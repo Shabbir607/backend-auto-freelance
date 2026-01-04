@@ -114,7 +114,9 @@ class AccountService
     // Fetch profile from Freelancer using assigned IP
     public function fetchProfile(PlatformAccount $account): array
     {
-        $ip = $account->ip;
+        $ipId = $account->ip_id;
+        $ip = IpAddress::find($ipId);
+        
         if (!$ip) {
             throw new Exception("Account does not have an assigned IP.");
         }
@@ -129,5 +131,71 @@ class AccountService
         ]);
 
         return $userData;
+    }
+
+    /**
+     * Get User Reputations
+     */
+    public function getReputations(PlatformAccount $account, array $userIds)
+    {
+        $query = [];
+        foreach ($userIds as $id) {
+            $query[] = "users[]=" . urlencode($id);
+        }
+        $queryString = implode('&', $query);
+
+        return $this->authService->request(
+            $account,
+            'GET',
+            '/users/0.1/reputations/?' . $queryString
+        );
+    }
+
+    /**
+     * Get User Portfolios
+     */
+    public function getPortfolios(PlatformAccount $account, array $userIds)
+    {
+        $query = [];
+        foreach ($userIds as $id) {
+            $query[] = "users[]=" . urlencode($id);
+        }
+        $queryString = implode('&', $query);
+
+        return $this->authService->request(
+            $account,
+            'GET',
+            '/users/0.1/portfolios/?' . $queryString
+        );
+    }
+
+    /**
+     * Get User Details
+     */
+    public function getUser(PlatformAccount $account, int $userId)
+    {
+        return $this->authService->request(
+            $account,
+            'GET',
+            "/users/0.1/users/{$userId}/"
+        );
+    }
+
+    /**
+     * Search Users by Username
+     */
+    public function searchUsers(PlatformAccount $account, array $usernames)
+    {
+        $query = [];
+        foreach ($usernames as $username) {
+            $query[] = "usernames[]=" . urlencode($username);
+        }
+        $queryString = implode('&', $query);
+
+        return $this->authService->request(
+            $account,
+            'GET',
+            '/users/0.1/users/?' . $queryString
+        );
     }
 }

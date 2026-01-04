@@ -36,7 +36,7 @@ class AccountController extends Controller
                 $platform_slug,
                 $request->input('username'),
                 $request->input('email'),
-                $request->input('ip_address') // IP must be passed
+                $request->input('ip_address') 
             );
             return response()->json(['success' => true, 'data' => $account]);
         } catch (Exception $e) {
@@ -48,7 +48,7 @@ class AccountController extends Controller
     public function fetchProfile(Request $request, $platform_slug, $accountId)
     {
         try {
-            $account = PlatformAccount::where('id', $accountId)
+            $account = PlatformAccount::where('uuid', $accountId)
                 ->where('user_id', auth()->id())
                 ->firstOrFail();
 
@@ -87,6 +87,112 @@ class AccountController extends Controller
             $deleted = $this->accountService->deleteAccount($account);
 
             return response()->json(['success' => $deleted]);
+        } catch (Exception $e) {
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 400);
+        }
+    }
+
+    public function reputations(Request $request)
+    {
+        try {
+            $request->validate([
+                'users' => 'nullable|array',
+                'users.*' => 'integer'
+            ]);
+
+            $uuid = $request->route('uuid');
+            $account = PlatformAccount::where('uuid', $uuid)
+                ->where('user_id', auth()->id())
+                ->firstOrFail();
+
+            $userIds = $request->input('users');
+
+            if (empty($userIds)) {
+                if (!$account->external_account_id) {
+                    // Try to fetch profile to get external ID
+                    try {
+                        $profile = $this->accountService->fetchProfile($account);
+                        // fetchProfile updates the account model
+                        $account->refresh();
+                    } catch (Exception $e) {
+                        return response()->json(['success' => false, 'error' => 'User ID required and could not be determined.'], 400);
+                    }
+                }
+                $userIds = [$account->external_account_id];
+            }
+
+            $reputations = $this->accountService->getReputations($account, $userIds);
+            return response()->json(['success' => true, 'data' => $reputations]);
+        } catch (Exception $e) {
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 400);
+        }
+    }
+
+    public function portfolios(Request $request)
+    {
+        try {
+            $request->validate([
+                'users' => 'nullable|array',
+                'users.*' => 'integer'
+            ]);
+
+            $uuid = $request->route('uuid');
+            $account = PlatformAccount::where('uuid', $uuid)
+                ->where('user_id', auth()->id())
+                ->firstOrFail();
+
+            $userIds = $request->input('users');
+
+            if (empty($userIds)) {
+                if (!$account->external_account_id) {
+                    try {
+                        $profile = $this->accountService->fetchProfile($account);
+                        $account->refresh();
+                    } catch (Exception $e) {
+                        return response()->json(['success' => false, 'error' => 'User ID required and could not be determined.'], 400);
+                    }
+                }
+                $userIds = [$account->external_account_id];
+            }
+
+            $portfolios = $this->accountService->getPortfolios($account, $userIds);
+            return response()->json(['success' => true, 'data' => $portfolios]);
+        } catch (Exception $e) {
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 400);
+        }
+    }
+    public function getUser(Request $request)
+    {
+        try {
+            $uuid = $request->route('uuid');
+            $userId = $request->route('userId');
+
+            $account = PlatformAccount::where('uuid', $uuid)
+                ->where('user_id', auth()->id())
+                ->firstOrFail();
+
+            $user = $this->accountService->getUser($account, $userId);
+            return response()->json(['success' => true, 'data' => $user]);
+        } catch (Exception $e) {
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 400);
+        }
+    }
+
+    public function searchUsers(Request $request)
+    {
+        try {
+            $request->validate([
+                'usernames' => 'required|array',
+                'usernames.*' => 'string'
+            ]);
+
+            $uuid = $request->route('uuid');
+            $account = PlatformAccount::where('uuid', $uuid)
+                ->where('user_id', auth()->id())
+                ->firstOrFail();
+
+            $users = $this->accountService->searchUsers($account, $request->usernames);
+            return response()->json(['success' => true, 'data' => $users]);
         } catch (Exception $e) {
             return response()->json(['success' => false, 'error' => $e->getMessage()], 400);
         }

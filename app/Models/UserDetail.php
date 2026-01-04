@@ -33,6 +33,15 @@ class UserDetail extends Model
         'linkedin_url',
         'facebook_url',
         'twitter_url',
+        'first_name',
+        'last_name',
+        'hourly_rate',
+        'availability',
+        'github_url',
+        'payment_info',
+        'notification_preferences',
+        'privacy_settings',
+        'location',
     ];
 
     /**
@@ -41,6 +50,9 @@ class UserDetail extends Model
     protected $casts = [
         'last_login_at' => 'datetime',
         'email_verified_at' => 'datetime',
+        'payment_info' => 'array',
+        'notification_preferences' => 'array',
+        'privacy_settings' => 'array',
     ];
 
     /**

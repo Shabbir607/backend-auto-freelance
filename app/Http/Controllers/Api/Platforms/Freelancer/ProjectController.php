@@ -17,18 +17,35 @@ class ProjectController extends Controller
     }
 
     /**
+     * GET list all projects from all accounts
+     */
+    public function listAll(Request $request, $platform_slug, $uuid, $ip_uuid)
+    {
+        
+        try {
+            $userId = $request->user('api')->id;
+            
+            $result = $this->projects->listAllProjects($platform_slug, $userId);
+            return response()->json(['success' => true, 'data' => $result]);
+        } catch (Exception $e) {
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 400);
+        }
+    }
+
+    /**
      * GET projects
      */
     public function listProjects(Request $request, $platform_slug)
     {
+        
         try {
             $userId = $request->user('api')->id;
 
             $filters = $request->all();
 
-            $projects = $this->projects->listProjects($platform_slug, $userId, $filters);
+            $result = $this->projects->listProjects($platform_slug, $userId, $filters);
 
-            return response()->json(['success' => true, 'data' => $projects]);
+            return response()->json(['success' => true, 'data' => $result]);
         } catch (Exception $e) {
             return response()->json(['success' => false, 'error' => $e->getMessage()], 400);
         }
@@ -61,6 +78,38 @@ class ProjectController extends Controller
             $project = $this->projects->getProject($platform_slug, $userId, $projectId);
 
             return response()->json(['success' => true, 'data' => $project]);
+        } catch (Exception $e) {
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 400);
+        }
+    }
+
+    /**
+     * PUT update project
+     */
+    public function update(Request $request, $platform_slug, $projectId)
+    {
+        try {
+            $userId = $request->user('api')->id;
+            
+            $project = $this->projects->updateProject($platform_slug, $userId, $projectId, $request->all());
+
+            return response()->json(['success' => true, 'data' => $project]);
+        } catch (Exception $e) {
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 400);
+        }
+    }
+
+    /**
+     * DELETE destroy project
+     */
+    public function destroy(Request $request, $platform_slug, $projectId)
+    {
+        try {
+            $userId = $request->user('api')->id;
+
+            $result = $this->projects->deleteProject($platform_slug, $userId, $projectId);
+
+            return response()->json(['success' => true, 'message' => 'Project deleted successfully', 'result' => $result]);
         } catch (Exception $e) {
             return response()->json(['success' => false, 'error' => $e->getMessage()], 400);
         }

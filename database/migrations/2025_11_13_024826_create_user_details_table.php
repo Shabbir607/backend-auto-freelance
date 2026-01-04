@@ -17,9 +17,13 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
 
             // Profile info
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
             $table->string('company_name', 150)->nullable();
             $table->string('job_title', 100)->nullable();
             $table->text('bio')->nullable();
+            $table->decimal('hourly_rate', 10, 2)->nullable();
+            $table->string('availability')->nullable(); // 'full-time', 'part-time', 'limited', 'not-available'
 
             // Contact & location
             $table->string('phone_number', 30)->nullable();
@@ -29,11 +33,15 @@ return new class extends Migration
             $table->string('state', 100)->nullable();
             $table->string('postal_code', 30)->nullable();
             $table->string('country', 100)->nullable();
+            $table->string('location')->nullable(); // Combined location string if needed
 
             // Account preferences
             $table->string('avatar_url', 255)->nullable();
             $table->string('timezone', 100)->default('UTC');
             $table->string('language', 10)->default('en');
+            $table->json('payment_info')->nullable();
+            $table->json('notification_preferences')->nullable();
+            $table->json('privacy_settings')->nullable();
 
             // Login & verification
             $table->timestamp('last_login_at')->nullable();
@@ -45,6 +53,7 @@ return new class extends Migration
             $table->string('linkedin_url', 255)->nullable();
             $table->string('facebook_url', 255)->nullable();
             $table->string('twitter_url', 255)->nullable();
+            $table->string('github_url')->nullable();
 
             $table->timestamps();
 

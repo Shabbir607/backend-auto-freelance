@@ -26,5 +26,9 @@ class PlatformAccount extends Model
     public function user() { return $this->belongsTo(User::class); }
     public function platform() { return $this->belongsTo(Platform::class); }
     public function ipAddress() { return $this->belongsTo(IpAddress::class,'ip_id'); }
+    // Alias for service compatibility
+    public function getIpAttribute() { return $this->ipAddress; }
+    
+    public function filters() { return $this->hasMany(AccountFilter::class); }
     public function audits() { return $this->hasMany(AccountAudit::class); }
 }

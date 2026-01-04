@@ -39,11 +39,28 @@ class RolesAndPermissionsSeeder extends Seeder
         $adminRole = Role::firstOrCreate(['name' => 'admin']);
         $adminRole->syncPermissions(Permission::all()); // Admin gets all permissions
 
-        $userRole = Role::firstOrCreate(['name' => 'user']);
-        $userRole->syncPermissions([
+        // Freelancer Role
+        $freelancerRole = Role::firstOrCreate(['name' => 'freelancer']);
+        $freelancerRole->syncPermissions([
             'view projects',
             'create proposals',
             'submit proposals'
+        ]);
+
+        // Recruiter Role
+        $recruiterRole = Role::firstOrCreate(['name' => 'recruiter']);
+        $recruiterRole->syncPermissions([
+            'manage projects',
+            'view projects',
+            'update projects',
+            'delete projects',
+            'assign roles'
+        ]);
+
+        // Legacy User Role (optional, can be same as freelancer or basic)
+        $userRole = Role::firstOrCreate(['name' => 'user']);
+        $userRole->syncPermissions([
+            'view projects'
         ]);
 
         // ------------------------------

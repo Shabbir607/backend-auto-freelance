@@ -67,7 +67,7 @@ class AuthController extends Controller
     // List all users (admin only)
     public function listUsers()
     {
-        $users = User::with('roles')->get();
+        $users = User::with(['roles', 'team.admin'])->get();
 
         return response()->json([
             'success' => true,

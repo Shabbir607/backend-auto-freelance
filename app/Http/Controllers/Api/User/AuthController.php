@@ -38,7 +38,9 @@ class AuthController extends Controller
                 'password' => Hash::make($request->password),
             ]);
 
-            $user->assignRole('user');
+            // Assign role based on request, default to freelancer if invalid or missing
+            $role = $request->role === 'recruiter' ? 'recruiter' : 'freelancer';
+            $user->assignRole($role);
 
             $details = UserDetail::create(['user_id' => $user->id]);
 
@@ -126,13 +128,12 @@ class AuthController extends Controller
     public function profile(Request $request)
     {
         try {
-            $user = $request->user()->load('userDetail');
+           
+            $user = $request->user()->load(['userDetail', 'skills', 'portfolios']);
 
             if (!$user->userDetail) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'User profile details not found.',
-                ], 404);
+                $user->userDetail()->create([]);
+                $user->load('userDetail');
             }
 
             return response()->json([
@@ -207,6 +208,23 @@ class AuthController extends Controller
                 'facebook_url'   => $details->facebook_url ?? null,
                 'twitter_url'    => $details->twitter_url ?? null,
             ],
+            'skills' => $user->skills->map(function ($skill) {
+                return [
+                    'id'    => $skill->id,
+                    'name'  => $skill->name,
+                    'level' => $skill->level,
+                ];
+            }),
+            'portfolios' => $user->portfolios->map(function ($portfolio) {
+                return [
+                    'id'          => $portfolio->id,
+                    'title'       => $portfolio->title,
+                    'description' => $portfolio->description,
+                    'image_url'   => $portfolio->image_url,
+                    'link_url'    => $portfolio->link_url,
+                    'is_public'   => $portfolio->is_public,
+                ];
+            }),
             'token'   => $token,
         ];
     }

@@ -23,6 +23,7 @@ class AuthController extends Controller
      */
     public function redirectToProvider(Request $request, string $platform_slug, ?string $ipUuid = null)
     {
+        
         try {
             $user = auth('api')->user();
 

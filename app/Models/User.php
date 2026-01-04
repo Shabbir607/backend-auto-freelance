@@ -48,12 +48,28 @@ class User extends Authenticatable
         ];
     }
     public function userDetail()
-{
-    return $this->hasOne(\App\Models\UserDetail::class, 'user_id');
-}
-public function platformAccounts()
-{
-    return $this->hasMany(\App\Models\PlatformAccount::class, 'user_id');
-}
+    {
+        return $this->hasOne(\App\Models\UserDetail::class, 'user_id');
+    }
+
+    public function skills()
+    {
+        return $this->hasMany(\App\Models\UserSkill::class, 'user_id');
+    }
+
+    public function portfolios()
+    {
+        return $this->hasMany(\App\Models\UserPortfolio::class, 'user_id');
+    }
+
+    public function platformAccounts()
+    {
+        return $this->hasMany(\App\Models\PlatformAccount::class, 'user_id');
+    }
+
+    public function team()
+    {
+        return $this->belongsTo(Team::class, 'team_id');
+    }
 
 }

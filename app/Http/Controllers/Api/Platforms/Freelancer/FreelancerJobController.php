@@ -17,13 +17,31 @@ class FreelancerJobController extends Controller
     }
 
     /**
+     * Helper to get the user's active Freelancer account if logged in
+     */
+    private function getAccount()
+    {
+        $user = auth('api')->user();
+        if (!$user) {
+            return null;
+        }
+
+        return \App\Models\PlatformAccount::where('user_id', $user->id)
+            ->whereHas('platform', function($q) {
+                $q->where('slug', 'freelancer');
+            })
+            ->where('status', 'active')
+            ->first();
+    }
+
+    /**
      * GET /freelancer/jobs
      */
     public function listJobs(Request $request)
     {
         try {
             return response()->json(
-                $this->service->listJobs($request->all())
+                $this->service->listJobs($request->all(), $this->getAccount())
             );
         } catch (Exception $e) {
             return $this->error($e);
@@ -37,7 +55,7 @@ class FreelancerJobController extends Controller
     {
         try {
             return response()->json(
-                $this->service->searchJobs($request->all())
+                $this->service->searchJobs($request->all(), $this->getAccount())
             );
         } catch (Exception $e) {
             return $this->error($e);
@@ -51,7 +69,7 @@ class FreelancerJobController extends Controller
     {
         try {
             return response()->json(
-                $this->service->jobBundles($request->all())
+                $this->service->jobBundles($request->all(), $this->getAccount())
             );
         } catch (Exception $e) {
             return $this->error($e);
@@ -65,7 +83,7 @@ class FreelancerJobController extends Controller
     {
         try {
             return response()->json(
-                $this->service->jobBundleCategories($request->all())
+                $this->service->jobBundleCategories($request->all(), $this->getAccount())
             );
         } catch (Exception $e) {
             return $this->error($e);
@@ -81,7 +99,7 @@ class FreelancerJobController extends Controller
     {
         try {
             return response()->json(
-                $this->service->listProjects($request->all())
+                $this->service->listProjects($request->all(), $this->getAccount())
             );
         } catch (Exception $e) {
             return $this->error($e);
@@ -95,7 +113,7 @@ class FreelancerJobController extends Controller
     {
         try {
             return response()->json(
-                $this->service->getProject((int) $id)
+                $this->service->getProject((int) $id, $this->getAccount())
             );
         } catch (Exception $e) {
             return $this->error($e);

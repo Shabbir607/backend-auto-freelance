@@ -9,7 +9,12 @@ Route::get('/auth/freelancer', [AuthController::class, 'handleCallback'])->name(
 
 
 
-// SPA Fallback
-Route::get('/{any}', function () {
-    return view('index');
-})->where('any', '.*');
+// API Status
+Route::get('/', function () {
+    return response()->json(['status' => 'Nexus AI Freelance Hub API is running']);
+});
+
+// Fallback for non-API routes
+Route::fallback(function () {
+    return response()->json(['message' => 'Not Found'], 404);
+});

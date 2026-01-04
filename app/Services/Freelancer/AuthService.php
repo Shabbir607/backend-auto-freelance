@@ -30,9 +30,11 @@ class AuthService
  */
 public function request(PlatformAccount $account, string $method, string $endpoint, array $options = []): array
 {
+
     $this->ensureToken($account);
 
     $platform = Platform::where('slug', 'freelancer')->firstOrFail();
+    // $platform->api_base_url = 'https://www.freelancer.com/api/0.1';
     $url = rtrim($platform->api_base_url, '/') . $endpoint;
 
     // Add Authorization header
@@ -60,7 +62,7 @@ public function request(PlatformAccount $account, string $method, string $endpoi
     }
 
     try {
-        // dd( $options,$url,$method);
+        // dd( $options,$url,$method, $account);
         $response = $this->client->request($method, $url, $options);
         // dd($response, $options,$url,$method);
         return json_decode($response->getBody()->getContents(), true);

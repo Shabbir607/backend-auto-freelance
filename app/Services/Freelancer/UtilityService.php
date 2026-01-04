@@ -13,18 +13,33 @@ class UtilityService
         $this->freelancer = $freelancer;
     }
 
-    public function categories(PlatformAccount $account)
+    public function getCategories(string $platformSlug)
     {
-        return $this->freelancer->get($account, '/api/projects/0.1/categories');
+        $account = $this->getAccount($platformSlug);
+        return $this->freelancer->get($account, '/projects/0.1/categories');
     }
 
-    public function countries(PlatformAccount $account)
+    public function getCountries(string $platformSlug)
     {
-        return $this->freelancer->get($account, '/api/common/0.1/countries');
+        $account = $this->getAccount($platformSlug);
+        return $this->freelancer->get($account, '/common/0.1/countries');
     }
 
-    public function currencies(PlatformAccount $account)
+    public function getCurrencies(string $platformSlug)
     {
-        return $this->freelancer->get($account, '/api/projects/0.1/currencies');
+        $account = $this->getAccount($platformSlug);
+        return $this->freelancer->get($account, '/projects/0.1/currencies');
+    }
+
+    private function getAccount(string $platformSlug)
+    {
+        // Use the first active account for the user to fetch public utility data
+        // This avoids needing a specific account ID for generic data
+        $platform = \App\Models\Platform::where('slug', $platformSlug)->firstOrFail();
+        
+        return \App\Models\PlatformAccount::where('platform_id', $platform->id)
+            ->where('user_id', auth()->id())
+            ->where('status', 'active')
+            ->firstOrFail();
     }
 }

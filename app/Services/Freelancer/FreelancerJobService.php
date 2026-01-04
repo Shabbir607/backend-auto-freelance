@@ -5,6 +5,7 @@ namespace App\Services\Freelancer;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Exception;
+use App\Models\PlatformAccount;
 
 class FreelancerJobService
 {
@@ -23,16 +24,37 @@ class FreelancerJobService
     /**
      * Generic GET request
      */
-    private function get(string $endpoint, array $params = []): array
+    /**
+     * Generic GET request with optional proxy support
+     */
+    private function get(string $endpoint, array $params = [], ?PlatformAccount $account = null): array
     {
         try {
-            $response = $this->client->get($this->baseUrl . $endpoint, [
+            $options = [
                 'headers' => [
                     'freelancer-oauth-v1' => $this->apiKey,
                     'Accept' => 'application/json',
                 ],
                 'query' => $params,
-            ]);
+            ];
+
+            // Configure Proxy if account is provided
+            if ($account && $account->ip) {
+                $ip = $account->ip;
+                if ($ip->provider === 'Webshare') {
+                    $proxyString = $ip->username && $ip->password
+                        ? "{$ip->username}:{$ip->password}@{$ip->ip_address}:{$ip->port}"
+                        : "{$ip->ip_address}:{$ip->port}";
+
+                    $options['proxy'] = "http://{$proxyString}";
+                } else {
+                    $options['curl'] = [
+                        CURLOPT_INTERFACE => $ip->ip_address
+                    ];
+                }
+            }
+
+            $response = $this->client->get($this->baseUrl . $endpoint, $options);
 
             $data = json_decode($response->getBody()->getContents(), true);
 
@@ -51,49 +73,49 @@ class FreelancerJobService
     /**
      * List job skill categories
      */
-    public function listJobs(array $params = []): array
+    public function listJobs(array $params = [], ?PlatformAccount $account = null): array
     {
-        return $this->get('/projects/0.1/jobs/', $params);
+        return $this->get('/projects/0.1/jobs/', $params, $account);
     }
 
     /**
      * Search jobs
      */
-    public function searchJobs(array $params = []): array
+    public function searchJobs(array $params = [], ?PlatformAccount $account = null): array
     {
-        return $this->get('/projects/0.1/jobs/search/', $params);
+        return $this->get('/projects/0.1/jobs/search/', $params, $account);
     }
 
     /**
      * Job bundles
      */
-    public function jobBundles(array $params = []): array
+    public function jobBundles(array $params = [], ?PlatformAccount $account = null): array
     {
-        return $this->get('/projects/0.1/job_bundles/', $params);
+        return $this->get('/projects/0.1/job_bundles/', $params, $account);
     }
 
     /**
      * Job bundle categories
      */
-    public function jobBundleCategories(array $params = []): array
+    public function jobBundleCategories(array $params = [], ?PlatformAccount $account = null): array
     {
-        return $this->get('/projects/0.1/job_bundle_categories/', $params);
+        return $this->get('/projects/0.1/job_bundle_categories/', $params, $account);
     }
 
     /**
      * Get list of projects with filters
      * e.g., jobs[], limit, offset, query, min_budget, max_budget, full_description, sort
      */
-    public function listProjects(array $params = []): array
+    public function listProjects(array $params = [], ?PlatformAccount $account = null): array
     {
-        return $this->get('/projects/0.1/projects/active/', $params);
+        return $this->get('/projects/0.1/projects/active/', $params, $account);
     }
 
     /**
      * Get full project details by project ID
      */
-    public function getProject(int $projectId): array
+    public function getProject(int $projectId, ?PlatformAccount $account = null): array
     {
-        return $this->get("/projects/0.1/projects/{$projectId}/");
+        return $this->get("/projects/0.1/projects/{$projectId}/", [], $account);
     }
 }

@@ -38,7 +38,7 @@ class FreelancerService
     }
 
     /**
-     * Generic request with IP header
+     * Generic request with IP header and Proxy configuration
      */
     protected function request(PlatformAccount $account, string $method, string $endpoint, array $query = [], array $payload = [])
     {
@@ -51,14 +51,32 @@ class FreelancerService
             'Accept'        => 'application/json',
         ];
 
-        // Pass assigned IP if available
+        $options = [
+            'headers' => $headers,
+        ];
+
+        // Configure Proxy
         if ($account->ip) {
-            $headers['X-Forwarded-For'] = $account->ip->ip_address;
+            $ip = $account->ip;
+            if ($ip->provider === 'Webshare') {
+                $proxyString = $ip->username && $ip->password
+                    ? "{$ip->username}:{$ip->password}@{$ip->ip_address}:{$ip->port}"
+                    : "{$ip->ip_address}:{$ip->port}";
+
+                $options['proxy'] = "http://{$proxyString}";
+            } else {
+                // Local IP binding (if not using a proxy server but a local interface)
+                $options['curl'] = [
+                    CURLOPT_INTERFACE => $ip->ip_address
+                ];
+            }
         }
 
         $url = "{$this->baseUrl}/" . ltrim($endpoint, '/');
 
-        $response = Http::withHeaders($headers)->$method($url, $method === 'GET' ? $query : $payload);
+        // Use Guzzle directly or configure Http facade options
+        // Laravel Http client supports 'withOptions' for Guzzle options
+        $response = Http::withOptions($options)->$method($url, $method === 'GET' ? $query : $payload);
 
         if (!$response->successful()) {
             throw new Exception("API Error: {$response->body()}");
