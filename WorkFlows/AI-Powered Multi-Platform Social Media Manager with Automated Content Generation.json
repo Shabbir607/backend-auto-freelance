@@ -1,0 +1,1397 @@
+{
+  "name": "AI-Powered Multi-Platform Social Media Manager with Automated Content Generation",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "social-media-manager",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "fb36adb8-ff43-487c-bb6d-907501bea42d",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -2768,
+        416
+      ],
+      "webhookId": "d3cc9fb2-e8c4-463b-8384-d08c7c4aca94"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "dalle_api_key",
+              "value": "<__PLACEHOLDER_VALUE__DALL-E API Key__>",
+              "type": "string"
+            },
+            {
+              "id": "id-2",
+              "name": "video_api_key",
+              "value": "<__PLACEHOLDER_VALUE__Video Generation API Key (Runway/Pika)__>",
+              "type": "string"
+            },
+            {
+              "id": "id-3",
+              "name": "video_api_url",
+              "value": "<__PLACEHOLDER_VALUE__Video Generation API URL__>",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "0414a660-7cf2-4b0c-adb5-3b267a461d16",
+      "name": "Workflow Configuration",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2544,
+        416
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Validate webhook input\nconst items = $input.all();\n\nif (items.length === 0) {\n  throw new Error('No input data received');\n}\n\nconst data = items[0].json;\n\n// Check for required fields\nconst requiredFields = ['selected_model', 'topic', 'platforms'];\nconst missingFields = [];\n\nfor (const field of requiredFields) {\n  if (!data[field]) {\n    missingFields.push(field);\n  }\n}\n\nif (missingFields.length > 0) {\n  throw new Error(`Missing required fields: ${missingFields.join(', ')}`);\n}\n\n// Validate platforms is an array\nif (!Array.isArray(data.platforms)) {\n  throw new Error('platforms must be an array');\n}\n\nif (data.platforms.length === 0) {\n  throw new Error('platforms array cannot be empty');\n}\n\n// Return validated data with proper structure\nreturn [{\n  json: {\n    selected_model: data.selected_model,\n    topic: data.topic,\n    platforms: data.platforms,\n    media_type: data.media_type || 'text',\n    additional_params: data.additional_params || {}\n  }\n}];"
+      },
+      "id": "7c240dc9-197b-411a-a899-0fe42c621428",
+      "name": "Validate Input",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -2320,
+        416
+      ]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "loose"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.selected_model }}",
+                    "rightValue": "openai",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  },
+                  {
+                    "leftValue": "={{ $json.selected_model }}",
+                    "rightValue": "gpt",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  },
+                  {
+                    "leftValue": "={{ $json.selected_model }}",
+                    "rightValue": "chatgpt",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "or"
+              },
+              "renameOutput": true,
+              "outputKey": "OpenAI"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "loose"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.selected_model }}",
+                    "rightValue": "anthropic",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  },
+                  {
+                    "leftValue": "={{ $json.selected_model }}",
+                    "rightValue": "claude",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "or"
+              },
+              "renameOutput": true,
+              "outputKey": "Anthropic"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "loose"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.selected_model }}",
+                    "rightValue": "gemini",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  },
+                  {
+                    "leftValue": "={{ $json.selected_model }}",
+                    "rightValue": "google",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "or"
+              },
+              "renameOutput": true,
+              "outputKey": "Gemini"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "loose"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.selected_model }}",
+                    "rightValue": "grok",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  },
+                  {
+                    "leftValue": "={{ $json.selected_model }}",
+                    "rightValue": "xai",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "or"
+              },
+              "renameOutput": true,
+              "outputKey": "Grok"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra",
+          "renameFallbackOutput": "Unknown Model"
+        }
+      },
+      "id": "8edaf5f5-f617-41e3-98af-67e6751b8410",
+      "name": "Route by AI Model",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -2096,
+        368
+      ]
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "gpt-4o"
+        },
+        "responses": {
+          "values": [
+            {
+              "content": "={{ $json.topic }}"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {
+          "instructions": "=You are a social media content strategist. Generate engaging social media content based on the provided topic. Decide if the content should be text-only, include an image, or include a video. Return ONLY valid JSON in this exact format: {\"content_type\": \"text|image|video\", \"text\": \"the post text\", \"image_prompt\": \"prompt for image generation or null\", \"video_prompt\": \"prompt for video generation or null\"}. Tone: {{ $json.tone || \"professional\" }}. Language: {{ $json.language || \"English\" }}."
+        }
+      },
+      "id": "4b0c05f9-3602-452f-b131-bec06f331263",
+      "name": "OpenAI Content Generator",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
+      "position": [
+        -1872,
+        128
+      ]
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "claude-3-5-sonnet-20241022"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "={{ $json.topic }}"
+            }
+          ]
+        },
+        "options": {
+          "system": "=You are a social media content strategist. Generate engaging social media content based on the provided topic. Decide if the content should be text-only, include an image, or include a video. Return ONLY valid JSON in this exact format: {\"content_type\": \"text|image|video\", \"text\": \"the post text\", \"image_prompt\": \"prompt for image generation or null\", \"video_prompt\": \"prompt for video generation or null\"}. Tone: {{ $json.tone || \"professional\" }}. Language: {{ $json.language || \"English\" }}."
+        }
+      },
+      "id": "a9669f54-b93d-4f15-ba21-ecc69fbe15c1",
+      "name": "Anthropic Content Generator",
+      "type": "@n8n/n8n-nodes-langchain.anthropic",
+      "typeVersion": 1,
+      "position": [
+        -1872,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "gemini-2.0-flash-exp"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "={{ $json.topic }}"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {
+          "systemMessage": "=You are a social media content strategist. Generate engaging social media content based on the provided topic. Decide if the content should be text-only, include an image, or include a video. Return ONLY valid JSON in this exact format: {\"content_type\": \"text|image|video\", \"text\": \"the post text\", \"image_prompt\": \"prompt for image generation or null\", \"video_prompt\": \"prompt for video generation or null\"}. Tone: {{ $json.tone || \"professional\" }}. Language: {{ $json.language || \"English\" }}."
+        }
+      },
+      "id": "b3bc9725-d032-4140-8bbd-4222199b0f31",
+      "name": "Google Gemini Content Generator",
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        -1872,
+        512
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.x.ai/v1/chat/completions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"grok-beta\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are a social media content strategist. Generate engaging social media content based on the provided topic. Decide if the content should be text-only, include an image, or include a video. Return ONLY valid JSON in this exact format: {\\\"content_type\\\": \\\"text|image|video\\\", \\\"text\\\": \\\"the post text\\\", \\\"image_prompt\\\": \\\"prompt for image generation or null\\\", \\\"video_prompt\\\": \\\"prompt for video generation or null\\\"}. Tone: {{ $json.tone || 'professional' }}. Language: {{ $json.language || 'English' }}.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": {{ $json.topic }}\n    }\n  ],\n  \"response_format\": {\n    \"type\": \"json_object\"\n  }\n}",
+        "options": {}
+      },
+      "id": "9ba8af99-bcfe-4b89-afaa-8271fb508bea",
+      "name": "Grok Content Generator",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -1808,
+        704
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// Parse AI response from different models and extract JSON content\nconst item = $input.item.json;\n\nlet responseText = '';\nlet parsedContent = null;\n\n// Extract response text based on different AI model formats\nif (item.choices && item.choices[0]) {\n  // OpenAI format\n  responseText = item.choices[0].message?.content || item.choices[0].text || '';\n} else if (item.content && Array.isArray(item.content)) {\n  // Anthropic format\n  responseText = item.content[0]?.text || '';\n} else if (item.candidates && item.candidates[0]) {\n  // Google Gemini format\n  responseText = item.candidates[0].content?.parts?.[0]?.text || '';\n} else if (item.choices && item.choices[0]?.message?.content) {\n  // Grok format (similar to OpenAI)\n  responseText = item.choices[0].message.content;\n} else if (typeof item === 'string') {\n  // Direct string response\n  responseText = item;\n} else if (item.text) {\n  // Generic text field\n  responseText = item.text;\n} else if (item.content) {\n  // Generic content field\n  responseText = typeof item.content === 'string' ? item.content : JSON.stringify(item.content);\n}\n\n// Try to extract JSON from the response\ntry {\n  // First, try to parse the entire response as JSON\n  parsedContent = JSON.parse(responseText);\n} catch (e) {\n  // If that fails, try to find JSON within the text\n  const jsonMatch = responseText.match(/\\{[\\s\\S]*\\}/);\n  if (jsonMatch) {\n    try {\n      parsedContent = JSON.parse(jsonMatch[0]);\n    } catch (e2) {\n      // If still fails, try to find JSON within code blocks\n      const codeBlockMatch = responseText.match(/```(?:json)?\\s*([\\s\\S]*?)```/);\n      if (codeBlockMatch) {\n        try {\n          parsedContent = JSON.parse(codeBlockMatch[1].trim());\n        } catch (e3) {\n          console.log('Failed to parse JSON from code block:', e3.message);\n        }\n      }\n    }\n  }\n}\n\n// If we still don't have parsed content, create a default structure\nif (!parsedContent) {\n  parsedContent = {\n    content_type: 'text',\n    text: responseText,\n    image_prompt: null,\n    video_prompt: null\n  };\n}\n\n// Ensure standardized structure\nconst standardizedContent = {\n  content_type: parsedContent.content_type || 'text',\n  text: parsedContent.text || parsedContent.caption || parsedContent.post_text || '',\n  image_prompt: parsedContent.image_prompt || parsedContent.imagePrompt || null,\n  video_prompt: parsedContent.video_prompt || parsedContent.videoPrompt || null,\n  hashtags: parsedContent.hashtags || [],\n  call_to_action: parsedContent.call_to_action || parsedContent.cta || null\n};\n\nreturn standardizedContent;"
+      },
+      "id": "dd802358-55ba-4055-8426-aa73e717f416",
+      "name": "Parse AI Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1520,
+        416
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "id-1",
+              "leftValue": "={{ $('Parse AI Response').item.json.content_type }}",
+              "rightValue": "image",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "id-2",
+              "leftValue": "={{ $('Parse AI Response').item.json.content_type }}",
+              "rightValue": "video",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "id": "b0e7a659-27bd-40d0-b282-d1b32f589a32",
+      "name": "Check Media Type",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -1296,
+        416
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "prompt": "={{ $json.image_prompt }}",
+        "options": {
+          "dalleQuality": "hd",
+          "size": "1024x1024",
+          "returnImageUrls": false
+        }
+      },
+      "id": "535cd2d0-fb9f-41cd-9d60-2a6a2c62048d",
+      "name": "Generate Image with DALL-E",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
+      "position": [
+        -1072,
+        272
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Workflow Configuration').first().json.video_api_url }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"prompt\": \"{{ $json.video_prompt }}\"\n}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "id": "5045cb91-5dd8-4537-a270-5e78c772d39a",
+      "name": "Generate Video",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -1072,
+        560
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "61d8ace3-4fbb-43f8-b15f-18997c865717",
+      "name": "Merge Media Paths",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -848,
+        416
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get the input data\nconst inputData = $input.all();\n\n// Array to hold output items\nconst outputItems = [];\n\n// Process each input item\nfor (const item of inputData) {\n  const platforms = item.json.platforms || [];\n  const content = item.json.content || '';\n  const mediaData = item.json.mediaData || null;\n  \n  // Create a separate item for each platform\n  for (const platform of platforms) {\n    outputItems.push({\n      json: {\n        platform: platform,\n        content: content,\n        mediaData: mediaData\n      }\n    });\n  }\n}\n\nreturn outputItems;"
+      },
+      "id": "d3368739-4a13-4c00-9541-e2a7405f5361",
+      "name": "Split Platforms",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -624,
+        416
+      ]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "loose"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.platform }}",
+                    "rightValue": "facebook",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Facebook"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "loose"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.platform }}",
+                    "rightValue": "instagram",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Instagram"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "loose"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.platform }}",
+                    "rightValue": "twitter",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  },
+                  {
+                    "leftValue": "={{ $json.platform }}",
+                    "rightValue": "x",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "or"
+              },
+              "renameOutput": true,
+              "outputKey": "X"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "loose"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.platform }}",
+                    "rightValue": "youtube",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "YouTube"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "loose"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.platform }}",
+                    "rightValue": "tiktok",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "TikTok"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "loose"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.platform }}",
+                    "rightValue": "linkedin",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "LinkedIn"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "811f1aba-549d-4ab1-8f49-2fd6f8f064a6",
+      "name": "Route by Platform",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -400,
+        352
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "optimized_text",
+              "value": "={{ $json.text }}",
+              "type": "string"
+            },
+            {
+              "id": "id-2",
+              "name": "platform",
+              "value": "facebook",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "98462a78-71df-4e8e-8bde-ab151fead283",
+      "name": "Optimize for Facebook",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -176,
+        -64
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "optimized_text",
+              "value": "={{ $json.text + \"\\n\\n\" + \"#socialmedia #content #instagram\" }}",
+              "type": "string"
+            },
+            {
+              "id": "id-2",
+              "name": "platform",
+              "value": "instagram",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "70faccd1-e9a0-4901-9651-eb80d0748ac1",
+      "name": "Optimize for Instagram",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -176,
+        128
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "optimized_text",
+              "value": "={{ $json.text.substring(0, 280) }}",
+              "type": "string"
+            },
+            {
+              "id": "id-2",
+              "name": "platform",
+              "value": "x",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "234af5b0-5802-4d92-922a-32622f83b5ae",
+      "name": "Optimize for X (Twitter)",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -176,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "video_title",
+              "value": "={{ $json.text.substring(0, 100) }}",
+              "type": "string"
+            },
+            {
+              "id": "id-2",
+              "name": "video_description",
+              "value": "={{ $json.text }}",
+              "type": "string"
+            },
+            {
+              "id": "id-3",
+              "name": "platform",
+              "value": "youtube",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "7fb29bc9-9562-43b4-af28-fdbb1c7fe96b",
+      "name": "Optimize for YouTube",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -176,
+        512
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "optimized_text",
+              "value": "={{ $json.text + \" #fyp #viral\" }}",
+              "type": "string"
+            },
+            {
+              "id": "id-2",
+              "name": "platform",
+              "value": "tiktok",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "eeefa667-3ba9-4c01-9db5-7be0d0ea0239",
+      "name": "Optimize for TikTok",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -176,
+        704
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "optimized_text",
+              "value": "={{ $json.text }}",
+              "type": "string"
+            },
+            {
+              "id": "id-2",
+              "name": "platform",
+              "value": "linkedin",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "f6785a69-75d5-4486-94c3-7d7768648f29",
+      "name": "Optimize for LinkedIn",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -176,
+        896
+      ]
+    },
+    {
+      "parameters": {
+        "httpRequestMethod": "POST",
+        "node": "<__PLACEHOLDER_VALUE__Facebook Page ID__>",
+        "edge": "feed",
+        "options": {
+          "queryParameters": {
+            "parameter": [
+              {
+                "name": "message",
+                "value": "={{ $json.optimized_text }}"
+              }
+            ]
+          }
+        }
+      },
+      "id": "17c588b9-f77a-4051-9f76-b573dad70091",
+      "name": "Post to Facebook",
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        48,
+        -64
+      ]
+    },
+    {
+      "parameters": {
+        "httpRequestMethod": "POST",
+        "node": "<__PLACEHOLDER_VALUE__Instagram Business Account ID__>",
+        "edge": "media",
+        "sendBinaryData": true,
+        "binaryPropertyName": "data",
+        "options": {
+          "queryParameters": {
+            "parameter": [
+              {
+                "name": "caption",
+                "value": "={{ $json.optimized_text }}"
+              },
+              {
+                "name": "image_url",
+                "value": "={{ $json.media_url }}"
+              }
+            ]
+          }
+        }
+      },
+      "id": "b982b2b5-8d59-4f39-8302-438bc4bfc955",
+      "name": "Post to Instagram",
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        48,
+        128
+      ]
+    },
+    {
+      "parameters": {
+        "text": "={{ $json.optimized_text }}",
+        "additionalFields": {}
+      },
+      "id": "32542b22-ef9f-434e-9c47-955ffa731860",
+      "name": "Post to X (Twitter)",
+      "type": "n8n-nodes-base.twitter",
+      "typeVersion": 2,
+      "position": [
+        48,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "video",
+        "operation": "upload",
+        "title": "={{ $json.video_title }}",
+        "categoryId": "22",
+        "options": {
+          "description": "={{ $json.video_description }}",
+          "privacyStatus": "public"
+        }
+      },
+      "id": "5b0fa635-6ba0-4f77-b217-0b6a3bba82d6",
+      "name": "Post to YouTube",
+      "type": "n8n-nodes-base.youTube",
+      "typeVersion": 1,
+      "position": [
+        48,
+        512
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://open.tiktokapis.com/v2/post/publish/video/init/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "post_info",
+              "value": "={{ { \"title\": $('Optimize for TikTok').item.json.caption, \"privacy_level\": \"SELF_ONLY\", \"disable_duet\": false, \"disable_comment\": false, \"disable_stitch\": false, \"video_cover_timestamp_ms\": 1000 } }}"
+            },
+            {
+              "name": "source_info",
+              "value": "={{ { \"source\": \"FILE_UPLOAD\", \"video_size\": $('Merge Media Paths').item.json.videoSize || 10000000, \"chunk_size\": 10000000, \"total_chunk_count\": 1 } }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "ea6f40f1-9ed7-4572-af44-3e308e244a65",
+      "name": "Post to TikTok",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        48,
+        704
+      ]
+    },
+    {
+      "parameters": {
+        "person": "<__PLACEHOLDER_VALUE__LinkedIn Person URN__>",
+        "text": "={{ $json.optimized_text }}",
+        "additionalFields": {
+          "visibility": "PUBLIC"
+        }
+      },
+      "id": "6b848fb6-04e7-40b2-bc3c-7552deebffaa",
+      "name": "Post to LinkedIn",
+      "type": "n8n-nodes-base.linkedIn",
+      "typeVersion": 1,
+      "position": [
+        48,
+        896
+      ]
+    },
+    {
+      "parameters": {
+        "numberInputs": 6
+      },
+      "id": "bd3f5678-7887-4ab8-a0f6-5af4423bb19e",
+      "name": "Collect Results",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        272,
+        352
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Format the collected results into a structured response\nconst items = $input.all();\n\nconst results = {\n  success: 0,\n  failed: 0,\n  total: items.length,\n  platforms: {},\n  errors: []\n};\n\n// Process each platform result\nfor (const item of items) {\n  const platform = item.json.platform || 'unknown';\n  const success = item.json.success !== false;\n  \n  if (success) {\n    results.success++;\n  } else {\n    results.failed++;\n  }\n  \n  // Store platform-specific result\n  results.platforms[platform] = {\n    success: success,\n    postId: item.json.postId || item.json.id || null,\n    url: item.json.url || item.json.postUrl || null,\n    message: item.json.message || (success ? 'Posted successfully' : 'Failed to post'),\n    timestamp: new Date().toISOString()\n  };\n  \n  // Collect errors\n  if (!success && item.json.error) {\n    results.errors.push({\n      platform: platform,\n      error: item.json.error,\n      details: item.json.errorDetails || null\n    });\n  }\n}\n\n// Add summary message\nresults.summary = `Successfully posted to ${results.success} out of ${results.total} platforms`;\n\nreturn [{ json: results }];"
+      },
+      "id": "c388ecb9-ddae-4391-9ffb-ba99aa64acc9",
+      "name": "Format Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        496,
+        416
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "id": "63c872ab-17bf-4c76-a737-90aba2471d8b",
+      "name": "Send Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        720,
+        416
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Workflow Configuration",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Workflow Configuration": {
+      "main": [
+        [
+          {
+            "node": "Validate Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Input": {
+      "main": [
+        [
+          {
+            "node": "Route by AI Model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route by AI Model": {
+      "main": [
+        [
+          {
+            "node": "OpenAI Content Generator",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Anthropic Content Generator",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Google Gemini Content Generator",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Grok Content Generator",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Content Generator": {
+      "main": [
+        [
+          {
+            "node": "Parse AI Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Anthropic Content Generator": {
+      "main": [
+        [
+          {
+            "node": "Parse AI Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Content Generator": {
+      "main": [
+        [
+          {
+            "node": "Parse AI Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Grok Content Generator": {
+      "main": [
+        [
+          {
+            "node": "Parse AI Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse AI Response": {
+      "main": [
+        [
+          {
+            "node": "Check Media Type",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Media Type": {
+      "main": [
+        [
+          {
+            "node": "Generate Image with DALL-E",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Generate Video",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Merge Media Paths",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Image with DALL-E": {
+      "main": [
+        [
+          {
+            "node": "Merge Media Paths",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Generate Video": {
+      "main": [
+        [
+          {
+            "node": "Merge Media Paths",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge Media Paths": {
+      "main": [
+        [
+          {
+            "node": "Split Platforms",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Platforms": {
+      "main": [
+        [
+          {
+            "node": "Route by Platform",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route by Platform": {
+      "main": [
+        [
+          {
+            "node": "Optimize for Facebook",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Optimize for Instagram",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Optimize for X (Twitter)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Optimize for YouTube",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Optimize for TikTok",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Optimize for LinkedIn",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Optimize for Facebook": {
+      "main": [
+        [
+          {
+            "node": "Post to Facebook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Optimize for Instagram": {
+      "main": [
+        [
+          {
+            "node": "Post to Instagram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Optimize for X (Twitter)": {
+      "main": [
+        [
+          {
+            "node": "Post to X (Twitter)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Optimize for YouTube": {
+      "main": [
+        [
+          {
+            "node": "Post to YouTube",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Optimize for TikTok": {
+      "main": [
+        [
+          {
+            "node": "Post to TikTok",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Optimize for LinkedIn": {
+      "main": [
+        [
+          {
+            "node": "Post to LinkedIn",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Post to Facebook": {
+      "main": [
+        [
+          {
+            "node": "Collect Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Post to Instagram": {
+      "main": [
+        [
+          {
+            "node": "Collect Results",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Post to X (Twitter)": {
+      "main": [
+        [
+          {
+            "node": "Collect Results",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "Post to YouTube": {
+      "main": [
+        [
+          {
+            "node": "Collect Results",
+            "type": "main",
+            "index": 3
+          }
+        ]
+      ]
+    },
+    "Post to TikTok": {
+      "main": [
+        [
+          {
+            "node": "Collect Results",
+            "type": "main",
+            "index": 4
+          }
+        ]
+      ]
+    },
+    "Post to LinkedIn": {
+      "main": [
+        [
+          {
+            "node": "Collect Results",
+            "type": "main",
+            "index": 5
+          }
+        ]
+      ]
+    },
+    "Collect Results": {
+      "main": [
+        [
+          {
+            "node": "Format Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Response": {
+      "main": [
+        [
+          {
+            "node": "Send Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "add98801-37e5-4f51-889e-d0c9d535697a",
+  "meta": {
+    "instanceId": "22a4699e0fb1f0e120aca9be07bf5135247776f787c23f8b2eb38166ac344e1d"
+  },
+  "id": "wjvKEjqdB0qHlA4q",
+  "tags": []
+}

@@ -1,0 +1,1588 @@
+{
+  "name": "EXAME GENRATOR",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "assessment-request",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "81dce223-bced-4280-a7f9-248cf45ae8da",
+      "name": "Assessment Request Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        1216,
+        3696
+      ],
+      "webhookId": "4f1610ed-fa5e-433b-ba13-12a5977de89d"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "provider",
+              "value": "={{ $json.body.body.selected_model.provider }}",
+              "type": "string"
+            },
+            {
+              "id": "id-2",
+              "name": "model_name",
+              "value": "={{ $json.body.body.selected_model.model_name }}",
+              "type": "string"
+            },
+            {
+              "id": "id-3",
+              "name": "max_tokens",
+              "value": "={{ $json.body.body.selected_model.max_tokens }}",
+              "type": "number"
+            },
+            {
+              "id": "id-4",
+              "name": "field",
+              "value": "={{ $json.body.body.field }}",
+              "type": "string"
+            },
+            {
+              "id": "id-5",
+              "name": "role",
+              "value": "={{ $json.body.body.role }}",
+              "type": "string"
+            },
+            {
+              "id": "id-6",
+              "name": "experience_level",
+              "value": "={{ $json.body.body.experience_level }}",
+              "type": "string"
+            },
+            {
+              "id": "id-7",
+              "name": "job_description",
+              "value": "={{ $json.body.body.job_description }}",
+              "type": "string"
+            },
+            {
+              "id": "id-8",
+              "name": "assessment_mode",
+              "value": "={{ $json.body.body.assessment_mode }}",
+              "type": "string"
+            },
+            {
+              "id": "id-9",
+              "name": "total_questions",
+              "value": "={{ $json.body.body.total_questions }}",
+              "type": "number"
+            },
+            {
+              "id": "id-10",
+              "name": "difficulty_distribution",
+              "value": "={{ $json.body.body.difficulty_distribution }}",
+              "type": "object"
+            },
+            {
+              "id": "id-11",
+              "name": "question_types_allowed",
+              "value": "={{ $json.body.body.question_types_allowed }}",
+              "type": "array"
+            },
+            {
+              "id": "id-12",
+              "name": "time_limit_minutes",
+              "value": "={{ $json.body.body.time_limit_minutes }}",
+              "type": "number"
+            },
+            {
+              "id": "id-13",
+              "name": "language_original",
+              "value": "={{ $json.body.body.language_original }}",
+              "type": "string"
+            },
+            {
+              "id": "id-14",
+              "name": "target_language",
+              "value": "={{ $json.body.body.target_language }}",
+              "type": "string"
+            },
+            {
+              "id": "id-15",
+              "name": "adaptive_testing",
+              "value": "={{ $json.body.body.adaptive_testing }}",
+              "type": "boolean"
+            },
+            {
+              "id": "id-16",
+              "name": "randomization_seed",
+              "value": "={{ $json.body.body.randomization_seed }}",
+              "type": "number"
+            },
+            {
+              "id": "id-17",
+              "name": "negative_marking",
+              "value": "={{ $json.body.body.negative_marking }}",
+              "type": "boolean"
+            },
+            {
+              "id": "id-18",
+              "name": "cost_profile",
+              "value": "={{ $json.body.body.selected_model.cost_profile }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "428cbda5-b78d-4909-acf4-5fff7c9dc00a",
+      "name": "Workflow Configuration",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1664,
+        3696
+      ]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.provider }}",
+                    "rightValue": "openai",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "OpenAI"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.provider }}",
+                    "rightValue": "anthropic",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Anthropic"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.provider }}",
+                    "rightValue": "grok",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Grok"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.provider }}",
+                    "rightValue": "ollama",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Ollama"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.provider }}",
+                    "rightValue": "google",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Google"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.provider }}",
+                    "rightValue": "mistral",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Mistral"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.provider }}",
+                    "rightValue": "groq",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Groq"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.provider }}",
+                    "rightValue": "azure",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Azure"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.provider }}",
+                    "rightValue": "aws",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "AWS"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.provider }}",
+                    "rightValue": "cohere",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Cohere"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.provider }}",
+                    "rightValue": "deepseek",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "DeepSeek"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.provider }}",
+                    "rightValue": "huggingface",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "HuggingFace"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "21b0e512-a117-4c24-bd2f-577278ca7478",
+      "name": "Route by LLM Provider",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        1888,
+        3536
+      ]
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"assessment_id\": {\"type\": \"string\"},\n    \"metadata\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"field\": {\"type\": \"string\"},\n        \"role\": {\"type\": \"string\"},\n        \"experience_level\": {\"type\": \"string\"},\n        \"total_questions\": {\"type\": \"number\"},\n        \"generated_at\": {\"type\": \"string\"}\n      }\n    },\n    \"questions\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"question_id\": {\"type\": \"string\"},\n          \"question_text\": {\"type\": \"string\"},\n          \"question_type\": {\"type\": \"string\"},\n          \"options\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}},\n          \"correct_answer\": {\"type\": \"string\"},\n          \"explanation\": {\"type\": \"string\"},\n          \"difficulty\": {\"type\": \"string\"},\n          \"bloom_level\": {\"type\": \"string\"},\n          \"primary_skill\": {\"type\": \"string\"},\n          \"skill_weight\": {\"type\": \"number\"}\n        }\n      }\n    },\n    \"scoring_config\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"overall_score\": {\"type\": \"number\"},\n        \"hire_recommendation\": {\"type\": \"string\"}\n      }\n    }\n  },\n  \"required\": [\"assessment_id\", \"questions\"]\n}",
+        "autoFix": true
+      },
+      "id": "0767fdc0-2be2-4585-8429-c4a53974fc01",
+      "name": "Structured Output Parser",
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        2112,
+        1408
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all(); const processedItems = []; for (const item of items) { try { let assessmentData = item.json.output || item.json.text || item.json; if (typeof assessmentData === 'string') { const jsonMatch = assessmentData.match(/\\{[\\s\\S]*\\}/); if (jsonMatch) { assessmentData = JSON.parse(jsonMatch[0]); } else { throw new Error('Could not extract valid JSON from AI response'); } } if (!assessmentData.questions || !Array.isArray(assessmentData.questions)) { throw new Error('Invalid assessment structure: questions array missing'); } const now = new Date().toISOString(); assessmentData.processed_at = now; assessmentData.workflow_execution_id = $execution.id; if (!assessmentData.audit_metadata) { assessmentData.audit_metadata = {}; } assessmentData.audit_metadata.processed_timestamp = now; assessmentData.audit_metadata.workflow_id = $workflow.id; processedItems.push({ json: assessmentData }); } catch (error) { processedItems.push({ json: { error: true, message: error.message, timestamp: new Date().toISOString() } }); } } return processedItems;"
+      },
+      "id": "4827ee33-8242-4a53-8ce6-5f85a8b775a2",
+      "name": "Post-Process Assessment JSON",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2544,
+        3696
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}",
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        }
+      },
+      "id": "d3d02f9c-d1ec-4043-afee-8fc394be831d",
+      "name": "Return Assessment JSON",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        3504,
+        3680
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "id-1",
+              "leftValue": "={{ $json.body.body.field }}",
+              "operator": {
+                "type": "string",
+                "operation": "exists"
+              }
+            },
+            {
+              "id": "id-2",
+              "leftValue": "={{ $json.body.body.role }}",
+              "operator": {
+                "type": "string",
+                "operation": "exists"
+              }
+            },
+            {
+              "id": "id-3",
+              "leftValue": "={{ $json.body.body.total_questions }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            },
+            {
+              "id": "id-4",
+              "leftValue": "={{ $json.body.body.selected_model.provider }}",
+              "operator": {
+                "type": "string",
+                "operation": "exists"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "57d88bd4-7385-40e3-b88c-024217eb75d9",
+      "name": "Validate Input Parameters",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1440,
+        3696
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "id-1",
+              "leftValue": "={{ $json.error }}",
+              "operator": {
+                "type": "string",
+                "operation": "notExists"
+              }
+            },
+            {
+              "id": "id-2",
+              "leftValue": "={{ $json.questions }}",
+              "operator": {
+                "type": "array",
+                "operation": "exists"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "20d89676-3d6d-46f8-ae9e-721daa16e9af",
+      "name": "Check Assessment Generation Success",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        2768,
+        3696
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "audit_id",
+              "value": "={{ $execution.id }}_{{ $now.toMillis() }}",
+              "type": "string"
+            },
+            {
+              "id": "id-2",
+              "name": "assessment_id",
+              "value": "={{ $json.assessment_id }}",
+              "type": "string"
+            },
+            {
+              "id": "id-3",
+              "name": "execution_id",
+              "value": "={{ $execution.id }}",
+              "type": "string"
+            },
+            {
+              "id": "id-4",
+              "name": "workflow_id",
+              "value": "={{ $workflow.id }}",
+              "type": "string"
+            },
+            {
+              "id": "id-5",
+              "name": "timestamp",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            },
+            {
+              "id": "id-6",
+              "name": "total_questions",
+              "value": "={{ $json.metadata.total_questions }}",
+              "type": "number"
+            },
+            {
+              "id": "id-7",
+              "name": "model_used",
+              "value": "={{ $json.metadata.model_used }}",
+              "type": "string"
+            },
+            {
+              "id": "id-8",
+              "name": "field",
+              "value": "={{ $json.metadata.field }}",
+              "type": "string"
+            },
+            {
+              "id": "id-9",
+              "name": "role",
+              "value": "={{ $json.metadata.role }}",
+              "type": "string"
+            },
+            {
+              "id": "id-10",
+              "name": "status",
+              "value": "success",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "304ef9d2-2c09-4b9d-98a6-7a6acf7ef689",
+      "name": "Prepare Audit Log Entry",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3216,
+        3696
+      ]
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "id": "4e6cef13-a2a8-4eb8-b918-6b8dcd5d48f1",
+      "name": "Combine Assessment Metrics",
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        2992,
+        3696
+      ]
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $('Workflow Configuration').item.json.model_name }}"
+        },
+        "builtInTools": {},
+        "options": {
+          "maxTokens": "={{ $('Workflow Configuration').item.json.max_tokens }}"
+        }
+      },
+      "id": "b8dc0c54-00e7-4e69-9187-6356a0101660",
+      "name": "OpenAI Chat Model2",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        2272,
+        1616
+      ]
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $('Workflow Configuration').item.json.model_name }}"
+        },
+        "options": {
+          "maxTokensToSample": "={{ $('Workflow Configuration').item.json.max_tokens }}"
+        }
+      },
+      "id": "b52fd4fe-966d-4b9d-a75e-77382219ce6f",
+      "name": "Anthropic Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [
+        2224,
+        2016
+      ]
+    },
+    {
+      "parameters": {
+        "modelName": "={{ $('Workflow Configuration').item.json.model_name }}",
+        "options": {
+          "maxOutputTokens": "={{ $('Workflow Configuration').item.json.max_tokens }}"
+        }
+      },
+      "id": "4c2fcbf5-3029-406c-a632-50017bb645f7",
+      "name": "Google Gemini Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        2224,
+        2416
+      ]
+    },
+    {
+      "parameters": {
+        "model": "={{ $('Workflow Configuration').item.json.model_name }}",
+        "options": {
+          "maxTokens": "={{ $('Workflow Configuration').item.json.max_tokens }}"
+        }
+      },
+      "id": "389651d1-1c36-4eb3-aa15-4326081e9d6e",
+      "name": "xAI Grok Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatXAiGrok",
+      "typeVersion": 1,
+      "position": [
+        2224,
+        2816
+      ]
+    },
+    {
+      "parameters": {
+        "model": "={{ $('Workflow Configuration').item.json.model_name }}",
+        "options": {}
+      },
+      "id": "ab96cabe-2edc-4e76-8024-9cfaec7cbdff",
+      "name": "Ollama Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        2224,
+        3216
+      ]
+    },
+    {
+      "parameters": {
+        "model": "={{ $('Workflow Configuration').item.json.model_name }}",
+        "options": {
+          "maxTokens": "={{ $('Workflow Configuration').item.json.max_tokens }}"
+        }
+      },
+      "id": "cf9ba050-1268-4cb8-ab28-7948ce47320e",
+      "name": "Mistral Cloud Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatMistralCloud",
+      "typeVersion": 1,
+      "position": [
+        2224,
+        3616
+      ]
+    },
+    {
+      "parameters": {
+        "model": "={{ $('Workflow Configuration').item.json.model_name }}",
+        "options": {
+          "maxTokensToSample": "={{ $('Workflow Configuration').item.json.max_tokens }}"
+        }
+      },
+      "id": "3f95c2ff-1911-4343-aa1e-df25252ad9b4",
+      "name": "Groq Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        2224,
+        4016
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "azureEntraCognitiveServicesOAuth2Api",
+        "model": "={{ $('Workflow Configuration').item.json.model_name }}",
+        "options": {
+          "maxTokens": "={{ $('Workflow Configuration').item.json.max_tokens }}"
+        }
+      },
+      "id": "a934ac4e-fa34-443d-9222-87909307a507",
+      "name": "Azure OpenAI Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatAzureOpenAi",
+      "typeVersion": 1,
+      "position": [
+        2224,
+        4416
+      ]
+    },
+    {
+      "parameters": {
+        "model": "={{ $('Workflow Configuration').item.json.model_name }}",
+        "options": {
+          "maxTokensToSample": "={{ $('Workflow Configuration').item.json.max_tokens }}"
+        }
+      },
+      "id": "61233028-99cf-4228-96d6-9e0669067079",
+      "name": "AWS Bedrock Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatAwsBedrock",
+      "typeVersion": 1.1,
+      "position": [
+        2224,
+        4816
+      ]
+    },
+    {
+      "parameters": {
+        "model": "={{ $('Workflow Configuration').item.json.model_name }}",
+        "options": {}
+      },
+      "id": "38894bd6-c12a-4a14-a212-fe1ef84618a7",
+      "name": "Cohere Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatCohere",
+      "typeVersion": 1,
+      "position": [
+        2224,
+        5216
+      ]
+    },
+    {
+      "parameters": {
+        "model": "={{ $('Workflow Configuration').item.json.model_name }}",
+        "options": {
+          "maxTokens": "={{ $('Workflow Configuration').item.json.max_tokens }}"
+        }
+      },
+      "id": "1e55ecec-caf7-4d8b-bbc0-29b67c375313",
+      "name": "DeepSeek Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+      "typeVersion": 1,
+      "position": [
+        2224,
+        5616
+      ]
+    },
+    {
+      "parameters": {
+        "model": "={{ $('Workflow Configuration').item.json.model_name }}",
+        "options": {
+          "maxTokens": "={{ $('Workflow Configuration').item.json.max_tokens }}"
+        }
+      },
+      "id": "fa2401ed-66bb-406f-b5fb-e9618876208c",
+      "name": "Hugging Face Inference Model",
+      "type": "@n8n/n8n-nodes-langchain.lmOpenHuggingFaceInference",
+      "typeVersion": 1,
+      "position": [
+        1216,
+        6016
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Generate an assessment with the following: Field={{ $('Route by LLM Provider').item.json.field }}, Role={{ $('Route by LLM Provider').item.json.role }}, Experience={{ $('Route by LLM Provider').item.json.experience_level }}, Total Questions={{ $('Route by LLM Provider').item.json.total_questions }}, Target Language={{ $('Route by LLM Provider').item.json.target_language }}. Create questions with: question_id, question_text, question_type, options array, correct_answer, explanation, difficulty (easy/medium/hard), bloom_level, primary_skill, and skill_weight (1-5). Include assessment_id, metadata object with field/role/experience_level/total_questions/generated_at, questions array, and scoring_config with overall_score and hire_recommendation.",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are an AI Assessment Generator. Generate technical assessments in valid JSON format matching the output parser schema. Focus on creating high-quality questions appropriate for the specified role and experience level. Ensure all required fields are present and properly formatted. Keep the output concise and well-structured."
+        }
+      },
+      "id": "13562a5e-bb09-471a-9730-819b492e59a7",
+      "name": "AI Agent - OpenAI",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        2192,
+        1184
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Generate an assessment with the following: Field={{ $('Route by LLM Provider').item.json.field }}, Role={{ $('Route by LLM Provider').item.json.role }}, Experience={{ $('Route by LLM Provider').item.json.experience_level }}, Total Questions={{ $('Route by LLM Provider').item.json.total_questions }}, Target Language={{ $('Route by LLM Provider').item.json.target_language }}. Create questions with: question_id, question_text, question_type, options array, correct_answer, explanation, difficulty (easy/medium/hard), bloom_level, primary_skill, and skill_weight (1-5). Include assessment_id, metadata object with field/role/experience_level/total_questions/generated_at, questions array, and scoring_config with overall_score and hire_recommendation.",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are an AI Assessment Generator. Generate technical assessments in valid JSON format matching the output parser schema. Focus on creating high-quality questions appropriate for the specified role and experience level. Ensure all required fields are present and properly formatted. Keep the output concise and well-structured."
+        }
+      },
+      "id": "17c46309-4182-4413-90e0-32cdbbcc4c9e",
+      "name": "AI Agent - Anthropic",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        2160,
+        1792
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Generate an assessment with the following: Field={{ $('Route by LLM Provider').item.json.field }}, Role={{ $('Route by LLM Provider').item.json.role }}, Experience={{ $('Route by LLM Provider').item.json.experience_level }}, Total Questions={{ $('Route by LLM Provider').item.json.total_questions }}, Target Language={{ $('Route by LLM Provider').item.json.target_language }}. Create questions with: question_id, question_text, question_type, options array, correct_answer, explanation, difficulty (easy/medium/hard), bloom_level, primary_skill, and skill_weight (1-5). Include assessment_id, metadata object with field/role/experience_level/total_questions/generated_at, questions array, and scoring_config with overall_score and hire_recommendation.",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are an AI Assessment Generator. Generate technical assessments in valid JSON format matching the output parser schema. Focus on creating high-quality questions appropriate for the specified role and experience level. Ensure all required fields are present and properly formatted. Keep the output concise and well-structured."
+        }
+      },
+      "id": "64d050df-c8ec-454d-bda3-6e2b8e02a472",
+      "name": "AI Agent - Google",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        2160,
+        2192
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Generate an assessment with the following: Field={{ $('Route by LLM Provider').item.json.field }}, Role={{ $('Route by LLM Provider').item.json.role }}, Experience={{ $('Route by LLM Provider').item.json.experience_level }}, Total Questions={{ $('Route by LLM Provider').item.json.total_questions }}, Target Language={{ $('Route by LLM Provider').item.json.target_language }}. Create questions with: question_id, question_text, question_type, options array, correct_answer, explanation, difficulty (easy/medium/hard), bloom_level, primary_skill, and skill_weight (1-5). Include assessment_id, metadata object with field/role/experience_level/total_questions/generated_at, questions array, and scoring_config with overall_score and hire_recommendation.",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are an AI Assessment Generator. Generate technical assessments in valid JSON format matching the output parser schema. Focus on creating high-quality questions appropriate for the specified role and experience level. Ensure all required fields are present and properly formatted. Keep the output concise and well-structured."
+        }
+      },
+      "id": "b162cdc2-77c3-47d7-bae6-b7fa02c03a8a",
+      "name": "AI Agent - Grok",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        2160,
+        2592
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Generate an assessment with the following: Field={{ $('Route by LLM Provider').item.json.field }}, Role={{ $('Route by LLM Provider').item.json.role }}, Experience={{ $('Route by LLM Provider').item.json.experience_level }}, Total Questions={{ $('Route by LLM Provider').item.json.total_questions }}, Target Language={{ $('Route by LLM Provider').item.json.target_language }}. Create questions with: question_id, question_text, question_type, options array, correct_answer, explanation, difficulty (easy/medium/hard), bloom_level, primary_skill, and skill_weight (1-5). Include assessment_id, metadata object with field/role/experience_level/total_questions/generated_at, questions array, and scoring_config with overall_score and hire_recommendation.",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are an AI Assessment Generator. Generate technical assessments in valid JSON format matching the output parser schema. Focus on creating high-quality questions appropriate for the specified role and experience level. Ensure all required fields are present and properly formatted. Keep the output concise and well-structured."
+        }
+      },
+      "id": "18716ee7-dcdb-45d6-a62e-adf212c29427",
+      "name": "AI Agent - Ollama",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        2160,
+        2992
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Generate an assessment with the following: Field={{ $('Route by LLM Provider').item.json.field }}, Role={{ $('Route by LLM Provider').item.json.role }}, Experience={{ $('Route by LLM Provider').item.json.experience_level }}, Total Questions={{ $('Route by LLM Provider').item.json.total_questions }}, Target Language={{ $('Route by LLM Provider').item.json.target_language }}. Create questions with: question_id, question_text, question_type, options array, correct_answer, explanation, difficulty (easy/medium/hard), bloom_level, primary_skill, and skill_weight (1-5). Include assessment_id, metadata object with field/role/experience_level/total_questions/generated_at, questions array, and scoring_config with overall_score and hire_recommendation.",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are an AI Assessment Generator. Generate technical assessments in valid JSON format matching the output parser schema. Focus on creating high-quality questions appropriate for the specified role and experience level. Ensure all required fields are present and properly formatted. Keep the output concise and well-structured."
+        }
+      },
+      "id": "0033cb49-4b40-4c3a-ae10-64385cd98dcd",
+      "name": "AI Agent - Mistral",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        2160,
+        3392
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Generate an assessment with the following: Field={{ $('Route by LLM Provider').item.json.field }}, Role={{ $('Route by LLM Provider').item.json.role }}, Experience={{ $('Route by LLM Provider').item.json.experience_level }}, Total Questions={{ $('Route by LLM Provider').item.json.total_questions }}, Target Language={{ $('Route by LLM Provider').item.json.target_language }}. Create questions with: question_id, question_text, question_type, options array, correct_answer, explanation, difficulty (easy/medium/hard), bloom_level, primary_skill, and skill_weight (1-5). Include assessment_id, metadata object with field/role/experience_level/total_questions/generated_at, questions array, and scoring_config with overall_score and hire_recommendation.",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are an AI Assessment Generator. Generate technical assessments in valid JSON format matching the output parser schema. Focus on creating high-quality questions appropriate for the specified role and experience level. Ensure all required fields are present and properly formatted. Keep the output concise and well-structured."
+        }
+      },
+      "id": "d7a600ec-e164-4d46-a4bd-c77221abcca4",
+      "name": "AI Agent - Groq",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        2160,
+        3792
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Generate an assessment with the following: Field={{ $('Route by LLM Provider').item.json.field }}, Role={{ $('Route by LLM Provider').item.json.role }}, Experience={{ $('Route by LLM Provider').item.json.experience_level }}, Total Questions={{ $('Route by LLM Provider').item.json.total_questions }}, Target Language={{ $('Route by LLM Provider').item.json.target_language }}. Create questions with: question_id, question_text, question_type, options array, correct_answer, explanation, difficulty (easy/medium/hard), bloom_level, primary_skill, and skill_weight (1-5). Include assessment_id, metadata object with field/role/experience_level/total_questions/generated_at, questions array, and scoring_config with overall_score and hire_recommendation.",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are an AI Assessment Generator. Generate technical assessments in valid JSON format matching the output parser schema. Focus on creating high-quality questions appropriate for the specified role and experience level. Ensure all required fields are present and properly formatted. Keep the output concise and well-structured."
+        }
+      },
+      "id": "c8588419-6061-4e89-84d0-35957f6ba515",
+      "name": "AI Agent - Azure",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        2160,
+        4192
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Generate an assessment with the following: Field={{ $('Route by LLM Provider').item.json.field }}, Role={{ $('Route by LLM Provider').item.json.role }}, Experience={{ $('Route by LLM Provider').item.json.experience_level }}, Total Questions={{ $('Route by LLM Provider').item.json.total_questions }}, Target Language={{ $('Route by LLM Provider').item.json.target_language }}. Create questions with: question_id, question_text, question_type, options array, correct_answer, explanation, difficulty (easy/medium/hard), bloom_level, primary_skill, and skill_weight (1-5). Include assessment_id, metadata object with field/role/experience_level/total_questions/generated_at, questions array, and scoring_config with overall_score and hire_recommendation.",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are an AI Assessment Generator. Generate technical assessments in valid JSON format matching the output parser schema. Focus on creating high-quality questions appropriate for the specified role and experience level. Ensure all required fields are present and properly formatted. Keep the output concise and well-structured."
+        }
+      },
+      "id": "4f0c1533-969a-4072-9a25-51a08274bd59",
+      "name": "AI Agent - AWS",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        2160,
+        4592
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Generate an assessment with the following: Field={{ $('Route by LLM Provider').item.json.field }}, Role={{ $('Route by LLM Provider').item.json.role }}, Experience={{ $('Route by LLM Provider').item.json.experience_level }}, Total Questions={{ $('Route by LLM Provider').item.json.total_questions }}, Target Language={{ $('Route by LLM Provider').item.json.target_language }}. Create questions with: question_id, question_text, question_type, options array, correct_answer, explanation, difficulty (easy/medium/hard), bloom_level, primary_skill, and skill_weight (1-5). Include assessment_id, metadata object with field/role/experience_level/total_questions/generated_at, questions array, and scoring_config with overall_score and hire_recommendation.",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are an AI Assessment Generator. Generate technical assessments in valid JSON format matching the output parser schema. Focus on creating high-quality questions appropriate for the specified role and experience level. Ensure all required fields are present and properly formatted. Keep the output concise and well-structured."
+        }
+      },
+      "id": "dd30a41f-3f8e-482b-b2a2-601f4c96f8f2",
+      "name": "AI Agent - Cohere",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        2160,
+        4992
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Generate an assessment with the following: Field={{ $('Route by LLM Provider').item.json.field }}, Role={{ $('Route by LLM Provider').item.json.role }}, Experience={{ $('Route by LLM Provider').item.json.experience_level }}, Total Questions={{ $('Route by LLM Provider').item.json.total_questions }}, Target Language={{ $('Route by LLM Provider').item.json.target_language }}. Create questions with: question_id, question_text, question_type, options array, correct_answer, explanation, difficulty (easy/medium/hard), bloom_level, primary_skill, and skill_weight (1-5). Include assessment_id, metadata object with field/role/experience_level/total_questions/generated_at, questions array, and scoring_config with overall_score and hire_recommendation.",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are an AI Assessment Generator. Generate technical assessments in valid JSON format matching the output parser schema. Focus on creating high-quality questions appropriate for the specified role and experience level. Ensure all required fields are present and properly formatted. Keep the output concise and well-structured."
+        }
+      },
+      "id": "89314dc1-5be5-4a3d-8f23-e1bc9fea6cde",
+      "name": "AI Agent - DeepSeek",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        2160,
+        5392
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Generate an assessment with the following: Field={{ $('Route by LLM Provider').item.json.field }}, Role={{ $('Route by LLM Provider').item.json.role }}, Experience={{ $('Route by LLM Provider').item.json.experience_level }}, Total Questions={{ $('Route by LLM Provider').item.json.total_questions }}, Target Language={{ $('Route by LLM Provider').item.json.target_language }}. Create questions with: question_id, question_text, question_type, options array, correct_answer, explanation, difficulty (easy/medium/hard), bloom_level, primary_skill, and skill_weight (1-5). Include assessment_id, metadata object with field/role/experience_level/total_questions/generated_at, questions array, and scoring_config with overall_score and hire_recommendation.",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are an AI Assessment Generator. Generate technical assessments in valid JSON format matching the output parser schema. Focus on creating high-quality questions appropriate for the specified role and experience level. Ensure all required fields are present and properly formatted. Keep the output concise and well-structured."
+        }
+      },
+      "id": "e99ecf69-247f-4439-97d6-e60989981e41",
+      "name": "AI Agent - HuggingFace",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        2160,
+        5792
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Assessment Request Webhook": {
+      "main": [
+        [
+          {
+            "node": "Validate Input Parameters",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Workflow Configuration": {
+      "main": [
+        [
+          {
+            "node": "Route by LLM Provider",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route by LLM Provider": {
+      "main": [
+        [
+          {
+            "node": "AI Agent - OpenAI",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "AI Agent - Anthropic",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "AI Agent - Grok",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "AI Agent - Ollama",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "AI Agent - Google",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "AI Agent - Mistral",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "AI Agent - Groq",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "AI Agent - Azure",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "AI Agent - AWS",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "AI Agent - Cohere",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "AI Agent - DeepSeek",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "AI Agent - HuggingFace",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent - OpenAI",
+            "type": "ai_outputParser",
+            "index": 0
+          },
+          {
+            "node": "AI Agent - Anthropic",
+            "type": "ai_outputParser",
+            "index": 0
+          },
+          {
+            "node": "AI Agent - Google",
+            "type": "ai_outputParser",
+            "index": 0
+          },
+          {
+            "node": "AI Agent - Grok",
+            "type": "ai_outputParser",
+            "index": 0
+          },
+          {
+            "node": "AI Agent - Ollama",
+            "type": "ai_outputParser",
+            "index": 0
+          },
+          {
+            "node": "AI Agent - Mistral",
+            "type": "ai_outputParser",
+            "index": 0
+          },
+          {
+            "node": "AI Agent - Groq",
+            "type": "ai_outputParser",
+            "index": 0
+          },
+          {
+            "node": "AI Agent - Azure",
+            "type": "ai_outputParser",
+            "index": 0
+          },
+          {
+            "node": "AI Agent - AWS",
+            "type": "ai_outputParser",
+            "index": 0
+          },
+          {
+            "node": "AI Agent - Cohere",
+            "type": "ai_outputParser",
+            "index": 0
+          },
+          {
+            "node": "AI Agent - DeepSeek",
+            "type": "ai_outputParser",
+            "index": 0
+          },
+          {
+            "node": "AI Agent - HuggingFace",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Post-Process Assessment JSON": {
+      "main": [
+        [
+          {
+            "node": "Check Assessment Generation Success",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Input Parameters": {
+      "main": [
+        [
+          {
+            "node": "Workflow Configuration",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Assessment Generation Success": {
+      "main": [
+        [
+          {
+            "node": "Combine Assessment Metrics",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Audit Log Entry": {
+      "main": [
+        [
+          {
+            "node": "Return Assessment JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Combine Assessment Metrics": {
+      "main": [
+        [
+          {
+            "node": "Prepare Audit Log Entry",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent - OpenAI",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Structured Output Parser",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Anthropic Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent - Anthropic",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent - Google",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "xAI Grok Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent - Grok",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent - Ollama",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mistral Cloud Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent - Mistral",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent - Groq",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Azure OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent - Azure",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AWS Bedrock Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent - AWS",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cohere Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent - Cohere",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DeepSeek Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent - DeepSeek",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent - OpenAI": {
+      "main": [
+        [
+          {
+            "node": "Post-Process Assessment JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent - Anthropic": {
+      "main": [
+        [
+          {
+            "node": "Post-Process Assessment JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent - Google": {
+      "main": [
+        [
+          {
+            "node": "Post-Process Assessment JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent - Grok": {
+      "main": [
+        [
+          {
+            "node": "Post-Process Assessment JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent - Ollama": {
+      "main": [
+        [
+          {
+            "node": "Post-Process Assessment JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent - Mistral": {
+      "main": [
+        [
+          {
+            "node": "Post-Process Assessment JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent - Groq": {
+      "main": [
+        [
+          {
+            "node": "Post-Process Assessment JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent - Azure": {
+      "main": [
+        [
+          {
+            "node": "Post-Process Assessment JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent - AWS": {
+      "main": [
+        [
+          {
+            "node": "Post-Process Assessment JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent - Cohere": {
+      "main": [
+        [
+          {
+            "node": "Post-Process Assessment JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent - DeepSeek": {
+      "main": [
+        [
+          {
+            "node": "Post-Process Assessment JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent - HuggingFace": {
+      "main": [
+        [
+          {
+            "node": "Post-Process Assessment JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "af9e0ef6-479e-4419-bf7f-986d2bb908a6",
+  "meta": {
+    "templateId": "2465",
+    "templateCredsSetupCompleted": true,
+    "instanceId": "22a4699e0fb1f0e120aca9be07bf5135247776f787c23f8b2eb38166ac344e1d"
+  },
+  "id": "74pnIpaFWPVPqtZ1",
+  "tags": []
+}

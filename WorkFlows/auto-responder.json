@@ -1,0 +1,932 @@
+{
+  "name": "auto-responder",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "auto-responder",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "9344bd05-b271-4d58-9af4-820763fe5992",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -2944,
+        816
+      ],
+      "webhookId": "0e090ed8-e8d5-4f8b-ab48-1fdccf603622"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "fallback_response",
+              "value": "Thank you for your message. We are currently experiencing high volume and will respond as soon as possible.",
+              "type": "string"
+            },
+            {
+              "id": "id-2",
+              "name": "ai_model",
+              "value": "openai",
+              "type": "string"
+            },
+            {
+              "id": "id-3",
+              "name": "selected_model",
+              "value": "={{ $json.body.ai_model || 'openai' }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "beb5592f-b9ef-4b4f-be0f-044fc1e240e3",
+      "name": "Workflow Configuration",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2720,
+        816
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "normalized_chat",
+              "value": "={{ typeof $json.body.complete_chat === 'string' ? $json.body.complete_chat : (Array.isArray($json.body.complete_chat) ? $json.body.complete_chat.map(msg => `${msg.role || 'user'}: ${msg.content || msg.message || ''}`).join('\\n') : JSON.stringify($json.body.complete_chat)) }}",
+              "type": "string"
+            },
+            {
+              "id": "id-2",
+              "name": "selected_ai_model",
+              "value": "={{ $json.body.ai_model || $json.selected_model || 'openai' }}",
+              "type": "string"
+            },
+            {
+              "id": "id-3",
+              "name": "channel_type",
+              "value": "={{ $json.body.channel || 'unknown' }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "49eab3d7-552f-4eed-be54-1a3e8c1b1d2d",
+      "name": "Normalize Chat Data",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2496,
+        816
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "id-1",
+              "leftValue": "={{ $json.normalized_chat }}",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "id": "8072fa09-c99d-401b-b7be-a6fc3a55f5fe",
+      "name": "Validate Required Fields",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -1984,
+        1056
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "error",
+              "value": "Missing required fields",
+              "type": "string"
+            },
+            {
+              "id": "id-2",
+              "name": "message",
+              "value": "Request must include complete_chat with valid content",
+              "type": "string"
+            },
+            {
+              "id": "id-3",
+              "name": "status",
+              "value": "error",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "587209d1-bd7a-40b0-9ee2-6c37ca449293",
+      "name": "Error Response - Missing Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1696,
+        1056
+      ]
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "id",
+          "value": "gpt-4o-mini"
+        },
+        "builtInTools": {},
+        "options": {
+          "temperature": 0.3
+        }
+      },
+      "id": "e1e3096f-3355-4fd8-ab62-faf1ddf3c1a5",
+      "name": "OpenAI Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -2048,
+        80
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "conversation_id",
+              "value": "={{ $('Normalize Chat Data').item.json.body.conversation_id }}",
+              "type": "string"
+            },
+            {
+              "id": "id-2",
+              "name": "response_text",
+              "value": "={{ $json.output || $json.text || $('Workflow Configuration').item.json.fallback_response }}",
+              "type": "string"
+            },
+            {
+              "id": "id-3",
+              "name": "intent",
+              "value": "={{ $json.intent || 'unknown' }}",
+              "type": "string"
+            },
+            {
+              "id": "id-4",
+              "name": "sentiment",
+              "value": "={{ $json.sentiment || 'neutral' }}",
+              "type": "string"
+            },
+            {
+              "id": "id-5",
+              "name": "status",
+              "value": "success",
+              "type": "string"
+            },
+            {
+              "id": "id-6",
+              "name": "timestamp",
+              "value": "={{ new Date().toISOString() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "90ae8726-93b3-4bcb-b9eb-7bd74f6d2174",
+      "name": "Format Final Response",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1696,
+        768
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "id": "5bd420fa-1edd-4ab7-beda-c0afb6615292",
+      "name": "Return Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        -1472,
+        768
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {
+          "responseCode": 400
+        }
+      },
+      "id": "ccd31450-e5de-4052-9994-0bd7e571c1be",
+      "name": "Return Error Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        -1472,
+        1056
+      ]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "loose"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.ai_model }}",
+                    "rightValue": "openai",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "OpenAI"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "loose"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.ai_model }}",
+                    "rightValue": "anthropic",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Anthropic"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "loose"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.ai_model }}",
+                    "rightValue": "google",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Google"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "loose"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.ai_model }}",
+                    "rightValue": "mistral",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Mistral"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "loose"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.ai_model }}",
+                    "rightValue": "groq",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Groq"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra",
+          "renameFallbackOutput": "Default (OpenAI)"
+        }
+      },
+      "id": "ef40f85a-e32f-4115-8423-e86ccaf06e71",
+      "name": "Route by AI Model",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -2272,
+        752
+      ]
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "claude-sonnet-4-5-20250929",
+          "cachedResultName": "Claude Sonnet 4.5"
+        },
+        "options": {}
+      },
+      "id": "33f93512-fd01-41e1-ac0b-d5ce89a55343",
+      "name": "Anthropic Claude",
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [
+        -2048,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "ad9e447e-a962-43b9-9b2f-d9bf8dbc5407",
+      "name": "Google Gemini",
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -2048,
+        880
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "6e15a922-4a05-42fb-9699-afaad023849c",
+      "name": "Mistral AI",
+      "type": "@n8n/n8n-nodes-langchain.lmChatMistralCloud",
+      "typeVersion": 1,
+      "position": [
+        -2048,
+        1472
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "38217c29-f4c4-46a2-be83-437d0497495c",
+      "name": "Groq",
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        -2048,
+        1984
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.normalized_chat }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are an intelligent customer service assistant. Analyze the conversation and generate an appropriate response based on the complete chat history provided. Be professional, helpful, and concise. If custom business rules or custom_prompt are provided in the input, follow them strictly. Maintain context from the entire conversation."
+        }
+      },
+      "id": "bba48ae8-fbf6-4973-b936-99647a6ce83b",
+      "name": "OpenAI Analysis Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -2048,
+        -144
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.normalized_chat }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are an intelligent customer service assistant. Analyze the conversation and generate an appropriate response based on the complete chat history provided. Be professional, helpful, and concise. If custom business rules or custom_prompt are provided in the input, follow them strictly. Maintain context from the entire conversation."
+        }
+      },
+      "id": "9bb5c5c1-cb8d-447a-acc0-34b90dea3578",
+      "name": "Anthropic Analysis Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -2048,
+        256
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.normalized_chat }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are an intelligent customer service assistant. Analyze the conversation and generate an appropriate response based on the complete chat history provided. Be professional, helpful, and concise. If custom business rules or custom_prompt are provided in the input, follow them strictly. Maintain context from the entire conversation."
+        }
+      },
+      "id": "75c9d5bf-097f-4b73-8f77-0cc262575cf8",
+      "name": "Google Analysis Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -2048,
+        656
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.normalized_chat }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are an intelligent customer service assistant. Analyze the conversation and generate an appropriate response based on the complete chat history provided. Be professional, helpful, and concise. If custom business rules or custom_prompt are provided in the input, follow them strictly. Maintain context from the entire conversation."
+        }
+      },
+      "id": "740e2698-1ea7-4893-a460-95686546e57b",
+      "name": "Mistral Analysis Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -2048,
+        1248
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.normalized_chat }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are an intelligent customer service assistant. Analyze the conversation and generate an appropriate response based on the complete chat history provided. Be professional, helpful, and concise. If custom business rules or custom_prompt are provided in the input, follow them strictly. Maintain context from the entire conversation."
+        }
+      },
+      "id": "50ccc7fc-c5ea-4679-acc5-70ca0b729635",
+      "name": "Groq Analysis Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -2048,
+        1760
+      ]
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n\t\"type\": \"object\",\n\t\"properties\": {\n\t\t\"response_text\": {\n\t\t\t\"type\": \"string\",\n\t\t\t\"description\": \"The generated response text for the conversation\"\n\t\t},\n\t\t\"intent\": {\n\t\t\t\"type\": \"string\",\n\t\t\t\"description\": \"The detected intent of the user's message\"\n\t\t},\n\t\t\"sentiment\": {\n\t\t\t\"type\": \"string\",\n\t\t\t\"description\": \"The sentiment analysis of the conversation (e.g., positive, negative, neutral)\"\n\t\t}\n\t},\n\t\"required\": [\"response_text\", \"intent\", \"sentiment\"]\n}"
+      },
+      "id": "ecbd9645-8e44-4619-a325-4b6a06ebafb8",
+      "name": "OpenAI Output Parser",
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        -1920,
+        80
+      ]
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n\t\"response_text\": \"Thank you for contacting us. How can I help you today?\",\n\t\"intent\": \"greeting\",\n\t\"sentiment\": \"positive\"\n}"
+      },
+      "id": "cb185e83-0283-41a4-b4a9-2476044d4856",
+      "name": "Anthropic Output Parser",
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        -1920,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n\t\"type\": \"object\",\n\t\"properties\": {\n\t\t\"response_text\": {\n\t\t\t\"type\": \"string\",\n\t\t\t\"description\": \"The generated response text for the conversation\"\n\t\t},\n\t\t\"intent\": {\n\t\t\t\"type\": \"string\",\n\t\t\t\"description\": \"The detected intent of the user's message\"\n\t\t},\n\t\t\"sentiment\": {\n\t\t\t\"type\": \"string\",\n\t\t\t\"description\": \"The sentiment analysis of the conversation (e.g., positive, negative, neutral)\"\n\t\t}\n\t},\n\t\"required\": [\"response_text\", \"intent\", \"sentiment\"]\n}"
+      },
+      "id": "fcfd7376-2cbb-46fa-91a4-4a44e17d6968",
+      "name": "Google Output Parser",
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        -1920,
+        880
+      ]
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n\t\"type\": \"object\",\n\t\"properties\": {\n\t\t\"response_text\": {\n\t\t\t\"type\": \"string\",\n\t\t\t\"description\": \"The generated response text for the conversation\"\n\t\t},\n\t\t\"intent\": {\n\t\t\t\"type\": \"string\",\n\t\t\t\"description\": \"The detected intent of the user's message\"\n\t\t},\n\t\t\"sentiment\": {\n\t\t\t\"type\": \"string\",\n\t\t\t\"description\": \"The sentiment analysis of the conversation (e.g., positive, negative, neutral)\"\n\t\t}\n\t},\n\t\"required\": [\"response_text\", \"intent\", \"sentiment\"]\n}"
+      },
+      "id": "92f48951-3f76-4042-8023-d7e35f49ed4c",
+      "name": "Mistral Output Parser",
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        -1920,
+        1472
+      ]
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n\t\"type\": \"object\",\n\t\"properties\": {\n\t\t\"response_text\": {\n\t\t\t\"type\": \"string\",\n\t\t\t\"description\": \"The generated response text for the conversation\"\n\t\t},\n\t\t\"intent\": {\n\t\t\t\"type\": \"string\",\n\t\t\t\"description\": \"The detected intent of the user's message\"\n\t\t},\n\t\t\"sentiment\": {\n\t\t\t\"type\": \"string\",\n\t\t\t\"description\": \"The sentiment analysis of the conversation (e.g., positive, negative, neutral)\"\n\t\t}\n\t},\n\t\"required\": [\"response_text\", \"intent\", \"sentiment\"]\n}"
+      },
+      "id": "3302c54c-11b7-40b2-9761-9c3bc12f2a94",
+      "name": "Groq Output Parser",
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        -1920,
+        1984
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Workflow Configuration",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Workflow Configuration": {
+      "main": [
+        [
+          {
+            "node": "Normalize Chat Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize Chat Data": {
+      "main": [
+        [
+          {
+            "node": "Route by AI Model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Required Fields": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Error Response - Missing Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Error Response - Missing Fields": {
+      "main": [
+        [
+          {
+            "node": "Return Error Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "OpenAI Analysis Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Final Response": {
+      "main": [
+        [
+          {
+            "node": "Return Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route by AI Model": {
+      "main": [
+        [
+          {
+            "node": "Validate Required Fields",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "OpenAI Analysis Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Validate Required Fields",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Anthropic Analysis Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Validate Required Fields",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Google Analysis Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Validate Required Fields",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Mistral Analysis Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Validate Required Fields",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Groq Analysis Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Validate Required Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Anthropic Claude": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Anthropic Analysis Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Google Analysis Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mistral AI": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Mistral Analysis Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Groq Analysis Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Analysis Agent": {
+      "main": [
+        [
+          {
+            "node": "Format Final Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Anthropic Analysis Agent": {
+      "main": [
+        [
+          {
+            "node": "Format Final Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Analysis Agent": {
+      "main": [
+        [
+          {
+            "node": "Format Final Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mistral Analysis Agent": {
+      "main": [
+        [
+          {
+            "node": "Format Final Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Analysis Agent": {
+      "main": [
+        [
+          {
+            "node": "Format Final Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "OpenAI Analysis Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Anthropic Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Anthropic Analysis Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Google Analysis Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mistral Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Mistral Analysis Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Groq Analysis Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "ebb1dc9e-3f2f-4959-9392-26344835dd56",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "22a4699e0fb1f0e120aca9be07bf5135247776f787c23f8b2eb38166ac344e1d"
+  },
+  "id": "XV9QsxuibaStsVCC",
+  "tags": []
+}
