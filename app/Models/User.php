@@ -23,6 +23,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'team_id',
+        'google_access_token',
+        'google_refresh_token',
+        'google_token_expires_in',
+        'google_calendar_email',
     ];
 
     /**
@@ -70,6 +75,14 @@ class User extends Authenticatable
     public function team()
     {
         return $this->belongsTo(Team::class, 'team_id');
+    }
+
+    /**
+     * Check if user has connected Google Calendar
+     */
+    public function hasGoogleCalendar(): bool
+    {
+        return !empty($this->google_access_token);
     }
 
 }

@@ -38,6 +38,22 @@ class FreelancerService
     }
 
     /**
+     * Core PUT request
+     */
+    public function put(PlatformAccount $account, string $endpoint, array $payload = [])
+    {
+        return $this->request($account, 'PUT', $endpoint, [], $payload);
+    }
+
+    /**
+     * Core DELETE request
+     */
+    public function delete(PlatformAccount $account, string $endpoint, array $params = [])
+    {
+        return $this->request($account, 'DELETE', $endpoint, $params);
+    }
+
+    /**
      * Generic request with IP header and Proxy configuration
      */
     protected function request(PlatformAccount $account, string $method, string $endpoint, array $query = [], array $payload = [])
@@ -53,6 +69,7 @@ class FreelancerService
 
         $options = [
             'headers' => $headers,
+            'timeout' => 60,
         ];
 
         // Configure Proxy

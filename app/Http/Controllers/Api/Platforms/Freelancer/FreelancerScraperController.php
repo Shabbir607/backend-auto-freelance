@@ -20,6 +20,8 @@ class FreelancerScraperController extends Controller
      */
     public function scrape(Request $request): JsonResponse
     {
+        $seoUrl = $request->input('seo_url');
+        
         // Rate limiting: 15 requests per minute per IP
         $rateKey = 'freelancer_scrape_' . $request->ip();
         if (RateLimiter::tooManyAttempts($rateKey, 15)) {
@@ -80,6 +82,10 @@ class FreelancerScraperController extends Controller
                     'username'    => $project['owner_info']['username'] ?? null,
                     'public_name' => $project['owner_info']['public_name'] ?? null,
                     'reputation'  => $project['owner_info']['reputation'] ?? null,
+                    'city'        => $project['owner_info']['city'] ?? null,
+                    'country'     => $project['owner_info']['country'] ?? null,
+                    'status'      => $project['owner_info']['status'] ?? null,
+                    'registration_date' => $project['owner_info']['registration_date'] ?? null,
                 ],
 
                 'jobs'        => $project['jobs'] ?? [],

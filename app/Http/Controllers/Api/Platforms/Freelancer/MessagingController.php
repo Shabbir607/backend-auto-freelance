@@ -20,7 +20,9 @@ class MessagingController extends Controller
      */
     public function listMessages(Request $request)
     {
-        $accounts = auth()->user()->freelancerAccounts; // collection of all accounts
+        $accounts = auth()->user()->platformAccounts()
+            ->whereHas('platform', fn($q) => $q->where('slug', 'freelancer'))
+            ->get();
         $result = [];
 
         foreach ($accounts as $account) {
@@ -91,7 +93,9 @@ class MessagingController extends Controller
 
     public function search(Request $request)
     {
-        $accounts = auth()->user()->freelancerAccounts;
+        $accounts = auth()->user()->platformAccounts()
+            ->whereHas('platform', fn($q) => $q->where('slug', 'freelancer'))
+            ->get();
         $result = [];
 
         foreach ($accounts as $account) {

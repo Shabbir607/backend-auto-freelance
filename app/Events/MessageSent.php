@@ -34,12 +34,27 @@ class MessageSent implements ShouldBroadcast
     {
         // Broadcast to the specific channel's UUID
         return [
-            new PrivateChannel('team.channel.' . $this->message->channel->uuid),
+            new Channel('team.channel.' . $this->message->channel->uuid),
         ];
     }
 
     public function broadcastAs()
     {
         return 'message.sent';
+    }
+
+    public function broadcastWith()
+    {
+        return [
+            'id' => $this->message->id,
+            'content' => $this->message->content,
+            'created_at' => $this->message->created_at,
+            'user' => [
+                'id' => $this->message->user->id,
+                'name' => $this->message->user->name,
+                'avatar_url' => $this->message->user->detail->avatar_url ?? null,
+            ],
+            'channel_id' => $this->message->channel_id,
+        ];
     }
 }

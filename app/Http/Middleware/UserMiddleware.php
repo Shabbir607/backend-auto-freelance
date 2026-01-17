@@ -15,13 +15,23 @@ class UserMiddleware
         // Passport-authenticated user
         $user = $request->user('api');
 
-        // Check if user exists AND has 'user' role via Spatie
-        if (!$user || (!$user->hasRole('user') && !$user->hasRole('admin'))) {
+        // Check if user exists
+        if (!$user) {
             return response()->json([
                 'success' => false,
-                'message' => 'Unauthorized. User access required.'
-            ], 403);
+                'message' => 'Unauthorized. Please login.'
+            ], 401);
         }
+
+        // Allow if user has ANY of the system roles
+        if ($user->hasAnyRole(['freelancer', 'client', 'agency', 'admin'])) {
+            return $next($request);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Unauthorized. Valid role required.'
+        ], 403);
 
         return $next($request);
     }

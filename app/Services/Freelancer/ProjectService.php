@@ -289,4 +289,96 @@ class ProjectService
             }
         }
     }
+    /**
+     * Invite Freelancer to Project
+     */
+    public function inviteFreelancer(string $platformSlug, int $userId, int $projectId, array $data)
+    {
+        $account = $this->getAccount($platformSlug, $userId);
+
+        return $this->freelancer->post(
+            $account,
+            "/projects/0.1/projects/{$projectId}/invite/",
+            $data
+        );
+    }
+
+    /**
+     * Get Project Upgrade Fees
+     */
+    public function getUpgradeFees(string $platformSlug, int $userId)
+    {
+        $account = $this->getAccount($platformSlug, $userId);
+
+        return $this->freelancer->get(
+            $account,
+            '/projects/0.1/projects/fees/'
+        );
+    }
+
+    /**
+     * Get Project Bid Info
+     */
+    public function getBidInfo(string $platformSlug, int $userId, int $projectId)
+    {
+        $account = $this->getAccount($platformSlug, $userId);
+
+        return $this->freelancer->get(
+            $account,
+            "/projects/0.1/projects/{$projectId}/bidinfo/"
+        );
+    }
+
+    /**
+     * Get Project Milestones
+     */
+    public function getMilestones(string $platformSlug, int $userId, int $projectId)
+    {
+        $account = $this->getAccount($platformSlug, $userId);
+
+        return $this->freelancer->get(
+            $account,
+            "/projects/0.1/projects/{$projectId}/milestones/"
+        );
+    }
+
+    /**
+     * Get Project Milestone Requests
+     */
+    public function getMilestoneRequests(string $platformSlug, int $userId, int $projectId)
+    {
+        $account = $this->getAccount($platformSlug, $userId);
+
+        return $this->freelancer->get(
+            $account,
+            "/projects/0.1/projects/{$projectId}/milestone_requests/"
+        );
+    }
+
+    /**
+     * Get Hourly Contracts
+     */
+    public function getHourlyContracts(string $platformSlug, int $userId, array $params = [])
+    {
+        $account = $this->getAccount($platformSlug, $userId);
+
+        return $this->freelancer->get(
+            $account,
+            '/projects/0.1/hourly_contracts/',
+            $params
+        );
+    }
+
+    /**
+     * Get IP Contracts
+     */
+    public function getIpContracts(string $platformSlug, int $userId, int $projectId)
+    {
+        $account = $this->getAccount($platformSlug, $userId);
+
+        return $this->freelancer->get(
+            $account,
+            "/projects/0.1/projects/{$projectId}/ip_contracts/"
+        );
+    }
 }

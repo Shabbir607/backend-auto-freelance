@@ -91,10 +91,20 @@ class ThreadController extends Controller
     public function createThread(Request $request): JsonResponse
     {
         try {
+            // Validate required fields
+            $validated = $request->validate([
+                'account_uuid' => 'required|uuid|exists:platform_accounts,uuid',
+                'members' => 'required|array|min:1',
+                'members.*' => 'required|integer',
+                'context_type' => 'nullable|string',
+                'context' => 'nullable|integer',
+                'message' => 'nullable|string',
+            ]);
+
             return response()->json(
                 $this->service->createThread(
                     $this->getAccount($request),
-                    $request->all()
+                    $validated
                 )
             );
         } catch (\Throwable $e) {

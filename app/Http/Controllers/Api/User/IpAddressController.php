@@ -60,14 +60,16 @@ class IpAddressController extends Controller
         if (!$ip) {
             $Id = intval($uuid);
             $ip = IpAddress::where('id', $Id)
+                            ->where('user_id', $userId)
                              ->first();
-            }
-            else{
-                return response()->json([
+        }
+
+        if (!$ip) {
+            return response()->json([
                 'success' => false,
                 'message' => 'IP address not found or not owned by this user'
             ], 404);
-            }
+        }
 
         return response()->json([
             'success' => true,
@@ -90,14 +92,16 @@ class IpAddressController extends Controller
         if (!$ip) {
             $Id = intval($uuid);
             $ip = IpAddress::where('id', $Id)
+                            ->where('user_id', $userId)
                              ->first();
-            }
-            else{
-                return response()->json([
+        }
+
+        if (!$ip) {
+            return response()->json([
                 'success' => false,
                 'message' => 'IP address not found or not owned by this user'
             ], 404);
-            }
+        }
 
         $ip->update($request->validated());
 
@@ -123,14 +127,16 @@ class IpAddressController extends Controller
         if (!$ip) {
             $Id = intval($uuid);
             $ip = IpAddress::where('id', $Id)
+                            ->where('user_id', $userId)
                              ->first();
-            }
-            else{
-                return response()->json([
+        }
+
+        if (!$ip) {
+            return response()->json([
                 'success' => false,
                 'message' => 'IP address not found or not owned by this user'
             ], 404);
-            }
+        }
 
         $ip->delete();
 

@@ -1,0 +1,1125 @@
+{
+	"info": {
+		"_postman_id": "freelancer-api-collection-v3",
+		"name": "Freelancer API Collection V3 (Comprehensive)",
+		"description": "Complete collection for Freelancer API integration, covering every endpoint including Utilities, Filters, and Extended Account Features.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Job Discovery",
+			"item": [
+				{
+					"name": "List Jobs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/freelancer/jobs",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"freelancer",
+								"jobs"
+							]
+						}
+					}
+				},
+				{
+					"name": "Search Jobs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/freelancer/jobs/search?query=php",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"freelancer",
+								"jobs",
+								"search"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "php"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Job Bundles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/freelancer/job-bundles",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"freelancer",
+								"job-bundles"
+							]
+						}
+					}
+				},
+				{
+					"name": "Job Bundle Categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/freelancer/job-bundle-categories",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"freelancer",
+								"job-bundle-categories"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Projects View",
+			"item": [
+				{
+					"name": "List Projects (Global)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/freelancer/projects",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"freelancer",
+								"projects"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Project (Global)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/freelancer/projects/12345",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"freelancer",
+								"projects",
+								"12345"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Messaging",
+			"item": [
+				{
+					"name": "List Threads",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/freelancer/messaging/threads?account_uuid={{uuid}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"freelancer",
+								"messaging",
+								"threads"
+							],
+							"query": [
+								{
+									"key": "account_uuid",
+									"value": "{{uuid}}"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Thread",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"members\": [12345],\n    \"subject\": \"New Project Discussion\",\n    \"message\": \"Hello, let's discuss the project.\",\n    \"account_uuid\": \"{{uuid}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/freelancer/messaging/threads",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"freelancer",
+								"messaging",
+								"threads"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Thread",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/freelancer/messaging/threads/123?account_uuid={{uuid}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"freelancer",
+								"messaging",
+								"threads",
+								"123"
+							],
+							"query": [
+								{
+									"key": "account_uuid",
+									"value": "{{uuid}}"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Send Message",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"message\": \"Here is the update.\",\n    \"account_uuid\": \"{{uuid}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/freelancer/messaging/threads/123/messages",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"freelancer",
+								"messaging",
+								"threads",
+								"123",
+								"messages"
+							]
+						}
+					}
+				},
+				{
+					"name": "List Messages",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/freelancer/messaging/threads/123/messages?account_uuid={{uuid}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"freelancer",
+								"messaging",
+								"threads",
+								"123",
+								"messages"
+							],
+							"query": [
+								{
+									"key": "account_uuid",
+									"value": "{{uuid}}"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Platform Management",
+			"item": [
+				{
+					"name": "List Accounts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/freelancer/freelancer/accounts",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"freelancer",
+								"freelancer",
+								"accounts"
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Account",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"newuser\",\n    \"email\": \"new@example.com\",\n    \"ip_address\": \"192.168.1.1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/freelancer/freelancer/accounts",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"freelancer",
+								"freelancer",
+								"accounts"
+							]
+						}
+					}
+				},
+				{
+					"name": "Fetch Profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/freelancer/freelancer/accounts/profile?uuid={{uuid}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"freelancer",
+								"freelancer",
+								"accounts",
+								"profile"
+							],
+							"query": [
+								{
+									"key": "uuid",
+									"value": "{{uuid}}"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Account Scoped",
+			"item": [
+				{
+					"name": "Projects",
+					"item": [
+						{
+							"name": "List Projects",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/freelancer/freelancer/{{uuid}}/projects",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"freelancer",
+										"freelancer",
+										"{{uuid}}",
+										"projects"
+									]
+								}
+							}
+						},
+						{
+							"name": "Create Project",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"Build a Website\",\n    \"description\": \"Need a Laravel expert.\",\n    \"currency\": {\"id\": 1},\n    \"budget\": {\"min\": 100, \"max\": 500},\n    \"jobs\": [3, 17]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/freelancer/freelancer/{{uuid}}/projects",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"freelancer",
+										"freelancer",
+										"{{uuid}}",
+										"projects"
+									]
+								}
+							}
+						},
+						{
+							"name": "Invite Freelancer",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"user_id\": 98765\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/freelancer/freelancer/{{uuid}}/projects/123/invite",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"freelancer",
+										"freelancer",
+										"{{uuid}}",
+										"projects",
+										"123",
+										"invite"
+									]
+								}
+							}
+						},
+						{
+							"name": "Get Milestones",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/freelancer/freelancer/{{uuid}}/projects/123/milestones",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"freelancer",
+										"freelancer",
+										"{{uuid}}",
+										"projects",
+										"123",
+										"milestones"
+									]
+								}
+							}
+						},
+						{
+							"name": "Get Milestone Requests",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/freelancer/freelancer/{{uuid}}/projects/123/milestone_requests",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"freelancer",
+										"freelancer",
+										"{{uuid}}",
+										"projects",
+										"123",
+										"milestone_requests"
+									]
+								}
+							}
+						},
+						{
+							"name": "Get IP Contracts",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/freelancer/freelancer/{{uuid}}/projects/123/ip_contracts",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"freelancer",
+										"freelancer",
+										"{{uuid}}",
+										"projects",
+										"123",
+										"ip_contracts"
+									]
+								}
+							}
+						}
+					]
+				},
+				{
+					"name": "Bidding",
+					"item": [
+						{
+							"name": "Place Bid",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"amount\": 150,\n    \"period\": 7,\n    \"description\": \"I can do this.\",\n    \"milestones\": [\n        {\"description\": \"Initial Setup\", \"amount\": 50},\n        {\"description\": \"Completion\", \"amount\": 100}\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/freelancer/freelancer/{{uuid}}/projects/123/bid",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"freelancer",
+										"freelancer",
+										"{{uuid}}",
+										"projects",
+										"123",
+										"bid"
+									]
+								}
+							}
+						},
+						{
+							"name": "List Bids",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/freelancer/freelancer/{{uuid}}/projects/123/bids",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"freelancer",
+										"freelancer",
+										"{{uuid}}",
+										"projects",
+										"123",
+										"bids"
+									]
+								}
+							}
+						},
+						{
+							"name": "Get Bid Fees",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/freelancer/freelancer/{{uuid}}/bids/fees",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"freelancer",
+										"freelancer",
+										"{{uuid}}",
+										"bids",
+										"fees"
+									]
+								}
+							}
+						}
+					]
+				},
+				{
+					"name": "Contests",
+					"item": [
+						{
+							"name": "Create Contest",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"Logo Design\",\n    \"description\": \"Modern logo needed.\",\n    \"currency\": {\"id\": 1},\n    \"budget\": {\"min\": 50, \"max\": 100},\n    \"jobs\": [3],\n    \"duration\": 7\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/freelancer/freelancer/{{uuid}}/contests",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"freelancer",
+										"freelancer",
+										"{{uuid}}",
+										"contests"
+									]
+								}
+							}
+						},
+						{
+							"name": "List Contests",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/freelancer/freelancer/{{uuid}}/contests",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"freelancer",
+										"freelancer",
+										"{{uuid}}",
+										"contests"
+									]
+								}
+							}
+						}
+					]
+				},
+				{
+					"name": "Utilities",
+					"item": [
+						{
+							"name": "Get Categories",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/freelancer/freelancer/{{uuid}}/categories",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"freelancer",
+										"freelancer",
+										"{{uuid}}",
+										"categories"
+									]
+								}
+							}
+						},
+						{
+							"name": "Get Countries",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/freelancer/freelancer/{{uuid}}/countries",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"freelancer",
+										"freelancer",
+										"{{uuid}}",
+										"countries"
+									]
+								}
+							}
+						},
+						{
+							"name": "Get Currencies",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/freelancer/freelancer/{{uuid}}/currencies",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"freelancer",
+										"freelancer",
+										"{{uuid}}",
+										"currencies"
+									]
+								}
+							}
+						},
+						{
+							"name": "Get Timezones",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/freelancer/freelancer/{{uuid}}/timezones",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"freelancer",
+										"freelancer",
+										"{{uuid}}",
+										"timezones"
+									]
+								}
+							}
+						}
+					]
+				},
+				{
+					"name": "Filters",
+					"item": [
+						{
+							"name": "List Filters",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/freelancer/freelancer/{{uuid}}/filters",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"freelancer",
+										"freelancer",
+										"{{uuid}}",
+										"filters"
+									]
+								}
+							}
+						},
+						{
+							"name": "Create Filter",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"High Value Projects\",\n    \"filter_params\": {\n        \"min_budget\": 500,\n        \"jobs\": [3, 7],\n        \"languages\": [\"en\"]\n    },\n    \"is_active\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/freelancer/freelancer/{{uuid}}/filters",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"freelancer",
+										"freelancer",
+										"{{uuid}}",
+										"filters"
+									]
+								}
+							}
+						},
+						{
+							"name": "Update Filter",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Updated Filter Name\",\n    \"filter_params\": {\n        \"max_budget\": 1000\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/freelancer/freelancer/{{uuid}}/filters/1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"freelancer",
+										"freelancer",
+										"{{uuid}}",
+										"filters",
+										"1"
+									]
+								}
+							}
+						},
+						{
+							"name": "Delete Filter",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/freelancer/freelancer/{{uuid}}/filters/1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"freelancer",
+										"freelancer",
+										"{{uuid}}",
+										"filters",
+										"1"
+									]
+								}
+							}
+						},
+						{
+							"name": "Add Demo Filters",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/freelancer/freelancer/{{uuid}}/filters/demo",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"freelancer",
+										"freelancer",
+										"{{uuid}}",
+										"filters",
+										"demo"
+									]
+								}
+							}
+						}
+					]
+				},
+				{
+					"name": "Users",
+					"item": [
+						{
+							"name": "Search Directory",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/freelancer/freelancer/{{uuid}}/users/directory?query=developer",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"freelancer",
+										"freelancer",
+										"{{uuid}}",
+										"users",
+										"directory"
+									],
+									"query": [
+										{
+											"key": "query",
+											"value": "developer"
+										}
+									]
+								}
+							}
+						},
+						{
+							"name": "Get Login Devices",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/freelancer/freelancer/{{uuid}}/users/devices",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"freelancer",
+										"freelancer",
+										"{{uuid}}",
+										"users",
+										"devices"
+									]
+								}
+							}
+						},
+						{
+							"name": "Add User Skills",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"jobs\": [3, 17]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/freelancer/freelancer/{{uuid}}/users/skills",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"freelancer",
+										"freelancer",
+										"{{uuid}}",
+										"users",
+										"skills"
+									]
+								}
+							}
+						},
+						{
+							"name": "Set User Skills",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"jobs\": [3, 17, 22]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/freelancer/freelancer/{{uuid}}/users/skills",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"freelancer",
+										"freelancer",
+										"{{uuid}}",
+										"users",
+										"skills"
+									]
+								}
+							}
+						},
+						{
+							"name": "Delete User Skills",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"jobs\": [3]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/freelancer/freelancer/{{uuid}}/users/skills",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"freelancer",
+										"freelancer",
+										"{{uuid}}",
+										"users",
+										"skills"
+									]
+								}
+							}
+						},
+						{
+							"name": "Get Reputations",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/freelancer/freelancer/{{uuid}}/reputations?users[]=12345",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"freelancer",
+										"freelancer",
+										"{{uuid}}",
+										"reputations"
+									],
+									"query": [
+										{
+											"key": "users[]",
+											"value": "12345"
+										}
+									]
+								}
+							}
+						},
+						{
+							"name": "Get Portfolios",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/freelancer/freelancer/{{uuid}}/portfolios?users[]=12345",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"freelancer",
+										"freelancer",
+										"{{uuid}}",
+										"portfolios"
+									],
+									"query": [
+										{
+											"key": "users[]",
+											"value": "12345"
+										}
+									]
+								}
+							}
+						},
+						{
+							"name": "Search Users",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/freelancer/freelancer/{{uuid}}/users/search?usernames[]=testuser",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"freelancer",
+										"freelancer",
+										"{{uuid}}",
+										"users",
+										"search"
+									],
+									"query": [
+										{
+											"key": "usernames[]",
+											"value": "testuser"
+										}
+									]
+								}
+							}
+						},
+						{
+							"name": "Get User Details",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/freelancer/freelancer/{{uuid}}/users/12345",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"freelancer",
+										"freelancer",
+										"{{uuid}}",
+										"users",
+										"12345"
+									]
+								}
+							}
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{bearer_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000",
+			"type": "string"
+		},
+		{
+			"key": "bearer_token",
+			"value": "YOUR_API_TOKEN",
+			"type": "string"
+		},
+		{
+			"key": "uuid",
+			"value": "YOUR_ACCOUNT_UUID",
+			"type": "string"
+		}
+	]
+}

@@ -21,7 +21,7 @@ class AuthController extends Controller
     /**
      * Redirect to OAuth provider with assigned IP.
      */
-    public function redirectToProvider(Request $request, string $platform_slug, ?string $ipUuid = null)
+    public function redirectToProvider(Request $request, string $platform_slug = 'freelancer', ?string $ipUuid = null)
     {
         
         try {
@@ -33,10 +33,28 @@ class AuthController extends Controller
                     ->where('user_id', $user->id)
                     ->firstOrFail();
             } else {
-                $ipModel = IpAddress::firstOrCreate(
-                    ['ip_address' => $request->ip(), 'user_id' => $user->id],
-                    ['is_assigned' => false]
-                );
+                // 1. Check if user already has an assigned IP (Sticky IP)
+                $ipModel = IpAddress::where('user_id', $user->id)
+                    ->where('is_assigned', true)
+                    ->first();
+
+                if (!$ipModel) {
+                    // 2. If no assigned IP, use Request IP
+                    // Check if IP exists globally first
+                    $ipModel = IpAddress::where('ip_address', $request->ip())->first();
+
+                    if (!$ipModel) {
+                        // Create and auto-assign
+                        $ipModel = IpAddress::create([
+                            'ip_address' => $request->ip(),
+                            'user_id' => $user->id,
+                            'is_assigned' => true
+                        ]);
+                    } elseif ($ipModel->user_id == $user->id && !$ipModel->is_assigned) {
+                        // If exists, belongs to user, but not assigned -> Assign it
+                        $ipModel->update(['is_assigned' => true]);
+                    }
+                }
             }
 
             // Generate unique session ID

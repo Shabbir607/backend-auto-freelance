@@ -82,13 +82,22 @@ class LocationService
     public function createOrUpdateForUser(int $userId): IpAddress
     {
         $ip = $this->getIp();
+        
+        // Check if IP already exists
+        $ipRecord = IpAddress::where('ip_address', $ip)->first();
+
+        // If IP exists, return it without updating (per user request and to avoid duplicates)
+        if ($ipRecord) {
+            return $ipRecord;
+        }
+
+        // If IP does not exist, create a new record
         $location = $this->getLocation();
 
-        $ipRecord = IpAddress::firstOrNew([
-            'user_id' => $userId,
-            'ip_address' => $ip,
-        ]);
-
+        $ipRecord = new IpAddress();
+        $ipRecord->user_id = $userId;
+        $ipRecord->ip_address = $ip;
+        
         $ipRecord->fill([
             'type' => 'dynamic',
             'provider' => $location['provider'] ?? null,

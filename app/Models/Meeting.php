@@ -11,12 +11,16 @@ class Meeting extends Model
 
     protected $fillable = [
         'project_id',
+        'organizer_id',
         'title',
         'description',
         'start_time',
         'end_time',
         'meeting_link',
         'status',
+        'google_event_id',
+        'google_meet_link',
+        'hangout_link',
     ];
 
     protected $casts = [
@@ -27,6 +31,11 @@ class Meeting extends Model
     public function project()
     {
         return $this->belongsTo(Project::class);
+    }
+
+    public function organizer()
+    {
+        return $this->belongsTo(User::class, 'organizer_id');
     }
 
     public function attendees()

@@ -28,48 +28,59 @@ class AuthService
  * @return array
  * @throws Exception
  */
-public function request(PlatformAccount $account, string $method, string $endpoint, array $options = []): array
-{
+    public function request(PlatformAccount $account, string $method, string $endpoint, array $options = []): array
+    {
 
-    $this->ensureToken($account);
+        $this->ensureToken($account);
 
-    $platform = Platform::where('slug', 'freelancer')->firstOrFail();
-    // $platform->api_base_url = 'https://www.freelancer.com/api/0.1';
-    $url = rtrim($platform->api_base_url, '/') . $endpoint;
+        $platform = Platform::where('slug', 'freelancer')->firstOrFail();
+        // $platform->api_base_url = 'https://www.freelancer.com/api/0.1';
+        $url = rtrim($platform->api_base_url, '/') . $endpoint;
 
-    // Add Authorization header
-    if (!isset($options['headers'])) {
-        $options['headers'] = [];
-    }
+        // Add Authorization header
+        if (!isset($options['headers'])) {
+            $options['headers'] = [];
+        }
 
-    $options['headers']['Authorization'] = 'Bearer ' . $account->oauth_access_token;
-    $options['headers']['Accept'] = 'application/json';
+        $options['headers']['Authorization'] = 'Bearer ' . $account->oauth_access_token;
+        $options['headers']['Accept'] = 'application/json';
 
-    // Handle IP / Proxy binding
-    if ($account->ip_id) {
-        $ip = $account->ip;
-        if ($ip) {
-            if ($ip->provider === 'Webshare') {
-                $proxyString = $ip->username && $ip->password
-                    ? "{$ip->username}:{$ip->password}@{$ip->ip_address}:{$ip->port}"
-                    : "{$ip->ip_address}:{$ip->port}";
+        // Handle IP / Proxy binding
+        if ($account->ip_id) {
+            $ip = $account->ip;
+            if ($ip) {
+                if ($ip->provider === 'Webshare' && $ip->port && $ip->ip_address !== '127.0.0.1') {
+                    $proxyString = $ip->username && $ip->password
+                        ? "{$ip->username}:{$ip->password}@{$ip->ip_address}:{$ip->port}"
+                        : "{$ip->ip_address}:{$ip->port}";
 
-                $options['proxy'] = "http://{$proxyString}";
-            } else {
-                $options['curl'][CURLOPT_INTERFACE] = $ip->ip_address;
+                    $options['proxy'] = "http://{$proxyString}";
+                } elseif ($this->isLocalIpAvailable($ip->ip_address) && $ip->ip_address !== '127.0.0.1') {
+                    $options['curl'][CURLOPT_INTERFACE] = $ip->ip_address;
+                }
             }
         }
-    }
 
-    try {
-        // dd( $options,$url,$method, $account);
-        $response = $this->client->request($method, $url, $options);
-        // dd($response, $options,$url,$method);
-        return json_decode($response->getBody()->getContents(), true);
-    } catch (\Exception $e) {
-        throw new Exception("Freelancer API request error: " . $e->getMessage());
+        try {
+            // dd( $options,$url,$method, $account);
+            $response = $this->client->request($method, $url, $options);
+            // dd($response, $options,$url,$method);
+            return json_decode($response->getBody()->getContents(), true);
+        } catch (\Exception $e) {
+            // Retry without IP binding if connection fails (cURL error 7)
+            if (str_contains($e->getMessage(), 'cURL error 7') && isset($options['curl'][CURLOPT_INTERFACE])) {
+                unset($options['curl'][CURLOPT_INTERFACE]);
+                try {
+                    $response = $this->client->request($method, $url, $options);
+                    return json_decode($response->getBody()->getContents(), true);
+                } catch (\Exception $retryException) {
+                    throw new Exception("Freelancer API request error (retry failed): " . $retryException->getMessage());
+                }
+            }
+
+            throw new Exception("Freelancer API request error: " . $e->getMessage());
+        }
     }
-}
 
 
     /**
@@ -116,7 +127,6 @@ public function request(PlatformAccount $account, string $method, string $endpoi
 
     // Requested IP
     $requestedIp = IpAddress::where('uuid', $ipUuid)
-        ->where('user_id', $userId)
         ->firstOrFail();
 
     // Check if user already has a platform account
@@ -244,7 +254,7 @@ public function request(PlatformAccount $account, string $method, string $endpoi
             $ip = IpAddress::where('ip_address', $ipAddress)->first();
 
             if ($ip) {
-                if ($ip->provider === 'Webshare') {
+                if ($ip->provider === 'Webshare' && $ip->port && $ip->ip_address !== '127.0.0.1') {
                     // -------------------------
                     // Webshare Proxy Handling
                     // -------------------------
@@ -258,7 +268,7 @@ public function request(PlatformAccount $account, string $method, string $endpoi
                     $options['curl'][CURLOPT_PROXYUSERPWD] = "{$ip->username}:{$ip->password}";
                     $options['curl'][CURLOPT_PROXYTYPE] = CURLPROXY_HTTP;
 
-                } else {
+                } elseif ($this->isLocalIpAvailable($ip->ip_address) && $ip->ip_address !== '127.0.0.1') {
                     // -------------------------
                     // Local IP binding
                     // -------------------------

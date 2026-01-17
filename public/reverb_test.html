@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reverb Test</title>
+    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <h1>Reverb WebSocket Test</h1>
+    <div id="status">Connecting...</div>
+    <div id="messages"></div>
+
+    <script>
+        // Configuration
+        const REVERB_APP_KEY = '8lmrg7lbhswai6ijbqcr';
+        const REVERB_HOST = 'localhost';
+        const REVERB_PORT = 8080;
+        const REVERB_SCHEME = 'http';
+
+        // Initialize Pusher (Reverb compatible)
+        Pusher.logToConsole = true;
+
+        const pusher = new Pusher(REVERB_APP_KEY, {
+            wsHost: REVERB_HOST,
+            wsPort: REVERB_PORT,
+            forceTLS: false,
+            disableStats: true,
+            enabledTransports: ['ws', 'wss'],
+            cluster: 'mt1' // dummy cluster
+        });
+
+        const channelId = '5e13e570-1305-4ace-95e8-641f2164efb0'; // Valid channel UUID
+        const channel = pusher.subscribe('team.channel.' + channelId);
+
+        channel.bind('pusher:subscription_succeeded', () => {
+            document.getElementById('status').innerText = 'Connected & Subscribed!';
+            console.log('Subscribed!');
+        });
+
+        channel.bind('message.sent', function (data) {
+            console.log('Received:', data);
+            const msgDiv = document.createElement('div');
+            msgDiv.innerText = JSON.stringify(data);
+            document.getElementById('messages').appendChild(msgDiv);
+        });
+
+        // Note: For private channels, you need an auth endpoint.
+        // This script assumes you have a way to authenticate or are testing public channels first.
+        // For strict testing, use Laravel Echo with a proper auth token.
+    </script>
+</body>
+
+</html>

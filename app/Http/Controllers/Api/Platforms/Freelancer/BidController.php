@@ -23,6 +23,10 @@ class BidController extends Controller
     public function placeBid(string $platform_slug, string $uuid, Request $request)
     {
         try {
+            if (!$request->user('api')->can('bid_on_project')) {
+                return response()->json(['success' => false, 'error' => 'Unauthorized. You do not have permission to bid on projects.'], 403);
+            }
+
             $data = $request->only([
                 'project_id',
                 'amount',
@@ -67,10 +71,10 @@ class BidController extends Controller
     /**
      * GET /freelancer/{platform_slug}/{uuid}/projects/{projectId}/bids
      */
-    public function listBids(string $platform_slug, string $uuid, int $projectId)
+    public function listBids(string $platform_slug, string $uuid, $projectId)
     {
         try {
-            $bids = $this->bidService->listBids($platform_slug, $uuid, $projectId);
+            $bids = $this->bidService->listBids($platform_slug, $uuid, (int)$projectId);
 
             return response()->json([
                 'success' => true,
@@ -87,16 +91,36 @@ class BidController extends Controller
     /**
      * GET /freelancer/{platform_slug}/{uuid}/bids/{bidId}
      */
-    public function show(string $platform_slug, string $uuid, int $bidId)
+    public function show(string $platform_slug, string $uuid, $bidId)
     {
         try {
             // Assuming BidService doesn't have getBid, implementing directly or assuming it does.
             // I'll check if I can use the model directly as fallback.
-            $bid = \App\Models\Bid::findOrFail($bidId);
+            $bid = \App\Models\Bid::findOrFail((int)$bidId);
 
             return response()->json([
                 'success' => true,
                 'bid' => $bid
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'success' => false,
+                'error' => $e->getMessage()
+            ], 400);
+        }
+    }
+    /**
+     * GET /freelancer/{platform_slug}/{uuid}/bids/fees
+     */
+    public function getUpgradeFees(Request $request, string $platform_slug, string $uuid)
+    {
+        try {
+            $params = $request->all();
+            $fees = $this->bidService->getUpgradeFees($platform_slug, $uuid, $params);
+
+            return response()->json([
+                'success' => true,
+                'fees' => $fees
             ]);
         } catch (Exception $e) {
             return response()->json([

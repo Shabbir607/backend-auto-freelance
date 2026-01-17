@@ -18,7 +18,7 @@ class AccountController extends Controller
     }
 
     // List all accounts
-    public function index($platform_slug)
+    public function index($platform_slug = 'freelancer')
     {
         try {
             $accounts = $this->accountService->listAccounts($platform_slug);
@@ -29,7 +29,7 @@ class AccountController extends Controller
     }
 
     // Create a new account
-    public function createAccount(Request $request, $platform_slug)
+    public function createAccount(Request $request, $platform_slug = 'freelancer')
     {
         try {
             $account = $this->accountService->createAccount(
@@ -45,12 +45,18 @@ class AccountController extends Controller
     }
 
     // Fetch account profile from Freelancer using assigned IP
-    public function fetchProfile(Request $request, $platform_slug, $accountId)
+    public function fetchProfile(Request $request, $platform_slug = 'freelancer')
     {
         try {
-            $account = PlatformAccount::where('uuid', $accountId)
-                ->where('user_id', auth()->id())
-                ->firstOrFail();
+            $accountId = $request->query('uuid') ?? $request->input('uuid');
+            
+            $query = PlatformAccount::where('user_id', auth()->id());
+
+            if ($accountId) {
+                $query->where('uuid', $accountId);
+            }
+
+            $account = $query->firstOrFail();
 
             $profile = $this->accountService->fetchProfile($account);
 
@@ -61,10 +67,12 @@ class AccountController extends Controller
     }
 
     // Update account
-    public function updateAccount(Request $request, $platform_slug, $accountId)
+    public function updateAccount(Request $request, $platform_slug = 'freelancer')
     {
         try {
-            $account = PlatformAccount::where('id', $accountId)
+            $accountId = $request->input('uuid') ?? $request->input('id');
+            $account = PlatformAccount::where('uuid', $accountId)
+                ->orWhere('id', $accountId)
                 ->where('user_id', auth()->id())
                 ->firstOrFail();
 
@@ -77,10 +85,12 @@ class AccountController extends Controller
     }
 
     // Delete account
-    public function deleteAccount($platform_slug, $accountId)
+    public function deleteAccount(Request $request, $platform_slug = 'freelancer')
     {
         try {
-            $account = PlatformAccount::where('id', $accountId)
+            $accountId = $request->input('uuid') ?? $request->input('id');
+            $account = PlatformAccount::where('uuid', $accountId)
+                ->orWhere('id', $accountId)
                 ->where('user_id', auth()->id())
                 ->firstOrFail();
 
@@ -193,6 +203,83 @@ class AccountController extends Controller
 
             $users = $this->accountService->searchUsers($account, $request->usernames);
             return response()->json(['success' => true, 'data' => $users]);
+        } catch (Exception $e) {
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 400);
+        }
+    }
+    public function searchDirectory(Request $request)
+    {
+        try {
+            $uuid = $request->route('uuid');
+            $account = PlatformAccount::where('uuid', $uuid)
+                ->where('user_id', auth()->id())
+                ->firstOrFail();
+
+            $results = $this->accountService->searchDirectory($account, $request->all());
+            return response()->json(['success' => true, 'data' => $results]);
+        } catch (Exception $e) {
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 400);
+        }
+    }
+
+    public function getLoginDevices(Request $request)
+    {
+        try {
+            $uuid = $request->route('uuid');
+            $account = PlatformAccount::where('uuid', $uuid)
+                ->where('user_id', auth()->id())
+                ->firstOrFail();
+
+            $devices = $this->accountService->getLoginDevices($account);
+            return response()->json(['success' => true, 'data' => $devices]);
+        } catch (Exception $e) {
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 400);
+        }
+    }
+
+    public function addUserSkills(Request $request)
+    {
+        try {
+            $request->validate(['jobs' => 'required|array']);
+            $uuid = $request->route('uuid');
+            $account = PlatformAccount::where('uuid', $uuid)
+                ->where('user_id', auth()->id())
+                ->firstOrFail();
+
+            $result = $this->accountService->addUserSkills($account, $request->jobs);
+            return response()->json(['success' => true, 'data' => $result]);
+        } catch (Exception $e) {
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 400);
+        }
+    }
+
+    public function setUserSkills(Request $request)
+    {
+        try {
+            $request->validate(['jobs' => 'required|array']);
+            $uuid = $request->route('uuid');
+            $account = PlatformAccount::where('uuid', $uuid)
+                ->where('user_id', auth()->id())
+                ->firstOrFail();
+
+            $result = $this->accountService->setUserSkills($account, $request->jobs);
+            return response()->json(['success' => true, 'data' => $result]);
+        } catch (Exception $e) {
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 400);
+        }
+    }
+
+    public function deleteUserSkills(Request $request)
+    {
+        try {
+            $request->validate(['jobs' => 'required|array']);
+            $uuid = $request->route('uuid');
+            $account = PlatformAccount::where('uuid', $uuid)
+                ->where('user_id', auth()->id())
+                ->firstOrFail();
+
+            $result = $this->accountService->deleteUserSkills($account, $request->jobs);
+            return response()->json(['success' => true, 'data' => $result]);
         } catch (Exception $e) {
             return response()->json(['success' => false, 'error' => $e->getMessage()], 400);
         }

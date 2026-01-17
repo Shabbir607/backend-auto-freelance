@@ -93,6 +93,8 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::disableForeignKeyConstraints();
+
         Schema::dropIfExists('team_invitations');
         Schema::dropIfExists('notifications');
         Schema::dropIfExists('team_messages');
@@ -105,5 +107,7 @@ return new class extends Migration
         });
 
         Schema::dropIfExists('teams');
+
+        Schema::enableForeignKeyConstraints();
     }
 };

@@ -2,36 +2,26 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Model;
 
 class Notification extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'uuid',
         'user_id',
         'type',
         'title',
-        'description',
-        'read',
-        'link',
+        'message',
+        'data',
+        'read_at',
     ];
 
     protected $casts = [
-        'read' => 'boolean',
+        'data' => 'array',
+        'read_at' => 'datetime',
     ];
-
-    protected static function booted()
-    {
-        static::creating(function ($model) {
-            if (empty($model->uuid)) {
-                $model->uuid = (string) Str::uuid();
-            }
-        });
-    }
 
     public function user()
     {

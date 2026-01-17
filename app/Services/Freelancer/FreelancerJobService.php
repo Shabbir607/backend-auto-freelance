@@ -6,6 +6,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Exception;
 use App\Models\PlatformAccount;
+use App\Models\IPAddress;
 
 class FreelancerJobService
 {
@@ -17,7 +18,7 @@ class FreelancerJobService
     {
         $this->apiKey = env('FREELANCER_API_KEY', '');
         $this->client = new Client([
-            'timeout' => 30,
+            'timeout' => 60,
         ]);
     }
 
@@ -41,19 +42,19 @@ class FreelancerJobService
             // Configure Proxy if account is provided
             if ($account && $account->ip) {
                 $ip = $account->ip;
-                if ($ip->provider === 'Webshare') {
+                if ($ip->provider === 'Webshare' && $ip->port && $ip->ip_address !== '127.0.0.1') {
                     $proxyString = $ip->username && $ip->password
                         ? "{$ip->username}:{$ip->password}@{$ip->ip_address}:{$ip->port}"
                         : "{$ip->ip_address}:{$ip->port}";
 
                     $options['proxy'] = "http://{$proxyString}";
-                } else {
+                } elseif ($ip->ip_address !== '127.0.0.1') {
                     $options['curl'] = [
                         CURLOPT_INTERFACE => $ip->ip_address
                     ];
                 }
             }
-
+// dd($this->baseUrl . $endpoint,$options,$account);
             $response = $this->client->get($this->baseUrl . $endpoint, $options);
 
             $data = json_decode($response->getBody()->getContents(), true);

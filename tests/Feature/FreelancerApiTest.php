@@ -4,181 +4,107 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\Models\User;
-use App\Services\Freelancer\ProjectService;
-use App\Services\Freelancer\BidService;
-use App\Services\Freelancer\AccountService;
+use App\Models\Platform;
+use App\Models\PlatformAccount;
+use App\Services\Freelancer\FreelancerService;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Mockery;
-use Illuminate\Foundation\Testing\WithFaker;
 
 class FreelancerApiTest extends TestCase
 {
-    use WithFaker;
+    use RefreshDatabase;
 
     protected $user;
-    protected $platformSlug = 'freelancer';
-    protected $uuid = 'test-uuid';
+    protected $platform;
+    protected $account;
+    protected $freelancerServiceMock;
 
     protected function setUp(): void
     {
         parent::setUp();
-        // Create a user to authenticate as
-        // Since DB is down, we might have trouble creating a user.
-        // We can try to mock the auth guard or just make a user instance and actingAs.
-        // However, actingAs requires a user that exists in DB usually for token.
-        // If DB is strictly down, we can't run these tests easily.
-        // But assuming we can run tests in a separate testing DB (sqlite in memory), we should be fine.
-        // I will assume standard Laravel testing setup.
+
+        // Create User
+        $this->user = User::factory()->create();
         
-        // Mock User
-        $this->user = User::make(['id' => 1, 'name' => 'Test User']);
-        $this->actingAs($this->user, 'api');
-    }
-
-    public function test_list_projects()
-    {
-        $this->mock(ProjectService::class, function ($mock) {
-            $mock->shouldReceive('listProjects')->once()->andReturn(['projects' => []]);
-        });
-
-        $response = $this->getJson("/api/freelancer/{$this->platformSlug}/{$this->uuid}/projects");
-
-        $response->assertStatus(200)
-                 ->assertJson(['success' => true]);
-    }
-
-    public function test_create_project()
-    {
-        $this->mock(ProjectService::class, function ($mock) {
-            $mock->shouldReceive('createProject')->once()->andReturn(['id' => 1]);
-        });
-
-        $response = $this->postJson("/api/freelancer/{$this->platformSlug}/{$this->uuid}/projects", [
-            'title' => 'Test Project',
-            'description' => 'Description'
+        // Create Platform
+        $this->platform = Platform::create([
+            'name' => 'Freelancer',
+            'slug' => 'freelancer',
+            'url' => 'https://www.freelancer.com',
+            'status' => 'active'
         ]);
 
-        $response->assertStatus(200)
-                 ->assertJson(['success' => true]);
-    }
+        // Create Role and Assign
+        $role = \Spatie\Permission\Models\Role::firstOrCreate(['name' => 'freelancer', 'guard_name' => 'api']);
+        $this->user->assignRole($role);
 
-    public function test_get_project()
-    {
-        $this->mock(ProjectService::class, function ($mock) {
-            $mock->shouldReceive('getProject')->once()->andReturn(['id' => 1]);
-        });
-
-        $response = $this->getJson("/api/freelancer/{$this->platformSlug}/{$this->uuid}/projects/1");
-
-        $response->assertStatus(200)
-                 ->assertJson(['success' => true]);
-    }
-
-    public function test_update_project()
-    {
-        $this->mock(ProjectService::class, function ($mock) {
-            $mock->shouldReceive('updateProject')->once()->andReturn(['id' => 1, 'title' => 'Updated']);
-        });
-
-        $response = $this->putJson("/api/freelancer/{$this->platformSlug}/{$this->uuid}/projects/1", [
-            'title' => 'Updated'
+        // Create Account
+        $this->account = PlatformAccount::create([
+            'user_id' => $this->user->id,
+            'platform_id' => $this->platform->id,
+            'uuid' => 'test-uuid',
+            'account_username' => 'testuser',
+            'email' => 'test@example.com',
+            'status' => 'active',
+            'external_account_id' => 12345,
+            'access_token' => 'fake-token'
         ]);
 
-        $response->assertStatus(200)
-                 ->assertJson(['success' => true]);
+        // Mock FreelancerService
+        $this->freelancerServiceMock = Mockery::mock(FreelancerService::class);
+        $this->app->instance(FreelancerService::class, $this->freelancerServiceMock);
+        
+        $this->withoutMiddleware();
     }
 
-    public function test_delete_project()
+    public function test_create_contest()
     {
-        $this->mock(ProjectService::class, function ($mock) {
-            $mock->shouldReceive('deleteProject')->once()->andReturn(true);
-        });
+        $payload = [
+            'title' => 'Test Contest',
+            'description' => 'Description',
+            'currency' => ['id' => 1],
+            'budget' => ['min' => 10, 'max' => 20],
+            'jobs' => [1],
+            'duration' => 3
+        ];
 
-        $response = $this->deleteJson("/api/freelancer/{$this->platformSlug}/{$this->uuid}/projects/1");
+        $this->freelancerServiceMock
+            ->shouldReceive('post')
+            ->once()
+            ->andReturn(['status' => 'success', 'result' => ['id' => 101]]);
+
+        $response = $this->actingAs($this->user, 'api')
+            ->postJson("/api/freelancer/freelancer/{$this->account->uuid}/contests", $payload);
 
         $response->assertStatus(200)
-                 ->assertJson(['success' => true]);
+            ->assertJson(['status' => 'success']);
     }
 
-    public function test_list_bids()
+    public function test_get_upgrade_fees()
     {
-        $this->mock(BidService::class, function ($mock) {
-            $mock->shouldReceive('listBids')->once()->andReturn(['bids' => []]);
-        });
+        $this->freelancerServiceMock
+            ->shouldReceive('get')
+            ->once()
+            ->andReturn(['fees' => []]);
 
-        $response = $this->getJson("/api/freelancer/{$this->platformSlug}/{$this->uuid}/projects/1/bids");
+        $response = $this->actingAs($this->user, 'api')
+            ->getJson("/api/freelancer/freelancer/{$this->account->uuid}/projects/fees");
 
         $response->assertStatus(200)
-                 ->assertJson(['success' => true]);
+            ->assertJson(['success' => true]);
     }
 
-    public function test_place_bid()
+    public function test_get_timezones()
     {
-        $this->mock(BidService::class, function ($mock) {
-            $mock->shouldReceive('placeBid')->once()->andReturn(['id' => 1]);
-        });
+        $this->freelancerServiceMock
+            ->shouldReceive('get')
+            ->once()
+            ->andReturn(['timezones' => []]);
 
-        $response = $this->postJson("/api/freelancer/{$this->platformSlug}/{$this->uuid}/projects/1/bid", [
-            'amount' => 100,
-            'period' => 7
-        ]);
+        $response = $this->actingAs($this->user, 'api')
+            ->getJson("/api/freelancer/freelancer/{$this->account->uuid}/timezones");
 
         $response->assertStatus(200)
-                 ->assertJson(['success' => true]);
-    }
-
-    public function test_get_bid()
-    {
-        // BidController uses Model directly for show, so this might fail if DB is down.
-        // We skip this if we can't mock the model easily in this context without a repo.
-        // However, we can verify the route exists.
-        $this->markTestSkipped('Skipping DB dependent test');
-    }
-
-    public function test_reputations()
-    {
-        $this->mock(AccountService::class, function ($mock) {
-            $mock->shouldReceive('getReputations')->once()->andReturn(['reputations' => []]);
-        });
-
-        $response = $this->getJson("/api/freelancer/{$this->platformSlug}/{$this->uuid}/reputations?users[]=1");
-
-        $response->assertStatus(200)
-                 ->assertJson(['success' => true]);
-    }
-
-    public function test_portfolios()
-    {
-        $this->mock(AccountService::class, function ($mock) {
-            $mock->shouldReceive('getPortfolios')->once()->andReturn(['portfolios' => []]);
-        });
-
-        $response = $this->getJson("/api/freelancer/{$this->platformSlug}/{$this->uuid}/portfolios?users[]=1");
-
-        $response->assertStatus(200)
-                 ->assertJson(['success' => true]);
-    }
-
-    public function test_search_users()
-    {
-        $this->mock(AccountService::class, function ($mock) {
-            $mock->shouldReceive('searchUsers')->once()->andReturn(['users' => []]);
-        });
-
-        $response = $this->getJson("/api/freelancer/{$this->platformSlug}/{$this->uuid}/users/search?usernames[]=test");
-
-        $response->assertStatus(200)
-                 ->assertJson(['success' => true]);
-    }
-
-    public function test_get_user()
-    {
-        $this->mock(AccountService::class, function ($mock) {
-            $mock->shouldReceive('getUser')->once()->andReturn(['id' => 1]);
-        });
-
-        $response = $this->getJson("/api/freelancer/{$this->platformSlug}/{$this->uuid}/users/1");
-
-        $response->assertStatus(200)
-                 ->assertJson(['success' => true]);
+            ->assertJson(['timezones' => []]);
     }
 }

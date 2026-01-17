@@ -17,6 +17,7 @@ class Channel extends Model
         'description',
         'is_private',
         'project_id',
+        'created_by',
     ];
 
     protected $casts = [
@@ -45,5 +46,20 @@ class Channel extends Model
     public function messages()
     {
         return $this->hasMany(TeamMessage::class);
+    }
+
+    public function lastMessage()
+    {
+        return $this->hasOne(TeamMessage::class)->latestOfMany();
+    }
+
+    public function scopeDm($query)
+    {
+        return $query->where('type', 'dm');
+    }
+
+    public function scopeGroup($query)
+    {
+        return $query->where('type', 'group');
     }
 }

@@ -42,4 +42,9 @@ class UtilityService
             ->where('status', 'active')
             ->firstOrFail();
     }
+    public function getTimezones(string $platformSlug)
+    {
+        $account = $this->getAccount($platformSlug);
+        return $this->freelancer->get($account, '/common/0.1/timezones');
+    }
 }

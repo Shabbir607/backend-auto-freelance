@@ -44,4 +44,13 @@ class UtilityController extends Controller
             return response()->json(['error' => $e->getMessage()], 400);
         }
     }
+    public function timezones($platform_slug)
+    {
+        try {
+            $timezones = $this->utilityService->getTimezones($platform_slug);
+            return response()->json($timezones);
+        } catch (Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 400);
+        }
+    }
 }

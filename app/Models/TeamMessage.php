@@ -55,4 +55,9 @@ class TeamMessage extends Model
     {
         return $this->hasMany(TeamMessage::class, 'parent_message_id');
     }
+
+    public function reactions()
+    {
+        return $this->hasMany(MessageReaction::class, 'team_message_id');
+    }
 }

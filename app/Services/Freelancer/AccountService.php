@@ -121,16 +121,58 @@ class AccountService
             throw new Exception("Account does not have an assigned IP.");
         }
 
-        $userData = $this->authService->getAuthenticatedUser($account, $ip->ip_address);
+        // 1. Get basic info to ensure we have the username/ID
+        $basicUser = $this->authService->getAuthenticatedUser($account, $ip->ip_address);
+        $userId = $basicUser['id'];
 
+        // 2. Fetch rich profile details
+        // 2. Fetch rich profile details
+        $queryParams = [
+            'avatar' => 'true',
+            'cover_image' => 'true',
+            'display_info' => 'true',
+            'country_details' => 'true',
+            'jobs' => 'true',
+            'portfolio_details' => 'true',
+            'preferred_details' => 'true',
+            'profile_description' => 'true',
+            'qualification_details' => 'true',
+            'recommendations' => 'true',
+            'responsiveness' => 'true',
+            'status' => 'true',
+            'operating_areas' => 'true',
+            'equipment_group_details' => 'false',
+            'document_submissions' => 'true',
+            'rising_star' => 'true',
+            'staff_details' => 'true',
+            'webapp' => '1',
+            'compact' => 'true',
+            'new_errors' => 'true',
+            'new_pools' => 'true',
+        ];
+
+        $queryString = http_build_query($queryParams);
+        $queryString .= '&usernames[]=' . urlencode($userId);
+
+        $response = $this->authService->request(
+            $account,
+            'GET',
+            '/users/0.1/users?' . $queryString
+        );
+
+        // Extract the specific user data from the response
+        // Response structure: { status: "success", result: { users: { "12345": { ... } } } }
+        $richUserData = $response['result']['users'][$userId] ?? $basicUser;
+
+        // Update account details
         $account->update([
-            'external_account_id' => $userData['id'] ?? null,
-            'account_username'    => $userData['username'] ?? $account->account_username,
-            'account_email'       => $userData['email'] ?? $account->account_email,
+            'external_account_id' => $richUserData['id'] ?? $basicUser['id'],
+            'account_username'    => $richUserData['username'] ?? $basicUser['username'],
+            'account_email'       => $richUserData['email'] ?? $account->account_email, // Email might not be in public profile
             'verified'            => true,
         ]);
 
-        return $userData;
+        return $richUserData;
     }
 
     /**
@@ -196,6 +238,75 @@ class AccountService
             $account,
             'GET',
             '/users/0.1/users/?' . $queryString
+        );
+    }
+    /**
+     * Search for Freelancers in Directory
+     */
+    public function searchDirectory(PlatformAccount $account, array $params)
+    {
+        return $this->authService->request(
+            $account,
+            'GET',
+            '/users/0.1/users/directory/',
+            ['query' => $params]
+        );
+    }
+
+    /**
+     * List User Login Devices
+     */
+    public function getLoginDevices(PlatformAccount $account)
+    {
+        return $this->authService->request(
+            $account,
+            'GET',
+            '/users/0.1/self/devices'
+        );
+    }
+
+    /**
+     * Add Skills (Jobs) to User
+     */
+    public function addUserSkills(PlatformAccount $account, array $jobIds)
+    {
+        return $this->authService->request(
+            $account,
+            'POST',
+            '/users/0.1/self/jobs',
+            ['form_params' => ['jobs' => $jobIds]]
+        );
+    }
+
+    /**
+     * Set Skills (Jobs) for User (Replaces existing)
+     */
+    public function setUserSkills(PlatformAccount $account, array $jobIds)
+    {
+        return $this->authService->request(
+            $account,
+            'PUT',
+            '/users/0.1/self/jobs',
+            ['form_params' => ['jobs' => $jobIds]]
+        );
+    }
+
+    /**
+     * Delete Skills (Jobs) from User
+     */
+    public function deleteUserSkills(PlatformAccount $account, array $jobIds)
+    {
+        // DELETE usually takes query params for arrays in Freelancer API
+        $query = [];
+        foreach ($jobIds as $id) {
+            $query[] = "jobs[]=" . urlencode($id);
+        }
+        $queryString = implode('&', $query);
+
+        return $this->authService->request(
+            $account,
+            'DELETE',
+            '/users/0.1/self/jobs?' . $queryString
         );
     }
 }

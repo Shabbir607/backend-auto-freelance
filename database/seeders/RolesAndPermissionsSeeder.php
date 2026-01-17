@@ -19,14 +19,48 @@ class RolesAndPermissionsSeeder extends Seeder
         // 1. Create Permissions
         // ------------------------------
         $permissions = [
+            // Blog Permissions
+            'view blog',
+            'create blog',
+            'edit blog',
+            'delete blog',
+            'publish blog',
+
+            // Job Permissions
+            'view jobs',
+            'create job',
+            'edit job',
+            'delete job',
+            'publish job',
+            'apply for job',
+            'view applicants',
+            'manage jobs', // General management
+
+            // Interview Permissions
+            'view interview',
+            'schedule interview',
+            'cancel interview',
+            'conduct interview',
+
+            // Profile & Account Permissions
+            'view profile',
+            'edit profile',
+            'delete account',
+            'manage profile', // General management
+
+            // System & Admin Permissions
+            'access admin panel',
             'manage users',
-            'manage projects',
-            'view projects',
-            'create proposals',
-            'submit proposals',
-            'assign roles',
-            'update projects',
-            'delete projects',
+            'manage settings',
+            'view logs',
+            'manage roles',
+            'manage permissions',
+
+            // Legacy / Granular Mappings (Optional but kept for safety)
+            'post_project',
+            'bid_on_project',
+            'hire_freelancer',
+            'manage_freelancer',
         ];
 
         foreach ($permissions as $perm) {
@@ -34,71 +68,126 @@ class RolesAndPermissionsSeeder extends Seeder
         }
 
         // ------------------------------
-        // 2. Create Roles
+        // 2. Create Roles & Assign Permissions
         // ------------------------------
-        $adminRole = Role::firstOrCreate(['name' => 'admin']);
-        $adminRole->syncPermissions(Permission::all()); // Admin gets all permissions
 
-        // Freelancer Role
+        // --- Freelancer Role ---
         $freelancerRole = Role::firstOrCreate(['name' => 'freelancer']);
         $freelancerRole->syncPermissions([
-            'view projects',
-            'create proposals',
-            'submit proposals'
+            // Jobs
+            'view jobs',
+            'apply for job',
+            'bid_on_project',
+            // Interviews
+            'view interview',
+            // Profile
+            'view profile',
+            'edit profile',
+            'manage profile',
+            // Blog
+            'view blog',
         ]);
 
-        // Recruiter Role
-        $recruiterRole = Role::firstOrCreate(['name' => 'recruiter']);
-        $recruiterRole->syncPermissions([
-            'manage projects',
-            'view projects',
-            'update projects',
-            'delete projects',
-            'assign roles'
+        // --- Client Role ---
+        $clientRole = Role::firstOrCreate(['name' => 'client']);
+        $clientRole->syncPermissions([
+            // Jobs
+            'view jobs',
+            'create job',
+            'edit job',
+            'delete job',
+            'view applicants',
+            'manage jobs',
+            'post_project',
+            'hire_freelancer',
+            // Interviews
+            'view interview',
+            'schedule interview',
+            'cancel interview',
+            // Profile
+            'view profile',
+            'edit profile',
+            'manage profile',
+            // Blog
+            'view blog',
         ]);
 
-        // Legacy User Role (optional, can be same as freelancer or basic)
-        $userRole = Role::firstOrCreate(['name' => 'user']);
-        $userRole->syncPermissions([
-            'view projects'
+        // --- Agency Role ---
+        // Agencies act like super-clients with team management capabilities
+        $agencyRole = Role::firstOrCreate(['name' => 'agency']);
+        $agencyRole->syncPermissions([
+            // Jobs
+            'view jobs',
+            'create job',
+            'edit job',
+            'delete job',
+            'view applicants',
+            'manage jobs',
+            'post_project',
+            'hire_freelancer',
+            'manage_freelancer',
+            // Interviews
+            'view interview',
+            'schedule interview',
+            'cancel interview',
+            'conduct interview',
+            // Profile
+            'view profile',
+            'edit profile',
+            'manage profile',
+            // Blog
+            'view blog',
+            'create blog', // Agencies might contribute content
         ]);
+
+        // --- Admin Role ---
+        $adminRole = Role::firstOrCreate(['name' => 'admin']);
+        $adminRole->syncPermissions(Permission::all());
 
         // ------------------------------
-        // 3. Create Default Admin User
+        // 3. Create Default Users
         // ------------------------------
-        $adminEmail = 'admin@auto-freelancing.com';
-        $adminPassword = 'Admin1234';
-
+        
+        // Admin
         $adminUser = User::firstOrCreate(
-            ['email' => $adminEmail],
+            ['email' => 'admin@auto-freelancing.com'],
             [
                 'name' => 'Super Admin',
-                'password' => Hash::make($adminPassword)
+                'password' => Hash::make('Admin1234')
             ]
         );
+        $adminUser->assignRole($adminRole);
 
-        if (!$adminUser->hasRole('admin')) {
-            $adminUser->assignRole('admin');
-        }
-
-        // ------------------------------
-        // 4. Example: Create a default normal user
-        // ------------------------------
-        $userEmail = 'user@auto-freelancing.com';
-        $userPassword = 'User1234';
-
-        $user = User::firstOrCreate(
-            ['email' => $userEmail],
+        // Agency User
+        $agencyUser = User::firstOrCreate(
+            ['email' => 'agency@auto-freelancing.com'],
             [
-                'name' => 'Default User',
-                'password' => Hash::make($userPassword)
+                'name' => 'Demo Agency',
+                'password' => Hash::make('Agency1234')
             ]
         );
+        $agencyUser->assignRole($agencyRole);
 
-        if (!$user->hasRole('user')) {
-            $user->assignRole('user');
-        }
+        // Freelancer User
+        $freelancerUser = User::firstOrCreate(
+            ['email' => 'freelancer@auto-freelancing.com'],
+            [
+                'name' => 'Demo Freelancer',
+                'password' => Hash::make('Freelancer1234')
+            ]
+        );
+        $freelancerUser->assignRole($freelancerRole);
+        
+        // Client User
+        $clientUser = User::firstOrCreate(
+            ['email' => 'client@auto-freelancing.com'],
+            [
+                'name' => 'Demo Client',
+                'password' => Hash::make('Client1234')
+            ]
+        );
+        $clientUser->assignRole($clientRole);
 
-        $this->command->info('Roles, permissions, and default users created successfully!');
+        $this->command->info('Comprehensive production roles and permissions created successfully!');
     }
 }

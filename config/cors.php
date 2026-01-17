@@ -17,6 +17,8 @@ return [
         'http://localhost:3000',     // Vite dev server
         'http://127.0.0.1:3000',     // sometimes needed
         'http://localhost:5173',     // if you use port 5173
+        'http://localhost:5174',     // Alternative Vite port
+        'http://your-frontend-domain.com', // TODO: Replace with your actual frontend domain
     ],
 
     'allowed_origins_patterns' => [],

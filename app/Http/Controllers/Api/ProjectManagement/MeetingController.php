@@ -24,6 +24,9 @@ class MeetingController extends Controller
     {
         $project = Project::findOrFail($projectId);
         $this->authorize('update', $project);
+        
+        // Instantiate service with current user for OAuth support
+        $calendarService = new \App\Services\GoogleCalendarService(Auth::user());
 
         $validated = $request->validate([
             'title' => 'required|string|max:255',
@@ -37,13 +40,44 @@ class MeetingController extends Controller
         // Generate a unique room ID for the meeting
         $roomId = Str::uuid();
 
+        // 1. Prepare data for Google Calendar
+        $attendeeEmails = [];
+        if (isset($validated['attendees'])) {
+            $attendeeEmails = \App\Models\User::whereIn('id', $validated['attendees'])
+                                ->pluck('email')
+                                ->toArray();
+        }
+
+        // 2. Create Google Calendar Event
+        $googleEvent = $calendarService->createEvent(
+            $validated['title'],
+            $validated['description'] ?? '',
+            $validated['start_time'],
+            $validated['end_time'],
+            $attendeeEmails
+        );
+
+        $googleEventId = null;
+        $googleMeetLink = null;
+        $hangoutLink = null;
+
+        if ($googleEvent['status'] === 'success') {
+            $googleEventId = $googleEvent['id'];
+            $googleMeetLink = $googleEvent['htmlLink']; // Link to the event
+            $hangoutLink = $googleEvent['hangoutLink']; // The actual Meet video link
+        }
+
+        // 3. Create Local Meeting
         $meeting = $project->meetings()->create([
             'title' => $validated['title'],
             'description' => $validated['description'] ?? null,
             'start_time' => $validated['start_time'],
             'end_time' => $validated['end_time'],
-            'meeting_link' => $roomId, // Using meeting_link column to store room ID
+            'meeting_link' => $roomId, 
             'status' => 'scheduled',
+            'google_event_id' => $googleEventId,
+            'google_meet_link' => $googleMeetLink,
+            'hangout_link' => $hangoutLink
         ]);
 
         if (isset($validated['attendees'])) {

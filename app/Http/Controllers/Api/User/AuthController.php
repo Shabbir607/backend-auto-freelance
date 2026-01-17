@@ -80,17 +80,26 @@ class AuthController extends Controller
                 ], 401);
             }
 
+            // Get or create UserDetail
             $details = $user->userDetail;
-
-            if ($details) {
+            if (!$details) {
+                // Create default UserDetail if not found
+                $details = $user->userDetail()->create([
+                    // You can prefill fields if needed
+                    'last_login_at' => now(),
+                    'uuid' => \Illuminate\Support\Str::uuid(),
+                ]);
+            } else {
                 // Update last login timestamp
                 $details->update(['last_login_at' => now()]);
-
-                // Generate or update IP record
-                $ipModel = $this->locationService->createOrUpdateForUser($user->id);
-                $details->update(['last_login_ip' => $ipModel->ip]);
             }
 
+            // Generate or update IP record
+            $ipModel = $this->locationService->createOrUpdateForUser($user->id);
+            $details->update(['last_login_ip' => $ipModel->ip]);
+
+            
+            // Generate access token
             $token = $user->createToken('Personal Access Token')->accessToken;
 
             return response()->json([
@@ -99,10 +108,14 @@ class AuthController extends Controller
                 'data'    => $this->formatUserResponse($user, $details, $token),
             ]);
         } catch (Throwable $e) {
-            Log::error('Login error: '.$e->getMessage());
-            return $this->errorResponse('An unexpected error occurred during login.', $e);
+            Log::error('Login error: ' . $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => 'An unexpected error occurred during login.',
+            ], 500);
         }
     }
+
 
     /**
      * Logout authenticated user
