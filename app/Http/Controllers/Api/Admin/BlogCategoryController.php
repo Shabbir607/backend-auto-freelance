@@ -41,7 +41,13 @@ class BlogCategoryController extends Controller
             'meta_keywords' => 'nullable|string',
             'sort_order' => 'integer|min:0',
             'is_active' => 'boolean',
+            'image' => 'nullable|image|max:5120',
         ]);
+
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('blog_categories', 'public');
+            $validated['image'] = url(Storage::url($path));
+        }
 
         $validated['slug'] = Str::slug($validated['title']);
 
@@ -81,7 +87,22 @@ class BlogCategoryController extends Controller
             'meta_keywords' => 'nullable|string',
             'sort_order' => 'integer|min:0',
             'is_active' => 'boolean',
+            'image' => 'nullable|image|max:5120',
         ]);
+
+        if ($request->hasFile('image')) {
+            // Delete old
+             if ($category->image) {
+                // Extract relative path from URL
+                $relativePath = str_replace(url('/storage').'/', '', $category->image);
+                if (Storage::disk('public')->exists($relativePath)) {
+                    Storage::disk('public')->delete($relativePath);
+                }
+            }
+
+            $path = $request->file('image')->store('blog_categories', 'public');
+            $validated['image'] = url(Storage::url($path));
+        }
 
         if (isset($validated['title'])) {
             $validated['slug'] = Str::slug($validated['title']);

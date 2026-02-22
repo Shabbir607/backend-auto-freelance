@@ -32,12 +32,17 @@ class Workflow extends Model
         'views',
         'recent_views',
         'total_views',
+        'meta_title',
+        'meta_description',
+        'meta_keywords',
+        'canonical_url',
+        'og_image',
     ];
 
     protected $casts = [
         'price' => 'decimal:2',
         'rating' => 'decimal:2',
-        'json_data' => 'array',
+        // 'json_data' => 'array',
         'workflow_features' => 'array',
         'workflow_nodes' => 'array',
         'roi_percentage' => 'integer',
@@ -62,5 +67,15 @@ class Workflow extends Model
     public function integrations()
     {
         return $this->belongsToMany(WorkflowIntegration::class, 'workflow_integration_pivot', 'workflow_id', 'integration_id');
+    }
+
+    public function faqs()
+    {
+        return $this->morphMany(Faq::class, 'faqable');
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(WorkflowReview::class);
     }
 }

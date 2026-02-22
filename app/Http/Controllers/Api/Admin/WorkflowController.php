@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Api\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Workflow;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use Illuminate\Validation\Rule;
 
 class WorkflowController extends Controller
 {
@@ -16,181 +16,242 @@ class WorkflowController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Workflow::with(['category', 'categories', 'integrations'])
-            ->orderByDesc('created_at');
-
-        // Search
-        if ($request->has('search')) {
-            $search = $request->get('search');
-            $query->where(function ($q) use ($search) {
-                $q->where('title', 'like', "%{$search}%")
-                  ->orWhere('description', 'like', "%{$search}%");
-            });
-        }
-
-        // Filter by Category
-        if ($request->has('category_id')) {
-            $categories = explode(',', $request->get('category_id'));
-            $query->whereHas('categories', function ($q) use ($categories) {
-                $q->whereIn('workflow_categories.id', $categories);
-            });
-        }
-
-        // Filter by Price Range
-        if ($request->has('min_price')) {
-            $query->where('price', '>=', $request->get('min_price'));
-        }
-        if ($request->has('max_price')) {
-            $query->where('price', '<=', $request->get('max_price'));
-        }
-
-        // Filter by Difficulty
-        if ($request->has('difficulty')) {
-            $query->where('difficulty', $request->get('difficulty'));
-        }
-
-        $workflows = $query->paginate($request->get('per_page', 20));
-
         return response()->json([
             'success' => true,
-            'data' => $workflows
+            'data' => Workflow::with('category')
+                ->orderByDesc('created_at')
+                ->paginate($request->get('per_page', 20))
         ]);
     }
 
-    /**
-     * Store workflow
-     */
-    public function store(\App\Http\Requests\StoreWorkflowRequest $request)
-    {
-        $validated = $request->validated();
+ /**
+ * Store workflow
+ */
+public function store(Request $request)
+{
+ 
+    $validator = Validator::make($request->all(), [
+        'external_id' => 'nullable|string|unique:workflows,external_id',
+        'category_id' => 'nullable|exists:workflow_categories,id',
 
-        return DB::transaction(function () use ($validated, $request) {
-            $fileData = [];
-            $categoriesToSync = [];
+        'title' => 'required|string|max:255',
+        'description' => 'nullable|string',
 
-            // Handle File Upload
-            if ($request->hasFile('json_file')) {
-                $processedData = $this->handleFileUpload($request->file('json_file'));
-                $fileData = $processedData['data'];
-                $categoriesToSync = $processedData['categories']; // Configured category IDs from JSON
-            }
+        'difficulty' => 'nullable|in:beginner,intermediate,advanced',
+        'price' => 'nullable|numeric|min:0',
 
-            // Merge file data with request data, allowing request data to override if necessary
-            // But strict file fields like external_id should probably come from file if not explicitly set
-            $validated = array_merge($validated, $fileData);
+        'json_data' => 'nullable|array',
+        'json_file' => 'nullable|file', // ✅ existing file upload
+        'json_file_url' => 'nullable|url', // ✅ NEW URL FIELD
 
-            // Generate slug if not present or needs uniqueness
-            if (!isset($validated['slug'])) {
-                $validated['slug'] = $this->generateUniqueSlug($validated['title']);
-            }
+        'workflow_features' => 'nullable|array',
+        'workflow_nodes' => 'nullable|array',
 
-            // Check if workflow exists by external_id
-            if (isset($validated['external_id'])) {
-                $workflow = Workflow::where('external_id', $validated['external_id'])->first();
-                if ($workflow) {
-                     // Update existing
-                     $workflow->update($this->sanitizePayload($validated));
-                } else {
-                     // Create new
-                     $workflow = Workflow::create($this->sanitizePayload($validated));
-                }
-            } else {
-                $workflow = Workflow::create($this->sanitizePayload($validated));
-            }
+        'status' => 'nullable|in:draft,published',
+    ]);
 
-            // Sync Integrations
-            if (!empty($validated['integration_ids'])) {
-                $workflow->integrations()->sync($validated['integration_ids']);
-            }
-
-            // Sync Categories (from file or request)
-            // Priority: Request categories > File categories
-            if ($request->has('category_ids')) {
-                 $workflow->categories()->sync($request->get('category_ids'));
-            } elseif (!empty($categoriesToSync)) {
-                 $workflow->categories()->sync($categoriesToSync);
-            }
-
-            // Also update primary category_id if available
-            if (!$workflow->category_id && $workflow->categories()->exists()) {
-                $workflow->category_id = $workflow->categories()->first()->id;
-                $workflow->save();
-            }
-
-            return response()->json([
-                'success' => true,
-                'message' => 'Workflow saved successfully.',
-                'data' => $workflow->load(['category', 'categories', 'integrations'])
-            ], 201);
-        });
+    if ($validator->fails()) {
+        return response()->json([
+            'success' => false,
+            'errors' => $validator->errors()
+        ], 422);
     }
+
+    $data = $validator->validated();
+
+    /**
+     * STRICT SLUG LOGIC
+     */
+    $slug = Str::slug($data['title']);
+
+    if (Workflow::where('slug', $slug)->exists()) {
+        return response()->json([
+            'success' => false,
+            'errors' => [
+                'title' => ['A workflow with this title already exists.']
+            ]
+        ], 422);
+    }
+
+    $data['slug'] = $slug;
+
+    /**
+     * JSON FILE LOGIC (URL > FILE)
+     * - If URL exists → store as json_file
+     * - Else if file uploaded → store file
+     */
+
+    $data['json_file_name'] = null;
+    $data['json_file_path'] = null;
+
+    // ✅ 1) If URL provided → store it as json_file
+    if ($request->filled('json_file_url')) {
+
+        $url = $request->json_file_url;
+
+        $data['json_file_name'] = basename(parse_url($url, PHP_URL_PATH));
+        $data['json_file_path'] = $url;
+
+    }
+    // ✅ 2) Else if file uploaded → keep your old logic
+    elseif ($request->hasFile('json_file')) {
+
+        $file = $request->file('json_file');
+
+        $storedFileName = time() . '_' . $file->getClientOriginalName();
+        $path = $file->storeAs('workflows', $storedFileName, 'public');
+
+        $data['json_file_name'] = $storedFileName; // ✅ EXACT name
+        $data['json_file_path'] = asset('storage/' . $path);
+    }
+
+    /**
+     * JSON DATA
+     */
+    if ($request->filled('json_data')) {
+        $data['json_data'] = json_encode(
+            $request->json_data,
+            JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
+        );
+    }
+
+    /**
+     * Encode arrays
+     */
+    foreach (['workflow_features', 'workflow_nodes'] as $field) {
+        if (isset($data[$field])) {
+            $data[$field] = json_encode(
+                $data[$field],
+                JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
+            );
+        }
+    }
+
+    $workflow = Workflow::create($data);
+
+    return response()->json([
+        'success' => true,
+        'message' => 'Workflow created successfully',
+        'data' => $workflow
+    ], 201);
+}
+
 
     /**
      * Show workflow
      */
     public function show($id)
     {
-        $workflow = Workflow::with(['category', 'categories', 'integrations'])->findOrFail($id);
-
         return response()->json([
             'success' => true,
-            'data' => $workflow
+            'data' => Workflow::with('category')->findOrFail($id)
         ]);
     }
 
     /**
      * Update workflow
      */
-    public function update(\App\Http\Requests\UpdateWorkflowRequest $request, $id)
+    public function update(Request $request, $id)
     {
         $workflow = Workflow::findOrFail($id);
-        $validated = $request->validated();
 
-        return DB::transaction(function () use ($workflow, $validated, $request) {
-            
-            if (isset($validated['title'])) {
-                $validated['slug'] = $this->generateUniqueSlug(
-                    $validated['title'],
-                    $workflow->id
+        $validator = Validator::make($request->all(), [
+            'external_id' => 'nullable|string|unique:workflows,external_id,' . $workflow->id,
+            'category_id' => 'nullable|exists:workflow_categories,id',
+
+            'title' => 'nullable|string|max:255',
+            'description' => 'nullable|string',
+
+            'difficulty' => 'nullable|in:beginner,intermediate,advanced',
+            'price' => 'nullable|numeric|min:0',
+
+            'json_data' => 'nullable|array',
+            'json_file' => 'nullable|file|mimes:json,txt,application/json|max:10240',
+
+            'workflow_features' => 'nullable|array',
+            'workflow_nodes' => 'nullable|array',
+
+            'status' => 'nullable|in:draft,published',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        $data = $validator->validated();
+
+        /**
+         * STRICT TITLE  SLUG UPDATE
+         */
+        if (!empty($data['title'])) {
+            $slug = Str::slug($data['title']);
+
+            if (
+                Workflow::where('slug', $slug)
+                    ->where('id', '!=', $workflow->id)
+                    ->exists()
+            ) {
+                return response()->json([
+                    'success' => false,
+                    'errors' => [
+                        'title' => ['A workflow with this title already exists.']
+                    ]
+                ], 422);
+            }
+
+            $data['slug'] = $slug;
+        }
+
+        /**
+         * Replace JSON file
+         */
+        if ($request->hasFile('json_file')) {
+
+            if ($workflow->json_file_path) {
+                $oldPath = str_replace(url('/storage') . '/', '', $workflow->json_file_path);
+                Storage::disk('public')->delete($oldPath);
+            }
+
+            $file = $request->file('json_file');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $path = $file->storeAs('workflows', $fileName, 'public');
+
+            $data['json_file_name'] = $file->getClientOriginalName();
+            $data['json_file_path'] = url(Storage::url($path));
+        }
+
+        /**
+         * Update JSON data
+         */
+        if ($request->filled('json_data')) {
+            $data['json_data'] = json_encode(
+                $request->json_data,
+                JSON_UNESCAPED_UNICODE
+            );
+        }
+
+        /**
+         * Encode arrays
+         */
+        foreach (['workflow_features', 'workflow_nodes'] as $field) {
+            if (isset($data[$field])) {
+                $data[$field] = json_encode(
+                    $data[$field],
+                    JSON_UNESCAPED_UNICODE
                 );
             }
+        }
 
-            $categoriesToSync = [];
+        $workflow->update($data);
 
-            // Handle File Upload
-            if ($request->hasFile('json_file')) {
-                // Delete old file if exists
-                if ($workflow->json_file_path) {
-                    $this->deleteWorkflowFile($workflow->json_file_path);
-                }
-                
-                $processedData = $this->handleFileUpload($request->file('json_file'));
-                $fileData = $processedData['data'];
-                $categoriesToSync = $processedData['categories'];
-                
-                $validated = array_merge($validated, $fileData);
-            }
-
-            $workflow->update($this->sanitizePayload($validated));
-
-            if (array_key_exists('integration_ids', $validated)) {
-                $workflow->integrations()->sync($validated['integration_ids'] ?? []);
-            }
-
-             // Sync Categories
-             if ($request->has('category_ids')) {
-                 $workflow->categories()->sync($request->get('category_ids'));
-            } elseif (!empty($categoriesToSync)) {
-                // Only sync from file if explicitly updating file and not overriding via API
-                 $workflow->categories()->sync($categoriesToSync);
-            }
-
-            return response()->json([
-                'success' => true,
-                'message' => 'Workflow updated successfully.',
-                'data' => $workflow->load(['category', 'categories', 'integrations'])
-            ]);
-        });
+        return response()->json([
+            'success' => true,
+            'message' => 'Workflow updated successfully',
+            'data' => $workflow
+        ]);
     }
 
     /**
@@ -199,141 +260,17 @@ class WorkflowController extends Controller
     public function destroy($id)
     {
         $workflow = Workflow::findOrFail($id);
-        
-        // Delete file if exists
+
         if ($workflow->json_file_path) {
-            $this->deleteWorkflowFile($workflow->json_file_path);
+            $path = str_replace(url('/storage') . '/', '', $workflow->json_file_path);
+            Storage::disk('public')->delete($path);
         }
-        
+
         $workflow->delete();
 
         return response()->json([
             'success' => true,
-            'message' => 'Workflow deleted successfully.'
-        ], 204);
-    }
-
-    /**
-     * Download workflow JSON file
-     */
-    public function downloadFile($id)
-    {
-        $workflow = Workflow::findOrFail($id);
-
-        if (!$workflow->json_file_path || !\Illuminate\Support\Facades\Storage::disk('public')->exists($workflow->json_file_path)) {
-            return response()->json([
-                'success' => false,
-                'message' => 'File not found.'
-            ], 404);
-        }
-
-        return \Illuminate\Support\Facades\Storage::disk('public')->download(
-            $workflow->json_file_path,
-            $workflow->json_file_name
-        );
-    }
-
-    /**
-     * Handle file upload and return data
-     */
-    private function handleFileUpload($file): array
-    {
-        $filename = time() . '_' . $file->getClientOriginalName();
-        $path = $file->storeAs('workflows', $filename, 'public');
-        
-        // Parse JSON content
-        $content = file_get_contents($file->getRealPath());
-        $jsonData = json_decode($content, true);
-
-        // Extract metadata from JSON wrapper if present
-        $data = [
-            'json_file_name' => $file->getClientOriginalName(),
-            'json_file_path' => $path,
-            'json_data' => $jsonData['workflow']['workflow'] ?? $jsonData, // Handle nested wrapper
-        ];
-        
-        $categories = [];
-
-        // Parse outer wrapper metadata
-        if (isset($jsonData['workflow'])) {
-            $meta = $jsonData['workflow'];
-            
-            // Map Basic Info
-            if (isset($meta['id'])) $data['external_id'] = $meta['id'];
-            if (isset($meta['name'])) $data['title'] = $meta['name'];
-            if (isset($meta['description'])) $data['description'] = $meta['description'];
-            
-            // Map Views
-            if (isset($meta['views'])) $data['views'] = (int)$meta['views'];
-            if (isset($meta['recentViews'])) $data['recent_views'] = (int)$meta['recentViews'];
-            if (isset($meta['totalViews'])) $data['total_views'] = (int)$meta['totalViews'];
-
-            // Map Categories
-            if (isset($meta['categories']) && is_array($meta['categories'])) {
-                foreach ($meta['categories'] as $cat) {
-                    if (isset($cat['id'])) {
-                         // Find or create category by external ID or Name? 
-                         // For now, assuming we match by name or create
-                         // But n8n categories might not match our system. 
-                         // Let's try to find by name, or fall back to a default.
-                         // Actually, user request didn't specify mapping logic, 
-                         // but "data categories each data proerply".
-                         // Let's assume we create them if they don't exist.
-                         
-                         $category = \App\Models\WorkflowCategory::firstOrCreate(
-                             ['slug' => Str::slug($cat['name'])],
-                             ['title' => $cat['name']]
-                         );
-                         $categories[] = $category->id;
-                    }
-                }
-            }
-        }
-
-        return [
-            'data' => $data,
-            'categories' => $categories
-        ];
-    }
-
-    /**
-     * Delete workflow file
-     */
-    private function deleteWorkflowFile($path): void
-    {
-        if (\Illuminate\Support\Facades\Storage::disk('public')->exists($path)) {
-            \Illuminate\Support\Facades\Storage::disk('public')->delete($path);
-        }
-    }
-
-    /**
-     * Ensure clean payload
-     */
-    private function sanitizePayload(array $data): array
-    {
-        unset($data['integration_ids']);
-        unset($data['category_ids']); // Remove from direct update
-        unset($data['json_file']); 
-        return $data;
-    }
-
-    /**
-     * Unique slug generator
-     */
-    private function generateUniqueSlug(string $title, $ignoreId = null): string
-    {
-        $slug = Str::slug($title);
-        $original = $slug;
-        $count = 1;
-
-        while (
-            Workflow::where('slug', $slug)
-                ->when($ignoreId, fn ($q) => $q->where('id', '!=', $ignoreId))
-                ->exists()
-        ) {
-            $slug = $original . '-' . $count++;
-        }
-
-        return $slug;
+            'message' => 'Workflow deleted successfully'
+        ]);
     }
 }

@@ -1,0 +1,34 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('workflow_reviews', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('workflow_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
+            $table->string('name')->nullable(); // For guest reviews
+            $table->string('email')->nullable(); // For guest reviews
+            $table->unsignedTinyInteger('rating'); // 1-5
+            $table->text('comment')->nullable();
+            $table->boolean('is_verified')->default(false); // True if user_id exists or verified purchaser
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('workflow_reviews');
+    }
+};

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\WorkflowCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
@@ -38,6 +39,12 @@ class WorkflowCategoryController extends Controller
         ]);
 
         $validated['slug'] = $this->generateUniqueSlug($validated['title']);
+
+        // Handle Icon Upload
+        if ($request->hasFile('icon')) {
+            $path = $request->file('icon')->store('workflow_categories', 'public');
+            $validated['icon'] = url(Storage::url($path));
+        }
 
         $category = WorkflowCategory::create([
             'title'      => $validated['title'],
@@ -89,6 +96,18 @@ class WorkflowCategoryController extends Controller
             'is_active'  => 'nullable|boolean',
         ]);
 
+        // Handle Icon Upload
+        if ($request->hasFile('icon')) {
+             if ($category->icon) {
+                $relativePath = str_replace(url('/storage').'/', '', $category->icon);
+                if (Storage::disk('public')->exists($relativePath)) {
+                    Storage::disk('public')->delete($relativePath);
+                }
+            }
+            $path = $request->file('icon')->store('workflow_categories', 'public');
+            $validated['icon'] = url(Storage::url($path));
+        }
+
         if (isset($validated['title'])) {
             $validated['slug'] = $this->generateUniqueSlug(
                 $validated['title'],
@@ -111,6 +130,14 @@ class WorkflowCategoryController extends Controller
     public function destroy($id)
     {
         $category = WorkflowCategory::findOrFail($id);
+        
+        if ($category->icon) {
+            $relativePath = str_replace(url('/storage').'/', '', $category->icon);
+            if (Storage::disk('public')->exists($relativePath)) {
+                Storage::disk('public')->delete($relativePath);
+            }
+        }
+
         $category->delete();
 
         return response()->json([

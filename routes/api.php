@@ -45,7 +45,11 @@ use App\Http\Controllers\Api\Public\WorkflowLibraryController;
 use App\Http\Controllers\Api\Public\BlogController as PublicBlogController;
 use App\Http\Controllers\Api\Admin\BlogCategoryController;
 use App\Http\Controllers\Api\Admin\BlogController as AdminBlogController;
-
+use App\Http\Controllers\Api\Admin\FaqController;
+use App\Http\Controllers\Api\Admin\PageController as AdminPageController;
+use App\Http\Controllers\Api\Public\PageController as PublicPageController;
+use App\Http\Controllers\Api\Public\FaqController as PublicFaqController;
+use Illuminate\Support\Facades\Storage;
 
 use App\Http\Controllers\Api\Platforms\Freelancer\ContestController;
 use App\Http\Controllers\Api\ProjectManagement\ProjectController as GeneralProjectController;
@@ -73,25 +77,50 @@ Route::post('/ip/validate', [IpController::class, 'validateIp']);
 
 // Webhooks
 Route::post('webhook/freelancer', [WebhookController::class, 'handle']);
-
+Route::get('web/faqs', [PublicFaqController::class, 'index']);
 // Public Scraper
 Route::get('/project/details', [FreelancerScraperController::class, 'scrape']);
+Route::get('/workflows/stats', [WorkflowLibraryController::class, 'stats']);
+Route::post('/workflow/view', [WorkflowLibraryController::class, 'trackView']);
+Route::get('/workflow/share', [WorkflowLibraryController::class, 'shareUrl']);
 
 // Public Workflow Library
 Route::get('/workflow-library', [WorkflowLibraryController::class, 'index']);
 Route::get('/workflow-library/categories', [WorkflowLibraryController::class, 'categories']);
 Route::get('/workflow-library/features', [WorkflowLibraryController::class, 'features']);
 Route::get('/workflow-library/{slug}', [WorkflowLibraryController::class, 'show']);
+Route::get('/workflow-categories', [WorkflowLibraryController::class, 'categoryList']);
+
+Route::get('/workflows', [WorkflowLibraryController::class, 'workflowsByCategory']);
+
+Route::get('/workflow-category/{slug}', [WorkflowLibraryController::class, 'categoryWithWorkflows']);
+
+Route::get('/workflow/{slug}/related', [WorkflowLibraryController::class, 'relevantWorkflows']);
+Route::post('/workflow/{slug}/reviews', [WorkflowLibraryController::class, 'storeReview']);
+
+
 // Route::get('/workflow-library/{slug}/deploy', [WorkflowLibraryController::class, 'deploy']); // Optional: secure deploy endpoint
 
 // Public Blog Routes
 Route::get('/blogs', [PublicBlogController::class, 'index']);
 Route::get('/blogs/categories', [PublicBlogController::class, 'categories']);
 Route::get('/blogs/{slug}', [PublicBlogController::class, 'show']);
+Route::get('/blog/share', [PublicBlogController::class, 'share']);
+
+// Public Page Routes
+Route::get('/page-slugs', [PublicPageController::class, 'slugs']); // Lightweight check
+Route::get('/page', [PublicPageController::class, 'show']);
+
+Route::get('/pagebody/{slug}', [PublicPageController::class, 'show']); // Added for frontend compatibility
+
 
 
 // Public Language Initialization
 Route::get('/public/language-init', [\App\Http\Controllers\Api\Public\LanguageController::class, 'init']);
+
+// Public Contact & Newsletter
+Route::post('/contact', [\App\Http\Controllers\Api\Public\ContactMessageController::class, 'store']);
+Route::post('/newsletter', [\App\Http\Controllers\Api\Public\NewsletterSubscriberController::class, 'store']);
 
 /*
 |--------------------------------------------------------------------------
@@ -99,7 +128,7 @@ Route::get('/public/language-init', [\App\Http\Controllers\Api\Public\LanguageCo
 |--------------------------------------------------------------------------
 | Accessible by all authenticated users with 'user' middleware check
 */
-Route::middleware(['auth:api', 'user'])->group(function () {
+Route::middleware(['auth:api', 'user'])->prefix('admin')->group(function () {
     
     // Profile & Auth
     Route::get('/user', [UserAuth::class, 'profile']);
@@ -181,6 +210,25 @@ Route::middleware(['auth:api', 'user'])->group(function () {
     Route::get('workflows/{id}/download', [AdminWorkflowController::class, 'downloadFile']);
     Route::apiResource('workflows', AdminWorkflowController::class);
     Route::apiResource('workflows', AdminWorkflowController::class);
+
+    // FAQ Management
+    Route::get('faqs', [FaqController::class, 'index']);
+    Route::post('faqs', [FaqController::class, 'store']); 
+    Route::get('faqs/{faq}', [FaqController::class, 'show']);
+    Route::put('faqs/{faq}', [FaqController::class, 'update']);
+    Route::delete('faqs/{faq}', [FaqController::class, 'destroy']);
+    // Page Management (SEO & Content)
+    Route::apiResource('pages', AdminPageController::class);
+
+    // Contact Messages Management
+    Route::get('contact-messages', [\App\Http\Controllers\Api\Admin\ContactMessageController::class, 'index']);
+    Route::get('contact-messages/{id}', [\App\Http\Controllers\Api\Admin\ContactMessageController::class, 'show']);
+    Route::post('contact-messages/{id}/reply', [\App\Http\Controllers\Api\Admin\ContactMessageController::class, 'reply']);
+    Route::delete('contact-messages/{id}', [\App\Http\Controllers\Api\Admin\ContactMessageController::class, 'destroy']);
+
+    // Newsletter Subscribers Management
+    Route::get('newsletter-subscribers', [\App\Http\Controllers\Api\Admin\NewsletterSubscriberController::class, 'index']);
+    Route::delete('newsletter-subscribers/{id}', [\App\Http\Controllers\Api\Admin\NewsletterSubscriberController::class, 'destroy']);
 
     // User Google Calendar Auth
     Route::prefix('auth/google')->group(function () {
@@ -371,6 +419,25 @@ Route::middleware(['auth:api', 'user'])->group(function () {
 
 
     
+});
+
+Route::get('/workflows/file/{name}', function ($name) {
+    $filename = "{$name}";
+ 
+    $path = "workflows/{$filename}";
+
+    if (!Storage::disk('public')->exists($path)) {
+        return response()->json(['error' => 'File not found'], 404);
+    }
+
+    return response(
+        Storage::disk('public')->get($path),
+        200,
+        [
+            'Content-Type' => 'application/json',
+            'Access-Control-Allow-Origin' => '*',
+        ]
+    );
 });
 
 Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback']);
