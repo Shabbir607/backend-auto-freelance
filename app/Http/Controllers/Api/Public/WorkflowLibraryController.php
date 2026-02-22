@@ -446,5 +446,38 @@ public function relevantWorkflows(Request $request, $slug)
 
         return response()->json(['success' => true, 'data' => $review, 'message' => 'Review submitted successfully']);
     }
+    public function topViewWorkflow(Request $request)
+    {
+        // Cache this query for 1 hour to reduce database load for continuous fetching
+        $cacheKey = 'workflow_top_view';
+        
+        return Cache::remember($cacheKey, 3600, function () {
+            $workflow = Workflow::where('status', 'published')
+                ->with(['category', 'integrations'])
+                ->orderBy('total_views', 'desc')
+                ->first();
+
+            if (!$workflow) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'No published workflows found.'
+                ], 404);
+            }
+
+            return response()->json([
+                'success' => true,
+                'data' => [
+                    'id' => $workflow->id,
+                    'title' => $workflow->title,
+                    'slug' => $workflow->slug,
+                    'description' => $workflow->description, // Raw or stripped depending on use case. Left raw for flexibility.
+                    'total_views' => $workflow->total_views,
+                    'json_data' => $workflow->json_data ? json_decode($workflow->json_data) : null,
+                    'category' => $workflow->category ? $workflow->category->title : null,
+                    'tags' => $workflow->integrations ? $workflow->integrations->pluck('name') : [],
+                ]
+            ]);
+        });
+    }
 
 }

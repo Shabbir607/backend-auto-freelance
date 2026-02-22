@@ -97,7 +97,7 @@ Route::get('/workflow-category/{slug}', [WorkflowLibraryController::class, 'cate
 
 Route::get('/workflow/{slug}/related', [WorkflowLibraryController::class, 'relevantWorkflows']);
 Route::post('/workflow/{slug}/reviews', [WorkflowLibraryController::class, 'storeReview']);
-
+Route::get('/workflow/top-view', [WorkflowLibraryController::class, 'topViewWorkflow']);
 
 // Route::get('/workflow-library/{slug}/deploy', [WorkflowLibraryController::class, 'deploy']); // Optional: secure deploy endpoint
 
