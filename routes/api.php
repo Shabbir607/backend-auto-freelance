@@ -67,7 +67,7 @@ use App\Http\Controllers\Api\ProjectManagement\MilestoneController as GeneralMil
 */
 
 // Authentication
-Route::post('/register', [UserAuth::class, 'register']);
+// Route::post('/register', [UserAuth::class, 'register']);
 Route::post('/login', [UserAuth::class, 'login']);
 Route::post('/admin/login', [AdminAuth::class, 'login']);
 
