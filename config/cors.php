@@ -12,13 +12,17 @@ return [
 
     'allowed_methods' => ['*'],
 
-    // Change this based on your environment
     'allowed_origins' => [
-        'http://localhost:3000',     // Vite dev server
-        'http://127.0.0.1:3000',     // sometimes needed
-        'http://localhost:5173',     // if you use port 5173
-        'http://localhost:5174',     // Alternative Vite port
-        'http://your-frontend-domain.com', // TODO: Replace with your actual frontend domain
+        'http://localhost:3000',
+        'http://127.0.0.1:3000',
+        'http://localhost:5173',
+        'http://localhost:5174',
+        'http://localhost:8000',
+        'http://127.0.0.1:8000',
+        'https://edgelancer.com',
+        'http://edgelancer.com',
+        'https://www.edgelancer.com',
+        'http://www.edgelancer.com',
     ],
 
     'allowed_origins_patterns' => [],
