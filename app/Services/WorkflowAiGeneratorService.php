@@ -202,6 +202,14 @@ class WorkflowAiGeneratorService
             "====================\n\n" .
             "Your job now is to generate a ready-to-publish long-form article (1500–2500 words) strictly following instructions.\n" .
             "Ensure the content answers what, why, who, when, how, types, tools, and pricing. Do not use generic AI-style content or disclaimers.\n\n" .
+            "FORMATTING INSTRUCTIONS FOR 'article_html':\n" .
+            "- The content MUST be professionally formatted using semantic HTML.\n" .
+            "- Use <article>, <header>, <hr> for structure.\n" .
+            "- Ensure proper visual hierarchy using <h2>, <h3>, <h4>.\n" .
+            "- Use bullet points <ul>, <ol> where applicable.\n" .
+            "- Display code cleanly inside <pre><code class=\"language-name\">...</code></pre>.\n" .
+            "- Build clean CSS-friendly tables (no inline styles like border=\"1\" or cellpadding).\n" .
+            "- Do NOT generate huge blocks of unformatted long text. Break it up beautifully.\n\n" .
             "CRITICAL REQUIREMENT: Your output MUST be strictly formatted as a pure JSON object so my automated system can parse it. Do NOT output markdown text outside the JSON block.\n\n" .
             "The JSON structure must be exactly:\n" .
             "{\n" .
@@ -210,7 +218,7 @@ class WorkflowAiGeneratorService
             "  \"reading_time_minutes\": 5,\n" .
             "  \"suggested_category\": \"(One single concise string, e.g. 'Data Scraping', 'Marketing', 'DevOps')\",\n" .
             "  \"workflow_description_summary\": \"(SGE Short Answer Summary <= 45 words)\",\n" .
-            "  \"article_html\": \"(Full HTML formatted 1500+ word article body including H2/H3/H4, lists, and tables)\",\n" .
+            "  \"article_html\": \"(Full semantic HTML formatted 1500+ word article body including <article>, <header>, proper H2/H3, lists, code blocks, and clean tables)\",\n" .
             "  \"faqs\": [\n" .
             "      {\"question\": \"...\", \"answer\": \"...\"},\n" .
             "      {\"question\": \"...\", \"answer\": \"...\"}\n" .
