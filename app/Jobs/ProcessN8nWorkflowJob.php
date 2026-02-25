@@ -66,7 +66,7 @@ class ProcessN8nWorkflowJob implements ShouldQueue
         }
 
         // Fetch JSON from the n8n API
-        $response = Http::timeout(30)->get($jsonUrl);
+        $response = Http::timeout(60)->get($jsonUrl);
         if (!$response->successful()) {
             throw new Exception("Failed to fetch JSON data for workflow {$name} from {$jsonUrl}");
         }
@@ -90,13 +90,16 @@ class ProcessN8nWorkflowJob implements ShouldQueue
                     $categoriesString = implode('|', $officialCategories);
                 }
             }
+            unset($parsed); // Memory optimization
         }
+        unset($rawResponse); // Memory optimization
 
         // Check deduplication early
         $existingWorkflow = Workflow::where('external_id', $id)->first();
         if ($existingWorkflow && $existingWorkflow->description) {
             // Already processed
             Log::info("Workflow already processed. Skipping AI generation for ID: {$id}");
+            unset($jsonData); 
             return;
         }
 
@@ -104,7 +107,9 @@ class ProcessN8nWorkflowJob implements ShouldQueue
         // Generate Content via AI Service
         try {
             $aiData = $aiService->generateForWorkflow($name, 'n8n workflow automation', $jsonData, $this->customPrompt);
+            unset($jsonData); // Free memory as soon as AI has what it needs
         } catch (\Exception $e) {
+            unset($jsonData);
             Log::error("AI Generation failed for workflow {$name}: " . $e->getMessage());
             throw $e;
         }

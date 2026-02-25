@@ -196,6 +196,7 @@ class WorkflowAiGeneratorService
 
         Log::info("Generating Final SEO Article for: {$workflowTitle}");
         $finalResponse = $this->makeApiRequest($finalMessages);
+        unset($seoData); // Free SEO intelligence as it's no longer needed
 
         if (!$finalResponse) {
             throw new Exception("Failed to generate final article from LongCat API.");
@@ -207,10 +208,11 @@ class WorkflowAiGeneratorService
         $finalResponse = trim($finalResponse);
 
         $parsedJson = json_decode($finalResponse, true);
+        unset($finalResponse); // Free raw response
 
         if (json_last_error() !== JSON_ERROR_NONE) {
             Log::error("Failed to parse JSON from AI: " . json_last_error_msg());
-            throw new Exception("AI returned invalid JSON: " . $finalResponse);
+            throw new Exception("AI returned invalid JSON.");
         }
 
         return $parsedJson;
