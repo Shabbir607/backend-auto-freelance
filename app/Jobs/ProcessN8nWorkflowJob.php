@@ -104,9 +104,12 @@ class ProcessN8nWorkflowJob implements ShouldQueue
         }
 
 
+        // Pre-build the workflow slug to pass to the AI
+        $workflowSlug = Str::slug($name) . '-' . $id;
+
         // Generate Content via AI Service
         try {
-            $aiData = $aiService->generateForWorkflow($name, 'n8n workflow automation', $jsonData, $this->customPrompt);
+            $aiData = $aiService->generateForWorkflow($name, 'n8n workflow automation', $jsonData, $this->customPrompt, $workflowSlug);
         } catch (\Exception $e) {
             unset($jsonData);
             Log::error("AI Generation failed for workflow {$name}: " . $e->getMessage());

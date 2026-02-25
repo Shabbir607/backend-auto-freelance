@@ -158,7 +158,7 @@ class WorkflowAiGeneratorService
     /**
      * Generate content (Blog, Meta, FAQs) for a workflow based on the 3 custom SEO prompts.
      */
-    public function generateForWorkflow($workflowTitle, $workflowDescription, $workflowJsonData, $customPrompt = '')
+    public function generateForWorkflow($workflowTitle, $workflowDescription, $workflowJsonData, $customPrompt = '', $workflowSlug = '')
     {
         $topic = "n8n Workflow Automation: {$workflowTitle} - {$workflowDescription}";
 
@@ -195,22 +195,27 @@ class WorkflowAiGeneratorService
             throw new Exception("Failed to generate SEO intelligence from LongCat API.");
         }
 
+        $workflowLinkUrl = config('app.frontend_url', 'https://edgelancer.com') . '/templates/' . $workflowSlug;
+
         // STEP 2: Final Article Generation in JSON format
-        $prompt3 = "You are an expert Senior SEO + Editorial Content Writer with 15+ years experience producing ready-to-publish long-form content for high-ranking websites. I am now giving you a full dataset gathered from my previous prompt:\n\n" .
+        $prompt3 = "You are an expert Senior SEO + Editorial Content Writer and Frontend UI/UX Designer. I am giving you a full dataset:\n\n" .
             "=== SEO DATASET ===\n" .
             "{$seoData}\n" .
             "====================\n\n" .
-            "Your job now is to generate a ready-to-publish long-form article (1500–2500 words) strictly following instructions.\n" .
-            "Ensure the content answers what, why, who, when, how, types, tools, and pricing. Do not use generic AI-style content or disclaimers.\n\n" .
-            "FORMATTING INSTRUCTIONS FOR 'article_html':\n" .
-            "- The content MUST be professionally formatted using semantic HTML.\n" .
-            "- Use <article>, <header>, <hr> for structure.\n" .
-            "- Ensure proper visual hierarchy using <h2>, <h3>, <h4>.\n" .
-            "- Use bullet points <ul>, <ol> where applicable.\n" .
-            "- Display code cleanly inside <pre><code class=\"language-name\">...</code></pre>.\n" .
-            "- Build clean CSS-friendly tables (no inline styles like border=\"1\" or cellpadding).\n" .
-            "- Do NOT generate huge blocks of unformatted long text. Break it up beautifully.\n\n" .
-            "CRITICAL REQUIREMENT: Your output MUST be strictly formatted as a pure JSON object so my automated system can parse it. Do NOT output markdown text outside the JSON block.\n\n" .
+            "Generate a ready-to-publish long-form article (1500–2500 words) using the dataset.\n" .
+            "DO NOT use generic AI-style content or disclaimers.\n\n" .
+            "FORMATTING INSTRUCTIONS FOR 'article_html' (CRITICAL):\n" .
+            "- The content MUST be professionally formatted using modern semantic HTML WITH Tailwind CSS classes for styling.\n" .
+            "- Do NOT generate huge blocks of unformatted text. Break it up beautifully into separate readable sections with distinct visual hierarchy.\n" .
+            "- HEADINGS: Use elegant typography (e.g., `<h2 class=\"text-3xl font-bold text-gray-900 dark:text-white mt-10 mb-6\">`).\n" .
+            "- PARAGRAPHS: Use `<p class=\"text-lg leading-relaxed text-gray-700 dark:text-gray-300 mb-6\">`.\n" .
+            "- LISTS: Use `<ul class=\"space-y-4 text-gray-600 dark:text-gray-400 list-none mb-8\">` and `<li class=\"flex items-start\">` with SVG checkmarks or nice styling.\n" .
+            "- CARDS: Put key takeaways, best practices, or 'Pros/Cons' inside beautifully styled custom cards instead of normal text. Example:\n" .
+            "  `<div class=\"bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 border border-gray-100 dark:border-gray-700 my-8\">`\n" .
+            "- CODE: Wrap code cleanly inside `<div class=\"bg-gray-900 rounded-lg p-4 my-6 overflow-x-auto\"><pre><code class=\"text-sm text-green-400\">...</code></pre></div>`.\n" .
+            "- TABLES: Build clean responsive tables using Tailwind classes (`min-w-full divide-y divide-gray-200 dark:divide-gray-700`). Do not use raw HTML border attributes.\n" .
+            "- ALERTS/NOTES: Use distinct callout boxes (e.g., `<div class=\"p-4 mb-6 text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 ring-1 ring-blue-100 dark:ring-blue-800\">`).\n" .
+            "- **CRITICAL**: You MUST include a highly visible, incredibly attractive Call to Action (CTA) card linking to this specific workflow early in the article (after the intro) AND at the conclusion. Use this exact URL for the link: `{$workflowLinkUrl}`. Make the button look like `<a href=\"{$workflowLinkUrl}\" class=\"inline-block px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg shadow-lg transition duration-200\">Install this Workflow Now</a>`.\n\n" .
             "The JSON structure must be exactly:\n" .
             "{\n" .
             "  \"seo_title\": \"(CTR + Intent optimized title)\",\n" .
@@ -218,7 +223,7 @@ class WorkflowAiGeneratorService
             "  \"reading_time_minutes\": 5,\n" .
             "  \"suggested_category\": \"(One single concise string, e.g. 'Data Scraping', 'Marketing', 'DevOps')\",\n" .
             "  \"workflow_description_summary\": \"(SGE Short Answer Summary <= 45 words)\",\n" .
-            "  \"article_html\": \"(Full semantic HTML formatted 1500+ word article body including <article>, <header>, proper H2/H3, lists, code blocks, and clean tables)\",\n" .
+            "  \"article_html\": \"(Full beautiful HTML with Tailwind CSS, including cards, callouts, lists, and the MUST-HAVE links to {$workflowLinkUrl})\",\n" .
             "  \"faqs\": [\n" .
             "      {\"question\": \"...\", \"answer\": \"...\"},\n" .
             "      {\"question\": \"...\", \"answer\": \"...\"}\n" .
