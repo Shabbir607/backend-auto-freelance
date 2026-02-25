@@ -12,7 +12,7 @@ class WorkflowAiGeneratorService
     protected $baseUrl;
     protected $model;
     protected $apiKeys;
-    protected $maxTokens = 4000;
+    protected $maxTokens = 8192; // Increased for long-form articles
 
     public function __construct()
     {
@@ -24,6 +24,36 @@ class WorkflowAiGeneratorService
             // Provide a fallback if config not loaded
             $this->apiKeys = [env('LONGCAT_API_KEY', '')];
         }
+    }
+
+    /**
+     * Clean and parse JSON from AI response, handling truncation and surrounding text.
+     */
+    protected function extractJson($string)
+    {
+        if (empty($string)) return null;
+
+        // Strip control characters (fix "Control character error")
+        $string = preg_replace('/[\x00-\x1F\x7F]/', '', $string);
+
+        // Find the first { and last }
+        $firstBracket = strpos($string, '{');
+        $lastBracket = strrpos($string, '}');
+
+        if ($firstBracket === false) return null;
+
+        // If it's truncated (no closing bracket), try to fix it
+        if ($lastBracket === false || $lastBracket < $firstBracket) {
+            $json = substr($string, $firstBracket);
+            // Count open braces to append missing ones
+            $openBraces = substr_count($json, '{');
+            $closeBraces = substr_count($json, '}');
+            $json .= str_repeat('}', max(0, $openBraces - $closeBraces));
+            return json_decode($json, true);
+        }
+
+        $json = substr($string, $firstBracket, $lastBracket - $firstBracket + 1);
+        return json_decode($json, true);
     }
 
     /**
@@ -202,17 +232,12 @@ class WorkflowAiGeneratorService
             throw new Exception("Failed to generate final article from LongCat API.");
         }
 
-        // Clean up markdown block wrapping if exists
-        $finalResponse = preg_replace('/```json\s*/', '', $finalResponse);
-        $finalResponse = preg_replace('/```\s*/', '', $finalResponse);
-        $finalResponse = trim($finalResponse);
-
-        $parsedJson = json_decode($finalResponse, true);
+        $parsedJson = $this->extractJson($finalResponse);
         unset($finalResponse); // Free raw response
 
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            Log::error("Failed to parse JSON from AI: " . json_last_error_msg());
-            throw new Exception("AI returned invalid JSON.");
+        if (!$parsedJson) {
+            Log::error("Failed to extract valid JSON from AI response.");
+            throw new Exception("AI returned invalid JSON structure.");
         }
 
         return $parsedJson;
