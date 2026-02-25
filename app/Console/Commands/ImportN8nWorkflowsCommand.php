@@ -39,11 +39,18 @@ class ImportN8nWorkflowsCommand extends Command
         $this->info("Parsing CSV file: {$filePath}");
 
         $header = null;
-        $count = 0;
-        $dispatched = 0;
+        $stats = [
+            'total_rows_read' => 0,
+            'skipped_header_mismatch' => 0,
+            'skipped_invalid_url' => 0,
+            'skipped_exists_external_id' => 0,
+            'skipped_exists_json_url' => 0,
+            'dispatched' => 0,
+        ];
 
+        // Increased line length to 0 to read any length and use proper enclosure
         if (($handle = fopen($filePath, 'r')) !== false) {
-            while (($row = fgetcsv($handle, 4000, ',')) !== false) {
+            while (($row = fgetcsv($handle, 0, ',', '"')) !== false) {
                 if (!$header) {
                     // Normalize headers: trim and uppercase for robust matching
                     $header = array_map(function($h) {
@@ -52,10 +59,12 @@ class ImportN8nWorkflowsCommand extends Command
                     continue;
                 }
 
-                $count++;
+                $stats['total_rows_read']++;
+                $count = $stats['total_rows_read'];
 
                 // If row doesn't match header count, skip
                 if (count($header) !== count($row)) {
+                    $stats['skipped_header_mismatch']++;
                     continue;
                 }
 
@@ -66,14 +75,17 @@ class ImportN8nWorkflowsCommand extends Command
                 $jsonUrl = $workflowData['RAW JSON URL'] ?? $workflowData['JSON URL'] ?? $workflowData['URL'] ?? $workflowData['DIRECT WORKFLOW URL'] ?? $workflowData['WORKFLOW URL'] ?? null;
 
                 if (empty($jsonUrl) || !filter_var($jsonUrl, FILTER_VALIDATE_URL)) {
+                    $stats['skipped_invalid_url']++;
                     continue;
                 }
 
                 if ($externalId && \App\Models\Workflow::where('external_id', $externalId)->exists()) {
+                    $stats['skipped_exists_external_id']++;
                     continue;
                 }
                 
                 if (\App\Models\Workflow::where('json_file_path', $jsonUrl)->exists()) {
+                    $stats['skipped_exists_json_url']++;
                     continue;
                 }
                 // Normalize the URL field for the job
@@ -81,17 +93,28 @@ class ImportN8nWorkflowsCommand extends Command
 
                 // Dispatch the Job with row index so it can update the CSV
                 ProcessN8nWorkflowJob::dispatch($workflowData, $customPrompt, $count, $filePath)->onQueue('default');
-                $dispatched++;
+                $stats['dispatched']++;
 
-                if ($limit > 0 && $dispatched >= $limit) {
+                if ($limit > 0 && $stats['dispatched'] >= $limit) {
                     break;
                 }
             }
             fclose($handle);
         }
 
-        $this->info("Successfully dispatched {$dispatched} workflow import jobs to the queue.");
-        Log::info("n8n:import-workflows dispatched {$dispatched} jobs.", ['file' => $filePath]);
+        $this->table(
+            ['Metric', 'Count'],
+            [
+                ['Total Rows Read', $stats['total_rows_read']],
+                ['Dispatched Jobs', $stats['dispatched']],
+                ['Skipped (Header/Row Mismatch)', $stats['skipped_header_mismatch']],
+                ['Skipped (Missing/Invalid URL)', $stats['skipped_invalid_url']],
+                ['Skipped (Already Exists by ID)', $stats['skipped_exists_external_id']],
+                ['Skipped (Already Exists by JSON URL)', $stats['skipped_exists_json_url']],
+            ]
+        );
+
+        Log::info("n8n:import-workflows finished.", $stats);
 
         return Command::SUCCESS;
     }
