@@ -107,7 +107,6 @@ class ProcessN8nWorkflowJob implements ShouldQueue
         // Generate Content via AI Service
         try {
             $aiData = $aiService->generateForWorkflow($name, 'n8n workflow automation', $jsonData, $this->customPrompt);
-            unset($jsonData); // Free memory as soon as AI has what it needs
         } catch (\Exception $e) {
             unset($jsonData);
             Log::error("AI Generation failed for workflow {$name}: " . $e->getMessage());
@@ -141,6 +140,7 @@ class ProcessN8nWorkflowJob implements ShouldQueue
                 'meta_description' => $aiData['meta_description'] ?? ''
             ]
         );
+        unset($jsonData); // Free memory now that it is saved
 
         // Save FAQs for workflow
         if (!empty($aiData['faqs']) && is_array($aiData['faqs'])) {
