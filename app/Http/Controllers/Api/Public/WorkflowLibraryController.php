@@ -85,21 +85,7 @@ public function index(Request $request)
 
             // Sorting
             $sort = $request->input('sort', 'newest');
-            switch ($sort) {
-                case 'most_popular':
-                    $query->orderBy('user_count', 'desc');
-                    break;
-                case 'highest_rated':
-                    $query->orderBy('rating', 'desc');
-                    break;
-                case 'highest_roi':
-                    $query->orderBy('roi_percentage', 'desc');
-                    break;
-                case 'newest':
-                default:
-                    $query->orderBy('created_at', 'desc');
-                    break;
-            }
+            $query->inRandomOrder();
 
             $workflows = $query->paginate($perPage);
 
