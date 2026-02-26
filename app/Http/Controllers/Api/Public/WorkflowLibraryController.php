@@ -269,8 +269,8 @@ public function relevantWorkflows(Request $request, $slug)
             ->where('status', 'published')
             ->firstOrFail();
 
-        $frontendBaseUrl = config('app.frontend_url') ?? 'https://frontend.example.com';
-        $url = $frontendBaseUrl . '/workflow/' . $workflow->slug;
+        $frontendBaseUrl = config('app.frontend_url') ?? 'https://edgelancer.com';
+        $url = $frontendBaseUrl . '/templates/' . $workflow->slug;
         $title = $workflow->title;
         $description = strip_tags($workflow->description ?? '');
 
