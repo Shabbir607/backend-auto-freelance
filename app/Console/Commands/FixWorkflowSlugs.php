@@ -39,12 +39,23 @@ class FixWorkflowSlugs extends Command
         // Build a cache of current valid slugs to avoid unnecessary lookups
         $validSlugs = $workflows->pluck('slug')->toArray();
 
-        // First pass: Calculate/Fix database slugs
+        // First pass: Calculate/Fix database slugs and titles
         foreach ($workflows as $workflow) {
             $oldSlug = $workflow->slug;
+            $oldTitle = $workflow->title;
             
+            // Clean title
+            $cleanTitle = str_replace(['.json', '_'], ['', ' '], $oldTitle);
+            $cleanTitle = preg_replace('/\s+/', ' ', trim($cleanTitle));
+
+            if ($oldTitle !== $cleanTitle) {
+                $this->line("Workflow Title Update [ID {$workflow->id}]: '{$oldTitle}' -> '{$cleanTitle}'");
+                if (!$dryRun) {
+                    $workflow->update(['title' => $cleanTitle]);
+                }
+            }
+
             // Generate clean slug version
-            $cleanTitle = str_replace('.json', '', $workflow->title);
             $categoryName = $workflow->category ? $workflow->category->title : 'uncategorized';
             $newBaseSlug = Str::slug($cleanTitle) . '-' . Str::slug($categoryName);
             $newSlug = $this->generateUniqueSlug($newBaseSlug, $workflow->id);

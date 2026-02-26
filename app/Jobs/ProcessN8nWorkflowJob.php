@@ -104,8 +104,9 @@ class ProcessN8nWorkflowJob implements ShouldQueue
         }
 
 
-        // Final cleanup of name string to remove .json extension
-        $name = str_replace('.json', '', $name);
+        // Final cleanup of name string to remove .json extension and underscores
+        $name = str_replace(['.json', '_'], ['', ' '], $name);
+        $name = preg_replace('/\s+/', ' ', trim($name));
 
         // Handle Categories early for slug generation
         $firstCategoryName = explode('|', $categoriesString)[0];
