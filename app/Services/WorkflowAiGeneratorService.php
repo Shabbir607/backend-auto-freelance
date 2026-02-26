@@ -195,6 +195,7 @@ class WorkflowAiGeneratorService
             throw new Exception("Failed to generate SEO intelligence from LongCat API.");
         }
 
+        $workflowSlug = str_replace('.json', '', $workflowSlug);
         $workflowLinkUrl = config('app.frontend_url', 'https://edgelancer.com') . '/templates/' . $workflowSlug;
 
         // STEP 2: Final Article Generation in JSON format

@@ -104,8 +104,18 @@ class ProcessN8nWorkflowJob implements ShouldQueue
         }
 
 
-        // Pre-build the workflow slug to pass to the AI
-        $workflowSlug = Str::slug($name) . '-' . $id;
+        // Final cleanup of name string to remove .json extension
+        $name = str_replace('.json', '', $name);
+
+        // Handle Categories early for slug generation
+        $firstCategoryName = explode('|', $categoriesString)[0];
+        if (empty(trim($firstCategoryName)) || trim($firstCategoryName) === 'Uncategorized') {
+            $firstCategoryName = 'Uncategorized';
+        }
+
+        // Pre-build the workflow slug to pass to the AI (Title + Category)
+        $workflowSlug = Str::slug($name) . '-' . Str::slug($firstCategoryName);
+        $workflowSlug = str_replace('.json', '', $workflowSlug);
 
         // Generate Content via AI Service
         try {
@@ -117,8 +127,8 @@ class ProcessN8nWorkflowJob implements ShouldQueue
         }
 
         // Handle Categories
-        $firstCategoryName = explode('|', $categoriesString)[0];
-        if ((empty(trim($firstCategoryName)) || trim($firstCategoryName) === 'Uncategorized') && !empty($aiData['suggested_category'])) {
+        // Update category if AI suggests a better one (but we keep the slug consistent with what was passed to AI)
+        if (($firstCategoryName === 'Uncategorized') && !empty($aiData['suggested_category'])) {
             $firstCategoryName = trim($aiData['suggested_category']);
         }
         
@@ -132,7 +142,7 @@ class ProcessN8nWorkflowJob implements ShouldQueue
             ['external_id' => $id],
             [
                 'title' => $name,
-                'slug' => Str::slug($name) . '-' . $id,
+                'slug' => $workflowSlug,
                 'category_id' => $category->id,
                 'description' => $aiData['workflow_description_summary'] ?? '',
                 'views' => (int)$views,
