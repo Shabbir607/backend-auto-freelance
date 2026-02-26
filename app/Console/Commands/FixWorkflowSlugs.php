@@ -29,39 +29,120 @@ class FixWorkflowSlugs extends Command
     {
         $dryRun = $this->option('dry-run');
         $workflows = Workflow::all();
+        $blogs = \App\Models\Blog::all();
+        $faqs = \App\Models\Faq::all();
 
-        $this->info("Found " . $workflows->count() . " workflows to process.");
+        $this->info("Found " . $workflows->count() . " workflows, " . $blogs->count() . " blogs, and " . $faqs->count() . " FAQs.");
 
-        $updatedCount = 0;
+        $updatedSlugsCount = 0;
+        
+        // Build a cache of current valid slugs to avoid unnecessary lookups
+        $validSlugs = $workflows->pluck('slug')->toArray();
 
+        // First pass: Calculate/Fix database slugs
         foreach ($workflows as $workflow) {
             $oldSlug = $workflow->slug;
             
-            // 1. Clean title from .json
+            // Generate clean slug version
             $cleanTitle = str_replace('.json', '', $workflow->title);
-            
-            // 2. Get category title
             $categoryName = $workflow->category ? $workflow->category->title : 'uncategorized';
-            $categorySlugPart = Str::slug($categoryName);
-
-            // 3. Generate new base slug
-            $newBaseSlug = Str::slug($cleanTitle) . '-' . $categorySlugPart;
-            $newBaseSlug = str_replace('.json', '', $newBaseSlug); // Extra safety
-
-            // 4. Ensure uniqueness
+            $newBaseSlug = Str::slug($cleanTitle) . '-' . Str::slug($categoryName);
             $newSlug = $this->generateUniqueSlug($newBaseSlug, $workflow->id);
 
             if ($oldSlug !== $newSlug) {
-                $this->line("Workflow ID [{$workflow->id}]: '{$oldSlug}' -> '{$newSlug}'");
-                
+                $this->line("Workflow Slug Update [ID {$workflow->id}]: '{$oldSlug}' -> '{$newSlug}'");
                 if (!$dryRun) {
                     $workflow->update(['slug' => $newSlug]);
                 }
-                $updatedCount++;
+                $updatedSlugsCount++;
             }
         }
 
-        $this->info("Processed {$workflows->count()} workflows. " . ($dryRun ? "[DRY RUN] " : "") . "Updated {$updatedCount} slugs.");
+        // Second pass: Global search and replace in all content fields
+        $contentProcessors = [
+            'Blog' => [$blogs, ['content']],
+            'Workflow' => [$workflows, ['description', 'meta_description', 'json_data']],
+            'Faq' => [$faqs, ['answer']],
+        ];
+
+        $totalFixedLinks = 0;
+        $lookupCache = []; // found_slug => target_slug
+
+        foreach ($contentProcessors as $type => [$models, $fields]) {
+            foreach ($models as $model) {
+                $updated = false;
+                foreach ($fields as $field) {
+                    $originalContent = $model->$field;
+                    if (empty($originalContent)) continue;
+
+                    $newContent = $originalContent;
+
+                    // Regex to find all /templates/ slugs (handles .json and messy suffixes)
+                    // Matches /templates/ followed by any non-whitespace characters until a delimiter like ", ', >, ?, or space
+                    if (preg_match_all('/\/templates\/([^\" \'>\?]+)/', $originalContent, $matches)) {
+                        foreach (array_unique($matches[1]) as $foundSlug) {
+                            $targetSlug = null;
+
+                            if (isset($lookupCache[$foundSlug])) {
+                                $targetSlug = $lookupCache[$foundSlug];
+                            } else {
+                                // 1. Try to find by extracting the zie619 ID part
+                                if (str_contains($foundSlug, 'zie619')) {
+                                    $extractedId = 'zie619' . Str::after($foundSlug, 'zie619');
+                                    $foundWorkflow = Workflow::where('external_id', $extractedId)->first();
+                                    if ($foundWorkflow) $targetSlug = $foundWorkflow->slug;
+                                }
+
+                                // 2. Fallback: Match by external_id suffix or json_file_path
+                                if (!$targetSlug) {
+                                    $foundWorkflow = Workflow::where('external_id', 'like', "%{$foundSlug}%")
+                                        ->orWhere('json_file_path', 'like', "%{$foundSlug}%")
+                                        ->first();
+                                    if ($foundWorkflow) $targetSlug = $foundWorkflow->slug;
+                                }
+
+                                // 3. Fallback: Word-based matching (Very robust for title-based messy slugs)
+                                if (!$targetSlug) {
+                                    $cleanName = str_replace(['.json', '-'], ' ', $foundSlug);
+                                    $words = explode(' ', $cleanName);
+                                    $usefulWords = array_filter($words, fn($w) => strlen($w) > 3 && !in_array(strtolower($w), ['workflow', 'automation', 'template', 'guide']));
+                                    
+                                    if (!empty($usefulWords)) {
+                                        $query = Workflow::query();
+                                        foreach ($usefulWords as $word) {
+                                            $query->where('title', 'like', "%{$word}%");
+                                        }
+                                        $match = $query->first();
+                                        if ($match) $targetSlug = $match->slug;
+                                    }
+                                }
+
+                                if ($targetSlug) {
+                                    $lookupCache[$foundSlug] = $targetSlug;
+                                }
+                            }
+
+                            if ($targetSlug && $foundSlug !== $targetSlug) {
+                                $this->line("Fixing Link in {$type} [ID {$model->id}]: '{$foundSlug}' -> '{$targetSlug}'");
+                                $newContent = str_replace('/templates/' . $foundSlug, '/templates/' . $targetSlug, $newContent);
+                                $totalFixedLinks++;
+                            }
+                        }
+                    }
+
+                    if ($newContent !== $originalContent) {
+                        $model->$field = $newContent;
+                        $updated = true;
+                    }
+                }
+
+                if ($updated && !$dryRun) {
+                    $model->save();
+                }
+            }
+        }
+
+        $this->info(($dryRun ? "[DRY RUN] " : "") . "Updated {$updatedSlugsCount} slugs and fixed {$totalFixedLinks} embedded links.");
 
         return Command::SUCCESS;
     }
