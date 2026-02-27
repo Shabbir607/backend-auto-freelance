@@ -77,21 +77,18 @@ class WorkflowAiGeneratorService
     protected function rotateApiKey()
     {
         $currentIndex = Cache::get('longcat_current_key_index', 0);
-        $nextIndex = $currentIndex + 1;
-
-        if ($nextIndex >= count($this->apiKeys)) {
-            Log::error('All LongCat API keys have been exhausted or failed.');
-            throw new Exception('All LongCat API keys are exhausted.');
-        }
+        $nextIndex = ($currentIndex + 1) % count($this->apiKeys);
 
         Cache::put('longcat_current_key_index', $nextIndex, now()->addHours(24));
         Log::info("Rotated to LongCat API Key index: {$nextIndex}");
+        
+        return $nextIndex;
     }
 
     /**
      * Make a request to the LongCat API with automatic retry and key rotation.
      */
-    protected function makeApiRequest(array $messages, $retries = 3)
+    protected function makeApiRequest(array $messages, $retriesPerKey = 2)
     {
         $payload = [
             'model' => $this->model,
@@ -100,59 +97,74 @@ class WorkflowAiGeneratorService
             'temperature' => 0.7
         ];
 
-        while ($retries > 0) {
+        $keysCount = count($this->apiKeys);
+        $keysTried = 0;
+
+        while ($keysTried < $keysCount) {
             $apiKey = $this->getActiveApiKey();
+            $currentKeyRetries = $retriesPerKey;
 
             if (empty($apiKey)) {
                 $this->rotateApiKey();
-                $retries--;
+                $keysTried++;
                 continue;
             }
 
-            try {
-                $response = Http::withHeaders([
-                    'Authorization' => "Bearer {$apiKey}",
-                    'Content-Type' => 'application/json',
-                    'Accept' => 'application/json'
-                ])->timeout(120)->post($this->baseUrl, $payload);
+            while ($currentKeyRetries >= 0) {
+                try {
+                    $response = Http::withHeaders([
+                        'Authorization' => "Bearer {$apiKey}",
+                        'Content-Type' => 'application/json',
+                        'Accept' => 'application/json'
+                    ])->timeout(120)->post($this->baseUrl, $payload);
 
-                if ($response->successful()) {
-                    $json = $response->json();
-                    return $json['choices'][0]['message']['content'] ?? null;
-                }
+                    if ($response->successful()) {
+                        $json = $response->json();
+                        return $json['choices'][0]['message']['content'] ?? null;
+                    }
 
-                // If unauthorized or rate limited, rotate key
-                $status = $response->status();
-                if ($status === 401 || $status === 403 || $status === 429) {
-                    Log::warning("Longcat API failed (HTTP {$status}) with key: " . substr($apiKey, 0, 5) . "...");
+                    $status = $response->status();
+                    
+                    // If unauthorized or rate limited, rotate key immediately and STOP retrying this key
+                    if ($status === 401 || $status === 403 || $status === 429) {
+                        Log::warning("Longcat API failed (HTTP {$status}) with key: " . substr($apiKey, 0, 8) . "... Rotated.");
+                        $this->rotateApiKey();
+                        $keysTried++;
+                        continue 2; // Break out of inner loop, increment keysTried, and try next key
+                    }
+
+                    // Temporary server error, retry on the same key
+                    if ($status >= 500 && $currentKeyRetries > 0) {
+                        Log::info("Longcat API server error (HTTP {$status}), retrying same key... ({$currentKeyRetries} left)");
+                        sleep(2);
+                        $currentKeyRetries--;
+                        continue;
+                    }
+
+                    // For other errors or exhausted retries, log and rotate
+                    Log::error("Longcat API request failed (HTTP {$status}): " . $response->body());
                     $this->rotateApiKey();
-                    $retries--;
-                    continue;
-                }
+                    $keysTried++;
+                    continue 2;
 
-                // Temporary server error, retry without rotation
-                if ($status >= 500) {
-                    sleep(2);
-                    $retries--;
-                    continue;
+                } catch (Exception $e) {
+                    Log::error("Longcat API Exception: " . $e->getMessage());
+                    
+                    if ($currentKeyRetries > 0) {
+                        sleep(2);
+                        $currentKeyRetries--;
+                        continue;
+                    }
+                    
+                    $this->rotateApiKey();
+                    $keysTried++;
+                    continue 2;
                 }
-
-                throw new Exception("API Error: " . $response->body());
-
-            } catch (Exception $e) {
-                if (str_contains($e->getMessage(), 'exhausted')) {
-                    throw $e;
-                }
-                
-                $retries--;
-                if ($retries <= 0) {
-                    throw $e;
-                }
-                sleep(2);
             }
         }
 
-        return null;
+        Log::error('All LongCat API keys have been exhausted or failed.');
+        throw new Exception('All LongCat API keys are exhausted.');
     }
 
     /**

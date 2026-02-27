@@ -5,7 +5,6 @@ return [
     'model' => env('LONGCAT_MODEL', 'LongCat-Flash-Chat'),
     'api_keys' => [
         // Add your 100+ API keys here
-        'ak_2lr7db3AO02f02l8d11s49sd0xB9V',
         'ak_2787TP3Vr08m02l4Dw64z5mI7Lr2q',
         'ak_2y77qc4nu7mC0aG54p77Y8mn9IK9A',
         'ak_2n87L74EW0yF8Z15808eH3t89935w',
