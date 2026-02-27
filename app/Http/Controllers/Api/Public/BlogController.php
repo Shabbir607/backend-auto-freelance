@@ -65,37 +65,115 @@ class BlogController extends Controller
                 return null;
             }
 
+            // SEO Expert: Dynamic Calculations
+            $content = $blog->content ?? '';
+            $wordCount = str_word_count(strip_tags($content));
+            $readingTime = ceil($wordCount / 200); // Average 200 wpm
+
             $seo = [
                 'id' => $blog->id,
                 'title' => $blog->meta_title ?? $blog->title,
                 'description' => $blog->meta_description ?? Str::limit(strip_tags($blog->description), 160),
                 'keywords' => $blog->meta_keywords,
-                'canonical' => url('blog/' . $blog->slug),
+                'canonical' => 'https://edgelancer.com/blogs/' . $blog->slug,
+                'og_type' => 'article',
                 'og_image' => $blog->image,
                 'twitter_card' => 'summary_large_image',
-                'twitter_site' => '@nexus_ai',
-                'meta_tags' => [], 
+                'twitter_site' => '@edgelancer',
+                'twitter_image' => $blog->image,
+                'robots' => 'index, follow',
+                'reading_time' => $readingTime . ' min read',
+                'meta_tags' => [
+                    ['name' => 'article:published_time', 'content' => $blog->published_at?->toIso8601String()],
+                    ['name' => 'article:modified_time', 'content' => $blog->updated_at?->toIso8601String()],
+                    ['name' => 'article:section', 'content' => $blog->category->title ?? 'Technology'],
+                ], 
                 'structured_data' => [
                     '@context' => 'https://schema.org',
-                    '@type' => 'BlogPosting',
-                    'headline' => $blog->title,
-                    'image' => $blog->image,
-                    'datePublished' => $blog->published_at,
-                    'dateModified' => $blog->updated_at,
-                    'author' => [
-                        '@type' => 'Person',
-                        'name' => $blog->author->name ?? 'Admin',
-                    ],
-                    'publisher' => [
-                        '@type' => 'Organization',
-                        'name' => 'Nexus AI',
-                        'logo' => [
-                            '@type' => 'ImageObject',
-                            'url' => url('/logo.png') 
+                    '@graph' => [
+                        // 1. BlogPosting
+                        [
+                            '@type' => 'BlogPosting',
+                            '@id' => 'https://edgelancer.com/blogs/' . $blog->slug . '#blogposting',
+                            'headline' => $blog->title,
+                            'description' => $blog->meta_description ?? Str::limit(strip_tags($blog->description), 160),
+                            'image' => $blog->image,
+                            'datePublished' => $blog->published_at?->toIso8601String(),
+                            'dateModified' => $blog->updated_at?->toIso8601String(),
+                            'author' => [
+                                '@type' => 'Person',
+                                'name' => $blog->author->name ?? 'Admin',
+                            ],
+                            'publisher' => [
+                                '@type' => 'Organization',
+                                'name' => 'Edgelancer',
+                                'logo' => [
+                                    '@type' => 'ImageObject',
+                                    'url' => 'https://edgelancer.com/favicon.png'
+                                ]
+                            ],
+                            'mainEntityOfPage' => [
+                                '@type' => 'WebPage',
+                                '@id' => 'https://edgelancer.com/blogs/' . $blog->slug
+                            ],
+                            'wordCount' => $wordCount,
+                            'timeRequired' => "PT{$readingTime}M"
+                        ],
+                        // 2. BreadcrumbList
+                        [
+                            '@type' => 'BreadcrumbList',
+                            '@id' => 'https://edgelancer.com/blogs/' . $blog->slug . '#breadcrumb',
+                            'itemListElement' => [
+                                [
+                                    '@type' => 'ListItem',
+                                    'position' => 1,
+                                    'name' => 'Home',
+                                    'item' => url('/')
+                                ],
+                                [
+                                    '@type' => 'ListItem',
+                                    'position' => 2,
+                                    'name' => 'Blogs',
+                                    'item' => 'https://edgelancer.com/blogs'
+                                ],
+                                [
+                                    '@type' => 'ListItem',
+                                    'position' => 3,
+                                    'name' => $blog->category->title ?? 'Category',
+                                    'item' => 'https://edgelancer.com/blogs?category=' . ($blog->category->slug ?? 'all')
+                                ],
+                                [
+                                    '@type' => 'ListItem',
+                                    'position' => 4,
+                                    'name' => $blog->title,
+                                    'item' => 'https://edgelancer.com/blogs/' . $blog->slug
+                                ]
+                            ]
                         ]
                     ]
                 ]
             ];
+
+            // 3. Add FAQ Schema if exists
+            if ($blog->faqs && $blog->faqs->count() > 0) {
+                $faqSchema = [
+                    '@type' => 'FAQPage',
+                    'mainEntity' => []
+                ];
+
+                foreach ($blog->faqs as $faq) {
+                    $faqSchema['mainEntity'][] = [
+                        '@type' => 'Question',
+                        'name' => $faq->question,
+                        'acceptedAnswer' => [
+                            '@type' => 'Answer',
+                            'text' => $faq->answer
+                        ]
+                    ];
+                }
+
+                $seo['structured_data']['@graph'][] = $faqSchema;
+            }
 
             return [
                 'success' => true,
@@ -163,8 +241,8 @@ class BlogController extends Controller
             if (!$blog) return null;
 
             // Full frontend and image URLs
-            $frontendBaseUrl = config('app.frontend_url') ?? url('/');
-            $url = $frontendBaseUrl . '/blog/' . $blog->slug;
+            $frontendBaseUrl = 'https://edgelancer.com';
+            $url = $frontendBaseUrl . '/blogs/' . $blog->slug;
             $title = $blog->meta_title ?? $blog->title;
             // Decode potential HTML entities if any, strip tags
             $description = $blog->meta_description ?? strip_tags($blog->description);
