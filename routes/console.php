@@ -16,3 +16,5 @@ Schedule::call(function () {
         SyncFreelancerThreads::dispatch($account);
     }
 })->everyTenMinutes();
+
+Schedule::command('n8n:import-workflows')->hourly()->withoutOverlapping();
