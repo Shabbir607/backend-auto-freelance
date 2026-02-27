@@ -185,16 +185,55 @@ class WorkflowAiGeneratorService
         }
 
         // STEP 1: SEO Intelligence Data Collection
-        $prompt1and2 = "ULTIMATE 2026 AI OVERVIEW + GEO + SEO + ENTITY RANKING MASTER PROMPT BY SAAD SEO\n\n" .
-            "Act as a Global SEO Consultant and Senior Technical Content Strategist with 20+ years of experience in building content that ranks across Organic Search, Google AI Overview (SGE), Featured Snippets, People Also Ask, Local Map Pack, Knowledge Panels, and Voice Search.\n\n" .
-            "Your task is to act as an SEO Research & Intelligence System for 2026 standards. You must deeply analyze the topic and provide a complete data package that a professional blog writer needs to write a perfectly optimized and ranking-ready article.\n" .
-            "TOPIC: {$topic}\n" .
-            "Related n8n JSON Node Integrations: {$jsonSummary}\n\n" .
-            "Custom User Instructions: {$customPrompt}\n\n" .
-            "Target Scope: Global\n" .
-            "Target Audience: Mixed (B2B / B2C)\n" .
-            "Ranking Priority: All (Organic / AI Overview / Featured Snippets)\n\n" .
-            "Provide the complete structured SEO Intelligence package. Include Search Intent Analysis, Keyword Intelligence, AI Overview Triggers, Competitor Intelligence, Entities, Topical Gaps, and Outranking Strategy. DO NOT WRITE THE ARTICLE YET.";
+        $prompt1and2 = "**Role:** You are an expert Global SEO Consultant and Senior Technical Content Strategist with 20+ years of experience. Your goal is to provide comprehensive SEO intelligence for a long-form article that will rank highly across Google Organic Search, AI Overviews (SGE), Featured Snippets, People Also Ask (PAA), and Knowledge Panels.\n\n" .
+            "**Context:** The article will be published on Edgelancer.com, a platform specializing in n8n workflow automation, templates, and solutions for freelancers and businesses. The content should be authoritative, helpful, and slightly informal.\n\n" .
+            "**Topic:**\n" .
+            "- **Primary Topic:** {$workflowTitle}\n" .
+            "- **Detailed Description:** {$workflowDescription}\n" .
+            "- **Key n8n Node Integrations (from JSON):** {$jsonSummary}\n\n" .
+            "**User Instructions/Specific Focus:** {$customPrompt} (If provided, prioritize these instructions.)\n\n" .
+            "**Target Audience:** Freelancers, small business owners, developers, and automation enthusiasts seeking practical n8n solutions.\n" .
+            "**Target Scope:** Global (English-speaking markets).\n\n" .
+            "**Task:** Generate a comprehensive SEO Intelligence Report in a strict JSON format. This report will guide a professional content writer. DO NOT write any part of the article itself.\n\n" .
+            "**JSON Output Structure (CRITICAL):**\n" .
+            "```json\n" .
+            "{\n" .
+            "  \"search_intent_analysis\": {\n" .
+            "    \"primary_intent\": \"[Informational/Navigational/Transactional/Commercial Investigation]\",\n" .
+            "    \"secondary_intents\": [\"...\", \"...\"],\n" .
+            "    \"user_questions_to_answer\": [\"...\", \"...\"],\n" .
+            "    \"target_audience_pain_points\": [\"...\", \"...\" ]\n" .
+            "  },\n" .
+            "  \"keyword_intelligence\": {\n" .
+            "    \"primary_keywords\": [\"...\", \"...\"],\n" .
+            "    \"secondary_keywords\": [\"...\", \"...\"],\n" .
+            "    \"long_tail_keywords\": [\"...\", \"...\"],\n" .
+            "    \"lsi_keywords\": [\"...\", \"...\"],\n" .
+            "    \"keyword_phrases_for_faqs\": [\"...\", \"...\" ]\n" .
+            "  },\n" .
+            "  \"ai_overview_triggers\": {\n" .
+            "    \"key_concepts_for_summary\": [\"...\", \"...\"],\n" .
+            "    \"concise_answer_points\": [\"...\", \"...\" ]\n" .
+            "  },\n" .
+            "  \"competitor_intelligence\": {\n" .
+            "    \"top_ranking_competitors\": [\"domain1.com\", \"domain2.com\"],\n" .
+            "    \"competitor_content_gaps\": [\"...\", \"...\"],\n" .
+            "    \"competitor_content_strengths\": [\"...\", \"...\" ]\n" .
+            "  },\n" .
+            "  \"entities\": [\n" .
+            "    {\"name\": \"n8n\", \"type\": \"Software\"},\n" .
+            "    {\"name\": \"Workflow Automation\", \"type\": \"Concept\"}\n" .
+            "  ],\n" .
+            "  \"topical_gaps\": [\"...\", \"...\"],\n" .
+            "  \"outranking_strategy\": {\n" .
+            "    \"unique_value_proposition\": \"[How Edgelancer.com can offer unique value for this topic]\",\n" .
+            "    \"content_differentiation\": \"[How the article will stand out from competitors]\",\n" .
+            "    \"suggested_content_format\": \"[e.g., Ultimate Guide, Step-by-step Tutorial, Data-driven Report]\"\n" .
+            "  },\n" .
+            "  \"suggested_word_count_range\": \"[1500-3000 words]\",\n" .
+            "  \"suggested_internal_links\": [\"/blog/related-article-1\", \"/templates/related-workflow-2\"]\n" .
+            "}\n" .
+            "```";
 
         $messages = [
             ['role' => 'user', 'content' => $prompt1and2]
@@ -211,37 +250,51 @@ class WorkflowAiGeneratorService
         $workflowLinkUrl = config('app.frontend_url', 'https://edgelancer.com') . '/templates/' . $workflowSlug;
 
         // STEP 2: Final Article Generation in JSON format
-        $prompt3 = "You are an expert Senior SEO + Editorial Content Writer and Frontend UI/UX Designer. I am giving you a full dataset:\n\n" .
-            "=== SEO DATASET ===\n" .
+        $prompt3 = "**Role:** You are an expert Senior SEO + Editorial Content Writer and Frontend UI/UX Designer, specializing in n8n workflow automation and solutions for freelancers and businesses. Your task is to write a ready-to-publish, long-form article for Edgelancer.com.\n\n" .
+            "**Context:** You have been provided with a comprehensive SEO Intelligence Report. Your writing style should be authoritative, helpful, engaging, and slightly informal. The article must provide immense value to the target audience: freelancers, small business owners, developers, and automation enthusiasts.\n\n" .
+            "**SEO Intelligence Report (CRITICAL - Use this data extensively):**\n" .
+            "```json\n" .
             "{$seoData}\n" .
-            "====================\n\n" .
-            "Generate a ready-to-publish long-form article (1500–2500 words) using the dataset.\n" .
-            "DO NOT use generic AI-style content or disclaimers.\n\n" .
-            "FORMATTING INSTRUCTIONS FOR 'article_html' (CRITICAL):\n" .
-            "- The content MUST be professionally formatted using modern semantic HTML WITH Tailwind CSS classes for styling.\n" .
-            "- Do NOT generate huge blocks of unformatted text. Break it up beautifully into separate readable sections with distinct visual hierarchy.\n" .
-            "- HEADINGS: Use elegant typography (e.g., `<h2 class=\"text-3xl font-bold text-gray-900 dark:text-white mt-10 mb-6\">`).\n" .
-            "- PARAGRAPHS: Use `<p class=\"text-lg leading-relaxed text-gray-700 dark:text-gray-300 mb-6\">`.\n" .
-            "- LISTS: Use `<ul class=\"space-y-4 text-gray-600 dark:text-gray-400 list-none mb-8\">` and `<li class=\"flex items-start\">` with SVG checkmarks or nice styling.\n" .
-            "- CARDS: Put key takeaways, best practices, or 'Pros/Cons' inside beautifully styled custom cards instead of normal text. Example:\n" .
-            "  `<div class=\"bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 border border-gray-100 dark:border-gray-700 my-8\">`\n" .
-            "- CODE: Wrap code cleanly inside `<div class=\"bg-gray-900 rounded-lg p-4 my-6 overflow-x-auto\"><pre><code class=\"text-sm text-green-400\">...</code></pre></div>`.\n" .
-            "- TABLES: Build clean responsive tables using Tailwind classes (`min-w-full divide-y divide-gray-200 dark:divide-gray-700`). Do not use raw HTML border attributes.\n" .
-            "- ALERTS/NOTES: Use distinct callout boxes (e.g., `<div class=\"p-4 mb-6 text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 ring-1 ring-blue-100 dark:ring-blue-800\">`).\n" .
-            "- **CRITICAL**: You MUST include a highly visible, incredibly attractive Call to Action (CTA) card linking to this specific workflow early in the article (after the intro) AND at the conclusion. Use this exact URL for the link: `{$workflowLinkUrl}`. Make the button look like `<a href=\"{$workflowLinkUrl}\" class=\"inline-block px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg shadow-lg transition duration-200\">Install this Workflow Now</a>`.\n\n" .
-            "The JSON structure must be exactly:\n" .
+            "```\n\n" .
+            "Article Requirements:\n\n" .
+            "1. Length: Aim for the suggested_word_count_range provided in the SEO Intelligence Report.\n" .
+            "2. Originality: DO NOT use generic AI-style content, disclaimers, or filler. Write naturally and authoritatively.\n" .
+            "3. Value Proposition: Focus on solving the user_questions_to_answer and addressing target_audience_pain_points identified in the SEO data.\n" .
+            "4. Keyword Integration: Naturally integrate primary_keywords, secondary_keywords, and long_tail_keywords throughout the article, especially in headings and the introduction.\n" .
+            "5. Entities: Ensure key entities are mentioned and explained where relevant.\n" .
+            "6. Content Differentiation: Implement the content_differentiation and unique_value_proposition strategies from the SEO data.\n" .
+            "7. Internal Linking: Strategically place internal links to other relevant Edgelancer.com pages, using the suggested_internal_links from the SEO data. Ensure anchor text is natural and descriptive.\n" .
+            "8. External Linking: Link to 2-3 high-authority, relevant external sources where appropriate (e.g., n8n documentation, industry reports).\n\n" .
+            "HTML Formatting Instructions for article_html (CRITICAL - Adhere strictly to these Tailwind CSS classes and structures):\n\n" .
+            "- Overall Structure: The article MUST be professionally formatted using modern semantic HTML with Tailwind CSS classes for styling. Break up text into readable sections with distinct visual hierarchy.\n" .
+            "- Headings: Use elegant typography.\n" .
+            "  - <h2>: `<h2 class=\"text-3xl font-bold text-gray-900 dark:text-white mt-10 mb-6\">`\n" .
+            "  - <h3>: `<h3 class=\"text-2xl font-semibold text-gray-800 dark:text-gray-200 mt-8 mb-5\">`\n" .
+            "  - <h4>: `<h4 class=\"text-xl font-medium text-gray-700 dark:text-gray-300 mt-6 mb-4\">`\n" .
+            "- Paragraphs: Use for main body text. `<p class=\"text-lg leading-relaxed text-gray-700 dark:text-gray-300 mb-6\">`\n" .
+            "- Lists: For bullet points or numbered lists.\n" .
+            "  - Unordered List (<ul>): `<ul class=\"space-y-4 text-gray-600 dark:text-gray-400 list-none mb-8\">`\n" .
+            "  - List Item (<li>): `<li class=\"flex items-start\">` (Consider adding an SVG checkmark or similar icon for visual appeal within the <li>)\n" .
+            "- Cards (Key Takeaways, Pros/Cons, Best Practices): Use for highlighting important information. `<div class=\"bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 border border-gray-100 dark:border-gray-700 my-8\">`\n" .
+            "- Code Blocks: For n8n JSON, code snippets, or API examples. `<div class=\"bg-gray-900 rounded-lg p-4 my-6 overflow-x-auto\"><pre><code class=\"text-sm text-green-400\">...</code></pre></div>`\n" .
+            "- Tables: For comparisons or structured data. `<table class=\"min-w-full divide-y divide-gray-200 dark:divide-gray-700\">` (Ensure responsive design with parent div if needed).\n" .
+            "- Alerts/Notes: For important warnings or tips. `<div class=\"p-4 mb-6 text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 ring-1 ring-blue-100 dark:ring-blue-800\">`\n" .
+            "- **Call to Action (CTA) Card (CRITICAL)**: You MUST include a highly visible, incredibly attractive Call to Action (CTA) card linking to this specific workflow. Place one early in the article (after the introduction/first main section) AND one at the conclusion.\n" .
+            "  - Link URL: `{$workflowLinkUrl}`\n" .
+            "  - Button HTML: `<a href=\"{$workflowLinkUrl}\" class=\"inline-block px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg shadow-lg transition duration-200\">Install this Workflow Now</a>`\n\n" .
+            "Final JSON Output Structure (CRITICAL - Adhere exactly):\n" .
             "{\n" .
-            "  \"seo_title\": \"(CTR + Intent optimized title)\",\n" .
-            "  \"meta_description\": \"(<= 160 chars)\",\n" .
-            "  \"reading_time_minutes\": 5,\n" .
-            "  \"suggested_category\": \"(One single concise string, e.g. 'Data Scraping', 'Marketing', 'DevOps')\",\n" .
-            "  \"workflow_description_summary\": \"(SGE Short Answer Summary <= 45 words)\",\n" .
-            "  \"article_html\": \"(Full beautiful HTML with Tailwind CSS, including cards, callouts, lists, and the MUST-HAVE links to {$workflowLinkUrl})\",\n" .
+            "  \"seo_title\": \"[Compelling, CTR-optimized Title incorporating primary keywords, max 60 chars]\",\n" .
+            "  \"meta_description\": \"[Concise, benefit-driven description incorporating primary/secondary keywords, max 160 chars]\",\n" .
+            "  \"reading_time_minutes\": [Estimated reading time in minutes, integer],\n" .
+            "  \"suggested_category\": \"[One single concise string from Edgelancer.com categories, e.g., 'Data Scraping', 'Marketing Automation', 'AI Integrations']\",\n" .
+            "  \"workflow_description_summary\": \"[SGE-optimized short answer summary of the workflow, max 45 words]\",\n" .
+            "  \"article_html\": \"[Full, beautifully formatted HTML content with Tailwind CSS classes, including cards, callouts, lists, and the two mandatory CTAs linking to {$workflowLinkUrl}. Ensure all HTML is properly escaped for JSON.]\",\n" .
             "  \"faqs\": [\n" .
-            "      {\"question\": \"...\", \"answer\": \"...\"},\n" .
-            "      {\"question\": \"...\", \"answer\": \"...\"}\n" .
+            "      {\"question\": \"[Question 1]\", \"answer\": \"[Concise Answer 1]\"},\n" .
+            "      {\"question\": \"[Question 2]\", \"answer\": \"[Concise Answer 2]\"}\n" .
             "  ],\n" .
-            "  \"conclusion\": \"(Text conclusion with action steps)\"\n" .
+            "  \"conclusion\": \"[Text conclusion summarizing key takeaways, reiterating value, and providing clear next steps/actionable advice. Include a final CTA if not already in article_html.]\"\n" .
             "}";
 
         $finalMessages = [
