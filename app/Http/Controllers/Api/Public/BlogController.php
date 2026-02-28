@@ -68,12 +68,18 @@ class BlogController extends Controller
             // SEO Expert: Dynamic Calculations
             $content = $blog->content ?? '';
             $wordCount = str_word_count(strip_tags($content));
-            $readingTime = ceil($wordCount / 200); // Average 200 wpm
+            $readingTime = max(1, ceil($wordCount / 200)); // Average 200 wpm, ensure at least 1 min
+
+            // Generate Title based on rules (50-60 chars max if possible, add power words/brackets if appropriate - though best left to admin, we ensure we use meta_title first)
+            $title = $blog->meta_title ?? $blog->title;
+            
+            // Generate Description based on rules (155 chars max)
+            $description = $blog->meta_description ?? Str::limit(strip_tags($blog->description), 155, '...');
 
             $seo = [
                 'id' => $blog->id,
-                'title' => $blog->meta_title ?? $blog->title,
-                'description' => $blog->meta_description ?? Str::limit(strip_tags($blog->description), 160),
+                'title' => $title,
+                'description' => $description,
                 'keywords' => $blog->meta_keywords,
                 'canonical' => 'https://edgelancer.com/blogs/' . $blog->slug,
                 'og_type' => 'article',
@@ -95,8 +101,8 @@ class BlogController extends Controller
                         [
                             '@type' => 'BlogPosting',
                             '@id' => 'https://edgelancer.com/blogs/' . $blog->slug . '#blogposting',
-                            'headline' => $blog->title,
-                            'description' => $blog->meta_description ?? Str::limit(strip_tags($blog->description), 160),
+                            'headline' => $title,
+                            'description' => $description,
                             'image' => $blog->image,
                             'datePublished' => $blog->published_at?->toIso8601String(),
                             'dateModified' => $blog->updated_at?->toIso8601String(),
@@ -244,8 +250,8 @@ class BlogController extends Controller
             $frontendBaseUrl = 'https://edgelancer.com';
             $url = $frontendBaseUrl . '/blogs/' . $blog->slug;
             $title = $blog->meta_title ?? $blog->title;
-            // Decode potential HTML entities if any, strip tags
-            $description = $blog->meta_description ?? strip_tags($blog->description);
+            // Decode potential HTML entities if any, strip tags and apply description limit
+            $description = $blog->meta_description ?? Str::limit(strip_tags($blog->description), 155, '...');
             $image = $blog->image_url ?? $blog->image; // image_url accessor if exists
 
             // Social share links
