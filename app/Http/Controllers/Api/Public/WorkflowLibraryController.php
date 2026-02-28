@@ -324,7 +324,7 @@ public function relevantWorkflows(Request $request, $slug)
                 'title' => $workflow->meta_title ?? $workflow->title,
                 'description' => $workflow->meta_description ?? Str::limit(strip_tags($workflow->description), 160),
                 'keywords' => $workflow->meta_keywords,
-                'canonical' => $workflow->canonical_url,
+                'canonical' => $workflow->canonical_url ?: 'https://edgelancer.com/templates/' . $workflow->slug,
                 'og_image' => $workflow->og_image
             ]
         ]);

@@ -185,55 +185,46 @@ class WorkflowAiGeneratorService
         }
 
         // STEP 1: SEO Intelligence Data Collection
-        $prompt1and2 = "**Role:** You are an expert Global SEO Consultant and Senior Technical Content Strategist with 20+ years of experience. Your goal is to provide comprehensive SEO intelligence for a long-form article that will rank highly across Google Organic Search, AI Overviews (SGE), Featured Snippets, People Also Ask (PAA), and Knowledge Panels.\n\n" .
-            "**Context:** The article will be published on Edgelancer.com, a platform specializing in n8n workflow automation, templates, and solutions for freelancers and businesses. The content should be authoritative, helpful, and slightly informal.\n\n" .
-            "**Topic:**\n" .
-            "- **Primary Topic:** {$workflowTitle}\n" .
-            "- **Detailed Description:** {$workflowDescription}\n" .
-            "- **Key n8n Node Integrations (from JSON):** {$jsonSummary}\n\n" .
-            "**User Instructions/Specific Focus:** {$customPrompt} (If provided, prioritize these instructions.)\n\n" .
-            "**Target Audience:** Freelancers, small business owners, developers, and automation enthusiasts seeking practical n8n solutions.\n" .
-            "**Target Scope:** Global (English-speaking markets).\n\n" .
-            "**Task:** Generate a comprehensive SEO Intelligence Report in a strict JSON format. This report will guide a professional content writer. DO NOT write any part of the article itself.\n\n" .
-            "**JSON Output Structure (CRITICAL):**\n" .
-            "```json\n" .
-            "{\n" .
-            "  \"search_intent_analysis\": {\n" .
-            "    \"primary_intent\": \"[Informational/Navigational/Transactional/Commercial Investigation]\",\n" .
-            "    \"secondary_intents\": [\"...\", \"...\"],\n" .
-            "    \"user_questions_to_answer\": [\"...\", \"...\"],\n" .
-            "    \"target_audience_pain_points\": [\"...\", \"...\" ]\n" .
-            "  },\n" .
-            "  \"keyword_intelligence\": {\n" .
-            "    \"primary_keywords\": [\"...\", \"...\"],\n" .
-            "    \"secondary_keywords\": [\"...\", \"...\"],\n" .
-            "    \"long_tail_keywords\": [\"...\", \"...\"],\n" .
-            "    \"lsi_keywords\": [\"...\", \"...\"],\n" .
-            "    \"keyword_phrases_for_faqs\": [\"...\", \"...\" ]\n" .
-            "  },\n" .
-            "  \"ai_overview_triggers\": {\n" .
-            "    \"key_concepts_for_summary\": [\"...\", \"...\"],\n" .
-            "    \"concise_answer_points\": [\"...\", \"...\" ]\n" .
-            "  },\n" .
-            "  \"competitor_intelligence\": {\n" .
-            "    \"top_ranking_competitors\": [\"domain1.com\", \"domain2.com\"],\n" .
-            "    \"competitor_content_gaps\": [\"...\", \"...\"],\n" .
-            "    \"competitor_content_strengths\": [\"...\", \"...\" ]\n" .
-            "  },\n" .
-            "  \"entities\": [\n" .
-            "    {\"name\": \"n8n\", \"type\": \"Software\"},\n" .
-            "    {\"name\": \"Workflow Automation\", \"type\": \"Concept\"}\n" .
-            "  ],\n" .
-            "  \"topical_gaps\": [\"...\", \"...\"],\n" .
-            "  \"outranking_strategy\": {\n" .
-            "    \"unique_value_proposition\": \"[How Edgelancer.com can offer unique value for this topic]\",\n" .
-            "    \"content_differentiation\": \"[How the article will stand out from competitors]\",\n" .
-            "    \"suggested_content_format\": \"[e.g., Ultimate Guide, Step-by-step Tutorial, Data-driven Report]\"\n" .
-            "  },\n" .
-            "  \"suggested_word_count_range\": \"[1500-3000 words]\",\n" .
-            "  \"suggested_internal_links\": [\"/blog/related-article-1\", \"/templates/related-workflow-2\"]\n" .
-            "}\n" .
-            "```";
+        $prompt1and2 = <<<PROMPT
+You are a world-class SEO strategist. Your task is to generate a detailed SEO Intelligence Report for an article about an n8n workflow.
+
+**Article Topic:**
+- **Title:** {$workflowTitle}
+- **Description:** {$workflowDescription}
+- **Core Technologies:** {$jsonSummary}
+- **User Focus:** {$customPrompt}
+
+**Your Goal:**
+Provide all the necessary SEO data for a writer to create an article that will rank #1 on Google.
+
+**Instructions:**
+- Analyze the topic and target audience (freelancers, developers, business owners).
+- Generate keywords, user questions, and competitor insights.
+- Output your report ONLY in the valid JSON format specified below. Do not include any text outside the JSON structure.
+
+**JSON Output Format:**
+```json
+{
+  "search_intent_analysis": {
+    "primary_intent": "Informational",
+    "user_questions_to_answer": ["What problem does this workflow solve?", "How do I set up this n8n workflow?", "What are the benefits of automating this task?"],
+    "target_audience_pain_points": ["Wasting time on manual data entry", "Difficulty connecting different apps", "Lack of technical skills for complex integrations"]
+  },
+  "keyword_intelligence": {
+    "primary_keywords": ["n8n workflow: {$workflowTitle}", "{$workflowTitle} automation"],
+    "secondary_keywords": ["n8n template", "how to automate {$workflowTitle}"],
+    "long_tail_keywords": ["step-by-step n8n {$workflowTitle} tutorial", "best n8n workflow for small business"],
+    "keyword_phrases_for_faqs": ["Is this n8n workflow free?", "Can I customize this automation?"]
+  },
+  "competitor_intelligence": {
+    "competitor_content_gaps": ["Lack of clear, step-by-step instructions", "No pre-built template available", "Poor explanation of the business value"],
+    "outranking_strategy": "Create a comprehensive, easy-to-follow guide with a downloadable n8n template, focusing on the practical benefits for freelancers and small businesses."
+  },
+  "suggested_word_count_range": "1500-2500 words",
+  "suggested_internal_links": ["/blog/what-is-n8n", "/templates"]
+}
+```
+PROMPT;
 
         $messages = [
             ['role' => 'user', 'content' => $prompt1and2]

@@ -134,7 +134,7 @@ class BlogController extends Controller
                                     '@type' => 'ListItem',
                                     'position' => 1,
                                     'name' => 'Home',
-                                    'item' => url('/')
+                                    'item' => 'https://edgelancer.com'
                                 ],
                                 [
                                     '@type' => 'ListItem',

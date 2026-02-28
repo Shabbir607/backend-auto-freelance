@@ -55,7 +55,7 @@ class PageController extends Controller
                 'title' => $page->meta_title ?? $page->title,
                 'description' => $page->meta_description,
                 'keywords' => $page->meta_keywords,
-                'canonical' => url(Str::slug($page->slug)), // canonical should be SEO slug
+                'canonical' => 'https://edgelancer.com/page/' . Str::slug($page->slug), // canonical should be SEO slug
                 'og_image' => $page->og_image,
                 'meta_tags' => $metaTags,
                 'structured_data' => [
@@ -63,7 +63,7 @@ class PageController extends Controller
                     '@type' => 'WebPage',
                     'name' => $page->title,
                     'description' => $page->meta_description,
-                    'url' => url(Str::slug($page->slug)),
+                    'url' => 'https://edgelancer.com/page/' . Str::slug($page->slug),
                 ]
             ];
 
