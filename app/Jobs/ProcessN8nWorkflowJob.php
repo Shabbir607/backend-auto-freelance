@@ -53,9 +53,9 @@ class ProcessN8nWorkflowJob implements ShouldQueue
         $name = $this->workflowRow['NAME'] ?? 'Unknown Workflow';
         $views = $this->workflowRow['TOTAL VIEWS'] ?? 0;
         
-        $categoriesString = $this->workflowRow['CATEGORIES'] ?? $this->workflowRow['CATEGORY'] ?? $this->workflowRow['KEY CATEGORIES'] ?? 'Uncategorized';
-        if (empty(trim($categoriesString))) {
-            $categoriesString = 'Uncategorized';
+        $categoriesString = $this->workflowRow['CATEGORIES'] ?? $this->workflowRow['CATEGORY'] ?? $this->workflowRow['KEY CATEGORIES'] ?? 'Marketing';
+        if (empty(trim($categoriesString)) || strcasecmp(trim($categoriesString), 'Uncategorized') === 0) {
+            $categoriesString = 'Marketing';
         }
 
         $jsonUrl = $this->workflowRow['JSON URL'] ?? null;
@@ -110,8 +110,8 @@ class ProcessN8nWorkflowJob implements ShouldQueue
 
         // Handle Categories early for slug generation
         $firstCategoryName = explode('|', $categoriesString)[0];
-        if (empty(trim($firstCategoryName)) || trim($firstCategoryName) === 'Uncategorized') {
-            $firstCategoryName = 'Uncategorized';
+        if (empty(trim($firstCategoryName)) || strcasecmp(trim($firstCategoryName), 'Uncategorized') === 0) {
+            $firstCategoryName = 'Marketing';
         }
 
         // Pre-build the workflow slug to pass to the AI (Title + Category)
@@ -129,7 +129,7 @@ class ProcessN8nWorkflowJob implements ShouldQueue
 
         // Handle Categories
         // Update category if AI suggests a better one (but we keep the slug consistent with what was passed to AI)
-        if (($firstCategoryName === 'Uncategorized') && !empty($aiData['suggested_category'])) {
+        if (($firstCategoryName === 'Marketing') && !empty($aiData['suggested_category'])) {
             $firstCategoryName = trim($aiData['suggested_category']);
         }
         

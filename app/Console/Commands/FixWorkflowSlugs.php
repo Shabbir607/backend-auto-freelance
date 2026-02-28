@@ -56,7 +56,7 @@ class FixWorkflowSlugs extends Command
             }
 
             // Generate clean slug version
-            $categoryName = $workflow->category ? $workflow->category->title : 'uncategorized';
+            $categoryName = $workflow->category ? $workflow->category->title : 'marketing';
             $newBaseSlug = Str::slug($cleanTitle) . '-' . Str::slug($categoryName);
             $newSlug = $this->generateUniqueSlug($newBaseSlug, $workflow->id);
 
