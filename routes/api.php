@@ -79,14 +79,19 @@ Route::post('/ip/validate', [IpController::class, 'validateIp']);
 Route::post('webhook/freelancer', [WebhookController::class, 'handle']);
 Route::get('web/faqs', [PublicFaqController::class, 'index']);
 Route::middleware(['verify.app.key'])->group(function () {
-    // Public Scraper
+    Route::get('/workflow-library', [WorkflowLibraryController::class, 'index']);
+    Route::get('/blogs', [PublicBlogController::class, 'index']);
+    Route::get('/blogs/categories', [PublicBlogController::class, 'categories']);
+    Route::get('/workflow-category/{slug}', [WorkflowLibraryController::class, 'categoryWithWorkflows']);
+
+});
+
     Route::get('/project/details', [FreelancerScraperController::class, 'scrape']);
     Route::get('/workflows/stats', [WorkflowLibraryController::class, 'stats']);
     Route::post('/workflow/view', [WorkflowLibraryController::class, 'trackView']);
     Route::get('/workflow/share', [WorkflowLibraryController::class, 'shareUrl']);
 
     // Public Workflow Library
-    Route::get('/workflow-library', [WorkflowLibraryController::class, 'index']);
     Route::get('/workflow-library/categories', [WorkflowLibraryController::class, 'categories']);
     Route::get('/workflow-library/features', [WorkflowLibraryController::class, 'features']);
     Route::get('/workflow-library/{slug}', [WorkflowLibraryController::class, 'show']);
@@ -110,10 +115,7 @@ Route::middleware(['verify.app.key'])->group(function () {
     Route::get('/page-slugs', [PublicPageController::class, 'slugs']); // Lightweight check
     Route::get('/page', [PublicPageController::class, 'show']);
 
-    Route::get('/pagebody/{slug}', [PublicPageController::class, 'show']); // Added for frontend compatibility
-});
-
-
+    Route::get('/pagebody/{slug}', [PublicPageController::class, 'show']);
 
 // Public Language Initialization
 Route::get('/public/language-init', [\App\Http\Controllers\Api\Public\LanguageController::class, 'init']);
