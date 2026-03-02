@@ -70,33 +70,25 @@ class ImportN8nWorkflowsCommand extends Command
 
                 $workflowData = array_combine($header, $row);
 
-                // ── URL Resolution (priority order) ──────────────────────────────────────────
-                // 1. RAW JSON URL / JSON URL / URL / DIRECT WORKFLOW URL / WORKFLOW URL
+                // ── URL Resolution ────────────────────────────────────────────────────────
                 $externalId = $workflowData['ID'] ?? null;
-                $jsonUrl = null;
-                foreach (['RAW JSON URL', 'JSON URL', 'URL', 'DIRECT WORKFLOW URL', 'WORKFLOW URL'] as $col) {
-                    $candidate = trim($workflowData[$col] ?? '');
-                    if (!empty($candidate) && str_starts_with($candidate, 'http')) {
-                        $jsonUrl = $candidate;
-                        break;
-                    }
+                $jsonUrl    = null;
+
+                // 1. JSON URL — only accept if it is the n8n official API
+                $candidateJson = trim($workflowData['JSON URL'] ?? $workflowData['RAW JSON URL'] ?? '');
+                if (str_contains($candidateJson, 'api.n8n.io/api/templates')) {
+                    $jsonUrl = $candidateJson;
                 }
 
-                // 2. Fallback: TEMPLATE URL column
+                // 2. Fallback: Template URL — only accept direct file CDN (files.manuscdn.com)
                 if (empty($jsonUrl)) {
-                    $templateUrl = trim($workflowData['TEMPLATE URL'] ?? '');
-                    if (!empty($templateUrl) && str_starts_with($templateUrl, 'http')) {
-                        // Convert n8n.io/workflows/{id} page URL → API URL
-                        if (preg_match('#n8n\.io/workflows/(\d+)#', $templateUrl, $m)) {
-                            $jsonUrl = 'https://api.n8n.io/api/templates/workflows/' . $m[1];
-                        } else {
-                            // Any other direct URL (e.g. GitHub raw) — use as-is
-                            $jsonUrl = $templateUrl;
-                        }
+                    $candidateTemplate = trim($workflowData['TEMPLATE URL'] ?? '');
+                    if (str_contains($candidateTemplate, 'files.manuscdn.com')) {
+                        $jsonUrl = $candidateTemplate;
                     }
                 }
 
-                // Must have a valid URL to continue
+                // Skip row if no valid URL found
                 if (empty($jsonUrl)) {
                     $stats['skipped_invalid_url']++;
                     continue;
