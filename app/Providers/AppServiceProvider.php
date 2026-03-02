@@ -28,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
 
             // 1. Check if the IP is persistently blocked (long-term)
             if (\Illuminate\Support\Facades\Cache::get("permanently_blocked_{$ip}")) {
-                return Limit::perMinute(0)->by($ip)->response(function () {
+                return Limit::perMinute(60)->by($ip)->response(function () {
                     return response()->json([
                         'message' => 'Your IP has been flagged for suspicious activity and is temporarily blocked.'
                     ], 403);
