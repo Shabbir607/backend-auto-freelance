@@ -61,12 +61,18 @@ class Blog extends Model
             return null;
         }
 
-        // If it's already a full URL (starts with http:// or https://), return as is
-        if (str_starts_with($this->image, 'http://') || str_starts_with($this->image, 'https://')) {
-            return $this->image;
+        // Fix locally generated URLs stored in DB over time
+        $url = $this->image;
+        if (str_contains($url, 'localhost')) {
+            $url = str_replace(['http://localhost', 'https://localhost'], 'https://api.edgelancer.com', $url);
         }
 
-        // If it's a storage path, use the public disk
-        return Storage::disk('public')->url($this->image);
+        // If it's already a full URL (starts with http:// or https://), return as is
+        if (str_starts_with($url, 'http://') || str_starts_with($url, 'https://')) {
+            return $url;
+        }
+
+        // If it's a storage path, use the public disk explicitly attached to production domain
+        return 'https://api.edgelancer.com/storage/' . ltrim($url, '/');
     }
 }

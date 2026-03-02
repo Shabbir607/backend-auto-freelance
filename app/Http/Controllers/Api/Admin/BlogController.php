@@ -96,7 +96,7 @@ class BlogController extends Controller
             $this->ensureBlogImageDirectory();
             $file = $request->file('image_url');
             $extension = $file->getClientOriginalExtension() ?: 'jpg';
-            $fileName = $slug . '-' . time() . '.' . $extension;
+            $fileName = $slug . '.' . $extension;
             $path = $file->storeAs('blogs', $fileName, 'public');
             // Store absolute production URL in the DB
             $validated['image'] = 'https://api.edgelancer.com/storage/' . $path;
@@ -175,7 +175,7 @@ class BlogController extends Controller
             $extension = $file->getClientOriginalExtension() ?: 'jpg';
             // Use slug if available, otherwise blog title slug
             $fileSlug = isset($validated['title']) ? Str::slug($validated['title']) : Str::slug($blog->title);
-            $fileName = $fileSlug . '-' . time() . '.' . $extension;
+            $fileName = $fileSlug . '.' . $extension;
             $path = $file->storeAs('blogs', $fileName, 'public');
             $newImage = 'https://api.edgelancer.com/storage/' . $path;
         } elseif ($request->filled('image_url') && is_string($request->image_url) && !empty($request->image_url)) {
@@ -188,10 +188,14 @@ class BlogController extends Controller
 
         // If a new image was provided, handle cleanup and update
         if ($newImage !== null) {
-            // Forcefully delete old local file if there was one
+            // Forcefully delete old local file if there was one, but ONLY if the filename is different from the new one
             if (!empty($blog->image)) {
-                $oldPath = 'blogs/' . basename($blog->image);
-                \Illuminate\Support\Facades\Storage::disk('public')->delete($oldPath);
+                $oldBasename = basename($blog->image);
+                $newBasename = basename($newImage);
+                if ($oldBasename !== $newBasename) {
+                    $oldPath = 'blogs/' . $oldBasename;
+                    \Illuminate\Support\Facades\Storage::disk('public')->delete($oldPath);
+                }
             }
             $validated['image'] = $newImage;
         }
