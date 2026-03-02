@@ -95,8 +95,8 @@ class BlogController extends Controller
         if ($request->hasFile('image_url')) {
             $this->ensureBlogImageDirectory();
             $path = $request->file('image_url')->store('blogs', 'public');
-            // Store absolute URL in the DB
-            $validated['image'] = \Illuminate\Support\Facades\Storage::disk('public')->url($path);
+            // Store absolute production URL in the DB
+            $validated['image'] = 'https://api.edgelancer.com/storage/' . $path;
         } elseif ($request->filled('image_url') && is_string($request->image_url)) {
             // Priority to image field if it's a string URL
             $validated['image'] = $request->image_url;
@@ -169,7 +169,7 @@ class BlogController extends Controller
         if ($request->hasFile('image_url')) {
             $this->ensureBlogImageDirectory();
             $path = $request->file('image_url')->store('blogs', 'public');
-            $newImage = \Illuminate\Support\Facades\Storage::disk('public')->url($path);
+            $newImage = 'https://api.edgelancer.com/storage/' . $path;
         } elseif ($request->filled('image_url') && is_string($request->image_url) && !empty($request->image_url)) {
             // Check if it's a new string value (not the existing one)
             if ($request->image_url !== $blog->image) {

@@ -84,42 +84,13 @@ public function store(Request $request)
     $data['json_file_name'] = null;
     $data['json_file_path'] = null;
 
-    // ✅ 1) If URL provided → download and store it as json_file locally
+    // ✅ 1) If URL provided → store it as json_file
     if ($request->filled('json_file_url')) {
+
         $url = $request->json_file_url;
-        
-        try {
-            $response = \Illuminate\Support\Facades\Http::timeout(30)->get($url);
-            if ($response->successful()) {
-                $rawResponse = $response->body();
-                $jsonData = $rawResponse;
 
-                // Unpack if it's from n8n API
-                if (str_contains($url, 'api.n8n.io/api/templates')) {
-                    $parsed = json_decode($rawResponse, true);
-                    if (isset($parsed['workflow']['workflow'])) {
-                        $jsonData = json_encode($parsed['workflow']['workflow'], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-                    }
-                }
-
-                // Generate filename
-                $baseName = basename(parse_url($url, PHP_URL_PATH));
-                if (empty($baseName) || !str_ends_with($baseName, '.json')) {
-                    $baseName = 'workflow_' . time() . '.json';
-                } else {
-                    $baseName = time() . '_' . $baseName;
-                }
-
-                // Save to local disk
-                $path = 'workflows/' . $baseName;
-                \Illuminate\Support\Facades\Storage::disk('public')->put($path, $jsonData);
-
-                $data['json_file_name'] = $baseName;
-                $data['json_file_path'] = asset('storage/' . $path);
-            }
-        } catch (\Exception $e) {
-            \Illuminate\Support\Facades\Log::error("Failed to download workflow JSON from URL: " . $e->getMessage());
-        }
+        $data['json_file_name'] = basename(parse_url($url, PHP_URL_PATH));
+        $data['json_file_path'] = $url;
 
     }
     // ✅ 2) Else if file uploaded → keep your old logic
@@ -131,7 +102,7 @@ public function store(Request $request)
         $path = $file->storeAs('workflows', $storedFileName, 'public');
 
         $data['json_file_name'] = $storedFileName; // ✅ EXACT name
-        $data['json_file_path'] = asset('storage/' . $path);
+        $data['json_file_path'] = 'https://api.edgelancer.com/storage/' . $path;
     }
 
     /**
@@ -196,7 +167,6 @@ public function store(Request $request)
 
             'json_data' => 'nullable|array',
             'json_file' => 'nullable|file|mimes:json,txt,application/json|max:10240',
-            'json_file_url' => 'nullable|url',
 
             'workflow_features' => 'nullable|array',
             'workflow_nodes' => 'nullable|array',
@@ -238,47 +208,7 @@ public function store(Request $request)
         /**
          * Replace JSON file
          */
-        if ($request->filled('json_file_url')) {
-            if ($workflow->json_file_path) {
-                $oldPath = str_replace(url('/storage') . '/', '', $workflow->json_file_path);
-                \Illuminate\Support\Facades\Storage::disk('public')->delete($oldPath);
-            }
-
-            $url = $request->json_file_url;
-            try {
-                $response = \Illuminate\Support\Facades\Http::timeout(30)->get($url);
-                if ($response->successful()) {
-                    $rawResponse = $response->body();
-                    $jsonData = $rawResponse;
-
-                    // Unpack if it's from n8n API
-                    if (str_contains($url, 'api.n8n.io/api/templates')) {
-                        $parsed = json_decode($rawResponse, true);
-                        if (isset($parsed['workflow']['workflow'])) {
-                            $jsonData = json_encode($parsed['workflow']['workflow'], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-                        }
-                    }
-
-                    // Generate filename
-                    $baseName = basename(parse_url($url, PHP_URL_PATH));
-                    if (empty($baseName) || !str_ends_with($baseName, '.json')) {
-                        $baseName = 'workflow_' . time() . '.json';
-                    } else {
-                        $baseName = time() . '_' . $baseName;
-                    }
-
-                    // Save to local disk
-                    $path = 'workflows/' . $baseName;
-                    \Illuminate\Support\Facades\Storage::disk('public')->put($path, $jsonData);
-
-                    $data['json_file_name'] = $baseName;
-                    $data['json_file_path'] = asset('storage/' . $path);
-                }
-            } catch (\Exception $e) {
-                \Illuminate\Support\Facades\Log::error("Failed to download workflow JSON from URL in update: " . $e->getMessage());
-            }
-
-        } elseif ($request->hasFile('json_file')) {
+        if ($request->hasFile('json_file')) {
 
             if ($workflow->json_file_path) {
                 $oldPath = str_replace(url('/storage') . '/', '', $workflow->json_file_path);
@@ -290,7 +220,7 @@ public function store(Request $request)
             $path = $file->storeAs('workflows', $fileName, 'public');
 
             $data['json_file_name'] = $file->getClientOriginalName();
-            $data['json_file_path'] = url(Storage::url($path));
+            $data['json_file_path'] = 'https://api.edgelancer.com/storage/' . $path;
         }
 
         /**
