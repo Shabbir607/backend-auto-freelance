@@ -15,6 +15,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ProcessN8nWorkflowJob implements ShouldQueue
@@ -65,34 +66,88 @@ class ProcessN8nWorkflowJob implements ShouldQueue
             return;
         }
 
-        // Fetch JSON from the n8n API
+        // ── Fetch JSON from the URL ────────────────────────────────────────────────
         $response = Http::timeout(60)->get($jsonUrl);
         if (!$response->successful()) {
             throw new Exception("Failed to fetch JSON data for workflow {$name} from {$jsonUrl}");
         }
 
         $rawResponse = $response->body();
-        $jsonData = $rawResponse;
-        
-        // N8N Official API Support (Nested JSON)
+        $jsonData    = $rawResponse;   // default: treat body as the workflow JSON
+        $recentViews = 0;
+        $nodeCount   = 0;
+        $nodeTypes   = [];
+
+        // ── n8n Official Templates API: https://api.n8n.io/api/templates/workflows/{id} ──
         if (str_contains($jsonUrl, 'api.n8n.io/api/templates/workflows')) {
             $parsed = json_decode($rawResponse, true);
+
             if (isset($parsed['workflow'])) {
-                // Actual workflow JSON is nested
-                $jsonData = json_encode($parsed['workflow']['workflow'] ?? $parsed['workflow']);
-                // Override metadata from official source if available
-                $name = $parsed['workflow']['name'] ?? $name;
-                $views = $parsed['workflow']['stats']['totalViews'] ?? $views;
-                
-                // Extract categories if missing from CSV
-                if (!empty($parsed['workflow']['categories']) && is_array($parsed['workflow']['categories'])) {
-                    $officialCategories = array_column($parsed['workflow']['categories'], 'name');
+                $wf = $parsed['workflow'];
+
+                // Override metadata from the official API source
+                $name        = $wf['name']        ?? $name;
+                $views       = $wf['totalViews']   ?? ($wf['stats']['totalViews'] ?? $views);
+                $recentViews = $wf['recentViews']  ?? 0;
+
+                // Extract categories from API if not in CSV
+                if (!empty($wf['categories']) && is_array($wf['categories'])) {
+                    $officialCategories = array_column($wf['categories'], 'name');
                     $categoriesString = implode('|', $officialCategories);
                 }
+
+                // Node metadata from workflowInfo
+                $nodeCount = $wf['workflowInfo']['nodeCount'] ?? 0;
+                if (!empty($wf['workflowInfo']['nodeTypes']) && is_array($wf['workflowInfo']['nodeTypes'])) {
+                    $nodeTypes = array_keys($wf['workflowInfo']['nodeTypes']);
+                }
+
+                // Extract the ACTUAL workflow JSON (nodes + connections)
+                if (!empty($wf['workflow'])) {
+                    $jsonData = json_encode($wf['workflow'], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+                } else {
+                    // workflow.workflow is null — try Template URL from CSV as fallback
+                    $templateUrl = trim($this->workflowRow['TEMPLATE URL'] ?? '');
+                    if (!empty($templateUrl)
+                        && str_starts_with($templateUrl, 'http')
+                        && !str_contains($templateUrl, 'n8n.io/workflows')
+                    ) {
+                        $tfResponse = Http::timeout(30)->get($templateUrl);
+                        if ($tfResponse->successful()) {
+                            $jsonData = $tfResponse->body();
+                        }
+                    }
+                    // If still no usable JSON, log and abort
+                    if (empty($jsonData) || $jsonData === 'null') {
+                        Log::warning("No workflow JSON available for: {$name} ({$jsonUrl})");
+                        return;
+                    }
+                }
+
+                unset($wf, $parsed);
             }
-            unset($parsed); // Memory optimization
         }
-        unset($rawResponse); // Memory optimization
+        unset($rawResponse);
+
+        // ── Save workflow JSON as a file on the server ─────────────────────────────
+        $cleanId       = str_replace('.json', '', $id);          // strip .json from ID if present
+        $cleanNameSlug = Str::slug(str_replace(['.json', '_'], ['', ' '], $name));
+        $jsonFileName  = $cleanNameSlug . '-' . Str::slug($cleanId) . '.json';
+        $jsonStorageDir = 'workflows';
+
+        // Ensure directory exists with proper permissions
+        $fullStorageDir = storage_path('app/public/' . $jsonStorageDir);
+        if (!is_dir($fullStorageDir)) {
+            mkdir($fullStorageDir, 0755, true);
+        }
+
+        // Write the file
+        $fullFilePath    = $fullStorageDir . '/' . $jsonFileName;
+        file_put_contents($fullFilePath, $jsonData);
+        @chmod($fullFilePath, 0644);
+
+        // Relative path stored in DB (accessible via Storage::url() / asset())
+        $jsonFileRelPath = $jsonStorageDir . '/' . $jsonFileName;
 
         // Check deduplication early
         $existingWorkflow = Workflow::where('external_id', $id)->first();
@@ -142,16 +197,21 @@ class ProcessN8nWorkflowJob implements ShouldQueue
         $workflow = Workflow::updateOrCreate(
             ['external_id' => $id],
             [
-                'title' => $name,
-                'slug' => $workflowSlug,
-                'category_id' => $category->id,
-                'description' => $aiData['workflow_description_summary'] ?? '',
-                'views' => (int)$views,
-                'json_data' => $jsonData,
-                'json_file_path' => $jsonUrl,
-                'status' => 'published',
-                'meta_title' => substr($aiData['seo_title'] ?? $name, 0, 255),
-                'meta_description' => $aiData['meta_description'] ?? ''
+                'title'            => $name,
+                'slug'             => $workflowSlug,
+                'category_id'      => $category->id,
+                'description'      => $aiData['workflow_description_summary'] ?? '',
+                'views'            => (int) $views,
+                'recent_views'     => (int) $recentViews,
+                'total_views'      => (int) $views,
+                'nodes_count'      => (int) $nodeCount,
+                'workflow_nodes'   => !empty($nodeTypes) ? $nodeTypes : null,
+                'json_data'        => $jsonData,
+                'json_file_name'   => $jsonFileName,
+                'json_file_path'   => $jsonFileRelPath,
+                'status'           => 'published',
+                'meta_title'       => substr($aiData['seo_title'] ?? $name, 0, 255),
+                'meta_description' => $aiData['meta_description'] ?? '',
             ]
         );
         unset($jsonData); // Free memory now that it is saved

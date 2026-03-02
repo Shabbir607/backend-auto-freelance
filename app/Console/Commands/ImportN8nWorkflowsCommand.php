@@ -13,7 +13,7 @@ class ImportN8nWorkflowsCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'n8n:import-workflows {--file=storage/app/private/n8n-workflows-templates-main/n8n_templates_scraped.csv} {--prompt=} {--limit=0}';
+    protected $signature = 'n8n:import-workflows {--file=storage/app/private/n8n_workflows_MASTER_PRODUCTION.csv} {--prompt=} {--limit=0} {--skip-pushed}';
 
     /**
      * The console command description.
@@ -74,9 +74,34 @@ class ImportN8nWorkflowsCommand extends Command
                 $externalId = $workflowData['ID'] ?? null;
                 $jsonUrl = $workflowData['RAW JSON URL'] ?? $workflowData['JSON URL'] ?? $workflowData['URL'] ?? $workflowData['DIRECT WORKFLOW URL'] ?? $workflowData['WORKFLOW URL'] ?? null;
 
-                if (empty($jsonUrl) || !filter_var($jsonUrl, FILTER_VALIDATE_URL)) {
+                // Fallback: if main URL is empty, try Template URL
+                if (empty($jsonUrl) || !str_starts_with($jsonUrl, 'http')) {
+                    $templateUrl = trim($workflowData['TEMPLATE URL'] ?? '');
+                    if (!empty($templateUrl) && str_starts_with($templateUrl, 'http')) {
+                        // Convert n8n.io/workflows/{id} page URL → API URL
+                        if (preg_match('#n8n\.io/workflows/(\d+)#', $templateUrl, $m)) {
+                            $jsonUrl = 'https://api.n8n.io/api/templates/workflows/' . $m[1];
+                        } elseif (!str_contains($templateUrl, 'n8n.io/workflows')) {
+                            // Direct file or API URL — use as-is
+                            $jsonUrl = $templateUrl;
+                        }
+                        // else: generic n8n.io/workflows page without ID → skip
+                    }
+                }
+
+                // Final URL check — must be a valid http(s) URL
+                if (empty($jsonUrl) || !str_starts_with($jsonUrl, 'http')) {
                     $stats['skipped_invalid_url']++;
                     continue;
+                }
+
+                // Optionally skip rows already marked as pushed in the CSV
+                if ($this->option('skip-pushed')) {
+                    $csvStatus = strtolower(trim($workflowData['STATUS'] ?? ''));
+                    if ($csvStatus === 'pushed') {
+                        $stats['skipped_exists_external_id']++;
+                        continue;
+                    }
                 }
 
                 if ($externalId && \App\Models\Workflow::where('external_id', $externalId)->exists()) {
