@@ -49,7 +49,7 @@ class BlogController extends Controller
         return response()->json([
             'success' => true,
             'data' => $blogs,
-        ]);
+        ], 200, [], JSON_UNESCAPED_SLASHES);
     }
 
     /**
@@ -94,7 +94,10 @@ class BlogController extends Controller
         // Handle image upload or direct image string
         if ($request->hasFile('image_url')) {
             $this->ensureBlogImageDirectory();
-            $path = $request->file('image_url')->store('blogs', 'public');
+            $file = $request->file('image_url');
+            $extension = $file->getClientOriginalExtension() ?: 'jpg';
+            $fileName = $slug . '-' . time() . '.' . $extension;
+            $path = $file->storeAs('blogs', $fileName, 'public');
             // Store absolute production URL in the DB
             $validated['image'] = 'https://api.edgelancer.com/storage/' . $path;
         } elseif ($request->filled('image_url') && is_string($request->image_url)) {
@@ -116,7 +119,7 @@ class BlogController extends Controller
             'success' => true,
             'message' => 'Blog created successfully',
             'data' => $blog->load('category'),
-        ], 201);
+        ], 201, [], JSON_UNESCAPED_SLASHES);
     }
 
     /**
@@ -129,7 +132,7 @@ class BlogController extends Controller
         return response()->json([
             'success' => true,
             'data' => $blog,
-        ]);
+        ], 200, [], JSON_UNESCAPED_SLASHES);
     }
 
     /**
@@ -168,7 +171,12 @@ class BlogController extends Controller
         // Determine if a new image is provided (File > image string)
         if ($request->hasFile('image_url')) {
             $this->ensureBlogImageDirectory();
-            $path = $request->file('image_url')->store('blogs', 'public');
+            $file = $request->file('image_url');
+            $extension = $file->getClientOriginalExtension() ?: 'jpg';
+            // Use slug if available, otherwise blog title slug
+            $fileSlug = isset($validated['title']) ? Str::slug($validated['title']) : Str::slug($blog->title);
+            $fileName = $fileSlug . '-' . time() . '.' . $extension;
+            $path = $file->storeAs('blogs', $fileName, 'public');
             $newImage = 'https://api.edgelancer.com/storage/' . $path;
         } elseif ($request->filled('image_url') && is_string($request->image_url) && !empty($request->image_url)) {
             // Check if it's a new string value (not the existing one)
@@ -210,7 +218,7 @@ class BlogController extends Controller
             'success' => true,
             'message' => 'Blog updated successfully',
             'data' => $blog->load('category'),
-        ]);
+        ], 200, [], JSON_UNESCAPED_SLASHES);
     }
 
     /**

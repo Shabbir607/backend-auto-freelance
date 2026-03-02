@@ -21,7 +21,7 @@ class WorkflowController extends Controller
             'data' => Workflow::with('category')
                 ->orderByDesc('created_at')
                 ->paginate($request->get('per_page', 20))
-        ]);
+        ], 200, [], JSON_UNESCAPED_SLASHES);
     }
 
  /**
@@ -133,7 +133,7 @@ public function store(Request $request)
         'success' => true,
         'message' => 'Workflow created successfully',
         'data' => $workflow
-    ], 201);
+    ], 201, [], JSON_UNESCAPED_SLASHES);
 }
 
 
@@ -145,7 +145,7 @@ public function store(Request $request)
         return response()->json([
             'success' => true,
             'data' => Workflow::with('category')->findOrFail($id)
-        ]);
+        ], 200, [], JSON_UNESCAPED_SLASHES);
     }
 
     /**
@@ -251,7 +251,7 @@ public function store(Request $request)
             'success' => true,
             'message' => 'Workflow updated successfully',
             'data' => $workflow
-        ]);
+        ], 200, [], JSON_UNESCAPED_SLASHES);
     }
 
     /**
