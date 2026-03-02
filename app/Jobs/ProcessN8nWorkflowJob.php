@@ -106,18 +106,35 @@ class ProcessN8nWorkflowJob implements ShouldQueue
                 if (!empty($wf['workflow'])) {
                     $jsonData = json_encode($wf['workflow'], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
                 } else {
-                    // workflow.workflow is null — try Template URL from CSV as fallback
+                    // workflow.workflow is null — resolve Template URL as fallback
                     $templateUrl = trim($this->workflowRow['TEMPLATE URL'] ?? '');
-                    if (!empty($templateUrl)
-                        && str_starts_with($templateUrl, 'http')
-                        && !str_contains($templateUrl, 'n8n.io/workflows')
-                    ) {
-                        $tfResponse = Http::timeout(30)->get($templateUrl);
-                        if ($tfResponse->successful()) {
-                            $jsonData = $tfResponse->body();
+                    $fallbackUrl = null;
+
+                    if (!empty($templateUrl) && str_starts_with($templateUrl, 'http')) {
+                        // Convert n8n.io/workflows/{id} page URL → API URL
+                        if (preg_match('#n8n\.io/workflows/(\d+)#', $templateUrl, $m)) {
+                            $fallbackUrl = 'https://api.n8n.io/api/templates/workflows/' . $m[1];
+                        } else {
+                            // Direct raw/file URL — use as-is
+                            $fallbackUrl = $templateUrl;
                         }
                     }
-                    // If still no usable JSON, log and abort
+
+                    if ($fallbackUrl) {
+                        $tfResponse = Http::timeout(30)->get($fallbackUrl);
+                        if ($tfResponse->successful()) {
+                            $tfParsed = json_decode($tfResponse->body(), true);
+                            // Handle nested n8n API response or plain JSON
+                            if (isset($tfParsed['workflow']['workflow'])) {
+                                $jsonData = json_encode($tfParsed['workflow']['workflow'], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+                            } else {
+                                $jsonData = $tfResponse->body();
+                            }
+                            unset($tfParsed);
+                        }
+                    }
+
+                    // If still no usable JSON, log and skip this row
                     if (empty($jsonData) || $jsonData === 'null') {
                         Log::warning("No workflow JSON available for: {$name} ({$jsonUrl})");
                         return;

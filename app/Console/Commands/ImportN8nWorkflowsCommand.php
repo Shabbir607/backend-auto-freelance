@@ -70,27 +70,34 @@ class ImportN8nWorkflowsCommand extends Command
 
                 $workflowData = array_combine($header, $row);
 
-                // Check if already imported in database instead of CSV status
+                // ── URL Resolution (priority order) ──────────────────────────────────────────
+                // 1. RAW JSON URL / JSON URL / URL / DIRECT WORKFLOW URL / WORKFLOW URL
                 $externalId = $workflowData['ID'] ?? null;
-                $jsonUrl = $workflowData['RAW JSON URL'] ?? $workflowData['JSON URL'] ?? $workflowData['URL'] ?? $workflowData['DIRECT WORKFLOW URL'] ?? $workflowData['WORKFLOW URL'] ?? null;
+                $jsonUrl = null;
+                foreach (['RAW JSON URL', 'JSON URL', 'URL', 'DIRECT WORKFLOW URL', 'WORKFLOW URL'] as $col) {
+                    $candidate = trim($workflowData[$col] ?? '');
+                    if (!empty($candidate) && str_starts_with($candidate, 'http')) {
+                        $jsonUrl = $candidate;
+                        break;
+                    }
+                }
 
-                // Fallback: if main URL is empty, try Template URL
-                if (empty($jsonUrl) || !str_starts_with($jsonUrl, 'http')) {
+                // 2. Fallback: TEMPLATE URL column
+                if (empty($jsonUrl)) {
                     $templateUrl = trim($workflowData['TEMPLATE URL'] ?? '');
                     if (!empty($templateUrl) && str_starts_with($templateUrl, 'http')) {
                         // Convert n8n.io/workflows/{id} page URL → API URL
                         if (preg_match('#n8n\.io/workflows/(\d+)#', $templateUrl, $m)) {
                             $jsonUrl = 'https://api.n8n.io/api/templates/workflows/' . $m[1];
-                        } elseif (!str_contains($templateUrl, 'n8n.io/workflows')) {
-                            // Direct file or API URL — use as-is
+                        } else {
+                            // Any other direct URL (e.g. GitHub raw) — use as-is
                             $jsonUrl = $templateUrl;
                         }
-                        // else: generic n8n.io/workflows page without ID → skip
                     }
                 }
 
-                // Final URL check — must be a valid http(s) URL
-                if (empty($jsonUrl) || !str_starts_with($jsonUrl, 'http')) {
+                // Must have a valid URL to continue
+                if (empty($jsonUrl)) {
                     $stats['skipped_invalid_url']++;
                     continue;
                 }
