@@ -78,40 +78,40 @@ Route::post('/ip/validate', [IpController::class, 'validateIp']);
 // Webhooks
 Route::post('webhook/freelancer', [WebhookController::class, 'handle']);
 Route::get('web/faqs', [PublicFaqController::class, 'index']);
-// Public Scraper
-Route::get('/project/details', [FreelancerScraperController::class, 'scrape']);
-Route::get('/workflows/stats', [WorkflowLibraryController::class, 'stats']);
-Route::post('/workflow/view', [WorkflowLibraryController::class, 'trackView']);
-Route::get('/workflow/share', [WorkflowLibraryController::class, 'shareUrl']);
+Route::middleware(['verify.app.key'])->group(function () {
+    // Public Scraper
+    Route::get('/project/details', [FreelancerScraperController::class, 'scrape']);
+    Route::get('/workflows/stats', [WorkflowLibraryController::class, 'stats']);
+    Route::post('/workflow/view', [WorkflowLibraryController::class, 'trackView']);
+    Route::get('/workflow/share', [WorkflowLibraryController::class, 'shareUrl']);
 
-// Public Workflow Library
-Route::get('/workflow-library', [WorkflowLibraryController::class, 'index']);
-Route::get('/workflow-library/categories', [WorkflowLibraryController::class, 'categories']);
-Route::get('/workflow-library/features', [WorkflowLibraryController::class, 'features']);
-Route::get('/workflow-library/{slug}', [WorkflowLibraryController::class, 'show']);
-Route::get('/workflow-categories', [WorkflowLibraryController::class, 'categoryList']);
+    // Public Workflow Library
+    Route::get('/workflow-library', [WorkflowLibraryController::class, 'index']);
+    Route::get('/workflow-library/categories', [WorkflowLibraryController::class, 'categories']);
+    Route::get('/workflow-library/features', [WorkflowLibraryController::class, 'features']);
+    Route::get('/workflow-library/{slug}', [WorkflowLibraryController::class, 'show']);
+    Route::get('/workflow-categories', [WorkflowLibraryController::class, 'categoryList']);
 
-Route::get('/workflows', [WorkflowLibraryController::class, 'workflowsByCategory']);
+    Route::get('/workflows', [WorkflowLibraryController::class, 'workflowsByCategory']);
 
-Route::get('/workflow-category/{slug}', [WorkflowLibraryController::class, 'categoryWithWorkflows']);
+    Route::get('/workflow-category/{slug}', [WorkflowLibraryController::class, 'categoryWithWorkflows']);
 
-Route::get('/workflow/{slug}/related', [WorkflowLibraryController::class, 'relevantWorkflows']);
-Route::post('/workflow/{slug}/reviews', [WorkflowLibraryController::class, 'storeReview']);
-Route::get('/workflow/top-view', [WorkflowLibraryController::class, 'topViewWorkflow']);
+    Route::get('/workflow/{slug}/related', [WorkflowLibraryController::class, 'relevantWorkflows']);
+    Route::post('/workflow/{slug}/reviews', [WorkflowLibraryController::class, 'storeReview']);
+    Route::get('/workflow/top-view', [WorkflowLibraryController::class, 'topViewWorkflow']);
 
-// Route::get('/workflow-library/{slug}/deploy', [WorkflowLibraryController::class, 'deploy']); // Optional: secure deploy endpoint
+    // Public Blog Routes
+    Route::get('/blogs', [PublicBlogController::class, 'index']);
+    Route::get('/blogs/categories', [PublicBlogController::class, 'categories']);
+    Route::get('/blogs/{slug}', [PublicBlogController::class, 'show']);
+    Route::get('/blog/share', [PublicBlogController::class, 'share']);
 
-// Public Blog Routes
-Route::get('/blogs', [PublicBlogController::class, 'index']);
-Route::get('/blogs/categories', [PublicBlogController::class, 'categories']);
-Route::get('/blogs/{slug}', [PublicBlogController::class, 'show']);
-Route::get('/blog/share', [PublicBlogController::class, 'share']);
+    // Public Page Routes
+    Route::get('/page-slugs', [PublicPageController::class, 'slugs']); // Lightweight check
+    Route::get('/page', [PublicPageController::class, 'show']);
 
-// Public Page Routes
-Route::get('/page-slugs', [PublicPageController::class, 'slugs']); // Lightweight check
-Route::get('/page', [PublicPageController::class, 'show']);
-
-Route::get('/pagebody/{slug}', [PublicPageController::class, 'show']); // Added for frontend compatibility
+    Route::get('/pagebody/{slug}', [PublicPageController::class, 'show']); // Added for frontend compatibility
+});
 
 
 

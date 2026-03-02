@@ -55,7 +55,7 @@ public function index(Request $request)
     {
         // Cache basic listing if no search/filters are applied
         $page = $request->input('page', 1);
-        $perPage = $request->input('per_page', 12); // Default to 12
+        $perPage = 12; // Strictly fixed at 12 to prevent scraping large datasets
         $sort = $request->input('sort', 'newest');
         
         $cacheKey = "workflow_list_p{$page}_pp{$perPage}_s{$sort}_" . md5(json_encode($request->all()));
@@ -131,7 +131,7 @@ public function categories(Request $request)
  */
 public function categoryList(Request $request)
 {
-    $perPage = $request->get('per_page', 10);
+    $perPage = 12; // Strictly fixed at 12
     $page = $request->get('page', 1);
     
     $cacheKey = "workflow_category_list_p{$page}_pp{$perPage}";
@@ -153,7 +153,7 @@ public function categoryList(Request $request)
 
 public function workflowsByCategory(Request $request)
 {
-    $perPage = $request->get('per_page', 12);
+    $perPage = 12; // Strictly fixed at 12
 
     $query = Workflow::where('status', 'published')
         ->with(['category', 'integrations', 'faqs']);
@@ -191,7 +191,7 @@ public function workflowsByCategory(Request $request)
 
 public function categoryWithWorkflows(Request $request, $slug)
 {
-    $perPage = $request->get('per_page', 12);
+    $perPage = 12; // Strictly fixed at 12
 
     $category = WorkflowCategory::where('slug', $slug)
         ->where('is_active', true)

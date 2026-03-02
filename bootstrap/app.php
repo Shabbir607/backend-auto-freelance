@@ -21,13 +21,18 @@ return Application::configure(basePath: dirname(__DIR__))
             'admin' => AdminMiddleware::class,
             'user' => UserMiddleware::class,
             'verify.account.ip' => VerifyAccountIp::class,
+            'verify.app.key' => \App\Http\Middleware\VerifyAppKey::class,
             'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
             'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
             'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
         ]);
         
+        $middleware->api(append: [
+            // SecurityHeaders::class, // Already appended below
+        ]);
+        
         // API Rate Limiting
-        $middleware->throttleApi('60,1');
+        $middleware->throttleApi('api');
         
         // Security Headers
         $middleware->append(SecurityHeaders::class);

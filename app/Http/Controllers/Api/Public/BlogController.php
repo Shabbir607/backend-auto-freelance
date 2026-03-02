@@ -17,7 +17,7 @@ class BlogController extends Controller
     public function index(Request $request)
     {
         $page = $request->get('page', 1);
-        $perPage = $request->get('per_page', 12);
+        $perPage = 12; // Strictly fixed at 12 to prevent scraping large datasets
         $search = $request->get('search', '');
         $category = $request->get('category', '');
 
@@ -108,7 +108,7 @@ class BlogController extends Controller
                             'dateModified' => $blog->updated_at?->toIso8601String(),
                             'author' => [
                                 '@type' => 'Person',
-                                'name' => $blog->author->name ?? 'Admin',
+                                'name' =>  'Dev Shabbir',
                             ],
                             'publisher' => [
                                 '@type' => 'Organization',
