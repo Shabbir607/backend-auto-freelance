@@ -40,9 +40,9 @@ class AppServiceProvider extends ServiceProvider
                 return [
                     // If they hit 10/min, we block them for 7 days
                     Limit::perMinute(20)->by($ip)->response(function () use ($ip) {
-                        \Illuminate\Support\Facades\Cache::put("permanently_blocked_{$ip}", true, now()->addDays(7));
+                        \Illuminate\Support\Facades\Cache::put("permanently_blocked_{$ip}", true, now()->addMinutes(10));
                         return response()->json([
-                            'message' => 'Rate limit exceeded. Your IP has been blocked for 7 days.'
+                            'message' => 'Rate limit exceeded. Your IP has been blocked'
                         ], 403);
                     }),
                    
