@@ -63,8 +63,7 @@ class BlogController extends Controller
             'title'             => 'required|string|max:255|unique:blogs,title',
             'description'       => 'required|string|max:500',
             'content'           => 'required|string',
-            'image'             => 'nullable', // Allow file upload
-            'image_url'         => 'nullable|string', // Allow direct URL
+            'image'             => 'nullable', // Allow file upload OR direct string URL
             'meta_title'        => 'nullable|string|max:255',
             'meta_description'  => 'nullable|string',
             'meta_keywords'     => 'nullable|string',
@@ -92,18 +91,17 @@ class BlogController extends Controller
             ], 409);
         }
 
-        // Handle image upload, direct image_url, or image string
+        // Handle image upload or direct image string
         if ($request->hasFile('image')) {
             $this->ensureBlogImageDirectory();
             $path = $request->file('image')->store('blogs', 'public');
             // Store absolute URL in the DB
             $validated['image'] = Storage::disk('public')->url($path);
-        } elseif ($request->filled('image_url')) {
-            // Priority to image_url if provided
-            $validated['image'] = $request->image_url;
         } elseif ($request->filled('image') && is_string($request->image)) {
-            // Fallback to image field if it's a string
+            // Priority to image field if it's a string URL
             $validated['image'] = $request->image;
+        } else {
+            unset($validated['image']); // Remove from validated array if empty/null
         }
 
         $validated['slug'] = $slug;
@@ -147,8 +145,7 @@ class BlogController extends Controller
             'title'             => 'sometimes|required|string|max:255|unique:blogs,title,' . $id,
             'description'       => 'sometimes|required|string|max:500',
             'content'           => 'sometimes|required|string',
-            'image'             => 'nullable', // Allow file upload
-            'image_url'         => 'nullable|string', // Allow direct URL
+            'image'             => 'nullable', // Allow file upload OR direct string URL
             'meta_title'        => 'nullable|string|max:255',
             'meta_description'  => 'nullable|string',
             'meta_keywords'     => 'nullable|string',
@@ -169,13 +166,11 @@ class BlogController extends Controller
         // Initialize new image variable
         $newImage = null;
 
-        // Determine if a new image is provided (File > image_url > image string)
+        // Determine if a new image is provided (File > image string)
         if ($request->hasFile('image')) {
             $this->ensureBlogImageDirectory();
             $path = $request->file('image')->store('blogs', 'public');
             $newImage = Storage::disk('public')->url($path);
-        } elseif ($request->filled('image_url')) {
-            $newImage = $request->image_url;
         } elseif ($request->filled('image') && is_string($request->image) && !empty($request->image)) {
             // Check if it's a new string value (not the existing one)
             if ($request->image !== $blog->image) {
