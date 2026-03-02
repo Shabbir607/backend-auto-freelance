@@ -188,14 +188,10 @@ class BlogController extends Controller
 
         // If a new image was provided, handle cleanup and update
         if ($newImage !== null) {
-            // Try to delete old local file if it exists and we're changing it
-            if ($blog->image && str_contains($blog->image, 'storage/blogs')) {
-                // Correctly extract path for Storage::delete
-                // Example: http://domain.com/storage/blogs/xyz.jpg -> blogs/xyz.jpg
+            // Forcefully delete old local file if there was one
+            if (!empty($blog->image)) {
                 $oldPath = 'blogs/' . basename($blog->image);
-                if (Storage::disk('public')->exists($oldPath)) {
-                    Storage::disk('public')->delete($oldPath);
-                }
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($oldPath);
             }
             $validated['image'] = $newImage;
         }

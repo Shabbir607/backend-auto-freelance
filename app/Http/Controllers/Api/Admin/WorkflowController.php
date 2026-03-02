@@ -210,9 +210,9 @@ public function store(Request $request)
          */
         if ($request->hasFile('json_file')) {
 
-            if ($workflow->json_file_path) {
-                $oldPath = str_replace(url('/storage') . '/', '', $workflow->json_file_path);
-                Storage::disk('public')->delete($oldPath);
+            if (!empty($workflow->json_file_path)) {
+                $oldPath = 'workflows/' . basename($workflow->json_file_path);
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($oldPath);
             }
 
             $file = $request->file('json_file');
@@ -261,9 +261,9 @@ public function store(Request $request)
     {
         $workflow = Workflow::findOrFail($id);
 
-        if ($workflow->json_file_path) {
-            $path = str_replace(url('/storage') . '/', '', $workflow->json_file_path);
-            Storage::disk('public')->delete($path);
+        if (!empty($workflow->json_file_path)) {
+            $path = 'workflows/' . basename($workflow->json_file_path);
+            \Illuminate\Support\Facades\Storage::disk('public')->delete($path);
         }
 
         $workflow->delete();
