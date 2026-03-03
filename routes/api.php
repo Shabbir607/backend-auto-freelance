@@ -49,6 +49,8 @@ use App\Http\Controllers\Api\Admin\FaqController;
 use App\Http\Controllers\Api\Admin\PageController as AdminPageController;
 use App\Http\Controllers\Api\Public\PageController as PublicPageController;
 use App\Http\Controllers\Api\Public\FaqController as PublicFaqController;
+use App\Http\Controllers\Api\Public\SupportChatController;
+use App\Http\Controllers\Api\Admin\SupportChatController as AdminSupportChatController;
 use Illuminate\Support\Facades\Storage;
 
 use App\Http\Controllers\Api\Platforms\Freelancer\ContestController;
@@ -126,6 +128,18 @@ Route::get('/public/language-init', [\App\Http\Controllers\Api\Public\LanguageCo
 // Public Contact & Newsletter
 Route::post('/contact', [\App\Http\Controllers\Api\Public\ContactMessageController::class, 'store']);
 Route::post('/newsletter', [\App\Http\Controllers\Api\Public\NewsletterSubscriberController::class, 'store']);
+
+// -----------------------------------------------------------------------
+// Customer Support Chat (no authentication required)
+// -----------------------------------------------------------------------
+Route::prefix('support')->group(function () {
+    // Open a new support ticket (returns session_token)
+    Route::post('/ticket', [SupportChatController::class, 'createTicket']);
+    // Send a message on an existing ticket
+    Route::post('/ticket/{token}/message', [SupportChatController::class, 'sendMessage']);
+    // Poll all messages for a ticket
+    Route::get('/ticket/{token}/messages', [SupportChatController::class, 'getMessages']);
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -419,6 +433,19 @@ Route::middleware(['auth:api', 'user'])->group(function () {
     Route::prefix('chat')->group(function () {
         Route::get('/stats', [AdminChatMonitorController::class, 'index']);
         Route::get('/logs', [AdminChatMonitorController::class, 'logs']);
+    });
+
+    // -----------------------------------------------------------------------
+    // Customer Support Chat — Admin Panel
+    // -----------------------------------------------------------------------
+    Route::prefix('support')->group(function () {
+        Route::get('/stats', [AdminSupportChatController::class, 'stats']);
+        Route::get('/tickets', [AdminSupportChatController::class, 'index']);
+        Route::get('/tickets/{id}', [AdminSupportChatController::class, 'show']);
+        Route::post('/tickets/{id}/reply', [AdminSupportChatController::class, 'reply']);
+        Route::put('/tickets/{id}/close', [AdminSupportChatController::class, 'close']);
+        Route::put('/tickets/{id}/reopen', [AdminSupportChatController::class, 'reopen']);
+        Route::delete('/tickets/{id}', [AdminSupportChatController::class, 'destroy']);
     });
 
 
