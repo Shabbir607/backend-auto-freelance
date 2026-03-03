@@ -212,50 +212,106 @@ public function categoryWithWorkflows(Request $request, $slug)
 
 
 
-public function relevantWorkflows(Request $request, $slug)
-{
-    $workflow = Workflow::where('slug', $slug)
-        ->where('status', 'published')
-        ->with('category')
-        ->firstOrFail();
+    public function relevantWorkflows(Request $request, $slug)
+    {
+        $workflow = Workflow::where('slug', $slug)
+            ->where('status', 'published')
+            ->with('category')
+            ->firstOrFail();
 
-    // Extract keywords from title
-    $keywords = explode(' ', strtolower($workflow->title));
+        // Extract keywords from title
+        $keywords = explode(' ', strtolower($workflow->title));
 
-    // ✅ Relevant workflows (same category OR similar title)
-    $relatedWorkflows = Workflow::where('status', 'published')
-        ->where('id', '!=', $workflow->id)
-        ->where(function ($q) use ($workflow, $keywords) {
-            $q->where('category_id', $workflow->category_id);
+        // ✅ Relevant workflows (same category OR similar title)
+        $relatedWorkflows = Workflow::where('status', 'published')
+            ->where('id', '!=', $workflow->id)
+            ->where(function ($q) use ($workflow, $keywords) {
+                $q->where('category_id', $workflow->category_id);
 
-            foreach ($keywords as $word) {
-                if (strlen($word) > 3) {
-                    $q->orWhere('title', 'like', "%{$word}%");
+                foreach ($keywords as $word) {
+                    if (strlen($word) > 3) {
+                        $q->orWhere('title', 'like', "%{$word}%");
+                    }
                 }
+            })
+            ->with(['category', 'integrations'])
+            ->orderBy('created_at', 'desc')
+            ->limit(6)
+            ->get();
+
+        // ✅ Relevant categories (only categories having workflows)
+        $relatedCategories = WorkflowCategory::where('is_active', true)
+            ->whereHas('workflows', function ($q) {
+                $q->where('status', 'published');
+            })
+            ->where('id', '!=', $workflow->category_id)
+            ->orderBy('sort_order')
+            ->limit(6)
+            ->get();
+
+        return response()->json([
+            'success' => true,
+            'current_workflow' => $workflow,
+            'related_workflows' => $relatedWorkflows,
+            'related_categories' => $relatedCategories
+        ]);
+    }
+
+    /**
+     * ✅ Get relevant blogs for a workflow - Cached
+     */
+    public function relevantBlogs(Request $request, $slug)
+    {
+        $cacheKey = "workflow_relevant_blogs_{$slug}";
+
+        return Cache::remember($cacheKey, 3600, function () use ($slug) {
+            $workflow = Workflow::where('slug', $slug)
+                ->where('status', 'published')
+                ->firstOrFail();
+
+            // Extract keywords from title
+            $title = strtolower($workflow->title);
+            $keywords = explode(' ', $title);
+            $filteredKeywords = array_filter($keywords, function($word) {
+                return strlen($word) > 3;
+            });
+
+            // If title contains "how to" or similar, use full title partially
+            $blogs = Blog::published()
+                ->with(['category', 'author:id,name,email'])
+                ->where(function ($q) use ($filteredKeywords, $workflow) {
+                    // Match category if possible
+                    // However, workflow categories might not match blog categories directly
+                    // So we prioritize title keywords
+                    foreach ($filteredKeywords as $word) {
+                        $q->orWhere('title', 'like', "%{$word}%");
+                        $q->orWhere('description', 'like', "%{$word}%");
+                    }
+                })
+                ->orderByDesc('is_featured')
+                ->orderByDesc('published_at')
+                ->limit(6)
+                ->get();
+
+            // Fallback if no relevant blogs found
+            if ($blogs->count() < 3) {
+                $fallbackBlogs = Blog::published()
+                    ->with(['category', 'author:id,name,email'])
+                    ->whereNotIn('id', $blogs->pluck('id'))
+                    ->orderByDesc('is_featured')
+                    ->orderByDesc('published_at')
+                    ->limit(6 - $blogs->count())
+                    ->get();
+                
+                $blogs = $blogs->concat($fallbackBlogs);
             }
-        })
-        ->with(['category', 'integrations'])
-        ->orderBy('created_at', 'desc')
-        ->limit(6)
-        ->get();
 
-    // ✅ Relevant categories (only categories having workflows)
-    $relatedCategories = WorkflowCategory::where('is_active', true)
-        ->whereHas('workflows', function ($q) {
-            $q->where('status', 'published');
-        })
-        ->where('id', '!=', $workflow->category_id)
-        ->orderBy('sort_order')
-        ->limit(6)
-        ->get();
-
-    return response()->json([
-        'success' => true,
-        'current_workflow' => $workflow,
-        'related_workflows' => $relatedWorkflows,
-        'related_categories' => $relatedCategories
-    ]);
-}
+            return response()->json([
+                'success' => true,
+                'data' => $blogs
+            ]);
+        });
+    }
 
       public function shareUrl(Request $request)
     {
@@ -467,3 +523,4 @@ public function relevantWorkflows(Request $request, $slug)
     }
 
 }
+

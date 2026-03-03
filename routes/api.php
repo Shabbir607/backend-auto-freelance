@@ -102,12 +102,15 @@ Route::middleware(['verify.app.key'])->group(function () {
     Route::get('/workflow-category/{slug}', [WorkflowLibraryController::class, 'categoryWithWorkflows']);
 
     Route::get('/workflow/{slug}/related', [WorkflowLibraryController::class, 'relevantWorkflows']);
+    Route::get('/workflow/{slug}/related-blogs', [WorkflowLibraryController::class, 'relevantBlogs']);
     Route::post('/workflow/{slug}/reviews', [WorkflowLibraryController::class, 'storeReview']);
     Route::get('/workflow/top-view', [WorkflowLibraryController::class, 'topViewWorkflow']);
 
     // Public Blog Routes
     Route::get('/blogs', [PublicBlogController::class, 'index']);
     Route::get('/blogs/categories', [PublicBlogController::class, 'categories']);
+    Route::get('/blogs/{slug}/related', [PublicBlogController::class, 'relatedBlogs']);
+    Route::get('/blogs/{slug}/related-workflows', [PublicBlogController::class, 'relatedWorkflows']);
     Route::get('/blogs/{slug}', [PublicBlogController::class, 'show']);
     Route::get('/blog/share', [PublicBlogController::class, 'share']);
 
@@ -448,3 +451,4 @@ Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback']);
 Route::fallback(function(){
     return response()->json(['message' => 'API Route Not Found'], 404);
 });
+

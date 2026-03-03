@@ -310,4 +310,104 @@ class BlogController extends Controller
         return response()->json($response);
     }
 
+    /**
+     * ✅ Get related blogs for a blog post - Cached
+     */
+    public function relatedBlogs($slug)
+    {
+        $cacheKey = "blog_related_articles_{$slug}";
+
+        return \Illuminate\Support\Facades\Cache::remember($cacheKey, 3600, function () use ($slug) {
+            $blog = Blog::published()
+                ->where('slug', $slug)
+                ->first();
+
+            if (!$blog) {
+                return null;
+            }
+
+            $blogs = Blog::published()
+                ->with(['category', 'author:id,name,email'])
+                ->where('id', '!=', $blog->id)
+                ->where('category_id', $blog->category_id)
+                ->orderByDesc('is_featured')
+                ->orderByDesc('published_at')
+                ->limit(6)
+                ->get();
+
+            // Fallback to latest featured if not enough in same category
+            if ($blogs->count() < 3) {
+                $fallback = Blog::published()
+                    ->with(['category', 'author:id,name,email'])
+                    ->where('id', '!=', $blog->id)
+                    ->whereNotIn('id', $blogs->pluck('id'))
+                    ->orderByDesc('is_featured')
+                    ->orderByDesc('published_at')
+                    ->limit(6 - $blogs->count())
+                    ->get();
+                
+                $blogs = $blogs->concat($fallback);
+            }
+
+            return response()->json([
+                'success' => true,
+                'data' => $blogs
+            ]);
+        });
+    }
+
+    /**
+     * ✅ Get relevant workflows for a blog post - Cached
+     */
+    public function relatedWorkflows($slug)
+    {
+        $cacheKey = "blog_related_workflows_{$slug}";
+
+        return \Illuminate\Support\Facades\Cache::remember($cacheKey, 3600, function () use ($slug) {
+            $blog = Blog::published()
+                ->where('slug', $slug)
+                ->first();
+
+            if (!$blog) {
+                return null;
+            }
+
+            // Extract keywords from title
+            $keywords = explode(' ', strtolower($blog->title));
+            $filteredKeywords = array_filter($keywords, function($word) {
+                return strlen($word) > 3;
+            });
+
+            $workflows = \App\Models\Workflow::where('status', 'published')
+                ->with(['category', 'integrations'])
+                ->where(function ($q) use ($filteredKeywords) {
+                    foreach ($filteredKeywords as $word) {
+                        $q->orWhere('title', 'like', "%{$word}%");
+                        $q->orWhere('description', 'like', "%{$word}%");
+                    }
+                })
+                ->orderByDesc('created_at')
+                ->limit(4)
+                ->get();
+
+            // Fallback to latest if not enough relevant found
+            if ($workflows->count() < 4) {
+                $fallbackCount = 4 - $workflows->count();
+                $fallbackWorkflows = \App\Models\Workflow::where('status', 'published')
+                    ->with(['category', 'integrations'])
+                    ->whereNotIn('id', $workflows->pluck('id'))
+                    ->orderByDesc('total_views') // Get popular ones
+                    ->limit($fallbackCount)
+                    ->get();
+                
+                $workflows = $workflows->concat($fallbackWorkflows);
+            }
+
+            return response()->json([
+                'success' => true,
+                'data' => $workflows
+            ]);
+        });
+    }
 }
+
