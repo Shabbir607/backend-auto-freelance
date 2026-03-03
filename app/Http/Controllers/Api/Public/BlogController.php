@@ -40,6 +40,13 @@ class BlogController extends Controller
                 ->paginate($perPage);
         });
 
+        // Hide author ID from public response
+        $blogs->getCollection()->each(function ($blog) {
+            if ($blog->author) {
+                $blog->author->makeHidden('id');
+            }
+        });
+
         return response()->json([
             'success' => true,
             'data' => $blogs
@@ -181,6 +188,10 @@ class BlogController extends Controller
                 $seo['structured_data']['@graph'][] = $faqSchema;
             }
 
+            if ($blog->author) {
+                $blog->author->makeHidden('id');
+            }
+
             return [
                 'success' => true,
                 'data' => $blog,
@@ -276,6 +287,10 @@ class BlogController extends Controller
                 'line' => "https://social-plugins.line.me/lineit/share?url={$url}&text=" . urlencode($title . ' - ' . $description),
                 'messenger' => "fb-messenger://share?link={$url}&app_id=1234567890",
             ];
+
+            if ($blog->author) {
+                $blog->author->makeHidden('id');
+            }
 
             return [
                 'success' => true,

@@ -59,16 +59,20 @@ class BlogController extends Controller
     {
         // Validate input
         $validator = Validator::make($request->all(), [
-            'category_id'       => 'required|exists:blog_categories,id',
+            'category_id'       => 'nullable|exists:blog_categories,id',
+            'author_id'         => 'nullable|exists:users,id',
             'title'             => 'required|string|max:255|unique:blogs,title',
-            'description'       => 'required|string|max:500',
-            'content'           => 'required|string',
-            'image_url'         => 'nullable', // Allow file upload OR direct string URL
+            'slug'              => 'nullable|string|max:255|unique:blogs,slug',
+            'description'       => 'nullable|string|max:500',
+            'content'           => 'nullable|string',
+            'image_url'         => 'nullable',
             'meta_title'        => 'nullable|string|max:255',
             'meta_description'  => 'nullable|string',
             'meta_keywords'     => 'nullable|string',
+            'views'             => 'nullable|integer',
             'status'            => 'required|in:draft,published',
             'is_featured'       => 'boolean',
+            'published_at'      => 'nullable|date',
         ]);
 
         if ($validator->fails()) {
@@ -106,10 +110,10 @@ class BlogController extends Controller
         }
         unset($validated['image_url']); // Remove from validated array so it doesn't break create()
 
-        $validated['slug'] = $slug;
-        $validated['author_id'] = $request->user()?->id;
+        $validated['author_id'] = $validated['author_id'] ?? $request->user()?->id;
+        $validated['slug'] = $validated['slug'] ?? $slug;
 
-        if ($validated['status'] === 'published') {
+        if (empty($validated['published_at']) && $validated['status'] === 'published') {
             $validated['published_at'] = now();
         }
 
@@ -143,16 +147,20 @@ class BlogController extends Controller
         $blog = Blog::findOrFail($id);
 
         $validator = Validator::make($request->all(), [
-            'category_id'       => 'sometimes|required|exists:blog_categories,id',
+            'category_id'       => 'sometimes|nullable|exists:blog_categories,id',
+            'author_id'         => 'sometimes|nullable|exists:users,id',
             'title'             => 'sometimes|required|string|max:255|unique:blogs,title,' . $id,
-            'description'       => 'sometimes|required|string|max:500',
-            'content'           => 'sometimes|required|string',
-            'image_url'         => 'nullable', // Allow file upload OR direct string URL
+            'slug'              => 'sometimes|nullable|string|max:255|unique:blogs,slug,' . $id,
+            'description'       => 'sometimes|nullable|string|max:500',
+            'content'           => 'sometimes|nullable|string',
+            'image_url'         => 'nullable',
             'meta_title'        => 'nullable|string|max:255',
             'meta_description'  => 'nullable|string',
             'meta_keywords'     => 'nullable|string',
+            'views'             => 'sometimes|nullable|integer',
             'status'            => 'sometimes|required|in:draft,published',
-            'is_featured'       => 'boolean',
+            'is_featured'       => 'sometimes|boolean',
+            'published_at'      => 'sometimes|nullable|date',
         ]);
 
         if ($validator->fails()) {
@@ -164,6 +172,10 @@ class BlogController extends Controller
         }
 
         $validated = $validator->validated();
+        unset($validated['image_url']); // Remove from validated array
+        
+        // Merge all inputs to ensure we get all fields from the request that we might want to update
+        $dataToUpdate = array_merge($request->except(['image_url', '_method']), $validated);
 
         // Initialize new image variable
         $newImage = null;
@@ -174,7 +186,7 @@ class BlogController extends Controller
             $file = $request->file('image_url');
             $extension = $file->getClientOriginalExtension() ?: 'jpg';
             // Use slug if available, otherwise blog title slug
-            $fileSlug = isset($validated['title']) ? Str::slug($validated['title']) : Str::slug($blog->title);
+            $fileSlug = isset($dataToUpdate['title']) ? Str::slug($dataToUpdate['title']) : Str::slug($blog->title);
             $fileName = $fileSlug . '.' . $extension;
             $path = $file->storeAs('blogs', $fileName, 'public');
             $newImage = 'https://api.edgelancer.com/storage/' . $path;
@@ -184,7 +196,6 @@ class BlogController extends Controller
                 $newImage = $request->image_url;
             }
         }
-        unset($validated['image_url']); // Remove from validated array so it doesn't break update()
 
         // If a new image was provided, handle cleanup and update
         if ($newImage !== null) {
@@ -197,22 +208,22 @@ class BlogController extends Controller
                     \Illuminate\Support\Facades\Storage::disk('public')->delete($oldPath);
                 }
             }
-            $validated['image'] = $newImage;
+            $dataToUpdate['image'] = $newImage;
         }
 
-        if (isset($validated['title'])) {
-            $validated['slug'] = Str::slug($validated['title']);
+        if (isset($dataToUpdate['title'])) {
+            $dataToUpdate['slug'] = Str::slug($dataToUpdate['title']);
         }
 
         if (
-            isset($validated['status']) &&
-            $validated['status'] === 'published' &&
+            isset($dataToUpdate['status']) &&
+            $dataToUpdate['status'] === 'published' &&
             $blog->status !== 'published'
         ) {
-            $validated['published_at'] = now();
+            $dataToUpdate['published_at'] = now();
         }
 
-        $blog->update($validated);
+        $blog->update($dataToUpdate);
 
         return response()->json([
             'success' => true,
