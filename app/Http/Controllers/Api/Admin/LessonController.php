@@ -21,30 +21,37 @@ class LessonController extends Controller
     public function store(LessonRequest $request)
     {
         $validated = $request->validated();
+        $data = $request->all();
 
         if ($request->hasFile('thumbnail')) {
             $this->ensureLessonDirectory('thumbnails');
             $file = $request->file('thumbnail');
-            $fileName = \Illuminate\Support\Str::slug($validated['title']) . '-' . time() . '.' . $file->getClientOriginalExtension();
+            $fileName = \Illuminate\Support\Str::slug($request->title) . '-' . time() . '.' . $file->getClientOriginalExtension();
             $path = $file->storeAs('lessons/thumbnails', $fileName, 'public');
-            $validated['thumbnail'] = 'https://api.edgelancer.com/storage/' . $path;
+            $data['thumbnail'] = 'https://api.edgelancer.com/storage/' . $path;
         }
 
         if ($request->hasFile('video')) {
             $this->ensureLessonDirectory('videos');
             $file = $request->file('video');
-            $fileName = \Illuminate\Support\Str::slug($validated['title']) . '-' . time() . '.' . $file->getClientOriginalExtension();
+            $fileName = \Illuminate\Support\Str::slug($request->title) . '-' . time() . '.' . $file->getClientOriginalExtension();
             $path = $file->storeAs('lessons/videos', $fileName, 'public');
-            $validated['video_url'] = 'https://api.edgelancer.com/storage/' . $path;
+            $data['video_url'] = 'https://api.edgelancer.com/storage/' . $path;
+        } elseif ($request->filled('video_url')) {
+            $data['video_url'] = $request->video_url;
         }
 
-        $lesson = Lesson::create($validated);
+        // Filter out file objects to avoid SQL errors
+        $data = array_filter($data, fn($value) => !($value instanceof \Illuminate\Http\UploadedFile));
+
+        $lesson = Lesson::create($data);
         return new LessonResource($lesson);
     }
 
     public function update(LessonRequest $request, Lesson $lesson)
     {
         $validated = $request->validated();
+        $data = $request->all();
 
         if ($request->hasFile('thumbnail')) {
             $this->ensureLessonDirectory('thumbnails');
@@ -55,9 +62,9 @@ class LessonController extends Controller
             }
 
             $file = $request->file('thumbnail');
-            $fileName = \Illuminate\Support\Str::slug($validated['title'] ?? $lesson->title) . '-' . time() . '.' . $file->getClientOriginalExtension();
+            $fileName = \Illuminate\Support\Str::slug($request->title ?? $lesson->title) . '-' . time() . '.' . $file->getClientOriginalExtension();
             $path = $file->storeAs('lessons/thumbnails', $fileName, 'public');
-            $validated['thumbnail'] = 'https://api.edgelancer.com/storage/' . $path;
+            $data['thumbnail'] = 'https://api.edgelancer.com/storage/' . $path;
         }
 
         if ($request->hasFile('video')) {
@@ -69,12 +76,17 @@ class LessonController extends Controller
             }
 
             $file = $request->file('video');
-            $fileName = \Illuminate\Support\Str::slug($validated['title'] ?? $lesson->title) . '-' . time() . '.' . $file->getClientOriginalExtension();
+            $fileName = \Illuminate\Support\Str::slug($request->title ?? $lesson->title) . '-' . time() . '.' . $file->getClientOriginalExtension();
             $path = $file->storeAs('lessons/videos', $fileName, 'public');
-            $validated['video_url'] = 'https://api.edgelancer.com/storage/' . $path;
+            $data['video_url'] = 'https://api.edgelancer.com/storage/' . $path;
+        } elseif ($request->filled('video_url')) {
+            $data['video_url'] = $request->video_url;
         }
 
-        $lesson->update($validated);
+        // Filter out file objects to avoid SQL errors
+        $data = array_filter($data, fn($value) => !($value instanceof \Illuminate\Http\UploadedFile));
+
+        $lesson->update($data);
         return new LessonResource($lesson);
     }
 

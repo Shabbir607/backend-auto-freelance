@@ -82,10 +82,53 @@ class LessonApiTest extends TestCase
             'order' => 1
         ];
 
-        $response = $this->actingAs($this->admin, 'api')->putJson("/api/admin/lessons/{$lesson->id}", $payload);
+        $response = $this->actingAs($this->admin, 'api')->postJson("/api/admin/lessons/{$lesson->id}", $payload);
 
         $response->assertStatus(200)
                  ->assertJsonPath('data.title', 'Updated Title');
+    }
+
+    public function test_admin_can_upload_video_file()
+    {
+        \Illuminate\Support\Facades\Storage::fake('public');
+        $course = Course::create(['title' => 'Test', 'slug' => 'test']);
+        $module = Module::create(['course_id' => $course->id, 'title' => 'M1']);
+
+        $video = \Illuminate\Http\Testing\File::create('lesson-video.mp4', 100);
+        $payload = [
+            'module_id' => $module->id,
+            'title' => 'Video Lesson',
+            'slug' => 'video-lesson',
+            'video' => $video,
+        ];
+
+        $response = $this->actingAs($this->admin, 'api')->postJson('/api/admin/lessons', $payload);
+
+        $response->assertStatus(201);
+        $lesson = Lesson::where('slug', 'video-lesson')->first();
+        $this->assertNotNull($lesson->video_url);
+        $this->assertStringContainsString('lessons/videos', $lesson->video_url);
+        
+        $storedPath = str_replace('https://api.edgelancer.com/storage/', '', $lesson->video_url);
+        \Illuminate\Support\Facades\Storage::disk('public')->assertExists($storedPath);
+    }
+
+    public function test_admin_can_submit_video_url()
+    {
+        $course = Course::create(['title' => 'Test', 'slug' => 'test-2']);
+        $module = Module::create(['course_id' => $course->id, 'title' => 'M2']);
+
+        $payload = [
+            'module_id' => $module->id,
+            'title' => 'URL Lesson',
+            'slug' => 'url-lesson',
+            'video_url' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        ];
+
+        $response = $this->actingAs($this->admin, 'api')->postJson('/api/admin/lessons', $payload);
+
+        $response->assertStatus(201)
+                 ->assertJsonPath('data.video_url', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ');
     }
 
     public function test_public_user_can_view_lesson()

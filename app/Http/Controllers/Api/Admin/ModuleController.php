@@ -12,13 +12,15 @@ class ModuleController extends Controller
 {
     public function store(ModuleRequest $request)
     {
-        $module = Module::create($request->validated());
+        $data = array_filter($request->all(), fn($value) => !($value instanceof \Illuminate\Http\UploadedFile));
+        $module = Module::create($data);
         return new ModuleResource($module);
     }
 
     public function update(ModuleRequest $request, Module $module)
     {
-        $module->update($request->validated());
+        $data = array_filter($request->all(), fn($value) => !($value instanceof \Illuminate\Http\UploadedFile));
+        $module->update($data);
         return new ModuleResource($module);
     }
 

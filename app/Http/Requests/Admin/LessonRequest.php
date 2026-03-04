@@ -39,6 +39,7 @@ class LessonRequest extends FormRequest
             'seo_meta_tags' => 'nullable|string',
             'og_image' => 'nullable|string|max:255',
             'seo_canonical_url' => 'nullable|url|max:255',
+            '*' => 'nullable',
         ];
     }
 }

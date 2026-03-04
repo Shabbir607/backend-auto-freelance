@@ -10,19 +10,7 @@ class Course extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = [
-        'title',
-        'slug',
-        'description',
-        'level',
-        'seo_title',
-        'seo_description',
-        'seo_keywords',
-        'seo_meta_tags',
-        'og_image',
-        'seo_canonical_url',
-        'is_published',
-    ];
+    protected $guarded = [];
 
     protected $casts = [
         'is_published' => 'boolean',

@@ -27,16 +27,20 @@ class CourseController extends Controller
     public function store(CourseRequest $request)
     {
         $validated = $request->validated();
+        $data = $request->all();
 
         if ($request->hasFile('og_image')) {
             $this->ensureCourseImageDirectory();
             $file = $request->file('og_image');
-            $fileName = \Illuminate\Support\Str::slug($validated['title']) . '-' . time() . '.' . $file->getClientOriginalExtension();
+            $fileName = \Illuminate\Support\Str::slug($request->title) . '-' . time() . '.' . $file->getClientOriginalExtension();
             $path = $file->storeAs('courses', $fileName, 'public');
-            $validated['og_image'] = 'https://api.edgelancer.com/storage/' . $path;
+            $data['og_image'] = 'https://api.edgelancer.com/storage/' . $path;
         }
 
-        $course = Course::create($validated);
+        // Filter out file objects to avoid SQL errors
+        $data = array_filter($data, fn($value) => !($value instanceof \Illuminate\Http\UploadedFile));
+
+        $course = Course::create($data);
         return new CourseResource($course);
     }
 
@@ -48,6 +52,7 @@ class CourseController extends Controller
     public function update(CourseRequest $request, Course $course)
     {
         $validated = $request->validated();
+        $data = $request->all();
 
         if ($request->hasFile('og_image')) {
             $this->ensureCourseImageDirectory();
@@ -59,12 +64,15 @@ class CourseController extends Controller
             }
 
             $file = $request->file('og_image');
-            $fileName = \Illuminate\Support\Str::slug($validated['title'] ?? $course->title) . '-' . time() . '.' . $file->getClientOriginalExtension();
+            $fileName = \Illuminate\Support\Str::slug($request->title ?? $course->title) . '-' . time() . '.' . $file->getClientOriginalExtension();
             $path = $file->storeAs('courses', $fileName, 'public');
-            $validated['og_image'] = 'https://api.edgelancer.com/storage/' . $path;
+            $data['og_image'] = 'https://api.edgelancer.com/storage/' . $path;
         }
 
-        $course->update($validated);
+        // Filter out file objects to avoid SQL errors
+        $data = array_filter($data, fn($value) => !($value instanceof \Illuminate\Http\UploadedFile));
+
+        $course->update($data);
         return new CourseResource($course);
     }
 

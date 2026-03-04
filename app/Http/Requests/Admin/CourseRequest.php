@@ -35,6 +35,7 @@ class CourseRequest extends FormRequest
             'og_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:5120',
             'seo_canonical_url' => 'nullable|url|max:255',
             'is_published' => 'boolean',
+            '*' => 'nullable', // Allow other dynamic fields
         ];
     }
 }
