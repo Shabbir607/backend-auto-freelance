@@ -507,7 +507,7 @@ Route::middleware('auth:api')->group(function () {
         Route::get('courses', [\App\Http\Controllers\Api\Admin\CourseController::class, 'index']);
         Route::post('courses', [\App\Http\Controllers\Api\Admin\CourseController::class, 'store']);
         Route::get('courses/{course}', [\App\Http\Controllers\Api\Admin\CourseController::class, 'show']);
-        Route::put('courses/{course}', [\App\Http\Controllers\Api\Admin\CourseController::class, 'update']);
+        Route::post('courses/{course}', [\App\Http\Controllers\Api\Admin\CourseController::class, 'update']);
         Route::delete('courses/{course}', [\App\Http\Controllers\Api\Admin\CourseController::class, 'destroy']);
         Route::patch('courses/{course}/publish', [\App\Http\Controllers\Api\Admin\CourseController::class, 'togglePublish']);
         
@@ -518,7 +518,7 @@ Route::middleware('auth:api')->group(function () {
         
         // Lessons
         Route::post('lessons', [\App\Http\Controllers\Api\Admin\LessonController::class, 'store']);
-        Route::put('lessons/{lesson}', [\App\Http\Controllers\Api\Admin\LessonController::class, 'update']);
+        Route::post('lessons/{lesson}', [\App\Http\Controllers\Api\Admin\LessonController::class, 'update']);
         Route::delete('lessons/{lesson}', [\App\Http\Controllers\Api\Admin\LessonController::class, 'destroy']);
         Route::post('lessons/reorder', [\App\Http\Controllers\Api\Admin\LessonController::class, 'reorder']);
         

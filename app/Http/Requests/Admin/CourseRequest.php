@@ -32,7 +32,7 @@ class CourseRequest extends FormRequest
             'seo_description' => 'nullable|string',
             'seo_keywords' => 'nullable|string|max:255',
             'seo_meta_tags' => 'nullable|string',
-            'og_image' => 'nullable|string|max:255',
+            'og_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:5120',
             'seo_canonical_url' => 'nullable|url|max:255',
             'is_published' => 'boolean',
         ];

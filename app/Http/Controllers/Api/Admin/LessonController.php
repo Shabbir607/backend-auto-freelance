@@ -10,20 +10,87 @@ use Illuminate\Http\Request;
 
 class LessonController extends Controller
 {
+    private function ensureLessonDirectory($subDir): void
+    {
+        $directory = storage_path('app/public/lessons/' . $subDir);
+        if (!\Illuminate\Support\Facades\File::exists($directory)) {
+            \Illuminate\Support\Facades\File::makeDirectory($directory, 0755, true);
+        }
+    }
+
     public function store(LessonRequest $request)
     {
-        $lesson = Lesson::create($request->validated());
+        $validated = $request->validated();
+
+        if ($request->hasFile('thumbnail')) {
+            $this->ensureLessonDirectory('thumbnails');
+            $file = $request->file('thumbnail');
+            $fileName = \Illuminate\Support\Str::slug($validated['title']) . '-' . time() . '.' . $file->getClientOriginalExtension();
+            $path = $file->storeAs('lessons/thumbnails', $fileName, 'public');
+            $validated['thumbnail'] = 'https://api.edgelancer.com/storage/' . $path;
+        }
+
+        if ($request->hasFile('video')) {
+            $this->ensureLessonDirectory('videos');
+            $file = $request->file('video');
+            $fileName = \Illuminate\Support\Str::slug($validated['title']) . '-' . time() . '.' . $file->getClientOriginalExtension();
+            $path = $file->storeAs('lessons/videos', $fileName, 'public');
+            $validated['video_url'] = 'https://api.edgelancer.com/storage/' . $path;
+        }
+
+        $lesson = Lesson::create($validated);
         return new LessonResource($lesson);
     }
 
     public function update(LessonRequest $request, Lesson $lesson)
     {
-        $lesson->update($request->validated());
+        $validated = $request->validated();
+
+        if ($request->hasFile('thumbnail')) {
+            $this->ensureLessonDirectory('thumbnails');
+            
+            if ($lesson->thumbnail && strpos($lesson->thumbnail, 'api.edgelancer.com/storage/lessons/thumbnails') !== false) {
+                $oldPath = str_replace('https://api.edgelancer.com/storage/', '', $lesson->thumbnail);
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($oldPath);
+            }
+
+            $file = $request->file('thumbnail');
+            $fileName = \Illuminate\Support\Str::slug($validated['title'] ?? $lesson->title) . '-' . time() . '.' . $file->getClientOriginalExtension();
+            $path = $file->storeAs('lessons/thumbnails', $fileName, 'public');
+            $validated['thumbnail'] = 'https://api.edgelancer.com/storage/' . $path;
+        }
+
+        if ($request->hasFile('video')) {
+            $this->ensureLessonDirectory('videos');
+            
+            if ($lesson->video_url && strpos($lesson->video_url, 'api.edgelancer.com/storage/lessons/videos') !== false) {
+                $oldPath = str_replace('https://api.edgelancer.com/storage/', '', $lesson->video_url);
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($oldPath);
+            }
+
+            $file = $request->file('video');
+            $fileName = \Illuminate\Support\Str::slug($validated['title'] ?? $lesson->title) . '-' . time() . '.' . $file->getClientOriginalExtension();
+            $path = $file->storeAs('lessons/videos', $fileName, 'public');
+            $validated['video_url'] = 'https://api.edgelancer.com/storage/' . $path;
+        }
+
+        $lesson->update($validated);
         return new LessonResource($lesson);
     }
 
     public function destroy(Lesson $lesson)
     {
+        // Cleanup files
+        if ($lesson->thumbnail && strpos($lesson->thumbnail, 'api.edgelancer.com/storage/lessons/thumbnails') !== false) {
+            $oldPath = str_replace('https://api.edgelancer.com/storage/', '', $lesson->thumbnail);
+            \Illuminate\Support\Facades\Storage::disk('public')->delete($oldPath);
+        }
+
+        if ($lesson->video_url && strpos($lesson->video_url, 'api.edgelancer.com/storage/lessons/videos') !== false) {
+            $oldPath = str_replace('https://api.edgelancer.com/storage/', '', $lesson->video_url);
+            \Illuminate\Support\Facades\Storage::disk('public')->delete($oldPath);
+        }
+
         $lesson->delete();
         return response()->json(['message' => 'Lesson deleted successfully']);
     }

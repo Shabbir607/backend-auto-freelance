@@ -10,6 +10,14 @@ use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
+    private function ensureCourseImageDirectory(): void
+    {
+        $directory = storage_path('app/public/courses');
+        if (!\Illuminate\Support\Facades\File::exists($directory)) {
+            \Illuminate\Support\Facades\File::makeDirectory($directory, 0755, true);
+        }
+    }
+
     public function index()
     {
         $courses = Course::withCount('reviews')->orderBy('created_at', 'desc')->paginate(15);
@@ -18,7 +26,17 @@ class CourseController extends Controller
 
     public function store(CourseRequest $request)
     {
-        $course = Course::create($request->validated());
+        $validated = $request->validated();
+
+        if ($request->hasFile('og_image')) {
+            $this->ensureCourseImageDirectory();
+            $file = $request->file('og_image');
+            $fileName = \Illuminate\Support\Str::slug($validated['title']) . '-' . time() . '.' . $file->getClientOriginalExtension();
+            $path = $file->storeAs('courses', $fileName, 'public');
+            $validated['og_image'] = 'https://api.edgelancer.com/storage/' . $path;
+        }
+
+        $course = Course::create($validated);
         return new CourseResource($course);
     }
 
@@ -29,12 +47,34 @@ class CourseController extends Controller
 
     public function update(CourseRequest $request, Course $course)
     {
-        $course->update($request->validated());
+        $validated = $request->validated();
+
+        if ($request->hasFile('og_image')) {
+            $this->ensureCourseImageDirectory();
+            
+            // Delete old image if exists
+            if ($course->og_image) {
+                $oldPath = str_replace('https://api.edgelancer.com/storage/', '', $course->og_image);
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($oldPath);
+            }
+
+            $file = $request->file('og_image');
+            $fileName = \Illuminate\Support\Str::slug($validated['title'] ?? $course->title) . '-' . time() . '.' . $file->getClientOriginalExtension();
+            $path = $file->storeAs('courses', $fileName, 'public');
+            $validated['og_image'] = 'https://api.edgelancer.com/storage/' . $path;
+        }
+
+        $course->update($validated);
         return new CourseResource($course);
     }
 
     public function destroy(Course $course)
     {
+        if ($course->og_image) {
+            $oldPath = str_replace('https://api.edgelancer.com/storage/', '', $course->og_image);
+            \Illuminate\Support\Facades\Storage::disk('public')->delete($oldPath);
+        }
+        
         $course->delete();
         return response()->json(['message' => 'Course deleted successfully']);
     }
