@@ -479,3 +479,53 @@ Route::fallback(function(){
     return response()->json(['message' => 'API Route Not Found'], 404);
 });
 
+
+// -----------------------------------------------------------------------
+// Course Management System
+// -----------------------------------------------------------------------
+
+// Public Routes
+Route::prefix('courses')->group(function () {
+    Route::get('/', [\App\Http\Controllers\Api\Public\CourseController::class, 'index']);
+    Route::get('/{slug}', [\App\Http\Controllers\Api\Public\CourseController::class, 'show']);
+    Route::get('/{id}/reviews', [\App\Http\Controllers\Api\Public\CourseReviewController::class, 'index']);
+    Route::post('/{id}/reviews', [\App\Http\Controllers\Api\Public\CourseReviewController::class, 'store']);
+});
+Route::get('lessons/{slug}', [\App\Http\Controllers\Api\Public\LessonController::class, 'show']);
+Route::post('lessons/{id}/progress', [\App\Http\Controllers\Api\Public\UserProgressController::class, 'updateProgress']);
+
+// Protected Routes
+Route::middleware('auth:api')->group(function () {
+    
+    // User Actions
+    Route::put('reviews/{review}', [\App\Http\Controllers\Api\Public\CourseReviewController::class, 'update']);
+    Route::delete('reviews/{review}', [\App\Http\Controllers\Api\Public\CourseReviewController::class, 'destroy']);
+
+    // Admin Routes
+    Route::prefix('admin')->group(function () {
+        // Courses
+        Route::get('courses', [\App\Http\Controllers\Api\Admin\CourseController::class, 'index']);
+        Route::post('courses', [\App\Http\Controllers\Api\Admin\CourseController::class, 'store']);
+        Route::get('courses/{course}', [\App\Http\Controllers\Api\Admin\CourseController::class, 'show']);
+        Route::put('courses/{course}', [\App\Http\Controllers\Api\Admin\CourseController::class, 'update']);
+        Route::delete('courses/{course}', [\App\Http\Controllers\Api\Admin\CourseController::class, 'destroy']);
+        Route::patch('courses/{course}/publish', [\App\Http\Controllers\Api\Admin\CourseController::class, 'togglePublish']);
+        
+        // Modules
+        Route::post('modules', [\App\Http\Controllers\Api\Admin\ModuleController::class, 'store']);
+        Route::put('modules/{module}', [\App\Http\Controllers\Api\Admin\ModuleController::class, 'update']);
+        Route::delete('modules/{module}', [\App\Http\Controllers\Api\Admin\ModuleController::class, 'destroy']);
+        
+        // Lessons
+        Route::post('lessons', [\App\Http\Controllers\Api\Admin\LessonController::class, 'store']);
+        Route::put('lessons/{lesson}', [\App\Http\Controllers\Api\Admin\LessonController::class, 'update']);
+        Route::delete('lessons/{lesson}', [\App\Http\Controllers\Api\Admin\LessonController::class, 'destroy']);
+        Route::post('lessons/reorder', [\App\Http\Controllers\Api\Admin\LessonController::class, 'reorder']);
+        
+        // Reviews Management
+        Route::get('reviews', [\App\Http\Controllers\Api\Admin\CourseReviewController::class, 'index']);
+        Route::patch('reviews/{review}/approve', [\App\Http\Controllers\Api\Admin\CourseReviewController::class, 'approve']);
+        Route::patch('reviews/{review}/reject', [\App\Http\Controllers\Api\Admin\CourseReviewController::class, 'reject']);
+        Route::delete('reviews/{review}', [\App\Http\Controllers\Api\Admin\CourseReviewController::class, 'destroy']);
+    });
+});
