@@ -15,20 +15,9 @@ class LessonController extends Controller
             ->with(['resources', 'module.course', 'userProgress'])
             ->firstOrFail();
 
-        // Check if user has access. 
-        // Logic: 
-        // 1. Is it a free preview? Allow.
-        // 2. Is it not free preview? Require auth and (optionally) check enrollment
-        
-        if (!$lesson->is_free_preview) {
-            $user = auth('api')->user();
-            if (!$user) {
-                return response()->json(['message' => 'Unauthorized. This lesson requires authentication.'], 403);
-            }
-            // Future logic: Check if user is enrolled in the course
-            // $courseId = $lesson->module->course_id;
-            // if (!$user->isEnrolledIn($courseId)) { abort(403); }
-        }
+        // All lessons are now accessible without authentication as requested.
+        // Progress is tracked by IP address.
+
 
         return new LessonResource($lesson);
     }
