@@ -24,4 +24,9 @@ class Lesson extends Model
     {
         return $this->hasMany(LessonResource::class);
     }
+
+    public function userProgress()
+    {
+        return $this->hasOne(UserLessonProgress::class)->where('ip_address', request()->ip());
+    }
 }

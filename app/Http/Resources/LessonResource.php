@@ -33,6 +33,9 @@ class LessonResource extends JsonResource
             ],
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'user_progress' => new UserLessonProgressResource($this->whenLoaded('userProgress')),
+            'module' => new ModuleResource($this->whenLoaded('module')),
+            'resources' => LessonFileResource::collection($this->whenLoaded('resources')),
         ];
     }
 }

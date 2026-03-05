@@ -23,10 +23,7 @@ class CourseController extends Controller
     {
         $course = Course::published()
             ->where('slug', $slug)
-            ->with(['modules.lessons' => function ($query) {
-                // For public view, we only need basic info, full content should be protected
-                $query->select('id', 'module_id', 'title', 'slug', 'is_free_preview', 'order');
-            }])
+            ->with(['modules.lessons.userProgress'])
             ->withCount('approvedReviews as reviews_count')
             ->firstOrFail();
 

@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ModuleResource extends JsonResource
+class LessonFileResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,9 +17,7 @@ class ModuleResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'order' => $this->order,
-            'lessons' => LessonResource::collection($this->whenLoaded('lessons')),
-            'course' => new CourseResource($this->whenLoaded('course')),
+            'file_url' => $this->file_url,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

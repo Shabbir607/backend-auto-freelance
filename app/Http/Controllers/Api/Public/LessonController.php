@@ -12,7 +12,7 @@ class LessonController extends Controller
     public function show($slug)
     {
         $lesson = Lesson::where('slug', $slug)
-            ->with('resources')
+            ->with(['resources', 'module.course', 'userProgress'])
             ->firstOrFail();
 
         // Check if user has access. 
