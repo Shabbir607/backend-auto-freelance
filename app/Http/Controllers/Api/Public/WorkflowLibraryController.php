@@ -57,7 +57,7 @@ public function index(Request $request)
     {
         // Cache basic listing if no search/filters are applied
         $page = $request->input('page', 1);
-        $perPage = 500; // Strictly fixed at 12 to prevent scraping large datasets
+        $perPage = 100; // Strictly fixed at 12 to prevent scraping large datasets
         $sort = $request->input('sort', 'newest');
         
         $cacheKey = "workflow_list_p{$page}_pp{$perPage}_s{$sort}_" . md5(json_encode($request->all()));
