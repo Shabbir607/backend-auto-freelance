@@ -1,7 +1,18 @@
 User-agent: *
-Allow: /
+Disallow: /admin/
+Disallow: /login
+Disallow: /dashboard
+Disallow: /api/
+Disallow: /storage/
+Disallow: /.env
+Disallow: /vendor/
 
-# Allow major AI crawlers
+# Block parameter URLs
+Disallow: /*?page=
+Disallow: /*?sort=
+Disallow: /*?filter=
+
+# Allow AI crawlers
 User-agent: GPTBot
 Allow: /
 
@@ -25,14 +36,5 @@ Allow: /
 
 User-agent: YouBot
 Allow: /
-
-# Disallow private areas
-Disallow: /admin/
-Disallow: /login
-Disallow: /dashboard
-Disallow: /api/
-Disallow: /storage/
-Disallow: /.env
-Disallow: /vendor/
 
 Sitemap: https://edgelancer.com/sitemap.xml

@@ -16,5 +16,6 @@ Route::get('/', function () {
 
 // Fallback for non-API routes
 Route::fallback(function () {
-    return response()->json(['message' => 'Not Found'], 404);
+    return redirect('https://edgelancer.com/', 301);
 });
+;
