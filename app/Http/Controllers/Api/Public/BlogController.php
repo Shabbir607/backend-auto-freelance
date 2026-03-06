@@ -6,8 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\BlogCategory;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Str;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Cache;
 
 class BlogController extends Controller
 {
@@ -221,7 +222,7 @@ class BlogController extends Controller
         $search = $request->input('search', '');
         $cacheKey = "blog_categories_s{$search}";
 
-        $categories = \Illuminate\Support\Facades\Cache::remember($cacheKey, 3600, function () use ($search) {
+        $categories = Cache::remember($cacheKey, 3600, function () use ($search) {
             $query = BlogCategory::where('is_active', true);
 
             if ($search) {

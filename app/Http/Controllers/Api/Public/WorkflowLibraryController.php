@@ -102,7 +102,7 @@ public function categories(Request $request)
     $search = $request->input('search', '');
     $cacheKey = 'workflow_categories_' . Str::slug($search);
 
-    return Cache::remember($cacheKey, 1800, function () use ($request) { // Cache for 30 mins
+    return Cache::remember($cacheKey, 3600, function () use ($request) { 
         $query = WorkflowCategory::where('is_active', true);
 
         if ($request->has('search')) {
@@ -123,18 +123,15 @@ public function categories(Request $request)
  */
 public function categoryList(Request $request)
 {
-    $perPage = 12; // Strictly fixed at 12
-    $page = $request->get('page', 1);
-    
-    $cacheKey = "workflow_category_list_p{$page}_pp{$perPage}";
+    $cacheKey = "workflow_category_list_all";
 
-    return Cache::remember($cacheKey, 600, function () use ($perPage) {
+    return Cache::remember($cacheKey, 3600, function () {
         $categories = WorkflowCategory::where('is_active', true)
             ->withCount(['workflows' => function ($q) {
                 $q->where('status', 'published');
             }])
             ->orderBy('sort_order')
-            ->paginate($perPage);
+            ->get();
 
         return response()->json([
             'success' => true,
