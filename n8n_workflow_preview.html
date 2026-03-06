@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>n8n Workflow Preview</title>
+    <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.0.0/webcomponents-loader.js"></script>
+    <script src="https://www.unpkg.com/lit@2.0.0-rc.2/polyfill-support.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@n8n_io/n8n-demo-component/n8n-demo.bundled.js"></script>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            background-color: #f0f2f5;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        n8n-demo {
+            width: 100%;
+            height: 600px;
+            /* Adjust height as needed */
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>My n8n Workflow Preview</h1>
+    <n8n-demo workflow='{
+  "id": "lN9uOQVOTZqFlVsj",
+  "meta": {
+    "instanceId": "143d2ab55c8bffb06f8b9c7ad30335764fdc48bbbacecbe2218dadb998a32213",
+    "templateCredsSetupCompleted": true
+  },
+  "name": "My workflow 3",
+  "tags": [],
+  "nodes": [
+    {
+      "id": "e5442c6a-ef95-4b78-b09a-35dee425d6f6",
+      "name": "On clicking ' execute'", "type" : "n8n-nodes-base.manualTrigger" , "position" : [ 0, 0 ], "parameters" :
+        [], "typeVersion" : 1 }, { "id" : "527cc819-c439-4353-a247-c3e832485ff0" , "name" : "Read PDF" , "type"
+        : "n8n-nodes-base.readPDF" , "position" : [ 440, 0 ], "parameters" : [], "typeVersion" : 1 }, { "id"
+        : "da9591a1-87fd-4b4e-bcae-ec2fc5264b9a" , "name" : "Download Resume (PDF File)" , "type"
+        : "n8n-nodes-base.googleDrive" , "position" : [ 220, 0 ], "parameters" : [], "typeVersion" : 3 }, { "id"
+        : "2534a95b-7c65-4c3b-b927-9cdbfbb400a7" , "name" : "Filter Relevant Information" , "type"
+        : "n8n-nodes-base.splitOut" , "position" : [ 660, 0 ], "parameters" : [], "typeVersion" : 1 }, { "id"
+        : "79a1858d-a405-4e09-8375-538550323cea" , "name" : "Analyse Resume" , "type"
+        : "@n8n/n8n-nodes-langchain.openAi" , "position" : [ 880, 0 ], "parameters" : [], "typeVersion" : 1.8 }, { "id"
+        : "fa7e3279-b59d-4c65-bb94-9910f47ec315" , "name" : "Find Suitable Job Offers " , "type"
+        : "n8n-nodes-base.httpRequest" , "position" : [ 1240, 0 ], "parameters" : [], "typeVersion" : 4.2 }, { "id"
+        : "f85c66f9-08a7-472f-9cf2-8049ccf62ac4" , "name" : "Organise the Job Posts" , "type"
+        : "n8n-nodes-base.splitOut" , "position" : [ 1460, 0 ], "parameters" : [], "typeVersion" : 1 }, { "id"
+        : "5fb3753e-b5b9-4a8f-942b-986cd571764d" , "name" : "Upload Job Posts Organised in a Spreadsheet" , "type"
+        : "n8n-nodes-base.googleSheets" , "position" : [ 1700, 0 ], "parameters" : [], "typeVersion" : 4.5 }, { "id"
+        : "2a7c8960-b9ec-4114-bc5e-0d878d7485ed" , "name" : "Sticky Note6" , "type" : "n8n-nodes-base.stickyNote"
+        , "position" : [ -840, -180 ], "parameters" : { "content" : "" }, "typeVersion" : 1 } ], "active" :
+        false, "pinData" : [], "settings" : { "executionOrder" : "v1" }, "versionId"
+        : "aa3dddb1-e084-448d-befc-dc430ad6bb48" , "connections" : { "Read PDF" : { "main" : [ [ { "node"
+        : "Filter Relevant Information" , "type" : "main" , "index" : 0 } ] ] }, "Analyse Resume" : { "main" : [ [
+        { "node" : "Find Suitable Job Offers " , "type" : "main" , "index" : 0 } ] ] }, "On clicking 'execute'" :
+        { "main" : [ [ { "node" : "Download Resume (PDF File)" , "type" : "main" , "index" : 0 } ] ]
+        }, "Organise the Job Posts" : { "main" : [ [ { "node" : "Upload Job Posts Organised in a Spreadsheet" , "type"
+        : "main" , "index" : 0 } ] ] }, "Find Suitable Job Offers " : { "main" : [ [ { "node" : "Organise the Job Posts"
+        , "type" : "main" , "index" : 0 } ] ] }, "Download Resume (PDF File)" : { "main" : [ [ { "node" : "Read PDF"
+        , "type" : "main" , "index" : 0 } ] ] }, "Filter Relevant Information" : { "main" : [ [ { "node"
+        : "Analyse Resume" , "type" : "main" , "index" : 0 } ] ] } } }' frame="true" clicktointeract="true"
+        theme="light" tidyup="true"></n8n-demo>
+
+    <h2>Explanation:</h2>
+    <p>To embed an n8n workflow preview on your website, you can use the <code>&lt;n8n-demo&gt;</code> web component.
+        This component simplifies the process by allowing you to directly embed the workflow JSON within your HTML.</p>
+
+    <h3>Steps to implement:</h3>
+    <ol>
+        <li>
+            <strong>Include the necessary scripts:</strong> Add the following script tags in the
+            <code>&lt;head&gt;</code> section of your HTML file. These scripts load the web components polyfill and the
+            n8n-demo component itself.
+            <pre><code>&lt;script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.0.0/webcomponents-loader.js"&gt;&lt;/script&gt;
+&lt;script src="https://www.unpkg.com/lit@2.0.0-rc.2/polyfill-support.js"&gt;&lt;/script&gt;
+&lt;script type="module" src="https://cdn.jsdelivr.net/npm/@n8n_io/n8n-demo-component/n8n-demo.bundled.js"&gt;&lt;/script&gt;</code></pre>
+        </li>
+        <li>
+            <strong>Add the <code>&lt;n8n-demo&gt;</code> tag:</strong> Place the <code>&lt;n8n-demo&gt;</code> tag in
+            the <code>&lt;body&gt;</code> of your HTML where you want the workflow preview to appear. The
+            <code>workflow</code> attribute should contain the stringified JSON of your n8n workflow.
+            <pre><code>&lt;n8n-demo
+        workflow='{
+  "id": "lN9uOQVOTZqFlVsj",
+  "meta": {
+    "instanceId": "143d2ab55c8bffb06f8b9c7ad30335764fdc48bbbacecbe2218dadb998a32213",
+    "templateCredsSetupCompleted": true
+  },
+  "name": "My workflow 3",
+  "tags": [],
+  "nodes": [
+    {
+      "id": "e5442c6a-ef95-4b78-b09a-35dee425d6f6",
+      "name": "On clicking 'execute'",
+      "type": "n8n-nodes-base.manualTrigger",
+      "position": [
+        0,
+        0
+      ],
+      "parameters": [],
+      "typeVersion": 1
+    },
+    {
+      "id": "527cc819-c439-4353-a247-c3e832485ff0",
+      "name": "Read PDF",
+      "type": "n8n-nodes-base.readPDF",
+      "position": [
+        440,
+        0
+      ],
+      "parameters": [],
+      "typeVersion": 1
+    },
+    {
+      "id": "da9591a1-87fd-4b4e-bcae-ec2fc5264b9a",
+      "name": "Download Resume (PDF File)",
+      "type": "n8n-nodes-base.googleDrive",
+      "position": [
+        220,
+        0
+      ],
+      "parameters": [],
+      "typeVersion": 3
+    },
+    {
+      "id": "2534a95b-7c65-4c3b-b927-9cdbfbb400a7",
+      "name": "Filter Relevant Information",
+      "type": "n8n-nodes-base.splitOut",
+      "position": [
+        660,
+        0
+      ],
+      "parameters": [],
+      "typeVersion": 1
+    },
+    {
+      "id": "79a1858d-a405-4e09-8375-538550323cea",
+      "name": "Analyse Resume",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "position": [
+        880,
+        0
+      ],
+      "parameters": [],
+      "typeVersion": 1.8
+    },
+    {
+      "id": "fa7e3279-b59d-4c65-bb94-9910f47ec315",
+      "name": "Find Suitable Job Offers ",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        1240,
+        0
+      ],
+      "parameters": [],
+      "typeVersion": 4.2
+    },
+    {
+      "id": "f85c66f9-08a7-472f-9cf2-8049ccf62ac4",
+      "name": "Organise the Job Posts",
+      "type": "n8n-nodes-base.splitOut",
+      "position": [
+        1460,
+        0
+      ],
+      "parameters": [],
+      "typeVersion": 1
+    },
+    {
+      "id": "5fb3753e-b5b9-4a8f-942b-986cd571764d",
+      "name": "Upload Job Posts Organised in a Spreadsheet",
+      "type": "n8n-nodes-base.googleSheets",
+      "position": [
+        1700,
+        0
+      ],
+      "parameters": [],
+      "typeVersion": 4.5
+    },
+    {
+      "id": "2a7c8960-b9ec-4114-bc5e-0d878d7485ed",
+      "name": "Sticky Note6",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -840,
+        -180
+      ],
+      "parameters": {
+        "content": ""
+      },
+      "typeVersion": 1
+    }
+  ],
+  "active": false,
+  "pinData": [],
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "aa3dddb1-e084-448d-befc-dc430ad6bb48",
+  "connections": {
+    "Read PDF": {
+      "main": [
+        [
+          {
+            "node": "Filter Relevant Information",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyse Resume": {
+      "main": [
+        [
+          {
+            "node": "Find Suitable Job Offers ",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "On clicking 'execute'": {
+      "main": [
+        [
+          {
+            "node": "Download Resume (PDF File)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Organise the Job Posts": {
+      "main": [
+        [
+          {
+            "node": "Upload Job Posts Organised in a Spreadsheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Find Suitable Job Offers ": {
+      "main": [
+        [
+          {
+            "node": "Organise the Job Posts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download Resume (PDF File)": {
+      "main": [
+        [
+          {
+            "node": "Read PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter Relevant Information": {
+      "main": [
+        [
+          {
+            "node": "Analyse Resume",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}'
+        frame="true"
+        clicktointeract="true"
+        theme="light"
+        tidyup="true"
+    &gt;&lt;/n8n-demo&gt;</code></pre>
+        </li>
+        <li>
+            <strong>Customize with attributes:</strong> The <code>&lt;n8n-demo&gt;</code> component offers several
+            attributes to customize its behavior and appearance:
+            <ul>
+                <li><code>workflow</code>: (Required) The JSON string of your n8n workflow.</li>
+                <li><code>frame</code>: Set to <code>"true"</code> to display a frame around the canvas with a code and
+                    copy button.</li>
+                <li><code>clicktointeract</code>: Set to <code>"true"</code> to add a button that users must click
+                    before interacting with the canvas, which can improve scrolling on pages with multiple demos.</li>
+                <li><code>theme</code>: Specifies the theme for the n8n workflow. Accepts <code>"light"</code> or
+                    <code>"dark"</code>.
+                </li>
+                <li><code>tidyup</code>: Set to <code>"true"</code> to automatically arrange nodes in a clean, organized
+                    layout when loaded.</li>
+                <li><code>disableinteractivity</code>: Set to <code>"true"</code> to prevent user interaction with the
+                    workflow entirely.</li>
+                <li><code>hidecanvaserrors</code>: Set to <code>"true"</code> to hide node errors on the canvas.</li>
+            </ul>
+        </li>
+        <li>
+            <strong>Styling:</strong> You can style the <code>&lt;n8n-demo&gt;</code> component using CSS to control its
+            width, height, borders, and other visual properties, as demonstrated in the example HTML.
+        </li>
+    </ol>
+
+    <h3>Extracted Workflow JSON:</h3>
+    <p>The workflow JSON for the "Auto-generate sticky notes and rename nodes" workflow is provided below. You can use
+        this directly in the <code>workflow</code> attribute of your <code>&lt;n8n-demo&gt;</code> tag.</p>
+    <pre><code>{"meta":{"instanceId":"84ba6d895254e080ac2b4916d987aa66b000f88d4d919a6b9c76848f9b8a7616"},"nodes":[{"id":"9ac0258b-4280-4e51-92b9-73bdb68a9fda","name":"Sticky Note1","type":"n8n-nodes-base.stickyNote","position":[1664,224],"parameters":{"color":7,"width":368,"height":272,"content":"## Initialize workflow\n\nStarts the workflow and sets initial variables."},"typeVersion":1},{"id":"9b2ebac0-c8d3-46b4-81a1-0a9ba16797e1","name":"Sticky Note2","type":"n8n-nodes-base.stickyNote","position":[2064,224],"parameters":{"color":7,"width":368,"height":272,"content":"## Prepare and parse nodes\n\nPrepares nodes and parses them for further processing."},"typeVersion":1},{"id":"d406950c-0fb6-431e-ae54-733c742558a5","name":"Sticky Note3","type":"n8n-nodes-base.stickyNote","position":[2464,224],"parameters":{"color":7,"width":448,"height":496,"content":"## AI logical grouping\n\nUses AI to logically group nodes."},"typeVersion":1},{"id":"3078427e-836b-4361-9294-84940082639b","name":"Sticky Note4","type":"n8n-nodes-base.stickyNote","position":[2944,224],"parameters":{"color":7,"width":448,"height":496,"content":"## Collision handling and export\n\nHandles collisions and merges results for export."},"typeVersion":1},{"id":"68979373-3928-4034-9383-77490082639b","name":"Sticky Note5","type":"n8n-nodes-base.stickyNote","position":[3424,224],"parameters":{"color":7,"width":448,"height":496,"content":"## Iterative adjustment\n\nControls loop for iterative collision fixes and picks the best result."},"typeVersion":1},{"id":"78979373-3928-4034-9383-77490082639b","name":"Sticky Note6","type":"n8n-nodes-base.stickyNote","position":[2064,528],"parameters":{"color":7,"width":448,"height":496,"content":"## Conditional node renaming\n\nDecides and executes the renaming procedure with AI assistance."},"typeVersion":1},{"id":"88979373-3928-4034-9383-77490082639b","name":"Sticky Note7","type":"n8n-nodes-base.stickyNote","position":[2544,752],"parameters":{"color":7,"width":368,"height":272,"content":"## Final output preparation\n\nFormats and structures the final workflow for output."},"typeVersion":1}],"connections":{}}</code></pre>
+</body>
+
+</html>
