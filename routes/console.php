@@ -17,4 +17,6 @@ Schedule::call(function () {
     }
 })->everyTenMinutes();
 
-Schedule::command('n8n:import-workflows')->hourly()->withoutOverlapping();
+// Schedule::command('n8n:import-workflows')->hourly()->withoutOverlapping();
+Schedule::command('seo:generate-keywords')->hourly()->withoutOverlapping();
+Schedule::command('seo:update-uncategorized')->hourly()->withoutOverlapping();
