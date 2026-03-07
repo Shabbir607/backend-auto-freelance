@@ -71,16 +71,58 @@ class UpdateUncategorizedContentWithAi implements ShouldQueue
             Log::warning("Skipping {$type} ID {$model->id} because content is empty.");
             return;
         }
+$prompt = "You are a world-class SEO strategist with deep expertise in on-page optimization, search intent analysis, and Google ranking factors. Your goal is to make every page rank #1 on Google for its target keyword.
 
-        $prompt = "You are an expert SEO assistant. I have a {$type} that is currently uncategorized or has a generic title.
-Here is the current title: {$title}
-Here is the content/description: " . Str::limit(strip_tags($content), 2000) . "
+I have a {$type} with the following details:
+Current Title: {$title}
+Content: " . Str::limit(strip_tags($content), 2000) . "
 
-Generate a highly engaging, SEO-optimized title and a concise, fitting category name for this {$type}.
-Return ONLY a valid JSON object in this exact format, with no markdown formatting or extra text:
+Analyze this content deeply and perform the following tasks:
+
+1. IDENTIFY the single most valuable primary keyword this page should rank for based on search volume, intent match, and competition opportunity.
+
+2. REWRITE the title to:
+   - Include the primary keyword naturally within the first 60 characters
+   - Trigger click-through with power words (Guide, How to, Best, Step-by-Step, Free, etc.)
+   - Match the exact search intent (informational, transactional, or commercial)
+   - Be unique, specific, and compelling
+   - Never exceed 60 characters
+
+3. WRITE a meta description that:
+   - Opens with the primary keyword or a close variant
+   - Clearly states the benefit or outcome the user will get
+   - Includes a soft call to action
+   - Is between 140-155 characters exactly
+   - Feels human and natural, not robotic
+
+4. ASSIGN a precise category that:
+   - Reflects the core topic cluster this page belongs to
+   - Is 1-3 words maximum
+   - Matches how real users and Google classify this content type
+
+5. GENERATE an H1 heading that:
+   - Is different from the meta title but targets the same keyword
+   - Is action-oriented and benefit-driven
+   - Is between 40-70 characters
+
+6. LIST 5 secondary keywords this page should naturally include in its content to support the primary keyword ranking.
+
+7. IDENTIFY the search intent of this page:
+   - Informational (user wants to learn)
+   - Navigational (user wants to find a specific site)
+   - Commercial (user is researching before buying)
+   - Transactional (user is ready to act)
+
+Return ONLY a valid JSON object with no markdown, no code blocks, no extra text:
 {
-    \"title\": \"Your New Title Here\",
-    \"category\": \"Your New Category Here\"
+    \"primary_keyword\": \"most important target keyword\",
+    \"title\": \"SEO optimized meta title under 60 chars\",
+    \"meta_description\": \"compelling meta description 140-155 chars\",
+    \"category\": \"Topic Category\",
+    \"h1\": \"Page H1 heading\",
+    \"secondary_keywords\": [\"keyword1\", \"keyword2\", \"keyword3\", \"keyword4\", \"keyword5\"],
+    \"search_intent\": \"informational|navigational|commercial|transactional\",
+    \"slug\": \"seo-friendly-url-slug\"
 }";
 
         $aiResponse = $this->callLongchatApi($prompt);
@@ -92,9 +134,22 @@ Return ONLY a valid JSON object in this exact format, with no markdown formattin
 
         $json = $this->extractJson($aiResponse);
 
-        if (isset($json['title']) && isset($json['category'])) {
-            $newTitle = $json['title'];
-            $newCategoryName = $json['category'];
+        if (isset($json['title']) || isset($json['h1'])) {
+            $newMetaTitle = $json['title'] ?? null;
+            $newTitle = $json['h1'] ?? $json['title'] ?? 'Generated Title';
+            $newCategoryName = $json['category'] ?? 'Uncategorized';
+            $metaDescription = $json['meta_description'] ?? null;
+            $slugFromAi = $json['slug'] ?? null;
+            
+            // Build meta keywords from primary and secondary
+            $keywordsList = [];
+            if (!empty($json['primary_keyword'])) {
+                $keywordsList[] = $json['primary_keyword'];
+            }
+            if (!empty($json['secondary_keywords']) && is_array($json['secondary_keywords'])) {
+                $keywordsList = array_merge($keywordsList, $json['secondary_keywords']);
+            }
+            $metaKeywords = !empty($keywordsList) ? implode(', ', $keywordsList) : null;
 
             // Handle Category
             if ($type === 'blog') {
@@ -117,10 +172,20 @@ Return ONLY a valid JSON object in this exact format, with no markdown formattin
 
             // Update Model
             $model->title = $newTitle;
+            if ($newMetaTitle) {
+                $model->meta_title = $newMetaTitle;
+            }
+            if ($metaDescription) {
+                $model->meta_description = $metaDescription;
+            }
+            if ($metaKeywords) {
+                $model->meta_keywords = $metaKeywords;
+            }
+            
             $model->category_id = $category->id;
             
             // Generate a fresh unique slug
-            $newSlug = Str::slug($newTitle);
+            $newSlug = $slugFromAi ? Str::slug($slugFromAi) : Str::slug($newTitle);
             
             // Check for duplicate slugs
             $count = 1;
