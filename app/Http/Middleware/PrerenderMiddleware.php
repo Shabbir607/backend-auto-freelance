@@ -18,6 +18,24 @@ class PrerenderMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
+        $uri = $request->getRequestUri();
+        $frontendUrl = env('FRONTEND_URL', 'https://edgelancer.com');
+
+        // Priority 3 & 4: Redirect known 404s and junk URLs (Uncategorized/Numeric)
+        if (
+            str_contains($uri, '/blogs/rss-ai-summarizer-guide') ||
+            str_contains($uri, '/blogs/airtable-markdown-to-html-guide') ||
+            str_contains($uri, 'uncategorized') ||
+            preg_match('/\/blogs\/[0-9]+-/', $uri) ||
+            preg_match('/\/workflow\/[0-9]+-/', $uri)
+        ) {
+            $redirectTarget = str_contains($uri, '/workflow/') 
+                ? rtrim($frontendUrl, '/') . '/workflows' 
+                : rtrim($frontendUrl, '/') . '/blogs';
+            
+            return redirect($redirectTarget, 301);
+        }
+
         $userAgent = $request->header('User-Agent');
         $bots = [
             'googlebot', 'bingbot', 'yandexbot', 'duckduckbot', 'slurp', 

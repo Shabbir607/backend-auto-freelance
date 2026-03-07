@@ -36,7 +36,11 @@ class SitemapController extends Controller
         try {
             $blogs = DB::table('blogs')
                 ->where('status', 'published')
-                ->get(['slug', 'updated_at']);
+                ->where('slug', 'not like', '%uncategorized%')
+                ->get(['slug', 'updated_at'])
+                ->filter(function ($blog) {
+                    return !preg_match('/^[0-9]+-/', $blog->slug);
+                });
             
             foreach ($blogs as $blog) {
                 $xml .= "    <url>\n";
@@ -54,7 +58,11 @@ class SitemapController extends Controller
         try {
             $workflows = DB::table('workflows')
                 ->where('status', 'published')
-                ->get(['slug', 'updated_at']);
+                ->where('slug', 'not like', '%uncategorized%')
+                ->get(['slug', 'updated_at'])
+                ->filter(function ($workflow) {
+                    return !preg_match('/^[0-9]+-/', $workflow->slug);
+                });
                 
             foreach ($workflows as $workflow) {
                 $xml .= "    <url>\n";
