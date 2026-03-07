@@ -53,7 +53,25 @@ class PrerenderMiddleware
 
                 if ($response->successful()) {
                     Log::info("Prerender Successful for: " . $targetUrl);
-                    return response($response->body())
+                    
+                    $html = $response->body();
+                    
+                    // Correcting Domain Exposure: Replace API URL with Frontend URL
+                    // This prevents bots from crawling the api. subdomain
+                    $frontendHost = parse_url($frontendUrl, PHP_URL_HOST);
+                    $currentHost = $request->getHost();
+                    
+                    if ($frontendHost) {
+                        // 1. Replace the current host (api.edgelancer.com usually) with frontend host
+                        $html = str_replace($currentHost, $frontendHost, $html);
+                        
+                        // 2. Explicitly replace api.edgelancer.com just in case it's hardcoded or from different scheme
+                        if ($currentHost !== 'api.edgelancer.com') {
+                            $html = str_replace('api.edgelancer.com', $frontendHost, $html);
+                        }
+                    }
+
+                    return response($html)
                         ->header('Content-Type', 'text/html')
                         ->header('X-Prerendered-By', 'Puppeteer-Laravel');
                 } else {
