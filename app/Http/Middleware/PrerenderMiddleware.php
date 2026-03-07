@@ -71,6 +71,16 @@ class PrerenderMiddleware
                         }
                     }
 
+                    // Inject SEO Tags (Canonical & Robots)
+                    // This ensures Google indexes the correct frontend URL
+                    $canonicalUrl = $frontendUrl . $request->getRequestUri();
+                    $seoTags = "\n    <link rel=\"canonical\" href=\"{$canonicalUrl}\" />";
+                    $seoTags .= "\n    <meta name=\"robots\" content=\"index, follow\" />\n";
+                    
+                    if (preg_match('/<head>/i', $html)) {
+                        $html = preg_replace('/(<head>)/i', "$1" . $seoTags, $html);
+                    }
+
                     return response($html)
                         ->header('Content-Type', 'text/html')
                         ->header('X-Prerendered-By', 'Puppeteer-Laravel');
