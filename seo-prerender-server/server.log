@@ -1,0 +1,9 @@
+nohup: ignoring input
+
+> seo-prerender-server@1.0.0 start
+> node server.js
+
+Prerender microservice listening on port 3000
+Puppeteer browser initialized successfully.
+[RENDERING] https://www.google.com
+[CACHE MISS] Rendered and cached https://www.google.com

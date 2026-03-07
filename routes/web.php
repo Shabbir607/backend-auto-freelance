@@ -14,7 +14,7 @@ Route::get('/sitemap.xml', [SitemapController::class, 'index']);
 
 // API Status
 Route::get('/', function () {
-    return response()->json(['status' => 'Nexus AI Freelance Hub API is running']);
+    return redirect('https://edgelancer.com/', 301);
 });
 
 // Fallback for non-API routes
