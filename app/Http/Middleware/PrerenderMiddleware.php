@@ -10,16 +10,6 @@ use Illuminate\Support\Facades\Log;
 class PrerenderMiddleware
 {
     /**
-     * The URIs that should be excluded from prerendering.
-     *
-     * @var array
-     */
-    protected $except = [
-        'api/*',
-        'sitemap.xml',
-    ];
-
-    /**
      * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -28,21 +18,7 @@ class PrerenderMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        // Don't prerender if it's not a GET request
-        if (!$request->isMethod('GET')) {
-            return $next($request);
-        }
-
-        // Don't prerender if the URL matches an excluded path
-        foreach ($this->except as $except) {
-            if ($request->is($except)) {
-                return $next($request);
-            }
-        }
-
-        // Only prerender if the user agent is a bot
-        $userAgent = strtolower($request->header('User-Agent'));
-        
+        $userAgent = $request->header('User-Agent');
         $bots = [
             'googlebot', 'bingbot', 'yandexbot', 'duckduckbot', 'slurp', 
             'twitterbot', 'facebookexternalhit', 'linkedinbot', 'embedly', 
@@ -54,41 +30,38 @@ class PrerenderMiddleware
         $isBot = false;
         if ($userAgent) {
             foreach ($bots as $bot) {
-                if (str_contains($userAgent, $bot)) {
+                if (stripos($userAgent, $bot) !== false) {
                     $isBot = true;
+                    Log::info("Prerender Bot Detected: " . $userAgent);
                     break;
                 }
             }
         }
 
-        if (!$isBot) {
-            return $next($request);
-        }
+        if ($isBot) {
+            $frontendUrl = env('FRONTEND_URL', 'https://edgelancer.com');
+            $prerenderServerUrl = env('PRERENDER_SERVER_URL', 'http://localhost:3000/render');
+            
+            // Reconstruct the full frontend URL the bot intended to visit
+            $targetUrl = $frontendUrl . $request->getRequestUri();
+            Log::info("Prerendering URL: " . $targetUrl);
+            
+            try {
+                $response = Http::timeout(30)->get($prerenderServerUrl, [
+                    'url' => $targetUrl
+                ]);
 
-        // User is a bot, fetch the prerendered HTML
-        $prerenderUrl = env('PRERENDER_SERVER_URL', 'http://localhost:3000/render');
-        
-        // Construct the target URL on the frontend
-        $frontendUrl = rtrim(env('FRONTEND_URL', 'https://edgelancer.com'), '/');
-        $path = $request->getRequestUri();
-        
-        // If the bot somehow hit the API directly (e.g. following a link), 
-        // we might need to strip the /api prefix for the frontend mapping.
-        // But usually, they hit the frontend domain.
-        $targetUrl = $frontendUrl . $path;
-
-        try {
-            $response = Http::timeout(40)->get($prerenderUrl, [
-                'url' => $targetUrl
-            ]);
-
-            if ($response->successful()) {
-                return response($response->body(), 200)
-                    ->header('Content-Type', 'text/html; charset=UTF-8')
-                    ->header('X-Prerendered-By', 'Puppeteer-Laravel');
+                if ($response->successful()) {
+                    Log::info("Prerender Successful for: " . $targetUrl);
+                    return response($response->body())
+                        ->header('Content-Type', 'text/html')
+                        ->header('X-Prerendered-By', 'Puppeteer-Laravel');
+                } else {
+                    Log::warning("Prerender Failed (Status " . $response->status() . ") for: " . $targetUrl);
+                }
+            } catch (\Exception $e) {
+                Log::error("Prerender Error: " . $e->getMessage());
             }
-        } catch (\Exception $e) {
-            Log::error('Prerender error for '.$targetUrl.': ' . $e->getMessage());
         }
 
         return $next($request);
