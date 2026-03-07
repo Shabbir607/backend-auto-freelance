@@ -15,10 +15,10 @@ class FreelancerService
 
     public function __construct()
     {
-        $this->clientId      = config('services.freelancer.client_id');
-        $this->clientSecret  = config('services.freelancer.client_secret');
-        $this->redirectUri   = config('services.freelancer.redirect_uri');
-        $this->baseUrl       = rtrim(config('services.freelancer.base_url'), '/');
+        $this->clientId      = config('services.freelancer.client_id') ?? '';
+        $this->clientSecret  = config('services.freelancer.client_secret') ?? '';
+        $this->redirectUri   = config('services.freelancer.redirect_uri') ?? '';
+        $this->baseUrl       = rtrim(config('services.freelancer.base_url') ?? '', '/');
     }
 
     /**

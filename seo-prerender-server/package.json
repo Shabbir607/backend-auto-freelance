@@ -1,0 +1,15 @@
+{
+    "name": "seo-prerender-server",
+    "version": "1.0.0",
+    "description": "Puppeteer microservice for SEO prerendering",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "dependencies": {
+        "cors": "^2.8.5",
+        "express": "^4.18.2",
+        "node-cache": "^5.1.2",
+        "puppeteer": "^22.0.0"
+    }
+}
