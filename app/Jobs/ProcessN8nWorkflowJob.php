@@ -171,6 +171,14 @@ class ProcessN8nWorkflowJob implements ShouldQueue
         $workflowSlug = Str::slug($name) . '-' . Str::slug($firstCategoryName);
         $workflowSlug = str_replace('.json', '', $workflowSlug);
 
+        // Ensure slug uniqueness to prevent Integrity Constraint Violations
+        $originalSlug = $workflowSlug;
+        $slugCount = 1;
+        while (\App\Models\Workflow::where('slug', $workflowSlug)->where('external_id', '!=', $id)->exists()) {
+            $workflowSlug = $originalSlug . '-' . $slugCount;
+            $slugCount++;
+        }
+
         // Generate Content via AI Service
         try {
             $aiData = $aiService->generateForWorkflow($name, 'n8n workflow automation', $jsonData, $this->customPrompt, $workflowSlug);

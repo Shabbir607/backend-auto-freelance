@@ -36,9 +36,6 @@ return Application::configure(basePath: dirname(__DIR__))
         
         // Security Headers
         $middleware->append(SecurityHeaders::class);
-
-        // SEO Prerender Middleware for Bots
-        $middleware->append(\App\Http\Middleware\PrerenderMiddleware::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
