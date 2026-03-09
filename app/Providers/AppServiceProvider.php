@@ -28,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
 
             // 1. Check if the IP is persistently blocked (long-term)
             if (\Illuminate\Support\Facades\Cache::get("permanently_blocked_{$ip}")) {
-                return Limit::perMinute(1160)->by($ip)->response(function () {
+                return Limit::perMinute(60)->by($ip)->response(function () {
                     return response()->json([
                         'message' => 'Your IP has been flagged for suspicious activity and is temporarily blocked.'
                     ], 403);
@@ -39,7 +39,7 @@ class AppServiceProvider extends ServiceProvider
                 // Persistent limits for guests (usually scrapers)
                 return [
                     // If they hit 10/min, we block them for 7 days
-                    Limit::perMinute(1130)->by($ip)->response(function () use ($ip) {
+                    Limit::perMinute(60)->by($ip)->response(function () use ($ip) {
                         \Illuminate\Support\Facades\Cache::put("permanently_blocked_{$ip}", true, now()->addMinutes(10));
                         return response()->json([
                             'message' => 'Rate limit exceeded. Your IP has been blocked'
@@ -51,8 +51,8 @@ class AppServiceProvider extends ServiceProvider
 
             // Strict limits for authenticated users
             return [
-                Limit::perMinute(1140)->by($user->id),
-                Limit::perHour(1300)->by($user->id),
+                Limit::perMinute(40)->by($user->id),
+                Limit::perHour(300)->by($user->id),
                 Limit::perDay(1000)->by($user->id),
             ];
         });
