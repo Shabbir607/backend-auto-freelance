@@ -22,6 +22,7 @@ return [
         'http://127.0.0.1:8000',
         'https://edgelancer.com',
         'http://edgelancer.com',
+        'https://edge.srv1381478.hstgr.cloud',
         'https://www.edgelancer.com',
         'http://www.edgelancer.com',
 
