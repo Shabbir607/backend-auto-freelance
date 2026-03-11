@@ -42,7 +42,7 @@ class AppServiceProvider extends ServiceProvider
 
                 return [
                     // If they hit 110/min per endpoint, we block them for 10 minutes
-                    Limit::perMinute(110)
+                    Limit::perMinute(130)
                         ->by($ip . '|' . $endpoint)
                         ->response(function () use ($ip) {
                             \Illuminate\Support\Facades\Cache::put("permanently_blocked_{$ip}", true, now()->addMinutes(10));
