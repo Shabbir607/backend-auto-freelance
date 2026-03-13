@@ -1,0 +1,28 @@
+{
+  "id": "cef15a54-e45c-458d-85df-fddcbb118acb",
+  "name": "Untitled Page",
+  "storyboards": [
+    {
+      "id": "570b3cc8-bde2-46df-8a4b-f0cf10118046",
+      "width": 1512,
+      "height": 982,
+      "x": -756,
+      "y": -461,
+      "zIndex": 0,
+      "type": "APPLICATION",
+      "route": "/"
+    },
+    {
+      "id": "45a491cc-f1bb-4a46-8956-0ee19ed0200e",
+      "name": "SecureInterviewClientDemo",
+      "width": 1200,
+      "height": 800,
+      "x": 800,
+      "y": -461,
+      "zIndex": 10,
+      "type": "COMPONENT",
+      "importPath": "./Secureinterviewclientdemo-45a491cc.tsx"
+    }
+  ],
+  "config_version": "1.0.0"
+}
