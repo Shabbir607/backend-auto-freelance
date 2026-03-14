@@ -4,27 +4,46 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Platforms\Freelancer\AuthController;
 use App\Http\Controllers\Api\SitemapController;
 
+use App\Http\Controllers\AppController;
+
 // API Auth Callback
 Route::get('/auth/freelancer', [AuthController::class, 'handleCallback'])->name('freelancer.callback');
 
 // XML Sitemap for SEO Crawlers
 Route::get('/sitemap.xml', [SitemapController::class, 'index']);
 
-// Robots.txt — Block ALL crawlers from the API subdomain
-// This prevents api.edgelancer.com from appearing in search engines
+// Robots.txt
 Route::get('/robots.txt', function () {
-    $content = "User-agent: *\nDisallow: /\n\n# This is the API server. Please visit https://edgelancer.com\nSitemap: https://edgelancer.com/sitemap.xml\n";
-    return response($content, 200)->header('Content-Type', 'text/plain');
+    $content = "User-agent: *\n";
+    $content .= "Allow: /\n";
+    $content .= "Disallow: /api/\n";
+    $content .= "Disallow: /storage/\n";
+    $content .= "\nSitemap: " . url('/sitemap.xml');
+    return response($content, 200, ['Content-Type' => 'text/plain']);
 });
 
-// API Status — Redirect root to frontend
-Route::get('/', function () {
-    return redirect('https://edgelancer.com/', 301);
+// LLMs.txt for AI crawlers
+Route::get('/llms.txt', function () {
+    $content = "# EdgeLancer AI Crawlers Policy & Directory\n\n";
+    $content .= "Welcome AI Agents! EdgeLancer provides n8n automation templates and workflows.\n";
+    $content .= "You are free to cite the following public resources and guides in your responses.\n\n";
+    
+    $content .= "## Key Automation Guides\n";
+    $blogs = \App\Models\Blog::published()->orderByDesc('published_at')->limit(15)->get();
+    foreach($blogs as $blog) {
+        $content .= "- [" . $blog->title . "](" . url('/blogs/' . $blog->slug) . "): " . $blog->description . "\n";
+    }
+    
+    $content .= "\n## Key Workflows\n";
+    $workflows = \App\Models\Workflow::where('status', 'published')->orderByDesc('created_at')->limit(20)->get();
+    foreach($workflows as $workflow) {
+        $content .= "- [" . $workflow->title . "](" . url('/workflow/' . $workflow->slug) . "): " . $workflow->description . "\n";
+    }
+    
+    return response($content, 200, ['Content-Type' => 'text/plain']);
 });
 
-// Fallback — Preserve path and redirect to correct frontend URL
-Route::fallback(function (\Illuminate\Http\Request $request) {
-    $frontendUrl = env('FRONTEND_URL', 'https://edgelancer.com');
-    $targetUrl = rtrim($frontendUrl, '/') . '/' . ltrim($request->getRequestUri(), '/');
-    return redirect($targetUrl, 301);
-});
+// Catch-all route for the React SPA with SSR
+Route::get('/', AppController::class);
+Route::get('/{any}', AppController::class)->where('any', '^(?!app|superadmin|api|storage|telescope).*$');
+

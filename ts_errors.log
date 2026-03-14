@@ -1,0 +1,50 @@
+resources/js/src/components/ProductionTemplates.tsx(34,26): error TS7031: Binding element 'children' implicitly has an 'any' type.
+resources/js/src/components/ProductionTemplates.tsx(34,52): error TS7031: Binding element 'onClick' implicitly has an 'any' type.
+resources/js/src/components/ProductionTemplates.tsx(60,29): error TS7006: Parameter 'id' implicitly has an 'any' type.
+resources/js/src/components/ProductionTemplates.tsx(125,30): error TS7006: Parameter 'slug' implicitly has an 'any' type.
+resources/js/src/components/SupportChatFloat.tsx(65,31): error TS2503: Cannot find namespace 'NodeJS'.
+resources/js/src/components/SupportChatFloat.tsx(66,35): error TS2503: Cannot find namespace 'NodeJS'.
+resources/js/src/components/SupportChatFloat.tsx(67,34): error TS2503: Cannot find namespace 'NodeJS'.
+resources/js/src/components/SupportChatFloat.tsx(155,59): error TS2503: Cannot find namespace 'NodeJS'.
+resources/js/src/components/SupportChatFloat.tsx(169,44): error TS2503: Cannot find namespace 'NodeJS'.
+resources/js/src/components/SupportChatFloat.tsx(182,59): error TS2503: Cannot find namespace 'NodeJS'.
+resources/js/src/components/home/Hero.tsx(62,38): error TS2345: Argument of type 'WorkflowResponse[]' is not assignable to parameter of type 'SetStateAction<never[]>'.
+  Type 'WorkflowResponse[]' is not assignable to type 'never[]'.
+    Type 'WorkflowResponse' is not assignable to type 'never'.
+resources/js/src/components/home/Hero.tsx(141,57): error TS2339: Property 'id' does not exist on type 'never'.
+resources/js/src/components/home/Hero.tsx(143,79): error TS2339: Property 'title' does not exist on type 'never'.
+resources/js/src/components/home/Hero.tsx(144,89): error TS2339: Property 'slug' does not exist on type 'never'.
+resources/js/src/components/home/Hero.tsx(146,110): error TS2339: Property 'title' does not exist on type 'never'.
+resources/js/src/components/home/Hero.tsx(147,107): error TS2339: Property 'description' does not exist on type 'never'.
+resources/js/src/pages/NewsletterSubscribers.tsx(61,7): error TS2353: Object literal may only specify known properties, and 'message' does not exist in type 'ConfirmationOptions'.
+resources/js/src/pages/NewsletterSubscribers.tsx(188,19): error TS2322: Type '{ currentPage: number; totalPages: number; onPageChange: Dispatch<SetStateAction<number>>; className: string; }' is not assignable to type 'IntrinsicAttributes & PaginationControlsProps<any>'.
+  Property 'currentPage' does not exist on type 'IntrinsicAttributes & PaginationControlsProps<any>'.
+resources/js/src/pages/app/AgencyJobBoard.tsx(369,15): error TS2345: Argument of type '{ title: string; description: string; variant: string; }' is not assignable to parameter of type 'string'.
+resources/js/src/pages/app/AgencyJobBoard.tsx(395,15): error TS2345: Argument of type '{ title: string; description: string; variant: string; }' is not assignable to parameter of type 'string'.
+resources/js/src/pages/app/AgencyJobBoard.tsx(405,15): error TS2345: Argument of type '{ title: string; description: string; variant: string; }' is not assignable to parameter of type 'string'.
+resources/js/src/pages/app/CVManager.tsx(187,15): error TS2345: Argument of type '{ title: string; description: string; variant: string; }' is not assignable to parameter of type 'string'.
+resources/js/src/pages/app/CVManager.tsx(195,15): error TS2345: Argument of type '{ title: string; description: string; variant: string; }' is not assignable to parameter of type 'string'.
+resources/js/src/pages/app/CVManager.tsx(209,15): error TS2345: Argument of type '{ title: string; description: string; variant: string; }' is not assignable to parameter of type 'string'.
+resources/js/src/pages/app/MarketplaceAccountDetail.tsx(121,17): error TS2345: Argument of type '(prev: { id: string; name: string; email: string; status: string; earnings: number; connects: number; rating: number; }[] | { id: string; name: string; email: string; status: string; earnings: number; connects: null; rating: number; }[]) => ({ ...; } | { ...; })[]' is not assignable to parameter of type 'SetStateAction<{ id: string; name: string; email: string; status: string; earnings: number; connects: number; rating: number; }[] | { id: string; name: string; email: string; status: string; earnings: number; connects: null; rating: number; }[]>'.
+  Type '(prev: { id: string; name: string; email: string; status: string; earnings: number; connects: number; rating: number; }[] | { id: string; name: string; email: string; status: string; earnings: number; connects: null; rating: number; }[]) => ({ ...; } | { ...; })[]' is not assignable to type '(prevState: { id: string; name: string; email: string; status: string; earnings: number; connects: number; rating: number; }[] | { id: string; name: string; email: string; status: string; earnings: number; connects: null; rating: number; }[]) => { ...; }[] | { ...; }[]'.
+    Type '({ id: string; name: string; email: string; status: string; earnings: number; connects: number; rating: number; } | { id: string; name: string; email: string; status: string; earnings: number; connects: null; rating: number; })[]' is not assignable to type '{ id: string; name: string; email: string; status: string; earnings: number; connects: number; rating: number; }[] | { id: string; name: string; email: string; status: string; earnings: number; connects: null; rating: number; }[]'.
+      Type '({ id: string; name: string; email: string; status: string; earnings: number; connects: number; rating: number; } | { id: string; name: string; email: string; status: string; earnings: number; connects: null; rating: number; })[]' is not assignable to type '{ id: string; name: string; email: string; status: string; earnings: number; connects: number; rating: number; }[]'.
+        Type '{ id: string; name: string; email: string; status: string; earnings: number; connects: number; rating: number; } | { id: string; name: string; email: string; status: string; earnings: number; connects: null; rating: number; }' is not assignable to type '{ id: string; name: string; email: string; status: string; earnings: number; connects: number; rating: number; }'.
+          Type '{ id: string; name: string; email: string; status: string; earnings: number; connects: null; rating: number; }' is not assignable to type '{ id: string; name: string; email: string; status: string; earnings: number; connects: number; rating: number; }'.
+            Types of property 'connects' are incompatible.
+              Type 'null' is not assignable to type 'number'.
+resources/js/src/pages/app/SupportChatAdmin.tsx(74,45): error TS7006: Parameter 'item' implicitly has an 'any' type.
+resources/js/src/pages/app/SupportChatAdmin.tsx(232,7): error TS2353: Object literal may only specify known properties, and 'message' does not exist in type 'ConfirmationOptions'.
+resources/js/src/pages/app/SupportChatAdmin.tsx(351,19): error TS2322: Type '{ currentPage: number; totalPages: number; onPageChange: Dispatch<SetStateAction<number>>; className: string; }' is not assignable to type 'IntrinsicAttributes & PaginationControlsProps<any>'.
+  Property 'currentPage' does not exist on type 'IntrinsicAttributes & PaginationControlsProps<any>'.
+resources/js/src/pages/app/UnifiedChat.tsx(364,58): error TS2345: Argument of type 'null' is not assignable to parameter of type 'SetStateAction<{ id: string; platform: string; client: { name: string; avatar: string; company: string; }; project: string; lastMessage: string; lastMessageTime: string; unread: number; starred: boolean; budget: string; status: string; }>'.
+resources/js/src/pages/auth/LoginPage.tsx(158,17): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+resources/js/src/pages/auth/SignupPage.tsx(164,17): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+resources/js/src/pages/interview/SecureInterviewClient.tsx(149,39): error TS2503: Cannot find namespace 'NodeJS'.
+resources/js/src/pages/website/CourseDetailsPage.tsx(51,48): error TS18048: 'revRes.data' is possibly 'undefined'.
+resources/js/src/pages/website/CourseDetailsPage.tsx(83,44): error TS18048: 'revRes.data' is possibly 'undefined'.
+resources/js/src/pages/website/CourseDetailsPage.tsx(126,76): error TS2532: Object is possibly 'undefined'.
+resources/js/src/pages/website/CourseDetailsPage.tsx(224,98): error TS2532: Object is possibly 'undefined'.
+resources/js/src/pages/website/LessonViewerPage.tsx(538,28): error TS18048: 'res.data' is possibly 'undefined'.
