@@ -20,8 +20,14 @@ class SitemapController extends Controller
         $staticUrls = [
             '/',
             '/blogs',
-            '/workflow-library',
+            '/workflows',
+            '/templates',
+            '/contact',
+            '/sitemap',
+            '/courses'
         ];
+        
+        $xml .= "    <!-- Static Pages -->\n";
 
         foreach ($staticUrls as $url) {
             $loc = $frontendUrl . (str_starts_with($url, '/') ? $url : '/' . $url);

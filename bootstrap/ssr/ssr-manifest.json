@@ -1,0 +1,163 @@
+{
+  "node_modules/reactflow/dist/style.css": [],
+  "resources/js/src/App.tsx": [],
+  "resources/js/src/api/mocks/_auth.ts": [],
+  "resources/js/src/api/mocks/_freelanceAccounts.ts": [],
+  "resources/js/src/api/mocks/_messages.ts": [],
+  "resources/js/src/api/mocks/_notifications.ts": [],
+  "resources/js/src/api/mocks/_projects.ts": [],
+  "resources/js/src/api/mocks/_social.ts": [],
+  "resources/js/src/api/mocks/_system.ts": [],
+  "resources/js/src/components/ConfirmationDialog.tsx": [],
+  "resources/js/src/components/DynamicIcon.tsx": [],
+  "resources/js/src/components/FAQSection.tsx": [],
+  "resources/js/src/components/GlobalLoadingOverlay.tsx": [],
+  "resources/js/src/components/LoadingScreen.tsx": [],
+  "resources/js/src/components/ProductionTemplates.tsx": [],
+  "resources/js/src/components/SEO/SEOHelmet.tsx": [],
+  "resources/js/src/components/SocialShareDialog.tsx": [],
+  "resources/js/src/components/SupportChatFloat.tsx": [],
+  "resources/js/src/components/home/BentoGrid.tsx": [],
+  "resources/js/src/components/home/BlogsSection.tsx": [],
+  "resources/js/src/components/home/CTASection.tsx": [],
+  "resources/js/src/components/home/CategoriesSection.tsx": [],
+  "resources/js/src/components/home/CodeDemoSection.tsx": [],
+  "resources/js/src/components/home/Hero.tsx": [],
+  "resources/js/src/components/home/LazyStarfield.tsx": [],
+  "resources/js/src/components/home/SpotlightCard.tsx": [],
+  "resources/js/src/components/home/Starfield.tsx": [
+    "/build/assets/Starfield-Dhj2bYIO.js"
+  ],
+  "resources/js/src/components/layout/DashboardLayout.tsx": [],
+  "resources/js/src/components/layout/Header.tsx": [],
+  "resources/js/src/components/layout/PublicFooter.tsx": [],
+  "resources/js/src/components/layout/PublicNavbar.tsx": [],
+  "resources/js/src/components/layout/PublicNavbarLayout.tsx": [],
+  "resources/js/src/components/layout/Sidebar.tsx": [],
+  "resources/js/src/components/ui/avatar.tsx": [],
+  "resources/js/src/components/ui/badge.tsx": [],
+  "resources/js/src/components/ui/button.tsx": [],
+  "resources/js/src/components/ui/card.tsx": [],
+  "resources/js/src/components/ui/checkbox.tsx": [
+    "/build/assets/SecureInterviewClient-BsHihC_C.js"
+  ],
+  "resources/js/src/components/ui/dialog.tsx": [],
+  "resources/js/src/components/ui/dropdown-menu.tsx": [
+    "/build/assets/BlogManagement-BvOWH8PQ.js"
+  ],
+  "resources/js/src/components/ui/input.tsx": [],
+  "resources/js/src/components/ui/label.tsx": [
+    "/build/assets/label-Bi_79Mmn.js"
+  ],
+  "resources/js/src/components/ui/pagination-controls.tsx": [
+    "/build/assets/pagination-controls-CgC50Tbv.js"
+  ],
+  "resources/js/src/components/ui/progress.tsx": [
+    "/build/assets/SecureInterviewClient-BsHihC_C.js"
+  ],
+  "resources/js/src/components/ui/scroll-area.tsx": [],
+  "resources/js/src/components/ui/select.tsx": [
+    "/build/assets/select-H0JYI2nI.js"
+  ],
+  "resources/js/src/components/ui/sheet.tsx": [],
+  "resources/js/src/components/ui/skeleton.tsx": [],
+  "resources/js/src/components/ui/switch.tsx": [],
+  "resources/js/src/components/ui/table.tsx": [
+    "/build/assets/table-DWq9r8gv.js"
+  ],
+  "resources/js/src/components/ui/textarea.tsx": [
+    "/build/assets/textarea-CMsb0E2l.js"
+  ],
+  "resources/js/src/components/workflow/N8nNode.tsx": [],
+  "resources/js/src/components/workflow/WorkflowReviewsSection.tsx": [],
+  "resources/js/src/contexts/AuthContext.tsx": [],
+  "resources/js/src/contexts/ThemeContext.tsx": [],
+  "resources/js/src/contexts/ToastContext.tsx": [],
+  "resources/js/src/lib/apiConfig.ts": [],
+  "resources/js/src/lib/serverApi.ts": [],
+  "resources/js/src/lib/sounds.ts": [
+    "/build/assets/sounds-B1yfOfjZ.js"
+  ],
+  "resources/js/src/lib/utils.ts": [],
+  "resources/js/src/pages/ContactEnquiries.tsx": [
+    "/build/assets/ContactEnquiries-B_byP5VT.js"
+  ],
+  "resources/js/src/pages/FAQManagement.tsx": [
+    "/build/assets/FAQManagement-BMHX9xSW.js"
+  ],
+  "resources/js/src/pages/NewsletterSubscribers.tsx": [
+    "/build/assets/NewsletterSubscribers-xFtKa_TR.js"
+  ],
+  "resources/js/src/pages/PageManagement.tsx": [
+    "/build/assets/PageManagement-BACe8NNN.js"
+  ],
+  "resources/js/src/pages/app/AdminCourseReviewsPage.tsx": [
+    "/build/assets/AdminCourseReviewsPage-9hXIzbSG.js"
+  ],
+  "resources/js/src/pages/app/AdminCoursesPage.tsx": [
+    "/build/assets/AdminCoursesPage-Iy8rYwHz.js"
+  ],
+  "resources/js/src/pages/app/BlogManagement.tsx": [
+    "/build/assets/BlogManagement-BvOWH8PQ.js"
+  ],
+  "resources/js/src/pages/app/Dashboard.tsx": [
+    "/build/assets/Dashboard-DNWmpFnB.js"
+  ],
+  "resources/js/src/pages/app/SupportChatAdmin.tsx": [
+    "/build/assets/SupportChatAdmin-zuLzpjBU.js"
+  ],
+  "resources/js/src/pages/auth/LoginPage.tsx": [
+    "/build/assets/LoginPage-CBixg35O.js"
+  ],
+  "resources/js/src/pages/auth/SignupPage.tsx": [
+    "/build/assets/SignupPage-CgEfakOq.js"
+  ],
+  "resources/js/src/pages/interview/SecureInterviewClient.tsx": [
+    "/build/assets/SecureInterviewClient-BsHihC_C.js"
+  ],
+  "resources/js/src/pages/superadmin/SuperAdminDashboard.tsx": [
+    "/build/assets/SuperAdminDashboard-DiPLSnv4.js"
+  ],
+  "resources/js/src/pages/website/BlogPage.tsx": [],
+  "resources/js/src/pages/website/BlogSlugPage.tsx": [],
+  "resources/js/src/pages/website/ContactPage.tsx": [
+    "/build/assets/ContactPage-BeDGywNs.js"
+  ],
+  "resources/js/src/pages/website/CourseDetailsPage.tsx": [
+    "/build/assets/CourseDetailsPage-DMfZzyB4.js"
+  ],
+  "resources/js/src/pages/website/CoursesListPage.tsx": [
+    "/build/assets/CoursesListPage-CfU7NZMa.js"
+  ],
+  "resources/js/src/pages/website/HomePage.tsx": [],
+  "resources/js/src/pages/website/LessonViewerPage.tsx": [
+    "/build/assets/LessonViewerPage-B434Hz_W.js"
+  ],
+  "resources/js/src/pages/website/NotFoundPage.tsx": [
+    "/build/assets/NotFoundPage-C98JL7l1.js"
+  ],
+  "resources/js/src/pages/website/SitemapPage.tsx": [
+    "/build/assets/SitemapPage-p70qZH9S.js"
+  ],
+  "resources/js/src/pages/website/TemplatesShowcasePage.tsx": [],
+  "resources/js/src/pages/website/WorkflowDetailsPage.tsx": [],
+  "resources/js/src/pages/website/WorkflowsPage.tsx": [],
+  "resources/js/src/services/blogService.ts": [],
+  "resources/js/src/services/contactService.ts": [
+    "/build/assets/contactService-DYCcY7WF.js"
+  ],
+  "resources/js/src/services/courseService.ts": [
+    "/build/assets/courseService-UHMy8Xl5.js"
+  ],
+  "resources/js/src/services/faqService.ts": [],
+  "resources/js/src/services/newsletterService.ts": [
+    "/build/assets/newsletterService-DXdskxTV.js"
+  ],
+  "resources/js/src/services/pageService.ts": [
+    "/build/assets/pageService-Cxi9cwOM.js"
+  ],
+  "resources/js/src/services/supportChatService.ts": [],
+  "resources/js/src/services/workflowService.ts": [],
+  "resources/js/src/stores/useAppStore.ts": [],
+  "resources/js/ssr.tsx": []
+}

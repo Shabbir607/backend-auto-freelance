@@ -20,8 +20,13 @@ class CentralizedProjectTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->user = User::make(['id' => 1, 'name' => 'Test User']);
+        $this->user = User::factory()->make(['id' => 1, 'name' => 'Test User']);
+        $this->user->syncRoles(['freelancer']);
         $this->actingAs($this->user, 'api');
+        
+        // Mock permissions if necessary
+        \Illuminate\Support\Facades\Gate::define('bid_on_project', fn() => true);
+        \Illuminate\Support\Facades\Gate::define('post_project', fn() => true);
     }
 
     public function test_list_all_projects_aggregates_accounts()
@@ -46,7 +51,7 @@ class CentralizedProjectTest extends TestCase
                 ]);
         });
 
-        $response = $this->getJson("/api/freelancer/{$this->platformSlug}/projects/all");
+        $response = $this->getJson("/api/freelancer/{$this->platformSlug}/test-uuid/all-projects");
 
         $response->assertStatus(200)
                  ->assertJson(['success' => true])
