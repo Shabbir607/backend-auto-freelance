@@ -5,7 +5,7 @@ import { Loader2, ArrowLeft, Layers, CheckCircle2, ChevronLeft, ChevronRight, La
 import { useState, useCallback, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "react-dom/server";
-import "react-router-dom/server.mjs";
+import "react-router";
 import "@radix-ui/react-slot";
 import "class-variance-authority";
 import "clsx";

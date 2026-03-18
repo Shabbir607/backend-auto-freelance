@@ -7,7 +7,7 @@ import { useState, useCallback, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import "react-dom/server";
-import "react-router-dom/server.mjs";
+import "react-router";
 import "@radix-ui/react-slot";
 import "class-variance-authority";
 import "clsx";

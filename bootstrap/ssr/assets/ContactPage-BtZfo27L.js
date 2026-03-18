@@ -5,7 +5,7 @@ import { c as contactService } from "./contactService-DYCcY7WF.js";
 import { Mail, MessageSquare, Clock, Send } from "lucide-react";
 import { useState } from "react";
 import "react-dom/server";
-import "react-router-dom/server.mjs";
+import "react-router";
 import "react-router-dom";
 import "@radix-ui/react-slot";
 import "class-variance-authority";

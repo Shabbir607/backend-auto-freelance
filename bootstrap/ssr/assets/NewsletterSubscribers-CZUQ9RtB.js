@@ -1,13 +1,13 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { a as useToast, o as useConfirmation, B as Button, C as Card, p as CardHeader, q as CardDescription, r as CardTitle, s as CardContent, I as Input, d as Badge } from "../ssr.js";
-import { P as PaginationControls } from "./pagination-controls-CgC50Tbv.js";
+import { C as CompactPagination } from "./pagination-controls-Bz09fOze.js";
 import { T as Table, a as TableHeader, b as TableRow, c as TableHead, d as TableBody, e as TableCell } from "./table-DWq9r8gv.js";
 import { n as newsletterService } from "./newsletterService-DXdskxTV.js";
 import { formatDistanceToNow } from "date-fns";
 import { RefreshCw, Search, Loader2, Mail, Trash2 } from "lucide-react";
 import { useState, useEffect } from "react";
 import "react-dom/server";
-import "react-router-dom/server.mjs";
+import "react-router";
 import "react-router-dom";
 import "@radix-ui/react-slot";
 import "class-variance-authority";
@@ -65,7 +65,7 @@ function NewsletterSubscribers() {
   const handleDelete = async (id, email) => {
     const confirmed = await confirm({
       title: "Delete Subscriber",
-      message: `Are you sure you want to delete ${email} from newsletter subscribers?`,
+      description: `Are you sure you want to delete ${email} from newsletter subscribers?`,
       confirmText: "Delete",
       cancelText: "Cancel"
     });
@@ -149,7 +149,7 @@ function NewsletterSubscribers() {
         ] }, subscriber.id)) })
       ] }),
       totalPages > 1 && /* @__PURE__ */ jsx(
-        PaginationControls,
+        CompactPagination,
         {
           currentPage,
           totalPages,

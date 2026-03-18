@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { e as PublicNavbar, B as Button, P as PublicFooter } from "../ssr.js";
 import "react";
 import "react-dom/server";
-import "react-router-dom/server.mjs";
+import "react-router";
 import "@radix-ui/react-slot";
 import "class-variance-authority";
 import "clsx";

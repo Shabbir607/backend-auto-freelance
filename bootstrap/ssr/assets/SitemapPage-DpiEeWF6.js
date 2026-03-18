@@ -4,7 +4,7 @@ import { Globe, HelpCircle, ArrowRight, Zap, BookOpen, Layers, Layout, Loader2, 
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import "react-dom/server";
-import "react-router-dom/server.mjs";
+import "react-router";
 import "@radix-ui/react-slot";
 import "class-variance-authority";
 import "clsx";

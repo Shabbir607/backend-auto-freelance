@@ -39,21 +39,21 @@
   "resources/js/src/components/ui/button.tsx": [],
   "resources/js/src/components/ui/card.tsx": [],
   "resources/js/src/components/ui/checkbox.tsx": [
-    "/build/assets/SecureInterviewClient-BsHihC_C.js"
+    "/build/assets/SecureInterviewClient-DkQwVjmL.js"
   ],
   "resources/js/src/components/ui/dialog.tsx": [],
   "resources/js/src/components/ui/dropdown-menu.tsx": [
-    "/build/assets/BlogManagement-BvOWH8PQ.js"
+    "/build/assets/BlogManagement-o7tqxcBy.js"
   ],
   "resources/js/src/components/ui/input.tsx": [],
   "resources/js/src/components/ui/label.tsx": [
     "/build/assets/label-Bi_79Mmn.js"
   ],
   "resources/js/src/components/ui/pagination-controls.tsx": [
-    "/build/assets/pagination-controls-CgC50Tbv.js"
+    "/build/assets/pagination-controls-Bz09fOze.js"
   ],
   "resources/js/src/components/ui/progress.tsx": [
-    "/build/assets/SecureInterviewClient-BsHihC_C.js"
+    "/build/assets/SecureInterviewClient-DkQwVjmL.js"
   ],
   "resources/js/src/components/ui/scroll-area.tsx": [],
   "resources/js/src/components/ui/select.tsx": [
@@ -71,6 +71,7 @@
   "resources/js/src/components/workflow/N8nNode.tsx": [],
   "resources/js/src/components/workflow/WorkflowReviewsSection.tsx": [],
   "resources/js/src/contexts/AuthContext.tsx": [],
+  "resources/js/src/contexts/SSRContext.tsx": [],
   "resources/js/src/contexts/ThemeContext.tsx": [],
   "resources/js/src/contexts/ToastContext.tsx": [],
   "resources/js/src/lib/apiConfig.ts": [],
@@ -80,64 +81,64 @@
   ],
   "resources/js/src/lib/utils.ts": [],
   "resources/js/src/pages/ContactEnquiries.tsx": [
-    "/build/assets/ContactEnquiries-B_byP5VT.js"
+    "/build/assets/ContactEnquiries-DD2nnu5Z.js"
   ],
   "resources/js/src/pages/FAQManagement.tsx": [
-    "/build/assets/FAQManagement-BMHX9xSW.js"
+    "/build/assets/FAQManagement-yICv-cjs.js"
   ],
   "resources/js/src/pages/NewsletterSubscribers.tsx": [
-    "/build/assets/NewsletterSubscribers-xFtKa_TR.js"
+    "/build/assets/NewsletterSubscribers-CZUQ9RtB.js"
   ],
   "resources/js/src/pages/PageManagement.tsx": [
-    "/build/assets/PageManagement-BACe8NNN.js"
+    "/build/assets/PageManagement-DHAGgfks.js"
   ],
   "resources/js/src/pages/app/AdminCourseReviewsPage.tsx": [
-    "/build/assets/AdminCourseReviewsPage-9hXIzbSG.js"
+    "/build/assets/AdminCourseReviewsPage-SUfNLfSB.js"
   ],
   "resources/js/src/pages/app/AdminCoursesPage.tsx": [
-    "/build/assets/AdminCoursesPage-Iy8rYwHz.js"
+    "/build/assets/AdminCoursesPage-CGOhROlf.js"
   ],
   "resources/js/src/pages/app/BlogManagement.tsx": [
-    "/build/assets/BlogManagement-BvOWH8PQ.js"
+    "/build/assets/BlogManagement-o7tqxcBy.js"
   ],
   "resources/js/src/pages/app/Dashboard.tsx": [
-    "/build/assets/Dashboard-DNWmpFnB.js"
+    "/build/assets/Dashboard-DmhoB5pu.js"
   ],
   "resources/js/src/pages/app/SupportChatAdmin.tsx": [
-    "/build/assets/SupportChatAdmin-zuLzpjBU.js"
+    "/build/assets/SupportChatAdmin-BRQ6dJvB.js"
   ],
   "resources/js/src/pages/auth/LoginPage.tsx": [
-    "/build/assets/LoginPage-CBixg35O.js"
+    "/build/assets/LoginPage-B4F3x2lN.js"
   ],
   "resources/js/src/pages/auth/SignupPage.tsx": [
-    "/build/assets/SignupPage-CgEfakOq.js"
+    "/build/assets/SignupPage-CW3H_bkh.js"
   ],
   "resources/js/src/pages/interview/SecureInterviewClient.tsx": [
-    "/build/assets/SecureInterviewClient-BsHihC_C.js"
+    "/build/assets/SecureInterviewClient-DkQwVjmL.js"
   ],
   "resources/js/src/pages/superadmin/SuperAdminDashboard.tsx": [
-    "/build/assets/SuperAdminDashboard-DiPLSnv4.js"
+    "/build/assets/SuperAdminDashboard-aS-KDMPl.js"
   ],
   "resources/js/src/pages/website/BlogPage.tsx": [],
   "resources/js/src/pages/website/BlogSlugPage.tsx": [],
   "resources/js/src/pages/website/ContactPage.tsx": [
-    "/build/assets/ContactPage-BeDGywNs.js"
+    "/build/assets/ContactPage-BtZfo27L.js"
   ],
   "resources/js/src/pages/website/CourseDetailsPage.tsx": [
-    "/build/assets/CourseDetailsPage-DMfZzyB4.js"
+    "/build/assets/CourseDetailsPage-CfrCRSag.js"
   ],
   "resources/js/src/pages/website/CoursesListPage.tsx": [
-    "/build/assets/CoursesListPage-CfU7NZMa.js"
+    "/build/assets/CoursesListPage-D_dgr6kF.js"
   ],
   "resources/js/src/pages/website/HomePage.tsx": [],
   "resources/js/src/pages/website/LessonViewerPage.tsx": [
-    "/build/assets/LessonViewerPage-B434Hz_W.js"
+    "/build/assets/LessonViewerPage-B1w78VfT.js"
   ],
   "resources/js/src/pages/website/NotFoundPage.tsx": [
-    "/build/assets/NotFoundPage-C98JL7l1.js"
+    "/build/assets/NotFoundPage-DNWBlxwM.js"
   ],
   "resources/js/src/pages/website/SitemapPage.tsx": [
-    "/build/assets/SitemapPage-p70qZH9S.js"
+    "/build/assets/SitemapPage-DpiEeWF6.js"
   ],
   "resources/js/src/pages/website/TemplatesShowcasePage.tsx": [],
   "resources/js/src/pages/website/WorkflowDetailsPage.tsx": [],

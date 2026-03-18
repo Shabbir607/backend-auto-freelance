@@ -7,7 +7,7 @@ import * as ProgressPrimitive from "@radix-ui/react-progress";
 import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
 import { CheckIcon } from "@radix-ui/react-icons";
 import "react-dom/server";
-import "react-router-dom/server.mjs";
+import "react-router";
 import "react-router-dom";
 import "@radix-ui/react-slot";
 import "class-variance-authority";

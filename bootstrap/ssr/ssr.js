@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import * as React from "react";
 import React__default, { createContext, useContext, useState, useEffect, useCallback, useRef, useMemo, lazy, Suspense, memo } from "react";
 import { renderToString } from "react-dom/server";
-import { StaticRouter } from "react-router-dom/server.mjs";
+import { StaticRouter } from "react-router";
 import { Link, useLocation, useNavigate, useParams, Outlet, Routes, Route, Navigate } from "react-router-dom";
 import { Slot } from "@radix-ui/react-slot";
 import { cva } from "class-variance-authority";
@@ -16,7 +16,7 @@ import * as AvatarPrimitive from "@radix-ui/react-avatar";
 import * as ScrollAreaPrimitive from "@radix-ui/react-scroll-area";
 import { formatDistanceToNow, format } from "date-fns";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import ReactFlow, { Handle, Position, ReactFlowProvider, useReactFlow, Background, useNodesState, useEdgesState, MarkerType, Controls, MiniMap, Panel } from "reactflow";
+import ReactFlow, { Handle, Position, ReactFlowProvider, useReactFlow, Background, applyNodeChanges, applyEdgeChanges, MarkerType, Controls, MiniMap, Panel } from "reactflow";
 import * as SwitchPrimitives from "@radix-ui/react-switch";
 import { useTranslation } from "react-i18next";
 function cn(...inputs) {
@@ -1689,6 +1689,8 @@ function ToastItem({ toast, onClose }) {
     }
   );
 }
+const SSRContext = createContext({});
+const useSSRContext = () => useContext(SSRContext);
 const LoadingScreen$1 = () => {
   return /* @__PURE__ */ jsx("div", { className: "fixed inset-0 z-50 flex items-center justify-center bg-[#020204]", children: /* @__PURE__ */ jsxs("div", { className: "relative", children: [
     /* @__PURE__ */ jsx("div", { className: "absolute inset-0 rounded-full bg-indigo-500/20 blur-xl animate-pulse" }),
@@ -4856,8 +4858,37 @@ function BlogSlugPage() {
     loadRelated();
     loadRelatedWorkflows();
   }, [slug]);
-  const metaTitle = seo?.title || blog?.meta_title || blog?.title || "Blog Post - EdgeLancer";
+  const currentYear = (/* @__PURE__ */ new Date()).getFullYear();
+  const metaTitleText = seo?.title || blog?.meta_title || blog?.title || "Blog Post - EdgeLancer";
+  const metaTitle = metaTitleText.toLowerCase().includes("n8n") ? metaTitleText : `${metaTitleText} - n8n Automation Guide (${currentYear})`;
   const metaDesc = seo?.description || blog?.meta_description || blog?.description || "Read this article on EdgeLancer blog.";
+  const schemaData = blog ? {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": typeof window !== "undefined" ? window.location.href : `https://edgelancer.com/blogs/${blog.slug}`
+    },
+    "headline": metaTitle,
+    "description": metaDesc,
+    "image": seo?.og_image || blog.image_url || "https://edgelancer.com/og-image.png",
+    "author": {
+      "@type": "Person",
+      "name": blog.author?.name || "EdgeLancer Team",
+      "url": "https://edgelancer.com/about"
+      // Placeholder unless author profile URL exists
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "EdgeLancer",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://edgelancer.com/logo.png"
+      }
+    },
+    "datePublished": blog.published_at || blog.created_at,
+    "dateModified": blog.updated_at || blog.published_at || blog.created_at
+  } : void 0;
   const handleShare = async () => {
     if (!blog) return;
     const shareData = {
@@ -4894,7 +4925,7 @@ function BlogSlugPage() {
         ogType: "article",
         publishedTime: blog?.published_at || blog?.created_at,
         modifiedTime: blog?.updated_at,
-        structuredData: seo?.structured_data
+        structuredData: schemaData || seo?.structured_data
       }
     ),
     /* @__PURE__ */ jsxs("div", { className: "fixed inset-0 z-0 pointer-events-none overflow-hidden", children: [
@@ -4948,7 +4979,7 @@ function BlogSlugPage() {
             ] }),
             publishedDate && /* @__PURE__ */ jsxs("div", { className: "flex items-center gap-2 bg-white/5 border border-white/10 rounded-full py-2 px-4", children: [
               /* @__PURE__ */ jsx(Calendar, { className: "w-4 h-4 text-slate-400" }),
-              /* @__PURE__ */ jsx("time", { dateTime: publishedDate, className: "font-medium", children: format(new Date(publishedDate), "MMM d, yyyy") })
+              /* @__PURE__ */ jsx("time", { dateTime: publishedDate, className: "font-medium", children: publishedDate ? format(new Date(publishedDate), "MMM d, yyyy") : "Recently" })
             ] }),
             /* @__PURE__ */ jsxs("div", { className: "flex items-center gap-2 bg-white/5 border border-white/10 rounded-full py-2 px-4", children: [
               /* @__PURE__ */ jsx(Clock, { className: "w-4 h-4 text-slate-400" }),
@@ -5150,7 +5181,53 @@ function BlogSlugPage() {
               }
             }
           ),
-          blog.faqs && blog.faqs.length > 0 && /* @__PURE__ */ jsx("div", { className: "mt-16 pt-16 border-t border-white/10", children: /* @__PURE__ */ jsx(FAQSection, { data: blog.faqs, title: "Frequently Asked Questions", className: "py-0" }) })
+          blog.author && /* @__PURE__ */ jsxs("div", { className: "mt-16 pt-10 border-t border-white/10 flex flex-col sm:flex-row gap-6 items-start sm:items-center bg-white/[0.02] p-8 rounded-3xl", children: [
+            /* @__PURE__ */ jsx("div", { className: "w-20 h-20 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shrink-0 shadow-lg shadow-indigo-500/20", children: /* @__PURE__ */ jsx(User, { className: "w-10 h-10 text-white" }) }),
+            /* @__PURE__ */ jsxs("div", { className: "flex-1", children: [
+              /* @__PURE__ */ jsx("h3", { className: "text-xl font-bold text-white mb-2", children: blog.author.name }),
+              /* @__PURE__ */ jsx("p", { className: "text-indigo-400 text-sm font-semibold mb-3 uppercase tracking-wider", children: "Automation Expert & Content Creator" }),
+              /* @__PURE__ */ jsxs("p", { className: "text-slate-400 leading-relaxed font-light", children: [
+                blog.author.name,
+                " specializes in building complex n8n workflows and AI agents. With extensive hands-on experience in workflow automation, they write practical guides to help businesses scale operations efficiently without code."
+              ] })
+            ] })
+          ] }),
+          blog.faqs && blog.faqs.length > 0 && /* @__PURE__ */ jsxs("div", { className: "mt-16 pt-12 border-t border-white/10", children: [
+            /* @__PURE__ */ jsxs("div", { className: "prose prose-invert max-w-none", children: [
+              /* @__PURE__ */ jsx("h2", { className: "text-2xl font-bold text-white mb-8 border-b border-indigo-500/15 pb-4 inline-block", children: "Key Questions Answered" }),
+              /* @__PURE__ */ jsx("div", { className: "space-y-8 pl-4 border-l-[3px] border-indigo-500/30", children: blog.faqs.map((faq, idx) => /* @__PURE__ */ jsxs("div", { className: "space-y-2", children: [
+                /* @__PURE__ */ jsxs("h3", { className: "text-lg font-semibold text-indigo-300 m-0 p-0", children: [
+                  "Q: ",
+                  faq.question
+                ] }),
+                /* @__PURE__ */ jsxs("p", { className: "text-slate-300 leading-relaxed m-0 p-0", children: [
+                  "A: ",
+                  faq.answer
+                ] })
+              ] }, `faq-prose-${idx}`)) })
+            ] }),
+            /* @__PURE__ */ jsx("div", { className: "mt-12", children: /* @__PURE__ */ jsx(FAQSection, { data: blog.faqs, title: "Frequently Asked Questions (Accordion)", className: "py-0" }) })
+          ] }),
+          !blog.faqs?.length && /* @__PURE__ */ jsxs("div", { className: "mt-16 pt-12 border-t border-white/10 prose prose-invert max-w-none", children: [
+            /* @__PURE__ */ jsx("h2", { className: "text-2xl font-bold text-white mb-6 border-b border-indigo-500/15 pb-4 inline-block", children: "Quick AI Summary Overview" }),
+            /* @__PURE__ */ jsxs("p", { className: "text-slate-300 leading-relaxed pl-4 border-l-[3px] border-indigo-500/30", children: [
+              /* @__PURE__ */ jsx("strong", { children: "Q: How does this workflow automation help?" }),
+              /* @__PURE__ */ jsx("br", {}),
+              "A: This `",
+              blog.title,
+              "` guide provides step-by-step instructions for automating tasks via n8n. It reduces manual data entry and improves operational efficiency.",
+              /* @__PURE__ */ jsx("br", {}),
+              /* @__PURE__ */ jsx("br", {}),
+              /* @__PURE__ */ jsx("strong", { children: "Q: Which tools are integrated?" }),
+              /* @__PURE__ */ jsx("br", {}),
+              "A: By leveraging n8n, this strategy connects multiple external apps through standardized API nodes, making it a robust alternative to Zapier or Make.",
+              /* @__PURE__ */ jsx("br", {}),
+              /* @__PURE__ */ jsx("br", {}),
+              /* @__PURE__ */ jsx("strong", { children: "Q: Do I need coding experience?" }),
+              /* @__PURE__ */ jsx("br", {}),
+              "A: While n8n supports custom JavaScript nodes, the core concepts detailed here rely on visual workflow mapping suitable for non-developers and automation experts alike."
+            ] })
+          ] })
         ] }),
         (relatedWorkflows.length > 0 || relatedBlogs.length > 0) && /* @__PURE__ */ jsxs("div", { className: "mt-24 pt-16 border-t border-white/5 space-y-20", children: [
           relatedWorkflows.length > 0 && /* @__PURE__ */ jsxs("section", { children: [
@@ -5160,10 +5237,10 @@ function BlogSlugPage() {
                   /* @__PURE__ */ jsx(Workflow, { className: "w-3.5 h-3.5 text-cyan-400" }),
                   /* @__PURE__ */ jsx("span", { className: "text-[10px] font-bold text-cyan-400 uppercase tracking-widest", children: "Automation" })
                 ] }),
-                /* @__PURE__ */ jsx("h2", { className: "text-3xl md:text-4xl font-bold text-white tracking-tight", children: "Automate this with Workflows" }),
-                /* @__PURE__ */ jsx("p", { className: "text-slate-400 text-lg font-light max-w-2xl", children: "Ready-to-use n8n templates designed to implement these strategies instantly." })
+                /* @__PURE__ */ jsx("h2", { className: "text-3xl md:text-4xl font-bold text-white tracking-tight", children: "Automate this with n8n Workflows" }),
+                /* @__PURE__ */ jsx("p", { className: "text-slate-400 text-lg font-light max-w-2xl", children: "Ready-to-use templates designed to implement these strategies instantly. Connect apps like Typeform, Google Sheets, and Slack without code." })
               ] }),
-              /* @__PURE__ */ jsx(Button, { asChild: true, variant: "outline", className: "border-white/10 hover:bg-white/5 rounded-2xl px-6 py-6 h-auto font-semibold", children: /* @__PURE__ */ jsx(Link, { to: "/workflows", children: "Explore Library" }) })
+              /* @__PURE__ */ jsx("div", { className: "flex flex-col gap-3 sm:flex-row items-center", children: /* @__PURE__ */ jsx(Button, { asChild: true, className: "bg-gradient-to-r from-indigo-500 to-cyan-500 hover:from-indigo-400 hover:to-cyan-400 border-0 rounded-2xl px-6 py-6 h-auto font-bold text-white shadow-lg shadow-indigo-500/20", children: /* @__PURE__ */ jsx(Link, { to: "/workflows", children: "Browse Core Templates" }) }) })
             ] }),
             /* @__PURE__ */ jsx("div", { className: "grid grid-cols-1 lg:grid-cols-2 gap-8", children: relatedWorkflows.slice(0, 4).map((workflow) => {
               const price = parseFloat(workflow.price || "0");
@@ -5245,11 +5322,14 @@ function BlogSlugPage() {
               /* @__PURE__ */ jsxs("div", { children: [
                 /* @__PURE__ */ jsxs("h2", { className: "text-3xl font-bold text-white mb-2 flex items-center gap-3", children: [
                   /* @__PURE__ */ jsx(Newspaper, { className: "w-8 h-8 text-indigo-400" }),
-                  "Continue Reading"
+                  "Build Your Automation Stack"
                 ] }),
-                /* @__PURE__ */ jsx("p", { className: "text-slate-400", children: "Deepen your knowledge with related articles" })
+                /* @__PURE__ */ jsx("p", { className: "text-slate-400", children: "Deepen your knowledge with related guides and tutorials in this cluster." })
               ] }),
-              /* @__PURE__ */ jsx(Link, { to: "/blogs", className: "text-indigo-400 hover:text-indigo-300 text-sm font-semibold transition-colors", children: "All Articles" })
+              /* @__PURE__ */ jsxs(Link, { to: "/blogs", className: "text-indigo-400 hover:text-indigo-300 text-sm font-semibold transition-colors flex items-center gap-1 group", children: [
+                "View Complete Knowledge Base",
+                /* @__PURE__ */ jsx(ChevronRight, { className: "w-4 h-4 group-hover:translate-x-1 transition-transform" })
+              ] })
             ] }),
             /* @__PURE__ */ jsx("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-6", children: relatedBlogs.slice(0, 4).map((rBlog) => /* @__PURE__ */ jsxs(
               Link,
@@ -6099,8 +6179,16 @@ function WorkflowDetailsPage() {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [relatedWorkflows, setRelatedWorkflows] = useState(ssrData.relatedWorkflows || []);
   const [relevantBlogs, setRelevantBlogs] = useState(ssrData.relevantBlogs || []);
-  const [nodes, setNodes, onNodesChange] = useNodesState([]);
-  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+  const [nodes, setNodes] = useState([]);
+  const [edges, setEdges] = useState([]);
+  const onNodesChange = useCallback(
+    (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
+    [setNodes]
+  );
+  const onEdgesChange = useCallback(
+    (changes) => setEdges((eds) => applyEdgeChanges(changes, eds)),
+    [setEdges]
+  );
   const nodeTypes = useMemo(() => ({ custom: N8nNode }), []);
   useEffect(() => {
     if (n8nJson) {
@@ -6331,7 +6419,7 @@ function WorkflowDetailsPage() {
                   /* @__PURE__ */ jsxs("span", { className: "text-slate-400 flex items-center gap-1.5", children: [
                     /* @__PURE__ */ jsx(Clock, { className: "w-3.5 h-3.5 text-blue-500" }),
                     "Updated ",
-                    formatDistanceToNow(new Date(workflow.updated_at), { addSuffix: true })
+                    workflow.updated_at ? formatDistanceToNow(new Date(workflow.updated_at), { addSuffix: true }) : "recently"
                   ] })
                 ] })
               ] })
@@ -7631,27 +7719,25 @@ function DashboardLayout() {
     ] })
   ] });
 }
-const SSRContext = createContext({});
-const useSSRContext = () => useContext(SSRContext);
-const LoginPage = lazy(() => import("./assets/LoginPage-CBixg35O.js"));
-const SignupPage = lazy(() => import("./assets/SignupPage-CgEfakOq.js"));
-const ContactPage = lazy(() => import("./assets/ContactPage-BeDGywNs.js"));
-const SitemapPage = lazy(() => import("./assets/SitemapPage-p70qZH9S.js"));
-const CoursesListPage = lazy(() => import("./assets/CoursesListPage-CfU7NZMa.js"));
-const CourseDetailsPage = lazy(() => import("./assets/CourseDetailsPage-DMfZzyB4.js"));
-const LessonViewerPage = lazy(() => import("./assets/LessonViewerPage-B434Hz_W.js"));
-const NotFoundPage = lazy(() => import("./assets/NotFoundPage-C98JL7l1.js"));
-const SecureInterviewClient = lazy(() => import("./assets/SecureInterviewClient-BsHihC_C.js"));
-const AdminDashboard = lazy(() => import("./assets/Dashboard-DNWmpFnB.js"));
-const BlogsManagement = lazy(() => import("./assets/BlogManagement-BvOWH8PQ.js"));
-const PagesManagement = lazy(() => import("./assets/PageManagement-BACe8NNN.js"));
-const FAQsManagement = lazy(() => import("./assets/FAQManagement-BMHX9xSW.js"));
-const CourseManagement = lazy(() => import("./assets/AdminCoursesPage-Iy8rYwHz.js"));
-const CourseReviews = lazy(() => import("./assets/AdminCourseReviewsPage-9hXIzbSG.js"));
-const ContactEnquiries = lazy(() => import("./assets/ContactEnquiries-B_byP5VT.js"));
-const NewsletterSubscribers = lazy(() => import("./assets/NewsletterSubscribers-xFtKa_TR.js"));
-const SupportChatAdmin = lazy(() => import("./assets/SupportChatAdmin-zuLzpjBU.js"));
-const SuperAdminDashboard = lazy(() => import("./assets/SuperAdminDashboard-DiPLSnv4.js"));
+const LoginPage = lazy(() => import("./assets/LoginPage-B4F3x2lN.js"));
+const SignupPage = lazy(() => import("./assets/SignupPage-CW3H_bkh.js"));
+const ContactPage = lazy(() => import("./assets/ContactPage-BtZfo27L.js"));
+const SitemapPage = lazy(() => import("./assets/SitemapPage-DpiEeWF6.js"));
+const CoursesListPage = lazy(() => import("./assets/CoursesListPage-D_dgr6kF.js"));
+const CourseDetailsPage = lazy(() => import("./assets/CourseDetailsPage-CfrCRSag.js"));
+const LessonViewerPage = lazy(() => import("./assets/LessonViewerPage-B1w78VfT.js"));
+const NotFoundPage = lazy(() => import("./assets/NotFoundPage-DNWBlxwM.js"));
+const SecureInterviewClient = lazy(() => import("./assets/SecureInterviewClient-DkQwVjmL.js"));
+const AdminDashboard = lazy(() => import("./assets/Dashboard-DmhoB5pu.js"));
+const BlogsManagement = lazy(() => import("./assets/BlogManagement-o7tqxcBy.js"));
+const PagesManagement = lazy(() => import("./assets/PageManagement-DHAGgfks.js"));
+const FAQsManagement = lazy(() => import("./assets/FAQManagement-yICv-cjs.js"));
+const CourseManagement = lazy(() => import("./assets/AdminCoursesPage-CGOhROlf.js"));
+const CourseReviews = lazy(() => import("./assets/AdminCourseReviewsPage-SUfNLfSB.js"));
+const ContactEnquiries = lazy(() => import("./assets/ContactEnquiries-DD2nnu5Z.js"));
+const NewsletterSubscribers = lazy(() => import("./assets/NewsletterSubscribers-CZUQ9RtB.js"));
+const SupportChatAdmin = lazy(() => import("./assets/SupportChatAdmin-BRQ6dJvB.js"));
+const SuperAdminDashboard = lazy(() => import("./assets/SuperAdminDashboard-aS-KDMPl.js"));
 function AppRoutes() {
   return /* @__PURE__ */ jsxs(Routes, { children: [
     /* @__PURE__ */ jsx(Route, { path: "/", element: /* @__PURE__ */ jsx(HomePage, {}) }),

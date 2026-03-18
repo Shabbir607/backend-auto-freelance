@@ -5,7 +5,7 @@ import { c as courseService } from "./courseService-UHMy8Xl5.js";
 import { Loader2, MessageSquare, Check, X, Trash2 } from "lucide-react";
 import { useState, useEffect } from "react";
 import "react-dom/server";
-import "react-router-dom/server.mjs";
+import "react-router";
 import "react-router-dom";
 import "@radix-ui/react-slot";
 import "class-variance-authority";

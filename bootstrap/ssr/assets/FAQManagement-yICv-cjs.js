@@ -1,14 +1,14 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { a as useToast, o as useConfirmation, h as faqService, B as Button, C as Card, p as CardHeader, q as CardDescription, r as CardTitle, s as CardContent, I as Input, d as Badge, D as Dialog, i as DialogContent, j as DialogHeader, k as DialogTitle, l as DialogDescription, t as Switch, m as DialogFooter } from "../ssr.js";
 import { L as Label } from "./label-Bi_79Mmn.js";
-import { P as PaginationControls } from "./pagination-controls-CgC50Tbv.js";
+import { P as PaginationControls } from "./pagination-controls-Bz09fOze.js";
 import { S as Select, a as SelectTrigger, b as SelectValue, c as SelectContent, d as SelectItem } from "./select-H0JYI2nI.js";
 import { T as Table, a as TableHeader, b as TableRow, c as TableHead, d as TableBody, e as TableCell } from "./table-DWq9r8gv.js";
 import { T as Textarea } from "./textarea-CMsb0E2l.js";
 import { Plus, Search, Loader2, HelpCircle, Edit, Trash2 } from "lucide-react";
 import { useState, useEffect } from "react";
 import "react-dom/server";
-import "react-router-dom/server.mjs";
+import "react-router";
 import "react-router-dom";
 import "@radix-ui/react-slot";
 import "class-variance-authority";
@@ -112,7 +112,7 @@ function FAQManagement() {
   const handleDelete = async (id) => {
     const confirmed = await confirm({
       title: "Delete FAQ",
-      message: "Are you sure you want to delete this FAQ? This action cannot be undone.",
+      description: "Are you sure you want to delete this FAQ? This action cannot be undone.",
       confirmText: "Delete",
       cancelText: "Cancel"
     });

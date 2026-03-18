@@ -1,13 +1,13 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { a as useToast, o as useConfirmation, B as Button, C as Card, p as CardHeader, q as CardDescription, r as CardTitle, s as CardContent, d as Badge, c as cn, D as Dialog, i as DialogContent, j as DialogHeader, k as DialogTitle, l as DialogDescription, A as adminSupportChatService } from "../ssr.js";
-import { P as PaginationControls } from "./pagination-controls-CgC50Tbv.js";
+import { C as CompactPagination } from "./pagination-controls-Bz09fOze.js";
 import { T as Table, a as TableHeader, b as TableRow, c as TableHead, d as TableBody, e as TableCell } from "./table-DWq9r8gv.js";
 import { T as Textarea } from "./textarea-CMsb0E2l.js";
 import { formatDistanceToNow } from "date-fns";
 import { Loader2, RefreshCw, MessageSquare, Trash2, AlertCircle, Send } from "lucide-react";
 import { useState, useMemo, useEffect } from "react";
 import "react-dom/server";
-import "react-router-dom/server.mjs";
+import "react-router";
 import "react-router-dom";
 import "@radix-ui/react-slot";
 import "class-variance-authority";
@@ -184,7 +184,7 @@ function SupportChatAdmin() {
   const handleDeleteTicket = async (ticket) => {
     const accepted = await confirm({
       title: "Delete Ticket",
-      message: `Are you sure you want to delete ticket #${ticket.id}? This will also delete all messages.`,
+      description: `Are you sure you want to delete ticket #${ticket.id}? This will also delete all messages.`,
       confirmText: "Delete",
       cancelText: "Cancel"
     });
@@ -267,7 +267,7 @@ function SupportChatAdmin() {
         ] }, ticket.id)) })
       ] }),
       totalPages > 1 && /* @__PURE__ */ jsx(
-        PaginationControls,
+        CompactPagination,
         {
           currentPage,
           totalPages,

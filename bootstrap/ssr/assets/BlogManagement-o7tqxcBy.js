@@ -10,7 +10,7 @@ import { T as Textarea } from "./textarea-CMsb0E2l.js";
 import { formatDistanceToNow } from "date-fns";
 import { Loader2, BookOpen, FolderPlus, RefreshCw, Plus, CheckCircle, Eye, Tag, Search, MoreVertical, Edit, Trash2, Calendar, Clock } from "lucide-react";
 import "react-dom/server";
-import "react-router-dom/server.mjs";
+import "react-router";
 import "react-router-dom";
 import "@radix-ui/react-slot";
 import "class-variance-authority";

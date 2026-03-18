@@ -5,7 +5,7 @@ import { Shield, ArrowLeft, DollarSign, Building2, Users, TrendingUp, Activity }
 import { formatDistanceToNow } from "date-fns";
 import "react";
 import "react-dom/server";
-import "react-router-dom/server.mjs";
+import "react-router";
 import "@radix-ui/react-slot";
 import "class-variance-authority";
 import "clsx";

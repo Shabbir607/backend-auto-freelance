@@ -183,6 +183,55 @@ function PaginationControls({
     }
   );
 }
+function CompactPagination({
+  currentPage,
+  totalPages,
+  onPageChange,
+  isLoading = false,
+  className
+}) {
+  const canGoToPrevious = currentPage > 1;
+  const canGoToNext = currentPage < totalPages;
+  if (totalPages <= 1) {
+    return null;
+  }
+  return /* @__PURE__ */ jsxs("div", { className: cn("flex items-center justify-between gap-2", className), children: [
+    /* @__PURE__ */ jsxs(
+      Button,
+      {
+        variant: "outline",
+        size: "sm",
+        onClick: () => onPageChange(currentPage - 1),
+        disabled: !canGoToPrevious || isLoading,
+        children: [
+          /* @__PURE__ */ jsx(ChevronLeft, { className: "h-4 w-4 mr-1" }),
+          "Previous"
+        ]
+      }
+    ),
+    /* @__PURE__ */ jsxs("span", { className: "text-sm text-nexus-muted", children: [
+      "Page ",
+      /* @__PURE__ */ jsx("span", { className: "font-medium text-white", children: currentPage }),
+      " of",
+      " ",
+      /* @__PURE__ */ jsx("span", { className: "font-medium text-white", children: totalPages })
+    ] }),
+    /* @__PURE__ */ jsxs(
+      Button,
+      {
+        variant: "outline",
+        size: "sm",
+        onClick: () => onPageChange(currentPage + 1),
+        disabled: !canGoToNext || isLoading,
+        children: [
+          "Next",
+          /* @__PURE__ */ jsx(ChevronRight, { className: "h-4 w-4 ml-1" })
+        ]
+      }
+    )
+  ] });
+}
 export {
+  CompactPagination as C,
   PaginationControls as P
 };

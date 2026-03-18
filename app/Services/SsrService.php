@@ -24,6 +24,7 @@ class SsrService
 
             $engine = new Node($nodePath, $tempPath);
             $renderer = new Renderer($engine);
+            $renderer->fallback(false);
 
             // Add URL to context if not present
             $context['url'] = $url;
@@ -36,9 +37,7 @@ class SsrService
             return $html;
         } catch (\Exception $e) {
             \Log::error('SSR Rendering Error: ' . $e->getMessage());
-            if (config('app.debug')) {
-                // throw $e; // Uncomment for debugging
-            }
+            throw $e;
             return null;
         }
     }

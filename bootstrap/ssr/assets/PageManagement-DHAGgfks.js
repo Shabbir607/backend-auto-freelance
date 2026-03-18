@@ -7,7 +7,7 @@ import { p as pageService } from "./pageService-Cxi9cwOM.js";
 import { Plus, Search, Loader2, FileText, Edit, Trash2 } from "lucide-react";
 import { useState, useEffect } from "react";
 import "react-dom/server";
-import "react-router-dom/server.mjs";
+import "react-router";
 import "react-router-dom";
 import "@radix-ui/react-slot";
 import "class-variance-authority";
@@ -140,7 +140,7 @@ function PageManagement() {
   const handleDelete = async (id) => {
     const confirmed = await confirm({
       title: "Delete Page",
-      message: "Are you sure you want to delete this page? This action cannot be undone.",
+      description: "Are you sure you want to delete this page? This action cannot be undone.",
       confirmText: "Delete",
       cancelText: "Cancel"
     });

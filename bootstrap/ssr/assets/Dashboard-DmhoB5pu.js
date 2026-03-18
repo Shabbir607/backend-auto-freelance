@@ -8,7 +8,7 @@ import { p as pageService } from "./pageService-Cxi9cwOM.js";
 import { c as contactService } from "./contactService-DYCcY7WF.js";
 import { n as newsletterService } from "./newsletterService-DXdskxTV.js";
 import "react-dom/server";
-import "react-router-dom/server.mjs";
+import "react-router";
 import "@radix-ui/react-slot";
 import "class-variance-authority";
 import "clsx";

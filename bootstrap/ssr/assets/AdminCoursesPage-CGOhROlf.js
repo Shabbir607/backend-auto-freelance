@@ -8,7 +8,7 @@ import { Plus, Search, Loader2, BookOpen, Settings, Edit, Trash2 } from "lucide-
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "react-dom/server";
-import "react-router-dom/server.mjs";
+import "react-router";
 import "@radix-ui/react-slot";
 import "class-variance-authority";
 import "clsx";
