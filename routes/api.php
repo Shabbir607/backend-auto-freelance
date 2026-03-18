@@ -41,15 +41,15 @@ use App\Http\Controllers\Api\Recruitment\RecruiterController;
 use App\Http\Controllers\Api\Admin\WorkflowCategoryController;
 use App\Http\Controllers\Api\Admin\WorkflowIntegrationController;
 use App\Http\Controllers\Api\Admin\WorkflowController as AdminWorkflowController;
-use App\Http\Controllers\Api\Public\WorkflowLibraryController;
-use App\Http\Controllers\Api\Public\BlogController as PublicBlogController;
+use App\Http\Controllers\Api\PublicApi\WorkflowLibraryController;
+use App\Http\Controllers\Api\PublicApi\BlogController as PublicBlogController;
 use App\Http\Controllers\Api\Admin\BlogCategoryController;
 use App\Http\Controllers\Api\Admin\BlogController as AdminBlogController;
 use App\Http\Controllers\Api\Admin\FaqController;
 use App\Http\Controllers\Api\Admin\PageController as AdminPageController;
-use App\Http\Controllers\Api\Public\PageController as PublicPageController;
-use App\Http\Controllers\Api\Public\FaqController as PublicFaqController;
-use App\Http\Controllers\Api\Public\SupportChatController;
+use App\Http\Controllers\Api\PublicApi\PageController as PublicPageController;
+use App\Http\Controllers\Api\PublicApi\FaqController as PublicFaqController;
+use App\Http\Controllers\Api\PublicApi\SupportChatController;
 use App\Http\Controllers\Api\Admin\SupportChatController as AdminSupportChatController;
 use Illuminate\Support\Facades\Storage;
 
@@ -123,11 +123,11 @@ Route::middleware(['verify.app.key'])->group(function () {
     Route::get('/pagebody/{slug}', [PublicPageController::class, 'show']);
 
 // Public Language Initialization
-Route::get('/public/language-init', [\App\Http\Controllers\Api\Public\LanguageController::class, 'init']);
+Route::get('/public/language-init', [\App\Http\Controllers\Api\PublicApi\LanguageController::class, 'init']);
 
 // Public Contact & Newsletter
-Route::post('/contact', [\App\Http\Controllers\Api\Public\ContactMessageController::class, 'store']);
-Route::post('/newsletter', [\App\Http\Controllers\Api\Public\NewsletterSubscriberController::class, 'store']);
+Route::post('/contact', [\App\Http\Controllers\Api\PublicApi\ContactMessageController::class, 'store']);
+Route::post('/newsletter', [\App\Http\Controllers\Api\PublicApi\NewsletterSubscriberController::class, 'store']);
 
 // -----------------------------------------------------------------------
 // Customer Support Chat (no authentication required)
@@ -486,20 +486,20 @@ Route::fallback(function(){
 
 // Public Routes
 Route::prefix('courses')->group(function () {
-    Route::get('/', [\App\Http\Controllers\Api\Public\CourseController::class, 'index']);
-    Route::get('/{slug}', [\App\Http\Controllers\Api\Public\CourseController::class, 'show']);
-    Route::get('/{id}/reviews', [\App\Http\Controllers\Api\Public\CourseReviewController::class, 'index']);
-    Route::post('/{id}/reviews', [\App\Http\Controllers\Api\Public\CourseReviewController::class, 'store']);
+    Route::get('/', [\App\Http\Controllers\Api\PublicApi\CourseController::class, 'index']);
+    Route::get('/{slug}', [\App\Http\Controllers\Api\PublicApi\CourseController::class, 'show']);
+    Route::get('/{id}/reviews', [\App\Http\Controllers\Api\PublicApi\CourseReviewController::class, 'index']);
+    Route::post('/{id}/reviews', [\App\Http\Controllers\Api\PublicApi\CourseReviewController::class, 'store']);
 });
-Route::get('lessons/{slug}', [\App\Http\Controllers\Api\Public\LessonController::class, 'show']);
-Route::post('lessons/{id}/progress', [\App\Http\Controllers\Api\Public\UserProgressController::class, 'updateProgress']);
+Route::get('lessons/{slug}', [\App\Http\Controllers\Api\PublicApi\LessonController::class, 'show']);
+Route::post('lessons/{id}/progress', [\App\Http\Controllers\Api\PublicApi\UserProgressController::class, 'updateProgress']);
 
 // Protected Routes
 Route::middleware('auth:api')->group(function () {
     
     // User Actions
-    Route::put('reviews/{review}', [\App\Http\Controllers\Api\Public\CourseReviewController::class, 'update']);
-    Route::delete('reviews/{review}', [\App\Http\Controllers\Api\Public\CourseReviewController::class, 'destroy']);
+    Route::put('reviews/{review}', [\App\Http\Controllers\Api\PublicApi\CourseReviewController::class, 'update']);
+    Route::delete('reviews/{review}', [\App\Http\Controllers\Api\PublicApi\CourseReviewController::class, 'destroy']);
 
     // Admin Routes
     Route::prefix('admin')->group(function () {
