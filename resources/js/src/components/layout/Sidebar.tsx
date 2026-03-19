@@ -46,8 +46,8 @@ export function Sidebar() {
 
   const navItems: NavItem[] = [
     { path: '/app/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-    { path: '/app/workflows', label: 'Workflows', icon: Workflow },
-    { path: '/app/workflow-templates', label: 'Templates Library', icon: GitBranch },
+    { path: '/app/workflows', label: 'Workflows', icon: Workflow, roles: ['admin', 'superadmin'] },
+    { path: '/app/workflow-templates', label: 'Templates Library', icon: GitBranch, roles: ['admin', 'superadmin'] },
     { path: '/app/blogs', label: 'Blog Management', icon: BookOpen, roles: ['admin', 'superadmin'] },
     { path: '/app/pages', label: 'Page Management', icon: FileText, roles: ['admin', 'superadmin'] },
     { path: '/app/faqs', label: 'FAQ Management', icon: HelpCircle, roles: ['admin', 'superadmin'] },

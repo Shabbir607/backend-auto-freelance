@@ -1,0 +1,40 @@
+
+> dev
+> vite
+
+
+  VITE v7.3.1  ready in 823 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
+
+  LARAVEL v11.46.2  plugin v2.1.0
+
+  ➜  APP_URL: http://localhost
+
+warn - The class `ease-[cubic-bezier(0.32,0.72,0,1)]` is ambiguous and matches multiple utilities.
+warn - If this is content and not a class, replace it with `ease-&lsqb;cubic-bezier(0.32,0.72,0,1)&rsqb;` to silence this warning.
+
+warn - The class `ease-[cubic-bezier(0.32,0.72,0,1)]` is ambiguous and matches multiple utilities.
+warn - If this is content and not a class, replace it with `ease-&lsqb;cubic-bezier(0.32,0.72,0,1)&rsqb;` to silence this warning.
+12:02:32 PM [vite] .env changed, restarting server...
+12:02:35 PM [vite] server restarted.
+
+  LARAVEL v11.46.2  plugin v2.1.0
+
+  ➜  APP_URL: http://localhost
+12:03:22 PM [vite] full reload routes/web.php
+12:25:32 PM [vite] (client) hmr update /resources/css/app.css?direct, /resources/js/src/index.css, /resources/js/src/components/layout/Sidebar.tsx
+12:25:32 PM [vite] (client) hmr update /resources/css/app.css?direct, /resources/js/src/index.css, /resources/js/src/components/layout/Sidebar.tsx
+
+  #  Node.js[7921]: void node::ResetStdio() at ../src/node.cc:751
+  #  Assertion failed: !(err != 0) || (err == -1 && (*__errno_location ()) == 1)
+
+----- Native stack trace -----
+
+ 1: 0xcc7f77 node::Assert(node::AssertionInfo const&) [node]
+ 2: 0xc77ef4  [node]
+ 3: 0x710bec847a76  [/lib/x86_64-linux-gnu/libc.so.6]
+ 4: 0x710bec847bbe  [/lib/x86_64-linux-gnu/libc.so.6]
+ 5: 0xbd946f node::DefaultProcessExitHandlerInternal(node::Environment*, node::ExitCode) [node]

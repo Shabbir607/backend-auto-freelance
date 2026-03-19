@@ -45,5 +45,5 @@ Route::get('/llms.txt', function () {
 
 // Catch-all route for the React SPA with SSR
 Route::get('/', AppController::class);
-Route::get('/{any}', AppController::class)->where('any', '^(?!app|superadmin|api|storage|telescope).*$');
+Route::get('/{any}', AppController::class)->where('any', '^(?!api|storage|telescope).*$');
 

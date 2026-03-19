@@ -31,9 +31,12 @@ interface SEOHelmetProps {
 }
 
 // ── Domain whitelist: maps known backend API domains to the frontend ───────────
-const FRONTEND_ORIGIN = 'https://edgelancer.com';
+const FRONTEND_ORIGIN = import.meta.env.VITE_FRONTEND_URL || (typeof window !== 'undefined' ? window.location.origin : 'https://edgelancer.com');
 const API_DOMAINS = [
     'api.edgelancer.com',
+    ...(import.meta.env.VITE_API_URL && import.meta.env.VITE_API_URL.startsWith('http')
+        ? [new URL(import.meta.env.VITE_API_URL).hostname]
+        : []),
 ];
 
 function sanitizeUrl(rawUrl: string | undefined): string {

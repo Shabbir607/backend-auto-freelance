@@ -1,7 +1,7 @@
 
 // Universal API Configuration
 export const API_CONFIG = {
-  BASE_URL: (import.meta.env.VITE_API_URL as string | undefined) || 'https://api.edgelancer.com',
+  BASE_URL: import.meta.env.VITE_API_URL || (typeof window !== 'undefined' ? `${window.location.origin}/api` : 'https://api.edgelancer.com/api'),
   SESSION_KEY: 'nexus_session',
   DEFAULT_PER_PAGE: 15,
   MAX_PER_PAGE: 100,

@@ -43,6 +43,8 @@ const CourseReviews = lazy(() => import("./pages/app/AdminCourseReviewsPage"));
 const ContactEnquiries = lazy(() => import("./pages/ContactEnquiries"));
 const NewsletterSubscribers = lazy(() => import("./pages/NewsletterSubscribers"));
 const SupportChatAdmin = lazy(() => import("./pages/app/SupportChatAdmin"));
+const AutomationHub = lazy(() => import("./pages/app/AutomationHub"));
+const WorkflowTemplates = lazy(() => import("./pages/app/WorkflowTemplates"));
 
 // SuperAdmin layout
 const SuperAdminDashboard = lazy(() => import("./pages/superadmin/SuperAdminDashboard"));
@@ -80,6 +82,8 @@ function AppRoutes() {
         <Route path="contact-enquiries" element={<ContactEnquiries />} />
         <Route path="newsletter-subscribers" element={<NewsletterSubscribers />} />
         <Route path="support-chat" element={<SupportChatAdmin />} />
+        <Route path="workflows" element={<AutomationHub />} />
+        <Route path="workflow-templates" element={<WorkflowTemplates />} />
       </Route>
 
       <Route path="/superadmin" element={<SuperAdminDashboard />} />
