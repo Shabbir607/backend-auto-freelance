@@ -1,5 +1,1347 @@
 {
+  "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/howler/dist/howler.js?commonjs-es-import": [
+    "/build/assets/sounds-BouPlq-I.cjs"
+  ],
+  "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/howler/dist/howler.js?commonjs-exports": [
+    "/build/assets/sounds-BouPlq-I.cjs"
+  ],
+  "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/invariant/invariant.js?commonjs-es-import": [],
+  "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/react-dom/cjs/react-dom-server-legacy.node.development.js?commonjs-exports": [],
+  "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/react-dom/cjs/react-dom-server-legacy.node.production.min.js?commonjs-exports": [],
+  "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/react-dom/cjs/react-dom-server.node.development.js?commonjs-exports": [],
+  "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/react-dom/cjs/react-dom-server.node.production.min.js?commonjs-exports": [],
+  "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/react-dom/cjs/react-dom.development.js?commonjs-exports": [],
+  "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/react-dom/cjs/react-dom.production.min.js?commonjs-exports": [],
+  "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/react-dom/index.js?commonjs-es-import": [],
+  "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/react-dom/index.js?commonjs-module": [],
+  "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/react-dom/server.node.js?commonjs-es-import": [],
+  "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/react-dom/server.node.js?commonjs-exports": [],
+  "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/react-fast-compare/index.js?commonjs-es-import": [],
+  "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/react-router-dom/dist/index.js?commonjs-es-import": [],
+  "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/react-router-dom/dist/index.js?commonjs-module": [],
+  "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/react-router/dist/development/dom-export.mjs?commonjs-proxy": [],
+  "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/react-router/dist/development/index.mjs?commonjs-proxy": [],
+  "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/react-router/node_modules/cookie/dist/index.js?commonjs-es-import": [],
+  "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/react-router/node_modules/cookie/dist/index.js?commonjs-exports": [],
+  "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/react/cjs/react-jsx-runtime.development.js?commonjs-exports": [],
+  "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/react/cjs/react-jsx-runtime.production.min.js?commonjs-exports": [],
+  "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/react/cjs/react.development.js?commonjs-module": [],
+  "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/react/cjs/react.production.min.js?commonjs-exports": [],
+  "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/react/index.js?commonjs-es-import": [],
+  "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/react/index.js?commonjs-module": [],
+  "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/react/jsx-runtime.js?commonjs-es-import": [],
+  "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/react/jsx-runtime.js?commonjs-module": [],
+  "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/scheduler/cjs/scheduler.development.js?commonjs-exports": [],
+  "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/scheduler/cjs/scheduler.production.min.js?commonjs-exports": [],
+  "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/scheduler/index.js?commonjs-module": [],
+  "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/set-cookie-parser/lib/set-cookie.js?commonjs-es-import": [],
+  "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/set-cookie-parser/lib/set-cookie.js?commonjs-module": [],
+  "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/shallowequal/index.js?commonjs-es-import": [],
+  "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/use-sync-external-store/cjs/use-sync-external-store-shim.development.js?commonjs-exports": [],
+  "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/use-sync-external-store/cjs/use-sync-external-store-shim.production.js?commonjs-exports": [],
+  "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/use-sync-external-store/cjs/use-sync-external-store-shim/with-selector.development.js?commonjs-exports": [],
+  "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/use-sync-external-store/cjs/use-sync-external-store-shim/with-selector.production.js?commonjs-exports": [],
+  "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/use-sync-external-store/shim/index.js?commonjs-es-import": [],
+  "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/use-sync-external-store/shim/index.js?commonjs-module": [],
+  "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/use-sync-external-store/shim/with-selector.js?commonjs-es-import": [],
+  "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/use-sync-external-store/shim/with-selector.js?commonjs-module": [],
+  "\u0000commonjsHelpers.js": [],
+  "node_modules/@floating-ui/core/dist/floating-ui.core.mjs": [
+    "/build/assets/select-pTnym9L9.cjs"
+  ],
+  "node_modules/@floating-ui/dom/dist/floating-ui.dom.mjs": [
+    "/build/assets/select-pTnym9L9.cjs"
+  ],
+  "node_modules/@floating-ui/react-dom/dist/floating-ui.react-dom.mjs": [
+    "/build/assets/select-pTnym9L9.cjs"
+  ],
+  "node_modules/@floating-ui/utils/dist/floating-ui.utils.dom.mjs": [
+    "/build/assets/select-pTnym9L9.cjs"
+  ],
+  "node_modules/@floating-ui/utils/dist/floating-ui.utils.mjs": [
+    "/build/assets/select-pTnym9L9.cjs"
+  ],
+  "node_modules/@hookform/resolvers/dist/resolvers.mjs": [
+    "/build/assets/types-BOn1W1aS.cjs"
+  ],
+  "node_modules/@hookform/resolvers/zod/dist/zod.mjs": [
+    "/build/assets/types-BOn1W1aS.cjs"
+  ],
+  "node_modules/@radix-ui/number/dist/index.mjs": [],
+  "node_modules/@radix-ui/primitive/dist/index.mjs": [],
+  "node_modules/@radix-ui/react-arrow/dist/index.mjs": [
+    "/build/assets/select-pTnym9L9.cjs"
+  ],
+  "node_modules/@radix-ui/react-avatar/dist/index.mjs": [],
+  "node_modules/@radix-ui/react-avatar/node_modules/@radix-ui/react-context/dist/index.mjs": [],
+  "node_modules/@radix-ui/react-avatar/node_modules/@radix-ui/react-primitive/dist/index.mjs": [],
+  "node_modules/@radix-ui/react-checkbox/dist/index.mjs": [
+    "/build/assets/SecureInterviewClient-DxUHfPmK.cjs"
+  ],
+  "node_modules/@radix-ui/react-collection/dist/index.mjs": [
+    "/build/assets/index-CwsyZJiJ.cjs"
+  ],
+  "node_modules/@radix-ui/react-collection/node_modules/@radix-ui/react-slot/dist/index.mjs": [
+    "/build/assets/index-CwsyZJiJ.cjs"
+  ],
+  "node_modules/@radix-ui/react-compose-refs/dist/index.mjs": [],
+  "node_modules/@radix-ui/react-context/dist/index.mjs": [],
+  "node_modules/@radix-ui/react-dialog/dist/index.mjs": [],
+  "node_modules/@radix-ui/react-dialog/node_modules/@radix-ui/react-slot/dist/index.mjs": [],
+  "node_modules/@radix-ui/react-direction/dist/index.mjs": [],
+  "node_modules/@radix-ui/react-dismissable-layer/dist/index.mjs": [],
+  "node_modules/@radix-ui/react-dropdown-menu/dist/index.mjs": [
+    "/build/assets/BlogManagement-C6efM5qj.cjs"
+  ],
+  "node_modules/@radix-ui/react-focus-guards/dist/index.mjs": [],
+  "node_modules/@radix-ui/react-focus-scope/dist/index.mjs": [],
+  "node_modules/@radix-ui/react-icons/dist/react-icons.esm.js": [],
+  "node_modules/@radix-ui/react-id/dist/index.mjs": [],
+  "node_modules/@radix-ui/react-label/dist/index.mjs": [
+    "/build/assets/label-BST6Rr9i.cjs"
+  ],
+  "node_modules/@radix-ui/react-label/node_modules/@radix-ui/react-primitive/dist/index.mjs": [
+    "/build/assets/label-BST6Rr9i.cjs"
+  ],
+  "node_modules/@radix-ui/react-menu/dist/index.mjs": [
+    "/build/assets/BlogManagement-C6efM5qj.cjs"
+  ],
+  "node_modules/@radix-ui/react-menu/node_modules/@radix-ui/react-slot/dist/index.mjs": [
+    "/build/assets/BlogManagement-C6efM5qj.cjs"
+  ],
+  "node_modules/@radix-ui/react-popper/dist/index.mjs": [
+    "/build/assets/select-pTnym9L9.cjs"
+  ],
+  "node_modules/@radix-ui/react-portal/dist/index.mjs": [],
+  "node_modules/@radix-ui/react-presence/dist/index.mjs": [],
+  "node_modules/@radix-ui/react-primitive/dist/index.mjs": [],
+  "node_modules/@radix-ui/react-primitive/node_modules/@radix-ui/react-slot/dist/index.mjs": [],
+  "node_modules/@radix-ui/react-progress/dist/index.mjs": [
+    "/build/assets/progress-DPoCB8T9.cjs"
+  ],
+  "node_modules/@radix-ui/react-progress/node_modules/@radix-ui/react-context/dist/index.mjs": [
+    "/build/assets/progress-DPoCB8T9.cjs"
+  ],
+  "node_modules/@radix-ui/react-progress/node_modules/@radix-ui/react-primitive/dist/index.mjs": [
+    "/build/assets/progress-DPoCB8T9.cjs"
+  ],
+  "node_modules/@radix-ui/react-roving-focus/dist/index.mjs": [
+    "/build/assets/index-06i-MvA5.cjs"
+  ],
+  "node_modules/@radix-ui/react-scroll-area/dist/index.mjs": [],
+  "node_modules/@radix-ui/react-select/dist/index.mjs": [
+    "/build/assets/select-pTnym9L9.cjs"
+  ],
+  "node_modules/@radix-ui/react-select/node_modules/@radix-ui/react-slot/dist/index.mjs": [
+    "/build/assets/select-pTnym9L9.cjs"
+  ],
+  "node_modules/@radix-ui/react-slot/dist/index.mjs": [],
+  "node_modules/@radix-ui/react-switch/dist/index.mjs": [],
+  "node_modules/@radix-ui/react-tabs/dist/index.mjs": [
+    "/build/assets/AutomationHub-CmKzK5S4.cjs"
+  ],
+  "node_modules/@radix-ui/react-use-callback-ref/dist/index.mjs": [],
+  "node_modules/@radix-ui/react-use-controllable-state/dist/index.mjs": [],
+  "node_modules/@radix-ui/react-use-escape-keydown/dist/index.mjs": [],
+  "node_modules/@radix-ui/react-use-is-hydrated/dist/index.mjs": [],
+  "node_modules/@radix-ui/react-use-layout-effect/dist/index.mjs": [],
+  "node_modules/@radix-ui/react-use-previous/dist/index.mjs": [],
+  "node_modules/@radix-ui/react-use-size/dist/index.mjs": [],
+  "node_modules/@radix-ui/react-visually-hidden/dist/index.mjs": [
+    "/build/assets/select-pTnym9L9.cjs"
+  ],
+  "node_modules/@reactflow/background/dist/esm/index.mjs": [],
+  "node_modules/@reactflow/controls/dist/esm/index.mjs": [],
+  "node_modules/@reactflow/core/dist/esm/index.mjs": [],
+  "node_modules/@reactflow/minimap/dist/esm/index.mjs": [],
+  "node_modules/aria-hidden/dist/es2015/index.js": [],
+  "node_modules/class-variance-authority/dist/index.mjs": [],
+  "node_modules/classcat/index.js": [],
+  "node_modules/clsx/dist/clsx.mjs": [],
+  "node_modules/d3-color/src/color.js": [],
+  "node_modules/d3-color/src/define.js": [],
+  "node_modules/d3-dispatch/src/dispatch.js": [],
+  "node_modules/d3-drag/src/constant.js": [],
+  "node_modules/d3-drag/src/drag.js": [],
+  "node_modules/d3-drag/src/event.js": [],
+  "node_modules/d3-drag/src/nodrag.js": [],
+  "node_modules/d3-drag/src/noevent.js": [],
+  "node_modules/d3-ease/src/cubic.js": [],
+  "node_modules/d3-interpolate/src/color.js": [],
+  "node_modules/d3-interpolate/src/constant.js": [],
+  "node_modules/d3-interpolate/src/number.js": [],
+  "node_modules/d3-interpolate/src/rgb.js": [],
+  "node_modules/d3-interpolate/src/string.js": [],
+  "node_modules/d3-interpolate/src/transform/decompose.js": [],
+  "node_modules/d3-interpolate/src/transform/index.js": [],
+  "node_modules/d3-interpolate/src/transform/parse.js": [],
+  "node_modules/d3-interpolate/src/zoom.js": [],
+  "node_modules/d3-selection/src/array.js": [],
+  "node_modules/d3-selection/src/constant.js": [],
+  "node_modules/d3-selection/src/creator.js": [],
+  "node_modules/d3-selection/src/matcher.js": [],
+  "node_modules/d3-selection/src/namespace.js": [],
+  "node_modules/d3-selection/src/namespaces.js": [],
+  "node_modules/d3-selection/src/pointer.js": [],
+  "node_modules/d3-selection/src/select.js": [],
+  "node_modules/d3-selection/src/selection/append.js": [],
+  "node_modules/d3-selection/src/selection/attr.js": [],
+  "node_modules/d3-selection/src/selection/call.js": [],
+  "node_modules/d3-selection/src/selection/classed.js": [],
+  "node_modules/d3-selection/src/selection/clone.js": [],
+  "node_modules/d3-selection/src/selection/data.js": [],
+  "node_modules/d3-selection/src/selection/datum.js": [],
+  "node_modules/d3-selection/src/selection/dispatch.js": [],
+  "node_modules/d3-selection/src/selection/each.js": [],
+  "node_modules/d3-selection/src/selection/empty.js": [],
+  "node_modules/d3-selection/src/selection/enter.js": [],
+  "node_modules/d3-selection/src/selection/exit.js": [],
+  "node_modules/d3-selection/src/selection/filter.js": [],
+  "node_modules/d3-selection/src/selection/html.js": [],
+  "node_modules/d3-selection/src/selection/index.js": [],
+  "node_modules/d3-selection/src/selection/insert.js": [],
+  "node_modules/d3-selection/src/selection/iterator.js": [],
+  "node_modules/d3-selection/src/selection/join.js": [],
+  "node_modules/d3-selection/src/selection/lower.js": [],
+  "node_modules/d3-selection/src/selection/merge.js": [],
+  "node_modules/d3-selection/src/selection/node.js": [],
+  "node_modules/d3-selection/src/selection/nodes.js": [],
+  "node_modules/d3-selection/src/selection/on.js": [],
+  "node_modules/d3-selection/src/selection/order.js": [],
+  "node_modules/d3-selection/src/selection/property.js": [],
+  "node_modules/d3-selection/src/selection/raise.js": [],
+  "node_modules/d3-selection/src/selection/remove.js": [],
+  "node_modules/d3-selection/src/selection/select.js": [],
+  "node_modules/d3-selection/src/selection/selectAll.js": [],
+  "node_modules/d3-selection/src/selection/selectChild.js": [],
+  "node_modules/d3-selection/src/selection/selectChildren.js": [],
+  "node_modules/d3-selection/src/selection/size.js": [],
+  "node_modules/d3-selection/src/selection/sort.js": [],
+  "node_modules/d3-selection/src/selection/sparse.js": [],
+  "node_modules/d3-selection/src/selection/style.js": [],
+  "node_modules/d3-selection/src/selection/text.js": [],
+  "node_modules/d3-selection/src/selector.js": [],
+  "node_modules/d3-selection/src/selectorAll.js": [],
+  "node_modules/d3-selection/src/sourceEvent.js": [],
+  "node_modules/d3-selection/src/window.js": [],
+  "node_modules/d3-timer/src/timeout.js": [],
+  "node_modules/d3-timer/src/timer.js": [],
+  "node_modules/d3-transition/src/interrupt.js": [],
+  "node_modules/d3-transition/src/selection/index.js": [],
+  "node_modules/d3-transition/src/selection/interrupt.js": [],
+  "node_modules/d3-transition/src/selection/transition.js": [],
+  "node_modules/d3-transition/src/transition/attr.js": [],
+  "node_modules/d3-transition/src/transition/attrTween.js": [],
+  "node_modules/d3-transition/src/transition/delay.js": [],
+  "node_modules/d3-transition/src/transition/duration.js": [],
+  "node_modules/d3-transition/src/transition/ease.js": [],
+  "node_modules/d3-transition/src/transition/easeVarying.js": [],
+  "node_modules/d3-transition/src/transition/end.js": [],
+  "node_modules/d3-transition/src/transition/filter.js": [],
+  "node_modules/d3-transition/src/transition/index.js": [],
+  "node_modules/d3-transition/src/transition/interpolate.js": [],
+  "node_modules/d3-transition/src/transition/merge.js": [],
+  "node_modules/d3-transition/src/transition/on.js": [],
+  "node_modules/d3-transition/src/transition/remove.js": [],
+  "node_modules/d3-transition/src/transition/schedule.js": [],
+  "node_modules/d3-transition/src/transition/select.js": [],
+  "node_modules/d3-transition/src/transition/selectAll.js": [],
+  "node_modules/d3-transition/src/transition/selection.js": [],
+  "node_modules/d3-transition/src/transition/style.js": [],
+  "node_modules/d3-transition/src/transition/styleTween.js": [],
+  "node_modules/d3-transition/src/transition/text.js": [],
+  "node_modules/d3-transition/src/transition/textTween.js": [],
+  "node_modules/d3-transition/src/transition/transition.js": [],
+  "node_modules/d3-transition/src/transition/tween.js": [],
+  "node_modules/d3-zoom/src/constant.js": [],
+  "node_modules/d3-zoom/src/event.js": [],
+  "node_modules/d3-zoom/src/noevent.js": [],
+  "node_modules/d3-zoom/src/transform.js": [],
+  "node_modules/d3-zoom/src/zoom.js": [],
+  "node_modules/date-fns/_lib/addLeadingZeros.mjs": [],
+  "node_modules/date-fns/_lib/defaultOptions.mjs": [],
+  "node_modules/date-fns/_lib/format/formatters.mjs": [],
+  "node_modules/date-fns/_lib/format/lightFormatters.mjs": [],
+  "node_modules/date-fns/_lib/format/longFormatters.mjs": [],
+  "node_modules/date-fns/_lib/getRoundingMethod.mjs": [],
+  "node_modules/date-fns/_lib/getTimezoneOffsetInMilliseconds.mjs": [],
+  "node_modules/date-fns/_lib/protectedTokens.mjs": [],
+  "node_modules/date-fns/compareAsc.mjs": [],
+  "node_modules/date-fns/constants.mjs": [],
+  "node_modules/date-fns/constructFrom.mjs": [],
+  "node_modules/date-fns/constructNow.mjs": [],
+  "node_modules/date-fns/differenceInCalendarDays.mjs": [],
+  "node_modules/date-fns/differenceInCalendarMonths.mjs": [],
+  "node_modules/date-fns/differenceInMilliseconds.mjs": [],
+  "node_modules/date-fns/differenceInMonths.mjs": [],
+  "node_modules/date-fns/differenceInSeconds.mjs": [],
+  "node_modules/date-fns/endOfDay.mjs": [],
+  "node_modules/date-fns/endOfMonth.mjs": [],
+  "node_modules/date-fns/format.mjs": [],
+  "node_modules/date-fns/formatDistance.mjs": [],
+  "node_modules/date-fns/formatDistanceToNow.mjs": [],
+  "node_modules/date-fns/getDayOfYear.mjs": [],
+  "node_modules/date-fns/getISOWeek.mjs": [],
+  "node_modules/date-fns/getISOWeekYear.mjs": [],
+  "node_modules/date-fns/getWeek.mjs": [],
+  "node_modules/date-fns/getWeekYear.mjs": [],
+  "node_modules/date-fns/isDate.mjs": [],
+  "node_modules/date-fns/isLastDayOfMonth.mjs": [],
+  "node_modules/date-fns/isValid.mjs": [],
+  "node_modules/date-fns/locale/_lib/buildFormatLongFn.mjs": [],
+  "node_modules/date-fns/locale/_lib/buildLocalizeFn.mjs": [],
+  "node_modules/date-fns/locale/_lib/buildMatchFn.mjs": [],
+  "node_modules/date-fns/locale/_lib/buildMatchPatternFn.mjs": [],
+  "node_modules/date-fns/locale/en-US.mjs": [],
+  "node_modules/date-fns/locale/en-US/_lib/formatDistance.mjs": [],
+  "node_modules/date-fns/locale/en-US/_lib/formatLong.mjs": [],
+  "node_modules/date-fns/locale/en-US/_lib/formatRelative.mjs": [],
+  "node_modules/date-fns/locale/en-US/_lib/localize.mjs": [],
+  "node_modules/date-fns/locale/en-US/_lib/match.mjs": [],
+  "node_modules/date-fns/startOfDay.mjs": [],
+  "node_modules/date-fns/startOfISOWeek.mjs": [],
+  "node_modules/date-fns/startOfISOWeekYear.mjs": [],
+  "node_modules/date-fns/startOfWeek.mjs": [],
+  "node_modules/date-fns/startOfWeekYear.mjs": [],
+  "node_modules/date-fns/startOfYear.mjs": [],
+  "node_modules/date-fns/toDate.mjs": [],
+  "node_modules/framer-motion/dist/es/animation/animate/single-value.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/animation/animators/AcceleratedAnimation.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/animation/animators/BaseAnimation.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/animation/animators/MainThreadAnimation.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/animation/animators/drivers/driver-frameloop.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/animation/animators/utils/accelerated-values.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/animation/animators/utils/can-animate.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/animation/animators/waapi/index.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/animation/animators/waapi/utils/get-final-keyframe.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/animation/animators/waapi/utils/supports-waapi.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/animation/generators/inertia.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/animation/generators/keyframes.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/animation/generators/spring/defaults.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/animation/generators/spring/find.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/animation/generators/spring/index.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/animation/generators/utils/velocity.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/animation/interfaces/motion-value.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/animation/interfaces/visual-element-target.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/animation/interfaces/visual-element-variant.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/animation/interfaces/visual-element.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/animation/optimized-appear/data-id.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/animation/optimized-appear/get-appear-id.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/animation/utils/default-transitions.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/animation/utils/is-animatable.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/animation/utils/is-animation-controls.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/animation/utils/is-keyframes-target.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/animation/utils/is-none.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/animation/utils/is-transition-defined.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/components/AnimatePresence/PopChild.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/components/AnimatePresence/PresenceChild.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/components/AnimatePresence/index.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/components/AnimatePresence/use-presence.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/components/AnimatePresence/utils.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/context/LayoutGroupContext.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/context/LazyContext.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/context/MotionConfigContext.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/context/MotionContext/create.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/context/MotionContext/index.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/context/MotionContext/utils.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/context/PresenceContext.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/context/SwitchLayoutGroupContext.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/easing/anticipate.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/easing/back.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/easing/circ.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/easing/cubic-bezier.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/easing/ease.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/easing/modifiers/mirror.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/easing/modifiers/reverse.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/easing/utils/is-easing-array.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/easing/utils/map.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/events/add-dom-event.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/events/add-pointer-event.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/events/event-info.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/frameloop/batcher.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/frameloop/frame.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/frameloop/microtask.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/frameloop/render-step.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/frameloop/sync-time.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/gestures/drag/VisualElementDragControls.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/gestures/drag/index.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/gestures/drag/utils/constraints.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/gestures/focus.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/gestures/hover.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/gestures/pan/PanSession.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/gestures/pan/index.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/gestures/press.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/motion/features/Feature.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/motion/features/animation/exit.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/motion/features/animation/index.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/motion/features/animations.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/motion/features/definitions.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/motion/features/drag.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/motion/features/gestures.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/motion/features/layout.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/motion/features/layout/MeasureLayout.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/motion/features/load-features.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/motion/features/viewport/index.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/motion/features/viewport/observers.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/motion/index.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/motion/utils/is-forced-motion-value.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/motion/utils/symbol.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/motion/utils/use-motion-ref.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/motion/utils/use-visual-element.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/motion/utils/use-visual-state.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/motion/utils/valid-prop.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/projection/animation/mix-values.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/projection/geometry/conversion.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/projection/geometry/copy.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/projection/geometry/delta-apply.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/projection/geometry/delta-calc.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/projection/geometry/delta-remove.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/projection/geometry/models.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/projection/geometry/utils.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/projection/node/DocumentProjectionNode.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/projection/node/HTMLProjectionNode.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/projection/node/create-projection-node.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/projection/node/state.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/projection/shared/stack.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/projection/styles/scale-border-radius.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/projection/styles/scale-box-shadow.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/projection/styles/scale-correction.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/projection/styles/transform.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/projection/utils/each-axis.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/projection/utils/has-transform.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/projection/utils/measure.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/VisualElement.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/components/create-factory.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/components/create-proxy.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/components/motion/create.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/components/motion/proxy.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/dom/DOMKeyframesResolver.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/dom/DOMVisualElement.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/dom/create-visual-element.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/dom/use-render.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/dom/utils/camel-to-dash.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/dom/utils/css-variables-conversion.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/dom/utils/filter-props.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/dom/utils/is-css-variable.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/dom/utils/is-svg-component.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/dom/utils/is-svg-element.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/dom/utils/unit-conversion.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/dom/value-types/animatable-none.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/dom/value-types/defaults.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/dom/value-types/dimensions.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/dom/value-types/find.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/dom/value-types/get-as-type.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/dom/value-types/number-browser.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/dom/value-types/number.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/dom/value-types/test.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/dom/value-types/transform.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/dom/value-types/type-auto.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/dom/value-types/type-int.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/html/HTMLVisualElement.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/html/config-motion.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/html/use-props.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/html/utils/build-styles.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/html/utils/build-transform.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/html/utils/create-render-state.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/html/utils/keys-position.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/html/utils/keys-transform.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/html/utils/make-none-animatable.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/html/utils/render.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/html/utils/scrape-motion-values.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/store.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/svg/SVGVisualElement.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/svg/config-motion.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/svg/lowercase-elements.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/svg/use-props.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/svg/utils/build-attrs.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/svg/utils/camel-case-attrs.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/svg/utils/create-render-state.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/svg/utils/is-svg-tag.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/svg/utils/path.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/svg/utils/render.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/svg/utils/scrape-motion-values.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/svg/utils/transform-origin.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/utils/KeyframesResolver.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/utils/animation-state.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/utils/compare-by-depth.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/utils/flat-tree.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/utils/get-variant-context.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/utils/is-controlling-variants.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/utils/is-variant-label.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/utils/motion-values.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/utils/resolve-dynamic-variants.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/utils/resolve-variants.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/utils/setters.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/render/utils/variant-props.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/utils/GlobalConfig.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/utils/array.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/utils/clamp.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/utils/delay.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/utils/distance.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/utils/get-context-window.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/utils/hsla-to-rgba.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/utils/interpolate.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/utils/is-browser.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/utils/is-numerical-string.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/utils/is-ref-object.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/utils/is-zero-value-string.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/utils/mix/color.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/utils/mix/complex.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/utils/mix/immediate.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/utils/mix/index.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/utils/mix/number.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/utils/mix/visibility.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/utils/offsets/default.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/utils/offsets/fill.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/utils/offsets/time.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/utils/pipe.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/utils/reduced-motion/index.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/utils/reduced-motion/state.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/utils/resolve-value.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/utils/shallow-compare.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/utils/subscription-manager.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/utils/use-constant.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/utils/use-isomorphic-effect.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/utils/velocity-per-second.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/utils/warn-once.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/value/index.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/value/types/color/hex.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/value/types/color/hsla.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/value/types/color/index.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/value/types/color/rgba.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/value/types/color/utils.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/value/types/complex/filter.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/value/types/complex/index.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/value/types/numbers/index.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/value/types/numbers/units.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/value/types/utils/color-regex.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/value/types/utils/float-regex.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/value/types/utils/is-nullish.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/value/types/utils/sanitize.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/value/types/utils/single-color-regex.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/value/use-will-change/add-will-change.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/value/use-will-change/is.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/value/utils/is-motion-value.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/framer-motion/dist/es/value/utils/resolve-motion-value.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/get-nonce/dist/es2015/index.js": [],
+  "node_modules/howler/dist/howler.js": [
+    "/build/assets/sounds-BouPlq-I.cjs"
+  ],
+  "node_modules/invariant/invariant.js": [],
+  "node_modules/lucide-react/dist/esm/Icon.js": [],
+  "node_modules/lucide-react/dist/esm/createLucideIcon.js": [],
+  "node_modules/lucide-react/dist/esm/defaultAttributes.js": [],
+  "node_modules/lucide-react/dist/esm/icons/activity.js": [],
+  "node_modules/lucide-react/dist/esm/icons/arrow-down-right.js": [
+    "/build/assets/AutomationHub-CmKzK5S4.cjs"
+  ],
+  "node_modules/lucide-react/dist/esm/icons/arrow-left.js": [],
+  "node_modules/lucide-react/dist/esm/icons/arrow-right.js": [],
+  "node_modules/lucide-react/dist/esm/icons/arrow-up-right.js": [
+    "/build/assets/AutomationHub-CmKzK5S4.cjs"
+  ],
+  "node_modules/lucide-react/dist/esm/icons/bar-chart-3.js": [],
+  "node_modules/lucide-react/dist/esm/icons/bar-chart.js": [],
+  "node_modules/lucide-react/dist/esm/icons/bell.js": [],
+  "node_modules/lucide-react/dist/esm/icons/book-open.js": [],
+  "node_modules/lucide-react/dist/esm/icons/bot.js": [],
+  "node_modules/lucide-react/dist/esm/icons/box.js": [],
+  "node_modules/lucide-react/dist/esm/icons/brain.js": [],
+  "node_modules/lucide-react/dist/esm/icons/briefcase.js": [],
+  "node_modules/lucide-react/dist/esm/icons/building-2.js": [
+    "/build/assets/SuperAdminDashboard-CRh1Ieb8.cjs"
+  ],
+  "node_modules/lucide-react/dist/esm/icons/calendar.js": [],
+  "node_modules/lucide-react/dist/esm/icons/camera.js": [
+    "/build/assets/SecureInterviewClient-DxUHfPmK.cjs"
+  ],
+  "node_modules/lucide-react/dist/esm/icons/check.js": [],
+  "node_modules/lucide-react/dist/esm/icons/chevron-down.js": [],
+  "node_modules/lucide-react/dist/esm/icons/chevron-left.js": [],
+  "node_modules/lucide-react/dist/esm/icons/chevron-right.js": [],
+  "node_modules/lucide-react/dist/esm/icons/chevron-up.js": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/lucide-react/dist/esm/icons/chevrons-left.js": [
+    "/build/assets/pagination-controls-B5AkcLuC.cjs"
+  ],
+  "node_modules/lucide-react/dist/esm/icons/chevrons-right.js": [
+    "/build/assets/pagination-controls-B5AkcLuC.cjs"
+  ],
+  "node_modules/lucide-react/dist/esm/icons/circle-alert.js": [],
+  "node_modules/lucide-react/dist/esm/icons/circle-check-big.js": [],
+  "node_modules/lucide-react/dist/esm/icons/circle-check.js": [],
+  "node_modules/lucide-react/dist/esm/icons/circle-help.js": [],
+  "node_modules/lucide-react/dist/esm/icons/circle-play.js": [
+    "/build/assets/circle-play-BVMGEQ73.cjs"
+  ],
+  "node_modules/lucide-react/dist/esm/icons/circle-x.js": [
+    "/build/assets/SecureInterviewClient-DxUHfPmK.cjs"
+  ],
+  "node_modules/lucide-react/dist/esm/icons/circle.js": [],
+  "node_modules/lucide-react/dist/esm/icons/clock.js": [],
+  "node_modules/lucide-react/dist/esm/icons/cloud.js": [],
+  "node_modules/lucide-react/dist/esm/icons/code-xml.js": [],
+  "node_modules/lucide-react/dist/esm/icons/code.js": [],
+  "node_modules/lucide-react/dist/esm/icons/copy.js": [],
+  "node_modules/lucide-react/dist/esm/icons/cpu.js": [],
+  "node_modules/lucide-react/dist/esm/icons/credit-card.js": [],
+  "node_modules/lucide-react/dist/esm/icons/database.js": [],
+  "node_modules/lucide-react/dist/esm/icons/dollar-sign.js": [],
+  "node_modules/lucide-react/dist/esm/icons/download.js": [],
+  "node_modules/lucide-react/dist/esm/icons/ellipsis-vertical.js": [
+    "/build/assets/BlogManagement-C6efM5qj.cjs"
+  ],
+  "node_modules/lucide-react/dist/esm/icons/external-link.js": [],
+  "node_modules/lucide-react/dist/esm/icons/eye-off.js": [
+    "/build/assets/types-BOn1W1aS.cjs"
+  ],
+  "node_modules/lucide-react/dist/esm/icons/eye.js": [],
+  "node_modules/lucide-react/dist/esm/icons/facebook.js": [],
+  "node_modules/lucide-react/dist/esm/icons/file-code.js": [],
+  "node_modules/lucide-react/dist/esm/icons/file-json.js": [],
+  "node_modules/lucide-react/dist/esm/icons/file-text.js": [],
+  "node_modules/lucide-react/dist/esm/icons/filter.js": [],
+  "node_modules/lucide-react/dist/esm/icons/folder-kanban.js": [],
+  "node_modules/lucide-react/dist/esm/icons/folder-plus.js": [
+    "/build/assets/BlogManagement-C6efM5qj.cjs"
+  ],
+  "node_modules/lucide-react/dist/esm/icons/git-branch.js": [],
+  "node_modules/lucide-react/dist/esm/icons/github.js": [],
+  "node_modules/lucide-react/dist/esm/icons/globe.js": [],
+  "node_modules/lucide-react/dist/esm/icons/headphones.js": [],
+  "node_modules/lucide-react/dist/esm/icons/home.js": [],
+  "node_modules/lucide-react/dist/esm/icons/image.js": [],
+  "node_modules/lucide-react/dist/esm/icons/info.js": [],
+  "node_modules/lucide-react/dist/esm/icons/layers.js": [],
+  "node_modules/lucide-react/dist/esm/icons/layout-dashboard.js": [],
+  "node_modules/lucide-react/dist/esm/icons/layout-grid.js": [],
+  "node_modules/lucide-react/dist/esm/icons/linkedin.js": [],
+  "node_modules/lucide-react/dist/esm/icons/loader-circle.js": [],
+  "node_modules/lucide-react/dist/esm/icons/loader.js": [],
+  "node_modules/lucide-react/dist/esm/icons/lock.js": [
+    "/build/assets/lock-dj5dcxCi.cjs"
+  ],
+  "node_modules/lucide-react/dist/esm/icons/log-out.js": [],
+  "node_modules/lucide-react/dist/esm/icons/mail-open.js": [
+    "/build/assets/ContactEnquiries-CXlqtccs.cjs"
+  ],
+  "node_modules/lucide-react/dist/esm/icons/mail.js": [],
+  "node_modules/lucide-react/dist/esm/icons/maximize-2.js": [],
+  "node_modules/lucide-react/dist/esm/icons/maximize.js": [
+    "/build/assets/SecureInterviewClient-DxUHfPmK.cjs"
+  ],
+  "node_modules/lucide-react/dist/esm/icons/megaphone.js": [],
+  "node_modules/lucide-react/dist/esm/icons/menu.js": [],
+  "node_modules/lucide-react/dist/esm/icons/message-circle.js": [],
+  "node_modules/lucide-react/dist/esm/icons/message-square.js": [],
+  "node_modules/lucide-react/dist/esm/icons/mic.js": [
+    "/build/assets/SecureInterviewClient-DxUHfPmK.cjs"
+  ],
+  "node_modules/lucide-react/dist/esm/icons/minimize-2.js": [],
+  "node_modules/lucide-react/dist/esm/icons/minus.js": [],
+  "node_modules/lucide-react/dist/esm/icons/monitor-smartphone.js": [
+    "/build/assets/SecureInterviewClient-DxUHfPmK.cjs"
+  ],
+  "node_modules/lucide-react/dist/esm/icons/monitor.js": [
+    "/build/assets/SecureInterviewClient-DxUHfPmK.cjs"
+  ],
+  "node_modules/lucide-react/dist/esm/icons/moon.js": [],
+  "node_modules/lucide-react/dist/esm/icons/newspaper.js": [],
+  "node_modules/lucide-react/dist/esm/icons/panels-top-left.js": [
+    "/build/assets/SitemapPage-DrJPm94b.cjs"
+  ],
+  "node_modules/lucide-react/dist/esm/icons/pause.js": [
+    "/build/assets/pause-CvdMdAmF.cjs"
+  ],
+  "node_modules/lucide-react/dist/esm/icons/pen-tool.js": [],
+  "node_modules/lucide-react/dist/esm/icons/pie-chart.js": [],
+  "node_modules/lucide-react/dist/esm/icons/play.js": [
+    "/build/assets/play-Lb2bnuGU.cjs"
+  ],
+  "node_modules/lucide-react/dist/esm/icons/plus.js": [],
+  "node_modules/lucide-react/dist/esm/icons/radio.js": [],
+  "node_modules/lucide-react/dist/esm/icons/refresh-ccw.js": [],
+  "node_modules/lucide-react/dist/esm/icons/refresh-cw.js": [
+    "/build/assets/refresh-cw-lsuzTtbP.cjs"
+  ],
+  "node_modules/lucide-react/dist/esm/icons/reply.js": [
+    "/build/assets/ContactEnquiries-CXlqtccs.cjs"
+  ],
+  "node_modules/lucide-react/dist/esm/icons/rotate-ccw.js": [
+    "/build/assets/LessonViewerPage-D6WBpB9x.cjs"
+  ],
+  "node_modules/lucide-react/dist/esm/icons/rotate-cw.js": [
+    "/build/assets/LessonViewerPage-D6WBpB9x.cjs"
+  ],
+  "node_modules/lucide-react/dist/esm/icons/search.js": [],
+  "node_modules/lucide-react/dist/esm/icons/send.js": [],
+  "node_modules/lucide-react/dist/esm/icons/server.js": [],
+  "node_modules/lucide-react/dist/esm/icons/settings.js": [],
+  "node_modules/lucide-react/dist/esm/icons/share-2.js": [],
+  "node_modules/lucide-react/dist/esm/icons/shield-alert.js": [
+    "/build/assets/SecureInterviewClient-DxUHfPmK.cjs"
+  ],
+  "node_modules/lucide-react/dist/esm/icons/shield-check.js": [],
+  "node_modules/lucide-react/dist/esm/icons/shield.js": [],
+  "node_modules/lucide-react/dist/esm/icons/shopping-bag.js": [],
+  "node_modules/lucide-react/dist/esm/icons/slack.js": [],
+  "node_modules/lucide-react/dist/esm/icons/smartphone.js": [],
+  "node_modules/lucide-react/dist/esm/icons/sparkles.js": [],
+  "node_modules/lucide-react/dist/esm/icons/square-pen.js": [
+    "/build/assets/square-pen-DNzlKH8s.cjs"
+  ],
+  "node_modules/lucide-react/dist/esm/icons/square.js": [
+    "/build/assets/SecureInterviewClient-DxUHfPmK.cjs"
+  ],
+  "node_modules/lucide-react/dist/esm/icons/star.js": [],
+  "node_modules/lucide-react/dist/esm/icons/sun.js": [],
+  "node_modules/lucide-react/dist/esm/icons/tag.js": [
+    "/build/assets/BlogManagement-C6efM5qj.cjs"
+  ],
+  "node_modules/lucide-react/dist/esm/icons/target.js": [],
+  "node_modules/lucide-react/dist/esm/icons/terminal.js": [],
+  "node_modules/lucide-react/dist/esm/icons/trash-2.js": [
+    "/build/assets/trash-2-BfBBcNrN.cjs"
+  ],
+  "node_modules/lucide-react/dist/esm/icons/trending-up.js": [],
+  "node_modules/lucide-react/dist/esm/icons/triangle-alert.js": [],
+  "node_modules/lucide-react/dist/esm/icons/truck.js": [],
+  "node_modules/lucide-react/dist/esm/icons/twitter.js": [],
+  "node_modules/lucide-react/dist/esm/icons/user.js": [],
+  "node_modules/lucide-react/dist/esm/icons/users.js": [],
+  "node_modules/lucide-react/dist/esm/icons/video.js": [],
+  "node_modules/lucide-react/dist/esm/icons/volume-1.js": [
+    "/build/assets/LessonViewerPage-D6WBpB9x.cjs"
+  ],
+  "node_modules/lucide-react/dist/esm/icons/volume-2.js": [
+    "/build/assets/LessonViewerPage-D6WBpB9x.cjs"
+  ],
+  "node_modules/lucide-react/dist/esm/icons/volume-x.js": [
+    "/build/assets/LessonViewerPage-D6WBpB9x.cjs"
+  ],
+  "node_modules/lucide-react/dist/esm/icons/wifi-off.js": [
+    "/build/assets/SecureInterviewClient-DxUHfPmK.cjs"
+  ],
+  "node_modules/lucide-react/dist/esm/icons/wifi.js": [
+    "/build/assets/SecureInterviewClient-DxUHfPmK.cjs"
+  ],
+  "node_modules/lucide-react/dist/esm/icons/workflow.js": [],
+  "node_modules/lucide-react/dist/esm/icons/wrench.js": [],
+  "node_modules/lucide-react/dist/esm/icons/x.js": [],
+  "node_modules/lucide-react/dist/esm/icons/zap.js": [],
+  "node_modules/lucide-react/dist/esm/shared/src/utils.js": [],
+  "node_modules/motion-dom/dist/es/animation/controls/BaseGroup.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/motion-dom/dist/es/animation/controls/Group.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/motion-dom/dist/es/animation/generators/utils/calc-duration.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/motion-dom/dist/es/animation/generators/utils/is-generator.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/motion-dom/dist/es/animation/utils/get-value-transition.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/motion-dom/dist/es/animation/waapi/utils/attach-timeline.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/motion-dom/dist/es/animation/waapi/utils/easing.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/motion-dom/dist/es/animation/waapi/utils/linear.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/motion-dom/dist/es/gestures/drag/state/is-active.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/motion-dom/dist/es/gestures/drag/state/set-active.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/motion-dom/dist/es/gestures/hover.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/motion-dom/dist/es/gestures/press/index.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/motion-dom/dist/es/gestures/press/utils/is-keyboard-accessible.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/motion-dom/dist/es/gestures/press/utils/keyboard.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/motion-dom/dist/es/gestures/press/utils/state.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/motion-dom/dist/es/gestures/utils/is-node-or-child.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/motion-dom/dist/es/gestures/utils/is-primary-pointer.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/motion-dom/dist/es/gestures/utils/setup.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/motion-dom/dist/es/utils/is-bezier-definition.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/motion-dom/dist/es/utils/resolve-elements.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/motion-dom/dist/es/utils/supports/flags.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/motion-dom/dist/es/utils/supports/linear-easing.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/motion-dom/dist/es/utils/supports/memo.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/motion-dom/dist/es/utils/supports/scroll-timeline.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/motion-utils/dist/es/errors.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/motion-utils/dist/es/memo.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/motion-utils/dist/es/noop.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/motion-utils/dist/es/progress.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/motion-utils/dist/es/time-conversion.mjs": [
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
+  ],
+  "node_modules/react-dom/cjs/react-dom-server-legacy.node.development.js": [],
+  "node_modules/react-dom/cjs/react-dom-server-legacy.node.production.min.js": [],
+  "node_modules/react-dom/cjs/react-dom-server.node.development.js": [],
+  "node_modules/react-dom/cjs/react-dom-server.node.production.min.js": [],
+  "node_modules/react-dom/cjs/react-dom.development.js": [],
+  "node_modules/react-dom/cjs/react-dom.production.min.js": [],
+  "node_modules/react-dom/index.js": [],
+  "node_modules/react-dom/server.node.js": [],
+  "node_modules/react-fast-compare/index.js": [],
+  "node_modules/react-helmet-async/lib/index.esm.js": [],
+  "node_modules/react-hook-form/dist/index.esm.mjs": [
+    "/build/assets/types-BOn1W1aS.cjs"
+  ],
+  "node_modules/react-i18next/dist/es/context.js": [],
+  "node_modules/react-i18next/dist/es/defaults.js": [],
+  "node_modules/react-i18next/dist/es/i18nInstance.js": [],
+  "node_modules/react-i18next/dist/es/unescape.js": [],
+  "node_modules/react-i18next/dist/es/useTranslation.js": [],
+  "node_modules/react-i18next/dist/es/utils.js": [],
+  "node_modules/react-remove-scroll-bar/dist/es2015/component.js": [],
+  "node_modules/react-remove-scroll-bar/dist/es2015/constants.js": [],
+  "node_modules/react-remove-scroll-bar/dist/es2015/utils.js": [],
+  "node_modules/react-remove-scroll/dist/es2015/Combination.js": [],
+  "node_modules/react-remove-scroll/dist/es2015/SideEffect.js": [],
+  "node_modules/react-remove-scroll/dist/es2015/UI.js": [],
+  "node_modules/react-remove-scroll/dist/es2015/aggresiveCapture.js": [],
+  "node_modules/react-remove-scroll/dist/es2015/handleScroll.js": [],
+  "node_modules/react-remove-scroll/dist/es2015/medium.js": [],
+  "node_modules/react-remove-scroll/dist/es2015/sidecar.js": [],
+  "node_modules/react-router-dom/dist/index.js": [],
+  "node_modules/react-router/dist/development/chunk-JPUPSTYD.mjs": [],
+  "node_modules/react-router/dist/development/chunk-LFPYN7LY.mjs": [],
+  "node_modules/react-router/dist/development/dom-export.mjs": [],
+  "node_modules/react-router/dist/development/index.mjs": [],
+  "node_modules/react-router/node_modules/cookie/dist/index.js": [],
+  "node_modules/react-style-singleton/dist/es2015/component.js": [],
+  "node_modules/react-style-singleton/dist/es2015/hook.js": [],
+  "node_modules/react-style-singleton/dist/es2015/singleton.js": [],
+  "node_modules/react/cjs/react-jsx-runtime.development.js": [],
+  "node_modules/react/cjs/react-jsx-runtime.production.min.js": [],
+  "node_modules/react/cjs/react.development.js": [],
+  "node_modules/react/cjs/react.production.min.js": [],
+  "node_modules/react/index.js": [],
+  "node_modules/react/jsx-runtime.js": [],
   "node_modules/reactflow/dist/style.css": [],
+  "node_modules/scheduler/cjs/scheduler.development.js": [],
+  "node_modules/scheduler/cjs/scheduler.production.min.js": [],
+  "node_modules/scheduler/index.js": [],
+  "node_modules/set-cookie-parser/lib/set-cookie.js": [],
+  "node_modules/shallowequal/index.js": [],
+  "node_modules/tailwind-merge/dist/bundle-mjs.mjs": [],
+  "node_modules/tslib/tslib.es6.mjs": [],
+  "node_modules/use-callback-ref/dist/es2015/assignRef.js": [],
+  "node_modules/use-callback-ref/dist/es2015/useMergeRef.js": [],
+  "node_modules/use-callback-ref/dist/es2015/useRef.js": [],
+  "node_modules/use-sidecar/dist/es2015/exports.js": [],
+  "node_modules/use-sidecar/dist/es2015/medium.js": [],
+  "node_modules/use-sync-external-store/cjs/use-sync-external-store-shim.development.js": [],
+  "node_modules/use-sync-external-store/cjs/use-sync-external-store-shim.production.js": [],
+  "node_modules/use-sync-external-store/cjs/use-sync-external-store-shim/with-selector.development.js": [],
+  "node_modules/use-sync-external-store/cjs/use-sync-external-store-shim/with-selector.production.js": [],
+  "node_modules/use-sync-external-store/shim/index.js": [],
+  "node_modules/use-sync-external-store/shim/with-selector.js": [],
+  "node_modules/zod/v3/ZodError.js": [
+    "/build/assets/types-BOn1W1aS.cjs"
+  ],
+  "node_modules/zod/v3/errors.js": [
+    "/build/assets/types-BOn1W1aS.cjs"
+  ],
+  "node_modules/zod/v3/helpers/errorUtil.js": [
+    "/build/assets/types-BOn1W1aS.cjs"
+  ],
+  "node_modules/zod/v3/helpers/parseUtil.js": [
+    "/build/assets/types-BOn1W1aS.cjs"
+  ],
+  "node_modules/zod/v3/helpers/util.js": [
+    "/build/assets/types-BOn1W1aS.cjs"
+  ],
+  "node_modules/zod/v3/locales/en.js": [
+    "/build/assets/types-BOn1W1aS.cjs"
+  ],
+  "node_modules/zod/v3/types.js": [
+    "/build/assets/types-BOn1W1aS.cjs"
+  ],
+  "node_modules/zustand/esm/index.mjs": [],
+  "node_modules/zustand/esm/shallow.mjs": [],
+  "node_modules/zustand/esm/traditional.mjs": [],
+  "node_modules/zustand/esm/vanilla.mjs": [],
   "resources/js/src/App.tsx": [],
   "resources/js/src/api/mocks/_auth.ts": [],
   "resources/js/src/api/mocks/_freelanceAccounts.ts": [],
@@ -26,7 +1368,7 @@
   "resources/js/src/components/home/LazyStarfield.tsx": [],
   "resources/js/src/components/home/SpotlightCard.tsx": [],
   "resources/js/src/components/home/Starfield.tsx": [
-    "/build/assets/Starfield-Dhj2bYIO.js"
+    "/build/assets/Starfield-CqujNO_I.cjs"
   ],
   "resources/js/src/components/layout/DashboardLayout.tsx": [],
   "resources/js/src/components/layout/Header.tsx": [],
@@ -39,34 +1381,37 @@
   "resources/js/src/components/ui/button.tsx": [],
   "resources/js/src/components/ui/card.tsx": [],
   "resources/js/src/components/ui/checkbox.tsx": [
-    "/build/assets/SecureInterviewClient-DkQwVjmL.js"
+    "/build/assets/SecureInterviewClient-DxUHfPmK.cjs"
   ],
   "resources/js/src/components/ui/dialog.tsx": [],
   "resources/js/src/components/ui/dropdown-menu.tsx": [
-    "/build/assets/BlogManagement-o7tqxcBy.js"
+    "/build/assets/BlogManagement-C6efM5qj.cjs"
   ],
   "resources/js/src/components/ui/input.tsx": [],
   "resources/js/src/components/ui/label.tsx": [
-    "/build/assets/label-Bi_79Mmn.js"
+    "/build/assets/label-BST6Rr9i.cjs"
   ],
   "resources/js/src/components/ui/pagination-controls.tsx": [
-    "/build/assets/pagination-controls-Bz09fOze.js"
+    "/build/assets/pagination-controls-B5AkcLuC.cjs"
   ],
   "resources/js/src/components/ui/progress.tsx": [
-    "/build/assets/SecureInterviewClient-DkQwVjmL.js"
+    "/build/assets/progress-DPoCB8T9.cjs"
   ],
   "resources/js/src/components/ui/scroll-area.tsx": [],
   "resources/js/src/components/ui/select.tsx": [
-    "/build/assets/select-H0JYI2nI.js"
+    "/build/assets/select-pTnym9L9.cjs"
   ],
   "resources/js/src/components/ui/sheet.tsx": [],
   "resources/js/src/components/ui/skeleton.tsx": [],
   "resources/js/src/components/ui/switch.tsx": [],
   "resources/js/src/components/ui/table.tsx": [
-    "/build/assets/table-DWq9r8gv.js"
+    "/build/assets/table-BghVgMLi.cjs"
+  ],
+  "resources/js/src/components/ui/tabs.tsx": [
+    "/build/assets/AutomationHub-CmKzK5S4.cjs"
   ],
   "resources/js/src/components/ui/textarea.tsx": [
-    "/build/assets/textarea-CMsb0E2l.js"
+    "/build/assets/textarea-CHua6wZE.cjs"
   ],
   "resources/js/src/components/workflow/N8nNode.tsx": [],
   "resources/js/src/components/workflow/WorkflowReviewsSection.tsx": [],
@@ -77,85 +1422,91 @@
   "resources/js/src/lib/apiConfig.ts": [],
   "resources/js/src/lib/serverApi.ts": [],
   "resources/js/src/lib/sounds.ts": [
-    "/build/assets/sounds-B1yfOfjZ.js"
+    "/build/assets/sounds-BouPlq-I.cjs"
   ],
   "resources/js/src/lib/utils.ts": [],
   "resources/js/src/pages/ContactEnquiries.tsx": [
-    "/build/assets/ContactEnquiries-DD2nnu5Z.js"
+    "/build/assets/ContactEnquiries-CXlqtccs.cjs"
   ],
   "resources/js/src/pages/FAQManagement.tsx": [
-    "/build/assets/FAQManagement-yICv-cjs.js"
+    "/build/assets/FAQManagement-DLune0Az.cjs"
   ],
   "resources/js/src/pages/NewsletterSubscribers.tsx": [
-    "/build/assets/NewsletterSubscribers-CZUQ9RtB.js"
+    "/build/assets/NewsletterSubscribers-tecIj_Ox.cjs"
   ],
   "resources/js/src/pages/PageManagement.tsx": [
-    "/build/assets/PageManagement-DHAGgfks.js"
+    "/build/assets/PageManagement-V9OQyJ1_.cjs"
   ],
   "resources/js/src/pages/app/AdminCourseReviewsPage.tsx": [
-    "/build/assets/AdminCourseReviewsPage-SUfNLfSB.js"
+    "/build/assets/AdminCourseReviewsPage-B1EBOiAg.cjs"
   ],
   "resources/js/src/pages/app/AdminCoursesPage.tsx": [
-    "/build/assets/AdminCoursesPage-CGOhROlf.js"
+    "/build/assets/AdminCoursesPage-Cwh_BGeI.cjs"
+  ],
+  "resources/js/src/pages/app/AutomationHub.tsx": [
+    "/build/assets/AutomationHub-CmKzK5S4.cjs"
   ],
   "resources/js/src/pages/app/BlogManagement.tsx": [
-    "/build/assets/BlogManagement-o7tqxcBy.js"
+    "/build/assets/BlogManagement-C6efM5qj.cjs"
   ],
   "resources/js/src/pages/app/Dashboard.tsx": [
-    "/build/assets/Dashboard-DmhoB5pu.js"
+    "/build/assets/Dashboard-N4_9nfqU.cjs"
   ],
   "resources/js/src/pages/app/SupportChatAdmin.tsx": [
-    "/build/assets/SupportChatAdmin-BRQ6dJvB.js"
+    "/build/assets/SupportChatAdmin-B4SbwML5.cjs"
+  ],
+  "resources/js/src/pages/app/WorkflowTemplates.tsx": [
+    "/build/assets/WorkflowTemplates-DDwGY1PX.cjs"
   ],
   "resources/js/src/pages/auth/LoginPage.tsx": [
-    "/build/assets/LoginPage-B4F3x2lN.js"
+    "/build/assets/LoginPage-CQgbGtvu.cjs"
   ],
   "resources/js/src/pages/auth/SignupPage.tsx": [
-    "/build/assets/SignupPage-CW3H_bkh.js"
+    "/build/assets/SignupPage-CcQbtZ6r.cjs"
   ],
   "resources/js/src/pages/interview/SecureInterviewClient.tsx": [
-    "/build/assets/SecureInterviewClient-DkQwVjmL.js"
+    "/build/assets/SecureInterviewClient-DxUHfPmK.cjs"
   ],
   "resources/js/src/pages/superadmin/SuperAdminDashboard.tsx": [
-    "/build/assets/SuperAdminDashboard-aS-KDMPl.js"
+    "/build/assets/SuperAdminDashboard-CRh1Ieb8.cjs"
   ],
   "resources/js/src/pages/website/BlogPage.tsx": [],
   "resources/js/src/pages/website/BlogSlugPage.tsx": [],
   "resources/js/src/pages/website/ContactPage.tsx": [
-    "/build/assets/ContactPage-BtZfo27L.js"
+    "/build/assets/ContactPage-CmF1MN2H.cjs"
   ],
   "resources/js/src/pages/website/CourseDetailsPage.tsx": [
-    "/build/assets/CourseDetailsPage-CfrCRSag.js"
+    "/build/assets/CourseDetailsPage-CkUJ6T9V.cjs"
   ],
   "resources/js/src/pages/website/CoursesListPage.tsx": [
-    "/build/assets/CoursesListPage-D_dgr6kF.js"
+    "/build/assets/CoursesListPage-CR6tAxhk.cjs"
   ],
   "resources/js/src/pages/website/HomePage.tsx": [],
   "resources/js/src/pages/website/LessonViewerPage.tsx": [
-    "/build/assets/LessonViewerPage-B1w78VfT.js"
+    "/build/assets/LessonViewerPage-D6WBpB9x.cjs"
   ],
   "resources/js/src/pages/website/NotFoundPage.tsx": [
-    "/build/assets/NotFoundPage-DNWBlxwM.js"
+    "/build/assets/NotFoundPage-DT24HmVw.cjs"
   ],
   "resources/js/src/pages/website/SitemapPage.tsx": [
-    "/build/assets/SitemapPage-DpiEeWF6.js"
+    "/build/assets/SitemapPage-DrJPm94b.cjs"
   ],
   "resources/js/src/pages/website/TemplatesShowcasePage.tsx": [],
   "resources/js/src/pages/website/WorkflowDetailsPage.tsx": [],
   "resources/js/src/pages/website/WorkflowsPage.tsx": [],
   "resources/js/src/services/blogService.ts": [],
   "resources/js/src/services/contactService.ts": [
-    "/build/assets/contactService-DYCcY7WF.js"
+    "/build/assets/contactService-aAHkcRLN.cjs"
   ],
   "resources/js/src/services/courseService.ts": [
-    "/build/assets/courseService-UHMy8Xl5.js"
+    "/build/assets/courseService-DHzi5qpu.cjs"
   ],
   "resources/js/src/services/faqService.ts": [],
   "resources/js/src/services/newsletterService.ts": [
-    "/build/assets/newsletterService-DXdskxTV.js"
+    "/build/assets/newsletterService-DBtprxc6.cjs"
   ],
   "resources/js/src/services/pageService.ts": [
-    "/build/assets/pageService-Cxi9cwOM.js"
+    "/build/assets/pageService-Cr3ChvZU.cjs"
   ],
   "resources/js/src/services/supportChatService.ts": [],
   "resources/js/src/services/workflowService.ts": [],

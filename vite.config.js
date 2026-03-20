@@ -17,4 +17,14 @@ export default defineConfig({
             '@': path.resolve(__dirname, './resources/js/src'),
         },
     },
+    ssr: {
+        noExternal: true,
+    },
+    build: {
+        rollupOptions: {
+            output: {
+                format: 'cjs',
+            },
+        },
+    },
 });
