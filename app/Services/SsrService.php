@@ -28,19 +28,15 @@ class SsrService
 
             // Add URL to context if not present
             $context['url'] = $url;
-            \Log::info("Attempting SSR for URL: $url");
-
+ 
             $html = $renderer
                 ->entry($bundlePath)
                 ->context($context)
                 ->render();
-            
-            \Log::info("SSR Successful for URL: $url");
-
+ 
             return $html;
         } catch (\Exception $e) {
             \Log::error('SSR Rendering Error: ' . $e->getMessage());
-            \Log::error($e->getTraceAsString());
             throw $e;
             return null;
         }
