@@ -37,7 +37,6 @@ class SsrService
             return $html;
         } catch (\Exception $e) {
             \Log::error('SSR Rendering Error: ' . $e->getMessage());
-            throw $e;
             return null;
         }
     }
