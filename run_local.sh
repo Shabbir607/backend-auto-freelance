@@ -6,7 +6,7 @@ php artisan serve --port=8000 &
 BACKEND_PID=$!
 
 # Start Vite dev server for React SPA
-npm run dev -- --host &
+npm run dev -- --host 127.0.0.1 &
 FRONTEND_PID=$!
 
 echo "Backend running on port 8000 (PID: $BACKEND_PID)"

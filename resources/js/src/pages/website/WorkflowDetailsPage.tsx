@@ -8,6 +8,7 @@ import {
     Bot,
     Box,
     Check,
+    ChevronRight,
     Clock,
     Copy,
     Download,
@@ -52,6 +53,7 @@ import { useCallback } from 'react';
 
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 
 import { LucideIconMap, N8nNode } from '@/components/workflow/N8nNode';
 import { SEOHelmet } from '@/components/SEO/SEOHelmet';
@@ -666,14 +668,150 @@ export default function WorkflowDetailsPage() {
                     )}
                 </div>
 
+
+
+                {/* --- Workflow-Specific FAQs --- */}
+                {!isFullscreen && workflow?.faqs && workflow.faqs.length > 0 && (
+                    <div className="mt-20 pt-16 border-t border-white/5">
+                        <FAQSection data={workflow.faqs} title="Frequently Asked Questions" className="py-0" />
+                    </div>
+                )}
+
+                {/* --- Related Content Section --- */}
+                {!isFullscreen && (relatedWorkflows.length > 0 || relevantBlogs.length > 0) && (
+                    <div className="mt-24 pt-16 border-t border-white/5 space-y-24 mb-16">
+
+                        {/* Related Workflows */}
+                        {relatedWorkflows.length > 0 && (
+                            <section>
+                                <div className="flex flex-col md:flex-row items-end justify-between gap-6 mb-12">
+                                    <div className="space-y-3">
+                                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20">
+                                            <Workflow className="w-3.5 h-3.5 text-cyan-400" />
+                                            <span className="text-[10px] font-bold text-cyan-400 uppercase tracking-widest">Similar Workflows</span>
+                                        </div>
+                                        <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight">Explore Related Automation Templates</h2>
+                                        <p className="text-slate-400 text-lg font-light max-w-2xl">Find more ready-to-use workflows in the same category to further automate your business.</p>
+                                    </div>
+                                    <div className="flex flex-col gap-3 sm:flex-row items-center">
+                                        <Button asChild className="bg-gradient-to-r from-indigo-500 to-cyan-500 hover:from-indigo-400 hover:to-cyan-400 border-0 rounded-2xl px-6 py-6 h-auto font-bold text-white shadow-lg shadow-indigo-500/20">
+                                            <Link to="/workflows">Browse Core Templates</Link>
+                                        </Button>
+                                    </div>
+                                </div>
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                    {relatedWorkflows.slice(0, 6).map((rWorkflow) => {
+                                        const price = parseFloat(rWorkflow.price || "0");
+                                        const CardCategoryIcon = LucideIconMap[rWorkflow.category?.icon as any] || Users;
+                                        return (
+                                            <div
+                                                key={rWorkflow.id}
+                                                className="group flex flex-col bg-[#0a0a0f] border border-white/5 rounded-[1.5rem] p-6 hover:border-cyan-500/30 transition-all duration-500 shadow-2xl hover:shadow-cyan-500/10 relative"
+                                            >
+                                                <div className="flex items-start justify-between mb-5">
+                                                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20 border border-white/5 flex items-center justify-center text-indigo-400 shadow-inner">
+                                                        <CardCategoryIcon className="w-6 h-6" />
+                                                    </div>
+                                                    {price === 0 ? (
+                                                        <Badge className="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] uppercase font-bold px-2.5 py-1">Free</Badge>
+                                                    ) : (
+                                                        <Badge className="bg-white/10 text-white border border-white/20 text-[10px] font-bold px-2.5 py-1">${rWorkflow.price}</Badge>
+                                                    )}
+                                                </div>
+
+                                                <div className="space-y-2 mb-6">
+                                                    <h3 className="font-bold text-white group-hover:text-cyan-400 transition-colors leading-tight text-lg line-clamp-2">
+                                                        {rWorkflow.title}
+                                                    </h3>
+                                                    <p className="text-slate-400 font-light leading-relaxed text-sm line-clamp-2">
+                                                        {rWorkflow.description}
+                                                    </p>
+                                                </div>
+
+                                                <div className="flex flex-wrap items-center gap-2 mb-8">
+                                                    <Badge variant="secondary" className="bg-white/5 text-slate-400 border-0 text-[10px] py-1 px-3 rounded-lg capitalize">
+                                                        {rWorkflow.category?.title || "Workflow"}
+                                                    </Badge>
+                                                    <Badge variant="secondary" className="bg-white/5 text-slate-400 border-0 text-[10px] py-1 px-3 rounded-lg">
+                                                        {rWorkflow.nodes_count || 12} Nodes
+                                                    </Badge>
+                                                    <Badge variant="secondary" className="bg-white/5 text-slate-400 border-0 text-[10px] py-1 px-3 rounded-lg capitalize">
+                                                        {rWorkflow.difficulty || "Beginner"}
+                                                    </Badge>
+                                                </div>
+
+                                                <div className="flex items-center justify-between mt-auto pt-5 border-t border-white/5">
+                                                    <div className="flex items-center gap-1.5 text-slate-500 text-xs font-medium">
+                                                        <Eye className="w-4 h-4 text-slate-600" />
+                                                        <span>{(rWorkflow.views || rWorkflow.total_views || 100).toLocaleString()} views</span>
+                                                    </div>
+
+                                                    <Link to={`/workflow/${rWorkflow.slug}`}>
+                                                        <Button className="bg-gradient-to-r from-cyan-500 to-purple-600 hover:opacity-90 text-white border-0 rounded-xl px-6 h-10 font-bold text-xs shadow-lg shadow-cyan-500/10">
+                                                            Download
+                                                        </Button>
+                                                    </Link>
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </section>
+                        )}
+
+                        {/* Related Articles */}
+                        {relevantBlogs.length > 0 && (
+                            <section>
+                                <div className="flex flex-col md:flex-row items-baseline justify-between gap-4 mb-10">
+                                    <div>
+                                        <h2 className="text-3xl font-bold text-white mb-2 flex items-center gap-3">
+                                            <Newspaper className="w-8 h-8 text-indigo-400" />
+                                            Build Your Automation Stack
+                                        </h2>
+                                        <p className="text-slate-400">Deepen your knowledge with related guides and tutorials in this cluster.</p>
+                                    </div>
+                                    <Link to="/blogs" className="text-indigo-400 hover:text-indigo-300 text-sm font-semibold transition-colors flex items-center gap-1 group">
+                                        View Complete Knowledge Base
+                                        <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                    </Link>
+                                </div>
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    {relevantBlogs.slice(0, 4).map((rBlog) => (
+                                        <Link
+                                            key={rBlog.id}
+                                            to={`/blogs/${rBlog.slug}`}
+                                            className="group flex flex-col sm:flex-row gap-5 p-4 bg-white/[0.02] border border-white/5 rounded-3xl hover:bg-white/[0.04] hover:border-indigo-500/30 transition-all duration-300"
+                                        >
+                                            <div className="relative w-full sm:w-40 aspect-video sm:aspect-square overflow-hidden rounded-2xl shrink-0 border border-white/10 bg-[#050507]">
+                                                {rBlog.image_url ? (
+                                                    <img src={rBlog.image_url} alt={rBlog.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                                                ) : (
+                                                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-800 to-slate-900">
+                                                        <Newspaper className="w-8 h-8 text-indigo-500/50" />
+                                                    </div>
+                                                )}
+                                            </div>
+                                            <div className="flex flex-col justify-center flex-1 min-w-0">
+                                                <div className="text-[10px] uppercase tracking-widest text-indigo-400 font-bold mb-2">{rBlog.category?.title || "Article"}</div>
+                                                <h3 className="text-lg font-bold text-white group-hover:text-indigo-300 transition-colors line-clamp-2 leading-tight">{rBlog.title}</h3>
+                                                <p className="text-slate-400 text-sm line-clamp-2 mt-2">{rBlog.description}</p>
+                                            </div>
+                                        </Link>
+                                    ))}
+                                </div>
+                            </section>
+                        )}
+                    </div>
+                )}
+
                 {!isFullscreen && (
-                    <div className="mt-20 border-t border-white/5 pt-20">
+                    <div className="mt-20 border-t border-white/5 pt-20 pb-20">
                         <WorkflowReviewsSection workflowSlug={workflow.slug} />
                     </div>
                 )}
             </div>
-
-            <FAQSection type="page" slug="workflows" />
 
             <SocialShareDialog
                 isOpen={isShareOpen}

@@ -49,6 +49,7 @@ export interface NavItemChild {
 const navItems: NavItem[] = [
   { label: "Home", to: "/", title: "Go to Home" },
   { label: "Workflows", to: "/workflows", title: "Browse Workflow Templates" },
+  { label: "Categories", title: "Workflow Categories" },
   { label: "Templates", to: "/templates", title: "View Template Library" },
   { label: "Courses", to: "/courses", title: "Browse our Expert Courses" },
   { label: "Blogs", to: "/blogs", title: "Read our latest Blog Posts" },

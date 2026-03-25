@@ -19,10 +19,12 @@ import {
     Star,
     Tag,
     User,
+    Users,
     Workflow,
     LayoutGrid,
     ChevronRight,
 } from "lucide-react";
+import { LucideIconMap } from '@/components/workflow/N8nNode';
 import { useEffect, useState } from "react";
 import { Link, useParams } from 'react-router-dom';
 import { SEOHelmet } from "@/components/SEO/SEOHelmet";
@@ -555,95 +557,58 @@ export default function BlogSlugPage() {
                                             </div>
                                         </div>
 
-                                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                                            {relatedWorkflows.slice(0, 4).map((workflow) => {
+                                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                            {relatedWorkflows.slice(0, 6).map((workflow) => {
                                                 const price = parseFloat(workflow.price || "0");
+                                                const CardCategoryIcon = LucideIconMap[workflow.category?.icon as any] || Users;
                                                 return (
                                                     <div
                                                         key={workflow.id}
-                                                        id={`related-workflow-card-${workflow.id}`}
-                                                        className="group flex flex-col bg-[#0a0a0e] border border-white/5 rounded-[2rem] overflow-hidden hover:border-cyan-500/30 transition-all duration-500 shadow-2xl hover:shadow-cyan-500/10 relative"
+                                                        className="group flex flex-col bg-[#0a0a0f] border border-white/5 rounded-[1.5rem] p-6 hover:border-cyan-500/30 transition-all duration-500 shadow-2xl hover:shadow-cyan-500/10 relative"
                                                     >
-                                                        {/* Card Content Top */}
-                                                        <div className="relative overflow-hidden bg-slate-900 flex shrink-0 aspect-[16/10] w-full">
-                                                            {workflow.og_image ? (
-                                                                <img
-                                                                    src={workflow.og_image}
-                                                                    alt={workflow.title}
-                                                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
-                                                                />
-                                                            ) : (
-                                                                <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-800 to-slate-950 p-12">
-                                                                    <Workflow className="w-16 h-16 text-slate-700/50 group-hover:scale-110 group-hover:text-cyan-500/30 transition-all duration-700" />
-                                                                </div>
-                                                            )}
-
-                                                            {/* Price/Rating Overlays */}
-                                                            <div className="absolute top-4 left-4 flex flex-col gap-2">
-                                                                {price === 0 ? (
-                                                                    <Badge className="bg-emerald-500 text-white border-0 shadow-lg px-3 py-1 font-bold text-[10px] uppercase">Free</Badge>
-                                                                ) : (
-                                                                    <Badge className="bg-white text-black border-0 shadow-lg px-3 py-1 font-bold text-[10px]">${workflow.price}</Badge>
-                                                                )}
+                                                        <div className="flex items-start justify-between mb-5">
+                                                            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20 border border-white/5 flex items-center justify-center text-indigo-400 shadow-inner">
+                                                                <CardCategoryIcon className="w-6 h-6" />
                                                             </div>
-
-                                                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                                            {price === 0 ? (
+                                                                <Badge className="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] uppercase font-bold px-2.5 py-1">Free</Badge>
+                                                            ) : (
+                                                                <Badge className="bg-white/10 text-white border border-white/20 text-[10px] font-bold px-2.5 py-1">${workflow.price}</Badge>
+                                                            )}
                                                         </div>
 
-                                                        {/* Card Details */}
-                                                        <div className="p-8 flex flex-col flex-1 justify-between gap-6 relative">
-                                                            <div className="space-y-4">
-                                                                <div className="flex items-center justify-between">
-                                                                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-cyan-500/80">
-                                                                        {workflow.category?.title || "Workflow Template"}
-                                                                    </span>
-                                                                    <div className="flex items-center gap-1.5 text-amber-400 font-bold text-xs bg-amber-400/10 px-2 py-0.5 rounded-full border border-amber-400/20">
-                                                                        <Star className="w-3 h-3 fill-current" />
-                                                                        {workflow.rating || "5.0"}
-                                                                    </div>
-                                                                </div>
+                                                        <div className="space-y-2 mb-6">
+                                                            <h3 className="font-bold text-white group-hover:text-cyan-400 transition-colors leading-tight text-lg line-clamp-2">
+                                                                {workflow.title}
+                                                            </h3>
+                                                            <p className="text-slate-400 font-light leading-relaxed text-sm line-clamp-2">
+                                                                {workflow.description}
+                                                            </p>
+                                                        </div>
 
-                                                                <h3 className="font-bold text-white group-hover:text-cyan-400 transition-colors leading-[1.25] text-xl md:text-2xl line-clamp-2">
-                                                                    {workflow.title}
-                                                                </h3>
+                                                        <div className="flex flex-wrap items-center gap-2 mb-8">
+                                                            <Badge variant="secondary" className="bg-white/5 text-slate-400 border-0 text-[10px] py-1 px-3 rounded-lg capitalize">
+                                                                {workflow.category?.title || "Workflow"}
+                                                            </Badge>
+                                                            <Badge variant="secondary" className="bg-white/5 text-slate-400 border-0 text-[10px] py-1 px-3 rounded-lg">
+                                                                {workflow.nodes_count || 12} Nodes
+                                                            </Badge>
+                                                            <Badge variant="secondary" className="bg-white/5 text-slate-400 border-0 text-[10px] py-1 px-3 rounded-lg capitalize">
+                                                                {workflow.difficulty || "Beginner"}
+                                                            </Badge>
+                                                        </div>
 
-                                                                <p className="text-slate-400 font-light leading-relaxed text-sm md:text-base line-clamp-2">
-                                                                    {workflow.description}
-                                                                </p>
+                                                        <div className="flex items-center justify-between mt-auto pt-5 border-t border-white/5">
+                                                            <div className="flex items-center gap-1.5 text-slate-500 text-xs font-medium">
+                                                                <Eye className="w-4 h-4 text-slate-600" />
+                                                                <span>{(workflow.views || workflow.total_views || 100).toLocaleString()} views</span>
                                                             </div>
 
-                                                            <div className="space-y-6">
-                                                                {/* Metadata Grid */}
-                                                                <div className="grid grid-cols-2 gap-4 py-6 border-y border-white/5">
-                                                                    <div className="space-y-1">
-                                                                        <span className="text-[9px] uppercase tracking-widest text-slate-400 font-bold">Complexity</span>
-                                                                        <div className="flex items-center gap-1.5 text-slate-300 font-medium text-xs capitalize">
-                                                                            <Bot className="w-3.5 h-3.5 text-cyan-500/50" />
-                                                                            {workflow.difficulty || "Beginner"}
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="space-y-1">
-                                                                        <span className="text-[9px] uppercase tracking-widest text-slate-400 font-bold">Automation Nodes</span>
-                                                                        <div className="flex items-center gap-1.5 text-slate-300 font-medium text-xs">
-                                                                            <LayoutGrid className="w-3.5 h-3.5 text-cyan-500/50" />
-                                                                            {workflow.nodes_count || 12} Nodes
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div className="flex items-center justify-between">
-                                                                    <div className="flex items-center gap-2 text-slate-400 text-xs">
-                                                                        <span className="ml-1">{(workflow.views || workflow.total_views || 100).toLocaleString()}+ active users</span>
-                                                                    </div>
-
-                                                                    <Link
-                                                                        to={`/workflow/${workflow.slug}`}
-                                                                        className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 group-hover:bg-cyan-500 group-hover:border-cyan-400 group-hover:text-black flex items-center justify-center transition-all duration-300 group-hover:shadow-[0_0_20px_rgba(34,211,238,0.4)]"
-                                                                    >
-                                                                        <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-0.5" />
-                                                                    </Link>
-                                                                </div>
-                                                            </div>
+                                                            <Link to={`/workflow/${workflow.slug}`}>
+                                                                <Button className="bg-gradient-to-r from-cyan-500 to-purple-600 hover:opacity-90 text-white border-0 rounded-xl px-6 h-10 font-bold text-xs shadow-lg shadow-cyan-500/10">
+                                                                    Download
+                                                                </Button>
+                                                            </Link>
                                                         </div>
                                                     </div>
                                                 );

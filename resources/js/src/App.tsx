@@ -11,7 +11,6 @@ import { SSRContext } from "./contexts/SSRContext";
 // Components
 import LoadingScreen from "./components/LoadingScreen";
 import SupportChatFloat from "./components/SupportChatFloat";
-import GlobalLoadingOverlay from "./components/GlobalLoadingOverlay";
 
 // Public Pages - Eager loaded for SSR support
 import HomePage from "./pages/website/HomePage";
@@ -108,7 +107,6 @@ function App() {
               <Suspense fallback={<LoadingScreen />}>
                 <AppRoutes />
                 <SupportChatFloat />
-                <GlobalLoadingOverlay />
               </Suspense>
             </ConfirmationProvider>
           </ToastProvider>

@@ -33,6 +33,7 @@ import {
 } from 'lucide-react';
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { SEOHelmet } from '@/components/SEO/SEOHelmet';
 
 // Difficulty colors
 const getDifficultyColor = (difficulty: string) => {
@@ -158,6 +159,10 @@ export default function TemplatesShowcasePage() {
 
   return (
     <PublicNavbarLayout className="text-white">
+      <SEOHelmet
+        title="Premium n8n Workflow Templates - EdgeLancer"
+        description="Explore ready-to-use n8n automation templates built for digital marketing, social media automation, and lead generation."
+      />
 
       {/* Hero Section */}
       <section className="pt-24 md:pt-32 pb-12 md:pb-16 px-4 relative overflow-hidden">

@@ -8,6 +8,7 @@ import { Course, courseService } from '@/services/courseService';
 import { ArrowRight, BookOpen, Clock, Loader2, PlayCircle, Search, Star, Users } from 'lucide-react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { SEOHelmet } from '@/components/SEO/SEOHelmet';
 
 export default function CoursesListPage() {
     const navigate = useNavigate();
@@ -100,6 +101,10 @@ export default function CoursesListPage() {
 
     return (
         <PublicNavbarLayout>
+            <SEOHelmet
+                title="Automation Courses & Tutorials - EdgeLancer"
+                description="Level up your automation and development skills with expert-led courses on EdgeLancer."
+            />
             <section className="relative pt-32 pb-20 px-4 overflow-hidden">
                 <div className="absolute inset-0 overflow-hidden pointer-events-none">
                     <div className="absolute top-[-10%] left-1/4 w-[600px] h-[600px] bg-blue-500/10 rounded-full blur-[120px]" />

@@ -110,7 +110,7 @@ class AppController extends Controller
     {
         $workflow = Workflow::where('slug', $slug)
             ->where('status', 'published')
-            ->with(['category', 'integrations', 'reviews.user'])
+            ->with(['category', 'integrations', 'reviews.user', 'faqs'])
             ->first();
 
         if (!$workflow) return [];
