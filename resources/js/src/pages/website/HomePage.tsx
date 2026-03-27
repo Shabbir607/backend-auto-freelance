@@ -59,12 +59,14 @@ export default function HomePage() {
         return <div className="min-h-screen bg-[#020204] flex items-center justify-center"><LoadingScreen /></div>;
     }
 
+    const origin = typeof window !== 'undefined' ? window.location.origin : 'https://edge.srv1381478.hstgr.cloud';
+
     const organizationJsonLd = {
         "@context": "https://schema.org",
         "@type": "Organization",
         name: "EdgeLancer",
-        url: "https://edgelancer.com",
-        logo: "https://edgelancer.com/favicon.png",
+        url: origin,
+        logo: `${origin}/favicon.png`,
         description: "Download ready-to-use n8n workflow automation templates. Connect apps, automate tasks, and build powerful AI agents with EdgeLancer.",
         sameAs: [
             "https://twitter.com/edgelancer",
@@ -77,10 +79,10 @@ export default function HomePage() {
         "@context": "https://schema.org",
         "@type": "WebSite",
         name: "EdgeLancer",
-        url: "https://edgelancer.com",
+        url: origin,
         potentialAction: {
             "@type": "SearchAction",
-            target: "https://edgelancer.com/workflows?search={search_term_string}",
+            target: `${origin}/workflows?search={search_term_string}`,
             "query-input": "required name=search_term_string",
         },
     };

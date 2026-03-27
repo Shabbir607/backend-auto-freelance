@@ -13,14 +13,14 @@
         <meta property="og:url" content="{{ url()->current() }}">
         <meta property="og:title" content="{{ $ssrData['blog']['title'] ?? '' }} - n8n Automation Guide ({{ date('Y') }})">
         <meta property="og:description" content="{{ $ssrData['blog']['description'] ?? '' }}">
-        <meta property="og:image" content="{{ $ssrData['blog']['image_url'] ?? 'https://edgelancer.com/og-image.png' }}">
+        <meta property="og:image" content="{{ $ssrData['blog']['image_url'] ?? url('/og-image.png') }}">
 
         <!-- Twitter -->
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:site" content="@edgelancer">
         <meta name="twitter:title" content="{{ $ssrData['blog']['title'] ?? '' }} - n8n Automation Guide ({{ date('Y') }})">
         <meta name="twitter:description" content="{{ $ssrData['blog']['description'] ?? '' }}">
-        <meta name="twitter:image" content="{{ $ssrData['blog']['image_url'] ?? 'https://edgelancer.com/og-image.png' }}">
+        <meta name="twitter:image" content="{{ $ssrData['blog']['image_url'] ?? url('/og-image.png') }}">
         
         @if(!empty($ssrHead))
             {!! preg_replace('/<title>.*?<\/title>/i', '', $ssrHead) !!}
@@ -36,17 +36,17 @@
             
             <!-- OpenGraph -->
             <meta property="og:type" content="website">
-            <meta property="og:url" content="https://edgelancer.com/">
+            <meta property="og:url" content="{{ url('/') }}">
             <meta property="og:title" content="EdgeLancer – n8n Workflow Automation Templates & AI Agents">
             <meta property="og:description" content="Discover powerful n8n automation templates and AI workflows to automate your business processes. Download & deploy in minutes.">
-            <meta property="og:image" content="https://edgelancer.com/og-image.png">
+            <meta property="og:image" content="{{ url('/og-image.png') }}">
 
             <!-- Twitter -->
             <meta name="twitter:card" content="summary_large_image">
             <meta name="twitter:site" content="@edgelancer">
             <meta name="twitter:title" content="EdgeLancer – Automation Templates & AI Agents">
             <meta name="twitter:description" content="Download ready-to-use n8n workflow automation templates and AI agents. Automate your business in minutes.">
-            <meta name="twitter:image" content="https://edgelancer.com/og-image.png">
+            <meta name="twitter:image" content="{{ url('/og-image.png') }}">
         @endif
     @endif
 

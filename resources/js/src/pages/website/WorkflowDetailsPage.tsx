@@ -316,6 +316,8 @@ export default function WorkflowDetailsPage() {
             ? JSON.parse(workflow.workflow_features)
             : [];
 
+    const origin = typeof window !== 'undefined' ? window.location.origin : 'https://edge.srv1381478.hstgr.cloud';
+
     const structuredData = [
         {
             "@context": "https://schema.org/",
@@ -341,19 +343,19 @@ export default function WorkflowDetailsPage() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": `${typeof window !== 'undefined' ? window.location.origin : 'https://edgelancer.com'}`
+                    "item": origin
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Workflows",
-                    "item": `${typeof window !== 'undefined' ? window.location.origin : 'https://edgelancer.com'}/workflows`
+                    "item": `${origin}/workflows`
                 },
                 {
                     "@type": "ListItem",
                     "position": 3,
                     "name": workflow.title,
-                    "item": `${typeof window !== 'undefined' ? window.location.origin : 'https://edgelancer.com'}/workflow/${workflow.slug}`
+                    "item": `${origin}/workflow/${workflow.slug}`
                 }
             ]
         }

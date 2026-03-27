@@ -102,28 +102,30 @@ export default function BlogSlugPage() {
 
     const metaDesc = seo?.description || blog?.meta_description || blog?.description || "Read this article on EdgeLancer blog.";
 
+    const origin = typeof window !== 'undefined' ? window.location.origin : 'https://edge.srv1381478.hstgr.cloud';
+
     // Generate BlogPosting Schema
     const schemaData = blog ? {
         "@context": "https://schema.org",
         "@type": "BlogPosting",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": typeof window !== 'undefined' ? window.location.href : `https://edgelancer.com/blogs/${blog.slug}`
+            "@id": `${origin}/blogs/${blog.slug}`
         },
         "headline": metaTitle,
         "description": metaDesc,
-        "image": seo?.og_image || blog.image_url || "https://edgelancer.com/og-image.png",
+        "image": seo?.og_image || blog.image_url || `${origin}/og-image.png`,
         "author": {
             "@type": "Person",
             "name": blog.author?.name || "EdgeLancer Team",
-            "url": "https://edgelancer.com/about" // Placeholder unless author profile URL exists
+            "url": `${origin}/about` 
         },
         "publisher": {
             "@type": "Organization",
             "name": "EdgeLancer",
             "logo": {
                 "@type": "ImageObject",
-                "url": "https://edgelancer.com/logo.png"
+                "url": `${origin}/logo.png`
             }
         },
         "datePublished": blog.published_at || blog.created_at,
@@ -462,10 +464,10 @@ export default function BlogSlugPage() {
                                 className="blog-content w-full"
                                 dangerouslySetInnerHTML={{
                                     __html: (blog.content || "")
-                                        .replace(/http:\/\/localhost:3000\/templates\//g, 'https://edgelancer.com/workflow/')
-                                        .replace(/http:\/\/localhost:3000\/workflow\//g, 'https://edgelancer.com/workflow/')
-                                        .replace(/http:\/\/localhost:3000\//g, 'https://edgelancer.com/workflow/')
-                                        .replace(/http:\/\/localhost:3000/g, 'https://edgelancer.com/workflow')
+                                        .replace(/http:\/\/localhost:3000\/templates\//g, `${origin}/workflow/`)
+                                        .replace(/http:\/\/localhost:3000\/workflow\//g, `${origin}/workflow/`)
+                                        .replace(/http:\/\/localhost:3000\//g, `${origin}/workflow/`)
+                                        .replace(/http:\/\/localhost:3000/g, `${origin}/workflow`)
                                         .replace(
                                             /<a([^>]*?)href="([^"]*)"([^>]*?)>(.*?)<\/a>/gi,
                                             (match, p1, p2, p3, p4) => {
