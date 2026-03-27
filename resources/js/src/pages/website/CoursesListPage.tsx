@@ -21,6 +21,7 @@ export default function CoursesListPage() {
     const [totalCourses, setTotalCourses] = useState(0);
 
     const [isLoadingMore, setIsLoadingMore] = useState(false);
+    const [hasMore, setHasMore] = useState(true);
     const observerTarget = useRef<HTMLDivElement>(null);
 
     const gradientPool = [
@@ -50,13 +51,19 @@ export default function CoursesListPage() {
             if (res.success && res.data) {
                 const isPaginatedObj = res.data && !Array.isArray(res.data) && 'data' in res.data;
                 const courseItems = isPaginatedObj ? (res.data as any).data : (Array.isArray(res.data) ? res.data : [res.data]);
+                const lastPage = isPaginatedObj ? (res.data as any).meta?.last_page || 1 : 1;
+                const total = isPaginatedObj ? (res.data as any).meta?.total || courseItems.length : courseItems.length;
 
                 setCourses(prev => append ? [...prev, ...courseItems] : courseItems);
-                setTotalPages(isPaginatedObj ? (res.data as any).meta?.last_page || 1 : 1);
-                setTotalCourses(isPaginatedObj ? (res.data as any).meta?.total || courseItems.length : courseItems.length);
-            } else if (!append) {
-                setCourses([]);
-                setTotalCourses(0);
+                setTotalPages(lastPage);
+                setTotalCourses(total);
+                setHasMore(currentPage < lastPage);
+            } else {
+                if (!append) {
+                    setCourses([]);
+                    setTotalCourses(0);
+                }
+                setHasMore(false);
             }
         } catch (e) {
             console.error('Failed to load courses', e);
@@ -75,17 +82,17 @@ export default function CoursesListPage() {
     }, [searchQuery, loadCourses]);
 
     const handleLoadMore = useCallback(() => {
-        if (page < totalPages && !isLoadingMore && !loading) {
+        if (hasMore && !isLoadingMore && !loading) {
             const nextPage = page + 1;
             setPage(nextPage);
             loadCourses(nextPage, true);
         }
-    }, [page, totalPages, isLoadingMore, loading, loadCourses]);
+    }, [hasMore, page, isLoadingMore, loading, loadCourses]);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
             (entries) => {
-                if (entries[0].isIntersecting && page < totalPages && !isLoadingMore && !loading) {
+                if (entries[0].isIntersecting && hasMore && !isLoadingMore && !loading) {
                     handleLoadMore();
                 }
             },
@@ -97,7 +104,7 @@ export default function CoursesListPage() {
         }
 
         return () => observer.disconnect();
-    }, [handleLoadMore, page, totalPages, isLoadingMore, loading]);
+    }, [handleLoadMore, hasMore, isLoadingMore, loading]);
 
     return (
         <PublicNavbarLayout>

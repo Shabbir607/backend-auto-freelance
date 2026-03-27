@@ -1,4 +1,4 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://api.edgelancer.com/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || (typeof window !== 'undefined' ? `${window.location.origin}/api` : 'https://edge.srv1381478.hstgr.cloud/api');
 
 
 interface FetchOptions {
