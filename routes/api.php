@@ -405,7 +405,7 @@ Route::middleware(['auth:api', 'role:freelancer|agency'])->prefix('freelancer')-
 | Job Board Routes (Client/Agency/Freelancer)
 |--------------------------------------------------------------------------
 */
-Route::middleware(['auth:api', 'user'])->prefix('job-board')->group(function () {
+Route::middleware(['auth:api', 'user'])->prefix('job-board')->name('job-board.')->group(function () {
     Route::apiResource('job-posts', JobPostController::class);
     Route::apiResource('companies', JobBoardCompanyController::class);
     Route::apiResource('candidates', JobBoardCandidateController::class);
