@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use Spatie\Ssr\Renderer;
-use Spatie\Ssr\Engines\Node;
+use App\Ssr\CustomNode as Node;
 
 class SsrService
 {
