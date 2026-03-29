@@ -672,10 +672,14 @@ export default function WorkflowDetailsPage() {
 
 
 
-                {/* --- Workflow-Specific FAQs --- */}
-                {!isFullscreen && workflow?.faqs && workflow.faqs.length > 0 && (
+                {/* --- Workflow-Specific or Global FAQs --- */}
+                {!isFullscreen && (
                     <div className="mt-20 pt-16 border-t border-white/5">
-                        <FAQSection data={workflow.faqs} title="Frequently Asked Questions" className="py-0" />
+                        {workflow?.faqs && workflow.faqs.length > 0 ? (
+                            <FAQSection data={workflow.faqs} title="Frequently Asked Questions" className="py-0" />
+                        ) : (
+                            <FAQSection type="page" slug="workflows" className="py-0" />
+                        )}
                     </div>
                 )}
 
