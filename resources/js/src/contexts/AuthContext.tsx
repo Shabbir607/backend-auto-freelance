@@ -247,13 +247,30 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const logout = () => {
-    setUser(null);
-    setTeam(null);
-    setToken(null);
-    if (typeof window !== 'undefined') {
-      localStorage.removeItem(SESSION_STORAGE_KEY);
-      localStorage.removeItem('nexus_user');
+  const logout = async () => {
+    try {
+      if (token && API_BASE_URL) {
+        const endpoint = user?.role === 'admin' || user?.role === 'superadmin'
+          ? `${API_BASE_URL}/admin/logout`
+          : `${API_BASE_URL}/logout`;
+
+        await fetch(endpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+            'x-app-key': import.meta.env.VITE_FRONTEND_SECRET || '',
+          },
+        }).catch(() => { });
+      }
+    } finally {
+      setUser(null);
+      setTeam(null);
+      setToken(null);
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem(SESSION_STORAGE_KEY);
+        localStorage.removeItem('nexus_user');
+      }
     }
   };
 

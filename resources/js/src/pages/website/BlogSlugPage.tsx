@@ -102,7 +102,7 @@ export default function BlogSlugPage() {
 
     const metaDesc = seo?.description || blog?.meta_description || blog?.description || "Read this article on EdgeLancer blog.";
 
-    const origin = typeof window !== 'undefined' ? window.location.origin : 'https://edge.srv1381478.hstgr.cloud';
+    const origin = import.meta.env.VITE_FRONTEND_URL || (typeof window !== 'undefined' ? window.location.origin : 'https://edgelancer.com');
 
     // Generate BlogPosting Schema
     const schemaData = blog ? {
@@ -110,15 +110,15 @@ export default function BlogSlugPage() {
         "@type": "BlogPosting",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": `${origin}/blogs/${blog.slug}`
+            "@id": `${origin}/blogs/${blog?.slug || ''}`
         },
         "headline": metaTitle,
         "description": metaDesc,
-        "image": seo?.og_image || blog.image_url || `${origin}/og-image.png`,
+        "image": seo?.og_image || blog?.image_url || `${origin}/og-image.png`,
         "author": {
             "@type": "Person",
-            "name": blog.author?.name || "EdgeLancer Team",
-            "url": `${origin}/about` 
+            "name": blog?.author?.name || "EdgeLancer Team",
+            "url": `${origin}/about`
         },
         "publisher": {
             "@type": "Organization",
@@ -128,17 +128,17 @@ export default function BlogSlugPage() {
                 "url": `${origin}/logo.png`
             }
         },
-        "datePublished": blog.published_at || blog.created_at,
-        "dateModified": blog.updated_at || blog.published_at || blog.created_at
+        "datePublished": blog?.published_at || blog?.created_at,
+        "dateModified": blog?.updated_at || blog?.published_at || blog?.created_at
     } : undefined;
 
     const handleShare = async () => {
         if (!blog) return;
 
         const shareData = {
-            title: blog.title,
-            text: blog.description || "Check out this amazing article!",
-            url: window.location.href,
+            title: blog?.title || 'EdgeLancer Blog',
+            text: blog?.description || "Check out this amazing article!",
+            url: typeof window !== 'undefined' ? window.location.href : '',
         };
 
         if (navigator.share && navigator.canShare(shareData)) {
@@ -178,6 +178,7 @@ export default function BlogSlugPage() {
             <SEOHelmet
                 title={metaTitle}
                 description={metaDesc}
+                url={`${origin}/blogs/${blog.slug}`}
                 keywords={seo?.keywords || blog?.meta_keywords}
                 ogImage={seo?.og_image || blog?.image_url || undefined}
                 ogType="article"

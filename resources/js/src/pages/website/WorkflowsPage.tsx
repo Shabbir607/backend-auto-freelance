@@ -173,8 +173,12 @@ export default function WorkflowsPage({ categorySlug }: { categorySlug?: string 
     return (
         <PublicNavbarLayout>
             <SEOHelmet
-                title={`${activeCategory === 'all' ? 'All n8n Workflow Templates' : categories.find(c => c.id === activeCategory)?.title + ' Templates'} - EdgeLancer`}
-                description="Browse and download ready-to-use n8n workflow templates for marketing, sales, web scrapers and more."
+                title={ssrData.seo?.title || `${activeCategory === 'all' ? 'All n8n Workflow Templates' : categories.find(c => c.id === activeCategory)?.title + ' Templates'} - EdgeLancer`}
+                description={ssrData.seo?.description || "Browse and download ready-to-use n8n workflow templates for marketing, sales, web scrapers and more."}
+                keywords={ssrData.seo?.keywords}
+                ogImage={ssrData.seo?.og_image}
+                metaTags={ssrData.seo?.meta_tags}
+                structuredData={ssrData.seo?.structured_data}
             />
             <section className="relative pt-24 md:pt-32 pb-12 md:pb-16 px-4 overflow-hidden">
                 <div className="absolute inset-0 overflow-hidden">

@@ -474,12 +474,6 @@ Route::get('/workflows/file/{name}', function ($name) {
 
 Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback']);
 
-// Fallback
-Route::fallback(function(){
-    return response()->json(['message' => 'API Route Not Found'], 404);
-});
-
-
 // -----------------------------------------------------------------------
 // Course Management System
 // -----------------------------------------------------------------------
@@ -528,4 +522,9 @@ Route::middleware('auth:api')->group(function () {
         Route::patch('reviews/{review}/reject', [\App\Http\Controllers\Api\Admin\CourseReviewController::class, 'reject']);
         Route::delete('reviews/{review}', [\App\Http\Controllers\Api\Admin\CourseReviewController::class, 'destroy']);
     });
+});
+
+// Fallback
+Route::fallback(function(){
+    return response()->json(['message' => 'API Route Not Found'], 404);
 });

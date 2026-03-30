@@ -134,6 +134,11 @@ export default function WorkflowDetailsPage() {
     const [relatedWorkflows, setRelatedWorkflows] = useState<WorkflowResponse[]>(ssrData.relatedWorkflows || []);
     const [relevantBlogs, setRelevantBlogs] = useState<any[]>(ssrData.relevantBlogs || []);
 
+    const [isClient, setIsClient] = useState(false);
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
+
     const [nodes, setNodes] = useState<any[]>([]);
     const [edges, setEdges] = useState<any[]>([]);
 
@@ -316,23 +321,23 @@ export default function WorkflowDetailsPage() {
             ? JSON.parse(workflow.workflow_features)
             : [];
 
-    const origin = typeof window !== 'undefined' ? window.location.origin : 'https://edge.srv1381478.hstgr.cloud';
+    const origin = import.meta.env.VITE_FRONTEND_URL || (typeof window !== 'undefined' ? window.location.origin : 'https://edgelancer.com');
 
-    const structuredData = [
+    const structuredData = workflow ? [
         {
             "@context": "https://schema.org/",
             "@type": "Product",
-            "name": workflow.title,
-            "description": workflow.description,
-            "image": workflow.og_image || workflow.category?.image_url,
+            "name": workflow?.title || 'Workflow',
+            "description": workflow?.description || '',
+            "image": workflow?.og_image || workflow?.category?.image_url,
             "brand": {
                 "@type": "Brand",
                 "name": "EdgeLancer"
             },
-            "aggregateRating": workflow.rating ? {
+            "aggregateRating": workflow?.rating ? {
                 "@type": "AggregateRating",
                 "ratingValue": workflow.rating,
-                "reviewCount": workflow.reviews_count || 15
+                "reviewCount": workflow?.reviews_count || 15
             } : undefined
         },
         {
@@ -354,19 +359,20 @@ export default function WorkflowDetailsPage() {
                 {
                     "@type": "ListItem",
                     "position": 3,
-                    "name": workflow.title,
-                    "item": `${origin}/workflow/${workflow.slug}`
+                    "name": workflow?.title || 'Workflow',
+                    "item": `${origin}/workflow/${workflow?.slug || ''}`
                 }
             ]
         }
-    ];
+    ] : undefined;
 
     return (
         <div className={`min-h-screen bg-[#020202] text-slate-300 font-sans flex flex-col transition-all duration-300 ${isFullscreen ? 'h-screen overflow-hidden' : ''}`}>
             <SEOHelmet
-                title={seo?.title || workflow.meta_title || workflow.title}
-                description={seo?.description || workflow.meta_description || workflow.description}
-                ogImage={(workflow.og_image || workflow.category?.image_url) ?? undefined}
+                title={seo?.title || workflow?.meta_title || workflow?.title || 'Workflow Details'}
+                description={seo?.description || workflow?.meta_description || workflow?.description || 'View workflow details on EdgeLancer.'}
+                url={workflow?.slug ? `${origin}/workflow/${workflow.slug}` : undefined}
+                ogImage={(workflow?.og_image || workflow?.category?.image_url) ?? undefined}
                 ogType="product"
                 structuredData={structuredData}
             />
@@ -466,7 +472,7 @@ export default function WorkflowDetailsPage() {
 
                         <div className={`flex-1 relative rounded-2xl overflow-hidden border border-white/10 bg-[#0a0a0a] shadow-2xl ${isFullscreen ? 'fixed inset-0 z-[100] rounded-none border-0' : ''}`}>
                             <div className={`absolute inset-0 transition-opacity duration-300 ${activeTab === 'visual' ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}>
-                                {(typeof window !== 'undefined' && activeTab === 'visual') && (
+                                {(isClient && activeTab === 'visual') && (
                                     <ReactFlowProvider>
                                         <WorkflowCanvas
                                             nodes={nodes}
@@ -479,7 +485,7 @@ export default function WorkflowDetailsPage() {
                                         />
                                     </ReactFlowProvider>
                                 )}
-                                {typeof window === 'undefined' && (
+                                {!isClient && (
                                     <div className="w-full h-full flex items-center justify-center bg-[#050505]">
                                         <div className="text-slate-500 flex flex-col items-center gap-4">
                                             <div className="w-8 h-8 rounded-full border-2 border-slate-800 border-t-purple-500 animate-spin" />

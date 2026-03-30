@@ -206,7 +206,14 @@ export default function BlogPage({ categorySlug }: BlogPageProps) {
 
     return (
         <PublicNavbarLayout>
-            <SEOHelmet title="Automation & AI Blog" description="Latest insights on automation, n8n, and AI workflows." />
+            <SEOHelmet
+                title={ssrData.seo?.title || "Automation & AI Blog - EdgeLancer"}
+                description={ssrData.seo?.description || "Latest insights on automation, n8n, and AI workflows."}
+                keywords={ssrData.seo?.keywords}
+                ogImage={ssrData.seo?.og_image}
+                metaTags={ssrData.seo?.meta_tags}
+                structuredData={ssrData.seo?.structured_data}
+            />
 
             {/* Hero Section */}
             <section className="relative pt-32 pb-16 px-4 overflow-hidden">

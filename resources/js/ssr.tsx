@@ -26,11 +26,12 @@ export default function render(url: string, context: any = {}) {
     const bridgeResponse = {
         html,
         head: helmet ? `
-            ${helmet.title.toString()}
-            ${helmet.meta.toString()}
-            ${helmet.link.toString()}
-            ${helmet.script.toString()}
-            ${helmet.noscript.toString()}
+            ${helmet.title?.toString() || ''}
+            ${helmet.meta?.toString() || ''}
+            ${helmet.link?.toString() || ''}
+            ${helmet.script?.toString() || ''}
+            ${helmet.noscript?.toString() || ''}
+            ${helmet.style?.toString() || ''}
         ` : ''
     };
 

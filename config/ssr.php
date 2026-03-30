@@ -14,7 +14,7 @@ return [
     /*
      * The path to the server-side-rendering bundle.
      */
-    'bundle_path' => base_path('bootstrap/ssr/ssr.cjs'),
+    'bundle_path' => base_path('bootstrap/ssr/ssr.js'),
 
     /*
      * The temporary path used for rendering.

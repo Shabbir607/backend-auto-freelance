@@ -58,7 +58,7 @@ export const SEOHelmet: React.FC<SEOHelmetProps> = ({
     description = '',
     keywords = '',
     ogImage = '',
-    url = typeof window !== 'undefined' ? window.location.href : '',
+    url = '',
     canonical,
     metaTags = {},
     structuredData,
@@ -68,12 +68,10 @@ export const SEOHelmet: React.FC<SEOHelmetProps> = ({
     modifiedTime,
 }) => {
     let finalOgImage = ogImage;
-    if (typeof window !== 'undefined') {
-        if (finalOgImage && !finalOgImage.startsWith('http')) {
-            finalOgImage = `${window.location.origin}${finalOgImage.startsWith('/') ? '' : '/'}${finalOgImage}`;
-        } else if (!finalOgImage) {
-            finalOgImage = `${window.location.origin}${DEFAULT_OG_IMAGE}`;
-        }
+    if (finalOgImage && !finalOgImage.startsWith('http')) {
+        finalOgImage = `${FRONTEND_ORIGIN}${finalOgImage.startsWith('/') ? '' : '/'}${finalOgImage}`;
+    } else if (!finalOgImage) {
+        finalOgImage = `${FRONTEND_ORIGIN}${DEFAULT_OG_IMAGE.startsWith('/') ? '' : '/'}${DEFAULT_OG_IMAGE}`;
     }
 
     const safeCanonical = sanitizeUrl(canonical);
@@ -84,7 +82,7 @@ export const SEOHelmet: React.FC<SEOHelmetProps> = ({
         canonicalUrl = canonicalUrl.split('?')[0];
     }
 
-    const pageUrl = safeUrl || (typeof window !== 'undefined' ? window.location.href : '');
+    const pageUrl = safeUrl || '';
 
     const structuredDataString = structuredData
         ? JSON.stringify(Array.isArray(structuredData) ? structuredData : structuredData)

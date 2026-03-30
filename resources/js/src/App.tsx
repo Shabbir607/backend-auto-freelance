@@ -2,6 +2,7 @@ import { Suspense, lazy } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import { ConfirmationProvider } from "./components/ConfirmationDialog";
 import { AuthProvider } from "./contexts/AuthContext";
+import { ProtectedRoute } from "./components/auth/ProtectedRoute";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { ToastProvider } from "./contexts/ToastContext";
 
@@ -70,22 +71,26 @@ function AppRoutes() {
       <Route path="/interview/:token" element={<SecureInterviewClient />} />
 
       {/* Admin Protected Routes */}
-      <Route path="/app" element={<DashboardLayout />}>
-        <Route index element={<Navigate to="dashboard" replace />} />
-        <Route path="dashboard" element={<AdminDashboard />} />
-        <Route path="blogs" element={<BlogsManagement />} />
-        <Route path="pages" element={<PagesManagement />} />
-        <Route path="faqs" element={<FAQsManagement />} />
-        <Route path="courses" element={<CourseManagement />} />
-        <Route path="course-reviews" element={<CourseReviews />} />
-        <Route path="contact-enquiries" element={<ContactEnquiries />} />
-        <Route path="newsletter-subscribers" element={<NewsletterSubscribers />} />
-        <Route path="support-chat" element={<SupportChatAdmin />} />
-        <Route path="workflows" element={<AutomationHub />} />
-        <Route path="workflow-templates" element={<WorkflowTemplates />} />
+      <Route path="/app" element={<ProtectedRoute allowedRoles={['admin', 'superadmin']} />}>
+        <Route element={<DashboardLayout />}>
+          <Route index element={<Navigate to="dashboard" replace />} />
+          <Route path="dashboard" element={<AdminDashboard />} />
+          <Route path="blogs" element={<BlogsManagement />} />
+          <Route path="pages" element={<PagesManagement />} />
+          <Route path="faqs" element={<FAQsManagement />} />
+          <Route path="courses" element={<CourseManagement />} />
+          <Route path="course-reviews" element={<CourseReviews />} />
+          <Route path="contact-enquiries" element={<ContactEnquiries />} />
+          <Route path="newsletter-subscribers" element={<NewsletterSubscribers />} />
+          <Route path="support-chat" element={<SupportChatAdmin />} />
+          <Route path="workflows" element={<AutomationHub />} />
+          <Route path="workflow-templates" element={<WorkflowTemplates />} />
+        </Route>
       </Route>
 
-      <Route path="/superadmin" element={<SuperAdminDashboard />} />
+      <Route path="/superadmin" element={<ProtectedRoute allowedRoles={['superadmin']} />}>
+        <Route index element={<SuperAdminDashboard />} />
+      </Route>
 
       <Route path="*" element={<NotFoundPage />} />
     </Routes>

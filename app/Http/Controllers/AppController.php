@@ -13,35 +13,47 @@ class AppController extends Controller
     public function __invoke(Request $request)
     {
         $url = $request->getPathInfo(); // Use path info instead of URI to exclude query strings
+        $normalizedPath = ltrim($url, '/');
+        if ($normalizedPath === '') $normalizedPath = 'home';
+        \Log::info("SSR Normalized Path: [" . $normalizedPath . "]");
+        
         $context = [];
+        $seoData = $this->getSeoData($normalizedPath);
+        if ($seoData) {
+            $context['seo'] = $seoData;
+        }
 
         // Simple route matching for SSR data orchestration
         $isNotFound = false;
+        $routeData = [];
         if ($url === '/' || $url === '') {
-            $context = $this->getHomepageData();
+            $routeData = $this->getHomepageData();
         } elseif ($url === '/blogs') {
-            $context = $this->getBlogsListData();
+            $routeData = $this->getBlogsListData();
         } elseif ($url === '/workflows') {
-            $context = $this->getWorkflowsListData();
+            $routeData = $this->getWorkflowsListData();
         } elseif (preg_match('/^\/blogs\/([^\/]+)\/?$/', $url, $matches)) {
-            $context = $this->getBlogData($matches[1]);
-            if (empty($context)) $isNotFound = true;
+            $routeData = $this->getBlogData($matches[1]);
+            if (empty($routeData)) $isNotFound = true;
         } elseif (preg_match('/^\/workflow\/([^\/]+)\/?$/', $url, $matches)) {
-            $context = $this->getWorkflowData($matches[1]);
-            if (empty($context)) $isNotFound = true;
+            $routeData = $this->getWorkflowData($matches[1]);
+            if (empty($routeData)) $isNotFound = true;
         }
+        // Merge route data into context while preserving the seo key
+        $context = array_merge($routeData, $context);
         // Render the page on the server
         $ssrResponse = SsrService::render($url, $context);
+        \Log::debug('Raw SSR Response for ' . $url . ': ' . ($ssrResponse ?: 'NULL'));
         $ssrHtml = '';
         $ssrHead = '';
 
         if ($ssrResponse) {
-            $data = json_decode($ssrResponse, true);
-            if (isset($data['html'])) {
-                $ssrHtml = $data['html'];
-                $ssrHead = $data['head'] ?? '';
+            $decoded = json_decode($ssrResponse, true);
+            if (json_last_error() === JSON_ERROR_NONE && isset($decoded['html'])) {
+                $ssrHtml = $decoded['html'];
+                $ssrHead = $decoded['head'] ?? '';
             } else {
-                // Fallback for non-JSON responses
+                // Fallback for non-JSON response
                 $ssrHtml = $ssrResponse;
             }
         }
@@ -93,6 +105,14 @@ class AppController extends Controller
 
         return [
             'blog' => $blog,
+            'seo' => [
+                'title' => $blog->meta_title ?? $blog->title,
+                'description' => $blog->meta_description ?? substr(strip_tags($blog->content), 0, 160),
+                'keywords' => $blog->meta_keywords,
+                'og_image' => $blog->og_image ?? $blog->image_url,
+                'canonical_url' => $blog->canonical_url,
+                'meta_tags' => json_decode($blog->meta_tags ?? '[]', true),
+            ],
             'relatedBlogs' => Blog::published()
                 ->where('category_id', $blog->category_id)
                 ->where('id', '!=', $blog->id)
@@ -117,7 +137,13 @@ class AppController extends Controller
 
         return [
             'workflow' => $workflow,
-            'seo' => null, // Placeholder or remove if not using a separate SEO relation
+            'seo' => [
+                'title' => $workflow->meta_title ?? $workflow->title,
+                'description' => $workflow->meta_description ?? substr(strip_tags($workflow->description), 0, 160),
+                'keywords' => $workflow->meta_keywords,
+                'og_image' => $workflow->og_image,
+                'canonical_url' => $workflow->canonical_url,
+            ],
             'relatedWorkflows' => Workflow::where('status', 'published')
                 ->where('id', '!=', $workflow->id)
                 ->where('category_id', $workflow->category_id)
@@ -151,6 +177,32 @@ class AppController extends Controller
                 ->paginate(12)
                 ->makeHidden(['json_data']),
             'categories' => WorkflowCategory::where('is_active', true)->get(),
+        ];
+    }
+
+    protected function getSeoData($slug)
+    {
+        $page = \App\Models\Page::where('slug', $slug)
+            ->where('is_active', true)
+            ->first();
+
+        if (!$page) {
+            return null;
+        }
+
+        return [
+            'title' => $page->meta_title ?? $page->title,
+            'description' => $page->meta_description,
+            'keywords' => $page->meta_keywords,
+            'og_image' => $page->og_image,
+            'meta_tags' => $page->meta_tags ?? [],
+            'structured_data' => [
+                '@context' => 'https://schema.org',
+                '@type' => 'WebPage',
+                'name' => $page->title,
+                'description' => $page->meta_description,
+                'url' => url($slug === 'home' ? '/' : $slug),
+            ]
         ];
     }
 }

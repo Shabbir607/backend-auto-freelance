@@ -3,51 +3,27 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    @if(!empty($ssrData['blog']))
-        <title>{{ $ssrData['blog']['title'] ?? 'Blog' }} - n8n Automation Guide ({{ date('Y') }})</title>
-        <meta name="title" content="{{ $ssrData['blog']['title'] ?? '' }} - n8n Automation Guide ({{ date('Y') }})">
-        <meta name="description" content="{{ $ssrData['blog']['description'] ?? '' }}">
+    @if(!empty($ssrHead))
+        {!! $ssrHead !!}
+    @else
+        <title>{{ $ssrData['blog']['title'] ?? 'EdgeLancer – n8n Workflow Automation Templates & AI Agents' }}</title>
+        <!-- Metadata -->
+        <meta name="title" content="{{ $ssrData['blog']['title'] ?? 'EdgeLancer – n8n Workflow Automation Templates & AI Agents' }}">
+        <meta name="description" content="{{ $ssrData['blog']['description'] ?? 'Download ready-to-use n8n workflow automation templates. Connect apps, automate tasks, and build powerful AI agents with EdgeLancer.' }}">
         
         <!-- OpenGraph -->
-        <meta property="og:type" content="article">
+        <meta property="og:type" content="{{ !empty($ssrData['blog']) ? 'article' : 'website' }}">
         <meta property="og:url" content="{{ url()->current() }}">
-        <meta property="og:title" content="{{ $ssrData['blog']['title'] ?? '' }} - n8n Automation Guide ({{ date('Y') }})">
-        <meta property="og:description" content="{{ $ssrData['blog']['description'] ?? '' }}">
+        <meta property="og:title" content="{{ $ssrData['blog']['title'] ?? 'EdgeLancer – n8n Workflow Automation Templates & AI Agents' }}">
+        <meta property="og:description" content="{{ $ssrData['blog']['description'] ?? 'Discover powerful n8n automation templates and AI workflows to automate your business processes.' }}">
         <meta property="og:image" content="{{ $ssrData['blog']['image_url'] ?? url('/og-image.png') }}">
 
         <!-- Twitter -->
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:site" content="@edgelancer">
-        <meta name="twitter:title" content="{{ $ssrData['blog']['title'] ?? '' }} - n8n Automation Guide ({{ date('Y') }})">
-        <meta name="twitter:description" content="{{ $ssrData['blog']['description'] ?? '' }}">
+        <meta name="twitter:title" content="{{ $ssrData['blog']['title'] ?? 'EdgeLancer – Automation Templates & AI Agents' }}">
+        <meta name="twitter:description" content="{{ $ssrData['blog']['description'] ?? 'Download ready-to-use n8n workflow automation templates and AI agents.' }}">
         <meta name="twitter:image" content="{{ $ssrData['blog']['image_url'] ?? url('/og-image.png') }}">
-        
-        @if(!empty($ssrHead))
-            {!! preg_replace('/<title>.*?<\/title>/i', '', $ssrHead) !!}
-        @endif
-    @else
-        @if(!empty($ssrHead))
-            {!! $ssrHead !!}
-        @else
-            <title>EdgeLancer</title>
-            <!-- Metadata -->
-            <meta name="title" content="EdgeLancer – n8n Workflow Automation Templates & AI Agents">
-            <meta name="description" content="Download ready-to-use n8n workflow automation templates. Connect apps, automate tasks, and build powerful AI agents with EdgeLancer.">
-            
-            <!-- OpenGraph -->
-            <meta property="og:type" content="website">
-            <meta property="og:url" content="{{ url('/') }}">
-            <meta property="og:title" content="EdgeLancer – n8n Workflow Automation Templates & AI Agents">
-            <meta property="og:description" content="Discover powerful n8n automation templates and AI workflows to automate your business processes. Download & deploy in minutes.">
-            <meta property="og:image" content="{{ url('/og-image.png') }}">
-
-            <!-- Twitter -->
-            <meta name="twitter:card" content="summary_large_image">
-            <meta name="twitter:site" content="@edgelancer">
-            <meta name="twitter:title" content="EdgeLancer – Automation Templates & AI Agents">
-            <meta name="twitter:description" content="Download ready-to-use n8n workflow automation templates and AI agents. Automate your business in minutes.">
-            <meta name="twitter:image" content="{{ url('/og-image.png') }}">
-        @endif
     @endif
 
     <!-- Scripts (Analytics) -->

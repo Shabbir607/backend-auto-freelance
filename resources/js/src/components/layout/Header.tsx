@@ -134,7 +134,7 @@ export function Header() {
         )}>
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-nexus-muted" />
           <Input
-            placeholder={t('common.search')}
+            placeholder="Search..."
             className="pl-10 bg-nexus-black border-nexus-border focus:border-nexus-blue transition-colors"
             onFocus={() => setSearchFocused(true)}
             onBlur={() => setSearchFocused(false)}
@@ -194,7 +194,7 @@ export function Header() {
         <Link to="/app/projects">
           <Button size="sm" className="gradient-primary text-white border-0 gap-2">
             <Plus className="w-4 h-4" />
-            <span className="hidden sm:inline">{t('projects.newProject')}</span>
+            <span className="hidden sm:inline">New Project</span>
           </Button>
         </Link>
 
@@ -230,7 +230,7 @@ export function Header() {
                       onClick={markAllAsRead}
                       className="text-xs text-nexus-blue hover:text-nexus-blue/80 transition-colors"
                     >
-                      {t('common.markAllRead')}
+                      Mark all as read
                     </button>
                   )}
                   <Link
@@ -238,7 +238,7 @@ export function Header() {
                     onClick={() => setShowNotifications(false)}
                     className="text-xs text-nexus-muted hover:text-white transition-colors"
                   >
-                    {t('common.viewAll')}
+                    View all
                   </Link>
                 </div>
               </div>
