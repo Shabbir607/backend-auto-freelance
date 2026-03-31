@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
 
 const SITE_NAME = 'EdgeLancer';
@@ -62,11 +62,17 @@ export const SEOHelmet: React.FC<SEOHelmetProps> = ({
     canonical,
     metaTags = {},
     structuredData,
-    robots = 'index, follow',
+    robots,
     ogType = 'website',
     publishedTime,
     modifiedTime,
 }) => {
+    const isStaging = typeof window !== 'undefined' && (
+      window.location.hostname.includes('hstgr.cloud') || 
+      window.location.hostname.includes('srv1381478')
+    );
+    const finalRobots = isStaging ? 'noindex, nofollow' : robots;
+
     let finalOgImage = ogImage;
     if (finalOgImage && !finalOgImage.startsWith('http')) {
         finalOgImage = `${FRONTEND_ORIGIN}${finalOgImage.startsWith('/') ? '' : '/'}${finalOgImage}`;
@@ -84,9 +90,15 @@ export const SEOHelmet: React.FC<SEOHelmetProps> = ({
 
     const pageUrl = safeUrl || '';
 
-    const structuredDataString = structuredData
-        ? JSON.stringify(Array.isArray(structuredData) ? structuredData : structuredData)
-        : null;
+    const structuredDataString = useMemo(() => {
+        if (!structuredData) return null;
+        try {
+            return JSON.stringify(structuredData);
+        } catch (e) {
+            console.error("Failed to stringify structured data:", e);
+            return null;
+        }
+    }, [structuredData]);
 
     return (
         <Helmet>
@@ -94,8 +106,8 @@ export const SEOHelmet: React.FC<SEOHelmetProps> = ({
             <title>{title}</title>
             <meta name="description" content={description} />
             {keywords && <meta name="keywords" content={keywords} />}
-            <meta name="robots" content={robots} />
-            <meta name="googlebot" content={robots} />
+            <meta name="robots" content={finalRobots} />
+            <meta name="googlebot" content={finalRobots} />
 
             {/* ── Canonical ── */}
             {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}

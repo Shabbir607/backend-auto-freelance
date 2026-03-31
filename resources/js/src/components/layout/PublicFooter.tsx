@@ -8,7 +8,16 @@ import { Link } from 'react-router-dom';
 
 export const PublicFooter = () => {
   const [workflowCategories, setWorkflowCategories] = useState<WorkflowCategory[]>([]);
-  const [blogCategories, setBlogCategories] = useState<BlogCategory[]>([]);
+  const [blogCategories, setBlogCategories] = useState<BlogCategory[]>(() => {
+    // SSR Fallback categories
+    return [
+      { id: 1, title: 'n8n Guides', slug: 'n8n-guides' },
+      { id: 2, title: 'AI Automation', slug: 'ai-automation' },
+      { id: 3, title: 'CRM Integration', slug: 'crm-integration' },
+      { id: 4, title: 'Web Scraping', slug: 'web-scraping' },
+    ] as BlogCategory[];
+  });
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,7 +36,7 @@ export const PublicFooter = () => {
         console.error("Failed to fetch footer categories:", error);
       }
     };
-    fetchData();
+    fetchData().finally(() => setLoading(false));
   }, []);
 
   return (
@@ -102,8 +111,10 @@ export const PublicFooter = () => {
                     </Link>
                   </li>
                 ))
-              ) : (
+              ) : loading ? (
                 <li className="text-gray-400 text-sm italic">Loading...</li>
+              ) : (
+                <li className="text-gray-500 text-sm italic">Coming soon...</li>
               )}
             </ul>
           </div>

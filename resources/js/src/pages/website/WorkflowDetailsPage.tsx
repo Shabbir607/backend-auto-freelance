@@ -486,10 +486,32 @@ export default function WorkflowDetailsPage() {
                                     </ReactFlowProvider>
                                 )}
                                 {!isClient && (
-                                    <div className="w-full h-full flex items-center justify-center bg-[#050505]">
-                                        <div className="text-slate-500 flex flex-col items-center gap-4">
-                                            <div className="w-8 h-8 rounded-full border-2 border-slate-800 border-t-purple-500 animate-spin" />
-                                            <p className="text-xs font-medium">Initializing Flow Visualizer...</p>
+                                    <div className="w-full h-full flex flex-col items-center justify-center bg-[#050505] p-8 text-center">
+                                        <div className="relative mb-8 group max-w-md w-full aspect-video rounded-2xl overflow-hidden border border-white/5 bg-white/[0.02]">
+                                            {workflow.og_image || workflow.category?.image_url ? (
+                                                <img 
+                                                    src={(workflow.og_image || workflow.category?.image_url) as string} 
+                                                    alt={workflow.title}
+                                                    className="w-full h-full object-cover opacity-40 grayscale"
+                                                />
+                                            ) : (
+                                                <div className="w-full h-full flex items-center justify-center">
+                                                    <Workflow className="w-12 h-12 text-slate-800" />
+                                                </div>
+                                            )}
+                                            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-black/40 backdrop-blur-[2px]">
+                                                <div className="w-10 h-10 rounded-full border-2 border-indigo-500/30 border-t-indigo-500 animate-spin" />
+                                                <p className="text-sm font-bold text-white tracking-widest uppercase">Initializing Canvas</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <div className="max-w-md mx-auto space-y-4 sr-only md:not-sr-only opacity-0">
+                                            <h3 className="text-slate-400 text-sm font-medium">Workflow Architecture: {workflow.title}</h3>
+                                            <p className="text-slate-600 text-xs leading-relaxed">
+                                                This n8n automation consists of {workflow.nodes_count || 'several'} specialized nodes 
+                                                orchestrated to handle {workflow.category?.title || 'complex business logic'} autonomously.
+                                                The visual layer is currently hydrating for high-performance interaction.
+                                            </p>
                                         </div>
                                     </div>
                                 )}

@@ -49,7 +49,7 @@ export interface NavItemChild {
 const navItems: NavItem[] = [
   { label: "Home", to: "/", title: "Go to Home" },
   { label: "Workflows", to: "/workflows", title: "Browse Workflow Templates" },
-  { label: "Categories", title: "Workflow Categories" },
+  { label: "Categories", to: "/workflows", title: "Browse by Niche" },
   { label: "Templates", to: "/templates", title: "View Template Library" },
   { label: "Courses", to: "/courses", title: "Browse our Expert Courses" },
   { label: "Blogs", to: "/blogs", title: "Read our latest Blog Posts" },
@@ -200,16 +200,17 @@ export function PublicNavbar() {
               return (
                 <div key={item.label} className="relative group/dropdown h-full flex items-center">
                   {isDropdown ? (
-                    <button
+                    <Link
+                      to={item.to!}
                       className={cn(
-                        "relative z-10 px-4 py-1.5 text-sm font-medium transition-colors duration-200 flex items-center gap-1 cursor-default outline-none h-full",
+                        "relative z-10 px-4 py-1.5 text-sm font-medium transition-colors duration-200 flex items-center gap-1 outline-none h-full",
                         hoveredIndex === index ? "text-white" : "text-slate-400"
                       )}
                       onMouseEnter={(e) => handleMouseEnter(index, e)}
                     >
                       {item.label}
                       <ChevronDown className="w-3 h-3 mt-0.5 group-hover/dropdown:rotate-180 transition-transform duration-300" />
-                    </button>
+                    </Link>
                   ) : (
                     <Link
                       to={item.to!}

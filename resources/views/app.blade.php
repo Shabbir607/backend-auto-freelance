@@ -25,6 +25,9 @@
         <meta name="twitter:description" content="{{ $ssrData['blog']['description'] ?? 'Download ready-to-use n8n workflow automation templates and AI agents.' }}">
         <meta name="twitter:image" content="{{ $ssrData['blog']['image_url'] ?? url('/og-image.png') }}">
     @endif
+    @if(str_contains(request()->getHost(), 'hstgr.cloud') || str_contains(request()->getHost(), 'srv1381478'))
+        <meta name="robots" content="noindex, nofollow">
+    @endif
 
     <!-- Scripts (Analytics) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-99XSN4QY3C"></script>

@@ -16,11 +16,13 @@ class SsrService
         try {
             $nodePath = config('ssr.node_path', 'node');
             $bundlePath = config('ssr.bundle_path');
+            // Proper file URI for Node.js import on Windows
+            $bundleUrl = 'file:///' . str_replace(['\\', ' '], ['/', '%20'], $bundlePath);
             
             // Create a temporary relay script that imports and runs the SSR bundle
             $contextJson = json_encode($context);
             $relayScript = <<<JS
-import render from 'file://{$bundlePath}';
+import render from '{$bundleUrl}';
 const context = {$contextJson};
 const url = '{$url}';
 try {

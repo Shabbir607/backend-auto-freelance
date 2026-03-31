@@ -104,33 +104,53 @@ export default function BlogSlugPage() {
 
     const origin = import.meta.env.VITE_FRONTEND_URL || (typeof window !== 'undefined' ? window.location.origin : 'https://edgelancer.com');
 
-    // Generate BlogPosting Schema
-    const schemaData = blog ? {
-        "@context": "https://schema.org",
-        "@type": "BlogPosting",
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": `${origin}/blogs/${blog?.slug || ''}`
-        },
-        "headline": metaTitle,
-        "description": metaDesc,
-        "image": seo?.og_image || blog?.image_url || `${origin}/og-image.png`,
-        "author": {
-            "@type": "Person",
-            "name": blog?.author?.name || "EdgeLancer Team",
-            "url": `${origin}/about`
-        },
-        "publisher": {
-            "@type": "Organization",
-            "name": "EdgeLancer",
-            "logo": {
-                "@type": "ImageObject",
-                "url": `${origin}/logo.png`
-            }
-        },
-        "datePublished": blog?.published_at || blog?.created_at,
-        "dateModified": blog?.updated_at || blog?.published_at || blog?.created_at
-    } : undefined;
+    // Generate Schema Data
+    const schemaData = blog ? (() => {
+        const articleSchema = {
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": `${origin}/blogs/${blog?.slug || ''}`
+            },
+            "headline": metaTitle,
+            "description": metaDesc,
+            "image": seo?.og_image || blog?.image_url || `${origin}/og-image.png`,
+            "author": {
+                "@type": "Person",
+                "name": blog?.author?.name || "EdgeLancer Team",
+                "url": `${origin}/about`
+            },
+            "publisher": {
+                "@type": "Organization",
+                "name": "EdgeLancer",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": `${origin}/logo.png`
+                }
+            },
+            "datePublished": blog?.published_at || blog?.created_at,
+            "dateModified": blog?.updated_at || blog?.published_at || blog?.created_at
+        };
+
+        if (blog.faqs && blog.faqs.length > 0) {
+            const faqSchema = {
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                "mainEntity": blog.faqs.map((faq: any) => ({
+                    "@type": "Question",
+                    "name": faq.question,
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": faq.answer
+                    }
+                }))
+            };
+            return [articleSchema, faqSchema];
+        }
+
+        return articleSchema;
+    })() : undefined;
 
     const handleShare = async () => {
         if (!blog) return;
@@ -178,7 +198,7 @@ export default function BlogSlugPage() {
             <SEOHelmet
                 title={metaTitle}
                 description={metaDesc}
-                url={`${origin}/blogs/${blog.slug}`}
+                url={blog?.slug ? `${origin}/blogs/${blog.slug}` : origin}
                 keywords={seo?.keywords || blog?.meta_keywords}
                 ogImage={seo?.og_image || blog?.image_url || undefined}
                 ogType="article"
@@ -469,6 +489,9 @@ export default function BlogSlugPage() {
                                         .replace(/http:\/\/localhost:3000\/workflow\//g, `${origin}/workflow/`)
                                         .replace(/http:\/\/localhost:3000\//g, `${origin}/workflow/`)
                                         .replace(/http:\/\/localhost:3000/g, `${origin}/workflow`)
+                                        .replace(/https?:\/\/edgelancer\.com\/blog\//g, '/blogs/')
+                                        .replace(/\/blog\//g, '/blogs/')
+                                        .replace(/href="blog\//g, 'href="/blogs/')
                                         .replace(
                                             /<a([^>]*?)href="([^"]*)"([^>]*?)>(.*?)<\/a>/gi,
                                             (match, p1, p2, p3, p4) => {
