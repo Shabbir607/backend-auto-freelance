@@ -2,22 +2,16 @@
 
 import { BlogCategory, blogService } from '@/services/blogService';
 import { WorkflowCategory, workflowService } from '@/services/workflowService';
+import { useSSRContext } from '@/contexts/SSRContext';
 import { ArrowRight, Github, Linkedin, Mail, Sparkles, Twitter } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export const PublicFooter = () => {
-  const [workflowCategories, setWorkflowCategories] = useState<WorkflowCategory[]>([]);
-  const [blogCategories, setBlogCategories] = useState<BlogCategory[]>(() => {
-    // SSR Fallback categories
-    return [
-      { id: 1, title: 'n8n Guides', slug: 'n8n-guides' },
-      { id: 2, title: 'AI Automation', slug: 'ai-automation' },
-      { id: 3, title: 'CRM Integration', slug: 'crm-integration' },
-      { id: 4, title: 'Web Scraping', slug: 'web-scraping' },
-    ] as BlogCategory[];
-  });
-  const [loading, setLoading] = useState(true);
+  const ssrData = useSSRContext();
+  const [workflowCategories, setWorkflowCategories] = useState<WorkflowCategory[]>(ssrData.categories || []);
+  const [blogCategories, setBlogCategories] = useState<BlogCategory[]>(ssrData.blogCategories || []);
+  const [loading, setLoading] = useState(!ssrData.categories);
 
   useEffect(() => {
     const fetchData = async () => {

@@ -63,7 +63,7 @@ export const SEOHelmet: React.FC<SEOHelmetProps> = ({
     const finalRobots = useMemo(() => {
         // If we are on a preview/test domain, force noindex
         if (typeof window !== 'undefined' && (window.location.hostname.includes('hstgr.cloud') || window.location.hostname.includes('srv1381478'))) {
-            return 'noindex, nofollow';
+            return 'noindex, follow';
         }
         return robots;
     }, [robots]);

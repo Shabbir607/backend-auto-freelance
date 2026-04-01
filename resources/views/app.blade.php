@@ -26,7 +26,7 @@
         <meta name="twitter:image" content="{{ $ssrData['blog']['image_url'] ?? url('/og-image.png') }}">
     @endif
     @if(str_contains(request()->getHost(), 'hstgr.cloud') || str_contains(request()->getHost(), 'srv1381478'))
-        <meta name="robots" content="noindex, nofollow">
+        <meta name="robots" content="noindex, follow">
     @endif
 
     <!-- Scripts (Analytics) -->

@@ -20,19 +20,17 @@ export default function HomePage() {
     const ssrData = useSSRContext();
 
     const [stats, setStats] = useState<any[]>(() => {
-        if (ssrData.stats && !Array.isArray(ssrData.stats)) {
-            return [
-                { label: "Workflow Views", value: ssrData.stats.total_visits || 0, suffix: "", decimals: 0 },
-                { label: "Active Users", value: ssrData.stats.active_users_today || 0, suffix: "", decimals: 0 },
-                { label: "Total Workflows", value: ssrData.stats.total_workflows || 0, suffix: "+", decimals: 0 },
-            ];
-        }
-        return ssrData.stats || [];
+        if (!ssrData.stats) return [];
+        return [
+            { label: "Workflow Views", value: ssrData.stats.total_visits || 0, suffix: "", decimals: 0 },
+            { label: "Active Users", value: ssrData.stats.active_users_today || 0, suffix: "", decimals: 0 },
+            { label: "Total Workflows", value: ssrData.stats.total_workflows || 0, suffix: "+", decimals: 0 },
+        ];
     });
     const [categories, setCategories] = useState<any[]>(ssrData.categories || []);
     const [initialWorkflows, setInitialWorkflows] = useState<any[]>(ssrData.workflows || []);
     const [blogs, setBlogs] = useState<any[]>(ssrData.blogs || []);
-    const [isLoading, setIsLoading] = useState(!ssrData.stats);
+    const [isLoading, setIsLoading] = useState(typeof window !== 'undefined' && !ssrData.stats);
 
     useEffect(() => {
         async function loadData() {
@@ -115,7 +113,7 @@ export default function HomePage() {
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
             />
             <LazyStarfield />
-            <div className="fixed inset-0 bg-[url('/noise.svg')] opacity-[0.03] pointer-events-none z-[1]" />
+            <div className="fixed inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] pointer-events-none z-[1]" />
 
             <div className="relative z-10">
                 <PublicNavbar />
