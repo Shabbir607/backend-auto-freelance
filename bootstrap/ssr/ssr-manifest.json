@@ -1358,6 +1358,7 @@
   "resources/js/src/components/SEO/SEOHelmet.tsx": [],
   "resources/js/src/components/SocialShareDialog.tsx": [],
   "resources/js/src/components/SupportChatFloat.tsx": [],
+  "resources/js/src/components/auth/ProtectedRoute.tsx": [],
   "resources/js/src/components/home/BentoGrid.tsx": [],
   "resources/js/src/components/home/BlogsSection.tsx": [],
   "resources/js/src/components/home/CTASection.tsx": [],
@@ -1428,7 +1429,7 @@
     "/build/assets/ContactEnquiries-B65oHj-U.js"
   ],
   "resources/js/src/pages/FAQManagement.tsx": [
-    "/build/assets/FAQManagement-DXRJnOEQ.js"
+    "/build/assets/FAQManagement-3EGGHD0w.js"
   ],
   "resources/js/src/pages/NewsletterSubscribers.tsx": [
     "/build/assets/NewsletterSubscribers-B0qpf1f8.js"
@@ -1458,10 +1459,10 @@
     "/build/assets/WorkflowTemplates-BYBbZXrU.js"
   ],
   "resources/js/src/pages/auth/LoginPage.tsx": [
-    "/build/assets/LoginPage-BCq-88Ge.js"
+    "/build/assets/LoginPage-D-v7jJSe.js"
   ],
   "resources/js/src/pages/auth/SignupPage.tsx": [
-    "/build/assets/SignupPage-MftNNPG2.js"
+    "/build/assets/SignupPage-BZxBe0WH.js"
   ],
   "resources/js/src/pages/interview/SecureInterviewClient.tsx": [
     "/build/assets/SecureInterviewClient-Xc6vi2Ic.js"
@@ -1485,7 +1486,7 @@
     "/build/assets/LessonViewerPage-DDuwguHo.js"
   ],
   "resources/js/src/pages/website/NotFoundPage.tsx": [
-    "/build/assets/NotFoundPage-DZmgo1ce.js"
+    "/build/assets/NotFoundPage-CV7wKiHM.js"
   ],
   "resources/js/src/pages/website/SitemapPage.tsx": [
     "/build/assets/SitemapPage-D_gfK2s_.js"

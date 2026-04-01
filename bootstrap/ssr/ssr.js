@@ -67489,13 +67489,28 @@ function AuthProvider({ children: children2 }) {
       setIsLoading(false);
     }
   };
-  const logout = () => {
-    setUser(null);
-    setTeam(null);
-    setToken(null);
-    if (typeof window !== "undefined") {
-      localStorage.removeItem(SESSION_STORAGE_KEY);
-      localStorage.removeItem("nexus_user");
+  const logout = async () => {
+    try {
+      if (token && API_BASE_URL$1) {
+        const endpoint = user?.role === "admin" || user?.role === "superadmin" ? `${API_BASE_URL$1}/admin/logout` : `${API_BASE_URL$1}/logout`;
+        await fetch(endpoint, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
+            "x-app-key": "739f77912fa0ca22538ad067e284545d5cd541a7c13cacebb5e3e4a8fdec9c8"
+          }
+        }).catch(() => {
+        });
+      }
+    } finally {
+      setUser(null);
+      setTeam(null);
+      setToken(null);
+      if (typeof window !== "undefined") {
+        localStorage.removeItem(SESSION_STORAGE_KEY);
+        localStorage.removeItem("nexus_user");
+      }
     }
   };
   const hasRole = (roles) => {
@@ -67528,6 +67543,22 @@ function useAuth() {
     throw new Error("useAuth must be used within an AuthProvider");
   }
   return context2;
+}
+function ProtectedRoute({ allowedRoles }) {
+  const { isAuthenticated, isLoading, user, hasRole } = useAuth();
+  const location2 = distExports.useLocation();
+  if (isLoading) {
+    return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex h-screen items-center justify-center bg-[#020204]", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-8 h-8 rounded-full border-2 border-indigo-500 border-t-purple-500 animate-spin" }) });
+  }
+  if (!isAuthenticated || !user) {
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Navigate, { to: "/login", state: { from: location2 }, replace: true });
+  }
+  if (allowedRoles && allowedRoles.length > 0) {
+    if (!hasRole(allowedRoles)) {
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Navigate, { to: "/", replace: true });
+    }
+  }
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Outlet, {});
 }
 const ThemeContext = reactExports.createContext(void 0);
 function ThemeProvider({ children: children2 }) {
@@ -68729,7 +68760,8 @@ async function apiRequest(endpoint, method = "GET", body, customHeaders) {
       data2 = await response.json();
     } else {
       const text = await response.text();
-      data2 = { message: text || `Error ${response.status}` };
+      const isHtml = /<[a-z][\s\S]*>/i.test(text);
+      data2 = { message: isHtml ? `Request failed (${response.status})` : text || `Error ${response.status}` };
     }
     if (!response.ok) {
       const firstValidationError = (() => {
@@ -69224,6 +69256,10 @@ async function serverFetch(endpoint, options = {}) {
     "Content-Type": "application/json",
     "Accept": "application/json"
   };
+  const appKey = "739f77912fa0ca22538ad067e284545d5cd541a7c13cacebb5e3e4a8fdec9c8";
+  {
+    headers["X-App-Key"] = appKey;
+  }
   try {
     const response = await fetch(url, { headers });
     if (!response.ok) {
@@ -69758,7 +69794,15 @@ class WorkflowService {
 const workflowService = new WorkflowService();
 const PublicFooter = () => {
   const [workflowCategories, setWorkflowCategories] = reactExports.useState([]);
-  const [blogCategories, setBlogCategories] = reactExports.useState([]);
+  const [blogCategories, setBlogCategories] = reactExports.useState(() => {
+    return [
+      { id: 1, title: "n8n Guides", slug: "n8n-guides" },
+      { id: 2, title: "AI Automation", slug: "ai-automation" },
+      { id: 3, title: "CRM Integration", slug: "crm-integration" },
+      { id: 4, title: "Web Scraping", slug: "web-scraping" }
+    ];
+  });
+  const [loading, setLoading] = reactExports.useState(true);
   reactExports.useEffect(() => {
     const fetchData = async () => {
       try {
@@ -69776,7 +69820,7 @@ const PublicFooter = () => {
         console.error("Failed to fetch footer categories:", error);
       }
     };
-    fetchData();
+    fetchData().finally(() => setLoading(false));
   }, []);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("footer", { className: "relative bg-[#050508] border-t border-white/5 overflow-hidden", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent" }),
@@ -69821,7 +69865,7 @@ const PublicFooter = () => {
           /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-4", children: blogCategories.length > 0 ? blogCategories.map((item) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(distExports.Link, { to: `/blogs?category=${item.slug}`, className: "text-gray-400 hover:text-white flex items-center group transition-colors", title: `Browse ${item.title} blogs`, children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "w-0 group-hover:w-2 h-px bg-purple-500 mr-0 group-hover:mr-2 transition-all duration-300" }),
             item.title
-          ] }) }, item.id)) : /* @__PURE__ */ jsxRuntimeExports.jsx("li", { className: "text-gray-400 text-sm italic", children: "Loading..." }) })
+          ] }) }, item.id)) : loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("li", { className: "text-gray-400 text-sm italic", children: "Loading..." }) : /* @__PURE__ */ jsxRuntimeExports.jsx("li", { className: "text-gray-500 text-sm italic", children: "Coming soon..." }) })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "md:col-span-3 space-y-6", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-white font-medium", children: "Get Product Updates" }),
@@ -69860,7 +69904,7 @@ const PublicFooter = () => {
 const navItems = [
   { label: "Home", to: "/", title: "Go to Home" },
   { label: "Workflows", to: "/workflows", title: "Browse Workflow Templates" },
-  { label: "Categories", title: "Workflow Categories" },
+  { label: "Categories", to: "/workflows", title: "Browse by Niche" },
   { label: "Templates", to: "/templates", title: "View Template Library" },
   { label: "Courses", to: "/courses", title: "Browse our Expert Courses" },
   { label: "Blogs", to: "/blogs", title: "Read our latest Blog Posts" },
@@ -70015,10 +70059,11 @@ function PublicNavbar() {
                   const isDropdown = !!item.children;
                   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative group/dropdown h-full flex items-center", children: [
                     isDropdown ? /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                      "button",
+                      distExports.Link,
                       {
+                        to: item.to,
                         className: cn(
-                          "relative z-10 px-4 py-1.5 text-sm font-medium transition-colors duration-200 flex items-center gap-1 cursor-default outline-none h-full",
+                          "relative z-10 px-4 py-1.5 text-sm font-medium transition-colors duration-200 flex items-center gap-1 outline-none h-full",
                           hoveredIndex === index ? "text-white" : "text-slate-400"
                         ),
                         onMouseEnter: (e) => handleMouseEnter(index, e),
@@ -73893,11 +73938,13 @@ const SEOHelmet = ({
   canonical,
   metaTags = {},
   structuredData,
-  robots = "index, follow",
+  robots,
   ogType = "website",
   publishedTime,
   modifiedTime
 }) => {
+  const isStaging = typeof window !== "undefined" && (window.location.hostname.includes("hstgr.cloud") || window.location.hostname.includes("srv1381478"));
+  const finalRobots = isStaging ? "noindex, nofollow" : robots;
   let finalOgImage = ogImage;
   if (finalOgImage && !finalOgImage.startsWith("http")) {
     finalOgImage = `${FRONTEND_ORIGIN}${finalOgImage.startsWith("/") ? "" : "/"}${finalOgImage}`;
@@ -73911,13 +73958,21 @@ const SEOHelmet = ({
     canonicalUrl = canonicalUrl.split("?")[0];
   }
   const pageUrl = safeUrl || "";
-  const structuredDataString = structuredData ? JSON.stringify(Array.isArray(structuredData) ? structuredData : structuredData) : null;
+  const structuredDataString = reactExports.useMemo(() => {
+    if (!structuredData) return null;
+    try {
+      return JSON.stringify(structuredData);
+    } catch (e) {
+      console.error("Failed to stringify structured data:", e);
+      return null;
+    }
+  }, [structuredData]);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(Helmet, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("title", { children: title }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { name: "description", content: description }),
     keywords && /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { name: "keywords", content: keywords }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { name: "robots", content: robots }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { name: "googlebot", content: robots }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { name: "robots", content: finalRobots }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { name: "googlebot", content: finalRobots }),
     canonicalUrl && /* @__PURE__ */ jsxRuntimeExports.jsx("link", { rel: "canonical", href: canonicalUrl }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { property: "og:site_name", content: SITE_NAME }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { property: "og:locale", content: "en_US" }),
@@ -73954,7 +74009,16 @@ const SEOHelmet = ({
 };
 function HomePage() {
   const ssrData = useSSRContext();
-  const [stats, setStats] = reactExports.useState(ssrData.stats || []);
+  const [stats, setStats] = reactExports.useState(() => {
+    if (ssrData.stats && !Array.isArray(ssrData.stats)) {
+      return [
+        { label: "Workflow Views", value: ssrData.stats.total_visits || 0, suffix: "", decimals: 0 },
+        { label: "Active Users", value: ssrData.stats.active_users_today || 0, suffix: "", decimals: 0 },
+        { label: "Total Workflows", value: ssrData.stats.total_workflows || 0, suffix: "+", decimals: 0 }
+      ];
+    }
+    return ssrData.stats || [];
+  });
   const [categories, setCategories] = reactExports.useState(ssrData.categories || []);
   const [initialWorkflows, setInitialWorkflows] = reactExports.useState(ssrData.workflows || []);
   const [blogs, setBlogs] = reactExports.useState(ssrData.blogs || []);
@@ -74018,8 +74082,12 @@ function HomePage() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       SEOHelmet,
       {
-        title: "Download Premium n8n Workflow Templates - EdgeLancer",
-        description: "Ready-to-use n8n workflow automation templates. Connect apps, automate tasks, and build powerful AI agents with EdgeLancer."
+        title: ssrData.seo?.title || "Download Premium n8n Workflow Templates - EdgeLancer",
+        description: ssrData.seo?.description || "Ready-to-use n8n workflow automation templates. Connect apps, automate tasks, and build powerful AI agents with EdgeLancer.",
+        keywords: ssrData.seo?.keywords,
+        ogImage: ssrData.seo?.og_image,
+        metaTags: ssrData.seo?.meta_tags,
+        structuredData: ssrData.seo?.structured_data
       }
     ),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -74037,7 +74105,7 @@ function HomePage() {
       }
     ),
     /* @__PURE__ */ jsxRuntimeExports.jsx(LazyStarfield, {}),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "fixed inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] pointer-events-none z-[1]" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "fixed inset-0 bg-[url('/noise.svg')] opacity-[0.03] pointer-events-none z-[1]" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative z-10", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(PublicNavbar, {}),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { id: "main-content", children: [
@@ -74289,7 +74357,17 @@ function BlogPage({ categorySlug }) {
   }, [fetchMoreBlogs, hasMore, loading, isLoadingMore]);
   const featuredBlogs = blogs.filter((blog) => blog.is_featured);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(PublicNavbarLayout, { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(SEOHelmet, { title: "Automation & AI Blog", description: "Latest insights on automation, n8n, and AI workflows." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      SEOHelmet,
+      {
+        title: ssrData.seo?.title || "Automation & AI Blog - EdgeLancer",
+        description: ssrData.seo?.description || "Latest insights on automation, n8n, and AI workflows.",
+        keywords: ssrData.seo?.keywords,
+        ogImage: ssrData.seo?.og_image,
+        metaTags: ssrData.seo?.meta_tags,
+        structuredData: ssrData.seo?.structured_data
+      }
+    ),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "relative pt-32 pb-16 px-4 overflow-hidden", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute inset-0 pointer-events-none transform-gpu", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute top-0 left-1/4 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[100px] will-change-transform" }),
@@ -81388,32 +81466,50 @@ function BlogSlugPage() {
   const metaTitle = metaTitleText.toLowerCase().includes("n8n") ? metaTitleText : `${metaTitleText} - n8n Automation Guide (${currentYear})`;
   const metaDesc = seo?.description || blog?.meta_description || blog?.description || "Read this article on EdgeLancer blog.";
   const origin = "http://localhost:8000";
-  const schemaData = blog ? {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": `${origin}/blogs/${blog?.slug || ""}`
-    },
-    "headline": metaTitle,
-    "description": metaDesc,
-    "image": seo?.og_image || blog?.image_url || `${origin}/og-image.png`,
-    "author": {
-      "@type": "Person",
-      "name": blog?.author?.name || "EdgeLancer Team",
-      "url": `${origin}/about`
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "EdgeLancer",
-      "logo": {
-        "@type": "ImageObject",
-        "url": `${origin}/logo.png`
-      }
-    },
-    "datePublished": blog?.published_at || blog?.created_at,
-    "dateModified": blog?.updated_at || blog?.published_at || blog?.created_at
-  } : void 0;
+  const schemaData = blog ? (() => {
+    const articleSchema = {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": `${origin}/blogs/${blog?.slug || ""}`
+      },
+      "headline": metaTitle,
+      "description": metaDesc,
+      "image": seo?.og_image || blog?.image_url || `${origin}/og-image.png`,
+      "author": {
+        "@type": "Person",
+        "name": blog?.author?.name || "EdgeLancer Team",
+        "url": `${origin}/about`
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "EdgeLancer",
+        "logo": {
+          "@type": "ImageObject",
+          "url": `${origin}/logo.png`
+        }
+      },
+      "datePublished": blog?.published_at || blog?.created_at,
+      "dateModified": blog?.updated_at || blog?.published_at || blog?.created_at
+    };
+    if (blog.faqs && blog.faqs.length > 0) {
+      const faqSchema = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": blog.faqs.map((faq) => ({
+          "@type": "Question",
+          "name": faq.question,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": faq.answer
+          }
+        }))
+      };
+      return [articleSchema, faqSchema];
+    }
+    return articleSchema;
+  })() : void 0;
   const handleShare = async () => {
     if (!blog) return;
     const shareData = {
@@ -81445,7 +81541,7 @@ function BlogSlugPage() {
       {
         title: metaTitle,
         description: metaDesc,
-        url: `${origin}/blogs/${blog.slug}`,
+        url: blog?.slug ? `${origin}/blogs/${blog.slug}` : origin,
         keywords: seo?.keywords || blog?.meta_keywords,
         ogImage: seo?.og_image || blog?.image_url || void 0,
         ogType: "article",
@@ -81692,7 +81788,7 @@ function BlogSlugPage() {
             {
               className: "blog-content w-full",
               dangerouslySetInnerHTML: {
-                __html: (blog.content || "").replace(/http:\/\/localhost:3000\/templates\//g, `${origin}/workflow/`).replace(/http:\/\/localhost:3000\/workflow\//g, `${origin}/workflow/`).replace(/http:\/\/localhost:3000\//g, `${origin}/workflow/`).replace(/http:\/\/localhost:3000/g, `${origin}/workflow`).replace(
+                __html: (blog.content || "").replace(/http:\/\/localhost:3000\/templates\//g, `${origin}/workflow/`).replace(/http:\/\/localhost:3000\/workflow\//g, `${origin}/workflow/`).replace(/http:\/\/localhost:3000\//g, `${origin}/workflow/`).replace(/http:\/\/localhost:3000/g, `${origin}/workflow`).replace(/https?:\/\/edgelancer\.com\/blog\//g, "/blogs/").replace(/\/blog\//g, "/blogs/").replace(/href="blog\//g, 'href="/blogs/').replace(
                   /<a([^>]*?)href="([^"]*)"([^>]*?)>(.*?)<\/a>/gi,
                   (match2, p1, p2, p3, p4) => {
                     if (p4.includes("http") || p2.includes("/webhook/")) {
@@ -81981,8 +82077,12 @@ function WorkflowsPage({ categorySlug }) {
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       SEOHelmet,
       {
-        title: `${activeCategory === "all" ? "All n8n Workflow Templates" : categories.find((c) => c.id === activeCategory)?.title + " Templates"} - EdgeLancer`,
-        description: "Browse and download ready-to-use n8n workflow templates for marketing, sales, web scrapers and more."
+        title: ssrData.seo?.title || `${activeCategory === "all" ? "All n8n Workflow Templates" : categories.find((c) => c.id === activeCategory)?.title + " Templates"} - EdgeLancer`,
+        description: ssrData.seo?.description || "Browse and download ready-to-use n8n workflow templates for marketing, sales, web scrapers and more.",
+        keywords: ssrData.seo?.keywords,
+        ogImage: ssrData.seo?.og_image,
+        metaTags: ssrData.seo?.meta_tags,
+        structuredData: ssrData.seo?.structured_data
       }
     ),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "relative pt-24 md:pt-32 pb-12 md:pb-16 px-4 overflow-hidden", children: [
@@ -82908,10 +83008,35 @@ function WorkflowDetailsPage() {
                   fullScreenToggle: () => setIsFullscreen(!isFullscreen)
                 }
               ) }),
-              !isClient && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-full h-full flex items-center justify-center bg-[#050505]", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-slate-500 flex flex-col items-center gap-4", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-8 h-8 rounded-full border-2 border-slate-800 border-t-purple-500 animate-spin" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-medium", children: "Initializing Flow Visualizer..." })
-              ] }) })
+              !isClient && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "w-full h-full flex flex-col items-center justify-center bg-[#050505] p-8 text-center", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative mb-8 group max-w-md w-full aspect-video rounded-2xl overflow-hidden border border-white/5 bg-white/[0.02]", children: [
+                  workflow.og_image || workflow.category?.image_url ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "img",
+                    {
+                      src: workflow.og_image || workflow.category?.image_url,
+                      alt: workflow.title,
+                      className: "w-full h-full object-cover opacity-40 grayscale"
+                    }
+                  ) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-full h-full flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Workflow, { className: "w-12 h-12 text-slate-800" }) }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute inset-0 flex flex-col items-center justify-center gap-3 bg-black/40 backdrop-blur-[2px]", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-10 h-10 rounded-full border-2 border-indigo-500/30 border-t-indigo-500 animate-spin" }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-bold text-white tracking-widest uppercase", children: "Initializing Canvas" })
+                  ] })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-md mx-auto space-y-4 sr-only md:not-sr-only opacity-0", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("h3", { className: "text-slate-400 text-sm font-medium", children: [
+                    "Workflow Architecture: ",
+                    workflow.title
+                  ] }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-slate-600 text-xs leading-relaxed", children: [
+                    "This n8n automation consists of ",
+                    workflow.nodes_count || "several",
+                    " specialized nodes orchestrated to handle ",
+                    workflow.category?.title || "complex business logic",
+                    " autonomously. The visual layer is currently hydrating for high-performance interaction."
+                  ] })
+                ] })
+              ] })
             ] }),
             activeTab === "config" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute inset-0 flex flex-col bg-[#0a0a0a]", children: [
               /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex justify-between items-center p-4 border-b border-white/5 bg-[#111]", children: [
@@ -84563,7 +84688,7 @@ function Header() {
       /* @__PURE__ */ jsxRuntimeExports.jsx(
         Input,
         {
-          placeholder: t("common.search"),
+          placeholder: "Search...",
           className: "pl-10 bg-nexus-black border-nexus-border focus:border-nexus-blue transition-colors",
           onFocus: () => setSearchFocused(true),
           onBlur: () => setSearchFocused(false)
@@ -84604,7 +84729,7 @@ function Header() {
       /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "p-2 hover:bg-nexus-border rounded-lg transition-colors", children: /* @__PURE__ */ jsxRuntimeExports.jsx(CircleHelp, { className: "w-5 h-5 text-nexus-muted" }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Link, { to: "/app/projects", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Button, { size: "sm", className: "gradient-primary text-white border-0 gap-2", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { className: "w-4 h-4" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "hidden sm:inline", children: t("projects.newProject") })
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "hidden sm:inline", children: "New Project" })
       ] }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", ref: dropdownRef, children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -84633,7 +84758,7 @@ function Header() {
                 {
                   onClick: markAllAsRead,
                   className: "text-xs text-nexus-blue hover:text-nexus-blue/80 transition-colors",
-                  children: t("common.markAllRead")
+                  children: "Mark all as read"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -84642,7 +84767,7 @@ function Header() {
                   to: "/app/notifications",
                   onClick: () => setShowNotifications(false),
                   className: "text-xs text-nexus-muted hover:text-white transition-colors",
-                  children: t("common.viewAll")
+                  children: "View all"
                 }
               )
             ] })
@@ -84690,19 +84815,19 @@ function DashboardLayout() {
     ] })
   ] });
 }
-const LoginPage = reactExports.lazy(() => import("./assets/LoginPage-BCq-88Ge.js"));
-const SignupPage = reactExports.lazy(() => import("./assets/SignupPage-MftNNPG2.js"));
+const LoginPage = reactExports.lazy(() => import("./assets/LoginPage-D-v7jJSe.js"));
+const SignupPage = reactExports.lazy(() => import("./assets/SignupPage-BZxBe0WH.js"));
 const ContactPage = reactExports.lazy(() => import("./assets/ContactPage-5-MZp5En.js"));
 const SitemapPage = reactExports.lazy(() => import("./assets/SitemapPage-D_gfK2s_.js"));
 const CoursesListPage = reactExports.lazy(() => import("./assets/CoursesListPage-B9K4TSP9.js"));
 const CourseDetailsPage = reactExports.lazy(() => import("./assets/CourseDetailsPage-Dm_9iaaX.js"));
 const LessonViewerPage = reactExports.lazy(() => import("./assets/LessonViewerPage-DDuwguHo.js"));
-const NotFoundPage = reactExports.lazy(() => import("./assets/NotFoundPage-DZmgo1ce.js"));
+const NotFoundPage = reactExports.lazy(() => import("./assets/NotFoundPage-CV7wKiHM.js"));
 const SecureInterviewClient = reactExports.lazy(() => import("./assets/SecureInterviewClient-Xc6vi2Ic.js"));
 const AdminDashboard = reactExports.lazy(() => import("./assets/Dashboard-IWsEjtbp.js"));
 const BlogsManagement = reactExports.lazy(() => import("./assets/BlogManagement-Dpd0vdG4.js"));
 const PagesManagement = reactExports.lazy(() => import("./assets/PageManagement-BVh6HAxt.js"));
-const FAQsManagement = reactExports.lazy(() => import("./assets/FAQManagement-DXRJnOEQ.js"));
+const FAQsManagement = reactExports.lazy(() => import("./assets/FAQManagement-3EGGHD0w.js"));
 const CourseManagement = reactExports.lazy(() => import("./assets/AdminCoursesPage-DY1-xmnX.js"));
 const CourseReviews = reactExports.lazy(() => import("./assets/AdminCourseReviewsPage-DFOIRdy1.js"));
 const ContactEnquiries = reactExports.lazy(() => import("./assets/ContactEnquiries-B65oHj-U.js"));
@@ -84730,7 +84855,7 @@ function AppRoutes() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "/workflow-categories/:slug", element: /* @__PURE__ */ jsxRuntimeExports.jsx(WorkflowsPage, {}) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "/blog-categories/:slug", element: /* @__PURE__ */ jsxRuntimeExports.jsx(BlogPage, {}) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "/interview/:token", element: /* @__PURE__ */ jsxRuntimeExports.jsx(SecureInterviewClient, {}) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs(distExports.Route, { path: "/app", element: /* @__PURE__ */ jsxRuntimeExports.jsx(DashboardLayout, {}), children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "/app", element: /* @__PURE__ */ jsxRuntimeExports.jsx(ProtectedRoute, { allowedRoles: ["admin", "superadmin"] }), children: /* @__PURE__ */ jsxRuntimeExports.jsxs(distExports.Route, { element: /* @__PURE__ */ jsxRuntimeExports.jsx(DashboardLayout, {}), children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { index: true, element: /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Navigate, { to: "dashboard", replace: true }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "dashboard", element: /* @__PURE__ */ jsxRuntimeExports.jsx(AdminDashboard, {}) }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "blogs", element: /* @__PURE__ */ jsxRuntimeExports.jsx(BlogsManagement, {}) }),
@@ -84743,8 +84868,8 @@ function AppRoutes() {
       /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "support-chat", element: /* @__PURE__ */ jsxRuntimeExports.jsx(SupportChatAdmin, {}) }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "workflows", element: /* @__PURE__ */ jsxRuntimeExports.jsx(AutomationHub, {}) }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "workflow-templates", element: /* @__PURE__ */ jsxRuntimeExports.jsx(WorkflowTemplates, {}) })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "/superadmin", element: /* @__PURE__ */ jsxRuntimeExports.jsx(SuperAdminDashboard, {}) }),
+    ] }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "/superadmin", element: /* @__PURE__ */ jsxRuntimeExports.jsx(ProtectedRoute, { allowedRoles: ["superadmin"] }), children: /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { index: true, element: /* @__PURE__ */ jsxRuntimeExports.jsx(SuperAdminDashboard, {}) }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "*", element: /* @__PURE__ */ jsxRuntimeExports.jsx(NotFoundPage, {}) })
   ] });
 }

@@ -20,6 +20,12 @@ async function serverFetch<T>(endpoint: string, options: FetchOptions = {}): Pro
     'Accept': 'application/json',
   };
 
+  // Inject App Key for public API verification
+  const appKey = import.meta.env.VITE_FRONTEND_SECRET;
+  if (appKey) {
+    headers['X-App-Key'] = appKey;
+  }
+
   try {
     const response = await fetch(url, { headers });
     if (!response.ok) {

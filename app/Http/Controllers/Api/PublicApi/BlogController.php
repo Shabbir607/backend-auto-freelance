@@ -82,7 +82,7 @@ class BlogController extends Controller
             $title = $blog->meta_title ?? $blog->title;
             
             // Generate Description based on rules (155 chars max)
-            $description = $blog->meta_description ?? Str::limit(strip_tags($blog->description), 155, '...');
+            $description = $blog->meta_description ?? \Illuminate\Support\Str::limit(strip_tags($blog->description), 155, '...');
 
             $seo = [
                 'id' => $blog->id,

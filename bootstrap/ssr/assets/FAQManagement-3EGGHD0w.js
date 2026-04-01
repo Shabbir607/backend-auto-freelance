@@ -115,8 +115,9 @@ function FAQManagement() {
     (faq) => faq.question.toLowerCase().includes(searchQuery.toLowerCase()) || faq.answer.toLowerCase().includes(searchQuery.toLowerCase())
   );
   const getFaqableTypeLabel = (type) => {
-    const cleanType = type.replace("App\\\\Models\\\\", "");
-    return cleanType.charAt(0).toUpperCase() + cleanType.slice(1);
+    if (!type) return "Unknown";
+    const parts = type.split("\\");
+    return parts[parts.length - 1];
   };
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between", children: [

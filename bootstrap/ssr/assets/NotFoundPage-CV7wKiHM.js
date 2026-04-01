@@ -6,7 +6,7 @@ function NotFoundPage() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen bg-[#020204] flex flex-col", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(PublicNavbar, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { className: "flex-grow flex items-center justify-center relative overflow-hidden", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] pointer-events-none" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-[url('/noise.svg')] opacity-[0.03] pointer-events-none" }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative z-10 text-center px-4", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-9xl font-black text-transparent bg-clip-text bg-gradient-to-b from-indigo-500 to-indigo-900 opacity-20", children: "404" }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute inset-0 flex flex-col items-center justify-center mt-8", children: [

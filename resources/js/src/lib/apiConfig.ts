@@ -124,7 +124,9 @@ export async function apiRequest<T>(
       data = await response.json();
     } else {
       const text = await response.text();
-      data = { message: text || `Error ${response.status}` };
+      // Sanitization: If we get any HTML back, don't dump it into the message
+      const isHtml = /<[a-z][\s\S]*>/i.test(text);
+      data = { message: isHtml ? `Request failed (${response.status})` : (text || `Error ${response.status}`) };
     }
 
     if (!response.ok) {

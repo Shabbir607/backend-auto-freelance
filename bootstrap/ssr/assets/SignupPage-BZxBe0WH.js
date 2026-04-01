@@ -136,7 +136,7 @@ function SignupPage() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen bg-[#020204] font-sans selection:bg-indigo-500/30 overflow-x-hidden", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-[calc(100vh-80px)] flex items-center justify-center p-4 relative overflow-hidden", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(Starfield, {}),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "fixed inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] pointer-events-none z-[1]" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "fixed inset-0 bg-[url('/noise.svg')] opacity-[0.03] pointer-events-none z-[1]" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-indigo-500/10 blur-[120px] rounded-full pointer-events-none z-0 mix-blend-screen" }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "w-full max-w-md relative z-20 py-12", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs(distExports.Link, { to: "/", className: "flex items-center justify-center gap-3 mb-10 group cursor-pointer", children: [

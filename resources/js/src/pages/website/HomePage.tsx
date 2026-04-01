@@ -115,7 +115,7 @@ export default function HomePage() {
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
             />
             <LazyStarfield />
-            <div className="fixed inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] pointer-events-none z-[1]" />
+            <div className="fixed inset-0 bg-[url('/noise.svg')] opacity-[0.03] pointer-events-none z-[1]" />
 
             <div className="relative z-10">
                 <PublicNavbar />
