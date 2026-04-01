@@ -4,411 +4,143 @@ namespace App\Http\Controllers\Api\PublicApi;
 
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
-use App\Models\BlogCategory;
+use App\Models\Workflow;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Str;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class BlogController extends Controller
 {
     /**
-     * List published blogs
+     * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        $page = $request->get('page', 1);
-        $perPage = 12; // Strictly fixed at 12 to prevent scraping large datasets
-        $search = $request->get('search', '');
-        $category = $request->get('category', '');
+        $query = Blog::where('status', 'published')
+            ->with(['category', 'author']);
 
-        $cacheKey = "blogs_list_p{$page}_pp{$perPage}_s{$search}_c{$category}";
+        // Filter by category if provided
+        if ($request->has('category')) {
+            $query->whereHas('category', function ($q) use ($request) {
+                $q->where('slug', $request->category);
+            });
+        }
 
-        $blogs = \Illuminate\Support\Facades\Cache::remember($cacheKey, 3600, function () use ($request, $perPage) {
-            return Blog::published()
-                ->with(['category', 'author:id,name,email']) // Select limited author fields for public
-                ->when($request->search, function ($query, $search) {
-                    $query->where('title', 'like', "%{$search}%")
-                          ->orWhere('description', 'like', "%{$search}%");
-                })
-                ->when($request->category, function ($query, $categorySlug) {
-                    $query->whereHas('category', function ($q) use ($categorySlug) {
-                        $q->where('slug', $categorySlug);
-                    });
-                })
-                ->orderByDesc('is_featured') // Featured first
-                ->orderByDesc('published_at')
-                ->paginate($perPage);
-        });
+        // Search in title or description
+        if ($request->has('search')) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'LIKE', "%{$search}%")
+                    ->orWhere('description', 'LIKE', "%{$search}%");
+            });
+        }
 
-        // Hide author ID from public response
-        $blogs->getCollection()->each(function ($blog) {
-            if ($blog->author) {
-                $blog->author->makeHidden('id');
-            }
-        });
+        // Filter for featured blogs
+        if ($request->has('featured')) {
+            $query->where('is_featured', true);
+        }
 
-        return response()->json([
-            'success' => true,
-            'data' => $blogs
-        ]);
+        // Sorting
+        $sort = $request->get('sort', 'latest');
+        switch ($sort) {
+            case 'oldest':
+                $query->orderBy('published_at', 'asc');
+                break;
+            case 'popular':
+                $query->orderBy('views', 'desc');
+                break;
+            case 'featured':
+                $query->orderBy('is_featured', 'desc')->orderBy('published_at', 'desc');
+                break;
+            default:
+                $query->orderBy('published_at', 'desc');
+        }
+
+        $blogs = $query->paginate($request->get('per_page', 12));
+
+        return response()->json($blogs);
     }
 
     /**
-     * Show single blog details
+     * Display the specified resource.
      */
     public function show($slug)
     {
-        $cacheKey = "blog_details_{$slug}";
-
-        $response = \Illuminate\Support\Facades\Cache::remember($cacheKey, 3600, function () use ($slug) {
-            $blog = Blog::published()
-                ->with(['category', 'author:id,name,email', 'faqs' => function ($query) {
-                    $query->where('status', true)->orderBy('sort_order');
-                }])
-                ->where('slug', $slug)
+        try {
+            $blog = Blog::where('slug', $slug)
+                ->where('status', 'published')
+                ->with(['category', 'author', 'faqs'])
                 ->first();
 
             if (!$blog) {
-                return null;
+                return response()->json(['message' => 'Blog not found'], 404);
             }
 
-            // SEO Expert: Dynamic Calculations
-            $content = $blog->content ?? '';
-            $wordCount = str_word_count(strip_tags($content));
-            $readingTime = max(1, ceil($wordCount / 200)); // Average 200 wpm, ensure at least 1 min
+            // Increment views
+            $blog->increment('views');
 
-            // Generate Title based on rules (50-60 chars max if possible, add power words/brackets if appropriate - though best left to admin, we ensure we use meta_title first)
-            $title = $blog->meta_title ?? $blog->title;
-            
-            // Generate Description based on rules (155 chars max)
-            $description = $blog->meta_description ?? \Illuminate\Support\Str::limit(strip_tags($blog->description), 155, '...');
-
-            $seo = [
-                'id' => $blog->id,
-                'title' => $title,
-                'description' => $description,
-                'keywords' => $blog->meta_keywords,
-                'canonical' => 'https://edgelancer.com/blogs/' . $blog->slug,
-                'og_type' => 'article',
-                'og_image' => $blog->image,
-                'twitter_card' => 'summary_large_image',
-                'twitter_site' => '@edgelancer',
-                'twitter_image' => $blog->image,
-                'robots' => 'index, follow',
-                'reading_time' => $readingTime . ' min read',
-                'meta_tags' => [
-                    ['name' => 'article:published_time', 'content' => $blog->published_at?->toIso8601String()],
-                    ['name' => 'article:modified_time', 'content' => $blog->updated_at?->toIso8601String()],
-                    ['name' => 'article:section', 'content' => $blog->category->title ?? 'Technology'],
-                ], 
-                'structured_data' => [
-                    '@context' => 'https://schema.org',
-                    '@graph' => [
-                        // 1. BlogPosting
-                        [
-                            '@type' => 'BlogPosting',
-                            '@id' => 'https://edgelancer.com/blogs/' . $blog->slug . '#blogposting',
-                            'headline' => $title,
-                            'description' => $description,
-                            'image' => $blog->image,
-                            'datePublished' => $blog->published_at?->toIso8601String(),
-                            'dateModified' => $blog->updated_at?->toIso8601String(),
-                            'author' => [
-                                '@type' => 'Person',
-                                'name' =>  'Dev Shabbir',
-                            ],
-                            'publisher' => [
-                                '@type' => 'Organization',
-                                'name' => 'Edgelancer',
-                                'logo' => [
-                                    '@type' => 'ImageObject',
-                                    'url' => 'https://edgelancer.com/favicon.png'
-                                ]
-                            ],
-                            'mainEntityOfPage' => [
-                                '@type' => 'WebPage',
-                                '@id' => 'https://edgelancer.com/blogs/' . $blog->slug
-                            ],
-                            'wordCount' => $wordCount,
-                            'timeRequired' => "PT{$readingTime}M"
-                        ],
-                        // 2. BreadcrumbList
-                        [
-                            '@type' => 'BreadcrumbList',
-                            '@id' => 'https://edgelancer.com/blogs/' . $blog->slug . '#breadcrumb',
-                            'itemListElement' => [
-                                [
-                                    '@type' => 'ListItem',
-                                    'position' => 1,
-                                    'name' => 'Home',
-                                    'item' => 'https://edgelancer.com'
-                                ],
-                                [
-                                    '@type' => 'ListItem',
-                                    'position' => 2,
-                                    'name' => 'Blogs',
-                                    'item' => 'https://edgelancer.com/blogs'
-                                ],
-                                [
-                                    '@type' => 'ListItem',
-                                    'position' => 3,
-                                    'name' => $blog->category->title ?? 'Category',
-                                    'item' => 'https://edgelancer.com/blogs?category=' . ($blog->category->slug ?? 'all')
-                                ],
-                                [
-                                    '@type' => 'ListItem',
-                                    'position' => 4,
-                                    'name' => $blog->title,
-                                    'item' => 'https://edgelancer.com/blogs/' . $blog->slug
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            ];
-
-            // 3. Add FAQ Schema if exists
-            if ($blog->faqs && $blog->faqs->count() > 0) {
-                $faqSchema = [
-                    '@type' => 'FAQPage',
-                    'mainEntity' => []
-                ];
-
-                foreach ($blog->faqs as $faq) {
-                    $faqSchema['mainEntity'][] = [
-                        '@type' => 'Question',
-                        'name' => $faq->question,
-                        'acceptedAnswer' => [
-                            '@type' => 'Answer',
-                            'text' => $faq->answer
-                        ]
-                    ];
-                }
-
-                $seo['structured_data']['@graph'][] = $faqSchema;
-            }
-
-            if ($blog->author) {
-                $blog->author->makeHidden('id');
-            }
-
-            return [
-                'success' => true,
-                'data' => $blog,
-                'seo' => $seo
-            ];
-        });
-
-        if (!$response) {
-            abort(404, 'Blog not found');
-        }
-
-        // Increment Views (Optimistic / Async)
-        // Fire and forget view increment on the DB directly to avoid clearing cache
-        // But doing it here means every hit hits the DB. 
-        // For "milliseconds" speed, we might want to defer this or sample it.
-        // For now, let's keep it direct update. It's a lightweight query.
-        Blog::where('slug', $slug)->increment('views');
-
-        return response()->json($response);
-    }
-    
-    /**
-     * List categories
-     */
-    public function categories(Request $request)
-    {
-        $search = $request->input('search', '');
-        $cacheKey = "blog_categories_s{$search}";
-
-        $categories = Cache::remember($cacheKey, 3600, function () use ($search) {
-            $query = BlogCategory::where('is_active', true);
-
-            if ($search) {
-                $query->where('title', 'like', "%{$search}%");
-            }
-
-            return $query->orderBy('sort_order')
-                ->orderBy('title')
-                ->get();
-        });
-
-        return response()->json([
-            'success' => true,
-            'data' => $categories
-        ]);
-    }
-
-    public function share(Request $request)
-    {
-        $request->validate([
-            'slug' => 'required|string|exists:blogs,slug',
-        ]);
-
-        $slug = $request->input('slug');
-        $cacheKey = "blog_share_{$slug}";
-
-        $response = \Illuminate\Support\Facades\Cache::remember($cacheKey, 3600, function () use ($slug) {
-            // Get the blog
-            $blog = Blog::published()
-                ->with(['author:id,name,email'])
-                ->where('slug', $slug)
-                ->first(); // We validated existence, so first() should work, or handle null
-
-            if (!$blog) return null;
-
-            // Full frontend and image URLs
-            $frontendBaseUrl = 'https://edgelancer.com';
-            $url = $frontendBaseUrl . '/blogs/' . $blog->slug;
-            $title = $blog->meta_title ?? $blog->title;
-            // Decode potential HTML entities if any, strip tags and apply description limit
-            $description = $blog->meta_description ?? Str::limit(strip_tags($blog->description), 155, '...');
-            $image = $blog->image_url ?? $blog->image; // image_url accessor if exists
-
-            // Social share links
-            $socialLinks = [
-                'facebook' => "https://www.facebook.com/sharer/sharer.php?u={$url}&quote=" . urlencode($title . ' - ' . $description),
-                'twitter' => "https://twitter.com/intent/tweet?url={$url}&text=" . urlencode($title . ' - ' . $description),
-                'linkedin' => "https://www.linkedin.com/shareArticle?mini=true&url={$url}&title=" . urlencode($title) . "&summary=" . urlencode($description),
-                'whatsapp' => "https://api.whatsapp.com/send?text=" . urlencode($title . ' - ' . $description . ' ' . $url),
-                'whatsapp_business' => "https://wa.me/?text=" . urlencode($title . ' - ' . $description . ' ' . $url),
-                'telegram' => "https://t.me/share/url?url={$url}&text=" . urlencode($title . ' - ' . $description),
-                'reddit' => "https://www.reddit.com/submit?url={$url}&title=" . urlencode($title . ' - ' . $description),
-                'pinterest' => "https://pinterest.com/pin/create/button/?url={$url}&media={$image}&description=" . urlencode($title . ' - ' . $description),
-                'tumblr' => "https://www.tumblr.com/widgets/share/tool?canonicalUrl={$url}&title=" . urlencode($title) . "&caption=" . urlencode($description) . "&content=" . urlencode($image),
-                'email' => "mailto:?subject=" . urlencode($title) . "&body=" . urlencode($description . ' ' . $url),
-                'tiktok' => "https://www.tiktok.com/share/video?url={$url}",
-                'sms' => "sms:?body=" . urlencode($title . ' - ' . $description . ' ' . $url),
-                'copy_link' => $url,
-                'google_drive' => "https://drive.google.com/drive/u/0/my-drive",
-                'notes' => "x-apple-notes://",
-                'hike' => "hike://forward?text=" . urlencode($title . ' - ' . $description . ' ' . $url),
-                'wechat' => "weixin://dl/chat",
-                'line' => "https://social-plugins.line.me/lineit/share?url={$url}&text=" . urlencode($title . ' - ' . $description),
-                'messenger' => "fb-messenger://share?link={$url}&app_id=1234567890",
-            ];
-
-            if ($blog->author) {
-                $blog->author->makeHidden('id');
-            }
-
-            return [
-                'success' => true,
-                'blog_id' => $blog->id,
-                'title' => $title,
-                'description' => $description,
-                'image_url' => $image,
-                'shareable_url' => $url,
-                'social_links' => $socialLinks
-            ];
-        });
-
-        if (!$response) {
-            abort(404, 'Blog not found');
-        }
-
-        return response()->json($response);
-    }
-
-    /**
-     * ✅ Get related blogs for a blog post - Cached
-     */
-    public function relatedBlogs($slug)
-    {
-        $cacheKey = "blog_related_articles_{$slug}";
-
-        return \Illuminate\Support\Facades\Cache::remember($cacheKey, 3600, function () use ($slug) {
-            $blog = Blog::published()
-                ->where('slug', $slug)
-                ->first();
-
-            if (!$blog) {
-                return null;
-            }
-
-            $blogs = Blog::published()
-                ->with(['category', 'author:id,name,email'])
+            // Get related blogs (by category)
+            $relatedBlogs = Blog::where('category_id', $blog->category_id)
                 ->where('id', '!=', $blog->id)
-                ->where('category_id', $blog->category_id)
-                ->orderByDesc('is_featured')
-                ->orderByDesc('published_at')
-                ->limit(6)
+                ->where('status', 'published')
+                ->take(3)
                 ->get();
 
-            // Fallback to latest featured if not enough in same category
-            if ($blogs->count() < 3) {
-                $fallback = Blog::published()
-                    ->with(['category', 'author:id,name,email'])
-                    ->where('id', '!=', $blog->id)
-                    ->whereNotIn('id', $blogs->pluck('id'))
-                    ->orderByDesc('is_featured')
-                    ->orderByDesc('published_at')
-                    ->limit(6 - $blogs->count())
-                    ->get();
-                
-                $blogs = $blogs->concat($fallback);
-            }
+            // Get related workflows (by category)
+            $relatedWorkflows = Workflow::where('category_id', $blog->category_id)
+                ->where('status', 'published')
+                ->take(4)
+                ->get();
 
             return response()->json([
-                'success' => true,
-                'data' => $blogs
-            ]);
-        });
+                'blog' => $blog,
+                'seo' => $blog->getSeoMetadata(),
+                'relatedBlogs' => $relatedBlogs,
+                'relatedWorkflows' => $relatedWorkflows
+            ], 200);
+
+        } catch (\Exception $e) {
+            \Log::error("Error fetching blog post: " . $e->getMessage());
+            return response()->json(['message' => 'Server error'], 500);
+        }
     }
 
     /**
-     * ✅ Get relevant workflows for a blog post - Cached
+     * Get featured blogs.
      */
-    public function relatedWorkflows($slug)
+    public function featured()
     {
-        $cacheKey = "blog_related_workflows_{$slug}";
+        $blogs = Blog::where('status', 'published')
+            ->where('is_featured', true)
+            ->with(['category', 'author'])
+            ->orderBy('published_at', 'desc')
+            ->take(5)
+            ->get();
 
-        return \Illuminate\Support\Facades\Cache::remember($cacheKey, 3600, function () use ($slug) {
-            $blog = Blog::published()
-                ->where('slug', $slug)
-                ->first();
+        return response()->json($blogs);
+    }
 
-            if (!$blog) {
-                return null;
-            }
+    /**
+     * Get recent blogs.
+     */
+    public function recent(Request $request)
+    {
+        $limit = $request->get('limit', 3);
+        $blogs = Blog::where('status', 'published')
+            ->with(['category', 'author'])
+            ->orderBy('published_at', 'desc')
+            ->take($limit)
+            ->get();
 
-            // Extract keywords from title
-            $keywords = explode(' ', strtolower($blog->title));
-            $filteredKeywords = array_filter($keywords, function($word) {
-                return strlen($word) > 3;
-            });
+        return response()->json($blogs);
+    }
 
-            $workflows = \App\Models\Workflow::where('status', 'published')
-                ->with(['category', 'integrations'])
-                ->where(function ($q) use ($filteredKeywords) {
-                    foreach ($filteredKeywords as $word) {
-                        $q->orWhere('title', 'like', "%{$word}%");
-                        $q->orWhere('description', 'like', "%{$word}%");
-                    }
-                })
-                ->orderByDesc('created_at')
-                ->limit(4)
-                ->get();
-
-            // Fallback to latest if not enough relevant found
-            if ($workflows->count() < 4) {
-                $fallbackCount = 4 - $workflows->count();
-                $fallbackWorkflows = \App\Models\Workflow::where('status', 'published')
-                    ->with(['category', 'integrations'])
-                    ->whereNotIn('id', $workflows->pluck('id'))
-                    ->orderByDesc('total_views') // Get popular ones
-                    ->limit($fallbackCount)
-                    ->get();
-                
-                $workflows = $workflows->concat($fallbackWorkflows);
-            }
-
-            return response()->json([
-                'success' => true,
-                'data' => $workflows
-            ]);
-        });
+    /**
+     * Get blog categories with blog counts.
+     */
+    public function categories()
+    {
+        $categories = \App\Models\BlogCategory::all();
+        return response()->json($categories);
     }
 }
-

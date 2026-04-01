@@ -321,60 +321,20 @@ export default function WorkflowDetailsPage() {
             ? JSON.parse(workflow.workflow_features)
             : [];
 
-    const origin = import.meta.env.VITE_FRONTEND_URL || (typeof window !== 'undefined' ? window.location.origin : 'https://edgelancer.com');
-
-    const structuredData = workflow ? [
-        {
-            "@context": "https://schema.org/",
-            "@type": "Product",
-            "name": workflow?.title || 'Workflow',
-            "description": workflow?.description || '',
-            "image": workflow?.og_image || workflow?.category?.image_url,
-            "brand": {
-                "@type": "Brand",
-                "name": "EdgeLancer"
-            },
-            "aggregateRating": workflow?.rating ? {
-                "@type": "AggregateRating",
-                "ratingValue": workflow.rating,
-                "reviewCount": workflow?.reviews_count || 15
-            } : undefined
-        },
-        {
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-                {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "name": "Home",
-                    "item": origin
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "name": "Workflows",
-                    "item": `${origin}/workflows`
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 3,
-                    "name": workflow?.title || 'Workflow',
-                    "item": `${origin}/workflow/${workflow?.slug || ''}`
-                }
-            ]
-        }
-    ] : undefined;
+    const siteOrigin = import.meta.env.VITE_FRONTEND_URL || (typeof window !== 'undefined' ? window.location.origin : 'https://edgelancer.com');
 
     return (
         <div className={`min-h-screen bg-[#020202] text-slate-300 font-sans flex flex-col transition-all duration-300 ${isFullscreen ? 'h-screen overflow-hidden' : ''}`}>
             <SEOHelmet
-                title={seo?.title || workflow?.meta_title || workflow?.title || 'Workflow Details'}
-                description={seo?.description || workflow?.meta_description || workflow?.description || 'View workflow details on EdgeLancer.'}
-                url={workflow?.slug ? `${origin}/workflow/${workflow.slug}` : undefined}
-                ogImage={(workflow?.og_image || workflow?.category?.image_url) ?? undefined}
-                ogType="product"
-                structuredData={structuredData}
+                title={seo?.title}
+                description={seo?.description}
+                keywords={seo?.keywords}
+                ogImage={seo?.og_image}
+                canonical={seo?.canonical}
+                ogType={seo?.og_type as any}
+                structuredData={seo?.structured_data}
+                metaTags={seo?.meta_tags}
+                robots={seo?.robots}
             />
             {!isFullscreen && <PublicNavbar />}
 
@@ -489,8 +449,8 @@ export default function WorkflowDetailsPage() {
                                     <div className="w-full h-full flex flex-col items-center justify-center bg-[#050505] p-8 text-center">
                                         <div className="relative mb-8 group max-w-md w-full aspect-video rounded-2xl overflow-hidden border border-white/5 bg-white/[0.02]">
                                             {workflow.og_image || workflow.category?.image_url ? (
-                                                <img 
-                                                    src={(workflow.og_image || workflow.category?.image_url) as string} 
+                                                <img
+                                                    src={(workflow.og_image || workflow.category?.image_url) as string}
                                                     alt={workflow.title}
                                                     className="w-full h-full object-cover opacity-40 grayscale"
                                                 />
@@ -504,11 +464,11 @@ export default function WorkflowDetailsPage() {
                                                 <p className="text-sm font-bold text-white tracking-widest uppercase">Initializing Canvas</p>
                                             </div>
                                         </div>
-                                        
+
                                         <div className="max-w-md mx-auto space-y-4 sr-only md:not-sr-only opacity-0">
                                             <h3 className="text-slate-400 text-sm font-medium">Workflow Architecture: {workflow.title}</h3>
                                             <p className="text-slate-600 text-xs leading-relaxed">
-                                                This n8n automation consists of {workflow.nodes_count || 'several'} specialized nodes 
+                                                This n8n automation consists of {workflow.nodes_count || 'several'} specialized nodes
                                                 orchestrated to handle {workflow.category?.title || 'complex business logic'} autonomously.
                                                 The visual layer is currently hydrating for high-performance interaction.
                                             </p>

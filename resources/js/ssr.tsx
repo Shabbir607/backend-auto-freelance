@@ -5,7 +5,7 @@ import App from './src/App';
 import { HelmetProvider } from 'react-helmet-async';
 
 export default function render(url: string, context: any = {}) {
-    const helmetContext = {} as any;
+    const helmetContext: any = {};
 
     // Ensure context is available for App.tsx
     if (typeof globalThis !== 'undefined') {
@@ -13,16 +13,14 @@ export default function render(url: string, context: any = {}) {
     }
 
     const html = renderToString(
-        <React.StrictMode>
-            <HelmetProvider context={helmetContext}>
-                <StaticRouter location={url}>
-                    <App />
-                </StaticRouter>
-            </HelmetProvider>
-        </React.StrictMode>
+        <HelmetProvider context={helmetContext}>
+            <StaticRouter location={url}>
+                <App initialData={context} />
+            </StaticRouter>
+        </HelmetProvider>
     );
 
-    const helmet = helmetContext.helmet;
+    const { helmet } = helmetContext;
     const bridgeResponse = {
         html,
         head: helmet ? `

@@ -39,11 +39,12 @@ class AppController extends Controller
             $routeData = $this->getWorkflowData($matches[1]);
             if (empty($routeData)) $isNotFound = true;
         }
+        
         // Merge route data into context while preserving the seo key
         $context = array_merge($routeData, $context);
+        
         // Render the page on the server
         $ssrResponse = SsrService::render($url, $context);
-        \Log::debug('Raw SSR Response for ' . $url . ': ' . ($ssrResponse ?: 'NULL'));
         $ssrHtml = '';
         $ssrHead = '';
 
@@ -53,7 +54,6 @@ class AppController extends Controller
                 $ssrHtml = $decoded['html'];
                 $ssrHead = $decoded['head'] ?? '';
             } else {
-                // Fallback for non-JSON response
                 $ssrHtml = $ssrResponse;
             }
         }
@@ -67,62 +67,58 @@ class AppController extends Controller
 
     protected function getHomepageData()
     {
+        $origin = config('app.frontend_url') ?? 'https://edgelancer.com';
         return [
-            'stats' => [
-                'total_workflows' => Workflow::where('status', 'published')->count(),
-                'total_visits' => Workflow::where('status', 'published')->sum('total_views'),
-                'active_users_today' => rand(7323, 8000),
-            ],
-            'categories' => WorkflowCategory::where('is_active', true)
-                ->withCount(['workflows' => function ($q) {
-                    $q->where('status', 'published');
-                }])
-                ->orderBy('sort_order')
-                ->get(),
-            'workflows' => Workflow::where('status', 'published')
-                ->with(['category', 'integrations'])
-                ->inRandomOrder()
-                ->limit(12)
-                ->get()
-                ->makeHidden(['json_data']),
-            'blogs' => Blog::published()
-                ->with(['category', 'author:id,name,email'])
-                ->orderByDesc('is_featured')
-                ->orderByDesc('published_at')
-                ->limit(20)
-                ->get(),
+            'workflows' => Workflow::where('status', 'published')->with(['category', 'integrations'])->take(6)->get(),
+            'blogs' => Blog::where('status', 'published')->with('category')->take(3)->get(),
+            'seo' => [
+                'title' => 'EdgeLancer – n8n Workflow Automation Templates & AI Agents',
+                'description' => 'Download ready-to-use n8n workflow automation templates. Connect apps, automate tasks, and build powerful AI agents with EdgeLancer.',
+                'og_image' => "{$origin}/og-image.png",
+                'canonical' => $origin,
+                'og_type' => 'website',
+                'structured_data' => [
+                    '@context' => 'https://schema.org',
+                    '@type' => 'WebSite',
+                    'name' => 'EdgeLancer',
+                    'url' => $origin,
+                    'potentialAction' => [
+                        '@type' => 'SearchAction',
+                        'target' => "{$origin}/workflows?search={search_term_string}",
+                        'query-input' => 'required name=search_term_string'
+                    ]
+                ]
+            ]
         ];
     }
 
     protected function getBlogData($slug)
     {
-        $blog = Blog::published()
-            ->with(['category', 'author:id,name,email', 'faqs'])
-            ->where('slug', $slug)
+        $blog = Blog::where('slug', $slug)
+            ->where('status', 'published')
+            ->with(['category', 'author'])
             ->first();
 
-        if (!$blog) return [];
+        if (!$blog) {
+            return [];
+        }
+
+        $relatedBlogs = Blog::where('category_id', $blog->category_id)
+            ->where('id', '!=', $blog->id)
+            ->where('status', 'published')
+            ->take(3)
+            ->get();
+
+        $relatedWorkflows = Workflow::where('category_id', $blog->category_id)
+            ->where('status', 'published')
+            ->take(4)
+            ->get();
 
         return [
             'blog' => $blog,
-            'seo' => [
-                'title' => $blog->meta_title ?? $blog->title,
-                'description' => $blog->meta_description ?? substr(strip_tags($blog->content), 0, 160),
-                'keywords' => $blog->meta_keywords,
-                'og_image' => $blog->og_image ?? $blog->image_url,
-                'canonical_url' => $blog->canonical_url,
-                'meta_tags' => json_decode($blog->meta_tags ?? '[]', true),
-            ],
-            'relatedBlogs' => Blog::published()
-                ->where('category_id', $blog->category_id)
-                ->where('id', '!=', $blog->id)
-                ->limit(6)
-                ->get(),
-            'relatedWorkflows' => Workflow::where('status', 'published')
-                ->with(['category', 'integrations'])
-                ->limit(4)
-                ->get()
-                ->makeHidden(['json_data']),
+            'seo' => $blog->getSeoMetadata(),
+            'relatedBlogs' => $relatedBlogs,
+            'relatedWorkflows' => $relatedWorkflows
         ];
     }
 
@@ -130,53 +126,66 @@ class AppController extends Controller
     {
         $workflow = Workflow::where('slug', $slug)
             ->where('status', 'published')
-            ->with(['category', 'integrations', 'reviews.user', 'faqs'])
+            ->with(['category', 'integrations'])
             ->first();
 
-        if (!$workflow) return [];
+        if (!$workflow) {
+            return [];
+        }
+
+        $relatedWorkflows = Workflow::where('category_id', $workflow->category_id)
+            ->where('id', '!=', $workflow->id)
+            ->where('status', 'published')
+            ->take(3)
+            ->get();
+
+        $suggestedBlogs = Blog::where('category_id', $workflow->category_id)
+            ->where('status', 'published')
+            ->take(3)
+            ->get();
 
         return [
             'workflow' => $workflow,
-            'seo' => [
-                'title' => $workflow->meta_title ?? $workflow->title,
-                'description' => $workflow->meta_description ?? substr(strip_tags($workflow->description), 0, 160),
-                'keywords' => $workflow->meta_keywords,
-                'og_image' => $workflow->og_image,
-                'canonical_url' => $workflow->canonical_url,
-            ],
-            'relatedWorkflows' => Workflow::where('status', 'published')
-                ->where('id', '!=', $workflow->id)
-                ->where('category_id', $workflow->category_id)
-                ->limit(4)
-                ->get()
-                ->makeHidden(['json_data']),
-            'relevantBlogs' => Blog::published()
-                ->where('category_id', $workflow->category_id)
-                ->limit(4)
-                ->get()
+            'seo' => $workflow->getSeoMetadata(),
+            'relatedWorkflows' => $relatedWorkflows,
+            'suggestedBlogs' => $suggestedBlogs
         ];
     }
 
     protected function getBlogsListData()
     {
+        $origin = config('app.frontend_url') ?? 'https://edgelancer.com';
         return [
-            'blogs' => Blog::published()
-                ->with(['category', 'author:id,name,email'])
-                ->orderByDesc('is_featured')
-                ->orderByDesc('published_at')
+            'blogs' => Blog::where('status', 'published')
+                ->with(['category', 'author'])
                 ->paginate(12),
-            'categories' => \App\Models\BlogCategory::where('is_active', true)->get(),
+            'categories' => \App\Models\BlogCategory::all(),
+            'seo' => [
+                'title' => 'Expert Automation & AI Blog | EdgeLancer Insights',
+                'description' => 'Read detailed guides, case studies, and tutorials on n8n automation, AI agent development, and freelance business scaling.',
+                'og_image' => "{$origin}/og-image.png",
+                'canonical' => "{$origin}/blogs",
+                'og_type' => 'website'
+            ]
         ];
     }
 
     protected function getWorkflowsListData()
     {
+        $origin = config('app.frontend_url') ?? 'https://edgelancer.com';
         return [
             'workflows' => Workflow::where('status', 'published')
                 ->with(['category', 'integrations'])
                 ->paginate(12)
                 ->makeHidden(['json_data']),
             'categories' => WorkflowCategory::where('is_active', true)->get(),
+            'seo' => [
+                'title' => 'n8n Workflow Templates – Automate Your Business | EdgeLancer',
+                'description' => 'Explore the largest library of professional n8n automation templates. Download and import ready-to-use workflows for AI, CRM, and more.',
+                'og_image' => "{$origin}/og-image.png",
+                'canonical' => "{$origin}/workflows",
+                'og_type' => 'website'
+            ]
         ];
     }
 
@@ -190,19 +199,6 @@ class AppController extends Controller
             return null;
         }
 
-        return [
-            'title' => $page->meta_title ?? $page->title,
-            'description' => $page->meta_description,
-            'keywords' => $page->meta_keywords,
-            'og_image' => $page->og_image,
-            'meta_tags' => $page->meta_tags ?? [],
-            'structured_data' => [
-                '@context' => 'https://schema.org',
-                '@type' => 'WebPage',
-                'name' => $page->title,
-                'description' => $page->meta_description,
-                'url' => url($slug === 'home' ? '/' : $slug),
-            ]
-        ];
+        return $page->getSeoMetadata();
     }
 }

@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage; // ✅ CORRECT PLACE
 
+use App\Traits\HasSEO;
+
 class Blog extends Model
 {
-    use HasFactory;
+    use HasFactory, HasSEO;
 
     protected $appends = ['image_url'];
 

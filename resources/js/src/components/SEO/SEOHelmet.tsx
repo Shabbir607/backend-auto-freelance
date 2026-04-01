@@ -4,11 +4,23 @@ import React, { useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
 
 const SITE_NAME = 'EdgeLancer';
-const DEFAULT_OG_IMAGE = '/og-image.png';
-const TWITTER_HANDLE = '@edgelancern8n';
+const DEFAULT_OG_IMAGE = 'https://edgelancer.com/og-image.png';
+const TWITTER_HANDLE = '@edgelancer';
+
+// Domain sanitization helper
+const sanitizeUrl = (url?: string) => {
+    if (!url) return '';
+    try {
+        // Replace development/hardcoded URLs with current production URL if needed
+        // but generally we trust the backend to provide correct URLs now.
+        return url;
+    } catch (e) {
+        return url;
+    }
+};
 
 interface SEOHelmetProps {
-    title: string;
+    title?: string;
     description?: string;
     keywords?: string;
     ogImage?: string;
@@ -17,85 +29,51 @@ interface SEOHelmetProps {
     /** Explicit canonical URL — defaults to url. Strip query params by setting this. */
     canonical?: string;
     /** Extra custom <meta> tags from API — key/value pairs */
-    metaTags?: Record<string, any>;
-    /** JSON-LD structured data object */
-    structuredData?: Record<string, any> | Record<string, any>[];
-    /** Override robots directive. Default: "index, follow" */
-    robots?: string;
-    /** Set to "article" for blog posts, default is "website" */
-    ogType?: string;
-    /** Published date for articles (ISO string) */
+    metaTags?: Record<string, any> | any[];
+    /** Structured data (JSON-LD) object */
+    structuredData?: Record<string, any>;
+    /** Open Graph type - defaults to website */
+    ogType?: 'website' | 'article' | 'product';
+    /** Published/Modified times for articles */
     publishedTime?: string;
-    /** Modified date for articles (ISO string) */
     modifiedTime?: string;
+    /** Robots directives */
+    robots?: string;
 }
 
-// ── Domain whitelist: maps known backend API domains to the frontend ───────────
 const FRONTEND_ORIGIN = import.meta.env.VITE_FRONTEND_URL || (typeof window !== 'undefined' ? window.location.origin : 'https://edgelancer.com');
-const API_DOMAINS = [
-    'api.edgelancer.com',
-    ...(import.meta.env.VITE_API_URL && import.meta.env.VITE_API_URL.startsWith('http')
-        ? [new URL(import.meta.env.VITE_API_URL).hostname]
-        : []),
-];
-
-function sanitizeUrl(rawUrl: string | undefined): string {
-    if (!rawUrl) return '';
-    try {
-        const parsed = new URL(rawUrl);
-        const isApiDomain = API_DOMAINS.some(d => parsed.hostname.includes(d));
-        if (isApiDomain) {
-            return `${FRONTEND_ORIGIN}${parsed.pathname}${parsed.search}`;
-        }
-        return rawUrl;
-    } catch {
-        return rawUrl;
-    }
-}
 
 export const SEOHelmet: React.FC<SEOHelmetProps> = ({
     title,
-    description = '',
-    keywords = '',
-    ogImage = '',
-    url = '',
+    description = 'Download ready-to-use n8n workflow automation templates and AI agents.',
+    keywords,
+    ogImage,
+    url,
     canonical,
-    metaTags = {},
+    metaTags = [],
     structuredData,
-    robots,
     ogType = 'website',
     publishedTime,
     modifiedTime,
+    robots = 'index, follow'
 }) => {
-    const isStaging = typeof window !== 'undefined' && (
-      window.location.hostname.includes('hstgr.cloud') || 
-      window.location.hostname.includes('srv1381478')
-    );
-    const finalRobots = isStaging ? 'noindex, nofollow' : robots;
-
-    let finalOgImage = ogImage;
-    if (finalOgImage && !finalOgImage.startsWith('http')) {
-        finalOgImage = `${FRONTEND_ORIGIN}${finalOgImage.startsWith('/') ? '' : '/'}${finalOgImage}`;
-    } else if (!finalOgImage) {
-        finalOgImage = `${FRONTEND_ORIGIN}${DEFAULT_OG_IMAGE.startsWith('/') ? '' : '/'}${DEFAULT_OG_IMAGE}`;
-    }
-
-    const safeCanonical = sanitizeUrl(canonical);
-    const safeUrl = sanitizeUrl(url) || url;
-
-    let canonicalUrl = safeCanonical || safeUrl;
-    if (canonicalUrl && canonicalUrl.includes('?') && !safeCanonical) {
-        canonicalUrl = canonicalUrl.split('?')[0];
-    }
-
-    const pageUrl = safeUrl || '';
+    const pageUrl = useMemo(() => sanitizeUrl(url || (typeof window !== 'undefined' ? window.location.href : '')), [url]);
+    const canonicalUrl = useMemo(() => sanitizeUrl(canonical || pageUrl), [canonical, pageUrl]);
+    const finalOgImage = useMemo(() => sanitizeUrl(ogImage || DEFAULT_OG_IMAGE), [ogImage]);
+    const finalRobots = useMemo(() => {
+        // If we are on a preview/test domain, force noindex
+        if (typeof window !== 'undefined' && (window.location.hostname.includes('hstgr.cloud') || window.location.hostname.includes('srv1381478'))) {
+            return 'noindex, nofollow';
+        }
+        return robots;
+    }, [robots]);
 
     const structuredDataString = useMemo(() => {
         if (!structuredData) return null;
         try {
             return JSON.stringify(structuredData);
         } catch (e) {
-            console.error("Failed to stringify structured data:", e);
+            console.error('Error stringifying structured data:', e);
             return null;
         }
     }, [structuredData]);
@@ -103,7 +81,7 @@ export const SEOHelmet: React.FC<SEOHelmetProps> = ({
     return (
         <Helmet>
             {/* ── Basic ── */}
-            <title>{title}</title>
+            <title>{title ? `${title} | ${SITE_NAME}` : SITE_NAME}</title>
             <meta name="description" content={description} />
             {keywords && <meta name="keywords" content={keywords} />}
             <meta name="robots" content={finalRobots} />
@@ -116,13 +94,13 @@ export const SEOHelmet: React.FC<SEOHelmetProps> = ({
             <meta property="og:site_name" content={SITE_NAME} />
             <meta property="og:locale" content="en_US" />
             <meta property="og:type" content={ogType} />
-            <meta property="og:title" content={title} />
+            <meta property="og:title" content={title || SITE_NAME} />
             <meta property="og:description" content={description} />
             <meta property="og:url" content={pageUrl} />
             <meta property="og:image" content={finalOgImage} />
             <meta property="og:image:width" content="1200" />
             <meta property="og:image:height" content="630" />
-            <meta property="og:image:alt" content={`${title} – ${SITE_NAME}`} />
+            <meta property="og:image:alt" content={`${title || SITE_NAME} – ${SITE_NAME}`} />
 
             {/* ── Article-specific OG tags ── */}
             {ogType === 'article' && publishedTime && (
@@ -136,13 +114,15 @@ export const SEOHelmet: React.FC<SEOHelmetProps> = ({
             <meta name="twitter:card" content="summary_large_image" />
             <meta name="twitter:site" content={TWITTER_HANDLE} />
             <meta name="twitter:creator" content={TWITTER_HANDLE} />
-            <meta name="twitter:title" content={title} />
+            <meta name="twitter:title" content={title || SITE_NAME} />
             <meta name="twitter:description" content={description} />
             <meta name="twitter:image" content={finalOgImage} />
-            <meta name="twitter:image:alt" content={`${title} – ${SITE_NAME}`} />
+            <meta name="twitter:image:alt" content={`${title || SITE_NAME} – ${SITE_NAME}`} />
 
             {/* ── Custom meta tags from API ── */}
-            {Object.entries(metaTags).map(([key, value]) => {
+            {Array.isArray(metaTags) ? metaTags.map((tag, idx) => (
+                <meta key={idx} name={tag.name || tag.property} content={tag.content} />
+            )) : Object.entries(metaTags).map(([key, value]) => {
                 if (!value || typeof value !== 'string') return null;
                 const isProperty = key.startsWith('og:') || key.startsWith('fb:') || key.startsWith('article:');
                 return isProperty
