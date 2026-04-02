@@ -2,15 +2,15 @@
 
 import { Button } from '@/components/ui/button';
 import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
 } from '@/components/ui/dialog';
 import { AlertTriangle, Loader2 } from 'lucide-react';
-import { createContext, ReactNode, useContext, useState } from 'react';
+import { createContext, ReactNode, useContext, useState, useEffect } from 'react';
 
 interface ConfirmationOptions {
   title: string;
@@ -64,54 +64,90 @@ export function ConfirmationProvider({ children }: { children: ReactNode }) {
   return (
     <ConfirmationContext.Provider value={{ confirm }}>
       {children}
-      <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <div className="flex items-center gap-3">
-              {options.isDangerous && (
-                <div className="flex-shrink-0">
-                  <AlertTriangle className="h-5 w-5 text-red-500" />
-                </div>
-              )}
-              <DialogTitle className={options.isDangerous ? 'text-red-600' : ''}>
-                {options.title}
-              </DialogTitle>
-            </div>
-            {options.description && (
-              <DialogDescription className="mt-2">
-                {options.description}
-              </DialogDescription>
-            )}
-          </DialogHeader>
-
-          <DialogFooter className="gap-2 sm:gap-0">
-            <Button
-              variant="outline"
-              onClick={handleCancel}
-              disabled={isLoading}
-            >
-              {options.cancelText || 'Cancel'}
-            </Button>
-            <Button
-              onClick={handleConfirm}
-              disabled={isLoading}
-              className={options.isDangerous ? 'bg-red-600 hover:bg-red-700 text-white' : ''}
-            >
-              {isLoading ? (
-                <>
-                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  {options.confirmText || 'Confirm'}
-                </>
-              ) : (
-                options.confirmText || 'Confirm'
-              )}
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+      <ConfirmationDialogInternal
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        isLoading={isLoading}
+        options={options}
+        handleConfirm={handleConfirm}
+        handleCancel={handleCancel}
+      />
     </ConfirmationContext.Provider>
   );
 }
+
+function ConfirmationDialogInternal({
+  isOpen,
+  setIsOpen,
+  isLoading,
+  options,
+  handleConfirm,
+  handleCancel,
+}: {
+  isOpen: boolean;
+  setIsOpen: (open: boolean) => void;
+  isLoading: boolean;
+  options: ConfirmationOptions;
+  handleConfirm: () => void;
+  handleCancel: () => void;
+}) {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) return null;
+
+  return (
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <div className="flex items-center gap-3">
+            {options.isDangerous && (
+              <div className="flex-shrink-0">
+                <AlertTriangle className="h-5 w-5 text-red-500" />
+              </div>
+            )}
+            <DialogTitle className={options.isDangerous ? 'text-red-600' : ''}>
+              {options.title}
+            </DialogTitle>
+          </div>
+          {options.description && (
+            <DialogDescription className="mt-2">
+              {options.description}
+            </DialogDescription>
+          )}
+        </DialogHeader>
+
+        <DialogFooter className="gap-2 sm:gap-0">
+          <Button
+            variant="outline"
+            onClick={handleCancel}
+            disabled={isLoading}
+          >
+            {options.cancelText || 'Cancel'}
+          </Button>
+          <Button
+            onClick={handleConfirm}
+            disabled={isLoading}
+            className={options.isDangerous ? 'bg-red-600 hover:bg-red-700 text-white' : ''}
+          >
+            {isLoading ? (
+              <>
+                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                {options.confirmText || 'Confirm'}
+              </>
+            ) : (
+              options.confirmText || 'Confirm'
+            )}
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
 
 export function useConfirmation() {
   const context = useContext(ConfirmationContext);

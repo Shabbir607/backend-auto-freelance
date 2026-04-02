@@ -17,9 +17,9 @@ class PageFaqSeeder extends Seeder
         $pages = [
             'Home' => [
                 'slug' => 'home', 
-                'title' => 'NexusAI - Freelance Automation Hub',
+                'title' => 'EdgeLancer - Freelance Automation Hub',
                 'faqs' => [
-                    ['question' => 'What is NexusAI?', 'answer' => 'NexusAI is a comprehensive platform designed to automate freelance workflows, manage clients, and scale your business using AI.'],
+                    ['question' => 'What is EdgeLancer?', 'answer' => 'EdgeLancer is a comprehensive platform designed to automate freelance workflows, manage clients, and scale your business using AI.'],
                     ['question' => 'Is it free to start?', 'answer' => 'Yes, you can get started for free. We offer various pricing tiers to suit different needs as your freelance business grows.'],
                     ['question' => 'How does the automation work?', 'answer' => 'We integrate with popular tools and provide pre-built workflows. You can customize these to automate repetitive tasks like invoicing, proposal writing, and lead generation.']
                 ]
@@ -98,7 +98,7 @@ class PageFaqSeeder extends Seeder
             ],
             'Blogs' => [
                 'slug' => 'blogs',
-                'title' => 'NexusAI Blog',
+                'title' => 'EdgeLancer Blog',
                 'faqs' => [
                     ['question' => 'How often do you publish?', 'answer' => 'We publish new insights, tutorials, and case studies weekly.'],
                     ['question' => 'Can I write a guest post?', 'answer' => 'We welcome contributions from industry experts. Contact our editorial team for guidelines.'],
@@ -107,9 +107,9 @@ class PageFaqSeeder extends Seeder
             ],
             'About Us' => [
                 'slug' => 'about',
-                'title' => 'About NexusAI',
+                'title' => 'About EdgeLancer',
                 'faqs' => [
-                    ['question' => 'When was NexusAI founded?', 'answer' => 'NexusAI was founded in 2022 by a team of former freelancers and AI engineers.'],
+                    ['question' => 'When was EdgeLancer founded?', 'answer' => 'EdgeLancer was founded in 2022 by a team of former freelancers and AI engineers.'],
                     ['question' => 'Where are you based?', 'answer' => 'We are a remote-first company with headquarters in San Francisco.'],
                     ['question' => 'Are you hiring?', 'answer' => 'We are always looking for talented individuals. Check our Careers page for open positions.']
                 ]

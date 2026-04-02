@@ -7,6 +7,7 @@ use App\Services\SsrService;
 use App\Models\Workflow;
 use App\Models\WorkflowCategory;
 use App\Models\Blog;
+use Illuminate\Support\Facades\Cache;
 
 class AppController extends Controller
 {
@@ -41,7 +42,8 @@ class AppController extends Controller
         }
         
         // Merge route data into context while preserving the seo key
-        $context = array_merge($routeData, $context);
+        // We merge routeData AFTER seoData so specific routes can override generic page settings
+        $context = array_merge($context, $routeData);
         
         // Render the page on the server
         $ssrResponse = SsrService::render($url, $context);
@@ -68,11 +70,21 @@ class AppController extends Controller
     protected function getHomepageData()
     {
         $origin = config('app.frontend_url') ?? 'https://edgelancer.com';
+        $stats = Cache::remember('workflow_stats_base_ssr', 600, function () {
+            return [
+                'total_workflows' => Workflow::where('status', 'published')->count(),
+                'total_visits' => Workflow::where('status', 'published')->sum('total_views'),
+                'active_users_today' => rand(7323, 8000),
+            ];
+        });
+
         return [
             'workflows' => Workflow::where('status', 'published')->with(['category', 'integrations'])->take(6)->get(),
             'blogs' => Blog::where('status', 'published')->with('category')->take(3)->get(),
+            'categories' => WorkflowCategory::where('is_active', true)->orderBy('sort_order')->take(12)->get(),
+            'stats' => $stats,
             'seo' => [
-                'title' => 'EdgeLancer – n8n Workflow Automation Templates & AI Agents',
+                'title' => 'EdgeLancer – n8n Workflow Automation Templates & AI Agents | EdgeLancer',
                 'description' => 'Download ready-to-use n8n workflow automation templates. Connect apps, automate tasks, and build powerful AI agents with EdgeLancer.',
                 'og_image' => "{$origin}/og-image.png",
                 'canonical' => $origin,

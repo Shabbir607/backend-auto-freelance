@@ -16,9 +16,7 @@ function App({ initialData }: { initialData?: any }) {
     <SSRContext.Provider value={ssrData}>
       <ConfirmationProvider>
         <div className="app-container">
-          <Suspense fallback={<LoadingScreen />}>
-            <AppRoutes />
-          </Suspense>
+          <AppRoutes />
         </div>
       </ConfirmationProvider>
     </SSRContext.Provider>

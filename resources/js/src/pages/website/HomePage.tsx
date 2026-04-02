@@ -97,8 +97,8 @@ export default function HomePage() {
     return (
         <div className="min-h-screen bg-[#020204] text-slate-200 font-sans selection:bg-indigo-500/30 overflow-x-hidden">
             <SEOHelmet
-                title={ssrData.seo?.title || "Download Premium n8n Workflow Templates - EdgeLancer"}
-                description={ssrData.seo?.description || "Ready-to-use n8n workflow automation templates. Connect apps, automate tasks, and build powerful AI agents with EdgeLancer."}
+                title={ssrData.seo?.title || "EdgeLancer – n8n Workflow Automation Templates & AI Agents"}
+                description={ssrData.seo?.description || "Download ready-to-use n8n workflow automation templates. Connect apps, automate tasks, and build powerful AI agents with EdgeLancer."}
                 keywords={ssrData.seo?.keywords}
                 ogImage={ssrData.seo?.og_image}
                 metaTags={ssrData.seo?.meta_tags}
