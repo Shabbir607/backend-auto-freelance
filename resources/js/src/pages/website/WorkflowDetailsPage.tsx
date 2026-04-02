@@ -2,7 +2,7 @@ import { FAQSection } from '@/components/FAQSection';
 import { PublicNavbar } from '@/components/layout/PublicNavbar';
 import { SocialShareDialog } from '@/components/SocialShareDialog';
 import { WorkflowReviewsSection } from '@/components/workflow/WorkflowReviewsSection';
-import { Workflow as WorkflowType, workflowService } from '@/services/workflowService';
+import { WorkflowResponse as WorkflowType, workflowService } from '@/services/workflowService';
 import {
     ArrowLeft,
     Bot,
@@ -170,7 +170,7 @@ export default function WorkflowDetailsPage() {
         setLoading(true);
         try {
             setError(null);
-            const response = await workflowService.getTemplate(slug!);
+            const response = await workflowService.getWorkflowBySlug(slug!);
             const wfData = response.data;
 
             if (wfData?.id) {

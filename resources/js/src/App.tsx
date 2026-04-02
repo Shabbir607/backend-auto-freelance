@@ -1,7 +1,7 @@
 import React from 'react';
 import AppRoutes from './routes/AppRoutes';
 import { SSRContext } from './contexts/SSRContext';
-import { ConfirmationProvider } from './contexts/ConfirmationContext';
+import { ConfirmationProvider } from './components/ConfirmationDialog';
 import { Suspense } from 'react';
 import LoadingScreen from './components/LoadingScreen';
 

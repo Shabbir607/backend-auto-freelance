@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { blogService, Blog, BlogSeo } from '../../services/blogService';
-import { workflowService, Workflow } from '../../services/workflowService';
-import PublicNavbar from '../../components/Navigation/PublicNavbar';
-import PublicFooter from '../../components/Navigation/PublicFooter';
+import { workflowService, WorkflowResponse } from '../../services/workflowService';
+import PublicNavbar from '../../components/layout/PublicNavbar';
+import PublicFooter from '../../components/layout/PublicFooter';
 import SEOHelmet from '../../components/SEO/SEOHelmet';
 import {
     Clock,
@@ -31,7 +31,7 @@ const BlogSlugPage: React.FC = () => {
     const [blog, setBlog] = useState<Blog | null>(ssrData.blog || null);
     const [seo, setSeo] = useState<BlogSeo | undefined>(ssrData.seo);
     const [relatedBlogs, setRelatedBlogs] = useState<Blog[]>(ssrData.relatedBlogs || []);
-    const [relatedWorkflows, setRelatedWorkflows] = useState<Workflow[]>(ssrData.relatedWorkflows || []);
+    const [relatedWorkflows, setRelatedWorkflows] = useState<WorkflowResponse[]>(ssrData.relatedWorkflows || []);
     const [loading, setLoading] = useState(!blog);
 
     useEffect(() => {
@@ -39,11 +39,13 @@ const BlogSlugPage: React.FC = () => {
 
         const load = async () => {
             try {
-                const response = await blogService.getPost(slug);
-                setBlog(response.blog);
-                setSeo(response.seo);
-                setRelatedBlogs(response.relatedBlogs || []);
-                setRelatedWorkflows(response.relatedWorkflows || []);
+                const response = await blogService.getBySlugWithSeo(slug);
+                if (response.success && response.data) {
+                    setBlog(response.data.blog);
+                    setSeo(response.data.seo);
+                    setRelatedBlogs(response.data.relatedBlogs || []);
+                    setRelatedWorkflows(response.data.relatedWorkflows || []);
+                }
             } catch (error) {
                 console.error("Error loading blog post:", error);
             } finally {
