@@ -2,7 +2,7 @@ import { FAQSection } from '@/components/FAQSection';
 import { PublicNavbar } from '@/components/layout/PublicNavbar';
 import { SocialShareDialog } from '@/components/SocialShareDialog';
 import { WorkflowReviewsSection } from '@/components/workflow/WorkflowReviewsSection';
-import { WorkflowResponse, workflowService } from '@/services/workflowService';
+import { Workflow as WorkflowType, workflowService } from '@/services/workflowService';
 import {
     ArrowLeft,
     Bot,
@@ -123,7 +123,7 @@ export default function WorkflowDetailsPage() {
     const navigate = useNavigate();
     const ssrData = useSSRContext();
 
-    const [workflow, setWorkflow] = useState<WorkflowResponse | null>(ssrData.workflow || null);
+    const [workflow, setWorkflow] = useState<WorkflowType | null>(ssrData.workflow || null);
     const [seo, setSeo] = useState<any>(ssrData.seo);
     const [loading, setLoading] = useState(!ssrData.workflow);
     const [error, setError] = useState<string | null>(null);
@@ -131,7 +131,7 @@ export default function WorkflowDetailsPage() {
     const [activeTab, setActiveTab] = useState<'visual' | 'config' | 'docs' | 'setup'>('visual');
     const [isShareOpen, setIsShareOpen] = useState(false);
     const [isFullscreen, setIsFullscreen] = useState(false);
-    const [relatedWorkflows, setRelatedWorkflows] = useState<WorkflowResponse[]>(ssrData.relatedWorkflows || []);
+    const [relatedWorkflows, setRelatedWorkflows] = useState<WorkflowType[]>(ssrData.relatedWorkflows || []);
     const [relevantBlogs, setRelevantBlogs] = useState<any[]>(ssrData.relevantBlogs || []);
 
     const [isClient, setIsClient] = useState(false);
@@ -169,13 +169,26 @@ export default function WorkflowDetailsPage() {
     const loadAllData = async () => {
         setLoading(true);
         try {
-            await Promise.all([
-                loadWorkflowDetails(),
-                loadRelatedWorkflows(),
-                loadRelevantBlogs()
-            ]);
+            setError(null);
+            const response = await workflowService.getTemplate(slug!);
+            const wfData = response.data;
+
+            if (wfData?.id) {
+                setWorkflow(wfData);
+                setSeo(response.seo || null);
+                setRelatedWorkflows(response.relatedWorkflows || []);
+                setRelevantBlogs(response.suggestedBlogs || []);
+
+                let finalJson = null;
+                if (wfData.json_data) {
+                    finalJson = typeof wfData.json_data === 'string' ? JSON.parse(wfData.json_data) : wfData.json_data;
+                }
+                setN8nJson(finalJson);
+                if (finalJson) processN8nData(finalJson);
+            }
         } catch (e) {
             console.error(e);
+            setError('Failed to load workflow details');
         } finally {
             setLoading(false);
         }
@@ -233,47 +246,6 @@ export default function WorkflowDetailsPage() {
         setEdges(newEdges);
     };
 
-    const loadWorkflowDetails = async () => {
-        try {
-            setError(null);
-            const response = await workflowService.getWorkflowBySlug(slug!);
-            const payload = response?.data || {};
-            const wfData = payload?.current_workflow || payload?.workflow || payload;
-
-            if (wfData?.id) {
-                setWorkflow(wfData);
-                setSeo(response?.seo || payload?.seo || null);
-
-                let finalJson = null;
-                if (wfData.json_data) {
-                    finalJson = typeof wfData.json_data === 'string' ? JSON.parse(wfData.json_data) : wfData.json_data;
-                }
-
-                if (finalJson) {
-                    setN8nJson(finalJson);
-                    processN8nData(finalJson);
-                }
-            } else {
-                setError('Workflow not found');
-            }
-        } catch (err) {
-            setError('Failed to load workflow');
-        }
-    };
-
-    const loadRelatedWorkflows = async () => {
-        try {
-            const res = await workflowService.getRelatedWorkflows(slug!);
-            if (res?.data) setRelatedWorkflows(res.data);
-        } catch (e) { }
-    };
-
-    const loadRelevantBlogs = async () => {
-        try {
-            const res = await workflowService.getRelatedBlogs(slug!);
-            if (res?.success) setRelevantBlogs(res.data);
-        } catch (e) { }
-    };
 
     const handleDownload = () => {
         if (!n8nJson) return;

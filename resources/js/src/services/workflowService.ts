@@ -33,12 +33,16 @@ export interface Workflow {
   preview_url?: string;
   video_url?: string;
   complexity?: string;
+  difficulty?: string;
   setup_time?: string;
   json_data?: any;
   workflow_features?: any;
   rating?: number;
   reviews_count?: number;
   user_count?: number;
+  views?: number;
+  total_views?: number;
+  nodes_count?: number;
   meta_title?: string;
   meta_description?: string;
   meta_keywords?: string;
@@ -51,6 +55,7 @@ export interface Workflow {
     title: string;
     slug: string;
     image_url?: string;
+    icon?: string;
   };
   integrations?: any[];
   faqs?: any[];
