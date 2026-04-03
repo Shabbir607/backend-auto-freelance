@@ -2,6 +2,10 @@ import React from 'react';
 import AppRoutes from './routes/AppRoutes';
 import { SSRContext } from './contexts/SSRContext';
 import { ConfirmationProvider } from './components/ConfirmationDialog';
+import { AuthProvider } from './contexts/AuthContext';
+import { ToastProvider } from './contexts/ToastContext';
+import { ThemeProvider } from './contexts/ThemeContext';
+import { AppProvider } from './contexts/AppContext';
 import { Suspense } from 'react';
 import LoadingScreen from './components/LoadingScreen';
 
@@ -14,11 +18,19 @@ function App({ initialData }: { initialData?: any }) {
 
   return (
     <SSRContext.Provider value={ssrData}>
-      <ConfirmationProvider>
-        <div className="app-container">
-          <AppRoutes />
-        </div>
-      </ConfirmationProvider>
+      <AuthProvider>
+        <AppProvider>
+          <ThemeProvider>
+            <ToastProvider>
+              <ConfirmationProvider>
+                <div className="app-container">
+                  <AppRoutes />
+                </div>
+              </ConfirmationProvider>
+            </ToastProvider>
+          </ThemeProvider>
+        </AppProvider>
+      </AuthProvider>
     </SSRContext.Provider>
   );
 }
