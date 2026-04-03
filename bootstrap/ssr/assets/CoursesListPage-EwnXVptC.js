@@ -1,4 +1,4 @@
-import { d as distExports, r as reactExports, j as jsxRuntimeExports, f as PublicNavbarLayout, l as SEOHelmet, g as Badge, n as BookOpen, q as Search, I as Input, L as LoaderCircle, h as Card, p as Star, b as Button, A as ArrowRight, F as FAQSection } from "../ssr.js";
+import { d as distExports, r as reactExports, j as jsxRuntimeExports, f as PublicNavbarLayout, l as SEOHelmet, g as Badge, n as BookOpen, s as Search, I as Input, L as LoaderCircle, h as Card, q as Star, b as Button, A as ArrowRight, F as FAQSection } from "../ssr.js";
 import { c as courseService } from "./courseService-BvPIQTiW.js";
 import { C as CirclePlay } from "./circle-play-CO_UqoRJ.js";
 import "stream";

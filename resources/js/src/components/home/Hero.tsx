@@ -7,9 +7,13 @@ import { useNavigate } from 'react-router-dom';
 import { workflowService } from '@/services/workflowService';
 
 const Counter = ({ end, duration = 2000, decimals = 0 }: any) => {
-    const [count, setCount] = useState(0);
+    // SSR: Render the actual end value for SEO and to match initial client state
+    const [count, setCount] = useState(end);
 
     useEffect(() => {
+        // Client-side: Reset to 0 and start animation
+        setCount(0);
+
         let startTime: number | null = null;
         let animationFrameId: number;
 
@@ -33,7 +37,7 @@ const Counter = ({ end, duration = 2000, decimals = 0 }: any) => {
         return () => cancelAnimationFrame(animationFrameId);
     }, [end, duration]);
 
-    return <>{count.toFixed(decimals)}</>;
+    return <>{Number(count).toFixed(decimals)}</>;
 };
 
 export const Hero = ({ initialStats = [] }: { initialStats?: any[] }) => {

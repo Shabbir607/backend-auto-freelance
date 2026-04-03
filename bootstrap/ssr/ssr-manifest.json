@@ -1,9 +1,9 @@
 {
   "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/howler/dist/howler.js?commonjs-es-import": [
-    "/build/assets/sounds-BC4bt-ac.js"
+    "/build/assets/sounds-C24HAfwg.js"
   ],
   "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/howler/dist/howler.js?commonjs-exports": [
-    "/build/assets/sounds-BC4bt-ac.js"
+    "/build/assets/sounds-C24HAfwg.js"
   ],
   "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/invariant/invariant.js?commonjs-es-import": [],
   "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/react-dom/cjs/react-dom-server-legacy.node.development.js?commonjs-exports": [],
@@ -47,19 +47,19 @@
   "\u0000/opt/lampp/htdocs/backend-auto-freelance/node_modules/use-sync-external-store/shim/with-selector.js?commonjs-module": [],
   "\u0000commonjsHelpers.js": [],
   "node_modules/@floating-ui/core/dist/floating-ui.core.mjs": [
-    "/build/assets/select-D43oyr7W.js"
+    "/build/assets/select-D2P8LlRo.js"
   ],
   "node_modules/@floating-ui/dom/dist/floating-ui.dom.mjs": [
-    "/build/assets/select-D43oyr7W.js"
+    "/build/assets/select-D2P8LlRo.js"
   ],
   "node_modules/@floating-ui/react-dom/dist/floating-ui.react-dom.mjs": [
-    "/build/assets/select-D43oyr7W.js"
+    "/build/assets/select-D2P8LlRo.js"
   ],
   "node_modules/@floating-ui/utils/dist/floating-ui.utils.dom.mjs": [
-    "/build/assets/select-D43oyr7W.js"
+    "/build/assets/select-D2P8LlRo.js"
   ],
   "node_modules/@floating-ui/utils/dist/floating-ui.utils.mjs": [
-    "/build/assets/select-D43oyr7W.js"
+    "/build/assets/select-D2P8LlRo.js"
   ],
   "node_modules/@hookform/resolvers/dist/resolvers.mjs": [
     "/build/assets/types-B7ye4Fl_.js"
@@ -70,19 +70,19 @@
   "node_modules/@radix-ui/number/dist/index.mjs": [],
   "node_modules/@radix-ui/primitive/dist/index.mjs": [],
   "node_modules/@radix-ui/react-arrow/dist/index.mjs": [
-    "/build/assets/select-D43oyr7W.js"
+    "/build/assets/select-D2P8LlRo.js"
   ],
   "node_modules/@radix-ui/react-avatar/dist/index.mjs": [],
   "node_modules/@radix-ui/react-avatar/node_modules/@radix-ui/react-context/dist/index.mjs": [],
   "node_modules/@radix-ui/react-avatar/node_modules/@radix-ui/react-primitive/dist/index.mjs": [],
   "node_modules/@radix-ui/react-checkbox/dist/index.mjs": [
-    "/build/assets/SecureInterviewClient-Xc6vi2Ic.js"
+    "/build/assets/SecureInterviewClient-Tke7t9o7.js"
   ],
   "node_modules/@radix-ui/react-collection/dist/index.mjs": [
-    "/build/assets/index-sGgg5_n-.js"
+    "/build/assets/index-ChMh29jy.js"
   ],
   "node_modules/@radix-ui/react-collection/node_modules/@radix-ui/react-slot/dist/index.mjs": [
-    "/build/assets/index-sGgg5_n-.js"
+    "/build/assets/index-ChMh29jy.js"
   ],
   "node_modules/@radix-ui/react-compose-refs/dist/index.mjs": [],
   "node_modules/@radix-ui/react-context/dist/index.mjs": [],
@@ -91,7 +91,7 @@
   "node_modules/@radix-ui/react-direction/dist/index.mjs": [],
   "node_modules/@radix-ui/react-dismissable-layer/dist/index.mjs": [],
   "node_modules/@radix-ui/react-dropdown-menu/dist/index.mjs": [
-    "/build/assets/BlogManagement-Dpd0vdG4.js"
+    "/build/assets/BlogManagement-DZ74slcy.js"
   ],
   "node_modules/@radix-ui/react-focus-guards/dist/index.mjs": [],
   "node_modules/@radix-ui/react-focus-scope/dist/index.mjs": [],
@@ -104,13 +104,13 @@
     "/build/assets/label-CAj1YcMb.js"
   ],
   "node_modules/@radix-ui/react-menu/dist/index.mjs": [
-    "/build/assets/BlogManagement-Dpd0vdG4.js"
+    "/build/assets/BlogManagement-DZ74slcy.js"
   ],
   "node_modules/@radix-ui/react-menu/node_modules/@radix-ui/react-slot/dist/index.mjs": [
-    "/build/assets/BlogManagement-Dpd0vdG4.js"
+    "/build/assets/BlogManagement-DZ74slcy.js"
   ],
   "node_modules/@radix-ui/react-popper/dist/index.mjs": [
-    "/build/assets/select-D43oyr7W.js"
+    "/build/assets/select-D2P8LlRo.js"
   ],
   "node_modules/@radix-ui/react-portal/dist/index.mjs": [],
   "node_modules/@radix-ui/react-presence/dist/index.mjs": [],
@@ -126,19 +126,19 @@
     "/build/assets/progress-DJzjhjq2.js"
   ],
   "node_modules/@radix-ui/react-roving-focus/dist/index.mjs": [
-    "/build/assets/index-FqzpclsW.js"
+    "/build/assets/index-BAJCQ1pj.js"
   ],
   "node_modules/@radix-ui/react-scroll-area/dist/index.mjs": [],
   "node_modules/@radix-ui/react-select/dist/index.mjs": [
-    "/build/assets/select-D43oyr7W.js"
+    "/build/assets/select-D2P8LlRo.js"
   ],
   "node_modules/@radix-ui/react-select/node_modules/@radix-ui/react-slot/dist/index.mjs": [
-    "/build/assets/select-D43oyr7W.js"
+    "/build/assets/select-D2P8LlRo.js"
   ],
   "node_modules/@radix-ui/react-slot/dist/index.mjs": [],
   "node_modules/@radix-ui/react-switch/dist/index.mjs": [],
   "node_modules/@radix-ui/react-tabs/dist/index.mjs": [
-    "/build/assets/AutomationHub-CXB0t8LJ.js"
+    "/build/assets/AutomationHub-E0Ejb5iS.js"
   ],
   "node_modules/@radix-ui/react-use-callback-ref/dist/index.mjs": [],
   "node_modules/@radix-ui/react-use-controllable-state/dist/index.mjs": [],
@@ -148,7 +148,7 @@
   "node_modules/@radix-ui/react-use-previous/dist/index.mjs": [],
   "node_modules/@radix-ui/react-use-size/dist/index.mjs": [],
   "node_modules/@radix-ui/react-visually-hidden/dist/index.mjs": [
-    "/build/assets/select-D43oyr7W.js"
+    "/build/assets/select-D2P8LlRo.js"
   ],
   "node_modules/@reactflow/background/dist/esm/index.mjs": [],
   "node_modules/@reactflow/controls/dist/esm/index.mjs": [],
@@ -258,36 +258,22 @@
   "node_modules/d3-zoom/src/noevent.js": [],
   "node_modules/d3-zoom/src/transform.js": [],
   "node_modules/d3-zoom/src/zoom.js": [],
-  "node_modules/date-fns/_lib/addLeadingZeros.mjs": [],
   "node_modules/date-fns/_lib/defaultOptions.mjs": [],
-  "node_modules/date-fns/_lib/format/formatters.mjs": [],
-  "node_modules/date-fns/_lib/format/lightFormatters.mjs": [],
-  "node_modules/date-fns/_lib/format/longFormatters.mjs": [],
   "node_modules/date-fns/_lib/getRoundingMethod.mjs": [],
   "node_modules/date-fns/_lib/getTimezoneOffsetInMilliseconds.mjs": [],
-  "node_modules/date-fns/_lib/protectedTokens.mjs": [],
   "node_modules/date-fns/compareAsc.mjs": [],
   "node_modules/date-fns/constants.mjs": [],
   "node_modules/date-fns/constructFrom.mjs": [],
   "node_modules/date-fns/constructNow.mjs": [],
-  "node_modules/date-fns/differenceInCalendarDays.mjs": [],
   "node_modules/date-fns/differenceInCalendarMonths.mjs": [],
   "node_modules/date-fns/differenceInMilliseconds.mjs": [],
   "node_modules/date-fns/differenceInMonths.mjs": [],
   "node_modules/date-fns/differenceInSeconds.mjs": [],
   "node_modules/date-fns/endOfDay.mjs": [],
   "node_modules/date-fns/endOfMonth.mjs": [],
-  "node_modules/date-fns/format.mjs": [],
   "node_modules/date-fns/formatDistance.mjs": [],
   "node_modules/date-fns/formatDistanceToNow.mjs": [],
-  "node_modules/date-fns/getDayOfYear.mjs": [],
-  "node_modules/date-fns/getISOWeek.mjs": [],
-  "node_modules/date-fns/getISOWeekYear.mjs": [],
-  "node_modules/date-fns/getWeek.mjs": [],
-  "node_modules/date-fns/getWeekYear.mjs": [],
-  "node_modules/date-fns/isDate.mjs": [],
   "node_modules/date-fns/isLastDayOfMonth.mjs": [],
-  "node_modules/date-fns/isValid.mjs": [],
   "node_modules/date-fns/locale/_lib/buildFormatLongFn.mjs": [],
   "node_modules/date-fns/locale/_lib/buildLocalizeFn.mjs": [],
   "node_modules/date-fns/locale/_lib/buildMatchFn.mjs": [],
@@ -298,670 +284,664 @@
   "node_modules/date-fns/locale/en-US/_lib/formatRelative.mjs": [],
   "node_modules/date-fns/locale/en-US/_lib/localize.mjs": [],
   "node_modules/date-fns/locale/en-US/_lib/match.mjs": [],
-  "node_modules/date-fns/startOfDay.mjs": [],
-  "node_modules/date-fns/startOfISOWeek.mjs": [],
-  "node_modules/date-fns/startOfISOWeekYear.mjs": [],
-  "node_modules/date-fns/startOfWeek.mjs": [],
-  "node_modules/date-fns/startOfWeekYear.mjs": [],
-  "node_modules/date-fns/startOfYear.mjs": [],
   "node_modules/date-fns/toDate.mjs": [],
   "node_modules/framer-motion/dist/es/animation/animate/single-value.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/animation/animators/AcceleratedAnimation.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/animation/animators/BaseAnimation.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/animation/animators/MainThreadAnimation.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/animation/animators/drivers/driver-frameloop.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/animation/animators/utils/accelerated-values.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/animation/animators/utils/can-animate.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/animation/animators/waapi/index.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/animation/animators/waapi/utils/get-final-keyframe.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/animation/animators/waapi/utils/supports-waapi.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/animation/generators/inertia.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/animation/generators/keyframes.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/animation/generators/spring/defaults.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/animation/generators/spring/find.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/animation/generators/spring/index.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/animation/generators/utils/velocity.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/animation/interfaces/motion-value.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/animation/interfaces/visual-element-target.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/animation/interfaces/visual-element-variant.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/animation/interfaces/visual-element.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/animation/optimized-appear/data-id.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/animation/optimized-appear/get-appear-id.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/animation/utils/default-transitions.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/animation/utils/is-animatable.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/animation/utils/is-animation-controls.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/animation/utils/is-keyframes-target.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/animation/utils/is-none.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/animation/utils/is-transition-defined.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/components/AnimatePresence/PopChild.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/components/AnimatePresence/PresenceChild.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/components/AnimatePresence/index.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/components/AnimatePresence/use-presence.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/components/AnimatePresence/utils.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/context/LayoutGroupContext.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/context/LazyContext.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/context/MotionConfigContext.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/context/MotionContext/create.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/context/MotionContext/index.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/context/MotionContext/utils.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/context/PresenceContext.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/context/SwitchLayoutGroupContext.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/easing/anticipate.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/easing/back.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/easing/circ.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/easing/cubic-bezier.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/easing/ease.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/easing/modifiers/mirror.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/easing/modifiers/reverse.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/easing/utils/is-easing-array.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/easing/utils/map.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/events/add-dom-event.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/events/add-pointer-event.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/events/event-info.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/frameloop/batcher.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/frameloop/frame.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/frameloop/microtask.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/frameloop/render-step.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/frameloop/sync-time.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/gestures/drag/VisualElementDragControls.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/gestures/drag/index.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/gestures/drag/utils/constraints.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/gestures/focus.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/gestures/hover.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/gestures/pan/PanSession.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/gestures/pan/index.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/gestures/press.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/motion/features/Feature.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/motion/features/animation/exit.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/motion/features/animation/index.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/motion/features/animations.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/motion/features/definitions.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/motion/features/drag.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/motion/features/gestures.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/motion/features/layout.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/motion/features/layout/MeasureLayout.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/motion/features/load-features.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/motion/features/viewport/index.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/motion/features/viewport/observers.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/motion/index.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/motion/utils/is-forced-motion-value.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/motion/utils/symbol.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/motion/utils/use-motion-ref.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/motion/utils/use-visual-element.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/motion/utils/use-visual-state.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/motion/utils/valid-prop.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/projection/animation/mix-values.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/projection/geometry/conversion.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/projection/geometry/copy.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/projection/geometry/delta-apply.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/projection/geometry/delta-calc.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/projection/geometry/delta-remove.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/projection/geometry/models.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/projection/geometry/utils.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/projection/node/DocumentProjectionNode.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/projection/node/HTMLProjectionNode.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/projection/node/create-projection-node.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/projection/node/state.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/projection/shared/stack.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/projection/styles/scale-border-radius.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/projection/styles/scale-box-shadow.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/projection/styles/scale-correction.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/projection/styles/transform.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/projection/utils/each-axis.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/projection/utils/has-transform.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/projection/utils/measure.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/VisualElement.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/components/create-factory.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/components/create-proxy.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/components/motion/create.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/components/motion/proxy.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/dom/DOMKeyframesResolver.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/dom/DOMVisualElement.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/dom/create-visual-element.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/dom/use-render.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/dom/utils/camel-to-dash.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/dom/utils/css-variables-conversion.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/dom/utils/filter-props.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/dom/utils/is-css-variable.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/dom/utils/is-svg-component.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/dom/utils/is-svg-element.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/dom/utils/unit-conversion.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/dom/value-types/animatable-none.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/dom/value-types/defaults.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/dom/value-types/dimensions.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/dom/value-types/find.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/dom/value-types/get-as-type.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/dom/value-types/number-browser.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/dom/value-types/number.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/dom/value-types/test.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/dom/value-types/transform.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/dom/value-types/type-auto.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/dom/value-types/type-int.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/html/HTMLVisualElement.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/html/config-motion.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/html/use-props.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/html/utils/build-styles.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/html/utils/build-transform.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/html/utils/create-render-state.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/html/utils/keys-position.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/html/utils/keys-transform.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/html/utils/make-none-animatable.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/html/utils/render.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/html/utils/scrape-motion-values.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/store.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/svg/SVGVisualElement.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/svg/config-motion.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/svg/lowercase-elements.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/svg/use-props.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/svg/utils/build-attrs.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/svg/utils/camel-case-attrs.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/svg/utils/create-render-state.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/svg/utils/is-svg-tag.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/svg/utils/path.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/svg/utils/render.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/svg/utils/scrape-motion-values.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/svg/utils/transform-origin.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/utils/KeyframesResolver.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/utils/animation-state.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/utils/compare-by-depth.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/utils/flat-tree.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/utils/get-variant-context.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/utils/is-controlling-variants.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/utils/is-variant-label.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/utils/motion-values.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/utils/resolve-dynamic-variants.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/utils/resolve-variants.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/utils/setters.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/render/utils/variant-props.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/utils/GlobalConfig.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/utils/array.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/utils/clamp.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/utils/delay.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/utils/distance.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/utils/get-context-window.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/utils/hsla-to-rgba.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/utils/interpolate.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/utils/is-browser.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/utils/is-numerical-string.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/utils/is-ref-object.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/utils/is-zero-value-string.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/utils/mix/color.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/utils/mix/complex.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/utils/mix/immediate.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/utils/mix/index.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/utils/mix/number.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/utils/mix/visibility.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/utils/offsets/default.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/utils/offsets/fill.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/utils/offsets/time.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/utils/pipe.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/utils/reduced-motion/index.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/utils/reduced-motion/state.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/utils/resolve-value.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/utils/shallow-compare.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/utils/subscription-manager.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/utils/use-constant.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/utils/use-isomorphic-effect.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/utils/velocity-per-second.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/utils/warn-once.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/value/index.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/value/types/color/hex.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/value/types/color/hsla.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/value/types/color/index.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/value/types/color/rgba.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/value/types/color/utils.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/value/types/complex/filter.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/value/types/complex/index.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/value/types/numbers/index.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/value/types/numbers/units.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/value/types/utils/color-regex.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/value/types/utils/float-regex.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/value/types/utils/is-nullish.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/value/types/utils/sanitize.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/value/types/utils/single-color-regex.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/value/use-will-change/add-will-change.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/value/use-will-change/is.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/value/utils/is-motion-value.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/framer-motion/dist/es/value/utils/resolve-motion-value.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/get-nonce/dist/es2015/index.js": [],
   "node_modules/howler/dist/howler.js": [
-    "/build/assets/sounds-BC4bt-ac.js"
+    "/build/assets/sounds-C24HAfwg.js"
   ],
   "node_modules/invariant/invariant.js": [],
   "node_modules/lucide-react/dist/esm/Icon.js": [],
@@ -969,12 +949,12 @@
   "node_modules/lucide-react/dist/esm/defaultAttributes.js": [],
   "node_modules/lucide-react/dist/esm/icons/activity.js": [],
   "node_modules/lucide-react/dist/esm/icons/arrow-down-right.js": [
-    "/build/assets/AutomationHub-CXB0t8LJ.js"
+    "/build/assets/AutomationHub-E0Ejb5iS.js"
   ],
   "node_modules/lucide-react/dist/esm/icons/arrow-left.js": [],
   "node_modules/lucide-react/dist/esm/icons/arrow-right.js": [],
   "node_modules/lucide-react/dist/esm/icons/arrow-up-right.js": [
-    "/build/assets/AutomationHub-CXB0t8LJ.js"
+    "/build/assets/AutomationHub-E0Ejb5iS.js"
   ],
   "node_modules/lucide-react/dist/esm/icons/bar-chart-3.js": [],
   "node_modules/lucide-react/dist/esm/icons/bar-chart.js": [],
@@ -985,24 +965,24 @@
   "node_modules/lucide-react/dist/esm/icons/brain.js": [],
   "node_modules/lucide-react/dist/esm/icons/briefcase.js": [],
   "node_modules/lucide-react/dist/esm/icons/building-2.js": [
-    "/build/assets/SuperAdminDashboard-BXFV-jWE.js"
+    "/build/assets/SuperAdminDashboard-NqY30DND.js"
   ],
   "node_modules/lucide-react/dist/esm/icons/calendar.js": [],
   "node_modules/lucide-react/dist/esm/icons/camera.js": [
-    "/build/assets/SecureInterviewClient-Xc6vi2Ic.js"
+    "/build/assets/SecureInterviewClient-Tke7t9o7.js"
   ],
   "node_modules/lucide-react/dist/esm/icons/check.js": [],
   "node_modules/lucide-react/dist/esm/icons/chevron-down.js": [],
   "node_modules/lucide-react/dist/esm/icons/chevron-left.js": [],
   "node_modules/lucide-react/dist/esm/icons/chevron-right.js": [],
   "node_modules/lucide-react/dist/esm/icons/chevron-up.js": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/lucide-react/dist/esm/icons/chevrons-left.js": [
-    "/build/assets/pagination-controls-BDasQ1IR.js"
+    "/build/assets/pagination-controls-BzU-U942.js"
   ],
   "node_modules/lucide-react/dist/esm/icons/chevrons-right.js": [
-    "/build/assets/pagination-controls-BDasQ1IR.js"
+    "/build/assets/pagination-controls-BzU-U942.js"
   ],
   "node_modules/lucide-react/dist/esm/icons/circle-alert.js": [],
   "node_modules/lucide-react/dist/esm/icons/circle-check-big.js": [],
@@ -1012,9 +992,11 @@
     "/build/assets/circle-play-CO_UqoRJ.js"
   ],
   "node_modules/lucide-react/dist/esm/icons/circle-x.js": [
-    "/build/assets/SecureInterviewClient-Xc6vi2Ic.js"
+    "/build/assets/SecureInterviewClient-Tke7t9o7.js"
   ],
-  "node_modules/lucide-react/dist/esm/icons/circle.js": [],
+  "node_modules/lucide-react/dist/esm/icons/circle.js": [
+    "/build/assets/Dashboard-Bz8ng1zC.js"
+  ],
   "node_modules/lucide-react/dist/esm/icons/clock.js": [],
   "node_modules/lucide-react/dist/esm/icons/cloud.js": [],
   "node_modules/lucide-react/dist/esm/icons/code-xml.js": [],
@@ -1026,7 +1008,7 @@
   "node_modules/lucide-react/dist/esm/icons/dollar-sign.js": [],
   "node_modules/lucide-react/dist/esm/icons/download.js": [],
   "node_modules/lucide-react/dist/esm/icons/ellipsis-vertical.js": [
-    "/build/assets/BlogManagement-Dpd0vdG4.js"
+    "/build/assets/BlogManagement-DZ74slcy.js"
   ],
   "node_modules/lucide-react/dist/esm/icons/external-link.js": [],
   "node_modules/lucide-react/dist/esm/icons/eye-off.js": [
@@ -1040,7 +1022,7 @@
   "node_modules/lucide-react/dist/esm/icons/filter.js": [],
   "node_modules/lucide-react/dist/esm/icons/folder-kanban.js": [],
   "node_modules/lucide-react/dist/esm/icons/folder-plus.js": [
-    "/build/assets/BlogManagement-Dpd0vdG4.js"
+    "/build/assets/BlogManagement-DZ74slcy.js"
   ],
   "node_modules/lucide-react/dist/esm/icons/git-branch.js": [],
   "node_modules/lucide-react/dist/esm/icons/github.js": [],
@@ -1060,33 +1042,33 @@
   ],
   "node_modules/lucide-react/dist/esm/icons/log-out.js": [],
   "node_modules/lucide-react/dist/esm/icons/mail-open.js": [
-    "/build/assets/ContactEnquiries-B65oHj-U.js"
+    "/build/assets/ContactEnquiries-CIwl6EUJ.js"
   ],
   "node_modules/lucide-react/dist/esm/icons/mail.js": [],
   "node_modules/lucide-react/dist/esm/icons/maximize-2.js": [],
   "node_modules/lucide-react/dist/esm/icons/maximize.js": [
-    "/build/assets/SecureInterviewClient-Xc6vi2Ic.js"
+    "/build/assets/SecureInterviewClient-Tke7t9o7.js"
   ],
   "node_modules/lucide-react/dist/esm/icons/megaphone.js": [],
   "node_modules/lucide-react/dist/esm/icons/menu.js": [],
   "node_modules/lucide-react/dist/esm/icons/message-circle.js": [],
   "node_modules/lucide-react/dist/esm/icons/message-square.js": [],
   "node_modules/lucide-react/dist/esm/icons/mic.js": [
-    "/build/assets/SecureInterviewClient-Xc6vi2Ic.js"
+    "/build/assets/SecureInterviewClient-Tke7t9o7.js"
   ],
-  "node_modules/lucide-react/dist/esm/icons/minimize-2.js": [],
+  "node_modules/lucide-react/dist/esm/icons/minimize-2.js": [
+    "/build/assets/LessonViewerPage-BhR_6_IB.js"
+  ],
   "node_modules/lucide-react/dist/esm/icons/minus.js": [],
   "node_modules/lucide-react/dist/esm/icons/monitor-smartphone.js": [
-    "/build/assets/SecureInterviewClient-Xc6vi2Ic.js"
+    "/build/assets/SecureInterviewClient-Tke7t9o7.js"
   ],
   "node_modules/lucide-react/dist/esm/icons/monitor.js": [
-    "/build/assets/SecureInterviewClient-Xc6vi2Ic.js"
+    "/build/assets/SecureInterviewClient-Tke7t9o7.js"
   ],
   "node_modules/lucide-react/dist/esm/icons/moon.js": [],
   "node_modules/lucide-react/dist/esm/icons/newspaper.js": [],
-  "node_modules/lucide-react/dist/esm/icons/panels-top-left.js": [
-    "/build/assets/SitemapPage-D_gfK2s_.js"
-  ],
+  "node_modules/lucide-react/dist/esm/icons/panels-top-left.js": [],
   "node_modules/lucide-react/dist/esm/icons/pause.js": [
     "/build/assets/pause-Dd5jwD05.js"
   ],
@@ -1097,18 +1079,17 @@
   ],
   "node_modules/lucide-react/dist/esm/icons/plus.js": [],
   "node_modules/lucide-react/dist/esm/icons/radio.js": [],
-  "node_modules/lucide-react/dist/esm/icons/refresh-ccw.js": [],
   "node_modules/lucide-react/dist/esm/icons/refresh-cw.js": [
     "/build/assets/refresh-cw-Bi_GhDfH.js"
   ],
   "node_modules/lucide-react/dist/esm/icons/reply.js": [
-    "/build/assets/ContactEnquiries-B65oHj-U.js"
+    "/build/assets/ContactEnquiries-CIwl6EUJ.js"
   ],
   "node_modules/lucide-react/dist/esm/icons/rotate-ccw.js": [
-    "/build/assets/LessonViewerPage-DDuwguHo.js"
+    "/build/assets/LessonViewerPage-BhR_6_IB.js"
   ],
   "node_modules/lucide-react/dist/esm/icons/rotate-cw.js": [
-    "/build/assets/LessonViewerPage-DDuwguHo.js"
+    "/build/assets/LessonViewerPage-BhR_6_IB.js"
   ],
   "node_modules/lucide-react/dist/esm/icons/search.js": [],
   "node_modules/lucide-react/dist/esm/icons/send.js": [],
@@ -1116,7 +1097,7 @@
   "node_modules/lucide-react/dist/esm/icons/settings.js": [],
   "node_modules/lucide-react/dist/esm/icons/share-2.js": [],
   "node_modules/lucide-react/dist/esm/icons/shield-alert.js": [
-    "/build/assets/SecureInterviewClient-Xc6vi2Ic.js"
+    "/build/assets/SecureInterviewClient-Tke7t9o7.js"
   ],
   "node_modules/lucide-react/dist/esm/icons/shield-check.js": [],
   "node_modules/lucide-react/dist/esm/icons/shield.js": [],
@@ -1128,13 +1109,11 @@
     "/build/assets/square-pen-Cs9H9Kwc.js"
   ],
   "node_modules/lucide-react/dist/esm/icons/square.js": [
-    "/build/assets/SecureInterviewClient-Xc6vi2Ic.js"
+    "/build/assets/SecureInterviewClient-Tke7t9o7.js"
   ],
   "node_modules/lucide-react/dist/esm/icons/star.js": [],
   "node_modules/lucide-react/dist/esm/icons/sun.js": [],
-  "node_modules/lucide-react/dist/esm/icons/tag.js": [
-    "/build/assets/BlogManagement-Dpd0vdG4.js"
-  ],
+  "node_modules/lucide-react/dist/esm/icons/tag.js": [],
   "node_modules/lucide-react/dist/esm/icons/target.js": [],
   "node_modules/lucide-react/dist/esm/icons/terminal.js": [],
   "node_modules/lucide-react/dist/esm/icons/trash-2.js": [
@@ -1148,19 +1127,19 @@
   "node_modules/lucide-react/dist/esm/icons/users.js": [],
   "node_modules/lucide-react/dist/esm/icons/video.js": [],
   "node_modules/lucide-react/dist/esm/icons/volume-1.js": [
-    "/build/assets/LessonViewerPage-DDuwguHo.js"
+    "/build/assets/LessonViewerPage-BhR_6_IB.js"
   ],
   "node_modules/lucide-react/dist/esm/icons/volume-2.js": [
-    "/build/assets/LessonViewerPage-DDuwguHo.js"
+    "/build/assets/LessonViewerPage-BhR_6_IB.js"
   ],
   "node_modules/lucide-react/dist/esm/icons/volume-x.js": [
-    "/build/assets/LessonViewerPage-DDuwguHo.js"
+    "/build/assets/LessonViewerPage-BhR_6_IB.js"
   ],
   "node_modules/lucide-react/dist/esm/icons/wifi-off.js": [
-    "/build/assets/SecureInterviewClient-Xc6vi2Ic.js"
+    "/build/assets/SecureInterviewClient-Tke7t9o7.js"
   ],
   "node_modules/lucide-react/dist/esm/icons/wifi.js": [
-    "/build/assets/SecureInterviewClient-Xc6vi2Ic.js"
+    "/build/assets/SecureInterviewClient-Tke7t9o7.js"
   ],
   "node_modules/lucide-react/dist/esm/icons/workflow.js": [],
   "node_modules/lucide-react/dist/esm/icons/wrench.js": [],
@@ -1168,91 +1147,91 @@
   "node_modules/lucide-react/dist/esm/icons/zap.js": [],
   "node_modules/lucide-react/dist/esm/shared/src/utils.js": [],
   "node_modules/motion-dom/dist/es/animation/controls/BaseGroup.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/motion-dom/dist/es/animation/controls/Group.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/motion-dom/dist/es/animation/generators/utils/calc-duration.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/motion-dom/dist/es/animation/generators/utils/is-generator.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/motion-dom/dist/es/animation/utils/get-value-transition.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/motion-dom/dist/es/animation/waapi/utils/attach-timeline.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/motion-dom/dist/es/animation/waapi/utils/easing.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/motion-dom/dist/es/animation/waapi/utils/linear.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/motion-dom/dist/es/gestures/drag/state/is-active.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/motion-dom/dist/es/gestures/drag/state/set-active.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/motion-dom/dist/es/gestures/hover.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/motion-dom/dist/es/gestures/press/index.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/motion-dom/dist/es/gestures/press/utils/is-keyboard-accessible.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/motion-dom/dist/es/gestures/press/utils/keyboard.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/motion-dom/dist/es/gestures/press/utils/state.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/motion-dom/dist/es/gestures/utils/is-node-or-child.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/motion-dom/dist/es/gestures/utils/is-primary-pointer.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/motion-dom/dist/es/gestures/utils/setup.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/motion-dom/dist/es/utils/is-bezier-definition.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/motion-dom/dist/es/utils/resolve-elements.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/motion-dom/dist/es/utils/supports/flags.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/motion-dom/dist/es/utils/supports/linear-easing.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/motion-dom/dist/es/utils/supports/memo.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/motion-dom/dist/es/utils/supports/scroll-timeline.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/motion-utils/dist/es/errors.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/motion-utils/dist/es/memo.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/motion-utils/dist/es/noop.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/motion-utils/dist/es/progress.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/motion-utils/dist/es/time-conversion.mjs": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "node_modules/react-dom/cjs/react-dom-server-legacy.node.development.js": [],
   "node_modules/react-dom/cjs/react-dom-server-legacy.node.production.min.js": [],
@@ -1357,7 +1336,6 @@
   "resources/js/src/components/ProductionTemplates.tsx": [],
   "resources/js/src/components/SEO/SEOHelmet.tsx": [],
   "resources/js/src/components/SocialShareDialog.tsx": [],
-  "resources/js/src/components/SupportChatFloat.tsx": [],
   "resources/js/src/components/auth/ProtectedRoute.tsx": [],
   "resources/js/src/components/home/BentoGrid.tsx": [],
   "resources/js/src/components/home/BlogsSection.tsx": [],
@@ -1381,25 +1359,25 @@
   "resources/js/src/components/ui/button.tsx": [],
   "resources/js/src/components/ui/card.tsx": [],
   "resources/js/src/components/ui/checkbox.tsx": [
-    "/build/assets/SecureInterviewClient-Xc6vi2Ic.js"
+    "/build/assets/SecureInterviewClient-Tke7t9o7.js"
   ],
   "resources/js/src/components/ui/dialog.tsx": [],
   "resources/js/src/components/ui/dropdown-menu.tsx": [
-    "/build/assets/BlogManagement-Dpd0vdG4.js"
+    "/build/assets/BlogManagement-DZ74slcy.js"
   ],
   "resources/js/src/components/ui/input.tsx": [],
   "resources/js/src/components/ui/label.tsx": [
     "/build/assets/label-CAj1YcMb.js"
   ],
   "resources/js/src/components/ui/pagination-controls.tsx": [
-    "/build/assets/pagination-controls-BDasQ1IR.js"
+    "/build/assets/pagination-controls-BzU-U942.js"
   ],
   "resources/js/src/components/ui/progress.tsx": [
     "/build/assets/progress-DJzjhjq2.js"
   ],
   "resources/js/src/components/ui/scroll-area.tsx": [],
   "resources/js/src/components/ui/select.tsx": [
-    "/build/assets/select-D43oyr7W.js"
+    "/build/assets/select-D2P8LlRo.js"
   ],
   "resources/js/src/components/ui/sheet.tsx": [],
   "resources/js/src/components/ui/skeleton.tsx": [],
@@ -1408,55 +1386,57 @@
     "/build/assets/table-BVLYlhcV.js"
   ],
   "resources/js/src/components/ui/tabs.tsx": [
-    "/build/assets/AutomationHub-CXB0t8LJ.js"
+    "/build/assets/AutomationHub-E0Ejb5iS.js"
   ],
   "resources/js/src/components/ui/textarea.tsx": [
     "/build/assets/textarea-DZtg9ezc.js"
   ],
   "resources/js/src/components/workflow/N8nNode.tsx": [],
   "resources/js/src/components/workflow/WorkflowReviewsSection.tsx": [],
+  "resources/js/src/contexts/AppContext.tsx": [],
   "resources/js/src/contexts/AuthContext.tsx": [],
   "resources/js/src/contexts/SSRContext.tsx": [],
   "resources/js/src/contexts/ThemeContext.tsx": [],
   "resources/js/src/contexts/ToastContext.tsx": [],
   "resources/js/src/lib/apiConfig.ts": [],
+  "resources/js/src/lib/mockData.ts": [],
   "resources/js/src/lib/serverApi.ts": [],
   "resources/js/src/lib/sounds.ts": [
-    "/build/assets/sounds-BC4bt-ac.js"
+    "/build/assets/sounds-C24HAfwg.js"
   ],
   "resources/js/src/lib/utils.ts": [],
   "resources/js/src/pages/ContactEnquiries.tsx": [
-    "/build/assets/ContactEnquiries-B65oHj-U.js"
+    "/build/assets/ContactEnquiries-CIwl6EUJ.js"
   ],
   "resources/js/src/pages/FAQManagement.tsx": [
-    "/build/assets/FAQManagement-3EGGHD0w.js"
+    "/build/assets/FAQManagement-B8WQMwoJ.js"
   ],
   "resources/js/src/pages/NewsletterSubscribers.tsx": [
-    "/build/assets/NewsletterSubscribers-B0qpf1f8.js"
+    "/build/assets/NewsletterSubscribers-DjrEVQ0i.js"
   ],
   "resources/js/src/pages/PageManagement.tsx": [
-    "/build/assets/PageManagement-BVh6HAxt.js"
+    "/build/assets/PageManagement-D7AQ8Spk.js"
   ],
   "resources/js/src/pages/app/AdminCourseReviewsPage.tsx": [
     "/build/assets/AdminCourseReviewsPage-DFOIRdy1.js"
   ],
   "resources/js/src/pages/app/AdminCoursesPage.tsx": [
-    "/build/assets/AdminCoursesPage-DY1-xmnX.js"
+    "/build/assets/AdminCoursesPage-XTe7FMiK.js"
   ],
   "resources/js/src/pages/app/AutomationHub.tsx": [
-    "/build/assets/AutomationHub-CXB0t8LJ.js"
+    "/build/assets/AutomationHub-E0Ejb5iS.js"
   ],
   "resources/js/src/pages/app/BlogManagement.tsx": [
-    "/build/assets/BlogManagement-Dpd0vdG4.js"
+    "/build/assets/BlogManagement-DZ74slcy.js"
   ],
   "resources/js/src/pages/app/Dashboard.tsx": [
-    "/build/assets/Dashboard-IWsEjtbp.js"
+    "/build/assets/Dashboard-Bz8ng1zC.js"
   ],
   "resources/js/src/pages/app/SupportChatAdmin.tsx": [
-    "/build/assets/SupportChatAdmin-Ddsgav1r.js"
+    "/build/assets/SupportChatAdmin-GMxYVc8e.js"
   ],
   "resources/js/src/pages/app/WorkflowTemplates.tsx": [
-    "/build/assets/WorkflowTemplates-BYBbZXrU.js"
+    "/build/assets/WorkflowTemplates-D9dQ15HF.js"
   ],
   "resources/js/src/pages/auth/LoginPage.tsx": [
     "/build/assets/LoginPage-D-v7jJSe.js"
@@ -1465,10 +1445,10 @@
     "/build/assets/SignupPage-BZxBe0WH.js"
   ],
   "resources/js/src/pages/interview/SecureInterviewClient.tsx": [
-    "/build/assets/SecureInterviewClient-Xc6vi2Ic.js"
+    "/build/assets/SecureInterviewClient-Tke7t9o7.js"
   ],
   "resources/js/src/pages/superadmin/SuperAdminDashboard.tsx": [
-    "/build/assets/SuperAdminDashboard-BXFV-jWE.js"
+    "/build/assets/SuperAdminDashboard-NqY30DND.js"
   ],
   "resources/js/src/pages/website/BlogPage.tsx": [],
   "resources/js/src/pages/website/BlogSlugPage.tsx": [],
@@ -1476,24 +1456,25 @@
     "/build/assets/ContactPage-5-MZp5En.js"
   ],
   "resources/js/src/pages/website/CourseDetailsPage.tsx": [
-    "/build/assets/CourseDetailsPage-Dm_9iaaX.js"
+    "/build/assets/CourseDetailsPage-D9P-GTzC.js"
   ],
   "resources/js/src/pages/website/CoursesListPage.tsx": [
-    "/build/assets/CoursesListPage-B9K4TSP9.js"
+    "/build/assets/CoursesListPage-EwnXVptC.js"
   ],
   "resources/js/src/pages/website/HomePage.tsx": [],
   "resources/js/src/pages/website/LessonViewerPage.tsx": [
-    "/build/assets/LessonViewerPage-DDuwguHo.js"
+    "/build/assets/LessonViewerPage-BhR_6_IB.js"
   ],
   "resources/js/src/pages/website/NotFoundPage.tsx": [
     "/build/assets/NotFoundPage-CV7wKiHM.js"
   ],
   "resources/js/src/pages/website/SitemapPage.tsx": [
-    "/build/assets/SitemapPage-D_gfK2s_.js"
+    "/build/assets/SitemapPage-zuR9GGoK.js"
   ],
   "resources/js/src/pages/website/TemplatesShowcasePage.tsx": [],
   "resources/js/src/pages/website/WorkflowDetailsPage.tsx": [],
   "resources/js/src/pages/website/WorkflowsPage.tsx": [],
+  "resources/js/src/routes/AppRoutes.tsx": [],
   "resources/js/src/services/blogService.ts": [],
   "resources/js/src/services/contactService.ts": [
     "/build/assets/contactService-D_MD-cyw.js"
@@ -1508,7 +1489,9 @@
   "resources/js/src/services/pageService.ts": [
     "/build/assets/pageService-mJqNpZ7Z.js"
   ],
-  "resources/js/src/services/supportChatService.ts": [],
+  "resources/js/src/services/supportChatService.ts": [
+    "/build/assets/SupportChatAdmin-GMxYVc8e.js"
+  ],
   "resources/js/src/services/workflowService.ts": [],
   "resources/js/src/stores/useAppStore.ts": [],
   "resources/js/ssr.tsx": []

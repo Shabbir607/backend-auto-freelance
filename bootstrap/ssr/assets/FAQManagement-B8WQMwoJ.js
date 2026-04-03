@@ -1,14 +1,14 @@
-import { a as useToast, aD as useConfirmation, r as reactExports, af as faqService, j as jsxRuntimeExports, b as Button, at as Plus, h as Card, aE as CardHeader, aF as CardDescription, aG as CardTitle, aH as CardContent, q as Search, I as Input, L as LoaderCircle, m as CircleHelp, g as Badge, aw as Dialog, ax as DialogContent, ay as DialogHeader, az as DialogTitle, aA as DialogDescription, aI as Switch, aB as DialogFooter } from "../ssr.js";
+import { a as useToast, aD as useConfirmation, r as reactExports, ae as faqService, j as jsxRuntimeExports, b as Button, as as Plus, h as Card, aE as CardHeader, aF as CardDescription, aG as CardTitle, aH as CardContent, s as Search, I as Input, L as LoaderCircle, m as CircleHelp, g as Badge, aw as Dialog, ax as DialogContent, ay as DialogHeader, az as DialogTitle, aA as DialogDescription, aI as Switch, aB as DialogFooter } from "../ssr.js";
 import { L as Label } from "./label-CAj1YcMb.js";
-import { P as PaginationControls } from "./pagination-controls-BDasQ1IR.js";
-import { S as Select, b as SelectTrigger, d as SelectValue, e as SelectContent, f as SelectItem } from "./select-D43oyr7W.js";
+import { P as PaginationControls } from "./pagination-controls-BzU-U942.js";
+import { S as Select, b as SelectTrigger, d as SelectValue, e as SelectContent, f as SelectItem } from "./select-D2P8LlRo.js";
 import { T as Table, a as TableHeader, b as TableRow, c as TableHead, d as TableBody, e as TableCell } from "./table-BVLYlhcV.js";
 import { T as Textarea } from "./textarea-DZtg9ezc.js";
 import { S as SquarePen } from "./square-pen-Cs9H9Kwc.js";
 import { T as Trash2 } from "./trash-2-Cu4B9ujU.js";
 import "stream";
 import "util";
-import "./index-sGgg5_n-.js";
+import "./index-ChMh29jy.js";
 const initialFormData = {
   question: "",
   answer: "",

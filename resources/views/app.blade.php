@@ -4,11 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    @if(!empty($ssrData['seo']['structured_data']))
-    <script type="application/ld+json">
-        {!! json_encode($ssrData['seo']['structured_data']) !!}
-    </script>
-    @endif
     @if(!empty($ssrHead))
         {!! $ssrHead !!}
     @else

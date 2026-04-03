@@ -411,38 +411,38 @@ function requireReact_development() {
           ReactSharedInternals.ReactDebugCurrentFrame = ReactDebugCurrentFrame;
           ReactSharedInternals.ReactCurrentActQueue = ReactCurrentActQueue;
         }
-        function warn2(format2) {
+        function warn2(format) {
           {
             {
               for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
                 args[_key - 1] = arguments[_key];
               }
-              printWarning("warn", format2, args);
+              printWarning("warn", format, args);
             }
           }
         }
-        function error(format2) {
+        function error(format) {
           {
             {
               for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
                 args[_key2 - 1] = arguments[_key2];
               }
-              printWarning("error", format2, args);
+              printWarning("error", format, args);
             }
           }
         }
-        function printWarning(level, format2, args) {
+        function printWarning(level, format, args) {
           {
             var ReactDebugCurrentFrame2 = ReactSharedInternals.ReactDebugCurrentFrame;
             var stack = ReactDebugCurrentFrame2.getStackAddendum();
             if (stack !== "") {
-              format2 += "%s";
+              format += "%s";
               args = args.concat([stack]);
             }
             var argsWithFormat = args.map(function(item) {
               return String(item);
             });
-            argsWithFormat.unshift("Warning: " + format2);
+            argsWithFormat.unshift("Warning: " + format);
             Function.prototype.apply.call(console[level], console, argsWithFormat);
           }
         }
@@ -2250,28 +2250,28 @@ function requireReactJsxRuntime_development() {
         return null;
       }
       var ReactSharedInternals = React3.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
-      function error(format2) {
+      function error(format) {
         {
           {
             for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
               args[_key2 - 1] = arguments[_key2];
             }
-            printWarning("error", format2, args);
+            printWarning("error", format, args);
           }
         }
       }
-      function printWarning(level, format2, args) {
+      function printWarning(level, format, args) {
         {
           var ReactDebugCurrentFrame2 = ReactSharedInternals.ReactDebugCurrentFrame;
           var stack = ReactDebugCurrentFrame2.getStackAddendum();
           if (stack !== "") {
-            format2 += "%s";
+            format += "%s";
             args = args.concat([stack]);
           }
           var argsWithFormat = args.map(function(item) {
             return String(item);
           });
-          argsWithFormat.unshift("Warning: " + format2);
+          argsWithFormat.unshift("Warning: " + format);
           Function.prototype.apply.call(console[level], console, argsWithFormat);
         }
       }
@@ -3105,12 +3105,6 @@ function requireJsxRuntime() {
   return jsxRuntime.exports;
 }
 var jsxRuntimeExports = requireJsxRuntime();
-var reactExports = requireReact();
-const React2 = /* @__PURE__ */ getDefaultExportFromCjs(reactExports);
-const React = /* @__PURE__ */ _mergeNamespaces({
-  __proto__: null,
-  default: React2
-}, [reactExports]);
 var server_node = {};
 var reactDomServerLegacy_node_production_min = {};
 var hasRequiredReactDomServerLegacy_node_production_min;
@@ -6221,38 +6215,38 @@ function requireReactDomServerLegacy_node_development() {
       var stream = require$$1$1;
       var ReactVersion = "18.3.1";
       var ReactSharedInternals = React3.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
-      function warn2(format2) {
+      function warn2(format) {
         {
           {
             for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
               args[_key - 1] = arguments[_key];
             }
-            printWarning("warn", format2, args);
+            printWarning("warn", format, args);
           }
         }
       }
-      function error(format2) {
+      function error(format) {
         {
           {
             for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
               args[_key2 - 1] = arguments[_key2];
             }
-            printWarning("error", format2, args);
+            printWarning("error", format, args);
           }
         }
       }
-      function printWarning(level, format2, args) {
+      function printWarning(level, format, args) {
         {
           var ReactDebugCurrentFrame2 = ReactSharedInternals.ReactDebugCurrentFrame;
           var stack = ReactDebugCurrentFrame2.getStackAddendum();
           if (stack !== "") {
-            format2 += "%s";
+            format += "%s";
             args = args.concat([stack]);
           }
           var argsWithFormat = args.map(function(item) {
             return String(item);
           });
-          argsWithFormat.unshift("Warning: " + format2);
+          argsWithFormat.unshift("Warning: " + format);
           Function.prototype.apply.call(console[level], console, argsWithFormat);
         }
       }
@@ -6970,8 +6964,8 @@ function requireReactDomServerLegacy_node_development() {
         {
           var invalidProps = [];
           for (var key in props) {
-            var isValid2 = validateProperty(type, key);
-            if (!isValid2) {
+            var isValid = validateProperty(type, key);
+            if (!isValid) {
               invalidProps.push(key);
             }
           }
@@ -7602,8 +7596,8 @@ function requireReactDomServerLegacy_node_development() {
         {
           var unknownProps = [];
           for (var key in props) {
-            var isValid2 = validateProperty$1(type, key, props[key], eventRegistry);
-            if (!isValid2) {
+            var isValid = validateProperty$1(type, key, props[key], eventRegistry);
+            if (!isValid) {
               unknownProps.push(key);
             }
           }
@@ -9683,11 +9677,11 @@ function requireReactDomServerLegacy_node_development() {
         var contextType = ctor.contextType;
         {
           if ("contextType" in ctor) {
-            var isValid2 = (
+            var isValid = (
               // Allow null for conditional declaration
               contextType === null || contextType !== void 0 && contextType.$$typeof === REACT_CONTEXT_TYPE && contextType._context === void 0
             );
-            if (!isValid2 && !didWarnAboutInvalidateContextType.has(ctor)) {
+            if (!isValid && !didWarnAboutInvalidateContextType.has(ctor)) {
               didWarnAboutInvalidateContextType.add(ctor);
               var addendum = "";
               if (contextType === void 0) {
@@ -11636,38 +11630,38 @@ function requireReactDomServer_node_development() {
       var util = require$$0$1;
       var ReactVersion = "18.3.1";
       var ReactSharedInternals = React3.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
-      function warn2(format2) {
+      function warn2(format) {
         {
           {
             for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
               args[_key - 1] = arguments[_key];
             }
-            printWarning("warn", format2, args);
+            printWarning("warn", format, args);
           }
         }
       }
-      function error(format2) {
+      function error(format) {
         {
           {
             for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
               args[_key2 - 1] = arguments[_key2];
             }
-            printWarning("error", format2, args);
+            printWarning("error", format, args);
           }
         }
       }
-      function printWarning(level, format2, args) {
+      function printWarning(level, format, args) {
         {
           var ReactDebugCurrentFrame2 = ReactSharedInternals.ReactDebugCurrentFrame;
           var stack = ReactDebugCurrentFrame2.getStackAddendum();
           if (stack !== "") {
-            format2 += "%s";
+            format += "%s";
             args = args.concat([stack]);
           }
           var argsWithFormat = args.map(function(item) {
             return String(item);
           });
-          argsWithFormat.unshift("Warning: " + format2);
+          argsWithFormat.unshift("Warning: " + format);
           Function.prototype.apply.call(console[level], console, argsWithFormat);
         }
       }
@@ -12478,8 +12472,8 @@ function requireReactDomServer_node_development() {
         {
           var invalidProps = [];
           for (var key in props) {
-            var isValid2 = validateProperty(type, key);
-            if (!isValid2) {
+            var isValid = validateProperty(type, key);
+            if (!isValid) {
               invalidProps.push(key);
             }
           }
@@ -13110,8 +13104,8 @@ function requireReactDomServer_node_development() {
         {
           var unknownProps = [];
           for (var key in props) {
-            var isValid2 = validateProperty$1(type, key, props[key], eventRegistry);
-            if (!isValid2) {
+            var isValid = validateProperty$1(type, key, props[key], eventRegistry);
+            if (!isValid) {
               unknownProps.push(key);
             }
           }
@@ -15158,11 +15152,11 @@ function requireReactDomServer_node_development() {
         var contextType = ctor.contextType;
         {
           if ("contextType" in ctor) {
-            var isValid2 = (
+            var isValid = (
               // Allow null for conditional declaration
               contextType === null || contextType !== void 0 && contextType.$$typeof === REACT_CONTEXT_TYPE && contextType._context === void 0
             );
-            if (!isValid2 && !didWarnAboutInvalidateContextType.has(ctor)) {
+            if (!isValid && !didWarnAboutInvalidateContextType.has(ctor)) {
               didWarnAboutInvalidateContextType.add(ctor);
               var addendum = "";
               if (contextType === void 0) {
@@ -17072,6 +17066,12 @@ function requireServer_node() {
   return server_node;
 }
 var server_nodeExports = requireServer_node();
+var reactExports = requireReact();
+const React2 = /* @__PURE__ */ getDefaultExportFromCjs(reactExports);
+const React = /* @__PURE__ */ _mergeNamespaces({
+  __proto__: null,
+  default: React2
+}, [reactExports]);
 var __typeError = (msg) => {
   throw TypeError(msg);
 };
@@ -17256,16 +17256,16 @@ function createHashHistory(options = {}) {
     options
   );
 }
-function invariant$2(value, message2) {
+function invariant$2(value, message) {
   if (value === false || value === null || typeof value === "undefined") {
-    throw new Error(message2);
+    throw new Error(message);
   }
 }
-function warning(cond, message2) {
+function warning(cond, message) {
   if (!cond) {
-    if (typeof console !== "undefined") console.warn(message2);
+    if (typeof console !== "undefined") console.warn(message);
     try {
-      throw new Error(message2);
+      throw new Error(message);
     } catch (e) {
     }
   }
@@ -22226,7 +22226,7 @@ function getInternalRouterError(status, {
   routeId,
   method,
   type,
-  message: message2
+  message
 } = {}) {
   let statusText = "Unknown Server Error";
   let errorMessage = "Unknown @remix-run/router error";
@@ -22839,7 +22839,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
 }
 function DefaultErrorComponent() {
   let error = useRouteError();
-  let message2 = isRouteErrorResponse(error) ? `${error.status} ${error.statusText}` : error instanceof Error ? error.message : JSON.stringify(error);
+  let message = isRouteErrorResponse(error) ? `${error.status} ${error.statusText}` : error instanceof Error ? error.message : JSON.stringify(error);
   let stack = error instanceof Error ? error.stack : null;
   let lightgrey = "rgba(200,200,200, 0.5)";
   let preStyles = { padding: "0.5rem", backgroundColor: lightgrey };
@@ -22852,7 +22852,7 @@ function DefaultErrorComponent() {
     );
     devInfo = /* @__PURE__ */ reactExports.createElement(reactExports.Fragment, null, /* @__PURE__ */ reactExports.createElement("p", null, "💿 Hey developer 👋"), /* @__PURE__ */ reactExports.createElement("p", null, "You can provide a way better UX than this when your app throws errors by providing your own ", /* @__PURE__ */ reactExports.createElement("code", { style: codeStyles }, "ErrorBoundary"), " or", " ", /* @__PURE__ */ reactExports.createElement("code", { style: codeStyles }, "errorElement"), " prop on your route."));
   }
-  return /* @__PURE__ */ reactExports.createElement(reactExports.Fragment, null, /* @__PURE__ */ reactExports.createElement("h2", null, "Unexpected Application Error!"), /* @__PURE__ */ reactExports.createElement("h3", { style: { fontStyle: "italic" } }, message2), stack ? /* @__PURE__ */ reactExports.createElement("pre", { style: preStyles }, stack) : null, devInfo);
+  return /* @__PURE__ */ reactExports.createElement(reactExports.Fragment, null, /* @__PURE__ */ reactExports.createElement("h2", null, "Unexpected Application Error!"), /* @__PURE__ */ reactExports.createElement("h3", { style: { fontStyle: "italic" } }, message), stack ? /* @__PURE__ */ reactExports.createElement("pre", { style: preStyles }, stack) : null, devInfo);
 }
 var defaultErrorElement = /* @__PURE__ */ reactExports.createElement(DefaultErrorComponent, null);
 var RenderErrorBoundary = class extends reactExports.Component {
@@ -23280,10 +23280,10 @@ function useNavigateStable() {
   return navigate;
 }
 var alreadyWarned$1 = {};
-function warningOnce(key, cond, message2) {
+function warningOnce(key, cond, message) {
   if (!cond && !alreadyWarned$1[key]) {
     alreadyWarned$1[key] = true;
-    warning(false, message2);
+    warning(false, message);
   }
 }
 function useRoute(...args) {
@@ -23305,10 +23305,10 @@ function useRoute(...args) {
   };
 }
 var alreadyWarned2 = {};
-function warnOnce$1(condition, message2) {
-  if (!condition && !alreadyWarned2[message2]) {
-    alreadyWarned2[message2] = true;
-    console.warn(message2);
+function warnOnce$1(condition, message) {
+  if (!condition && !alreadyWarned2[message]) {
+    alreadyWarned2[message] = true;
+    console.warn(message);
   }
 }
 var USE_OPTIMISTIC = "useOptimistic";
@@ -24504,8 +24504,8 @@ function hydrate(index) {
             }
             continue;
           case TYPE_ERROR:
-            const [, message2, errorType] = value;
-            let error = errorType && globalObj && globalObj[errorType] ? new globalObj[errorType](message2) : new Error(message2);
+            const [, message, errorType] = value;
+            let error = errorType && globalObj && globalObj[errorType] ? new globalObj[errorType](message) : new Error(message);
             hydrated[index2] = error;
             set2(error);
             continue;
@@ -24840,9 +24840,9 @@ var ESCAPE_REGEX = /[&><\u2028\u2029]/g;
 function escapeHtml(html) {
   return html.replace(ESCAPE_REGEX, (match2) => ESCAPE_LOOKUP[match2]);
 }
-function invariant2(value, message2) {
+function invariant2(value, message) {
   if (value === false || value === null || typeof value === "undefined") {
-    throw new Error(message2);
+    throw new Error(message);
   }
 }
 var SingleFetchRedirectSymbol = /* @__PURE__ */ Symbol("SingleFetchRedirect");
@@ -25268,12 +25268,12 @@ function decodeViaTurboStream(body, global2) {
     plugins: [
       (type, ...rest) => {
         if (type === "SanitizedError") {
-          let [name, message2, stack] = rest;
+          let [name, message, stack] = rest;
           let Constructor = Error;
           if (name && name in global2 && typeof global2[name] === "function") {
             Constructor = global2[name];
           }
-          let error = new Constructor(message2);
+          let error = new Constructor(message);
           error.stack = stack;
           return { value: error };
         }
@@ -27704,19 +27704,19 @@ function usePageHide(callback, options) {
 }
 function usePrompt({
   when,
-  message: message2
+  message
 }) {
   let blocker = useBlocker(when);
   reactExports.useEffect(() => {
     if (blocker.state === "blocked") {
-      let proceed = window.confirm(message2);
+      let proceed = window.confirm(message);
       if (proceed) {
         setTimeout(blocker.proceed, 0);
       } else {
         blocker.reset();
       }
     }
-  }, [blocker, message2]);
+  }, [blocker, message]);
   reactExports.useEffect(() => {
     if (blocker.state === "blocked" && !when) {
       blocker.reset();
@@ -28102,7 +28102,7 @@ function requireDist$1() {
       str += "; Path=" + cookie.path;
     }
     if (cookie.expires) {
-      if (!isDate2(cookie.expires) || !Number.isFinite(cookie.expires.valueOf())) {
+      if (!isDate(cookie.expires) || !Number.isFinite(cookie.expires.valueOf())) {
         throw new TypeError(`option expires is invalid: ${cookie.expires}`);
       }
       str += "; Expires=" + cookie.expires.toUTCString();
@@ -28247,7 +28247,7 @@ function requireDist$1() {
       return str;
     }
   }
-  function isDate2(val) {
+  function isDate(val) {
     return __toString.call(val) === "[object Date]";
   }
   return dist$1;
@@ -28917,12 +28917,12 @@ function stripRoutesParam(request) {
   }
   return new Request(url.href, init2);
 }
-function invariant$1(value, message2) {
+function invariant$1(value, message) {
   if (value === false || value === null || typeof value === "undefined") {
     console.error(
       "The following error is a bug in React Router; please open an issue! https://github.com/remix-run/react-router/issues/new/choose"
     );
-    throw new Error(message2);
+    throw new Error(message);
   }
 }
 var globalDevServerHooksKey = "__reactRouterDevServerHooks";
@@ -29411,8 +29411,8 @@ function encodeViaTurboStream(data2, requestSignal, streamTimeout, serverMode) {
     plugins: [
       (value) => {
         if (value instanceof Error) {
-          let { name, message: message2, stack } = serverMode === "production" ? sanitizeError(value, serverMode) : value;
-          return ["SanitizedError", name, message2, stack];
+          let { name, message, stack } = serverMode === "production" ? sanitizeError(value, serverMode) : value;
+          return ["SanitizedError", name, message, stack];
         }
         if (value instanceof ErrorResponseImpl) {
           let { data: data3, status, statusText } = value;
@@ -29954,13 +29954,13 @@ function errorResponseToJson(errorResponse, serverMode) {
   );
 }
 function returnLastResortErrorResponse(error, serverMode) {
-  let message2 = "Unexpected Server Error";
+  let message = "Unexpected Server Error";
   if (serverMode !== "production") {
-    message2 += `
+    message += `
 
 ${String(error)}`;
   }
-  return new Response(message2, {
+  return new Response(message, {
     status: 500,
     headers: {
       "Content-Type": "text/plain"
@@ -38059,38 +38059,38 @@ function requireReactDom_development() {
           suppressWarning = newSuppressWarning;
         }
       }
-      function warn2(format2) {
+      function warn2(format) {
         {
           if (!suppressWarning) {
             for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
               args[_key - 1] = arguments[_key];
             }
-            printWarning("warn", format2, args);
+            printWarning("warn", format, args);
           }
         }
       }
-      function error(format2) {
+      function error(format) {
         {
           if (!suppressWarning) {
             for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
               args[_key2 - 1] = arguments[_key2];
             }
-            printWarning("error", format2, args);
+            printWarning("error", format, args);
           }
         }
       }
-      function printWarning(level, format2, args) {
+      function printWarning(level, format, args) {
         {
           var ReactDebugCurrentFrame2 = ReactSharedInternals.ReactDebugCurrentFrame;
           var stack = ReactDebugCurrentFrame2.getStackAddendum();
           if (stack !== "") {
-            format2 += "%s";
+            format += "%s";
             args = args.concat([stack]);
           }
           var argsWithFormat = args.map(function(item) {
             return String(item);
           });
-          argsWithFormat.unshift("Warning: " + format2);
+          argsWithFormat.unshift("Warning: " + format);
           Function.prototype.apply.call(console[level], console, argsWithFormat);
         }
       }
@@ -40890,8 +40890,8 @@ function requireReactDom_development() {
         {
           var invalidProps = [];
           for (var key in props) {
-            var isValid2 = validateProperty(type, key);
-            if (!isValid2) {
+            var isValid = validateProperty(type, key);
+            if (!isValid) {
               invalidProps.push(key);
             }
           }
@@ -41033,8 +41033,8 @@ function requireReactDom_development() {
         {
           var unknownProps = [];
           for (var key in props) {
-            var isValid2 = validateProperty$1(type, key, props[key], eventRegistry);
-            if (!isValid2) {
+            var isValid = validateProperty$1(type, key, props[key], eventRegistry);
+            if (!isValid) {
               unknownProps.push(key);
             }
           }
@@ -46164,17 +46164,17 @@ function requireReactDom_development() {
       }
       function getSuspenseInstanceFallbackErrorDetails(instance) {
         var dataset = instance.nextSibling && instance.nextSibling.dataset;
-        var digest, message2, stack;
+        var digest, message, stack;
         if (dataset) {
           digest = dataset.dgst;
           {
-            message2 = dataset.msg;
+            message = dataset.msg;
             stack = dataset.stck;
           }
         }
         {
           return {
-            message: message2,
+            message,
             digest,
             stack
           };
@@ -51261,11 +51261,11 @@ function requireReactDom_development() {
         var contextType = ctor.contextType;
         {
           if ("contextType" in ctor) {
-            var isValid2 = (
+            var isValid = (
               // Allow null for conditional declaration
               contextType === null || contextType !== void 0 && contextType.$$typeof === REACT_CONTEXT_TYPE && contextType._context === void 0
             );
-            if (!isValid2 && !didWarnAboutInvalidateContextType.has(ctor)) {
+            if (!isValid && !didWarnAboutInvalidateContextType.has(ctor)) {
               didWarnAboutInvalidateContextType.add(ctor);
               var addendum = "";
               if (contextType === void 0) {
@@ -52926,16 +52926,16 @@ function requireReactDom_development() {
             );
           }
           if (isSuspenseInstanceFallback(suspenseInstance)) {
-            var digest, message2, stack;
+            var digest, message, stack;
             {
               var _getSuspenseInstanceF = getSuspenseInstanceFallbackErrorDetails(suspenseInstance);
               digest = _getSuspenseInstanceF.digest;
-              message2 = _getSuspenseInstanceF.message;
+              message = _getSuspenseInstanceF.message;
               stack = _getSuspenseInstanceF.stack;
             }
             var error2;
-            if (message2) {
-              error2 = new Error(message2);
+            if (message) {
+              error2 = new Error(message);
             } else {
               error2 = new Error("The server could not finish this Suspense boundary, likely due to an error during server rendering. Switched to client rendering.");
             }
@@ -60178,136 +60178,1789 @@ function requireDist() {
   return dist.exports;
 }
 var distExports = /* @__PURE__ */ requireDist();
-function setRef(ref, value) {
-  if (typeof ref === "function") {
-    return ref(value);
-  } else if (ref !== null && ref !== void 0) {
-    ref.current = value;
+const mockUsers = [
+  {
+    id: "superadmin-1",
+    email: "superadmin@nexus.ai",
+    name: "System Administrator",
+    role: "superadmin",
+    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=80",
+    createdAt: "2024-01-01T00:00:00Z"
+  },
+  {
+    id: "admin-1",
+    email: "admin@teamone.com",
+    name: "Alex Morgan",
+    role: "admin",
+    teamId: "team-1",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80",
+    createdAt: "2024-01-15T00:00:00Z"
+  },
+  {
+    id: "admin-2",
+    email: "admin@teamtwo.com",
+    name: "Sarah Chen",
+    role: "admin",
+    teamId: "team-2",
+    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80",
+    createdAt: "2024-02-01T00:00:00Z"
+  },
+  {
+    id: "user-1",
+    email: "user@teamone.com",
+    name: "Jordan Smith",
+    role: "user",
+    teamId: "team-1",
+    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&q=80",
+    createdAt: "2024-02-10T00:00:00Z"
+  },
+  {
+    id: "user-2",
+    email: "mike@teamone.com",
+    name: "Mike Johnson",
+    role: "user",
+    teamId: "team-1",
+    avatar: "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=100&q=80",
+    createdAt: "2024-02-15T00:00:00Z"
+  },
+  {
+    id: "user-3",
+    email: "emma@teamone.com",
+    name: "Emma Davis",
+    role: "user",
+    teamId: "team-1",
+    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80",
+    createdAt: "2024-02-20T00:00:00Z"
+  },
+  {
+    id: "user-4",
+    email: "lisa@teamtwo.com",
+    name: "Lisa Wang",
+    role: "user",
+    teamId: "team-2",
+    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&q=80",
+    createdAt: "2024-03-01T00:00:00Z"
   }
+];
+const mockTeams = [
+  {
+    id: "team-1",
+    name: "ProDev Solutions",
+    adminId: "admin-1",
+    plan: "pro",
+    createdAt: "2024-01-15T00:00:00Z"
+  },
+  {
+    id: "team-2",
+    name: "Digital Nomads Agency",
+    adminId: "admin-2",
+    plan: "enterprise",
+    createdAt: "2024-02-01T00:00:00Z"
+  }
+];
+function getUsersByTeam(teamId) {
+  return mockUsers.filter((u) => u.teamId === teamId);
 }
-function composeRefs(...refs) {
-  return (node) => {
-    let hasCleanup = false;
-    const cleanups = refs.map((ref) => {
-      const cleanup = setRef(ref, node);
-      if (!hasCleanup && typeof cleanup == "function") {
-        hasCleanup = true;
-      }
-      return cleanup;
-    });
-    if (hasCleanup) {
-      return () => {
-        for (let i = 0; i < cleanups.length; i++) {
-          const cleanup = cleanups[i];
-          if (typeof cleanup == "function") {
-            cleanup();
-          } else {
-            setRef(refs[i], null);
-          }
-        }
-      };
+function getTeamById(teamId) {
+  return mockTeams.find((t) => t.id === teamId);
+}
+const __vite_import_meta_env__$1 = {};
+const createStoreImpl = (createState) => {
+  let state;
+  const listeners = /* @__PURE__ */ new Set();
+  const setState = (partial, replace2) => {
+    const nextState = typeof partial === "function" ? partial(state) : partial;
+    if (!Object.is(nextState, state)) {
+      const previousState = state;
+      state = (replace2 != null ? replace2 : typeof nextState !== "object" || nextState === null) ? nextState : Object.assign({}, state, nextState);
+      listeners.forEach((listener) => listener(state, previousState));
     }
   };
-}
-function useComposedRefs(...refs) {
-  return reactExports.useCallback(composeRefs(...refs), refs);
-}
-var REACT_LAZY_TYPE = /* @__PURE__ */ Symbol.for("react.lazy");
-var use = React[" use ".trim().toString()];
-function isPromiseLike(value) {
-  return typeof value === "object" && value !== null && "then" in value;
-}
-function isLazyComponent(element) {
-  return element != null && typeof element === "object" && "$$typeof" in element && element.$$typeof === REACT_LAZY_TYPE && "_payload" in element && isPromiseLike(element._payload);
-}
-// @__NO_SIDE_EFFECTS__
-function createSlot$2(ownerName) {
-  const SlotClone = /* @__PURE__ */ createSlotClone$2(ownerName);
-  const Slot2 = reactExports.forwardRef((props, forwardedRef) => {
-    let { children: children2, ...slotProps } = props;
-    if (isLazyComponent(children2) && typeof use === "function") {
-      children2 = use(children2._payload);
+  const getState2 = () => state;
+  const getInitialState = () => initialState2;
+  const subscribe2 = (listener) => {
+    listeners.add(listener);
+    return () => listeners.delete(listener);
+  };
+  const destroy = () => {
+    if ((__vite_import_meta_env__$1 ? "production" : void 0) !== "production") {
+      console.warn(
+        "[DEPRECATED] The `destroy` method will be unsupported in a future version. Instead use unsubscribe function returned by subscribe. Everything will be garbage-collected if store is garbage-collected."
+      );
     }
-    const childrenArray = reactExports.Children.toArray(children2);
-    const slottable = childrenArray.find(isSlottable$2);
-    if (slottable) {
-      const newElement = slottable.props.children;
-      const newChildren = childrenArray.map((child) => {
-        if (child === slottable) {
-          if (reactExports.Children.count(newElement) > 1) return reactExports.Children.only(null);
-          return reactExports.isValidElement(newElement) ? newElement.props.children : null;
-        } else {
-          return child;
-        }
+    listeners.clear();
+  };
+  const api = { setState, getState: getState2, getInitialState, subscribe: subscribe2, destroy };
+  const initialState2 = state = createState(setState, getState2, api);
+  return api;
+};
+const createStore = (createState) => createState ? createStoreImpl(createState) : createStoreImpl;
+var withSelector = { exports: {} };
+var withSelector_production = {};
+var shim = { exports: {} };
+var useSyncExternalStoreShim_production = {};
+var hasRequiredUseSyncExternalStoreShim_production;
+function requireUseSyncExternalStoreShim_production() {
+  if (hasRequiredUseSyncExternalStoreShim_production) return useSyncExternalStoreShim_production;
+  hasRequiredUseSyncExternalStoreShim_production = 1;
+  var React3 = requireReact();
+  function is(x, y) {
+    return x === y && (0 !== x || 1 / x === 1 / y) || x !== x && y !== y;
+  }
+  var objectIs = "function" === typeof Object.is ? Object.is : is, useState = React3.useState, useEffect = React3.useEffect, useLayoutEffect = React3.useLayoutEffect, useDebugValue2 = React3.useDebugValue;
+  function useSyncExternalStore$2(subscribe2, getSnapshot) {
+    var value = getSnapshot(), _useState = useState({ inst: { value, getSnapshot } }), inst = _useState[0].inst, forceUpdate = _useState[1];
+    useLayoutEffect(
+      function() {
+        inst.value = value;
+        inst.getSnapshot = getSnapshot;
+        checkIfSnapshotChanged(inst) && forceUpdate({ inst });
+      },
+      [subscribe2, value, getSnapshot]
+    );
+    useEffect(
+      function() {
+        checkIfSnapshotChanged(inst) && forceUpdate({ inst });
+        return subscribe2(function() {
+          checkIfSnapshotChanged(inst) && forceUpdate({ inst });
+        });
+      },
+      [subscribe2]
+    );
+    useDebugValue2(value);
+    return value;
+  }
+  function checkIfSnapshotChanged(inst) {
+    var latestGetSnapshot = inst.getSnapshot;
+    inst = inst.value;
+    try {
+      var nextValue = latestGetSnapshot();
+      return !objectIs(inst, nextValue);
+    } catch (error) {
+      return true;
+    }
+  }
+  function useSyncExternalStore$1(subscribe2, getSnapshot) {
+    return getSnapshot();
+  }
+  var shim2 = "undefined" === typeof window || "undefined" === typeof window.document || "undefined" === typeof window.document.createElement ? useSyncExternalStore$1 : useSyncExternalStore$2;
+  useSyncExternalStoreShim_production.useSyncExternalStore = void 0 !== React3.useSyncExternalStore ? React3.useSyncExternalStore : shim2;
+  return useSyncExternalStoreShim_production;
+}
+var useSyncExternalStoreShim_development = {};
+var hasRequiredUseSyncExternalStoreShim_development;
+function requireUseSyncExternalStoreShim_development() {
+  if (hasRequiredUseSyncExternalStoreShim_development) return useSyncExternalStoreShim_development;
+  hasRequiredUseSyncExternalStoreShim_development = 1;
+  "production" !== process.env.NODE_ENV && (function() {
+    function is(x, y) {
+      return x === y && (0 !== x || 1 / x === 1 / y) || x !== x && y !== y;
+    }
+    function useSyncExternalStore$2(subscribe2, getSnapshot) {
+      didWarnOld18Alpha || void 0 === React3.startTransition || (didWarnOld18Alpha = true, console.error(
+        "You are using an outdated, pre-release alpha of React 18 that does not support useSyncExternalStore. The use-sync-external-store shim will not work correctly. Upgrade to a newer pre-release."
+      ));
+      var value = getSnapshot();
+      if (!didWarnUncachedGetSnapshot) {
+        var cachedValue = getSnapshot();
+        objectIs(value, cachedValue) || (console.error(
+          "The result of getSnapshot should be cached to avoid an infinite loop"
+        ), didWarnUncachedGetSnapshot = true);
+      }
+      cachedValue = useState({
+        inst: { value, getSnapshot }
       });
-      return /* @__PURE__ */ jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children: reactExports.isValidElement(newElement) ? reactExports.cloneElement(newElement, void 0, newChildren) : null });
+      var inst = cachedValue[0].inst, forceUpdate = cachedValue[1];
+      useLayoutEffect(
+        function() {
+          inst.value = value;
+          inst.getSnapshot = getSnapshot;
+          checkIfSnapshotChanged(inst) && forceUpdate({ inst });
+        },
+        [subscribe2, value, getSnapshot]
+      );
+      useEffect(
+        function() {
+          checkIfSnapshotChanged(inst) && forceUpdate({ inst });
+          return subscribe2(function() {
+            checkIfSnapshotChanged(inst) && forceUpdate({ inst });
+          });
+        },
+        [subscribe2]
+      );
+      useDebugValue2(value);
+      return value;
     }
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children: children2 });
-  });
-  Slot2.displayName = `${ownerName}.Slot`;
-  return Slot2;
-}
-var Slot$1 = /* @__PURE__ */ createSlot$2("Slot");
-// @__NO_SIDE_EFFECTS__
-function createSlotClone$2(ownerName) {
-  const SlotClone = reactExports.forwardRef((props, forwardedRef) => {
-    let { children: children2, ...slotProps } = props;
-    if (isLazyComponent(children2) && typeof use === "function") {
-      children2 = use(children2._payload);
-    }
-    if (reactExports.isValidElement(children2)) {
-      const childrenRef = getElementRef$3(children2);
-      const props2 = mergeProps$2(slotProps, children2.props);
-      if (children2.type !== reactExports.Fragment) {
-        props2.ref = forwardedRef ? composeRefs(forwardedRef, childrenRef) : childrenRef;
+    function checkIfSnapshotChanged(inst) {
+      var latestGetSnapshot = inst.getSnapshot;
+      inst = inst.value;
+      try {
+        var nextValue = latestGetSnapshot();
+        return !objectIs(inst, nextValue);
+      } catch (error) {
+        return true;
       }
-      return reactExports.cloneElement(children2, props2);
     }
-    return reactExports.Children.count(children2) > 1 ? reactExports.Children.only(null) : null;
-  });
-  SlotClone.displayName = `${ownerName}.SlotClone`;
-  return SlotClone;
+    function useSyncExternalStore$1(subscribe2, getSnapshot) {
+      return getSnapshot();
+    }
+    "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
+    var React3 = requireReact(), objectIs = "function" === typeof Object.is ? Object.is : is, useState = React3.useState, useEffect = React3.useEffect, useLayoutEffect = React3.useLayoutEffect, useDebugValue2 = React3.useDebugValue, didWarnOld18Alpha = false, didWarnUncachedGetSnapshot = false, shim2 = "undefined" === typeof window || "undefined" === typeof window.document || "undefined" === typeof window.document.createElement ? useSyncExternalStore$1 : useSyncExternalStore$2;
+    useSyncExternalStoreShim_development.useSyncExternalStore = void 0 !== React3.useSyncExternalStore ? React3.useSyncExternalStore : shim2;
+    "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(Error());
+  })();
+  return useSyncExternalStoreShim_development;
 }
-var SLOTTABLE_IDENTIFIER$2 = /* @__PURE__ */ Symbol("radix.slottable");
-function isSlottable$2(child) {
-  return reactExports.isValidElement(child) && typeof child.type === "function" && "__radixId" in child.type && child.type.__radixId === SLOTTABLE_IDENTIFIER$2;
+var hasRequiredShim;
+function requireShim() {
+  if (hasRequiredShim) return shim.exports;
+  hasRequiredShim = 1;
+  if (process.env.NODE_ENV === "production") {
+    shim.exports = requireUseSyncExternalStoreShim_production();
+  } else {
+    shim.exports = requireUseSyncExternalStoreShim_development();
+  }
+  return shim.exports;
 }
-function mergeProps$2(slotProps, childProps) {
-  const overrideProps = { ...childProps };
-  for (const propName in childProps) {
-    const slotPropValue = slotProps[propName];
-    const childPropValue = childProps[propName];
-    const isHandler = /^on[A-Z]/.test(propName);
-    if (isHandler) {
-      if (slotPropValue && childPropValue) {
-        overrideProps[propName] = (...args) => {
-          const result = childPropValue(...args);
-          slotPropValue(...args);
-          return result;
+var hasRequiredWithSelector_production;
+function requireWithSelector_production() {
+  if (hasRequiredWithSelector_production) return withSelector_production;
+  hasRequiredWithSelector_production = 1;
+  var React3 = requireReact(), shim2 = requireShim();
+  function is(x, y) {
+    return x === y && (0 !== x || 1 / x === 1 / y) || x !== x && y !== y;
+  }
+  var objectIs = "function" === typeof Object.is ? Object.is : is, useSyncExternalStore = shim2.useSyncExternalStore, useRef = React3.useRef, useEffect = React3.useEffect, useMemo = React3.useMemo, useDebugValue2 = React3.useDebugValue;
+  withSelector_production.useSyncExternalStoreWithSelector = function(subscribe2, getSnapshot, getServerSnapshot, selector2, isEqual) {
+    var instRef = useRef(null);
+    if (null === instRef.current) {
+      var inst = { hasValue: false, value: null };
+      instRef.current = inst;
+    } else inst = instRef.current;
+    instRef = useMemo(
+      function() {
+        function memoizedSelector(nextSnapshot) {
+          if (!hasMemo) {
+            hasMemo = true;
+            memoizedSnapshot = nextSnapshot;
+            nextSnapshot = selector2(nextSnapshot);
+            if (void 0 !== isEqual && inst.hasValue) {
+              var currentSelection = inst.value;
+              if (isEqual(currentSelection, nextSnapshot))
+                return memoizedSelection = currentSelection;
+            }
+            return memoizedSelection = nextSnapshot;
+          }
+          currentSelection = memoizedSelection;
+          if (objectIs(memoizedSnapshot, nextSnapshot)) return currentSelection;
+          var nextSelection = selector2(nextSnapshot);
+          if (void 0 !== isEqual && isEqual(currentSelection, nextSelection))
+            return memoizedSnapshot = nextSnapshot, currentSelection;
+          memoizedSnapshot = nextSnapshot;
+          return memoizedSelection = nextSelection;
+        }
+        var hasMemo = false, memoizedSnapshot, memoizedSelection, maybeGetServerSnapshot = void 0 === getServerSnapshot ? null : getServerSnapshot;
+        return [
+          function() {
+            return memoizedSelector(getSnapshot());
+          },
+          null === maybeGetServerSnapshot ? void 0 : function() {
+            return memoizedSelector(maybeGetServerSnapshot());
+          }
+        ];
+      },
+      [getSnapshot, getServerSnapshot, selector2, isEqual]
+    );
+    var value = useSyncExternalStore(subscribe2, instRef[0], instRef[1]);
+    useEffect(
+      function() {
+        inst.hasValue = true;
+        inst.value = value;
+      },
+      [value]
+    );
+    useDebugValue2(value);
+    return value;
+  };
+  return withSelector_production;
+}
+var withSelector_development = {};
+var hasRequiredWithSelector_development;
+function requireWithSelector_development() {
+  if (hasRequiredWithSelector_development) return withSelector_development;
+  hasRequiredWithSelector_development = 1;
+  "production" !== process.env.NODE_ENV && (function() {
+    function is(x, y) {
+      return x === y && (0 !== x || 1 / x === 1 / y) || x !== x && y !== y;
+    }
+    "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
+    var React3 = requireReact(), shim2 = requireShim(), objectIs = "function" === typeof Object.is ? Object.is : is, useSyncExternalStore = shim2.useSyncExternalStore, useRef = React3.useRef, useEffect = React3.useEffect, useMemo = React3.useMemo, useDebugValue2 = React3.useDebugValue;
+    withSelector_development.useSyncExternalStoreWithSelector = function(subscribe2, getSnapshot, getServerSnapshot, selector2, isEqual) {
+      var instRef = useRef(null);
+      if (null === instRef.current) {
+        var inst = { hasValue: false, value: null };
+        instRef.current = inst;
+      } else inst = instRef.current;
+      instRef = useMemo(
+        function() {
+          function memoizedSelector(nextSnapshot) {
+            if (!hasMemo) {
+              hasMemo = true;
+              memoizedSnapshot = nextSnapshot;
+              nextSnapshot = selector2(nextSnapshot);
+              if (void 0 !== isEqual && inst.hasValue) {
+                var currentSelection = inst.value;
+                if (isEqual(currentSelection, nextSnapshot))
+                  return memoizedSelection = currentSelection;
+              }
+              return memoizedSelection = nextSnapshot;
+            }
+            currentSelection = memoizedSelection;
+            if (objectIs(memoizedSnapshot, nextSnapshot))
+              return currentSelection;
+            var nextSelection = selector2(nextSnapshot);
+            if (void 0 !== isEqual && isEqual(currentSelection, nextSelection))
+              return memoizedSnapshot = nextSnapshot, currentSelection;
+            memoizedSnapshot = nextSnapshot;
+            return memoizedSelection = nextSelection;
+          }
+          var hasMemo = false, memoizedSnapshot, memoizedSelection, maybeGetServerSnapshot = void 0 === getServerSnapshot ? null : getServerSnapshot;
+          return [
+            function() {
+              return memoizedSelector(getSnapshot());
+            },
+            null === maybeGetServerSnapshot ? void 0 : function() {
+              return memoizedSelector(maybeGetServerSnapshot());
+            }
+          ];
+        },
+        [getSnapshot, getServerSnapshot, selector2, isEqual]
+      );
+      var value = useSyncExternalStore(subscribe2, instRef[0], instRef[1]);
+      useEffect(
+        function() {
+          inst.hasValue = true;
+          inst.value = value;
+        },
+        [value]
+      );
+      useDebugValue2(value);
+      return value;
+    };
+    "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(Error());
+  })();
+  return withSelector_development;
+}
+var hasRequiredWithSelector;
+function requireWithSelector() {
+  if (hasRequiredWithSelector) return withSelector.exports;
+  hasRequiredWithSelector = 1;
+  if (process.env.NODE_ENV === "production") {
+    withSelector.exports = requireWithSelector_production();
+  } else {
+    withSelector.exports = requireWithSelector_development();
+  }
+  return withSelector.exports;
+}
+var withSelectorExports = requireWithSelector();
+const useSyncExternalStoreExports = /* @__PURE__ */ getDefaultExportFromCjs(withSelectorExports);
+const __vite_import_meta_env__ = {};
+const { useDebugValue: useDebugValue$1 } = React2;
+const { useSyncExternalStoreWithSelector: useSyncExternalStoreWithSelector$1 } = useSyncExternalStoreExports;
+let didWarnAboutEqualityFn = false;
+const identity$3 = (arg) => arg;
+function useStore$1(api, selector2 = identity$3, equalityFn) {
+  if ((__vite_import_meta_env__ ? "production" : void 0) !== "production" && equalityFn && !didWarnAboutEqualityFn) {
+    console.warn(
+      "[DEPRECATED] Use `createWithEqualityFn` instead of `create` or use `useStoreWithEqualityFn` instead of `useStore`. They can be imported from 'zustand/traditional'. https://github.com/pmndrs/zustand/discussions/1937"
+    );
+    didWarnAboutEqualityFn = true;
+  }
+  const slice = useSyncExternalStoreWithSelector$1(
+    api.subscribe,
+    api.getState,
+    api.getServerState || api.getInitialState,
+    selector2,
+    equalityFn
+  );
+  useDebugValue$1(slice);
+  return slice;
+}
+const createImpl = (createState) => {
+  if ((__vite_import_meta_env__ ? "production" : void 0) !== "production" && typeof createState !== "function") {
+    console.warn(
+      "[DEPRECATED] Passing a vanilla store will be unsupported in a future version. Instead use `import { useStore } from 'zustand'`."
+    );
+  }
+  const api = typeof createState === "function" ? createStore(createState) : createState;
+  const useBoundStore = (selector2, equalityFn) => useStore$1(api, selector2, equalityFn);
+  Object.assign(useBoundStore, api);
+  return useBoundStore;
+};
+const create$1 = (createState) => createState ? createImpl(createState) : createImpl;
+const mockFreelanceAccounts = [
+  {
+    id: "acc-1",
+    teamId: "team-1",
+    platform: "upwork",
+    accountName: "ProDev Solutions",
+    username: "prodev_alex",
+    isActive: true,
+    autoBidEnabled: true,
+    dailyBudget: 500,
+    bidCount: 156,
+    successRate: 34,
+    aiPrompt: "Focus on web development projects with React and Node.js. Budget range: $1000-$5000. Prioritize long-term contracts.",
+    proxyId: "proxy-1",
+    lastActivity: new Date(Date.now() - 1e3 * 60 * 15).toISOString(),
+    assignedTo: ["user-1", "user-2"]
+  },
+  {
+    id: "acc-2",
+    teamId: "team-1",
+    platform: "upwork",
+    accountName: "AI Automation Expert",
+    username: "ai_expert_pro",
+    isActive: true,
+    autoBidEnabled: false,
+    dailyBudget: 300,
+    bidCount: 89,
+    successRate: 41,
+    aiPrompt: "Target AI/ML automation projects. Minimum budget: $2000. Focus on Python and TensorFlow.",
+    proxyId: "proxy-2",
+    lastActivity: new Date(Date.now() - 1e3 * 60 * 45).toISOString(),
+    assignedTo: ["user-1"]
+  },
+  {
+    id: "acc-3",
+    teamId: "team-1",
+    platform: "fiverr",
+    accountName: "WebFlow Master",
+    username: "webflow_master",
+    isActive: true,
+    autoBidEnabled: true,
+    dailyBudget: 200,
+    bidCount: 234,
+    successRate: 52,
+    aiPrompt: "Focus on Webflow and no-code solutions. Quick turnaround projects preferred.",
+    lastActivity: new Date(Date.now() - 1e3 * 60 * 5).toISOString(),
+    assignedTo: ["user-2", "user-3"]
+  },
+  {
+    id: "acc-4",
+    teamId: "team-1",
+    platform: "freelancer",
+    accountName: "Full Stack Dev",
+    username: "fullstack_dev",
+    isActive: false,
+    autoBidEnabled: false,
+    dailyBudget: 400,
+    bidCount: 67,
+    successRate: 28,
+    lastActivity: new Date(Date.now() - 1e3 * 60 * 60 * 24).toISOString(),
+    assignedTo: ["user-3"]
+  },
+  {
+    id: "acc-5",
+    teamId: "team-1",
+    platform: "toptal",
+    accountName: "Enterprise Solutions",
+    username: "enterprise_dev",
+    isActive: true,
+    autoBidEnabled: true,
+    dailyBudget: 1e3,
+    bidCount: 45,
+    successRate: 67,
+    aiPrompt: "Target enterprise-level projects. Minimum $10,000 budget. Focus on scalable architectures.",
+    proxyId: "proxy-3",
+    lastActivity: new Date(Date.now() - 1e3 * 60 * 30).toISOString(),
+    assignedTo: ["user-1"]
+  },
+  {
+    id: "acc-6",
+    teamId: "team-2",
+    platform: "upwork",
+    accountName: "Digital Nomads Main",
+    username: "digitalnomads",
+    isActive: true,
+    autoBidEnabled: true,
+    dailyBudget: 750,
+    bidCount: 312,
+    successRate: 45,
+    aiPrompt: "Focus on digital marketing and content creation projects.",
+    lastActivity: new Date(Date.now() - 1e3 * 60 * 10).toISOString(),
+    assignedTo: ["user-4"]
+  }
+];
+const mockProxies = [
+  {
+    id: "proxy-1",
+    teamId: "team-1",
+    ip: "192.168.1.100",
+    port: 8080,
+    username: "proxy_user_1",
+    status: "active",
+    assignedAccounts: ["acc-1"],
+    location: "United States",
+    lastChecked: new Date(Date.now() - 1e3 * 60 * 5).toISOString()
+  },
+  {
+    id: "proxy-2",
+    teamId: "team-1",
+    ip: "192.168.1.101",
+    port: 8080,
+    username: "proxy_user_2",
+    status: "active",
+    assignedAccounts: ["acc-2"],
+    location: "United Kingdom",
+    lastChecked: new Date(Date.now() - 1e3 * 60 * 3).toISOString()
+  },
+  {
+    id: "proxy-3",
+    teamId: "team-1",
+    ip: "192.168.1.102",
+    port: 8080,
+    username: "proxy_user_3",
+    status: "error",
+    assignedAccounts: ["acc-5"],
+    location: "Germany",
+    lastChecked: new Date(Date.now() - 1e3 * 60 * 60).toISOString()
+  },
+  {
+    id: "proxy-4",
+    teamId: "team-2",
+    ip: "10.0.0.50",
+    port: 3128,
+    username: "dn_proxy",
+    status: "active",
+    assignedAccounts: [],
+    location: "Canada",
+    lastChecked: new Date(Date.now() - 1e3 * 60 * 2).toISOString()
+  }
+];
+function getAccountsByTeam(teamId) {
+  return mockFreelanceAccounts.filter((a) => a.teamId === teamId);
+}
+function getAccountsForUser(userId) {
+  return mockFreelanceAccounts.filter((a) => a.assignedTo?.includes(userId));
+}
+function getProxiesByTeam(teamId) {
+  return mockProxies.filter((p) => p.teamId === teamId);
+}
+const mockProjects = [
+  {
+    id: "proj-1",
+    teamId: "team-1",
+    title: "E-commerce Platform Development",
+    description: "Build a full-featured e-commerce platform with React and Node.js. Includes payment integration, inventory management, and admin dashboard.",
+    clientName: "Sarah Johnson",
+    clientEmail: "sarah@techcorp.com",
+    platform: "upwork",
+    status: "active",
+    priority: "high",
+    budget: 15e3,
+    deadline: new Date(Date.now() + 1e3 * 60 * 60 * 24 * 30).toISOString(),
+    assignedTo: ["user-1", "user-2"],
+    createdAt: new Date(Date.now() - 1e3 * 60 * 60 * 24 * 15).toISOString(),
+    updatedAt: new Date(Date.now() - 1e3 * 60 * 60 * 2).toISOString(),
+    progress: 45,
+    conversationId: "conv-1",
+    tasks: [
+      { id: "task-1", title: "Setup project structure", completed: true },
+      { id: "task-2", title: "Design database schema", completed: true },
+      { id: "task-3", title: "Implement authentication", completed: true },
+      { id: "task-4", title: "Build product catalog", completed: false },
+      { id: "task-5", title: "Payment integration", completed: false },
+      { id: "task-6", title: "Admin dashboard", completed: false }
+    ]
+  },
+  {
+    id: "proj-2",
+    teamId: "team-1",
+    title: "AI Chatbot Integration",
+    description: "Integrate an AI-powered chatbot into existing customer support system.",
+    clientName: "Michael Chen",
+    clientEmail: "michael@innovate.io",
+    platform: "fiverr",
+    status: "bidding",
+    priority: "medium",
+    budget: 5e3,
+    deadline: new Date(Date.now() + 1e3 * 60 * 60 * 24 * 14).toISOString(),
+    assignedTo: ["user-1"],
+    createdAt: new Date(Date.now() - 1e3 * 60 * 60 * 24 * 3).toISOString(),
+    updatedAt: new Date(Date.now() - 1e3 * 60 * 30).toISOString(),
+    progress: 0,
+    conversationId: "conv-2",
+    tasks: [
+      { id: "task-7", title: "Requirements gathering", completed: false },
+      { id: "task-8", title: "API integration design", completed: false }
+    ]
+  },
+  {
+    id: "proj-3",
+    teamId: "team-1",
+    title: "Mobile App Development",
+    description: "React Native app for iOS and Android with real-time features.",
+    clientName: "Emma Williams",
+    clientEmail: "emma@startupx.com",
+    platform: "upwork",
+    status: "in_review",
+    priority: "high",
+    budget: 25e3,
+    deadline: new Date(Date.now() + 1e3 * 60 * 60 * 24 * 7).toISOString(),
+    assignedTo: ["user-2", "user-3"],
+    createdAt: new Date(Date.now() - 1e3 * 60 * 60 * 24 * 45).toISOString(),
+    updatedAt: new Date(Date.now() - 1e3 * 60 * 60 * 5).toISOString(),
+    progress: 90,
+    conversationId: "conv-3",
+    tasks: [
+      { id: "task-9", title: "UI/UX Design", completed: true },
+      { id: "task-10", title: "Core functionality", completed: true },
+      { id: "task-11", title: "Push notifications", completed: true },
+      { id: "task-12", title: "Final testing", completed: false }
+    ]
+  },
+  {
+    id: "proj-4",
+    teamId: "team-1",
+    title: "Dashboard Analytics Tool",
+    description: "Build a comprehensive analytics dashboard with data visualization.",
+    clientName: "David Martinez",
+    clientEmail: "david@analytics.co",
+    platform: "direct",
+    status: "completed",
+    priority: "low",
+    budget: 8e3,
+    assignedTo: ["user-3"],
+    createdAt: new Date(Date.now() - 1e3 * 60 * 60 * 24 * 60).toISOString(),
+    updatedAt: new Date(Date.now() - 1e3 * 60 * 60 * 24 * 5).toISOString(),
+    progress: 100,
+    tasks: [
+      { id: "task-13", title: "Data pipeline setup", completed: true },
+      { id: "task-14", title: "Chart components", completed: true },
+      { id: "task-15", title: "Export functionality", completed: true }
+    ]
+  },
+  {
+    id: "proj-5",
+    teamId: "team-1",
+    title: "API Development for SaaS",
+    description: "RESTful API development with comprehensive documentation.",
+    clientName: "Lisa Park",
+    clientEmail: "lisa@saascompany.com",
+    platform: "freelancer",
+    status: "bidding",
+    priority: "urgent",
+    budget: 12e3,
+    deadline: new Date(Date.now() + 1e3 * 60 * 60 * 24 * 21).toISOString(),
+    assignedTo: ["user-1"],
+    createdAt: new Date(Date.now() - 1e3 * 60 * 60 * 24 * 1).toISOString(),
+    updatedAt: new Date(Date.now() - 1e3 * 60 * 60).toISOString(),
+    progress: 0,
+    tasks: []
+  },
+  {
+    id: "proj-6",
+    teamId: "team-1",
+    title: "WordPress Plugin Development",
+    description: "Custom WordPress plugin for membership management.",
+    clientName: "Robert Brown",
+    clientEmail: "robert@wpsite.com",
+    platform: "fiverr",
+    status: "active",
+    priority: "medium",
+    budget: 3500,
+    deadline: new Date(Date.now() + 1e3 * 60 * 60 * 24 * 10).toISOString(),
+    assignedTo: ["user-2"],
+    createdAt: new Date(Date.now() - 1e3 * 60 * 60 * 24 * 7).toISOString(),
+    updatedAt: new Date(Date.now() - 1e3 * 60 * 60 * 12).toISOString(),
+    progress: 30,
+    tasks: [
+      { id: "task-16", title: "Plugin architecture", completed: true },
+      { id: "task-17", title: "User management", completed: false },
+      { id: "task-18", title: "Payment integration", completed: false }
+    ]
+  },
+  {
+    id: "proj-7",
+    teamId: "team-2",
+    title: "Social Media Marketing Campaign",
+    description: "Full social media marketing campaign for product launch.",
+    clientName: "Jennifer Lee",
+    clientEmail: "jennifer@brand.com",
+    platform: "upwork",
+    status: "active",
+    priority: "high",
+    budget: 7500,
+    deadline: new Date(Date.now() + 1e3 * 60 * 60 * 24 * 14).toISOString(),
+    assignedTo: ["user-4"],
+    createdAt: new Date(Date.now() - 1e3 * 60 * 60 * 24 * 10).toISOString(),
+    updatedAt: new Date(Date.now() - 1e3 * 60 * 60 * 3).toISOString(),
+    progress: 60,
+    tasks: [
+      { id: "task-19", title: "Content strategy", completed: true },
+      { id: "task-20", title: "Create content calendar", completed: true },
+      { id: "task-21", title: "Design assets", completed: false }
+    ]
+  }
+];
+function getProjectsByTeam(teamId) {
+  return mockProjects.filter((p) => p.teamId === teamId);
+}
+function getProjectsForUser(userId) {
+  return mockProjects.filter((p) => p.assignedTo.includes(userId));
+}
+const mockConversations$1 = [
+  {
+    id: "conv-1",
+    teamId: "team-1",
+    clientName: "Sarah Johnson",
+    clientAvatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80",
+    clientEmail: "sarah@techcorp.com",
+    platform: "upwork",
+    lastMessage: "Thanks! When can you start on the payment integration?",
+    lastMessageTime: new Date(Date.now() - 1e3 * 60 * 5).toISOString(),
+    unreadCount: 2,
+    projectId: "proj-1",
+    projectTitle: "E-commerce Platform Development",
+    assignedTo: ["user-1", "user-2"],
+    status: "active",
+    messages: [
+      {
+        id: "msg-1",
+        conversationId: "conv-1",
+        sender: "client",
+        content: "Hi, I saw your proposal for the e-commerce project. Your portfolio looks impressive!",
+        timestamp: new Date(Date.now() - 1e3 * 60 * 60 * 24).toISOString(),
+        read: true
+      },
+      {
+        id: "msg-2",
+        conversationId: "conv-1",
+        sender: "user",
+        content: "Hello Sarah! Thank you for reaching out. I'd be happy to discuss the project details with you. I have extensive experience with e-commerce platforms.",
+        timestamp: new Date(Date.now() - 1e3 * 60 * 60 * 23).toISOString(),
+        read: true
+      },
+      {
+        id: "msg-3",
+        conversationId: "conv-1",
+        sender: "client",
+        content: "Great! Can you handle both frontend and backend? We need React for the frontend and Node.js for the backend.",
+        timestamp: new Date(Date.now() - 1e3 * 60 * 60 * 20).toISOString(),
+        read: true
+      },
+      {
+        id: "msg-4",
+        conversationId: "conv-1",
+        sender: "user",
+        content: "Absolutely! I specialize in full-stack development with React and Node.js. I can also set up the payment integration with Stripe.",
+        timestamp: new Date(Date.now() - 1e3 * 60 * 60 * 18).toISOString(),
+        read: true
+      },
+      {
+        id: "msg-5",
+        conversationId: "conv-1",
+        sender: "client",
+        content: "Perfect! I've reviewed your proposal and I'm ready to move forward. Let's start with the project.",
+        timestamp: new Date(Date.now() - 1e3 * 60 * 30).toISOString(),
+        read: true
+      },
+      {
+        id: "msg-6",
+        conversationId: "conv-1",
+        sender: "user",
+        content: "Excellent! I'll start setting up the project structure today. I'll send you the initial wireframes by tomorrow.",
+        timestamp: new Date(Date.now() - 1e3 * 60 * 20).toISOString(),
+        read: true
+      },
+      {
+        id: "msg-7",
+        conversationId: "conv-1",
+        sender: "client",
+        content: "Thanks! When can you start on the payment integration?",
+        timestamp: new Date(Date.now() - 1e3 * 60 * 5).toISOString(),
+        read: false
+      }
+    ]
+  },
+  {
+    id: "conv-2",
+    teamId: "team-1",
+    clientName: "Michael Chen",
+    clientAvatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80",
+    clientEmail: "michael@innovate.io",
+    platform: "fiverr",
+    lastMessage: "Could you send me some portfolio examples of chatbot integrations?",
+    lastMessageTime: new Date(Date.now() - 1e3 * 60 * 15).toISOString(),
+    unreadCount: 1,
+    projectId: "proj-2",
+    projectTitle: "AI Chatbot Integration",
+    assignedTo: ["user-1"],
+    status: "active",
+    messages: [
+      {
+        id: "msg-8",
+        conversationId: "conv-2",
+        sender: "client",
+        content: "Hi! I need help integrating an AI chatbot into my website. Do you have experience with this?",
+        timestamp: new Date(Date.now() - 1e3 * 60 * 60 * 2).toISOString(),
+        read: true
+      },
+      {
+        id: "msg-9",
+        conversationId: "conv-2",
+        sender: "user",
+        content: "Hello Michael! Yes, I have extensive experience with AI chatbot integrations. I've worked with OpenAI, Dialogflow, and custom solutions.",
+        timestamp: new Date(Date.now() - 1e3 * 60 * 60).toISOString(),
+        read: true
+      },
+      {
+        id: "msg-10",
+        conversationId: "conv-2",
+        sender: "client",
+        content: "Could you send me some portfolio examples of chatbot integrations?",
+        timestamp: new Date(Date.now() - 1e3 * 60 * 15).toISOString(),
+        read: false
+      }
+    ]
+  },
+  {
+    id: "conv-3",
+    teamId: "team-1",
+    clientName: "Emma Williams",
+    clientAvatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80",
+    clientEmail: "emma@startupx.com",
+    platform: "upwork",
+    lastMessage: "The app looks great! Just a few minor tweaks needed on the profile screen.",
+    lastMessageTime: new Date(Date.now() - 1e3 * 60 * 60).toISOString(),
+    unreadCount: 0,
+    projectId: "proj-3",
+    projectTitle: "Mobile App Development",
+    assignedTo: ["user-2", "user-3"],
+    status: "active",
+    messages: [
+      {
+        id: "msg-11",
+        conversationId: "conv-3",
+        sender: "client",
+        content: "I've reviewed the latest build. The app looks great! Just a few minor tweaks needed on the profile screen.",
+        timestamp: new Date(Date.now() - 1e3 * 60 * 60).toISOString(),
+        read: true
+      }
+    ]
+  },
+  {
+    id: "conv-4",
+    teamId: "team-1",
+    clientName: "David Martinez",
+    clientAvatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&q=80",
+    platform: "whatsapp",
+    lastMessage: "Can we schedule a call tomorrow to discuss the new requirements?",
+    lastMessageTime: new Date(Date.now() - 1e3 * 60 * 120).toISOString(),
+    unreadCount: 0,
+    assignedTo: ["user-3"],
+    status: "active",
+    messages: [
+      {
+        id: "msg-12",
+        conversationId: "conv-4",
+        sender: "client",
+        content: "Hey, got your number from the Fiverr project. Hope that's okay!",
+        timestamp: new Date(Date.now() - 1e3 * 60 * 150).toISOString(),
+        read: true
+      },
+      {
+        id: "msg-13",
+        conversationId: "conv-4",
+        sender: "user",
+        content: "Hi David! No problem at all. How can I help you?",
+        timestamp: new Date(Date.now() - 1e3 * 60 * 140).toISOString(),
+        read: true
+      },
+      {
+        id: "msg-14",
+        conversationId: "conv-4",
+        sender: "client",
+        content: "Can we schedule a call tomorrow to discuss the new requirements?",
+        timestamp: new Date(Date.now() - 1e3 * 60 * 120).toISOString(),
+        read: true
+      }
+    ]
+  },
+  {
+    id: "conv-5",
+    teamId: "team-1",
+    clientName: "Lisa Park",
+    clientAvatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&q=80",
+    clientEmail: "lisa@saascompany.com",
+    platform: "email",
+    lastMessage: "Looking forward to your proposal for the API development project.",
+    lastMessageTime: new Date(Date.now() - 1e3 * 60 * 60 * 3).toISOString(),
+    unreadCount: 1,
+    projectId: "proj-5",
+    projectTitle: "API Development for SaaS",
+    assignedTo: ["user-1"],
+    status: "active",
+    messages: [
+      {
+        id: "msg-15",
+        conversationId: "conv-5",
+        sender: "client",
+        content: "Hi, I found your profile on Freelancer. We need a comprehensive REST API for our SaaS platform.",
+        timestamp: new Date(Date.now() - 1e3 * 60 * 60 * 5).toISOString(),
+        read: true
+      },
+      {
+        id: "msg-16",
+        conversationId: "conv-5",
+        sender: "client",
+        content: "Looking forward to your proposal for the API development project.",
+        timestamp: new Date(Date.now() - 1e3 * 60 * 60 * 3).toISOString(),
+        read: false
+      }
+    ]
+  },
+  {
+    id: "conv-6",
+    teamId: "team-2",
+    clientName: "Jennifer Lee",
+    clientAvatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&q=80",
+    clientEmail: "jennifer@brand.com",
+    platform: "upwork",
+    lastMessage: "The content calendar looks perfect! Let's proceed with the design phase.",
+    lastMessageTime: new Date(Date.now() - 1e3 * 60 * 60 * 2).toISOString(),
+    unreadCount: 0,
+    projectId: "proj-7",
+    projectTitle: "Social Media Marketing Campaign",
+    assignedTo: ["user-4"],
+    status: "active",
+    messages: [
+      {
+        id: "msg-17",
+        conversationId: "conv-6",
+        sender: "client",
+        content: "The content calendar looks perfect! Let's proceed with the design phase.",
+        timestamp: new Date(Date.now() - 1e3 * 60 * 60 * 2).toISOString(),
+        read: true
+      }
+    ]
+  }
+];
+function getConversationsByTeam(teamId) {
+  return mockConversations$1.filter((c) => c.teamId === teamId);
+}
+function getConversationsForUser(userId) {
+  return mockConversations$1.filter((c) => c.assignedTo?.includes(userId));
+}
+const mockSocialPosts = [
+  {
+    id: "post-1",
+    teamId: "team-1",
+    content: "🚀 Excited to announce our latest project launch! We've been working hard on this e-commerce platform and it's finally live. Check it out! #webdev #ecommerce #react",
+    platforms: ["twitter", "linkedin"],
+    scheduledFor: new Date(Date.now() + 1e3 * 60 * 60 * 24 * 2).toISOString(),
+    status: "scheduled",
+    imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
+    createdBy: "user-1",
+    createdAt: new Date(Date.now() - 1e3 * 60 * 60 * 24).toISOString()
+  },
+  {
+    id: "post-2",
+    teamId: "team-1",
+    content: "💡 Pro tip: Always validate user input on both client and server side. Security should never be an afterthought! #coding #security #bestpractices",
+    platforms: ["twitter", "facebook", "linkedin"],
+    scheduledFor: new Date(Date.now() + 1e3 * 60 * 60 * 24 * 5).toISOString(),
+    status: "scheduled",
+    createdBy: "user-2",
+    createdAt: new Date(Date.now() - 1e3 * 60 * 60 * 12).toISOString()
+  },
+  {
+    id: "post-3",
+    teamId: "team-1",
+    content: "Looking for a skilled React developer? Our team specializes in building scalable web applications. DM us for a free consultation! 📱💻",
+    platforms: ["twitter", "linkedin"],
+    scheduledFor: new Date(Date.now() - 1e3 * 60 * 60 * 24 * 3).toISOString(),
+    status: "published",
+    createdBy: "admin-1",
+    createdAt: new Date(Date.now() - 1e3 * 60 * 60 * 24 * 5).toISOString(),
+    publishedAt: new Date(Date.now() - 1e3 * 60 * 60 * 24 * 3).toISOString(),
+    engagement: {
+      likes: 45,
+      comments: 12,
+      shares: 8
+    }
+  },
+  {
+    id: "post-4",
+    teamId: "team-1",
+    content: "🎉 Just completed another successful project! Thank you to our amazing client for the trust. Here's to many more collaborations!",
+    platforms: ["facebook", "instagram"],
+    scheduledFor: new Date(Date.now() + 1e3 * 60 * 60 * 24 * 7).toISOString(),
+    status: "draft",
+    imageUrl: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80",
+    createdBy: "user-3",
+    createdAt: new Date(Date.now() - 1e3 * 60 * 60 * 2).toISOString()
+  },
+  {
+    id: "post-5",
+    teamId: "team-1",
+    content: 'New blog post: "10 Tips for Better Code Reviews" - Learn how to give and receive feedback effectively. Link in bio! 📝',
+    platforms: ["twitter"],
+    scheduledFor: new Date(Date.now() + 1e3 * 60 * 60 * 48).toISOString(),
+    status: "scheduled",
+    createdBy: "user-1",
+    createdAt: new Date(Date.now() - 1e3 * 60 * 30).toISOString()
+  },
+  {
+    id: "post-6",
+    teamId: "team-2",
+    content: "📈 Digital marketing trends for 2024: AI-powered content, short-form video, and personalized experiences. Are you ready?",
+    platforms: ["twitter", "linkedin", "facebook"],
+    scheduledFor: new Date(Date.now() + 1e3 * 60 * 60 * 24).toISOString(),
+    status: "scheduled",
+    createdBy: "user-4",
+    createdAt: new Date(Date.now() - 1e3 * 60 * 60 * 6).toISOString()
+  }
+];
+const mockSocialAccounts = [
+  {
+    id: "social-1",
+    teamId: "team-1",
+    platform: "twitter",
+    accountName: "ProDev Solutions",
+    username: "@prodev_solutions",
+    isConnected: true,
+    followers: 12500,
+    avatar: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=100&q=80"
+  },
+  {
+    id: "social-2",
+    teamId: "team-1",
+    platform: "linkedin",
+    accountName: "ProDev Solutions",
+    username: "prodev-solutions",
+    isConnected: true,
+    followers: 8200
+  },
+  {
+    id: "social-3",
+    teamId: "team-1",
+    platform: "facebook",
+    accountName: "ProDev Solutions",
+    username: "prodevsolutions",
+    isConnected: true,
+    followers: 5600
+  },
+  {
+    id: "social-4",
+    teamId: "team-1",
+    platform: "instagram",
+    accountName: "ProDev Solutions",
+    username: "@prodev.solutions",
+    isConnected: false,
+    followers: 0
+  },
+  {
+    id: "social-5",
+    teamId: "team-2",
+    platform: "twitter",
+    accountName: "Digital Nomads",
+    username: "@digitalnomads_agency",
+    isConnected: true,
+    followers: 25e3
+  }
+];
+function getSocialPostsByTeam(teamId) {
+  return mockSocialPosts.filter((p) => p.teamId === teamId);
+}
+function getSocialAccountsByTeam(teamId) {
+  return mockSocialAccounts.filter((a) => a.teamId === teamId);
+}
+const mockSystemStatus$1 = {
+  apiStatus: "operational",
+  upworkConnected: true,
+  fiverrConnected: true,
+  freelancerConnected: true,
+  lastSync: new Date(Date.now() - 1e3 * 60 * 2).toISOString()
+};
+const mockActivities$1 = [
+  {
+    id: "act-1",
+    teamId: "team-1",
+    type: "bid_placed",
+    title: "Bid placed",
+    description: 'Auto-bid placed on "React Dashboard Development" - $2,500',
+    timestamp: new Date(Date.now() - 1e3 * 60 * 5).toISOString(),
+    platform: "upwork",
+    userId: "user-1"
+  },
+  {
+    id: "act-2",
+    teamId: "team-1",
+    type: "message_received",
+    title: "New message",
+    description: "Sarah Johnson: Thanks! When can you start?",
+    timestamp: new Date(Date.now() - 1e3 * 60 * 10).toISOString(),
+    platform: "upwork"
+  },
+  {
+    id: "act-3",
+    teamId: "team-1",
+    type: "bid_won",
+    title: "Bid won!",
+    description: 'Your bid on "AI Integration Project" was accepted - $5,000',
+    timestamp: new Date(Date.now() - 1e3 * 60 * 30).toISOString(),
+    platform: "fiverr",
+    userId: "user-2"
+  },
+  {
+    id: "act-4",
+    teamId: "team-1",
+    type: "project_completed",
+    title: "Project completed",
+    description: "Dashboard Analytics Tool marked as complete",
+    timestamp: new Date(Date.now() - 1e3 * 60 * 60).toISOString(),
+    userId: "user-3"
+  },
+  {
+    id: "act-5",
+    teamId: "team-1",
+    type: "payment_received",
+    title: "Payment received",
+    description: "Received $3,500 for Mobile App Development milestone",
+    timestamp: new Date(Date.now() - 1e3 * 60 * 60 * 2).toISOString(),
+    platform: "upwork"
+  },
+  {
+    id: "act-6",
+    teamId: "team-1",
+    type: "account_connected",
+    title: "Account connected",
+    description: 'Toptal account "Enterprise Solutions" connected successfully',
+    timestamp: new Date(Date.now() - 1e3 * 60 * 60 * 5).toISOString(),
+    platform: "toptal"
+  },
+  {
+    id: "act-7",
+    teamId: "team-1",
+    type: "bid_placed",
+    title: "Bid placed",
+    description: 'Auto-bid placed on "Node.js API Development" - $4,000',
+    timestamp: new Date(Date.now() - 1e3 * 60 * 60 * 8).toISOString(),
+    platform: "freelancer",
+    userId: "user-1"
+  },
+  {
+    id: "act-8",
+    teamId: "team-2",
+    type: "user_joined",
+    title: "New team member",
+    description: "Lisa Wang joined the team",
+    timestamp: new Date(Date.now() - 1e3 * 60 * 60 * 24).toISOString()
+  },
+  {
+    id: "act-9",
+    type: "user_joined",
+    title: "New admin registered",
+    description: "Digital Nomads Agency signed up for Enterprise plan",
+    timestamp: new Date(Date.now() - 1e3 * 60 * 60 * 24 * 2).toISOString()
+  }
+];
+const mockApiTokens = [
+  {
+    id: "token-1",
+    teamId: "team-1",
+    name: "Gemini Pro",
+    provider: "gemini",
+    status: "active",
+    lastUsed: new Date(Date.now() - 1e3 * 60 * 5).toISOString(),
+    createdAt: new Date(Date.now() - 1e3 * 60 * 60 * 24 * 30).toISOString()
+  },
+  {
+    id: "token-2",
+    teamId: "team-1",
+    name: "OpenAI GPT-4",
+    provider: "openai",
+    status: "active",
+    lastUsed: new Date(Date.now() - 1e3 * 60 * 60).toISOString(),
+    createdAt: new Date(Date.now() - 1e3 * 60 * 60 * 24 * 45).toISOString()
+  },
+  {
+    id: "token-3",
+    teamId: "team-1",
+    name: "Claude API",
+    provider: "anthropic",
+    status: "expired",
+    createdAt: new Date(Date.now() - 1e3 * 60 * 60 * 24 * 60).toISOString()
+  },
+  {
+    id: "token-4",
+    teamId: "team-2",
+    name: "Gemini Flash",
+    provider: "gemini",
+    status: "active",
+    lastUsed: new Date(Date.now() - 1e3 * 60 * 30).toISOString(),
+    createdAt: new Date(Date.now() - 1e3 * 60 * 60 * 24 * 15).toISOString()
+  }
+];
+const mockPlatformStats = {
+  "team-1": {
+    totalBids: 567,
+    successfulBids: 89,
+    totalEarnings: 125e3,
+    activeProjects: 4,
+    completedProjects: 23,
+    averageRating: 4.9
+  },
+  "team-2": {
+    totalBids: 312,
+    successfulBids: 45,
+    totalEarnings: 78e3,
+    activeProjects: 2,
+    completedProjects: 15,
+    averageRating: 4.8
+  }
+};
+function getActivitiesByTeam(teamId) {
+  return mockActivities$1.filter((a) => a.teamId === teamId || !a.teamId);
+}
+function getApiTokensByTeam(teamId) {
+  return mockApiTokens.filter((t) => t.teamId === teamId);
+}
+const useAppStore = create$1((set2, get2) => ({
+  // Initial State
+  projects: [],
+  freelanceAccounts: [],
+  proxies: [],
+  conversations: [],
+  socialPosts: [],
+  socialAccounts: [],
+  activities: [],
+  apiTokens: [],
+  teamUsers: [],
+  systemStatus: mockSystemStatus$1,
+  selectedConversationId: null,
+  sidebarCollapsed: false,
+  activeRequests: 0,
+  // Initialize data based on user role
+  initializeForUser: (user) => {
+    if (user.role === "superadmin") {
+      set2({
+        projects: mockProjects,
+        freelanceAccounts: mockFreelanceAccounts,
+        proxies: mockProxies,
+        conversations: mockConversations$1,
+        socialPosts: mockSocialPosts,
+        socialAccounts: mockSocialAccounts,
+        activities: mockActivities$1,
+        apiTokens: mockApiTokens,
+        teamUsers: mockUsers.filter((u) => u.role !== "superadmin")
+      });
+    } else if (user.role === "admin" && user.teamId) {
+      set2({
+        projects: getProjectsByTeam(user.teamId),
+        freelanceAccounts: getAccountsByTeam(user.teamId),
+        proxies: getProxiesByTeam(user.teamId),
+        conversations: getConversationsByTeam(user.teamId),
+        socialPosts: getSocialPostsByTeam(user.teamId),
+        socialAccounts: getSocialAccountsByTeam(user.teamId),
+        activities: getActivitiesByTeam(user.teamId),
+        apiTokens: getApiTokensByTeam(user.teamId),
+        teamUsers: getUsersByTeam(user.teamId)
+      });
+    } else if (user.role === "user") {
+      set2({
+        projects: getProjectsForUser(user.id),
+        freelanceAccounts: getAccountsForUser(user.id),
+        proxies: [],
+        conversations: getConversationsForUser(user.id),
+        socialPosts: user.teamId ? getSocialPostsByTeam(user.teamId) : [],
+        socialAccounts: user.teamId ? getSocialAccountsByTeam(user.teamId) : [],
+        activities: user.teamId ? getActivitiesByTeam(user.teamId).filter((a) => a.userId === user.id || !a.userId) : [],
+        apiTokens: [],
+        teamUsers: []
+      });
+    }
+  },
+  // Project Actions
+  addProject: (project) => {
+    const newProject = {
+      ...project,
+      id: `proj-${Date.now()}`,
+      createdAt: (/* @__PURE__ */ new Date()).toISOString(),
+      updatedAt: (/* @__PURE__ */ new Date()).toISOString()
+    };
+    set2((state) => ({ projects: [...state.projects, newProject] }));
+  },
+  updateProject: (id2, updates) => {
+    set2((state) => ({
+      projects: state.projects.map(
+        (p) => p.id === id2 ? { ...p, ...updates, updatedAt: (/* @__PURE__ */ new Date()).toISOString() } : p
+      )
+    }));
+  },
+  deleteProject: (id2) => {
+    set2((state) => ({ projects: state.projects.filter((p) => p.id !== id2) }));
+  },
+  updateProjectStatus: (id2, status) => {
+    set2((state) => ({
+      projects: state.projects.map(
+        (p) => p.id === id2 ? { ...p, status, updatedAt: (/* @__PURE__ */ new Date()).toISOString() } : p
+      )
+    }));
+  },
+  toggleTaskComplete: (projectId, taskId) => {
+    set2((state) => ({
+      projects: state.projects.map(
+        (p) => p.id === projectId ? {
+          ...p,
+          tasks: p.tasks.map(
+            (t) => t.id === taskId ? { ...t, completed: !t.completed } : t
+          ),
+          updatedAt: (/* @__PURE__ */ new Date()).toISOString()
+        } : p
+      )
+    }));
+  },
+  // Freelance Account Actions
+  addFreelanceAccount: (account) => {
+    const newAccount = {
+      ...account,
+      id: `acc-${Date.now()}`
+    };
+    set2((state) => ({ freelanceAccounts: [...state.freelanceAccounts, newAccount] }));
+  },
+  updateFreelanceAccount: (id2, updates) => {
+    set2((state) => ({
+      freelanceAccounts: state.freelanceAccounts.map(
+        (a) => a.id === id2 ? { ...a, ...updates } : a
+      )
+    }));
+  },
+  deleteFreelanceAccount: (id2) => {
+    set2((state) => ({
+      freelanceAccounts: state.freelanceAccounts.filter((a) => a.id !== id2)
+    }));
+  },
+  toggleAutoBid: (id2) => {
+    set2((state) => ({
+      freelanceAccounts: state.freelanceAccounts.map(
+        (a) => a.id === id2 ? { ...a, autoBidEnabled: !a.autoBidEnabled } : a
+      )
+    }));
+  },
+  // Proxy Actions
+  addProxy: (proxy) => {
+    const newProxy = {
+      ...proxy,
+      id: `proxy-${Date.now()}`
+    };
+    set2((state) => ({ proxies: [...state.proxies, newProxy] }));
+  },
+  updateProxy: (id2, updates) => {
+    set2((state) => ({
+      proxies: state.proxies.map((p) => p.id === id2 ? { ...p, ...updates } : p)
+    }));
+  },
+  deleteProxy: (id2) => {
+    set2((state) => ({ proxies: state.proxies.filter((p) => p.id !== id2) }));
+  },
+  // Conversation Actions
+  selectConversation: (id2) => {
+    set2({ selectedConversationId: id2 });
+    if (id2) {
+      get2().markConversationRead(id2);
+    }
+  },
+  markConversationRead: (id2) => {
+    set2((state) => ({
+      conversations: state.conversations.map(
+        (c) => c.id === id2 ? {
+          ...c,
+          unreadCount: 0,
+          messages: c.messages.map((m) => ({ ...m, read: true }))
+        } : c
+      )
+    }));
+  },
+  addMessage: (conversationId, content, sender) => {
+    const newMessage = {
+      id: `msg-${Date.now()}`,
+      conversationId,
+      sender,
+      content,
+      timestamp: (/* @__PURE__ */ new Date()).toISOString(),
+      read: sender === "user"
+    };
+    set2((state) => ({
+      conversations: state.conversations.map(
+        (c) => c.id === conversationId ? {
+          ...c,
+          messages: [...c.messages, newMessage],
+          lastMessage: content,
+          lastMessageTime: newMessage.timestamp,
+          unreadCount: sender === "client" ? c.unreadCount + 1 : c.unreadCount
+        } : c
+      )
+    }));
+  },
+  // Social Post Actions
+  addSocialPost: (post) => {
+    const newPost = {
+      ...post,
+      id: `post-${Date.now()}`,
+      createdAt: (/* @__PURE__ */ new Date()).toISOString()
+    };
+    set2((state) => ({ socialPosts: [...state.socialPosts, newPost] }));
+  },
+  updateSocialPost: (id2, updates) => {
+    set2((state) => ({
+      socialPosts: state.socialPosts.map((p) => p.id === id2 ? { ...p, ...updates } : p)
+    }));
+  },
+  deleteSocialPost: (id2) => {
+    set2((state) => ({ socialPosts: state.socialPosts.filter((p) => p.id !== id2) }));
+  },
+  // Team User Actions
+  addTeamUser: (user) => {
+    const newUser = {
+      ...user,
+      id: `user-${Date.now()}`,
+      createdAt: (/* @__PURE__ */ new Date()).toISOString()
+    };
+    set2((state) => ({ teamUsers: [...state.teamUsers, newUser] }));
+  },
+  updateTeamUser: (id2, updates) => {
+    set2((state) => ({
+      teamUsers: state.teamUsers.map((u) => u.id === id2 ? { ...u, ...updates } : u)
+    }));
+  },
+  deleteTeamUser: (id2) => {
+    set2((state) => ({ teamUsers: state.teamUsers.filter((u) => u.id !== id2) }));
+  },
+  // API Token Actions
+  addApiToken: (token) => {
+    const newToken = {
+      ...token,
+      id: `token-${Date.now()}`,
+      createdAt: (/* @__PURE__ */ new Date()).toISOString()
+    };
+    set2((state) => ({ apiTokens: [...state.apiTokens, newToken] }));
+  },
+  updateApiToken: (id2, updates) => {
+    set2((state) => ({
+      apiTokens: state.apiTokens.map((t) => t.id === id2 ? { ...t, ...updates } : t)
+    }));
+  },
+  deleteApiToken: (id2) => {
+    set2((state) => ({ apiTokens: state.apiTokens.filter((t) => t.id !== id2) }));
+  },
+  // Activity Actions
+  addActivity: (activity) => {
+    const newActivity = {
+      ...activity,
+      id: `act-${Date.now()}`,
+      timestamp: (/* @__PURE__ */ new Date()).toISOString()
+    };
+    set2((state) => ({ activities: [newActivity, ...state.activities] }));
+  },
+  // UI Actions
+  toggleSidebar: () => {
+    set2((state) => ({ sidebarCollapsed: !state.sidebarCollapsed }));
+  },
+  incrementActiveRequests: () => {
+    set2((state) => ({ activeRequests: state.activeRequests + 1 }));
+  },
+  decrementActiveRequests: () => {
+    set2((state) => ({ activeRequests: Math.max(0, state.activeRequests - 1) }));
+  },
+  // Stats
+  getPlatformStats: (teamId) => {
+    return mockPlatformStats[teamId] || {
+      totalBids: 0,
+      successfulBids: 0,
+      totalEarnings: 0,
+      activeProjects: 0,
+      completedProjects: 0,
+      averageRating: 0
+    };
+  },
+  getUnreadMessageCount: () => {
+    return get2().conversations.reduce((sum, c) => sum + c.unreadCount, 0);
+  }
+}));
+const SESSION_STORAGE_KEY = "nexus_session";
+const API_BASE_URL$1 = "http://localhost:8000/api";
+const AuthContext = reactExports.createContext(void 0);
+function AuthProvider({ children: children2 }) {
+  const [user, setUser] = reactExports.useState(null);
+  const [team, setTeam] = reactExports.useState(null);
+  const [token, setToken] = reactExports.useState(null);
+  const [isLoading, setIsLoading] = reactExports.useState(true);
+  const initializeForUser = useAppStore((state) => state.initializeForUser);
+  reactExports.useEffect(() => {
+    if (typeof window === "undefined") {
+      setIsLoading(false);
+      return;
+    }
+    const storedSession = localStorage.getItem(SESSION_STORAGE_KEY);
+    const legacyUser = localStorage.getItem("nexus_user");
+    try {
+      if (storedSession) {
+        const parsedSession = JSON.parse(storedSession);
+        setUser(parsedSession.user);
+        setToken(parsedSession.token ?? null);
+        if (parsedSession.user.teamId) {
+          setTeam(getTeamById(parsedSession.user.teamId) || null);
+        }
+        initializeForUser(parsedSession.user);
+      } else if (legacyUser) {
+        const parsedUser = JSON.parse(legacyUser);
+        setUser(parsedUser);
+        setToken(null);
+        if (parsedUser.teamId) {
+          setTeam(getTeamById(parsedUser.teamId) || null);
+        }
+        initializeForUser(parsedUser);
+      }
+    } catch (e) {
+      if (typeof window !== "undefined") {
+        localStorage.removeItem(SESSION_STORAGE_KEY);
+        localStorage.removeItem("nexus_user");
+      }
+    }
+    setIsLoading(false);
+  }, [initializeForUser]);
+  const login = async (email, password) => {
+    setIsLoading(true);
+    try {
+      if (!API_BASE_URL$1) ;
+      console.debug("Login attempt:", { url: `${API_BASE_URL$1}/admin/login`, email });
+      let response = await fetch(`${API_BASE_URL$1}/admin/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-app-key": "739f77912fa0ca22538ad067e284545d5cd541a7c13cacebb5e3e4a8fdec9c8"
+        },
+        body: JSON.stringify({ email, password })
+      });
+      if (response.status === 404) {
+        console.debug("Admin login endpoint not found, trying /login");
+        response = await fetch(`${API_BASE_URL$1}/login`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-app-key": "739f77912fa0ca22538ad067e284545d5cd541a7c13cacebb5e3e4a8fdec9c8"
+          },
+          body: JSON.stringify({ email, password })
+        });
+      }
+      const payload = await response.json().catch(() => ({ success: false }));
+      console.debug("Login response payload:", payload);
+      if (!response.ok) {
+        return { success: false, message: payload?.message || "Unable to login. Please try again." };
+      }
+      const data2 = payload.data || payload;
+      const authToken = data2.token || payload.token;
+      const adminData = data2.admin || data2.user || (data2.email ? data2 : null);
+      if (payload?.success && adminData && authToken) {
+        const roles = adminData.roles || (adminData.role ? [adminData.role] : []);
+        const mappedRole = roles.includes("superadmin") ? "superadmin" : roles.includes("admin") ? "admin" : "user";
+        const authenticatedUser = {
+          id: String(adminData.id || adminData.uuid),
+          email: adminData.email,
+          name: adminData.name || adminData.email,
+          role: mappedRole,
+          teamId: adminData.team_id || adminData.teamId,
+          createdAt: adminData.created_at || adminData.createdAt || (/* @__PURE__ */ new Date()).toISOString()
         };
-      } else if (slotPropValue) {
-        overrideProps[propName] = slotPropValue;
+        setUser(authenticatedUser);
+        setToken(authToken);
+        if (typeof window !== "undefined") {
+          localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify({ user: authenticatedUser, token: authToken }));
+          localStorage.removeItem("nexus_user");
+        }
+        if (authenticatedUser.teamId) {
+          setTeam(getTeamById(authenticatedUser.teamId) || null);
+        }
+        initializeForUser(authenticatedUser);
+        return { success: true };
       }
-    } else if (propName === "style") {
-      overrideProps[propName] = { ...slotPropValue, ...childPropValue };
-    } else if (propName === "className") {
-      overrideProps[propName] = [slotPropValue, childPropValue].filter(Boolean).join(" ");
+      return { success: false, message: payload?.message || "Invalid email or password" };
+    } catch (error) {
+      console.error("Login error", error);
+      return { success: false, message: "Network error. Please try again." };
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  const register = async (name, email, password, passwordConfirmation) => {
+    setIsLoading(true);
+    try {
+      if (!API_BASE_URL$1) ;
+      const response = await fetch(`${API_BASE_URL$1}/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-app-key": "739f77912fa0ca22538ad067e284545d5cd541a7c13cacebb5e3e4a8fdec9c8"
+        },
+        body: JSON.stringify({ name, email, password, password_confirmation: passwordConfirmation })
+      });
+      const payload = await response.json().catch(() => ({ success: false }));
+      if (!response.ok) {
+        return { success: false, message: payload?.message || "Unable to register. Please try again." };
+      }
+      if (payload?.success && payload.data && payload.data.token) {
+        const { uuid, name: userName, email: userEmail, role, token: authToken } = payload.data;
+        const mappedRole = role === "freelancer" ? "user" : role;
+        const registeredUser = {
+          id: uuid,
+          email: userEmail,
+          name: userName,
+          role: mappedRole,
+          createdAt: (/* @__PURE__ */ new Date()).toISOString()
+        };
+        setUser(registeredUser);
+        setToken(authToken);
+        if (typeof window !== "undefined") {
+          localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify({ user: registeredUser, token: authToken }));
+          localStorage.removeItem("nexus_user");
+        }
+        if (registeredUser.teamId) {
+          setTeam(getTeamById(registeredUser.teamId) || null);
+        }
+        initializeForUser(registeredUser);
+        return { success: true };
+      }
+      return { success: false, message: payload?.message || "Registration failed" };
+    } catch (error) {
+      console.error("Registration error", error);
+      return { success: false, message: "Network error. Please try again." };
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  const logout = async () => {
+    try {
+      if (token && API_BASE_URL$1) {
+        const endpoint = user?.role === "admin" || user?.role === "superadmin" ? `${API_BASE_URL$1}/admin/logout` : `${API_BASE_URL$1}/logout`;
+        await fetch(endpoint, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
+            "x-app-key": "739f77912fa0ca22538ad067e284545d5cd541a7c13cacebb5e3e4a8fdec9c8"
+          }
+        }).catch(() => {
+        });
+      }
+    } finally {
+      setUser(null);
+      setTeam(null);
+      setToken(null);
+      if (typeof window !== "undefined") {
+        localStorage.removeItem(SESSION_STORAGE_KEY);
+        localStorage.removeItem("nexus_user");
+      }
+    }
+  };
+  const hasRole = (roles) => {
+    if (!user) return false;
+    return roles.includes(user.role);
+  };
+  const canAccessTeamSettings = user?.role === "admin" || user?.role === "superadmin";
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    AuthContext.Provider,
+    {
+      value: {
+        user,
+        team,
+        token,
+        isLoading,
+        login,
+        register,
+        logout,
+        isAuthenticated: !!user,
+        hasRole,
+        canAccessTeamSettings
+      },
+      children: children2
+    }
+  );
+}
+function useAuth() {
+  const context2 = reactExports.useContext(AuthContext);
+  if (context2 === void 0) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
+  return context2;
+}
+function ProtectedRoute({ allowedRoles }) {
+  const { isAuthenticated, isLoading, user, hasRole } = useAuth();
+  const location2 = distExports.useLocation();
+  if (isLoading) {
+    return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex h-screen items-center justify-center bg-[#020204]", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-8 h-8 rounded-full border-2 border-indigo-500 border-t-purple-500 animate-spin" }) });
+  }
+  if (!isAuthenticated || !user) {
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Navigate, { to: "/login", state: { from: location2 }, replace: true });
+  }
+  if (allowedRoles && allowedRoles.length > 0) {
+    if (!hasRole(allowedRoles)) {
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Navigate, { to: "/", replace: true });
     }
   }
-  return { ...slotProps, ...overrideProps };
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Outlet, {});
 }
-function getElementRef$3(element) {
-  let getter = Object.getOwnPropertyDescriptor(element.props, "ref")?.get;
-  let mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
-  if (mayWarn) {
-    return element.ref;
+const API_BASE_URL = "http://localhost:8000/api";
+const memoryCache = /* @__PURE__ */ new Map();
+async function serverFetch(endpoint, options = {}) {
+  const url = endpoint.startsWith("http") ? endpoint : `${API_BASE_URL}${endpoint}`;
+  if (memoryCache.has(url)) return memoryCache.get(url);
+  const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json"
+  };
+  const appKey = "739f77912fa0ca22538ad067e284545d5cd541a7c13cacebb5e3e4a8fdec9c8";
+  {
+    headers["X-App-Key"] = appKey;
   }
-  getter = Object.getOwnPropertyDescriptor(element, "ref")?.get;
-  mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
-  if (mayWarn) {
-    return element.props.ref;
+  try {
+    const response = await fetch(url, { headers });
+    if (!response.ok) {
+      throw new Error(`API Status ${response.status}`);
+    }
+    const data2 = await response.json();
+    memoryCache.set(url, data2);
+    return data2;
+  } catch (err) {
+    console.error(`Fetch error for ${url}:`, err);
+    throw err;
   }
-  return element.props.ref || element.ref;
+}
+async function fetchBlogs(page = 1, perPage = 12, search, categorySlug) {
+  const params = new URLSearchParams();
+  params.append("page", page.toString());
+  params.append("per_page", perPage.toString());
+  const data2 = await serverFetch(`/blogs?${params.toString()}`, {});
+  return data2?.data;
+}
+async function fetchWorkflowCategories() {
+  const data2 = await serverFetch("/workflow-library/categories", {});
+  const result = data2?.data;
+  return Array.isArray(result) ? result : result?.data || [];
+}
+async function fetchWorkflowLibrary(page = 1, perPage = 12, search, categoryId) {
+  const params = new URLSearchParams();
+  params.append("page", page.toString());
+  params.append("per_page", perPage.toString());
+  params.append("sort", "newest");
+  const data2 = await serverFetch(`/workflow-library?${params.toString()}`, {});
+  return data2;
+}
+async function fetchWorkflowStats() {
+  const data2 = await serverFetch("/workflows/stats", {});
+  return data2?.data || data2;
 }
 function r(e) {
   var t, f, n = "";
@@ -60322,46 +61975,6 @@ function clsx() {
   for (var e, t, f = 0, n = "", o = arguments.length; f < o; f++) (e = arguments[f]) && (t = r(e)) && (n && (n += " "), n += t);
   return n;
 }
-const falsyToString = (value) => typeof value === "boolean" ? `${value}` : value === 0 ? "0" : value;
-const cx = clsx;
-const cva = (base, config) => (props) => {
-  var _config_compoundVariants;
-  if ((config === null || config === void 0 ? void 0 : config.variants) == null) return cx(base, props === null || props === void 0 ? void 0 : props.class, props === null || props === void 0 ? void 0 : props.className);
-  const { variants, defaultVariants } = config;
-  const getVariantClassNames = Object.keys(variants).map((variant) => {
-    const variantProp = props === null || props === void 0 ? void 0 : props[variant];
-    const defaultVariantProp = defaultVariants === null || defaultVariants === void 0 ? void 0 : defaultVariants[variant];
-    if (variantProp === null) return null;
-    const variantKey = falsyToString(variantProp) || falsyToString(defaultVariantProp);
-    return variants[variant][variantKey];
-  });
-  const propsWithoutUndefined = props && Object.entries(props).reduce((acc, param) => {
-    let [key, value] = param;
-    if (value === void 0) {
-      return acc;
-    }
-    acc[key] = value;
-    return acc;
-  }, {});
-  const getCompoundVariantClassNames = config === null || config === void 0 ? void 0 : (_config_compoundVariants = config.compoundVariants) === null || _config_compoundVariants === void 0 ? void 0 : _config_compoundVariants.reduce((acc, param) => {
-    let { class: cvClass, className: cvClassName, ...compoundVariantOptions } = param;
-    return Object.entries(compoundVariantOptions).every((param2) => {
-      let [key, value] = param2;
-      return Array.isArray(value) ? value.includes({
-        ...defaultVariants,
-        ...propsWithoutUndefined
-      }[key]) : {
-        ...defaultVariants,
-        ...propsWithoutUndefined
-      }[key] === value;
-    }) ? [
-      ...acc,
-      cvClass,
-      cvClassName
-    ] : acc;
-  }, []);
-  return cx(base, getVariantClassNames, getCompoundVariantClassNames, props === null || props === void 0 ? void 0 : props.class, props === null || props === void 0 ? void 0 : props.className);
-};
 const CLASS_PART_SEPARATOR = "-";
 const createClassGroupUtils = (config) => {
   const classMap = createClassMap(config);
@@ -62823,6 +64436,1570 @@ const twMerge = /* @__PURE__ */ createTailwindMerge(getDefaultConfig);
 function cn(...inputs) {
   return twMerge(clsx(inputs));
 }
+const API_CONFIG = {
+  BASE_URL: "http://localhost:8000/api",
+  SESSION_KEY: "nexus_session",
+  DEFAULT_PER_PAGE: 15,
+  MAX_PER_PAGE: 100,
+  TIMEOUT: 3e4
+  // 30 seconds
+};
+const PAGINATION_CONFIG = {
+  defaultPage: 1,
+  defaultPerPage: API_CONFIG.DEFAULT_PER_PAGE,
+  pageSizeOptions: [10, 15, 25, 50, 100]
+};
+const getAuthToken = () => {
+  try {
+    if (typeof window === "undefined") return null;
+    const session = localStorage.getItem(API_CONFIG.SESSION_KEY);
+    if (session) {
+      const parsed = JSON.parse(session);
+      return parsed.token || null;
+    }
+  } catch (e) {
+    console.error("Error getting auth token:", e);
+  }
+  return null;
+};
+const getAuthHeaders = (includeContentType = true) => {
+  const token = getAuthToken();
+  const headers = {};
+  if (includeContentType) {
+    headers["Content-Type"] = "application/json";
+  }
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
+  const appKey = "739f77912fa0ca22538ad067e284545d5cd541a7c13cacebb5e3e4a8fdec9c8";
+  {
+    headers["X-App-Key"] = appKey;
+  }
+  return headers;
+};
+async function apiRequest(endpoint, method = "GET", body, customHeaders) {
+  const isFormData = body instanceof FormData;
+  const isGetRequest = method === "GET";
+  const includeDefaultContentType = !isFormData && !isGetRequest;
+  const headers = {
+    ...getAuthHeaders(includeDefaultContentType),
+    ...customHeaders
+  };
+  const options = {
+    method,
+    headers
+  };
+  if (body) {
+    if (isFormData) {
+      options.body = body;
+    } else {
+      options.body = typeof body === "string" ? body : JSON.stringify(body);
+    }
+  }
+  try {
+    const fullUrl = endpoint.startsWith("http") ? endpoint : `${API_CONFIG.BASE_URL}${endpoint}`;
+    const response = await fetch(fullUrl, options);
+    let data2 = {};
+    const contentType = response.headers.get("content-type");
+    if (contentType && contentType.includes("application/json")) {
+      data2 = await response.json();
+    } else {
+      const text = await response.text();
+      const isHtml = /<[a-z][\s\S]*>/i.test(text);
+      data2 = { message: isHtml ? `Request failed (${response.status})` : text || `Error ${response.status}` };
+    }
+    if (!response.ok) {
+      const firstValidationError = (() => {
+        if (!data2?.errors || typeof data2.errors !== "object") return void 0;
+        const entries = Object.entries(data2.errors);
+        for (const [, value] of entries) {
+          if (Array.isArray(value) && value.length > 0 && typeof value[0] === "string") {
+            return value[0];
+          }
+          if (typeof value === "string" && value.trim()) {
+            return value;
+          }
+        }
+        return void 0;
+      })();
+      return {
+        success: false,
+        message: data2.message || firstValidationError || `Request failed with status ${response.status}`,
+        errors: data2.errors
+      };
+    }
+    const resultData = data2;
+    return {
+      success: true,
+      data: resultData,
+      message: data2.message
+    };
+  } catch (error) {
+    console.error("API Request Error:", error);
+    return {
+      success: false,
+      message: error instanceof Error ? error.message : "Network error occurred"
+    };
+  } finally {
+  }
+}
+const buildQueryString = (params) => {
+  const searchParams = new URLSearchParams();
+  Object.entries(params).forEach(([key, value]) => {
+    if (value !== null && value !== void 0 && value !== "") {
+      searchParams.append(key, String(value));
+    }
+  });
+  const queryString = searchParams.toString();
+  return queryString ? `?${queryString}` : "";
+};
+class BaseService {
+  baseUrl;
+  constructor(baseUrl = API_CONFIG.BASE_URL) {
+    this.baseUrl = baseUrl;
+  }
+  getAuthHeaders(includeContentType = true) {
+    return getAuthHeaders(includeContentType);
+  }
+  async request(endpoint, method = "GET", body, customHeaders) {
+    return apiRequest(endpoint, method, body, customHeaders);
+  }
+  buildUrl(endpoint, params) {
+    const queryString = params ? buildQueryString(params) : "";
+    return `${endpoint}${queryString}`;
+  }
+}
+class FAQService extends BaseService {
+  constructor() {
+    super();
+  }
+  async listFAQs(page = PAGINATION_CONFIG.defaultPage, perPage = PAGINATION_CONFIG.defaultPerPage) {
+    const endpoint = this.buildUrl("/admin/faqs", { page, per_page: perPage });
+    const response = await fetch(`${this.baseUrl}${endpoint}`, {
+      headers: this.getAuthHeaders()
+    });
+    if (!response.ok) {
+      throw new Error(`Failed to fetch FAQs: ${response.statusText}`);
+    }
+    return response.json();
+  }
+  async getFAQ(id2) {
+    const response = await fetch(`${this.baseUrl}/admin/faqs/${id2}`, {
+      headers: this.getAuthHeaders()
+    });
+    if (!response.ok) {
+      throw new Error(`Failed to fetch FAQ: ${response.statusText}`);
+    }
+    return response.json();
+  }
+  async createFAQ(data2) {
+    const response = await fetch(`${this.baseUrl}/admin/faqs`, {
+      method: "POST",
+      headers: this.getAuthHeaders(),
+      body: JSON.stringify(data2)
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Failed to create FAQ");
+    }
+    return response.json();
+  }
+  async updateFAQ(id2, data2) {
+    const response = await fetch(`${this.baseUrl}/admin/faqs/${id2}`, {
+      method: "PUT",
+      headers: this.getAuthHeaders(),
+      body: JSON.stringify(data2)
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Failed to update FAQ");
+    }
+    return response.json();
+  }
+  async deleteFAQ(id2) {
+    const response = await fetch(`${this.baseUrl}/admin/faqs/${id2}`, {
+      method: "DELETE",
+      headers: this.getAuthHeaders()
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Failed to delete FAQ");
+    }
+    return response.json();
+  }
+  // Public/Web API endpoints (no authentication required)
+  async getPublicFAQs(type, slug) {
+    const endpoint = this.buildUrl("/web/faqs", { type, slug });
+    const response = await fetch(`${this.baseUrl}${endpoint}`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch FAQs: ${response.statusText}`);
+    }
+    return response.json();
+  }
+}
+const faqService = new FAQService();
+const toKebabCase = (string) => string.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
+const mergeClasses = (...classes) => classes.filter((className, index, array2) => {
+  return Boolean(className) && array2.indexOf(className) === index;
+}).join(" ");
+var defaultAttributes = {
+  xmlns: "http://www.w3.org/2000/svg",
+  width: 24,
+  height: 24,
+  viewBox: "0 0 24 24",
+  fill: "none",
+  stroke: "currentColor",
+  strokeWidth: 2,
+  strokeLinecap: "round",
+  strokeLinejoin: "round"
+};
+const Icon = reactExports.forwardRef(
+  ({
+    color: color2 = "currentColor",
+    size = 24,
+    strokeWidth = 2,
+    absoluteStrokeWidth,
+    className = "",
+    children: children2,
+    iconNode,
+    ...rest
+  }, ref) => {
+    return reactExports.createElement(
+      "svg",
+      {
+        ref,
+        ...defaultAttributes,
+        width: size,
+        height: size,
+        stroke: color2,
+        strokeWidth: absoluteStrokeWidth ? Number(strokeWidth) * 24 / Number(size) : strokeWidth,
+        className: mergeClasses("lucide", className),
+        ...rest
+      },
+      [
+        ...iconNode.map(([tag, attrs]) => reactExports.createElement(tag, attrs)),
+        ...Array.isArray(children2) ? children2 : [children2]
+      ]
+    );
+  }
+);
+const createLucideIcon = (iconName, iconNode) => {
+  const Component = reactExports.forwardRef(
+    ({ className, ...props }, ref) => reactExports.createElement(Icon, {
+      ref,
+      iconNode,
+      className: mergeClasses(`lucide-${toKebabCase(iconName)}`, className),
+      ...props
+    })
+  );
+  Component.displayName = `${iconName}`;
+  return Component;
+};
+const Activity = createLucideIcon("Activity", [
+  [
+    "path",
+    {
+      d: "M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2",
+      key: "169zse"
+    }
+  ]
+]);
+const ArrowLeft = createLucideIcon("ArrowLeft", [
+  ["path", { d: "m12 19-7-7 7-7", key: "1l729n" }],
+  ["path", { d: "M19 12H5", key: "x3x0zl" }]
+]);
+const ArrowRight = createLucideIcon("ArrowRight", [
+  ["path", { d: "M5 12h14", key: "1ays0h" }],
+  ["path", { d: "m12 5 7 7-7 7", key: "xquz4c" }]
+]);
+const BarChart3 = createLucideIcon("BarChart3", [
+  ["path", { d: "M3 3v18h18", key: "1s2lah" }],
+  ["path", { d: "M18 17V9", key: "2bz60n" }],
+  ["path", { d: "M13 17V5", key: "1frdt8" }],
+  ["path", { d: "M8 17v-3", key: "17ska0" }]
+]);
+const BarChart = createLucideIcon("BarChart", [
+  ["line", { x1: "12", x2: "12", y1: "20", y2: "10", key: "1vz5eb" }],
+  ["line", { x1: "18", x2: "18", y1: "20", y2: "4", key: "cun8e5" }],
+  ["line", { x1: "6", x2: "6", y1: "20", y2: "16", key: "hq0ia6" }]
+]);
+const Bell = createLucideIcon("Bell", [
+  ["path", { d: "M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9", key: "1qo2s2" }],
+  ["path", { d: "M10.3 21a1.94 1.94 0 0 0 3.4 0", key: "qgo35s" }]
+]);
+const BookOpen = createLucideIcon("BookOpen", [
+  ["path", { d: "M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z", key: "vv98re" }],
+  ["path", { d: "M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z", key: "1cyq3y" }]
+]);
+const Bot = createLucideIcon("Bot", [
+  ["path", { d: "M12 8V4H8", key: "hb8ula" }],
+  ["rect", { width: "16", height: "12", x: "4", y: "8", rx: "2", key: "enze0r" }],
+  ["path", { d: "M2 14h2", key: "vft8re" }],
+  ["path", { d: "M20 14h2", key: "4cs60a" }],
+  ["path", { d: "M15 13v2", key: "1xurst" }],
+  ["path", { d: "M9 13v2", key: "rq6x2g" }]
+]);
+const Box = createLucideIcon("Box", [
+  [
+    "path",
+    {
+      d: "M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z",
+      key: "hh9hay"
+    }
+  ],
+  ["path", { d: "m3.3 7 8.7 5 8.7-5", key: "g66t2b" }],
+  ["path", { d: "M12 22V12", key: "d0xqtd" }]
+]);
+const Brain = createLucideIcon("Brain", [
+  [
+    "path",
+    {
+      d: "M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z",
+      key: "l5xja"
+    }
+  ],
+  [
+    "path",
+    {
+      d: "M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z",
+      key: "ep3f8r"
+    }
+  ],
+  ["path", { d: "M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4", key: "1p4c4q" }],
+  ["path", { d: "M17.599 6.5a3 3 0 0 0 .399-1.375", key: "tmeiqw" }],
+  ["path", { d: "M6.003 5.125A3 3 0 0 0 6.401 6.5", key: "105sqy" }],
+  ["path", { d: "M3.477 10.896a4 4 0 0 1 .585-.396", key: "ql3yin" }],
+  ["path", { d: "M19.938 10.5a4 4 0 0 1 .585.396", key: "1qfode" }],
+  ["path", { d: "M6 18a4 4 0 0 1-1.967-.516", key: "2e4loj" }],
+  ["path", { d: "M19.967 17.484A4 4 0 0 1 18 18", key: "159ez6" }]
+]);
+const Briefcase = createLucideIcon("Briefcase", [
+  ["path", { d: "M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16", key: "jecpp" }],
+  ["rect", { width: "20", height: "14", x: "2", y: "6", rx: "2", key: "i6l2r4" }]
+]);
+const Calendar = createLucideIcon("Calendar", [
+  ["path", { d: "M8 2v4", key: "1cmpym" }],
+  ["path", { d: "M16 2v4", key: "4m81vk" }],
+  ["rect", { width: "18", height: "18", x: "3", y: "4", rx: "2", key: "1hopcy" }],
+  ["path", { d: "M3 10h18", key: "8toen8" }]
+]);
+const Check = createLucideIcon("Check", [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]]);
+const ChevronDown = createLucideIcon("ChevronDown", [
+  ["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]
+]);
+const ChevronLeft = createLucideIcon("ChevronLeft", [
+  ["path", { d: "m15 18-6-6 6-6", key: "1wnfg3" }]
+]);
+const ChevronRight = createLucideIcon("ChevronRight", [
+  ["path", { d: "m9 18 6-6-6-6", key: "mthhwq" }]
+]);
+const CircleAlert = createLucideIcon("CircleAlert", [
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+  ["line", { x1: "12", x2: "12", y1: "8", y2: "12", key: "1pkeuh" }],
+  ["line", { x1: "12", x2: "12.01", y1: "16", y2: "16", key: "4dfq90" }]
+]);
+const CircleCheckBig = createLucideIcon("CircleCheckBig", [
+  ["path", { d: "M22 11.08V12a10 10 0 1 1-5.93-9.14", key: "g774vq" }],
+  ["path", { d: "m9 11 3 3L22 4", key: "1pflzl" }]
+]);
+const CircleCheck = createLucideIcon("CircleCheck", [
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+  ["path", { d: "m9 12 2 2 4-4", key: "dzmm74" }]
+]);
+const CircleHelp = createLucideIcon("CircleHelp", [
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+  ["path", { d: "M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3", key: "1u773s" }],
+  ["path", { d: "M12 17h.01", key: "p32p05" }]
+]);
+const Clock = createLucideIcon("Clock", [
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+  ["polyline", { points: "12 6 12 12 16 14", key: "68esgv" }]
+]);
+const Cloud = createLucideIcon("Cloud", [
+  ["path", { d: "M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z", key: "p7xjir" }]
+]);
+const CodeXml = createLucideIcon("CodeXml", [
+  ["path", { d: "m18 16 4-4-4-4", key: "1inbqp" }],
+  ["path", { d: "m6 8-4 4 4 4", key: "15zrgr" }],
+  ["path", { d: "m14.5 4-5 16", key: "e7oirm" }]
+]);
+const Code = createLucideIcon("Code", [
+  ["polyline", { points: "16 18 22 12 16 6", key: "z7tu5w" }],
+  ["polyline", { points: "8 6 2 12 8 18", key: "1eg1df" }]
+]);
+const Copy = createLucideIcon("Copy", [
+  ["rect", { width: "14", height: "14", x: "8", y: "8", rx: "2", ry: "2", key: "17jyea" }],
+  ["path", { d: "M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2", key: "zix9uf" }]
+]);
+const Cpu = createLucideIcon("Cpu", [
+  ["rect", { width: "16", height: "16", x: "4", y: "4", rx: "2", key: "14l7u7" }],
+  ["rect", { width: "6", height: "6", x: "9", y: "9", rx: "1", key: "5aljv4" }],
+  ["path", { d: "M15 2v2", key: "13l42r" }],
+  ["path", { d: "M15 20v2", key: "15mkzm" }],
+  ["path", { d: "M2 15h2", key: "1gxd5l" }],
+  ["path", { d: "M2 9h2", key: "1bbxkp" }],
+  ["path", { d: "M20 15h2", key: "19e6y8" }],
+  ["path", { d: "M20 9h2", key: "19tzq7" }],
+  ["path", { d: "M9 2v2", key: "165o2o" }],
+  ["path", { d: "M9 20v2", key: "i2bqo8" }]
+]);
+const CreditCard = createLucideIcon("CreditCard", [
+  ["rect", { width: "20", height: "14", x: "2", y: "5", rx: "2", key: "ynyp8z" }],
+  ["line", { x1: "2", x2: "22", y1: "10", y2: "10", key: "1b3vmo" }]
+]);
+const Database = createLucideIcon("Database", [
+  ["ellipse", { cx: "12", cy: "5", rx: "9", ry: "3", key: "msslwz" }],
+  ["path", { d: "M3 5V19A9 3 0 0 0 21 19V5", key: "1wlel7" }],
+  ["path", { d: "M3 12A9 3 0 0 0 21 12", key: "mv7ke4" }]
+]);
+const DollarSign = createLucideIcon("DollarSign", [
+  ["line", { x1: "12", x2: "12", y1: "2", y2: "22", key: "7eqyqh" }],
+  ["path", { d: "M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6", key: "1b0p4s" }]
+]);
+const Download = createLucideIcon("Download", [
+  ["path", { d: "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4", key: "ih7n3h" }],
+  ["polyline", { points: "7 10 12 15 17 10", key: "2ggqvy" }],
+  ["line", { x1: "12", x2: "12", y1: "15", y2: "3", key: "1vk2je" }]
+]);
+const ExternalLink = createLucideIcon("ExternalLink", [
+  ["path", { d: "M15 3h6v6", key: "1q9fwt" }],
+  ["path", { d: "M10 14 21 3", key: "gplh6r" }],
+  ["path", { d: "M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6", key: "a6xqqp" }]
+]);
+const Eye = createLucideIcon("Eye", [
+  ["path", { d: "M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z", key: "rwhkz3" }],
+  ["circle", { cx: "12", cy: "12", r: "3", key: "1v7zrd" }]
+]);
+const Facebook = createLucideIcon("Facebook", [
+  [
+    "path",
+    { d: "M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z", key: "1jg4f8" }
+  ]
+]);
+const FileCode = createLucideIcon("FileCode", [
+  ["path", { d: "M10 12.5 8 15l2 2.5", key: "1tg20x" }],
+  ["path", { d: "m14 12.5 2 2.5-2 2.5", key: "yinavb" }],
+  ["path", { d: "M14 2v4a2 2 0 0 0 2 2h4", key: "tnqrlb" }],
+  ["path", { d: "M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z", key: "1mlx9k" }]
+]);
+const FileJson = createLucideIcon("FileJson", [
+  ["path", { d: "M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z", key: "1rqfz7" }],
+  ["path", { d: "M14 2v4a2 2 0 0 0 2 2h4", key: "tnqrlb" }],
+  [
+    "path",
+    { d: "M10 12a1 1 0 0 0-1 1v1a1 1 0 0 1-1 1 1 1 0 0 1 1 1v1a1 1 0 0 0 1 1", key: "1oajmo" }
+  ],
+  [
+    "path",
+    { d: "M14 18a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1 1 1 0 0 1-1-1v-1a1 1 0 0 0-1-1", key: "mpwhp6" }
+  ]
+]);
+const FileText = createLucideIcon("FileText", [
+  ["path", { d: "M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z", key: "1rqfz7" }],
+  ["path", { d: "M14 2v4a2 2 0 0 0 2 2h4", key: "tnqrlb" }],
+  ["path", { d: "M10 9H8", key: "b1mrlr" }],
+  ["path", { d: "M16 13H8", key: "t4e002" }],
+  ["path", { d: "M16 17H8", key: "z1uh3a" }]
+]);
+const Filter = createLucideIcon("Filter", [
+  ["polygon", { points: "22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3", key: "1yg77f" }]
+]);
+const FolderKanban = createLucideIcon("FolderKanban", [
+  [
+    "path",
+    {
+      d: "M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z",
+      key: "1fr9dc"
+    }
+  ],
+  ["path", { d: "M8 10v4", key: "tgpxqk" }],
+  ["path", { d: "M12 10v2", key: "hh53o1" }],
+  ["path", { d: "M16 10v6", key: "1d6xys" }]
+]);
+const GitBranch = createLucideIcon("GitBranch", [
+  ["line", { x1: "6", x2: "6", y1: "3", y2: "15", key: "17qcm7" }],
+  ["circle", { cx: "18", cy: "6", r: "3", key: "1h7g24" }],
+  ["circle", { cx: "6", cy: "18", r: "3", key: "fqmcym" }],
+  ["path", { d: "M18 9a9 9 0 0 1-9 9", key: "n2h4wq" }]
+]);
+const Github = createLucideIcon("Github", [
+  [
+    "path",
+    {
+      d: "M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4",
+      key: "tonef"
+    }
+  ],
+  ["path", { d: "M9 18c-4.51 2-5-2-7-2", key: "9comsn" }]
+]);
+const Globe = createLucideIcon("Globe", [
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+  ["path", { d: "M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20", key: "13o1zl" }],
+  ["path", { d: "M2 12h20", key: "9i4pu4" }]
+]);
+const Headphones = createLucideIcon("Headphones", [
+  [
+    "path",
+    {
+      d: "M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3",
+      key: "1xhozi"
+    }
+  ]
+]);
+const Home = createLucideIcon("Home", [
+  ["path", { d: "m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z", key: "y5dka4" }],
+  ["polyline", { points: "9 22 9 12 15 12 15 22", key: "e2us08" }]
+]);
+const Image$1 = createLucideIcon("Image", [
+  ["rect", { width: "18", height: "18", x: "3", y: "3", rx: "2", ry: "2", key: "1m3agn" }],
+  ["circle", { cx: "9", cy: "9", r: "2", key: "af1f0g" }],
+  ["path", { d: "m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21", key: "1xmnt7" }]
+]);
+const Info = createLucideIcon("Info", [
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+  ["path", { d: "M12 16v-4", key: "1dtifu" }],
+  ["path", { d: "M12 8h.01", key: "e9boi3" }]
+]);
+const Layers = createLucideIcon("Layers", [
+  [
+    "path",
+    {
+      d: "m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z",
+      key: "8b97xw"
+    }
+  ],
+  ["path", { d: "m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65", key: "dd6zsq" }],
+  ["path", { d: "m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65", key: "ep9fru" }]
+]);
+const LayoutDashboard = createLucideIcon("LayoutDashboard", [
+  ["rect", { width: "7", height: "9", x: "3", y: "3", rx: "1", key: "10lvy0" }],
+  ["rect", { width: "7", height: "5", x: "14", y: "3", rx: "1", key: "16une8" }],
+  ["rect", { width: "7", height: "9", x: "14", y: "12", rx: "1", key: "1hutg5" }],
+  ["rect", { width: "7", height: "5", x: "3", y: "16", rx: "1", key: "ldoo1y" }]
+]);
+const LayoutGrid = createLucideIcon("LayoutGrid", [
+  ["rect", { width: "7", height: "7", x: "3", y: "3", rx: "1", key: "1g98yp" }],
+  ["rect", { width: "7", height: "7", x: "14", y: "3", rx: "1", key: "6d4xhi" }],
+  ["rect", { width: "7", height: "7", x: "14", y: "14", rx: "1", key: "nxv5o0" }],
+  ["rect", { width: "7", height: "7", x: "3", y: "14", rx: "1", key: "1bb6yr" }]
+]);
+const Linkedin = createLucideIcon("Linkedin", [
+  [
+    "path",
+    {
+      d: "M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z",
+      key: "c2jq9f"
+    }
+  ],
+  ["rect", { width: "4", height: "12", x: "2", y: "9", key: "mk3on5" }],
+  ["circle", { cx: "4", cy: "4", r: "2", key: "bt5ra8" }]
+]);
+const LoaderCircle = createLucideIcon("LoaderCircle", [
+  ["path", { d: "M21 12a9 9 0 1 1-6.219-8.56", key: "13zald" }]
+]);
+const Loader = createLucideIcon("Loader", [
+  ["path", { d: "M12 2v4", key: "3427ic" }],
+  ["path", { d: "m16.2 7.8 2.9-2.9", key: "r700ao" }],
+  ["path", { d: "M18 12h4", key: "wj9ykh" }],
+  ["path", { d: "m16.2 16.2 2.9 2.9", key: "1bxg5t" }],
+  ["path", { d: "M12 18v4", key: "jadmvz" }],
+  ["path", { d: "m4.9 19.1 2.9-2.9", key: "bwix9q" }],
+  ["path", { d: "M2 12h4", key: "j09sii" }],
+  ["path", { d: "m4.9 4.9 2.9 2.9", key: "giyufr" }]
+]);
+const LogOut = createLucideIcon("LogOut", [
+  ["path", { d: "M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4", key: "1uf3rs" }],
+  ["polyline", { points: "16 17 21 12 16 7", key: "1gabdz" }],
+  ["line", { x1: "21", x2: "9", y1: "12", y2: "12", key: "1uyos4" }]
+]);
+const Mail = createLucideIcon("Mail", [
+  ["rect", { width: "20", height: "16", x: "2", y: "4", rx: "2", key: "18n3k1" }],
+  ["path", { d: "m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7", key: "1ocrg3" }]
+]);
+const Maximize2 = createLucideIcon("Maximize2", [
+  ["polyline", { points: "15 3 21 3 21 9", key: "mznyad" }],
+  ["polyline", { points: "9 21 3 21 3 15", key: "1avn1i" }],
+  ["line", { x1: "21", x2: "14", y1: "3", y2: "10", key: "ota7mn" }],
+  ["line", { x1: "3", x2: "10", y1: "21", y2: "14", key: "1atl0r" }]
+]);
+const Megaphone = createLucideIcon("Megaphone", [
+  ["path", { d: "m3 11 18-5v12L3 14v-3z", key: "n962bs" }],
+  ["path", { d: "M11.6 16.8a3 3 0 1 1-5.8-1.6", key: "1yl0tm" }]
+]);
+const Menu = createLucideIcon("Menu", [
+  ["line", { x1: "4", x2: "20", y1: "12", y2: "12", key: "1e0a9i" }],
+  ["line", { x1: "4", x2: "20", y1: "6", y2: "6", key: "1owob3" }],
+  ["line", { x1: "4", x2: "20", y1: "18", y2: "18", key: "yk5zj1" }]
+]);
+const MessageCircle = createLucideIcon("MessageCircle", [
+  ["path", { d: "M7.9 20A9 9 0 1 0 4 16.1L2 22Z", key: "vv11sd" }]
+]);
+const MessageSquare = createLucideIcon("MessageSquare", [
+  ["path", { d: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z", key: "1lielz" }]
+]);
+const Minus = createLucideIcon("Minus", [["path", { d: "M5 12h14", key: "1ays0h" }]]);
+const Moon = createLucideIcon("Moon", [
+  ["path", { d: "M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z", key: "a7tn18" }]
+]);
+const Newspaper = createLucideIcon("Newspaper", [
+  [
+    "path",
+    {
+      d: "M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2",
+      key: "7pis2x"
+    }
+  ],
+  ["path", { d: "M18 14h-8", key: "sponae" }],
+  ["path", { d: "M15 18h-5", key: "95g1m2" }],
+  ["path", { d: "M10 6h8v4h-8V6Z", key: "smlsk5" }]
+]);
+const PanelsTopLeft = createLucideIcon("PanelsTopLeft", [
+  ["rect", { width: "18", height: "18", x: "3", y: "3", rx: "2", key: "afitv7" }],
+  ["path", { d: "M3 9h18", key: "1pudct" }],
+  ["path", { d: "M9 21V9", key: "1oto5p" }]
+]);
+const PenTool = createLucideIcon("PenTool", [
+  [
+    "path",
+    {
+      d: "M15.707 21.293a1 1 0 0 1-1.414 0l-1.586-1.586a1 1 0 0 1 0-1.414l5.586-5.586a1 1 0 0 1 1.414 0l1.586 1.586a1 1 0 0 1 0 1.414z",
+      key: "nt11vn"
+    }
+  ],
+  [
+    "path",
+    {
+      d: "m18 13-1.375-6.874a1 1 0 0 0-.746-.776L3.235 2.028a1 1 0 0 0-1.207 1.207L5.35 15.879a1 1 0 0 0 .776.746L13 18",
+      key: "15qc1e"
+    }
+  ],
+  ["path", { d: "m2.3 2.3 7.286 7.286", key: "1wuzzi" }],
+  ["circle", { cx: "11", cy: "11", r: "2", key: "xmgehs" }]
+]);
+const PieChart = createLucideIcon("PieChart", [
+  ["path", { d: "M21.21 15.89A10 10 0 1 1 8 2.83", key: "k2fpak" }],
+  ["path", { d: "M22 12A10 10 0 0 0 12 2v10z", key: "1rfc4y" }]
+]);
+const Plus = createLucideIcon("Plus", [
+  ["path", { d: "M5 12h14", key: "1ays0h" }],
+  ["path", { d: "M12 5v14", key: "s699le" }]
+]);
+const Radio = createLucideIcon("Radio", [
+  ["path", { d: "M4.9 19.1C1 15.2 1 8.8 4.9 4.9", key: "1vaf9d" }],
+  ["path", { d: "M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5", key: "u1ii0m" }],
+  ["circle", { cx: "12", cy: "12", r: "2", key: "1c9p78" }],
+  ["path", { d: "M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5", key: "1j5fej" }],
+  ["path", { d: "M19.1 4.9C23 8.8 23 15.1 19.1 19", key: "10b0cb" }]
+]);
+const Search = createLucideIcon("Search", [
+  ["circle", { cx: "11", cy: "11", r: "8", key: "4ej97u" }],
+  ["path", { d: "m21 21-4.3-4.3", key: "1qie3q" }]
+]);
+const Send = createLucideIcon("Send", [
+  ["path", { d: "m22 2-7 20-4-9-9-4Z", key: "1q3vgg" }],
+  ["path", { d: "M22 2 11 13", key: "nzbqef" }]
+]);
+const Server = createLucideIcon("Server", [
+  ["rect", { width: "20", height: "8", x: "2", y: "2", rx: "2", ry: "2", key: "ngkwjq" }],
+  ["rect", { width: "20", height: "8", x: "2", y: "14", rx: "2", ry: "2", key: "iecqi9" }],
+  ["line", { x1: "6", x2: "6.01", y1: "6", y2: "6", key: "16zg32" }],
+  ["line", { x1: "6", x2: "6.01", y1: "18", y2: "18", key: "nzw8ys" }]
+]);
+const Settings = createLucideIcon("Settings", [
+  [
+    "path",
+    {
+      d: "M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z",
+      key: "1qme2f"
+    }
+  ],
+  ["circle", { cx: "12", cy: "12", r: "3", key: "1v7zrd" }]
+]);
+const Share2 = createLucideIcon("Share2", [
+  ["circle", { cx: "18", cy: "5", r: "3", key: "gq8acd" }],
+  ["circle", { cx: "6", cy: "12", r: "3", key: "w7nqdw" }],
+  ["circle", { cx: "18", cy: "19", r: "3", key: "1xt0gg" }],
+  ["line", { x1: "8.59", x2: "15.42", y1: "13.51", y2: "17.49", key: "47mynk" }],
+  ["line", { x1: "15.41", x2: "8.59", y1: "6.51", y2: "10.49", key: "1n3mei" }]
+]);
+const ShieldCheck = createLucideIcon("ShieldCheck", [
+  [
+    "path",
+    {
+      d: "M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z",
+      key: "oel41y"
+    }
+  ],
+  ["path", { d: "m9 12 2 2 4-4", key: "dzmm74" }]
+]);
+const Shield = createLucideIcon("Shield", [
+  [
+    "path",
+    {
+      d: "M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z",
+      key: "oel41y"
+    }
+  ]
+]);
+const ShoppingBag = createLucideIcon("ShoppingBag", [
+  ["path", { d: "M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z", key: "hou9p0" }],
+  ["path", { d: "M3 6h18", key: "d0wm0j" }],
+  ["path", { d: "M16 10a4 4 0 0 1-8 0", key: "1ltviw" }]
+]);
+const Slack = createLucideIcon("Slack", [
+  ["rect", { width: "3", height: "8", x: "13", y: "2", rx: "1.5", key: "diqz80" }],
+  ["path", { d: "M19 8.5V10h1.5A1.5 1.5 0 1 0 19 8.5", key: "183iwg" }],
+  ["rect", { width: "3", height: "8", x: "8", y: "14", rx: "1.5", key: "hqg7r1" }],
+  ["path", { d: "M5 15.5V14H3.5A1.5 1.5 0 1 0 5 15.5", key: "76g71w" }],
+  ["rect", { width: "8", height: "3", x: "14", y: "13", rx: "1.5", key: "1kmz0a" }],
+  ["path", { d: "M15.5 19H14v1.5a1.5 1.5 0 1 0 1.5-1.5", key: "jc4sz0" }],
+  ["rect", { width: "8", height: "3", x: "2", y: "8", rx: "1.5", key: "1omvl4" }],
+  ["path", { d: "M8.5 5H10V3.5A1.5 1.5 0 1 0 8.5 5", key: "16f3cl" }]
+]);
+const Smartphone = createLucideIcon("Smartphone", [
+  ["rect", { width: "14", height: "20", x: "5", y: "2", rx: "2", ry: "2", key: "1yt0o3" }],
+  ["path", { d: "M12 18h.01", key: "mhygvu" }]
+]);
+const Sparkles = createLucideIcon("Sparkles", [
+  [
+    "path",
+    {
+      d: "M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z",
+      key: "4pj2yx"
+    }
+  ],
+  ["path", { d: "M20 3v4", key: "1olli1" }],
+  ["path", { d: "M22 5h-4", key: "1gvqau" }],
+  ["path", { d: "M4 17v2", key: "vumght" }],
+  ["path", { d: "M5 18H3", key: "zchphs" }]
+]);
+const Star = createLucideIcon("Star", [
+  [
+    "polygon",
+    {
+      points: "12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2",
+      key: "8f66p6"
+    }
+  ]
+]);
+const Sun = createLucideIcon("Sun", [
+  ["circle", { cx: "12", cy: "12", r: "4", key: "4exip2" }],
+  ["path", { d: "M12 2v2", key: "tus03m" }],
+  ["path", { d: "M12 20v2", key: "1lh1kg" }],
+  ["path", { d: "m4.93 4.93 1.41 1.41", key: "149t6j" }],
+  ["path", { d: "m17.66 17.66 1.41 1.41", key: "ptbguv" }],
+  ["path", { d: "M2 12h2", key: "1t8f8n" }],
+  ["path", { d: "M20 12h2", key: "1q8mjw" }],
+  ["path", { d: "m6.34 17.66-1.41 1.41", key: "1m8zz5" }],
+  ["path", { d: "m19.07 4.93-1.41 1.41", key: "1shlcs" }]
+]);
+const Tag = createLucideIcon("Tag", [
+  [
+    "path",
+    {
+      d: "M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z",
+      key: "vktsd0"
+    }
+  ],
+  ["circle", { cx: "7.5", cy: "7.5", r: ".5", fill: "currentColor", key: "kqv944" }]
+]);
+const Target = createLucideIcon("Target", [
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+  ["circle", { cx: "12", cy: "12", r: "6", key: "1vlfrh" }],
+  ["circle", { cx: "12", cy: "12", r: "2", key: "1c9p78" }]
+]);
+const Terminal = createLucideIcon("Terminal", [
+  ["polyline", { points: "4 17 10 11 4 5", key: "akl6gq" }],
+  ["line", { x1: "12", x2: "20", y1: "19", y2: "19", key: "q2wloq" }]
+]);
+const TrendingUp = createLucideIcon("TrendingUp", [
+  ["polyline", { points: "22 7 13.5 15.5 8.5 10.5 2 17", key: "126l90" }],
+  ["polyline", { points: "16 7 22 7 22 13", key: "kwv8wd" }]
+]);
+const TriangleAlert = createLucideIcon("TriangleAlert", [
+  [
+    "path",
+    {
+      d: "m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3",
+      key: "wmoenq"
+    }
+  ],
+  ["path", { d: "M12 9v4", key: "juzpu7" }],
+  ["path", { d: "M12 17h.01", key: "p32p05" }]
+]);
+const Truck = createLucideIcon("Truck", [
+  ["path", { d: "M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2", key: "wrbu53" }],
+  ["path", { d: "M15 18H9", key: "1lyqi6" }],
+  [
+    "path",
+    {
+      d: "M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14",
+      key: "lysw3i"
+    }
+  ],
+  ["circle", { cx: "17", cy: "18", r: "2", key: "332jqn" }],
+  ["circle", { cx: "7", cy: "18", r: "2", key: "19iecd" }]
+]);
+const Twitter = createLucideIcon("Twitter", [
+  [
+    "path",
+    {
+      d: "M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z",
+      key: "pff0z6"
+    }
+  ]
+]);
+const User = createLucideIcon("User", [
+  ["path", { d: "M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2", key: "975kel" }],
+  ["circle", { cx: "12", cy: "7", r: "4", key: "17ys0d" }]
+]);
+const Users = createLucideIcon("Users", [
+  ["path", { d: "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2", key: "1yyitq" }],
+  ["circle", { cx: "9", cy: "7", r: "4", key: "nufk8" }],
+  ["path", { d: "M22 21v-2a4 4 0 0 0-3-3.87", key: "kshegd" }],
+  ["path", { d: "M16 3.13a4 4 0 0 1 0 7.75", key: "1da9ce" }]
+]);
+const Video = createLucideIcon("Video", [
+  [
+    "path",
+    {
+      d: "m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5",
+      key: "ftymec"
+    }
+  ],
+  ["rect", { x: "2", y: "6", width: "14", height: "12", rx: "2", key: "158x01" }]
+]);
+const Workflow = createLucideIcon("Workflow", [
+  ["rect", { width: "8", height: "8", x: "3", y: "3", rx: "2", key: "by2w9f" }],
+  ["path", { d: "M7 11v4a2 2 0 0 0 2 2h4", key: "xkn7yn" }],
+  ["rect", { width: "8", height: "8", x: "13", y: "13", rx: "2", key: "1cgmvn" }]
+]);
+const Wrench = createLucideIcon("Wrench", [
+  [
+    "path",
+    {
+      d: "M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z",
+      key: "cbrjhi"
+    }
+  ]
+]);
+const X = createLucideIcon("X", [
+  ["path", { d: "M18 6 6 18", key: "1bl5f8" }],
+  ["path", { d: "m6 6 12 12", key: "d8bk6v" }]
+]);
+const Zap = createLucideIcon("Zap", [
+  [
+    "path",
+    {
+      d: "M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z",
+      key: "1xq2db"
+    }
+  ]
+]);
+const FAQSection = ({
+  type = "page",
+  slug = "home",
+  title = "Frequently Asked Questions",
+  className,
+  data: data2
+}) => {
+  const [openIndex, setOpenIndex] = reactExports.useState(0);
+  const [faqs, setFaqs] = reactExports.useState([]);
+  const [isLoading, setIsLoading] = reactExports.useState(!data2);
+  const [error, setError] = reactExports.useState(null);
+  reactExports.useEffect(() => {
+    if (data2) {
+      setFaqs(data2);
+      setIsLoading(false);
+    } else {
+      loadFAQs();
+    }
+  }, [type, slug, data2]);
+  const loadFAQs = async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const response = await faqService.getPublicFAQs(type, slug);
+      if (response.success) {
+        setFaqs(response.data);
+      } else {
+        setFaqs([]);
+      }
+    } catch (err) {
+      console.error("Error loading FAQs:", err);
+      setFaqs([]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  if (isLoading) {
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: cn("py-24 px-6 max-w-3xl mx-auto", className), children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-3xl font-bold text-white mb-10 text-center", children: title }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center justify-center py-12", children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "w-8 h-8 animate-spin text-indigo-400" }) })
+    ] });
+  }
+  if (error || faqs.length === 0) {
+    return null;
+  }
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: cn("py-24 px-6 max-w-3xl mx-auto", className), children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-2xl font-bold text-white mb-8 text-center", children: title }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-3", children: faqs.map((faq, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: cn(
+      "border rounded-xl overflow-hidden transition-all duration-300",
+      openIndex === i ? "border-indigo-500/20 bg-indigo-500/[0.04]" : "border-white/[0.06] bg-white/[0.02] hover:border-white/[0.1]"
+    ), children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("button", { onClick: () => setOpenIndex(openIndex === i ? null : i), className: "w-full flex items-center justify-between p-5 text-left gap-4", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-medium text-slate-200 text-[15px] leading-snug", children: faq.question }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: cn(
+          "w-7 h-7 rounded-lg flex items-center justify-center shrink-0 transition-colors",
+          openIndex === i ? "bg-indigo-500/15" : "bg-white/[0.05]"
+        ), children: openIndex === i ? /* @__PURE__ */ jsxRuntimeExports.jsx(Minus, { className: "w-3.5 h-3.5 text-indigo-400" }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { className: "w-3.5 h-3.5 text-slate-500" }) })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: cn(
+        "px-5 text-slate-400 text-sm leading-relaxed overflow-hidden transition-all duration-300 ease-in-out",
+        openIndex === i ? "max-h-60 pb-5 opacity-100" : "max-h-0 opacity-0"
+      ), children: faq.answer })
+    ] }, faq.id)) })
+  ] });
+};
+const adminBlogCategoryService = {
+  // Get all blog categories
+  getAll: async () => {
+    const response = await apiRequest("/admin/blog-categories", "GET");
+    return { success: response.success, message: response.message, data: response.data?.data };
+  },
+  // Create a new blog category
+  create: async (data2) => {
+    const response = await apiRequest("/admin/blog-categories", "POST", data2);
+    return { success: response.success, message: response.message, data: response.data?.data };
+  },
+  // Update a blog category
+  update: async (id2, data2) => {
+    const response = await apiRequest(`/admin/blog-categories/${id2}`, "PUT", data2);
+    return { success: response.success, message: response.message, data: response.data?.data };
+  },
+  // Delete a blog category
+  delete: async (id2) => {
+    const response = await apiRequest(`/admin/blog-categories/${id2}`, "DELETE");
+    return { success: response.success, message: response.message };
+  }
+};
+const adminBlogService = {
+  // Get all blogs with pagination
+  getAll: async (page = 1, perPage = 20) => {
+    const response = await apiRequest(`/admin/blogs?page=${page}&per_page=${perPage}`, "GET");
+    return { success: response.success, message: response.message, data: response.data?.data };
+  },
+  // Get a single blog by ID
+  getById: async (id2) => {
+    const response = await apiRequest(`/admin/blogs/${id2}`, "GET");
+    return { success: response.success, message: response.message, data: response.data?.data };
+  },
+  // Create a new blog
+  create: async (data2) => {
+    const response = await apiRequest("/admin/blogs", "POST", data2);
+    return { success: response.success, message: response.message, data: response.data?.data };
+  },
+  // Create a new blog with image file
+  createWithImage: async (data2, imageFile) => {
+    const formData = new FormData();
+    formData.append("category_id", data2.category_id.toString());
+    formData.append("title", data2.title);
+    formData.append("description", data2.description);
+    formData.append("content", data2.content);
+    formData.append("status", data2.status);
+    formData.append("is_featured", data2.is_featured ? "1" : "0");
+    if (data2.meta_title) formData.append("meta_title", data2.meta_title);
+    if (data2.meta_description) formData.append("meta_description", data2.meta_description);
+    if (data2.meta_keywords) formData.append("meta_keywords", data2.meta_keywords);
+    formData.append("image_url", imageFile);
+    const response = await apiRequest("/admin/blogs", "POST", formData);
+    return { success: response.success, message: response.message, data: response.data?.data };
+  },
+  // Update a blog
+  update: async (id2, data2) => {
+    const response = await apiRequest(`/admin/blogs/${id2}`, "PUT", data2);
+    return { success: response.success, message: response.message, data: response.data?.data };
+  },
+  // Update a blog with image file
+  updateWithImage: async (id2, data2, imageFile) => {
+    const formData = new FormData();
+    if (data2.category_id) formData.append("category_id", data2.category_id.toString());
+    if (data2.title) formData.append("title", data2.title);
+    if (data2.description) formData.append("description", data2.description);
+    if (data2.content) formData.append("content", data2.content);
+    if (data2.status) formData.append("status", data2.status);
+    if (data2.is_featured !== void 0) formData.append("is_featured", data2.is_featured ? "1" : "0");
+    if (data2.meta_title) formData.append("meta_title", data2.meta_title);
+    if (data2.meta_description) formData.append("meta_description", data2.meta_description);
+    if (data2.meta_keywords) formData.append("meta_keywords", data2.meta_keywords);
+    formData.append("image_url", imageFile);
+    formData.append("_method", "PUT");
+    const response = await apiRequest(`/admin/blogs/${id2}`, "POST", formData);
+    return { success: response.success, message: response.message, data: response.data?.data };
+  },
+  // Delete a blog
+  delete: async (id2) => {
+    const response = await apiRequest(`/admin/blogs/${id2}`, "DELETE");
+    return { success: response.success, message: response.message };
+  },
+  // Search blogs
+  search: async (query, filters) => {
+    const params = new URLSearchParams();
+    if (query) params.append("search", query);
+    if (filters?.category_id) params.append("category_id", filters.category_id.toString());
+    if (filters?.status && filters.status !== "all") params.append("status", filters.status);
+    if (filters?.page) params.append("page", filters.page.toString());
+    const response = await apiRequest(`/admin/blogs?${params.toString()}`, "GET");
+    return { success: response.success, message: response.message, data: response.data?.data };
+  }
+};
+const blogService = {
+  // Get all blogs with pagination, search, and category filter
+  getAll: async (page = 1, perPage = 20, search, categorySlug) => {
+    const params = new URLSearchParams();
+    params.append("page", page.toString());
+    params.append("per_page", perPage.toString());
+    if (search) params.append("search", search);
+    if (categorySlug) params.append("category", categorySlug);
+    const response = await apiRequest(`/blogs?${params.toString()}`, "GET");
+    return { success: response.success, message: response.message, data: response.data };
+  },
+  // Get all blog categories
+  getCategories: async () => {
+    const response = await apiRequest("/blogs/categories", "GET");
+    const result = response.data?.data;
+    const arrayData = Array.isArray(result) ? result : result?.data || [];
+    return { success: response.success, message: response.message, data: arrayData };
+  },
+  // Get a single blog by slug
+  getBySlug: async (slug) => {
+    const response = await apiRequest(`/blogs/${slug}`, "GET");
+    return { success: response.success, message: response.message, data: response.data?.data };
+  },
+  // Get blog by slug with SEO payload preserved
+  getBySlugWithSeo: async (slug) => {
+    const response = await apiRequest(`/blogs/${slug}`);
+    return { success: response.success, message: response.message, data: response.data };
+  },
+  // Get a single blog by ID
+  getById: async (id2) => {
+    const response = await apiRequest(`/blogs/${id2}`, "GET");
+    return { success: response.success, message: response.message, data: response.data?.data };
+  },
+  // Search blogs
+  search: async (query, filters) => {
+    const params = new URLSearchParams();
+    if (query) params.append("search", query);
+    if (filters?.category_id) params.append("category_id", filters.category_id.toString());
+    if (filters?.status && filters.status !== "all") params.append("status", filters.status);
+    if (filters?.page) params.append("page", filters.page.toString());
+    const response = await apiRequest(`/blogs?${params.toString()}`, "GET");
+    return { success: response.success, message: response.message, data: response.data?.data };
+  },
+  // Get related blogs
+  getRelatedBlogs: async (slug) => {
+    const response = await apiRequest(`/blogs/${slug}/related`);
+    return { success: response.success, message: response.message, data: response.data?.data };
+  },
+  // Get related workflows for a blog
+  getRelatedWorkflows: async (slug) => {
+    const response = await apiRequest(`/blogs/${slug}/related-workflows`);
+    return { success: response.success, message: response.message, data: response.data?.data };
+  }
+};
+class WorkflowService {
+  // Headers are now handled centrally in apiRequest
+  /**
+   * GET /admin/workflows - List all workflows with pagination
+   */
+  async listWorkflows(page = 1, perPage = 20) {
+    const response = await apiRequest(`/admin/workflows?page=${page}&per_page=${perPage}`);
+    if (!response.success) throw new Error(response.message);
+    return { success: true, data: response.data };
+  }
+  /**
+   * POST /admin/workflows - Create a new workflow
+   * Accepts JSON object OR FormData
+   */
+  async createWorkflow(payload) {
+    const response = await apiRequest("/admin/workflows", "POST", payload);
+    if (!response.success) throw new Error(response.message);
+    const dataPayload = response.data.data || response.data;
+    return { success: true, data: dataPayload };
+  }
+  /**
+   * GET /admin/workflows/:id - Get a specific workflow by ID
+   */
+  async getWorkflow(id2) {
+    const response = await apiRequest(`/admin/workflows/${id2}`);
+    if (!response.success) throw new Error(response.message);
+    const dataPayload = response.data.data || response.data;
+    return { success: true, data: dataPayload };
+  }
+  /**
+   * PUT /admin/workflows/:id - Update a specific workflow
+   * Accepts JSON object OR FormData
+   */
+  async updateWorkflow(id2, payload) {
+    const response = await apiRequest(`/admin/workflows/${id2}`, "PUT", payload);
+    if (!response.success) throw new Error(response.message);
+    const dataPayload = response.data.data || response.data;
+    return { success: true, data: dataPayload };
+  }
+  /**
+   * DELETE /admin/workflows/:id - Delete a specific workflow
+   */
+  async deleteWorkflow(id2) {
+    const response = await apiRequest(`/admin/workflows/${id2}`, "DELETE");
+    if (!response.success) throw new Error(response.message);
+    return response.data.data || response.data;
+  }
+  /**
+   * GET /admin/workflow-categories - List all workflow categories
+   */
+  async listCategories() {
+    const response = await apiRequest("/admin/workflow-categories");
+    if (!response.success) throw new Error(response.message);
+    return { success: true, data: response.data?.data };
+  }
+  /**
+   * GET /admin/workflow-categories/:id - Get a specific category by ID
+   */
+  async getCategory(id2) {
+    const response = await apiRequest(`/admin/workflow-categories/${id2}`);
+    if (!response.success) throw new Error(response.message);
+    return { success: true, data: response.data?.data };
+  }
+  /**
+   * POST /admin/workflow-categories - Create a new category
+   */
+  async createCategory(payload) {
+    const response = await apiRequest("/admin/workflow-categories", "POST", payload);
+    if (!response.success) throw new Error(response.message);
+    return { success: true, data: response.data?.data };
+  }
+  /**
+   * PUT /admin/workflow-categories/:id - Update a specific category
+   */
+  async updateCategory(id2, payload) {
+    const response = await apiRequest(`/admin/workflow-categories/${id2}`, "PUT", payload);
+    if (!response.success) throw new Error(response.message);
+    return { success: true, data: response.data?.data };
+  }
+  /**
+   * DELETE /admin/workflow-categories/:id - Delete a specific category
+   */
+  async deleteCategory(id2) {
+    const response = await apiRequest(`/admin/workflow-categories/${id2}`, "DELETE");
+    if (!response.success) throw new Error(response.message);
+    return response.data;
+  }
+  /**
+   * GET /workflow-library - Get public workflow library with pagination
+   */
+  async getWorkflowLibrary(page = 1, perPage = 12, search = "", categoryId = null, sort = "newest") {
+    const params = { page, per_page: perPage, sort };
+    if (search) params.search = search;
+    if (categoryId) params.category_id = categoryId;
+    const response = await apiRequest(`/workflow-library${buildQueryString(params)}`);
+    if (!response.success) throw new Error(response.message);
+    return response.data;
+  }
+  /**
+   * GET /workflows/stats - Get workflow statistics
+   */
+  async getWorkflowStats() {
+    const response = await apiRequest("/workflows/stats");
+    if (!response.success) throw new Error(response.message);
+    return { success: true, data: response.data?.data || response.data };
+  }
+  /**
+   * GET /workflow-library/categories - Get public workflow categories
+   */
+  async getWorkflowLibraryCategories() {
+    const response = await apiRequest("/workflow-library/categories");
+    if (!response.success) throw new Error(response.message);
+    const result = response.data;
+    const arrayData = Array.isArray(result) ? result : result?.data || [];
+    return { success: true, data: arrayData };
+  }
+  /**
+   * GET /workflow-library/:slug - Get a specific workflow by slug
+   */
+  async getWorkflowBySlug(slug) {
+    const response = await apiRequest(`/workflow-library/${slug}`);
+    if (!response.success) throw new Error(response.message);
+    const raw = response.data;
+    const payload = raw?.data ?? raw;
+    return {
+      success: true,
+      data: payload,
+      seo: payload?.seo || raw?.seo || null,
+      relatedWorkflows: raw?.related_workflows || payload?.related_workflows || [],
+      suggestedBlogs: raw?.suggested_blogs || raw?.related_blogs || payload?.suggested_blogs || []
+    };
+  }
+  /**
+   * GET /workflows/file/:name - Get workflow JSON file by filename
+   */
+  async getWorkflowJsonFile(fileName, jsonFilePath) {
+    if (jsonFilePath && (jsonFilePath.startsWith("http") || jsonFilePath.startsWith("https"))) {
+      try {
+        console.log(`Fetching from json_file_path: ${jsonFilePath}`);
+        const response = await fetch(jsonFilePath, {
+          headers: {
+            "x-app-key": "739f77912fa0ca22538ad067e284545d5cd541a7c13cacebb5e3e4a8fdec9c8"
+          }
+        });
+        if (response.ok) {
+          return await response.json();
+        }
+        throw new Error(`HTTP error! status: ${response.status}`);
+      } catch (error) {
+        console.warn(`Error fetching from json_file_path (${jsonFilePath}):`, error);
+        if (fileName) {
+          try {
+            console.log(`Falling back to API with fileName: ${fileName}`);
+            const url = fileName.startsWith("http") || fileName.startsWith("/") ? fileName : `/workflows/file/${fileName}`;
+            const apiResponse = await apiRequest(url);
+            if (!apiResponse.success) {
+              throw new Error(apiResponse.message);
+            }
+            return apiResponse.data;
+          } catch (fallbackError) {
+            console.error(`Fallback to API also failed for ${fileName}:`, fallbackError);
+            throw fallbackError;
+          }
+        }
+        throw error;
+      }
+    }
+    if (fileName) {
+      try {
+        const url = fileName.startsWith("http") || fileName.startsWith("/") ? fileName : `/workflows/file/${fileName}`;
+        const response = await apiRequest(url);
+        if (!response.success) {
+          throw new Error(response.message);
+        }
+        return response.data;
+      } catch (error) {
+        console.error(`Error fetching from API (${fileName}):`, error);
+        throw error;
+      }
+    }
+    throw new Error("No file name or path provided");
+  }
+  /**
+   * GET /workflow-library/:slug/related - Get related workflows by slug
+   */
+  async getRelatedWorkflows(slug) {
+    const response = await apiRequest(`/workflow/${slug}/related`);
+    if (!response.success) throw new Error(response.message);
+    const raw = response.data;
+    const related = raw?.related_workflows || raw?.data?.related_workflows || raw?.data || [];
+    return {
+      success: true,
+      data: Array.isArray(related) ? related : []
+    };
+  }
+  /**
+   * POST /workflow/:slug/reviews - Submit a review
+   */
+  async submitReview(slug, data2) {
+    const response = await apiRequest(`/workflow/${slug}/reviews`, "POST", data2);
+    return { success: response.success, message: response.message || "", data: response.data };
+  }
+  /**
+   * GET /workflow/:slug/related-blogs - Get relevant blogs by workflow slug
+   */
+  async getRelatedBlogs(slug) {
+    const response = await apiRequest(`/workflow/${slug}/related-blogs`);
+    if (!response.success) throw new Error(response.message);
+    const raw = response.data;
+    const blogs = raw?.data || raw?.related_blogs || [];
+    return {
+      success: true,
+      data: Array.isArray(blogs) ? blogs : []
+    };
+  }
+}
+const workflowService = new WorkflowService();
+const SSRContext = reactExports.createContext({});
+const useSSRContext = () => reactExports.useContext(SSRContext);
+const PublicFooter = () => {
+  const ssrData = useSSRContext();
+  const [workflowCategories, setWorkflowCategories] = reactExports.useState(ssrData.categories || []);
+  const [blogCategories, setBlogCategories] = reactExports.useState(ssrData.blogCategories || []);
+  const [loading, setLoading] = reactExports.useState(!ssrData.categories);
+  reactExports.useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [wfRes, blogRes] = await Promise.all([
+          workflowService.getWorkflowLibraryCategories(),
+          blogService.getCategories()
+        ]);
+        if (wfRes.success && wfRes.data) {
+          setWorkflowCategories(wfRes.data.slice(0, 4));
+        }
+        if (blogRes.success && blogRes.data) {
+          setBlogCategories(blogRes.data.slice(0, 4));
+        }
+      } catch (error) {
+        console.error("Failed to fetch footer categories:", error);
+      }
+    };
+    fetchData().finally(() => setLoading(false));
+  }, []);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("footer", { className: "relative bg-[#050508] border-t border-white/5 overflow-hidden", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute -top-24 left-1/4 w-64 h-64 bg-purple-600/10 blur-[100px] rounded-full" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-1 md:grid-cols-12 gap-12 mb-12", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "md:col-span-3 space-y-6", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(distExports.Link, { to: "/", className: "flex items-center gap-2 group cursor-pointer", title: "EdgeLancer - Back to Top", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: "/favicon.png", alt: "EdgeLancer Logo", width: 40, height: 40, className: "object-contain group-hover:scale-105 transition-transform duration-300" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "span",
+              {
+                className: "text-1xl md:text-1xl font-black tracking-widest uppercase bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-indigo-500 to-purple-600 drop-shadow-[0_0_15px_rgba(168,85,247,0.5)]",
+                style: { fontFamily: "'Orbitron', sans-serif" },
+                children: "EdgeLancer"
+              }
+            ),
+            "            "
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-gray-400 text-sm leading-relaxed", children: "Empowering the next generation of creators with autonomous AI workflows. Join the neural revolution." }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex gap-4", children: [
+            { Icon: Twitter, label: "Twitter", href: "https://x.com/edgelancern8n" },
+            { Icon: Github, label: "GitHub", href: "https://github.com/edgelancer" },
+            { Icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/edgelancer" },
+            { Icon: Mail, label: "Email", href: "mailto:contact@edgelancer.com" }
+          ].map((item, i) => /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: item.href, className: "p-2 rounded-lg bg-white/5 border border-white/10 text-gray-400 hover:text-cyan-400 hover:border-cyan-400/50 hover:bg-cyan-400/5 transition-all", "aria-label": item.label, title: `Follow us on ${item.label}`, children: /* @__PURE__ */ jsxRuntimeExports.jsx(item.Icon, { className: "w-5 h-5" }) }, i)) })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "md:col-span-2", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-white font-medium mb-6", children: "Platform" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-4", children: [
+            { label: "Home", href: "/" },
+            { label: "Workflows", href: "/workflows" },
+            { label: "Templates", href: "/templates" },
+            { label: "Blog", href: "/blogs" }
+          ].map((item) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(distExports.Link, { to: item.href, className: "text-gray-400 hover:text-white flex items-center group transition-colors", title: `Go to ${item.label}`, children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "w-0 group-hover:w-2 h-px bg-indigo-500 mr-0 group-hover:mr-2 transition-all duration-300" }),
+            item.label
+          ] }) }, item.label)) })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "md:col-span-2", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-white font-medium mb-6", children: "Resources" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-4", children: blogCategories.length > 0 ? blogCategories.map((item) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(distExports.Link, { to: `/blogs?category=${item.slug}`, className: "text-gray-400 hover:text-white flex items-center group transition-colors", title: `Browse ${item.title} blogs`, children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "w-0 group-hover:w-2 h-px bg-purple-500 mr-0 group-hover:mr-2 transition-all duration-300" }),
+            item.title
+          ] }) }, item.id)) : loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("li", { className: "text-gray-400 text-sm italic", children: "Loading..." }) : /* @__PURE__ */ jsxRuntimeExports.jsx("li", { className: "text-gray-500 text-sm italic", children: "Coming soon..." }) })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "md:col-span-3 space-y-6", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-white font-medium", children: "Get Product Updates" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative group", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "input",
+              {
+                type: "email",
+                placeholder: "Enter your email",
+                "aria-label": "Email address for newsletter",
+                className: "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50 transition-all placeholder:text-gray-600"
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "absolute right-2 top-2 bottom-2 px-3 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors flex items-center justify-center", "aria-label": "Subscribe to updates", children: /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowRight, { className: "w-4 h-4" }) })
+          ] })
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-gray-400", children: [
+          "© ",
+          (/* @__PURE__ */ new Date()).getFullYear(),
+          " EdgeLancer  Built for the future."
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex gap-6 text-xs text-gray-400 items-center", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: "mailto:contact@edgelancer.com", className: "hover:text-cyan-400 transition-colors flex items-center gap-1", title: "Email us at contact@edgelancer.com", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Mail, { className: "w-3.5 h-3.5" }),
+            "contact@edgelancer.com"
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Link, { to: "/sitemap", className: "hover:text-white transition-colors", title: "View Site Structure", children: "Sitemap" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Link, { to: "/contact", className: "hover:text-white transition-colors", title: "Get in touch with us", children: "Contact" })
+        ] })
+      ] })
+    ] })
+  ] });
+};
+function setRef(ref, value) {
+  if (typeof ref === "function") {
+    return ref(value);
+  } else if (ref !== null && ref !== void 0) {
+    ref.current = value;
+  }
+}
+function composeRefs(...refs) {
+  return (node) => {
+    let hasCleanup = false;
+    const cleanups = refs.map((ref) => {
+      const cleanup = setRef(ref, node);
+      if (!hasCleanup && typeof cleanup == "function") {
+        hasCleanup = true;
+      }
+      return cleanup;
+    });
+    if (hasCleanup) {
+      return () => {
+        for (let i = 0; i < cleanups.length; i++) {
+          const cleanup = cleanups[i];
+          if (typeof cleanup == "function") {
+            cleanup();
+          } else {
+            setRef(refs[i], null);
+          }
+        }
+      };
+    }
+  };
+}
+function useComposedRefs(...refs) {
+  return reactExports.useCallback(composeRefs(...refs), refs);
+}
+var REACT_LAZY_TYPE = /* @__PURE__ */ Symbol.for("react.lazy");
+var use = React[" use ".trim().toString()];
+function isPromiseLike(value) {
+  return typeof value === "object" && value !== null && "then" in value;
+}
+function isLazyComponent(element) {
+  return element != null && typeof element === "object" && "$$typeof" in element && element.$$typeof === REACT_LAZY_TYPE && "_payload" in element && isPromiseLike(element._payload);
+}
+// @__NO_SIDE_EFFECTS__
+function createSlot$2(ownerName) {
+  const SlotClone = /* @__PURE__ */ createSlotClone$2(ownerName);
+  const Slot2 = reactExports.forwardRef((props, forwardedRef) => {
+    let { children: children2, ...slotProps } = props;
+    if (isLazyComponent(children2) && typeof use === "function") {
+      children2 = use(children2._payload);
+    }
+    const childrenArray = reactExports.Children.toArray(children2);
+    const slottable = childrenArray.find(isSlottable$2);
+    if (slottable) {
+      const newElement = slottable.props.children;
+      const newChildren = childrenArray.map((child) => {
+        if (child === slottable) {
+          if (reactExports.Children.count(newElement) > 1) return reactExports.Children.only(null);
+          return reactExports.isValidElement(newElement) ? newElement.props.children : null;
+        } else {
+          return child;
+        }
+      });
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children: reactExports.isValidElement(newElement) ? reactExports.cloneElement(newElement, void 0, newChildren) : null });
+    }
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children: children2 });
+  });
+  Slot2.displayName = `${ownerName}.Slot`;
+  return Slot2;
+}
+var Slot$1 = /* @__PURE__ */ createSlot$2("Slot");
+// @__NO_SIDE_EFFECTS__
+function createSlotClone$2(ownerName) {
+  const SlotClone = reactExports.forwardRef((props, forwardedRef) => {
+    let { children: children2, ...slotProps } = props;
+    if (isLazyComponent(children2) && typeof use === "function") {
+      children2 = use(children2._payload);
+    }
+    if (reactExports.isValidElement(children2)) {
+      const childrenRef = getElementRef$3(children2);
+      const props2 = mergeProps$2(slotProps, children2.props);
+      if (children2.type !== reactExports.Fragment) {
+        props2.ref = forwardedRef ? composeRefs(forwardedRef, childrenRef) : childrenRef;
+      }
+      return reactExports.cloneElement(children2, props2);
+    }
+    return reactExports.Children.count(children2) > 1 ? reactExports.Children.only(null) : null;
+  });
+  SlotClone.displayName = `${ownerName}.SlotClone`;
+  return SlotClone;
+}
+var SLOTTABLE_IDENTIFIER$2 = /* @__PURE__ */ Symbol("radix.slottable");
+function isSlottable$2(child) {
+  return reactExports.isValidElement(child) && typeof child.type === "function" && "__radixId" in child.type && child.type.__radixId === SLOTTABLE_IDENTIFIER$2;
+}
+function mergeProps$2(slotProps, childProps) {
+  const overrideProps = { ...childProps };
+  for (const propName in childProps) {
+    const slotPropValue = slotProps[propName];
+    const childPropValue = childProps[propName];
+    const isHandler = /^on[A-Z]/.test(propName);
+    if (isHandler) {
+      if (slotPropValue && childPropValue) {
+        overrideProps[propName] = (...args) => {
+          const result = childPropValue(...args);
+          slotPropValue(...args);
+          return result;
+        };
+      } else if (slotPropValue) {
+        overrideProps[propName] = slotPropValue;
+      }
+    } else if (propName === "style") {
+      overrideProps[propName] = { ...slotPropValue, ...childPropValue };
+    } else if (propName === "className") {
+      overrideProps[propName] = [slotPropValue, childPropValue].filter(Boolean).join(" ");
+    }
+  }
+  return { ...slotProps, ...overrideProps };
+}
+function getElementRef$3(element) {
+  let getter = Object.getOwnPropertyDescriptor(element.props, "ref")?.get;
+  let mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
+  if (mayWarn) {
+    return element.ref;
+  }
+  getter = Object.getOwnPropertyDescriptor(element, "ref")?.get;
+  mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
+  if (mayWarn) {
+    return element.props.ref;
+  }
+  return element.props.ref || element.ref;
+}
+const falsyToString = (value) => typeof value === "boolean" ? `${value}` : value === 0 ? "0" : value;
+const cx = clsx;
+const cva = (base, config) => (props) => {
+  var _config_compoundVariants;
+  if ((config === null || config === void 0 ? void 0 : config.variants) == null) return cx(base, props === null || props === void 0 ? void 0 : props.class, props === null || props === void 0 ? void 0 : props.className);
+  const { variants, defaultVariants } = config;
+  const getVariantClassNames = Object.keys(variants).map((variant) => {
+    const variantProp = props === null || props === void 0 ? void 0 : props[variant];
+    const defaultVariantProp = defaultVariants === null || defaultVariants === void 0 ? void 0 : defaultVariants[variant];
+    if (variantProp === null) return null;
+    const variantKey = falsyToString(variantProp) || falsyToString(defaultVariantProp);
+    return variants[variant][variantKey];
+  });
+  const propsWithoutUndefined = props && Object.entries(props).reduce((acc, param) => {
+    let [key, value] = param;
+    if (value === void 0) {
+      return acc;
+    }
+    acc[key] = value;
+    return acc;
+  }, {});
+  const getCompoundVariantClassNames = config === null || config === void 0 ? void 0 : (_config_compoundVariants = config.compoundVariants) === null || _config_compoundVariants === void 0 ? void 0 : _config_compoundVariants.reduce((acc, param) => {
+    let { class: cvClass, className: cvClassName, ...compoundVariantOptions } = param;
+    return Object.entries(compoundVariantOptions).every((param2) => {
+      let [key, value] = param2;
+      return Array.isArray(value) ? value.includes({
+        ...defaultVariants,
+        ...propsWithoutUndefined
+      }[key]) : {
+        ...defaultVariants,
+        ...propsWithoutUndefined
+      }[key] === value;
+    }) ? [
+      ...acc,
+      cvClass,
+      cvClassName
+    ] : acc;
+  }, []);
+  return cx(base, getVariantClassNames, getCompoundVariantClassNames, props === null || props === void 0 ? void 0 : props.class, props === null || props === void 0 ? void 0 : props.className);
+};
 const buttonVariants = cva(
   "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
   {
@@ -62862,6 +66039,4276 @@ const Button = reactExports.forwardRef(
   }
 );
 Button.displayName = "Button";
+const navItems = [
+  { label: "Home", to: "/", title: "Go to Home" },
+  { label: "Workflows", to: "/workflows", title: "Browse Workflow Templates" },
+  { label: "Categories", to: "/blogs", title: "Workflow Categories" },
+  { label: "Templates", to: "/templates", title: "View Template Library" },
+  { label: "Courses", to: "/courses", title: "Browse our Expert Courses" },
+  { label: "Blogs", to: "/blogs", title: "Read our latest Blog Posts" },
+  { label: "Contact", to: "/contact", title: "Contact Us" }
+];
+function PublicNavbar() {
+  const { pathname } = distExports.useLocation();
+  const [isScrolled, setIsScrolled] = reactExports.useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = reactExports.useState(false);
+  const [mobileCategoryOpen, setMobileCategoryOpen] = reactExports.useState(false);
+  const [dynamicNavItems, setDynamicNavItems] = reactExports.useState(navItems);
+  const categoryIcons = [
+    BarChart3,
+    Bot,
+    Box,
+    Cpu,
+    FileCode,
+    FileJson,
+    GitBranch,
+    Globe,
+    Mail,
+    MessageSquare,
+    Share2,
+    ShieldCheck,
+    Terminal,
+    Users,
+    Workflow,
+    Zap
+  ];
+  const getRandomIcon = () => categoryIcons[Math.floor(Math.random() * categoryIcons.length)] || Box;
+  reactExports.useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await workflowService.getWorkflowLibraryCategories();
+        if (response.success && response.data) {
+          const categories = response.data;
+          const topCategories = categories.slice(0, 6).map((cat) => ({
+            label: cat.title,
+            to: `/workflows?category=${cat.slug}`,
+            title: `Explore ${cat.title} workflows`,
+            description: cat.badge_text || `Browse our ${cat.title} templates`,
+            icon: getRandomIcon()
+          }));
+          if (categories.length > 6) {
+            topCategories.push({
+              label: "View All Categories",
+              to: "/workflows",
+              title: "View all workflow categories",
+              description: "Explore all of our available categories",
+              icon: ArrowRight
+            });
+          }
+          setDynamicNavItems((prev) => prev.map((item) => {
+            if (item.label === "Categories") {
+              return { ...item, children: topCategories };
+            }
+            return item;
+          }));
+        }
+      } catch (error) {
+        console.error("Failed to fetch nav categories:", error);
+      }
+    };
+    fetchCategories();
+  }, []);
+  const [hoveredIndex, setHoveredIndex] = reactExports.useState(null);
+  const [activeIndex, setActiveIndex] = reactExports.useState(null);
+  const [hoverStyle, setHoverStyle] = reactExports.useState({});
+  const navRef = reactExports.useRef(null);
+  reactExports.useEffect(() => {
+    const handleScroll2 = () => setIsScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll2);
+    return () => window.removeEventListener("scroll", handleScroll2);
+  }, []);
+  reactExports.useEffect(() => {
+    const idx = dynamicNavItems.findIndex(
+      (item) => item.to === pathname || item.children && item.children.some((child) => child.to === pathname)
+    );
+    setActiveIndex(idx !== -1 ? idx : null);
+  }, [pathname, dynamicNavItems]);
+  reactExports.useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [mobileMenuOpen]);
+  const handleMouseEnter = (index, e) => {
+    setHoveredIndex(index);
+    const rect = e.currentTarget.getBoundingClientRect();
+    const navRect = navRef.current?.getBoundingClientRect();
+    if (navRect) {
+      setHoverStyle({
+        width: `${rect.width}px`,
+        transform: `translateX(${rect.left - navRect.left}px)`,
+        opacity: 1
+      });
+    }
+  };
+  const handleMouseLeave = () => {
+    setHoveredIndex(null);
+    setHoverStyle((prev) => ({ ...prev, opacity: 0 }));
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "nav",
+      {
+        className: cn(
+          "fixed z-50 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]",
+          "md:top-5 md:inset-x-0 md:max-w-6xl md:mx-auto md:rounded-2xl",
+          "top-0 inset-x-0 w-full border-b md:border",
+          isScrolled || mobileMenuOpen ? "bg-[#050507]/80 backdrop-blur-xl border-white/10 shadow-[0_8px_40px_-12px_rgba(0,0,0,0.8)]" : "bg-transparent border-transparent md:bg-[#050507]/40 md:backdrop-blur-md md:border-white/5"
+        ),
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "h-16 md:h-14 px-4 flex items-center justify-between", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            distExports.Link,
+            {
+              to: "/",
+              className: "flex items-center gap-3 group relative z-20",
+              title: "EdgeLancer Home",
+              onClick: () => setMobileMenuOpen(false),
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "img",
+                {
+                  src: "/favicon.png",
+                  alt: "Logo",
+                  width: 80,
+                  height: 80,
+                  className: "w-20 h-20 object-contain group-hover:scale-105 transition-transform duration-300"
+                }
+              )
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "div",
+            {
+              ref: navRef,
+              className: "hidden md:flex relative items-center bg-white/5 rounded-full p-1 border border-white/5 shadow-inner",
+              onMouseLeave: handleMouseLeave,
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "div",
+                  {
+                    className: "absolute top-1 bottom-1 left-0 bg-white/10 rounded-full transition-all duration-300 ease-out pointer-events-none",
+                    style: hoverStyle
+                  }
+                ),
+                dynamicNavItems.map((item, index) => {
+                  const isDropdown = !!item.children;
+                  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative group/dropdown h-full flex items-center", children: [
+                    isDropdown ? /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                      distExports.Link,
+                      {
+                        to: item.to,
+                        className: cn(
+                          "relative z-10 px-4 py-1.5 text-sm font-medium transition-colors duration-200 flex items-center gap-1 outline-none h-full",
+                          hoveredIndex === index ? "text-white" : "text-slate-400"
+                        ),
+                        onMouseEnter: (e) => handleMouseEnter(index, e),
+                        children: [
+                          item.label,
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronDown, { className: "w-3 h-3 mt-0.5 group-hover/dropdown:rotate-180 transition-transform duration-300" })
+                        ]
+                      }
+                    ) : /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                      distExports.Link,
+                      {
+                        to: item.to,
+                        className: cn(
+                          "relative z-10 px-4 py-1.5 text-sm font-medium transition-colors duration-200 block h-full flex items-center",
+                          activeIndex === index ? "text-white" : "text-slate-400 hover:text-white"
+                        ),
+                        onMouseEnter: (e) => handleMouseEnter(index, e),
+                        children: [
+                          item.label,
+                          activeIndex === index && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-indigo-400 rounded-full shadow-[0_0_8px_currentColor]" })
+                        ]
+                      }
+                    ),
+                    isDropdown && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute top-full left-1/2 -translate-x-1/2 pt-2 invisible opacity-0 translate-y-1 group-hover/dropdown:visible group-hover/dropdown:opacity-100 group-hover/dropdown:translate-y-0 transition-all duration-500 ease-out delay-200 group-hover/dropdown:delay-0", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-[600px] p-4 rounded-2xl border border-white/10 bg-[#0a0a0c]/95 backdrop-blur-2xl shadow-2xl grid grid-cols-2 gap-2", children: item.children?.map((child, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                      distExports.Link,
+                      {
+                        to: child.to,
+                        className: "flex items-start gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors group/item",
+                        children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-10 h-10 rounded-lg bg-white/5 border border-white/5 flex items-center justify-center text-slate-400 group-hover/item:text-indigo-400 group-hover/item:border-indigo-500/30 transition-all", children: /* @__PURE__ */ jsxRuntimeExports.jsx(child.icon, { className: "w-5 h-5" }) }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-sm font-medium text-slate-200 group-hover/item:text-white", children: child.label }),
+                            child.description && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-xs text-slate-400 group-hover/item:text-slate-300", children: child.description })
+                          ] })
+                        ]
+                      },
+                      i
+                    )) }) })
+                  ] }, item.label);
+                })
+              ]
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(distExports.Link, { to: "/contact", className: "hidden md:block group relative", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute -inset-1 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 opacity-20 blur-lg transition-all duration-500 group-hover:opacity-50 group-hover:blur-xl" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative overflow-hidden rounded-full p-[1px] transition-transform duration-300 active:scale-95", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute inset-[-1000%] animate-[spin_4s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)] group-hover:animate-[spin_2s_linear_infinite]" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs(Button, { className: "relative h-9 rounded-full bg-slate-950/90 backdrop-blur-sm px-6 text-sm font-semibold text-white transition-all duration-300 group-hover:bg-slate-900/90", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-50" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "relative flex items-center gap-2 bg-gradient-to-b from-white to-white/70 bg-clip-text text-transparent", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "tracking-wide", children: "Hire Us" }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowRight, { className: "w-3.5 h-3.5 text-indigo-400 transition-transform duration-300 group-hover:translate-x-1" })
+                  ] })
+                ] })
+              ] })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "button",
+              {
+                onClick: () => setMobileMenuOpen(!mobileMenuOpen),
+                className: "md:hidden relative z-50 p-2 text-slate-300 hover:text-white transition-colors",
+                children: mobileMenuOpen ? /* @__PURE__ */ jsxRuntimeExports.jsx(X, { className: "w-6 h-6" }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Menu, { className: "w-6 h-6" })
+              }
+            )
+          ] })
+        ] })
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      "div",
+      {
+        className: cn(
+          "fixed inset-0 z-40 bg-[#050507] md:hidden flex flex-col pt-24 px-6 transition-all duration-300 ease-in-out overflow-y-auto",
+          mobileMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"
+        ),
+        children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-col gap-2", children: dynamicNavItems.map((item, idx) => /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border-b border-white/5 last:border-0 pb-2", children: item.children ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "button",
+              {
+                onClick: () => setMobileCategoryOpen(!mobileCategoryOpen),
+                className: "w-full group flex items-center justify-between p-4 rounded-xl hover:bg-white/5 transition-all text-left",
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-lg font-medium text-slate-300 group-hover:text-white", children: item.label }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronDown, { className: cn("w-5 h-5 text-slate-600 transition-transform duration-300", mobileCategoryOpen ? "rotate-180 text-indigo-400" : "") })
+                ]
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: cn("overflow-hidden transition-all duration-300 px-4 space-y-1", mobileCategoryOpen ? "max-h-[500px] opacity-100 pb-4" : "max-h-0 opacity-0"), children: item.children.map((child, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              distExports.Link,
+              {
+                to: child.to,
+                onClick: () => setMobileMenuOpen(false),
+                className: "flex items-center gap-3 p-3 rounded-lg text-slate-400 hover:text-white hover:bg-white/5",
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(child.icon, { className: "w-4 h-4 text-indigo-400" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm", children: child.label })
+                ]
+              },
+              i
+            )) })
+          ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            distExports.Link,
+            {
+              to: item.to,
+              onClick: () => setMobileMenuOpen(false),
+              className: "group flex items-center justify-between p-4 rounded-xl hover:bg-white/5 transition-all",
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-lg font-medium text-slate-300 group-hover:text-white", children: item.label }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronRight, { className: "w-5 h-5 text-slate-600 group-hover:text-indigo-400 transition-colors" })
+              ]
+            }
+          ) }, item.label)) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-8 pb-10 space-y-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Link, { to: "/contact", onClick: () => setMobileMenuOpen(false), children: /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { className: "w-full h-12 text-base bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-900/20 rounded-xl", children: "Hire Us" }) }) })
+        ]
+      }
+    )
+  ] });
+}
+const SpotlightCard$1 = ({ children: children2, className = "", onClick }) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+  "div",
+  {
+    onClick,
+    className: `relative rounded-2xl border border-white/10 bg-[#12121a] backdrop-blur-xl hover:border-white/20 transition-all duration-300 cursor-pointer flex flex-col group overflow-hidden ${className}`,
+    children: children2
+  }
+);
+const iconPool = [
+  Zap,
+  Bot,
+  GitBranch,
+  Layers,
+  LayoutGrid,
+  Workflow,
+  Mail,
+  MessageSquare,
+  Globe,
+  Database,
+  FileText,
+  Share2,
+  Smartphone,
+  Cpu,
+  BarChart,
+  Settings,
+  Bell,
+  Cloud,
+  Code
+];
+const gradientPool = [
+  "from-purple-500 to-indigo-500",
+  "from-cyan-500 to-blue-500",
+  "from-fuchsia-500 to-pink-500",
+  "from-emerald-500 to-teal-500",
+  "from-orange-500 to-red-500",
+  "from-blue-400 to-indigo-600"
+];
+const getWorkflowVisuals = (id2, index = 0) => {
+  const safeId = id2 || index;
+  const Icon2 = iconPool[safeId % iconPool.length];
+  const gradient = gradientPool[safeId % gradientPool.length];
+  return { Icon: Icon2, gradient };
+};
+const ProductionTemplates = ({
+  initialWorkflows = [],
+  initialCategories = []
+}) => {
+  const navigate = distExports.useNavigate();
+  const [workflows, setWorkflows] = reactExports.useState(initialWorkflows);
+  const [categories, setCategories] = reactExports.useState(initialCategories);
+  const [activeCategory, setActiveCategory] = reactExports.useState(null);
+  const [searchQuery, setSearchQuery] = reactExports.useState("");
+  const [loading, setLoading] = reactExports.useState(initialWorkflows.length === 0);
+  const [hasLoadedInitial, setHasLoadedInitial] = reactExports.useState(initialWorkflows.length > 0);
+  reactExports.useEffect(() => {
+    if (initialCategories.length > 0) return;
+    workflowService.getWorkflowLibraryCategories().then((res) => {
+      if (res?.data) {
+        setCategories(res.data);
+      }
+    }).catch((error) => console.error("Error loading workflow categories:", error));
+  }, [initialCategories.length]);
+  reactExports.useEffect(() => {
+    if (hasLoadedInitial) {
+      setHasLoadedInitial(false);
+      return;
+    }
+    const fetchWorkflows = async () => {
+      try {
+        setLoading(true);
+        const templatesRes = await workflowService.getWorkflowLibrary(1, 12, searchQuery, activeCategory);
+        if (templatesRes?.data) {
+          setWorkflows(templatesRes.data);
+        } else {
+          setWorkflows([]);
+        }
+      } catch (error) {
+        console.error("Error loading workflow templates:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    const delayDebounceFn = setTimeout(() => {
+      fetchWorkflows();
+    }, 400);
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchQuery, activeCategory]);
+  const handleViewDetails = (slug) => {
+    navigate(`/workflow/${slug}`);
+  };
+  const filteredWorkflows = workflows.filter((wf) => {
+    const matchesCategory = activeCategory === null || Number(wf.category_id) === Number(activeCategory);
+    const query = searchQuery.toLowerCase();
+    const matchesSearch = !searchQuery || wf.title && wf.title.toLowerCase().includes(query) || wf.description && wf.description.toLowerCase().includes(query);
+    return matchesCategory && matchesSearch;
+  });
+  const visibleCategories = categories.slice(0, 8);
+  if (loading) {
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "relative py-24 px-6 bg-[#050505] min-h-screen font-sans text-slate-300 overflow-hidden", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-purple-900/20 blur-[120px] rounded-full pointer-events-none z-0 mix-blend-screen" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-7xl mx-auto flex items-center justify-center h-screen relative z-10", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col items-center gap-4", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Loader, { className: "w-8 h-8 animate-spin text-purple-500" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-slate-400", children: "Loading templates..." })
+      ] }) })
+    ] });
+  }
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "relative py-24 px-6 bg-[#050505] min-h-screen font-sans text-slate-300 overflow-hidden", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-purple-900/20 blur-[120px] rounded-full pointer-events-none z-0 mix-blend-screen" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-7xl mx-auto relative z-10", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col md:flex-row md:items-end justify-between mb-12 gap-8 border-b border-white/5 pb-8", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-purple-400 font-mono text-xs font-semibold uppercase tracking-wider mb-2", children: "Marketplace" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-4xl font-bold text-white tracking-tight mb-4", children: [
+            "Production ",
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-400", children: "Templates" })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-slate-400 max-w-xl text-lg leading-relaxed", children: "Deploy battle-tested automation architectures. Clone, configure, and run in seconds." })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative w-full md:w-80 group", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-gradient-to-r from-purple-500/10 to-indigo-500/10 rounded-xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Search, { className: "absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "input",
+              {
+                type: "text",
+                placeholder: "Search templates...",
+                value: searchQuery,
+                onChange: (e) => setSearchQuery(e.target.value),
+                className: "w-full pl-12 pr-4 py-3 rounded-xl border border-slate-800 bg-[#0a0a0a] text-white placeholder-slate-600 focus:outline-none focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 transition-all shadow-xl"
+              }
+            )
+          ] })
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-10", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center justify-between mb-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("h3", { className: "text-sm font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-2", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Filter, { className: "w-4 h-4" }),
+          "Categories"
+        ] }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex gap-2 flex-wrap transition-all duration-300", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "button",
+            {
+              onClick: () => {
+                setActiveCategory(null);
+                setSearchQuery("");
+              },
+              className: `flex-shrink-0 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 border ${activeCategory === null ? "bg-purple-500/10 border-purple-500/50 text-purple-300 shadow-[0_0_15px_rgba(168,85,247,0.2)]" : "bg-transparent border-slate-800 text-slate-400 hover:text-slate-300 hover:border-slate-700"}`,
+              children: "All Templates"
+            }
+          ),
+          visibleCategories.map((cat) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "button",
+            {
+              onClick: () => {
+                setActiveCategory(cat.id);
+                setSearchQuery("");
+              },
+              className: `flex-shrink-0 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 border ${activeCategory === cat.id ? "bg-purple-500/10 border-purple-500/50 text-purple-300 shadow-[0_0_15px_rgba(168,85,247,0.2)]" : "bg-transparent border-slate-800 text-slate-400 hover:text-slate-300 hover:border-slate-700"}`,
+              children: cat.title
+            },
+            cat.id
+          ))
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6", children: filteredWorkflows.map((workflow, index) => {
+        const { Icon: Icon2, gradient } = getWorkflowVisuals(workflow.id, index);
+        return /* @__PURE__ */ jsxRuntimeExports.jsx(
+          SpotlightCard$1,
+          {
+            className: "h-full",
+            onClick: () => handleViewDetails(workflow.slug),
+            children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-6 flex flex-col h-full", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start justify-between mb-4", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `w-12 h-12 rounded-xl bg-gradient-to-br ${gradient} flex items-center justify-center shadow-lg shadow-black/20 flex-shrink-0`, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon2, { className: "w-6 h-6 text-white" }) }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 flex-wrap justify-end", children: [
+                  Number(workflow.price) === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500/20 transition-colors", children: "Free" }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold border border-white/10 text-gray-300", children: [
+                    "$",
+                    workflow.price
+                  ] }),
+                  workflow.rating && /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-500 border border-amber-500/20", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(Star, { className: "w-3 h-3 fill-current" }),
+                    workflow.rating
+                  ] })
+                ] })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-4 flex-grow", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg font-semibold text-white mb-2 group-hover:text-cyan-400 transition-colors line-clamp-1", children: workflow.title }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-gray-400 line-clamp-2", children: workflow.description })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap gap-2 mb-6", children: [
+                workflow.category && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "inline-flex items-center px-2.5 py-0.5 rounded-full border border-white/10 text-gray-400 text-xs font-normal", children: workflow.category.title }),
+                workflow.nodes_count > 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full border border-white/10 text-gray-400 text-xs font-normal", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(LayoutGrid, { className: "w-3 h-3" }),
+                  workflow.nodes_count,
+                  " Nodes"
+                ] }),
+                workflow.difficulty && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "inline-flex items-center px-2.5 py-0.5 rounded-full border border-white/10 text-gray-400 text-xs font-normal capitalize", children: workflow.difficulty }),
+                workflow.time_saved_value && /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full border border-cyan-500/20 text-cyan-400 text-xs font-normal", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(Clock, { className: "w-3 h-3" }),
+                  workflow.time_saved_value,
+                  " ",
+                  workflow.time_saved_unit
+                ] })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between pt-4 border-t border-white/5 mt-auto", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 text-xs text-gray-400", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(Eye, { className: "w-4 h-4" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+                    workflow.views?.toLocaleString() || workflow.user_count?.toLocaleString() || 0,
+                    " views"
+                  ] })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "button",
+                  {
+                    onClick: (e) => {
+                      e.stopPropagation();
+                      handleViewDetails(workflow.slug);
+                    },
+                    className: "px-4 py-1.5 text-sm rounded-md bg-gradient-to-r from-cyan-500 to-fuchsia-500 text-white font-medium hover:opacity-90 transition-opacity border-0 shadow-lg",
+                    children: "Download"
+                  }
+                )
+              ] })
+            ] })
+          },
+          workflow.id
+        );
+      }) }),
+      filteredWorkflows.length === 0 && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-center py-12 border border-white/5 rounded-2xl bg-[#12121a] mt-8", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-slate-400 text-lg", children: "No templates found matching your criteria." }) })
+    ] })
+  ] });
+};
+const SpotlightCard = ({ children: children2, className, spotlightColor = "rgba(99, 102, 241, 0.15)", onClick }) => {
+  const divRef = reactExports.useRef(null);
+  const [position, setPosition] = reactExports.useState({ x: 0, y: 0 });
+  const [opacity, setOpacity] = reactExports.useState(0);
+  const handleMouseMove = (e) => {
+    if (!divRef.current) return;
+    const rect = divRef.current.getBoundingClientRect();
+    setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+  };
+  const handleMouseEnter = () => setOpacity(1);
+  const handleMouseLeave = () => setOpacity(0);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    "div",
+    {
+      ref: divRef,
+      onMouseMove: handleMouseMove,
+      onMouseEnter: handleMouseEnter,
+      onMouseLeave: handleMouseLeave,
+      onClick,
+      className: cn(
+        "relative overflow-hidden rounded-xl border border-slate-800 bg-[#0e0f14] text-slate-200 transition-all duration-300",
+        className
+      ),
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            className: "pointer-events-none absolute -inset-px opacity-0 transition-opacity duration-300 z-10",
+            style: {
+              opacity,
+              background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, ${spotlightColor}, transparent 40%)`
+            }
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "relative z-20 h-full", children: children2 })
+      ]
+    }
+  );
+};
+const BentoGrid = () => /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "py-16 md:py-32 px-4 md:px-6", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-7xl mx-auto", children: [
+  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-12 md:mb-20 max-w-3xl", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-3xl md:text-4xl font-bold text-white mb-4 md:mb-6", children: [
+      "How to Setup ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-indigo-500", children: "n8n on Local System." })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-base md:text-lg text-slate-400", children: "If you are looking for the best workflow automation tool, learning how to setup n8n on local system is a game-changer. Experience complete privacy, zero limits, and total control." })
+  ] }),
+  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 auto-rows-auto md:auto-rows-[300px]", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(SpotlightCard, { className: "md:col-span-2 md:row-span-2 p-6 md:p-10 flex flex-col justify-between group h-full", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative z-10", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-12 h-12 md:w-14 md:h-14 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center mb-6 text-indigo-400", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Terminal, { className: "w-6 h-6 md:w-7 md:h-7" }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-2xl md:text-3xl font-bold text-white mb-4", children: "Complete Local Installation" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-slate-400 max-w-md text-base md:text-lg mb-4", children: "Unlike cloud-only solutions, a local n8n installation gives you complete privacy, zero limits, and total control over your data." }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-slate-400 max-w-md text-base md:text-lg", children: [
+          "In this comprehensive guide, we'll walk you through the complete ",
+          /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "n8n local setup" }),
+          " process step-by-step to get your automation environment running perfectly."
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-8 w-full h-48 bg-black/50 rounded-lg border border-white/10 p-4 font-mono text-xs md:text-sm overflow-hidden relative", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-gradient-to-b from-transparent to-black/80 z-10" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-2 text-slate-400", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400", children: "$" }),
+            " npx n8n"
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: "➜  Downloading packages..." }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-white", title: "n8n local host url", children: "✔  n8n ready on http://localhost:5689" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400", children: "Press 'O'" }),
+            " to open in browser"
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+            "[20:14:02] INFO: ",
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: "Editor initialized perfectly" })
+          ] })
+        ] })
+      ] })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(SpotlightCard, { className: "p-6 md:p-8 flex flex-col justify-end group min-h-[250px]", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Settings, { className: "w-8 h-8 md:w-10 md:h-10 text-pink-500 mb-6" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg md:text-xl font-bold text-white mb-2", children: "Prerequisites" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { className: "text-sm md:text-base text-slate-400 list-disc pl-4 space-y-1", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Node.js (v18 or later)" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "npm (Package Manager)" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+          "Docker (optional for ",
+          /* @__PURE__ */ jsxRuntimeExports.jsx("em", { children: "n8n docker setup" }),
+          ")"
+        ] })
+      ] })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(SpotlightCard, { className: "p-6 md:p-8 flex flex-col justify-end group min-h-[250px]", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Zap, { className: "w-8 h-8 md:w-10 md:h-10 text-emerald-500 mb-6" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg md:text-xl font-bold text-white mb-2", children: "Method 1: npm (Fastest)" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm md:text-base text-slate-400 mb-4", children: "The quickest way to start automating locally today:" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("code", { className: "text-xs bg-black/50 p-2 rounded text-emerald-400 border border-emerald-500/20", children: "npx n8n" })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(SpotlightCard, { className: "md:col-span-2 p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-8 group", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 overflow-hidden", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Server, { className: "w-8 h-8 md:w-10 md:h-10 text-blue-500 mb-6" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg md:text-xl font-bold text-white mb-2", children: "Method 2: Docker Deployment" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm md:text-base text-slate-400 mb-4", children: [
+        "For robust ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "n8n automation local deployment" }),
+        ", Docker is the industry standard. It encapsulates dependencies perfectly and ensures a stable environment."
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("code", { className: "text-xs md:text-sm bg-black/50 p-3 rounded text-blue-400 border border-blue-500/20 block overflow-x-auto whitespace-nowrap", children: "docker run -it --rm --name n8n -p 5689:5689 -v ~/.n8n:/home/node/.n8n n8nio/n8n" })
+    ] }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(SpotlightCard, { className: "p-6 md:p-8 flex flex-col justify-center bg-indigo-600/10 border-indigo-500/30 min-h-[250px]", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(ShieldCheck, { className: "w-8 h-8 md:w-10 md:h-10 text-indigo-400 mb-6" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg md:text-xl font-bold text-white mb-2", children: "Why Local Setup?" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm md:text-base text-indigo-200", children: "Mastering local installation provides unparalleled benefits: workflow privacy, custom nodes, no rate limits, and zero recurring cloud costs for your system." })
+    ] })
+  ] })
+] }) });
+function toDate(argument) {
+  const argStr = Object.prototype.toString.call(argument);
+  if (argument instanceof Date || typeof argument === "object" && argStr === "[object Date]") {
+    return new argument.constructor(+argument);
+  } else if (typeof argument === "number" || argStr === "[object Number]" || typeof argument === "string" || argStr === "[object String]") {
+    return new Date(argument);
+  } else {
+    return /* @__PURE__ */ new Date(NaN);
+  }
+}
+function constructFrom(date, value) {
+  if (date instanceof Date) {
+    return new date.constructor(value);
+  } else {
+    return new Date(value);
+  }
+}
+const minutesInMonth = 43200;
+const minutesInDay = 1440;
+let defaultOptions$1 = {};
+function getDefaultOptions() {
+  return defaultOptions$1;
+}
+function getTimezoneOffsetInMilliseconds(date) {
+  const _date = toDate(date);
+  const utcDate = new Date(
+    Date.UTC(
+      _date.getFullYear(),
+      _date.getMonth(),
+      _date.getDate(),
+      _date.getHours(),
+      _date.getMinutes(),
+      _date.getSeconds(),
+      _date.getMilliseconds()
+    )
+  );
+  utcDate.setUTCFullYear(_date.getFullYear());
+  return +date - +utcDate;
+}
+function compareAsc(dateLeft, dateRight) {
+  const _dateLeft = toDate(dateLeft);
+  const _dateRight = toDate(dateRight);
+  const diff = _dateLeft.getTime() - _dateRight.getTime();
+  if (diff < 0) {
+    return -1;
+  } else if (diff > 0) {
+    return 1;
+  } else {
+    return diff;
+  }
+}
+function constructNow(date) {
+  return constructFrom(date, Date.now());
+}
+function differenceInCalendarMonths(dateLeft, dateRight) {
+  const _dateLeft = toDate(dateLeft);
+  const _dateRight = toDate(dateRight);
+  const yearDiff = _dateLeft.getFullYear() - _dateRight.getFullYear();
+  const monthDiff = _dateLeft.getMonth() - _dateRight.getMonth();
+  return yearDiff * 12 + monthDiff;
+}
+function getRoundingMethod(method) {
+  return (number) => {
+    const round = method ? Math[method] : Math.trunc;
+    const result = round(number);
+    return result === 0 ? 0 : result;
+  };
+}
+function differenceInMilliseconds(dateLeft, dateRight) {
+  return +toDate(dateLeft) - +toDate(dateRight);
+}
+function endOfDay(date) {
+  const _date = toDate(date);
+  _date.setHours(23, 59, 59, 999);
+  return _date;
+}
+function endOfMonth(date) {
+  const _date = toDate(date);
+  const month = _date.getMonth();
+  _date.setFullYear(_date.getFullYear(), month + 1, 0);
+  _date.setHours(23, 59, 59, 999);
+  return _date;
+}
+function isLastDayOfMonth(date) {
+  const _date = toDate(date);
+  return +endOfDay(_date) === +endOfMonth(_date);
+}
+function differenceInMonths(dateLeft, dateRight) {
+  const _dateLeft = toDate(dateLeft);
+  const _dateRight = toDate(dateRight);
+  const sign2 = compareAsc(_dateLeft, _dateRight);
+  const difference = Math.abs(
+    differenceInCalendarMonths(_dateLeft, _dateRight)
+  );
+  let result;
+  if (difference < 1) {
+    result = 0;
+  } else {
+    if (_dateLeft.getMonth() === 1 && _dateLeft.getDate() > 27) {
+      _dateLeft.setDate(30);
+    }
+    _dateLeft.setMonth(_dateLeft.getMonth() - sign2 * difference);
+    let isLastMonthNotFull = compareAsc(_dateLeft, _dateRight) === -sign2;
+    if (isLastDayOfMonth(toDate(dateLeft)) && difference === 1 && compareAsc(dateLeft, _dateRight) === 1) {
+      isLastMonthNotFull = false;
+    }
+    result = sign2 * (difference - Number(isLastMonthNotFull));
+  }
+  return result === 0 ? 0 : result;
+}
+function differenceInSeconds(dateLeft, dateRight, options) {
+  const diff = differenceInMilliseconds(dateLeft, dateRight) / 1e3;
+  return getRoundingMethod(options?.roundingMethod)(diff);
+}
+const formatDistanceLocale = {
+  lessThanXSeconds: {
+    one: "less than a second",
+    other: "less than {{count}} seconds"
+  },
+  xSeconds: {
+    one: "1 second",
+    other: "{{count}} seconds"
+  },
+  halfAMinute: "half a minute",
+  lessThanXMinutes: {
+    one: "less than a minute",
+    other: "less than {{count}} minutes"
+  },
+  xMinutes: {
+    one: "1 minute",
+    other: "{{count}} minutes"
+  },
+  aboutXHours: {
+    one: "about 1 hour",
+    other: "about {{count}} hours"
+  },
+  xHours: {
+    one: "1 hour",
+    other: "{{count}} hours"
+  },
+  xDays: {
+    one: "1 day",
+    other: "{{count}} days"
+  },
+  aboutXWeeks: {
+    one: "about 1 week",
+    other: "about {{count}} weeks"
+  },
+  xWeeks: {
+    one: "1 week",
+    other: "{{count}} weeks"
+  },
+  aboutXMonths: {
+    one: "about 1 month",
+    other: "about {{count}} months"
+  },
+  xMonths: {
+    one: "1 month",
+    other: "{{count}} months"
+  },
+  aboutXYears: {
+    one: "about 1 year",
+    other: "about {{count}} years"
+  },
+  xYears: {
+    one: "1 year",
+    other: "{{count}} years"
+  },
+  overXYears: {
+    one: "over 1 year",
+    other: "over {{count}} years"
+  },
+  almostXYears: {
+    one: "almost 1 year",
+    other: "almost {{count}} years"
+  }
+};
+const formatDistance$1 = (token, count2, options) => {
+  let result;
+  const tokenValue = formatDistanceLocale[token];
+  if (typeof tokenValue === "string") {
+    result = tokenValue;
+  } else if (count2 === 1) {
+    result = tokenValue.one;
+  } else {
+    result = tokenValue.other.replace("{{count}}", count2.toString());
+  }
+  if (options?.addSuffix) {
+    if (options.comparison && options.comparison > 0) {
+      return "in " + result;
+    } else {
+      return result + " ago";
+    }
+  }
+  return result;
+};
+function buildFormatLongFn(args) {
+  return (options = {}) => {
+    const width = options.width ? String(options.width) : args.defaultWidth;
+    const format = args.formats[width] || args.formats[args.defaultWidth];
+    return format;
+  };
+}
+const dateFormats = {
+  full: "EEEE, MMMM do, y",
+  long: "MMMM do, y",
+  medium: "MMM d, y",
+  short: "MM/dd/yyyy"
+};
+const timeFormats = {
+  full: "h:mm:ss a zzzz",
+  long: "h:mm:ss a z",
+  medium: "h:mm:ss a",
+  short: "h:mm a"
+};
+const dateTimeFormats = {
+  full: "{{date}} 'at' {{time}}",
+  long: "{{date}} 'at' {{time}}",
+  medium: "{{date}}, {{time}}",
+  short: "{{date}}, {{time}}"
+};
+const formatLong = {
+  date: buildFormatLongFn({
+    formats: dateFormats,
+    defaultWidth: "full"
+  }),
+  time: buildFormatLongFn({
+    formats: timeFormats,
+    defaultWidth: "full"
+  }),
+  dateTime: buildFormatLongFn({
+    formats: dateTimeFormats,
+    defaultWidth: "full"
+  })
+};
+const formatRelativeLocale = {
+  lastWeek: "'last' eeee 'at' p",
+  yesterday: "'yesterday at' p",
+  today: "'today at' p",
+  tomorrow: "'tomorrow at' p",
+  nextWeek: "eeee 'at' p",
+  other: "P"
+};
+const formatRelative = (token, _date, _baseDate, _options) => formatRelativeLocale[token];
+function buildLocalizeFn(args) {
+  return (value, options) => {
+    const context2 = options?.context ? String(options.context) : "standalone";
+    let valuesArray;
+    if (context2 === "formatting" && args.formattingValues) {
+      const defaultWidth2 = args.defaultFormattingWidth || args.defaultWidth;
+      const width = options?.width ? String(options.width) : defaultWidth2;
+      valuesArray = args.formattingValues[width] || args.formattingValues[defaultWidth2];
+    } else {
+      const defaultWidth2 = args.defaultWidth;
+      const width = options?.width ? String(options.width) : args.defaultWidth;
+      valuesArray = args.values[width] || args.values[defaultWidth2];
+    }
+    const index = args.argumentCallback ? args.argumentCallback(value) : value;
+    return valuesArray[index];
+  };
+}
+const eraValues = {
+  narrow: ["B", "A"],
+  abbreviated: ["BC", "AD"],
+  wide: ["Before Christ", "Anno Domini"]
+};
+const quarterValues = {
+  narrow: ["1", "2", "3", "4"],
+  abbreviated: ["Q1", "Q2", "Q3", "Q4"],
+  wide: ["1st quarter", "2nd quarter", "3rd quarter", "4th quarter"]
+};
+const monthValues = {
+  narrow: ["J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"],
+  abbreviated: [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec"
+  ],
+  wide: [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ]
+};
+const dayValues = {
+  narrow: ["S", "M", "T", "W", "T", "F", "S"],
+  short: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+  abbreviated: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+  wide: [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday"
+  ]
+};
+const dayPeriodValues = {
+  narrow: {
+    am: "a",
+    pm: "p",
+    midnight: "mi",
+    noon: "n",
+    morning: "morning",
+    afternoon: "afternoon",
+    evening: "evening",
+    night: "night"
+  },
+  abbreviated: {
+    am: "AM",
+    pm: "PM",
+    midnight: "midnight",
+    noon: "noon",
+    morning: "morning",
+    afternoon: "afternoon",
+    evening: "evening",
+    night: "night"
+  },
+  wide: {
+    am: "a.m.",
+    pm: "p.m.",
+    midnight: "midnight",
+    noon: "noon",
+    morning: "morning",
+    afternoon: "afternoon",
+    evening: "evening",
+    night: "night"
+  }
+};
+const formattingDayPeriodValues = {
+  narrow: {
+    am: "a",
+    pm: "p",
+    midnight: "mi",
+    noon: "n",
+    morning: "in the morning",
+    afternoon: "in the afternoon",
+    evening: "in the evening",
+    night: "at night"
+  },
+  abbreviated: {
+    am: "AM",
+    pm: "PM",
+    midnight: "midnight",
+    noon: "noon",
+    morning: "in the morning",
+    afternoon: "in the afternoon",
+    evening: "in the evening",
+    night: "at night"
+  },
+  wide: {
+    am: "a.m.",
+    pm: "p.m.",
+    midnight: "midnight",
+    noon: "noon",
+    morning: "in the morning",
+    afternoon: "in the afternoon",
+    evening: "in the evening",
+    night: "at night"
+  }
+};
+const ordinalNumber = (dirtyNumber, _options) => {
+  const number = Number(dirtyNumber);
+  const rem100 = number % 100;
+  if (rem100 > 20 || rem100 < 10) {
+    switch (rem100 % 10) {
+      case 1:
+        return number + "st";
+      case 2:
+        return number + "nd";
+      case 3:
+        return number + "rd";
+    }
+  }
+  return number + "th";
+};
+const localize = {
+  ordinalNumber,
+  era: buildLocalizeFn({
+    values: eraValues,
+    defaultWidth: "wide"
+  }),
+  quarter: buildLocalizeFn({
+    values: quarterValues,
+    defaultWidth: "wide",
+    argumentCallback: (quarter) => quarter - 1
+  }),
+  month: buildLocalizeFn({
+    values: monthValues,
+    defaultWidth: "wide"
+  }),
+  day: buildLocalizeFn({
+    values: dayValues,
+    defaultWidth: "wide"
+  }),
+  dayPeriod: buildLocalizeFn({
+    values: dayPeriodValues,
+    defaultWidth: "wide",
+    formattingValues: formattingDayPeriodValues,
+    defaultFormattingWidth: "wide"
+  })
+};
+function buildMatchFn(args) {
+  return (string, options = {}) => {
+    const width = options.width;
+    const matchPattern = width && args.matchPatterns[width] || args.matchPatterns[args.defaultMatchWidth];
+    const matchResult = string.match(matchPattern);
+    if (!matchResult) {
+      return null;
+    }
+    const matchedString = matchResult[0];
+    const parsePatterns = width && args.parsePatterns[width] || args.parsePatterns[args.defaultParseWidth];
+    const key = Array.isArray(parsePatterns) ? findIndex(parsePatterns, (pattern) => pattern.test(matchedString)) : (
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- I challange you to fix the type
+      findKey(parsePatterns, (pattern) => pattern.test(matchedString))
+    );
+    let value;
+    value = args.valueCallback ? args.valueCallback(key) : key;
+    value = options.valueCallback ? (
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- I challange you to fix the type
+      options.valueCallback(value)
+    ) : value;
+    const rest = string.slice(matchedString.length);
+    return { value, rest };
+  };
+}
+function findKey(object, predicate) {
+  for (const key in object) {
+    if (Object.prototype.hasOwnProperty.call(object, key) && predicate(object[key])) {
+      return key;
+    }
+  }
+  return void 0;
+}
+function findIndex(array2, predicate) {
+  for (let key = 0; key < array2.length; key++) {
+    if (predicate(array2[key])) {
+      return key;
+    }
+  }
+  return void 0;
+}
+function buildMatchPatternFn(args) {
+  return (string, options = {}) => {
+    const matchResult = string.match(args.matchPattern);
+    if (!matchResult) return null;
+    const matchedString = matchResult[0];
+    const parseResult = string.match(args.parsePattern);
+    if (!parseResult) return null;
+    let value = args.valueCallback ? args.valueCallback(parseResult[0]) : parseResult[0];
+    value = options.valueCallback ? options.valueCallback(value) : value;
+    const rest = string.slice(matchedString.length);
+    return { value, rest };
+  };
+}
+const matchOrdinalNumberPattern = /^(\d+)(th|st|nd|rd)?/i;
+const parseOrdinalNumberPattern = /\d+/i;
+const matchEraPatterns = {
+  narrow: /^(b|a)/i,
+  abbreviated: /^(b\.?\s?c\.?|b\.?\s?c\.?\s?e\.?|a\.?\s?d\.?|c\.?\s?e\.?)/i,
+  wide: /^(before christ|before common era|anno domini|common era)/i
+};
+const parseEraPatterns = {
+  any: [/^b/i, /^(a|c)/i]
+};
+const matchQuarterPatterns = {
+  narrow: /^[1234]/i,
+  abbreviated: /^q[1234]/i,
+  wide: /^[1234](th|st|nd|rd)? quarter/i
+};
+const parseQuarterPatterns = {
+  any: [/1/i, /2/i, /3/i, /4/i]
+};
+const matchMonthPatterns = {
+  narrow: /^[jfmasond]/i,
+  abbreviated: /^(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)/i,
+  wide: /^(january|february|march|april|may|june|july|august|september|october|november|december)/i
+};
+const parseMonthPatterns = {
+  narrow: [
+    /^j/i,
+    /^f/i,
+    /^m/i,
+    /^a/i,
+    /^m/i,
+    /^j/i,
+    /^j/i,
+    /^a/i,
+    /^s/i,
+    /^o/i,
+    /^n/i,
+    /^d/i
+  ],
+  any: [
+    /^ja/i,
+    /^f/i,
+    /^mar/i,
+    /^ap/i,
+    /^may/i,
+    /^jun/i,
+    /^jul/i,
+    /^au/i,
+    /^s/i,
+    /^o/i,
+    /^n/i,
+    /^d/i
+  ]
+};
+const matchDayPatterns = {
+  narrow: /^[smtwf]/i,
+  short: /^(su|mo|tu|we|th|fr|sa)/i,
+  abbreviated: /^(sun|mon|tue|wed|thu|fri|sat)/i,
+  wide: /^(sunday|monday|tuesday|wednesday|thursday|friday|saturday)/i
+};
+const parseDayPatterns = {
+  narrow: [/^s/i, /^m/i, /^t/i, /^w/i, /^t/i, /^f/i, /^s/i],
+  any: [/^su/i, /^m/i, /^tu/i, /^w/i, /^th/i, /^f/i, /^sa/i]
+};
+const matchDayPeriodPatterns = {
+  narrow: /^(a|p|mi|n|(in the|at) (morning|afternoon|evening|night))/i,
+  any: /^([ap]\.?\s?m\.?|midnight|noon|(in the|at) (morning|afternoon|evening|night))/i
+};
+const parseDayPeriodPatterns = {
+  any: {
+    am: /^a/i,
+    pm: /^p/i,
+    midnight: /^mi/i,
+    noon: /^no/i,
+    morning: /morning/i,
+    afternoon: /afternoon/i,
+    evening: /evening/i,
+    night: /night/i
+  }
+};
+const match = {
+  ordinalNumber: buildMatchPatternFn({
+    matchPattern: matchOrdinalNumberPattern,
+    parsePattern: parseOrdinalNumberPattern,
+    valueCallback: (value) => parseInt(value, 10)
+  }),
+  era: buildMatchFn({
+    matchPatterns: matchEraPatterns,
+    defaultMatchWidth: "wide",
+    parsePatterns: parseEraPatterns,
+    defaultParseWidth: "any"
+  }),
+  quarter: buildMatchFn({
+    matchPatterns: matchQuarterPatterns,
+    defaultMatchWidth: "wide",
+    parsePatterns: parseQuarterPatterns,
+    defaultParseWidth: "any",
+    valueCallback: (index) => index + 1
+  }),
+  month: buildMatchFn({
+    matchPatterns: matchMonthPatterns,
+    defaultMatchWidth: "wide",
+    parsePatterns: parseMonthPatterns,
+    defaultParseWidth: "any"
+  }),
+  day: buildMatchFn({
+    matchPatterns: matchDayPatterns,
+    defaultMatchWidth: "wide",
+    parsePatterns: parseDayPatterns,
+    defaultParseWidth: "any"
+  }),
+  dayPeriod: buildMatchFn({
+    matchPatterns: matchDayPeriodPatterns,
+    defaultMatchWidth: "any",
+    parsePatterns: parseDayPeriodPatterns,
+    defaultParseWidth: "any"
+  })
+};
+const enUS = {
+  code: "en-US",
+  formatDistance: formatDistance$1,
+  formatLong,
+  formatRelative,
+  localize,
+  match,
+  options: {
+    weekStartsOn: 0,
+    firstWeekContainsDate: 1
+  }
+};
+function formatDistance(date, baseDate, options) {
+  const defaultOptions2 = getDefaultOptions();
+  const locale = options?.locale ?? defaultOptions2.locale ?? enUS;
+  const minutesInAlmostTwoDays = 2520;
+  const comparison = compareAsc(date, baseDate);
+  if (isNaN(comparison)) {
+    throw new RangeError("Invalid time value");
+  }
+  const localizeOptions = Object.assign({}, options, {
+    addSuffix: options?.addSuffix,
+    comparison
+  });
+  let dateLeft;
+  let dateRight;
+  if (comparison > 0) {
+    dateLeft = toDate(baseDate);
+    dateRight = toDate(date);
+  } else {
+    dateLeft = toDate(date);
+    dateRight = toDate(baseDate);
+  }
+  const seconds = differenceInSeconds(dateRight, dateLeft);
+  const offsetInSeconds = (getTimezoneOffsetInMilliseconds(dateRight) - getTimezoneOffsetInMilliseconds(dateLeft)) / 1e3;
+  const minutes = Math.round((seconds - offsetInSeconds) / 60);
+  let months;
+  if (minutes < 2) {
+    if (options?.includeSeconds) {
+      if (seconds < 5) {
+        return locale.formatDistance("lessThanXSeconds", 5, localizeOptions);
+      } else if (seconds < 10) {
+        return locale.formatDistance("lessThanXSeconds", 10, localizeOptions);
+      } else if (seconds < 20) {
+        return locale.formatDistance("lessThanXSeconds", 20, localizeOptions);
+      } else if (seconds < 40) {
+        return locale.formatDistance("halfAMinute", 0, localizeOptions);
+      } else if (seconds < 60) {
+        return locale.formatDistance("lessThanXMinutes", 1, localizeOptions);
+      } else {
+        return locale.formatDistance("xMinutes", 1, localizeOptions);
+      }
+    } else {
+      if (minutes === 0) {
+        return locale.formatDistance("lessThanXMinutes", 1, localizeOptions);
+      } else {
+        return locale.formatDistance("xMinutes", minutes, localizeOptions);
+      }
+    }
+  } else if (minutes < 45) {
+    return locale.formatDistance("xMinutes", minutes, localizeOptions);
+  } else if (minutes < 90) {
+    return locale.formatDistance("aboutXHours", 1, localizeOptions);
+  } else if (minutes < minutesInDay) {
+    const hours = Math.round(minutes / 60);
+    return locale.formatDistance("aboutXHours", hours, localizeOptions);
+  } else if (minutes < minutesInAlmostTwoDays) {
+    return locale.formatDistance("xDays", 1, localizeOptions);
+  } else if (minutes < minutesInMonth) {
+    const days = Math.round(minutes / minutesInDay);
+    return locale.formatDistance("xDays", days, localizeOptions);
+  } else if (minutes < minutesInMonth * 2) {
+    months = Math.round(minutes / minutesInMonth);
+    return locale.formatDistance("aboutXMonths", months, localizeOptions);
+  }
+  months = differenceInMonths(dateRight, dateLeft);
+  if (months < 12) {
+    const nearestMonth = Math.round(minutes / minutesInMonth);
+    return locale.formatDistance("xMonths", nearestMonth, localizeOptions);
+  } else {
+    const monthsSinceStartOfYear = months % 12;
+    const years = Math.trunc(months / 12);
+    if (monthsSinceStartOfYear < 3) {
+      return locale.formatDistance("aboutXYears", years, localizeOptions);
+    } else if (monthsSinceStartOfYear < 9) {
+      return locale.formatDistance("overXYears", years, localizeOptions);
+    } else {
+      return locale.formatDistance("almostXYears", years + 1, localizeOptions);
+    }
+  }
+}
+function formatDistanceToNow(date, options) {
+  return formatDistance(date, constructNow(date), options);
+}
+const getImageUrl = (url) => {
+  if (!url) return null;
+  if (url.includes("localhost")) return null;
+  return url;
+};
+const calculateReadTime = (content) => {
+  if (!content) return "5 min read";
+  const words = content.split(/\s+/).length;
+  return `${Math.ceil(words / 200)} min read`;
+};
+const BlogsSection = ({ initialBlogs = [] }) => {
+  const blogs = reactExports.useMemo(() => {
+    if (initialBlogs.length <= 6) return initialBlogs;
+    const shuffled = [...initialBlogs].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, 6);
+  }, [initialBlogs]);
+  if (blogs.length === 0) return null;
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "py-16 md:py-24 px-4 md:px-6 border-t border-white/5 bg-[#020204]", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-7xl mx-auto", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col md:flex-row justify-between items-start md:items-end mb-8 md:mb-12 gap-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-2xl md:text-3xl font-bold text-white mb-2", children: "Latest from the Blog" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-slate-400 text-sm md:text-base", children: "Tips, tutorials, and insights on workflow automation." })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        distExports.Link,
+        {
+          to: "/blogs",
+          title: "View all blog posts",
+          className: "text-indigo-400 hover:text-indigo-300 h-auto text-sm md:text-base group flex items-center",
+          children: [
+            "View all posts ",
+            /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowRight, { className: "w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" })
+          ]
+        }
+      )
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6", children: blogs.map((blog) => /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Link, { to: `/blogs/${blog.slug}`, "aria-label": `Read: ${blog.title}`, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(SpotlightCard, { className: "group cursor-pointer h-full flex flex-col", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative aspect-[16/9] overflow-hidden rounded-t-xl bg-slate-900", children: [
+        getImageUrl(blog.image_url) ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "img",
+          {
+            src: getImageUrl(blog.image_url),
+            alt: blog.title,
+            className: "w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          }
+        ) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-full h-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Eye, { className: "w-8 h-8 text-slate-600" }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-gradient-to-t from-[#0e0f14] via-transparent to-transparent" }),
+        blog.category?.title && /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "absolute top-3 left-3 px-2 py-1 text-xs font-medium rounded-md bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 flex items-center gap-1", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Zap, { className: "w-3 h-3" }),
+          blog.category.title
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-5 flex flex-col flex-1", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg font-semibold text-white mb-2 group-hover:text-cyan-400 transition-colors line-clamp-2", children: blog.title }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-slate-400 leading-relaxed line-clamp-2 mb-4", children: blog.description }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-auto flex items-center gap-4 text-xs text-slate-500", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "flex items-center gap-1", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Calendar, { className: "w-3 h-3" }),
+            formatDistanceToNow(new Date(blog.published_at || blog.created_at || Date.now()), { addSuffix: true })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "flex items-center gap-1", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Clock, { className: "w-3 h-3" }),
+            calculateReadTime(blog.content)
+          ] })
+        ] })
+      ] })
+    ] }) }, blog.id)) })
+  ] }) });
+};
+const CategoriesSection = ({ initialCategories = [] }) => {
+  const navigate = distExports.useNavigate();
+  const [categories, setCategories] = reactExports.useState(initialCategories);
+  const [loading, setLoading] = reactExports.useState(initialCategories.length === 0);
+  const categoryIcons = [
+    BarChart3,
+    Bot,
+    FileCode,
+    FileJson,
+    GitBranch,
+    Globe,
+    Mail,
+    MessageSquare,
+    Share2,
+    ShieldCheck,
+    Terminal,
+    Users,
+    Workflow,
+    Zap
+  ];
+  const getIconForCategory = (cat, index) => {
+    if (!cat.title) return categoryIcons[index % categoryIcons.length];
+    const hash = cat.title.split("").reduce((acc, ch) => acc + ch.charCodeAt(0), 0);
+    return categoryIcons[hash % categoryIcons.length];
+  };
+  reactExports.useEffect(() => {
+    if (initialCategories.length > 0) {
+      const withIcons = initialCategories.slice(0, 9).map((cat, index) => ({
+        ...cat,
+        icon: getIconForCategory(cat, index)
+      }));
+      setCategories(withIcons);
+      setLoading(false);
+      return;
+    }
+    const fetchCategories = async () => {
+      try {
+        setLoading(true);
+        const response = await workflowService.getWorkflowLibraryCategories();
+        if (response.success && response.data) {
+          const sortedCategories = [...response.data].sort((a, b) => {
+            const countA = typeof a.workflows_count === "number" ? a.workflows_count : 0;
+            const countB = typeof b.workflows_count === "number" ? b.workflows_count : 0;
+            return countB - countA;
+          });
+          const categoriesWithIcons = sortedCategories.slice(0, 9).map((cat, index) => ({
+            ...cat,
+            icon: getIconForCategory(cat, index)
+          }));
+          setCategories(categoriesWithIcons);
+        }
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchCategories();
+  }, [initialCategories.length]);
+  const handleCategoryClick = (slug) => {
+    navigate(`/workflows?category=${slug}`);
+  };
+  if (loading) {
+    return /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "py-16 md:py-24 px-4 md:px-6 border-t border-white/5 bg-[#020204]", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-7xl mx-auto", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-col md:flex-row justify-between items-start md:items-end mb-8 md:mb-12 gap-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-2xl md:text-3xl font-bold text-white mb-2", children: "Browse by Category" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-slate-400 text-sm md:text-base", children: "Find a starting point for your next automation." })
+      ] }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6", children: [1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-5 md:p-6 bg-[#0e0f14] rounded-xl border border-slate-800 animate-pulse", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-10 h-10 bg-slate-800 rounded-lg mb-4" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-6 bg-slate-800 rounded mb-2 w-3/4" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-4 bg-slate-800 rounded w-full" })
+      ] }, i)) })
+    ] }) });
+  }
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "py-16 md:py-24 px-4 md:px-6 border-t border-white/5 bg-[#020204]", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-7xl mx-auto", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col md:flex-row justify-between items-start md:items-end mb-8 md:mb-12 gap-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-2xl md:text-3xl font-bold text-white mb-2", children: "Browse by Category" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-slate-400 text-sm md:text-base", children: "Find a starting point for your next automation." })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        distExports.Link,
+        {
+          to: "/workflows",
+          title: "View all workflow categories and templates",
+          className: "text-indigo-400 hover:text-indigo-300 p-0 hover:bg-transparent md:hover:bg-accent md:p-4 h-auto text-sm md:text-base group flex items-center",
+          children: [
+            "View all categories ",
+            /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowRight, { className: "w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" })
+          ]
+        }
+      )
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6", children: categories.map((cat) => {
+      const Icon2 = cat.icon || Workflow;
+      return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        SpotlightCard,
+        {
+          className: "group p-5 md:p-6 cursor-pointer",
+          onClick: () => handleCategoryClick(cat.slug),
+          children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start justify-between mb-4", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-10 h-10 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center group-hover:bg-indigo-500/10 group-hover:border-indigo-500/50 transition-colors", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon2, { className: "w-5 h-5 text-slate-400 group-hover:text-indigo-400 transition-colors" }) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowRight, { className: "w-4 h-4 text-slate-600 -translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all" })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg font-semibold text-white mb-2", children: cat.title }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-slate-400 leading-relaxed", children: cat.badge_text || `Discover ${cat.title.toLowerCase()} automation workflows` })
+          ]
+        },
+        cat.id
+      );
+    }) })
+  ] }) });
+};
+const CodeDemoSection = () => /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "py-16 md:py-24 bg-[#0a0a0a] border-y border-white/5 overflow-hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-7xl mx-auto px-4 md:px-6 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center", children: [
+  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-8 order-2 lg:order-1", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-3xl md:text-4xl font-bold text-white", children: [
+      "Download & Import ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      "Ready-to-Use ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-indigo-500", children: "n8n Workflows." })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-base md:text-lg text-slate-400 leading-relaxed", children: "Instantly grab powerful workflow JSON templates that get the best views. Our analysis gives you complete workflow details, custom nodes, and a seamless import experience right into your secure n8n editor." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-4", children: [
+      { title: "One-Click Import", desc: "Simply copy our JSON templates directly into your n8n workspace." },
+      { title: "Complete Node Analysis", desc: "Every template includes complete descriptions and analysis of nodes." },
+      { title: "Free Download", desc: "Download JSON files to keep backups before launching in n8n." }
+    ].map((item, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "flex gap-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-1 w-6 h-6 rounded-full bg-indigo-500/20 flex items-center justify-center shrink-0", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Check, { className: "w-3 h-3 text-indigo-400" }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-bold text-white text-sm md:text-base", children: item.title }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs md:text-sm text-slate-400", children: item.desc })
+      ] })
+    ] }, i)) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center gap-4 pt-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("button", { className: "flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl font-medium transition-colors", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Download, { className: "w-4 h-4" }),
+        "Download JSON Template"
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("button", { className: "flex items-center gap-2 bg-white/5 hover:bg-white/10 text-white px-6 py-3 rounded-xl font-medium transition-colors border border-white/10", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Copy, { className: "w-4 h-4" }),
+        "Copy to Clipboard"
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: "http://localhost:5689", title: "n8n local host url", target: "_blank", rel: "noreferrer", className: "flex items-center gap-2 bg-white/5 hover:bg-white/10 text-slate-300 px-6 py-3 rounded-xl font-medium transition-colors border border-white/10 text-sm", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(ExternalLink, { className: "w-4 h-4" }),
+        "Open Local n8n Editor"
+      ] })
+    ] })
+  ] }),
+  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-xl border border-white/10 bg-[#050505] shadow-2xl overflow-hidden flex flex-col h-[450px] md:h-[550px] w-full order-1 lg:order-2", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "h-10 border-b border-white/5 flex items-center px-4 bg-[#0e0e0e] justify-between shrink-0", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex gap-1.5", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-3 h-3 rounded-full bg-slate-700" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-3 h-3 rounded-full bg-slate-700" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-3 h-3 rounded-full bg-slate-700" })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-xs text-slate-400 font-mono", children: "workflow-analysis.json" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-10" })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-1 overflow-hidden", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "w-48 border-r border-white/5 bg-[#0a0a0a] p-4 hidden md:block shrink-0", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-[10px] font-bold text-slate-400 uppercase mb-3", children: "Templates" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 text-sm text-indigo-400 bg-indigo-500/10 p-2 rounded cursor-pointer", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(FileJson, { className: "w-4 h-4" }),
+            " workflow-analysis.json"
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 text-sm text-slate-400 p-2 cursor-pointer hover:text-white", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(FileCode, { className: "w-4 h-4" }),
+            " README.md"
+          ] })
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 p-4 md:p-6 font-mono text-xs md:text-sm overflow-auto custom-scrollbar", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-slate-300 whitespace-pre", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-slate-400", children: '// How to use: Download this JSON and click "Import from File" or paste it directly in your n8n editor.' }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "{",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "  ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"name"' }),
+        ": ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400", children: '"Complete SEO & Data Analysis Workflow"' }),
+        ",",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "  ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"nodes"' }),
+        ": [",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "    ",
+        "{",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "      ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"parameters"' }),
+        ": ",
+        "{",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "        ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"method"' }),
+        ": ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400", children: '"GET"' }),
+        ",",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "        ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"url"' }),
+        ": ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400", children: '"https://api.edgelancer.com/api/workflow/top-view"' }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "      ",
+        "}",
+        ",",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "      ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"id"' }),
+        ": ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400", children: '"4a2c9183-b715"' }),
+        ",",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "      ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"name"' }),
+        ": ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400", children: '"Fetch Top Views API"' }),
+        ",",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "      ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"type"' }),
+        ": ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400", children: '"n8n-nodes-base.httpRequest"' }),
+        ",",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "      ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"typeVersion"' }),
+        ": ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-orange-400", children: "4.1" }),
+        ",",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "      ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"position"' }),
+        ": [",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-orange-400", children: "460" }),
+        ", ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-orange-400", children: "260" }),
+        "]",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "    ",
+        "}",
+        ",",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "    ",
+        "{",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "      ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"parameters"' }),
+        ": ",
+        "{",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "        ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"content"' }),
+        ": ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400", children: '"## Complete Workflow Details\\n\\nThis template analyzes the data fetched and returns custom tags to be previewed."' }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "      ",
+        "}",
+        ",",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "      ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"id"' }),
+        ": ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400", children: '"9922ffaa-bb11"' }),
+        ",",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "      ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"name"' }),
+        ": ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400", children: '"Sticky Note"' }),
+        ",",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "      ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"type"' }),
+        ": ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400", children: '"n8n-nodes-base.stickyNote"' }),
+        ",",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "      ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"typeVersion"' }),
+        ": ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-orange-400", children: "1" }),
+        ",",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "      ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"position"' }),
+        ": [",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-orange-400", children: "240" }),
+        ", ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-orange-400", children: "120" }),
+        "]",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "    ",
+        "}",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "  ],",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "  ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"pinData"' }),
+        ": ",
+        "{}",
+        ",",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "  ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"connections"' }),
+        ": ",
+        "{}",
+        ",",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "  ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"active"' }),
+        ": ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-orange-400", children: "false" }),
+        ",",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "  ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"settings"' }),
+        ": ",
+        "{",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "    ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"executionOrder"' }),
+        ": ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400", children: '"v1"' }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "  ",
+        "}",
+        ",",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "  ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"versionId"' }),
+        ": ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400", children: '"342111-a8ab-10222"' }),
+        ",",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "  ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"tags"' }),
+        ": [",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "    ",
+        "{",
+        " ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"name"' }),
+        ": ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400", children: '"analysis"' }),
+        " ",
+        "}",
+        ",",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "    ",
+        "{",
+        " ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"name"' }),
+        ": ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400", children: '"high-views"' }),
+        " ",
+        "}",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "  ]",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "}"
+      ] }) })
+    ] })
+  ] })
+] }) });
+const CTASection = () => {
+  distExports.useNavigate();
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "py-24 md:py-40 text-center relative overflow-hidden", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-gradient-to-t from-indigo-900/10 via-transparent to-transparent pointer-events-none" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto px-6 relative z-10", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-6 md:mb-8 tracking-tighter", children: "Ready for Boost your business?" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-lg md:text-xl text-slate-400 mb-10 md:mb-12 max-w-2xl mx-auto", children: "Perfect if anyone wants to build a custom automation tool." }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col sm:flex-row justify-center gap-4 w-full sm:w-auto px-4 sm:px-0", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Link, { to: "/contact", title: "Get Started with EdgeLancer for Free", className: "w-full sm:w-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Button, { size: "lg", className: "h-12 md:h-14 px-8 md:px-10 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full text-base md:text-lg shadow-2xl shadow-indigo-500/20 font-bold w-full", children: [
+          "Get Started Free ",
+          /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronRight, { className: "w-5 h-5 ml-2" })
+        ] }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Link, { to: "/contact", title: "Contact our Sales Team", className: "w-full sm:w-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { size: "lg", variant: "outline", className: "h-12 md:h-14 px-8 md:px-10 border-slate-700 text-white hover:bg-white/5 rounded-full text-base md:text-lg font-bold w-full bg-transparent", children: "Contact Sales" }) })
+      ] })
+    ] })
+  ] });
+};
+const Counter = ({ end, duration = 2e3, decimals = 0 }) => {
+  const [count2, setCount] = reactExports.useState(end);
+  reactExports.useEffect(() => {
+    setCount(0);
+    let startTime = null;
+    let animationFrameId;
+    const animate = (timestamp) => {
+      if (!startTime) startTime = timestamp;
+      const progress = timestamp - startTime;
+      const percentage = Math.min(progress / duration, 1);
+      const ease = 1 - Math.pow(1 - percentage, 4);
+      const currentVal = ease * end;
+      setCount(currentVal);
+      if (progress < duration) {
+        animationFrameId = requestAnimationFrame(animate);
+      }
+    };
+    animationFrameId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [end, duration]);
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: Number(count2).toFixed(decimals) });
+};
+const Hero = ({ initialStats = [] }) => {
+  const [stats, setStats] = reactExports.useState(initialStats.length > 0 ? initialStats : [
+    { label: "Workflow Views", value: 10, suffix: "M+", decimals: 0 },
+    { label: "Active Users", value: 50, suffix: "K+", decimals: 0 },
+    { label: "Total Workflows", value: 500, suffix: "+", decimals: 0 }
+  ]);
+  const [searchQuery, setSearchQuery] = reactExports.useState("");
+  const [searchResults, setSearchResults] = reactExports.useState([]);
+  const [searchLoading, setSearchLoading] = reactExports.useState(false);
+  const [showResults, setShowResults] = reactExports.useState(false);
+  const navigate = distExports.useNavigate();
+  reactExports.useEffect(() => {
+    if (!searchQuery) {
+      setSearchResults([]);
+      setShowResults(false);
+      return;
+    }
+    setSearchLoading(true);
+    const handler = setTimeout(async () => {
+      try {
+        const res = await workflowService.getWorkflowLibrary(1, 8, searchQuery);
+        if (res?.data) {
+          setSearchResults(res.data);
+          setShowResults(true);
+        } else {
+          setSearchResults([]);
+          setShowResults(false);
+        }
+      } catch (e) {
+        setSearchResults([]);
+        setShowResults(false);
+      } finally {
+        setSearchLoading(false);
+      }
+    }, 400);
+    return () => clearTimeout(handler);
+  }, [searchQuery]);
+  reactExports.useEffect(() => {
+    if (initialStats.length > 0) return;
+    const fetchStats = async () => {
+      try {
+        const response = await workflowService.getWorkflowStats();
+        if (response.success && response.data) {
+          const { total_workflows, total_visits, active_users_today } = response.data;
+          setStats([
+            { label: "Workflow Views", value: total_visits, suffix: "", decimals: 0 },
+            { label: "Active Users", value: active_users_today, suffix: "", decimals: 0 },
+            { label: "Total Workflows", value: total_workflows, suffix: "+", decimals: 0 }
+          ]);
+        }
+      } catch (error) {
+        console.error("Failed to fetch stats:", error);
+      }
+    };
+    fetchStats();
+  }, [initialStats.length]);
+  return (
+    // UPDATED: Reduced padding-top from 'pt-24 md:pt-24' to 'pt-12 md:pt-16'
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "relative w-full min-h-[90vh] md:h-screen flex flex-col justify-center pt-12 md:pt-16 bg-[#050505] overflow-hidden", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-purple-900/20 blur-[120px] rounded-full pointer-events-none z-0 mix-blend-screen" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-7xl mx-auto relative z-10 w-full px-4 md:px-6", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center max-w-4xl mx-auto", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("h1", { className: "text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-white leading-[1.1] mb-5", children: [
+          "Ready-to-Use ",
+          /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-400", children: "Workflow Templates" })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-base sm:text-lg md:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed mb-8 px-4", children: "Start automating in seconds with our library of proven workflow templates. Customize them to fit your exact needs." }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-xl mx-auto relative mb-8 group px-2", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-gradient-to-r from-purple-500/20 to-indigo-500/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative flex items-center", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Search, { className: "absolute left-4 w-5 h-5 text-slate-400" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "input",
+              {
+                type: "text",
+                placeholder: "Search workflows...",
+                className: "w-full h-12 md:h-14 pl-12 pr-4 rounded-xl bg-[#0a0a0a] border border-slate-800 text-slate-200 placeholder:text-slate-400 focus:outline-none focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 transition-all shadow-2xl text-base",
+                "aria-label": "Search workflows",
+                value: searchQuery,
+                onChange: (e) => setSearchQuery(e.target.value),
+                onFocus: () => {
+                  if (searchResults.length > 0) setShowResults(true);
+                },
+                onBlur: () => setTimeout(() => setShowResults(false), 200),
+                autoComplete: "off"
+              }
+            ),
+            showResults && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute left-0 right-0 top-14 z-20 bg-[#0a0a0a] border border-slate-800 rounded-xl shadow-2xl mt-2 max-h-80 overflow-y-auto animate-in fade-in slide-in-from-top-2", children: searchLoading ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-4 text-slate-400 text-center text-sm", children: "Searching..." }) : searchResults.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-4 text-slate-400 text-center text-sm", children: "No workflows found" }) : searchResults.map((wf) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "button",
+              {
+                className: "w-full text-left px-4 py-3 hover:bg-purple-900/10 transition-colors flex flex-col border-b border-slate-800 last:border-b-0",
+                title: `View details for ${wf.title}`,
+                onClick: () => navigate(`/workflow/${wf.slug}`),
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-semibold text-slate-200 text-base", children: wf.title }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs text-slate-400 line-clamp-1", children: wf.description })
+                ]
+              },
+              wf.id
+            )) })
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-slate-400 text-xs md:text-sm mb-10 font-medium px-4", children: "Connect your favorite apps, build powerful workflows, and let AI handle repetitive tasks." }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap justify-center gap-8 md:gap-20 border-t border-white/5 pt-8", children: stats.map((stat, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col items-center p-2 min-w-[120px]", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-1 tabular-nums", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Counter, { end: stat.value, decimals: stat.decimals }),
+            stat.suffix
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-[10px] md:text-sm text-slate-400 font-medium uppercase tracking-wider text-center", children: stat.label })
+        ] }, i)) })
+      ] }) })
+    ] })
+  );
+};
+const Starfield = reactExports.lazy(() => import("./assets/Starfield-CBXUfjFu.js").then((m) => ({ default: m.Starfield })));
+function LazyStarfield() {
+  const [isMounted, setIsMounted] = React2.useState(false);
+  React2.useEffect(() => {
+    setIsMounted(true);
+  }, []);
+  if (!isMounted) return null;
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(reactExports.Suspense, { fallback: null, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Starfield, {}) });
+}
+var reactFastCompare;
+var hasRequiredReactFastCompare;
+function requireReactFastCompare() {
+  if (hasRequiredReactFastCompare) return reactFastCompare;
+  hasRequiredReactFastCompare = 1;
+  var hasElementType = typeof Element !== "undefined";
+  var hasMap = typeof Map === "function";
+  var hasSet = typeof Set === "function";
+  var hasArrayBuffer = typeof ArrayBuffer === "function" && !!ArrayBuffer.isView;
+  function equal(a, b) {
+    if (a === b) return true;
+    if (a && b && typeof a == "object" && typeof b == "object") {
+      if (a.constructor !== b.constructor) return false;
+      var length, i, keys;
+      if (Array.isArray(a)) {
+        length = a.length;
+        if (length != b.length) return false;
+        for (i = length; i-- !== 0; )
+          if (!equal(a[i], b[i])) return false;
+        return true;
+      }
+      var it;
+      if (hasMap && a instanceof Map && b instanceof Map) {
+        if (a.size !== b.size) return false;
+        it = a.entries();
+        while (!(i = it.next()).done)
+          if (!b.has(i.value[0])) return false;
+        it = a.entries();
+        while (!(i = it.next()).done)
+          if (!equal(i.value[1], b.get(i.value[0]))) return false;
+        return true;
+      }
+      if (hasSet && a instanceof Set && b instanceof Set) {
+        if (a.size !== b.size) return false;
+        it = a.entries();
+        while (!(i = it.next()).done)
+          if (!b.has(i.value[0])) return false;
+        return true;
+      }
+      if (hasArrayBuffer && ArrayBuffer.isView(a) && ArrayBuffer.isView(b)) {
+        length = a.length;
+        if (length != b.length) return false;
+        for (i = length; i-- !== 0; )
+          if (a[i] !== b[i]) return false;
+        return true;
+      }
+      if (a.constructor === RegExp) return a.source === b.source && a.flags === b.flags;
+      if (a.valueOf !== Object.prototype.valueOf && typeof a.valueOf === "function" && typeof b.valueOf === "function") return a.valueOf() === b.valueOf();
+      if (a.toString !== Object.prototype.toString && typeof a.toString === "function" && typeof b.toString === "function") return a.toString() === b.toString();
+      keys = Object.keys(a);
+      length = keys.length;
+      if (length !== Object.keys(b).length) return false;
+      for (i = length; i-- !== 0; )
+        if (!Object.prototype.hasOwnProperty.call(b, keys[i])) return false;
+      if (hasElementType && a instanceof Element) return false;
+      for (i = length; i-- !== 0; ) {
+        if ((keys[i] === "_owner" || keys[i] === "__v" || keys[i] === "__o") && a.$$typeof) {
+          continue;
+        }
+        if (!equal(a[keys[i]], b[keys[i]])) return false;
+      }
+      return true;
+    }
+    return a !== a && b !== b;
+  }
+  reactFastCompare = function isEqual(a, b) {
+    try {
+      return equal(a, b);
+    } catch (error) {
+      if ((error.message || "").match(/stack|recursion/i)) {
+        console.warn("react-fast-compare cannot handle circular refs");
+        return false;
+      }
+      throw error;
+    }
+  };
+  return reactFastCompare;
+}
+var reactFastCompareExports = requireReactFastCompare();
+const fastCompare = /* @__PURE__ */ getDefaultExportFromCjs(reactFastCompareExports);
+var invariant_1;
+var hasRequiredInvariant;
+function requireInvariant() {
+  if (hasRequiredInvariant) return invariant_1;
+  hasRequiredInvariant = 1;
+  var NODE_ENV = process.env.NODE_ENV;
+  var invariant3 = function(condition, format, a, b, c, d, e, f) {
+    if (NODE_ENV !== "production") {
+      if (format === void 0) {
+        throw new Error("invariant requires an error message argument");
+      }
+    }
+    if (!condition) {
+      var error;
+      if (format === void 0) {
+        error = new Error(
+          "Minified exception occurred; use the non-minified dev environment for the full error message and additional helpful warnings."
+        );
+      } else {
+        var args = [a, b, c, d, e, f];
+        var argIndex = 0;
+        error = new Error(
+          format.replace(/%s/g, function() {
+            return args[argIndex++];
+          })
+        );
+        error.name = "Invariant Violation";
+      }
+      error.framesToPop = 1;
+      throw error;
+    }
+  };
+  invariant_1 = invariant3;
+  return invariant_1;
+}
+var invariantExports = requireInvariant();
+const invariant = /* @__PURE__ */ getDefaultExportFromCjs(invariantExports);
+var shallowequal;
+var hasRequiredShallowequal;
+function requireShallowequal() {
+  if (hasRequiredShallowequal) return shallowequal;
+  hasRequiredShallowequal = 1;
+  shallowequal = function shallowEqual2(objA, objB, compare, compareContext) {
+    var ret = compare ? compare.call(compareContext, objA, objB) : void 0;
+    if (ret !== void 0) {
+      return !!ret;
+    }
+    if (objA === objB) {
+      return true;
+    }
+    if (typeof objA !== "object" || !objA || typeof objB !== "object" || !objB) {
+      return false;
+    }
+    var keysA = Object.keys(objA);
+    var keysB = Object.keys(objB);
+    if (keysA.length !== keysB.length) {
+      return false;
+    }
+    var bHasOwnProperty = Object.prototype.hasOwnProperty.bind(objB);
+    for (var idx = 0; idx < keysA.length; idx++) {
+      var key = keysA[idx];
+      if (!bHasOwnProperty(key)) {
+        return false;
+      }
+      var valueA = objA[key];
+      var valueB = objB[key];
+      ret = compare ? compare.call(compareContext, valueA, valueB, key) : void 0;
+      if (ret === false || ret === void 0 && valueA !== valueB) {
+        return false;
+      }
+    }
+    return true;
+  };
+  return shallowequal;
+}
+var shallowequalExports = requireShallowequal();
+const shallowEqual = /* @__PURE__ */ getDefaultExportFromCjs(shallowequalExports);
+var TAG_NAMES = /* @__PURE__ */ ((TAG_NAMES2) => {
+  TAG_NAMES2["BASE"] = "base";
+  TAG_NAMES2["BODY"] = "body";
+  TAG_NAMES2["HEAD"] = "head";
+  TAG_NAMES2["HTML"] = "html";
+  TAG_NAMES2["LINK"] = "link";
+  TAG_NAMES2["META"] = "meta";
+  TAG_NAMES2["NOSCRIPT"] = "noscript";
+  TAG_NAMES2["SCRIPT"] = "script";
+  TAG_NAMES2["STYLE"] = "style";
+  TAG_NAMES2["TITLE"] = "title";
+  TAG_NAMES2["FRAGMENT"] = "Symbol(react.fragment)";
+  return TAG_NAMES2;
+})(TAG_NAMES || {});
+var SEO_PRIORITY_TAGS = {
+  link: { rel: ["amphtml", "canonical", "alternate"] },
+  script: { type: ["application/ld+json"] },
+  meta: {
+    charset: "",
+    name: ["generator", "robots", "description"],
+    property: [
+      "og:type",
+      "og:title",
+      "og:url",
+      "og:image",
+      "og:image:alt",
+      "og:description",
+      "twitter:url",
+      "twitter:title",
+      "twitter:description",
+      "twitter:image",
+      "twitter:image:alt",
+      "twitter:card",
+      "twitter:site"
+    ]
+  }
+};
+var VALID_TAG_NAMES = Object.values(TAG_NAMES);
+var REACT_TAG_MAP = {
+  accesskey: "accessKey",
+  charset: "charSet",
+  class: "className",
+  contenteditable: "contentEditable",
+  contextmenu: "contextMenu",
+  "http-equiv": "httpEquiv",
+  itemprop: "itemProp",
+  tabindex: "tabIndex"
+};
+var HTML_TAG_MAP = Object.entries(REACT_TAG_MAP).reduce(
+  (carry, [key, value]) => {
+    carry[value] = key;
+    return carry;
+  },
+  {}
+);
+var HELMET_ATTRIBUTE = "data-rh";
+var HELMET_PROPS = {
+  DEFAULT_TITLE: "defaultTitle",
+  DEFER: "defer",
+  ENCODE_SPECIAL_CHARACTERS: "encodeSpecialCharacters",
+  ON_CHANGE_CLIENT_STATE: "onChangeClientState",
+  TITLE_TEMPLATE: "titleTemplate",
+  PRIORITIZE_SEO_TAGS: "prioritizeSeoTags"
+};
+var getInnermostProperty = (propsList, property) => {
+  for (let i = propsList.length - 1; i >= 0; i -= 1) {
+    const props = propsList[i];
+    if (Object.prototype.hasOwnProperty.call(props, property)) {
+      return props[property];
+    }
+  }
+  return null;
+};
+var getTitleFromPropsList = (propsList) => {
+  let innermostTitle = getInnermostProperty(
+    propsList,
+    "title"
+    /* TITLE */
+  );
+  const innermostTemplate = getInnermostProperty(propsList, HELMET_PROPS.TITLE_TEMPLATE);
+  if (Array.isArray(innermostTitle)) {
+    innermostTitle = innermostTitle.join("");
+  }
+  if (innermostTemplate && innermostTitle) {
+    return innermostTemplate.replace(/%s/g, () => innermostTitle);
+  }
+  const innermostDefaultTitle = getInnermostProperty(propsList, HELMET_PROPS.DEFAULT_TITLE);
+  return innermostTitle || innermostDefaultTitle || void 0;
+};
+var getOnChangeClientState = (propsList) => getInnermostProperty(propsList, HELMET_PROPS.ON_CHANGE_CLIENT_STATE) || (() => {
+});
+var getAttributesFromPropsList = (tagType, propsList) => propsList.filter((props) => typeof props[tagType] !== "undefined").map((props) => props[tagType]).reduce((tagAttrs, current) => ({ ...tagAttrs, ...current }), {});
+var getBaseTagFromPropsList = (primaryAttributes, propsList) => propsList.filter((props) => typeof props[
+  "base"
+  /* BASE */
+] !== "undefined").map((props) => props[
+  "base"
+  /* BASE */
+]).reverse().reduce((innermostBaseTag, tag) => {
+  if (!innermostBaseTag.length) {
+    const keys = Object.keys(tag);
+    for (let i = 0; i < keys.length; i += 1) {
+      const attributeKey = keys[i];
+      const lowerCaseAttributeKey = attributeKey.toLowerCase();
+      if (primaryAttributes.indexOf(lowerCaseAttributeKey) !== -1 && tag[lowerCaseAttributeKey]) {
+        return innermostBaseTag.concat(tag);
+      }
+    }
+  }
+  return innermostBaseTag;
+}, []);
+var warn$1 = (msg) => console && typeof console.warn === "function" && console.warn(msg);
+var getTagsFromPropsList = (tagName, primaryAttributes, propsList) => {
+  const approvedSeenTags = {};
+  return propsList.filter((props) => {
+    if (Array.isArray(props[tagName])) {
+      return true;
+    }
+    if (typeof props[tagName] !== "undefined") {
+      warn$1(
+        `Helmet: ${tagName} should be of type "Array". Instead found type "${typeof props[tagName]}"`
+      );
+    }
+    return false;
+  }).map((props) => props[tagName]).reverse().reduce((approvedTags, instanceTags) => {
+    const instanceSeenTags = {};
+    instanceTags.filter((tag) => {
+      let primaryAttributeKey;
+      const keys2 = Object.keys(tag);
+      for (let i = 0; i < keys2.length; i += 1) {
+        const attributeKey = keys2[i];
+        const lowerCaseAttributeKey = attributeKey.toLowerCase();
+        if (primaryAttributes.indexOf(lowerCaseAttributeKey) !== -1 && !(primaryAttributeKey === "rel" && tag[primaryAttributeKey].toLowerCase() === "canonical") && !(lowerCaseAttributeKey === "rel" && tag[lowerCaseAttributeKey].toLowerCase() === "stylesheet")) {
+          primaryAttributeKey = lowerCaseAttributeKey;
+        }
+        if (primaryAttributes.indexOf(attributeKey) !== -1 && (attributeKey === "innerHTML" || attributeKey === "cssText" || attributeKey === "itemprop")) {
+          primaryAttributeKey = attributeKey;
+        }
+      }
+      if (!primaryAttributeKey || !tag[primaryAttributeKey]) {
+        return false;
+      }
+      const value = tag[primaryAttributeKey].toLowerCase();
+      if (!approvedSeenTags[primaryAttributeKey]) {
+        approvedSeenTags[primaryAttributeKey] = {};
+      }
+      if (!instanceSeenTags[primaryAttributeKey]) {
+        instanceSeenTags[primaryAttributeKey] = {};
+      }
+      if (!approvedSeenTags[primaryAttributeKey][value]) {
+        instanceSeenTags[primaryAttributeKey][value] = true;
+        return true;
+      }
+      return false;
+    }).reverse().forEach((tag) => approvedTags.push(tag));
+    const keys = Object.keys(instanceSeenTags);
+    for (let i = 0; i < keys.length; i += 1) {
+      const attributeKey = keys[i];
+      const tagUnion = {
+        ...approvedSeenTags[attributeKey],
+        ...instanceSeenTags[attributeKey]
+      };
+      approvedSeenTags[attributeKey] = tagUnion;
+    }
+    return approvedTags;
+  }, []).reverse();
+};
+var getAnyTrueFromPropsList = (propsList, checkedTag) => {
+  if (Array.isArray(propsList) && propsList.length) {
+    for (let index = 0; index < propsList.length; index += 1) {
+      const prop = propsList[index];
+      if (prop[checkedTag]) {
+        return true;
+      }
+    }
+  }
+  return false;
+};
+var reducePropsToState = (propsList) => ({
+  baseTag: getBaseTagFromPropsList([
+    "href"
+    /* HREF */
+  ], propsList),
+  bodyAttributes: getAttributesFromPropsList("bodyAttributes", propsList),
+  defer: getInnermostProperty(propsList, HELMET_PROPS.DEFER),
+  encode: getInnermostProperty(propsList, HELMET_PROPS.ENCODE_SPECIAL_CHARACTERS),
+  htmlAttributes: getAttributesFromPropsList("htmlAttributes", propsList),
+  linkTags: getTagsFromPropsList(
+    "link",
+    [
+      "rel",
+      "href"
+      /* HREF */
+    ],
+    propsList
+  ),
+  metaTags: getTagsFromPropsList(
+    "meta",
+    [
+      "name",
+      "charset",
+      "http-equiv",
+      "property",
+      "itemprop"
+      /* ITEM_PROP */
+    ],
+    propsList
+  ),
+  noscriptTags: getTagsFromPropsList("noscript", [
+    "innerHTML"
+    /* INNER_HTML */
+  ], propsList),
+  onChangeClientState: getOnChangeClientState(propsList),
+  scriptTags: getTagsFromPropsList(
+    "script",
+    [
+      "src",
+      "innerHTML"
+      /* INNER_HTML */
+    ],
+    propsList
+  ),
+  styleTags: getTagsFromPropsList("style", [
+    "cssText"
+    /* CSS_TEXT */
+  ], propsList),
+  title: getTitleFromPropsList(propsList),
+  titleAttributes: getAttributesFromPropsList("titleAttributes", propsList),
+  prioritizeSeoTags: getAnyTrueFromPropsList(propsList, HELMET_PROPS.PRIORITIZE_SEO_TAGS)
+});
+var flattenArray = (possibleArray) => Array.isArray(possibleArray) ? possibleArray.join("") : possibleArray;
+var checkIfPropsMatch = (props, toMatch) => {
+  const keys = Object.keys(props);
+  for (let i = 0; i < keys.length; i += 1) {
+    if (toMatch[keys[i]] && toMatch[keys[i]].includes(props[keys[i]])) {
+      return true;
+    }
+  }
+  return false;
+};
+var prioritizer = (elementsList, propsToMatch) => {
+  if (Array.isArray(elementsList)) {
+    return elementsList.reduce(
+      (acc, elementAttrs) => {
+        if (checkIfPropsMatch(elementAttrs, propsToMatch)) {
+          acc.priority.push(elementAttrs);
+        } else {
+          acc.default.push(elementAttrs);
+        }
+        return acc;
+      },
+      { priority: [], default: [] }
+    );
+  }
+  return { default: elementsList, priority: [] };
+};
+var without = (obj, key) => {
+  return {
+    ...obj,
+    [key]: void 0
+  };
+};
+var SELF_CLOSING_TAGS = [
+  "noscript",
+  "script",
+  "style"
+  /* STYLE */
+];
+var encodeSpecialCharacters = (str, encode2 = true) => {
+  if (encode2 === false) {
+    return String(str);
+  }
+  return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#x27;");
+};
+var generateElementAttributesAsString = (attributes) => Object.keys(attributes).reduce((str, key) => {
+  const attr = typeof attributes[key] !== "undefined" ? `${key}="${attributes[key]}"` : `${key}`;
+  return str ? `${str} ${attr}` : attr;
+}, "");
+var generateTitleAsString = (type, title, attributes, encode2) => {
+  const attributeString = generateElementAttributesAsString(attributes);
+  const flattenedTitle = flattenArray(title);
+  return attributeString ? `<${type} ${HELMET_ATTRIBUTE}="true" ${attributeString}>${encodeSpecialCharacters(
+    flattenedTitle,
+    encode2
+  )}</${type}>` : `<${type} ${HELMET_ATTRIBUTE}="true">${encodeSpecialCharacters(
+    flattenedTitle,
+    encode2
+  )}</${type}>`;
+};
+var generateTagsAsString = (type, tags, encode2 = true) => tags.reduce((str, t) => {
+  const tag = t;
+  const attributeHtml = Object.keys(tag).filter(
+    (attribute) => !(attribute === "innerHTML" || attribute === "cssText")
+  ).reduce((string, attribute) => {
+    const attr = typeof tag[attribute] === "undefined" ? attribute : `${attribute}="${encodeSpecialCharacters(tag[attribute], encode2)}"`;
+    return string ? `${string} ${attr}` : attr;
+  }, "");
+  const tagContent = tag.innerHTML || tag.cssText || "";
+  const isSelfClosing = SELF_CLOSING_TAGS.indexOf(type) === -1;
+  return `${str}<${type} ${HELMET_ATTRIBUTE}="true" ${attributeHtml}${isSelfClosing ? `/>` : `>${tagContent}</${type}>`}`;
+}, "");
+var convertElementAttributesToReactProps = (attributes, initProps = {}) => Object.keys(attributes).reduce((obj, key) => {
+  const mapped = REACT_TAG_MAP[key];
+  obj[mapped || key] = attributes[key];
+  return obj;
+}, initProps);
+var generateTitleAsReactComponent = (_type, title, attributes) => {
+  const initProps = {
+    key: title,
+    [HELMET_ATTRIBUTE]: true
+  };
+  const props = convertElementAttributesToReactProps(attributes, initProps);
+  return [React2.createElement("title", props, title)];
+};
+var generateTagsAsReactComponent = (type, tags) => tags.map((tag, i) => {
+  const mappedTag = {
+    key: i,
+    [HELMET_ATTRIBUTE]: true
+  };
+  Object.keys(tag).forEach((attribute) => {
+    const mapped = REACT_TAG_MAP[attribute];
+    const mappedAttribute = mapped || attribute;
+    if (mappedAttribute === "innerHTML" || mappedAttribute === "cssText") {
+      const content = tag.innerHTML || tag.cssText;
+      mappedTag.dangerouslySetInnerHTML = { __html: content };
+    } else {
+      mappedTag[mappedAttribute] = tag[attribute];
+    }
+  });
+  return React2.createElement(type, mappedTag);
+});
+var getMethodsForTag = (type, tags, encode2 = true) => {
+  switch (type) {
+    case "title":
+      return {
+        toComponent: () => generateTitleAsReactComponent(type, tags.title, tags.titleAttributes),
+        toString: () => generateTitleAsString(type, tags.title, tags.titleAttributes, encode2)
+      };
+    case "bodyAttributes":
+    case "htmlAttributes":
+      return {
+        toComponent: () => convertElementAttributesToReactProps(tags),
+        toString: () => generateElementAttributesAsString(tags)
+      };
+    default:
+      return {
+        toComponent: () => generateTagsAsReactComponent(type, tags),
+        toString: () => generateTagsAsString(type, tags, encode2)
+      };
+  }
+};
+var getPriorityMethods = ({ metaTags, linkTags, scriptTags, encode: encode2 }) => {
+  const meta = prioritizer(metaTags, SEO_PRIORITY_TAGS.meta);
+  const link = prioritizer(linkTags, SEO_PRIORITY_TAGS.link);
+  const script = prioritizer(scriptTags, SEO_PRIORITY_TAGS.script);
+  const priorityMethods = {
+    toComponent: () => [
+      ...generateTagsAsReactComponent("meta", meta.priority),
+      ...generateTagsAsReactComponent("link", link.priority),
+      ...generateTagsAsReactComponent("script", script.priority)
+    ],
+    toString: () => (
+      // generate all the tags as strings and concatenate them
+      `${getMethodsForTag("meta", meta.priority, encode2)} ${getMethodsForTag(
+        "link",
+        link.priority,
+        encode2
+      )} ${getMethodsForTag("script", script.priority, encode2)}`
+    )
+  };
+  return {
+    priorityMethods,
+    metaTags: meta.default,
+    linkTags: link.default,
+    scriptTags: script.default
+  };
+};
+var mapStateOnServer = (props) => {
+  const {
+    baseTag,
+    bodyAttributes,
+    encode: encode2 = true,
+    htmlAttributes,
+    noscriptTags,
+    styleTags,
+    title = "",
+    titleAttributes,
+    prioritizeSeoTags
+  } = props;
+  let { linkTags, metaTags, scriptTags } = props;
+  let priorityMethods = {
+    toComponent: () => [],
+    toString: () => ""
+  };
+  if (prioritizeSeoTags) {
+    ({ priorityMethods, linkTags, metaTags, scriptTags } = getPriorityMethods(props));
+  }
+  return {
+    priority: priorityMethods,
+    base: getMethodsForTag("base", baseTag, encode2),
+    bodyAttributes: getMethodsForTag("bodyAttributes", bodyAttributes, encode2),
+    htmlAttributes: getMethodsForTag("htmlAttributes", htmlAttributes, encode2),
+    link: getMethodsForTag("link", linkTags, encode2),
+    meta: getMethodsForTag("meta", metaTags, encode2),
+    noscript: getMethodsForTag("noscript", noscriptTags, encode2),
+    script: getMethodsForTag("script", scriptTags, encode2),
+    style: getMethodsForTag("style", styleTags, encode2),
+    title: getMethodsForTag("title", { title, titleAttributes }, encode2)
+  };
+};
+var server_default = mapStateOnServer;
+var instances = [];
+var isDocument = !!(typeof window !== "undefined" && window.document && window.document.createElement);
+var HelmetData = class {
+  instances = [];
+  canUseDOM = isDocument;
+  context;
+  value = {
+    setHelmet: (serverState) => {
+      this.context.helmet = serverState;
+    },
+    helmetInstances: {
+      get: () => this.canUseDOM ? instances : this.instances,
+      add: (instance) => {
+        (this.canUseDOM ? instances : this.instances).push(instance);
+      },
+      remove: (instance) => {
+        const index = (this.canUseDOM ? instances : this.instances).indexOf(instance);
+        (this.canUseDOM ? instances : this.instances).splice(index, 1);
+      }
+    }
+  };
+  constructor(context2, canUseDOM) {
+    this.context = context2;
+    this.canUseDOM = canUseDOM || false;
+    if (!canUseDOM) {
+      context2.helmet = server_default({
+        baseTag: [],
+        bodyAttributes: {},
+        htmlAttributes: {},
+        linkTags: [],
+        metaTags: [],
+        noscriptTags: [],
+        scriptTags: [],
+        styleTags: [],
+        title: "",
+        titleAttributes: {}
+      });
+    }
+  }
+};
+var major = parseInt(React2.version.split(".")[0], 10);
+var isReact19 = major >= 19;
+var defaultValue = {};
+var Context = React2.createContext(defaultValue);
+var HelmetProvider = class _HelmetProvider extends reactExports.Component {
+  static canUseDOM = isDocument;
+  helmetData;
+  constructor(props) {
+    super(props);
+    if (isReact19) {
+      this.helmetData = null;
+    } else {
+      this.helmetData = new HelmetData(this.props.context || {}, _HelmetProvider.canUseDOM);
+    }
+  }
+  render() {
+    if (isReact19) {
+      return /* @__PURE__ */ React2.createElement(React2.Fragment, null, this.props.children);
+    }
+    return /* @__PURE__ */ React2.createElement(Context.Provider, { value: this.helmetData.value }, this.props.children);
+  }
+};
+var updateTags = (type, tags) => {
+  const headElement = document.head || document.querySelector(
+    "head"
+    /* HEAD */
+  );
+  const tagNodes = headElement.querySelectorAll(`${type}[${HELMET_ATTRIBUTE}]`);
+  const oldTags = [].slice.call(tagNodes);
+  const newTags = [];
+  let indexToDelete;
+  if (tags && tags.length) {
+    tags.forEach((tag) => {
+      const newElement = document.createElement(type);
+      for (const attribute in tag) {
+        if (Object.prototype.hasOwnProperty.call(tag, attribute)) {
+          if (attribute === "innerHTML") {
+            newElement.innerHTML = tag.innerHTML;
+          } else if (attribute === "cssText") {
+            const cssText = tag.cssText;
+            newElement.appendChild(document.createTextNode(cssText));
+          } else {
+            const attr = attribute;
+            const value = typeof tag[attr] === "undefined" ? "" : tag[attr];
+            newElement.setAttribute(attribute, value);
+          }
+        }
+      }
+      newElement.setAttribute(HELMET_ATTRIBUTE, "true");
+      if (oldTags.some((existingTag, index) => {
+        indexToDelete = index;
+        return newElement.isEqualNode(existingTag);
+      })) {
+        oldTags.splice(indexToDelete, 1);
+      } else {
+        newTags.push(newElement);
+      }
+    });
+  }
+  oldTags.forEach((tag) => tag.parentNode?.removeChild(tag));
+  newTags.forEach((tag) => headElement.appendChild(tag));
+  return {
+    oldTags,
+    newTags
+  };
+};
+var updateAttributes = (tagName, attributes) => {
+  const elementTag = document.getElementsByTagName(tagName)[0];
+  if (!elementTag) {
+    return;
+  }
+  const helmetAttributeString = elementTag.getAttribute(HELMET_ATTRIBUTE);
+  const helmetAttributes = helmetAttributeString ? helmetAttributeString.split(",") : [];
+  const attributesToRemove = [...helmetAttributes];
+  const attributeKeys = Object.keys(attributes);
+  for (const attribute of attributeKeys) {
+    const value = attributes[attribute] || "";
+    if (elementTag.getAttribute(attribute) !== value) {
+      elementTag.setAttribute(attribute, value);
+    }
+    if (helmetAttributes.indexOf(attribute) === -1) {
+      helmetAttributes.push(attribute);
+    }
+    const indexToSave = attributesToRemove.indexOf(attribute);
+    if (indexToSave !== -1) {
+      attributesToRemove.splice(indexToSave, 1);
+    }
+  }
+  for (let i = attributesToRemove.length - 1; i >= 0; i -= 1) {
+    elementTag.removeAttribute(attributesToRemove[i]);
+  }
+  if (helmetAttributes.length === attributesToRemove.length) {
+    elementTag.removeAttribute(HELMET_ATTRIBUTE);
+  } else if (elementTag.getAttribute(HELMET_ATTRIBUTE) !== attributeKeys.join(",")) {
+    elementTag.setAttribute(HELMET_ATTRIBUTE, attributeKeys.join(","));
+  }
+};
+var updateTitle = (title, attributes) => {
+  if (typeof title !== "undefined" && document.title !== title) {
+    document.title = flattenArray(title);
+  }
+  updateAttributes("title", attributes);
+};
+var commitTagChanges = (newState, cb) => {
+  const {
+    baseTag,
+    bodyAttributes,
+    htmlAttributes,
+    linkTags,
+    metaTags,
+    noscriptTags,
+    onChangeClientState,
+    scriptTags,
+    styleTags,
+    title,
+    titleAttributes
+  } = newState;
+  updateAttributes("body", bodyAttributes);
+  updateAttributes("html", htmlAttributes);
+  updateTitle(title, titleAttributes);
+  const tagUpdates = {
+    baseTag: updateTags("base", baseTag),
+    linkTags: updateTags("link", linkTags),
+    metaTags: updateTags("meta", metaTags),
+    noscriptTags: updateTags("noscript", noscriptTags),
+    scriptTags: updateTags("script", scriptTags),
+    styleTags: updateTags("style", styleTags)
+  };
+  const addedTags = {};
+  const removedTags = {};
+  Object.keys(tagUpdates).forEach((tagType) => {
+    const { newTags, oldTags } = tagUpdates[tagType];
+    if (newTags.length) {
+      addedTags[tagType] = newTags;
+    }
+    if (oldTags.length) {
+      removedTags[tagType] = tagUpdates[tagType].oldTags;
+    }
+  });
+  if (cb) {
+    cb();
+  }
+  onChangeClientState(newState, addedTags, removedTags);
+};
+var _helmetCallback = null;
+var handleStateChangeOnClient = (newState) => {
+  if (_helmetCallback) {
+    cancelAnimationFrame(_helmetCallback);
+  }
+  if (newState.defer) {
+    _helmetCallback = requestAnimationFrame(() => {
+      commitTagChanges(newState, () => {
+        _helmetCallback = null;
+      });
+    });
+  } else {
+    commitTagChanges(newState);
+    _helmetCallback = null;
+  }
+};
+var client_default = handleStateChangeOnClient;
+var HelmetDispatcher = class extends reactExports.Component {
+  rendered = false;
+  shouldComponentUpdate(nextProps) {
+    return !shallowEqual(nextProps, this.props);
+  }
+  componentDidUpdate() {
+    this.emitChange();
+  }
+  componentWillUnmount() {
+    const { helmetInstances } = this.props.context;
+    helmetInstances.remove(this);
+    this.emitChange();
+  }
+  emitChange() {
+    const { helmetInstances, setHelmet } = this.props.context;
+    let serverState = null;
+    const state = reducePropsToState(
+      helmetInstances.get().map((instance) => {
+        const { context: _context, ...props } = instance.props;
+        return props;
+      })
+    );
+    if (HelmetProvider.canUseDOM) {
+      client_default(state);
+    } else if (server_default) {
+      serverState = server_default(state);
+    }
+    setHelmet(serverState);
+  }
+  // componentWillMount will be deprecated
+  // for SSR, initialize on first render
+  // constructor is also unsafe in StrictMode
+  init() {
+    if (this.rendered) {
+      return;
+    }
+    this.rendered = true;
+    const { helmetInstances } = this.props.context;
+    helmetInstances.add(this);
+    this.emitChange();
+  }
+  render() {
+    this.init();
+    return null;
+  }
+};
+var react19Instances = [];
+var toHtmlAttributes = (props) => {
+  const result = {};
+  for (const key of Object.keys(props)) {
+    result[HTML_TAG_MAP[key] || key] = props[key];
+  }
+  return result;
+};
+var toReactProps = (attrs) => {
+  const result = {};
+  for (const key of Object.keys(attrs)) {
+    const mapped = REACT_TAG_MAP[key];
+    result[mapped || key] = attrs[key];
+  }
+  return result;
+};
+var applyAttributes = (tagName, attributes) => {
+  if (!isDocument)
+    return;
+  const el = document.getElementsByTagName(tagName)[0];
+  if (!el)
+    return;
+  const managedAttr = "data-rh-managed";
+  const prev = el.getAttribute(managedAttr);
+  const prevKeys = prev ? prev.split(",") : [];
+  const nextKeys = Object.keys(attributes);
+  for (const key of prevKeys) {
+    if (!nextKeys.includes(key)) {
+      el.removeAttribute(key);
+    }
+  }
+  for (const key of nextKeys) {
+    const value = attributes[key];
+    if (value === void 0 || value === null || value === false) {
+      el.removeAttribute(key);
+    } else if (value === true) {
+      el.setAttribute(key, "");
+    } else {
+      el.setAttribute(key, String(value));
+    }
+  }
+  if (nextKeys.length > 0) {
+    el.setAttribute(managedAttr, nextKeys.join(","));
+  } else {
+    el.removeAttribute(managedAttr);
+  }
+};
+var syncAllAttributes = () => {
+  const htmlAttrs = {};
+  const bodyAttrs = {};
+  for (const instance of react19Instances) {
+    const { htmlAttributes, bodyAttributes } = instance.props;
+    if (htmlAttributes) {
+      Object.assign(htmlAttrs, toHtmlAttributes(htmlAttributes));
+    }
+    if (bodyAttributes) {
+      Object.assign(bodyAttrs, toHtmlAttributes(bodyAttributes));
+    }
+  }
+  applyAttributes("html", htmlAttrs);
+  applyAttributes("body", bodyAttrs);
+};
+var React19Dispatcher = class extends reactExports.Component {
+  componentDidMount() {
+    react19Instances.push(this);
+    syncAllAttributes();
+  }
+  componentDidUpdate() {
+    syncAllAttributes();
+  }
+  componentWillUnmount() {
+    const index = react19Instances.indexOf(this);
+    if (index !== -1) {
+      react19Instances.splice(index, 1);
+    }
+    syncAllAttributes();
+  }
+  resolveTitle() {
+    const { title, titleTemplate, defaultTitle } = this.props;
+    if (title && titleTemplate) {
+      return titleTemplate.replace(/%s/g, () => Array.isArray(title) ? title.join("") : title);
+    }
+    return title || defaultTitle || void 0;
+  }
+  renderTitle() {
+    const title = this.resolveTitle();
+    if (title === void 0)
+      return null;
+    const titleAttributes = this.props.titleAttributes || {};
+    return React2.createElement("title", toReactProps(titleAttributes), title);
+  }
+  renderBase() {
+    const { base } = this.props;
+    if (!base)
+      return null;
+    return React2.createElement("base", toReactProps(base));
+  }
+  renderMeta() {
+    const { meta } = this.props;
+    if (!meta || !Array.isArray(meta))
+      return null;
+    return meta.map(
+      (attrs, i) => React2.createElement("meta", {
+        key: i,
+        ...toReactProps(attrs)
+      })
+    );
+  }
+  renderLink() {
+    const { link } = this.props;
+    if (!link || !Array.isArray(link))
+      return null;
+    return link.map(
+      (attrs, i) => React2.createElement("link", {
+        key: i,
+        ...toReactProps(attrs)
+      })
+    );
+  }
+  renderScript() {
+    const { script } = this.props;
+    if (!script || !Array.isArray(script))
+      return null;
+    return script.map((attrs, i) => {
+      const { innerHTML, ...rest } = attrs;
+      const props = toReactProps(rest);
+      if (innerHTML) {
+        props.dangerouslySetInnerHTML = { __html: innerHTML };
+      }
+      return React2.createElement("script", { key: i, ...props });
+    });
+  }
+  renderStyle() {
+    const { style: style2 } = this.props;
+    if (!style2 || !Array.isArray(style2))
+      return null;
+    return style2.map((attrs, i) => {
+      const { cssText, ...rest } = attrs;
+      const props = toReactProps(rest);
+      if (cssText) {
+        props.dangerouslySetInnerHTML = { __html: cssText };
+      }
+      return React2.createElement("style", { key: i, ...props });
+    });
+  }
+  renderNoscript() {
+    const { noscript } = this.props;
+    if (!noscript || !Array.isArray(noscript))
+      return null;
+    return noscript.map((attrs, i) => {
+      const { innerHTML, ...rest } = attrs;
+      const props = toReactProps(rest);
+      if (innerHTML) {
+        props.dangerouslySetInnerHTML = { __html: innerHTML };
+      }
+      return React2.createElement("noscript", { key: i, ...props });
+    });
+  }
+  render() {
+    return React2.createElement(
+      React2.Fragment,
+      null,
+      this.renderTitle(),
+      this.renderBase(),
+      this.renderMeta(),
+      this.renderLink(),
+      this.renderScript(),
+      this.renderStyle(),
+      this.renderNoscript()
+    );
+  }
+};
+var Helmet = class extends reactExports.Component {
+  static defaultProps = {
+    defer: true,
+    encodeSpecialCharacters: true,
+    prioritizeSeoTags: false
+  };
+  shouldComponentUpdate(nextProps) {
+    return !fastCompare(without(this.props, "helmetData"), without(nextProps, "helmetData"));
+  }
+  mapNestedChildrenToProps(child, nestedChildren) {
+    if (!nestedChildren) {
+      return null;
+    }
+    switch (child.type) {
+      case "script":
+      case "noscript":
+        return {
+          innerHTML: nestedChildren
+        };
+      case "style":
+        return {
+          cssText: nestedChildren
+        };
+      default:
+        throw new Error(
+          `<${child.type} /> elements are self-closing and can not contain children. Refer to our API for more information.`
+        );
+    }
+  }
+  flattenArrayTypeChildren(child, arrayTypeChildren, newChildProps, nestedChildren) {
+    return {
+      ...arrayTypeChildren,
+      [child.type]: [
+        ...arrayTypeChildren[child.type] || [],
+        {
+          ...newChildProps,
+          ...this.mapNestedChildrenToProps(child, nestedChildren)
+        }
+      ]
+    };
+  }
+  mapObjectTypeChildren(child, newProps, newChildProps, nestedChildren) {
+    switch (child.type) {
+      case "title":
+        return {
+          ...newProps,
+          [child.type]: nestedChildren,
+          titleAttributes: { ...newChildProps }
+        };
+      case "body":
+        return {
+          ...newProps,
+          bodyAttributes: { ...newChildProps }
+        };
+      case "html":
+        return {
+          ...newProps,
+          htmlAttributes: { ...newChildProps }
+        };
+      default:
+        return {
+          ...newProps,
+          [child.type]: { ...newChildProps }
+        };
+    }
+  }
+  mapArrayTypeChildrenToProps(arrayTypeChildren, newProps) {
+    let newFlattenedProps = { ...newProps };
+    Object.keys(arrayTypeChildren).forEach((arrayChildName) => {
+      newFlattenedProps = {
+        ...newFlattenedProps,
+        [arrayChildName]: arrayTypeChildren[arrayChildName]
+      };
+    });
+    return newFlattenedProps;
+  }
+  warnOnInvalidChildren(child, nestedChildren) {
+    invariant(
+      VALID_TAG_NAMES.some((name) => child.type === name),
+      typeof child.type === "function" ? `You may be attempting to nest <Helmet> components within each other, which is not allowed. Refer to our API for more information.` : `Only elements types ${VALID_TAG_NAMES.join(
+        ", "
+      )} are allowed. Helmet does not support rendering <${child.type}> elements. Refer to our API for more information.`
+    );
+    invariant(
+      !nestedChildren || typeof nestedChildren === "string" || Array.isArray(nestedChildren) && !nestedChildren.some((nestedChild) => typeof nestedChild !== "string"),
+      `Helmet expects a string as a child of <${child.type}>. Did you forget to wrap your children in braces? ( <${child.type}>{\`\`}</${child.type}> ) Refer to our API for more information.`
+    );
+    return true;
+  }
+  mapChildrenToProps(children2, newProps) {
+    let arrayTypeChildren = {};
+    React2.Children.forEach(children2, (child) => {
+      if (!child || !child.props) {
+        return;
+      }
+      const { children: nestedChildren, ...childProps } = child.props;
+      const newChildProps = Object.keys(childProps).reduce((obj, key) => {
+        obj[HTML_TAG_MAP[key] || key] = childProps[key];
+        return obj;
+      }, {});
+      let { type } = child;
+      if (typeof type === "symbol") {
+        type = type.toString();
+      } else {
+        this.warnOnInvalidChildren(child, nestedChildren);
+      }
+      switch (type) {
+        case "Symbol(react.fragment)":
+          newProps = this.mapChildrenToProps(nestedChildren, newProps);
+          break;
+        case "link":
+        case "meta":
+        case "noscript":
+        case "script":
+        case "style":
+          arrayTypeChildren = this.flattenArrayTypeChildren(
+            child,
+            arrayTypeChildren,
+            newChildProps,
+            nestedChildren
+          );
+          break;
+        default:
+          newProps = this.mapObjectTypeChildren(child, newProps, newChildProps, nestedChildren);
+          break;
+      }
+    });
+    return this.mapArrayTypeChildrenToProps(arrayTypeChildren, newProps);
+  }
+  render() {
+    const { children: children2, ...props } = this.props;
+    let newProps = { ...props };
+    let { helmetData } = props;
+    if (children2) {
+      newProps = this.mapChildrenToProps(children2, newProps);
+    }
+    if (helmetData && !(helmetData instanceof HelmetData)) {
+      const data2 = helmetData;
+      helmetData = new HelmetData(data2.context, true);
+      delete newProps.helmetData;
+    }
+    if (isReact19) {
+      return /* @__PURE__ */ React2.createElement(React19Dispatcher, { ...newProps });
+    }
+    return helmetData ? /* @__PURE__ */ React2.createElement(HelmetDispatcher, { ...newProps, context: helmetData.value }) : /* @__PURE__ */ React2.createElement(Context.Consumer, null, (context2) => /* @__PURE__ */ React2.createElement(HelmetDispatcher, { ...newProps, context: context2 }));
+  }
+};
+const SITE_NAME = "EdgeLancer";
+const DEFAULT_OG_IMAGE = "https://edgelancer.com/og-image.png";
+const TWITTER_HANDLE = "@edgelancer";
+const sanitizeUrl = (url) => {
+  if (!url) return "";
+  try {
+    return url;
+  } catch (e) {
+    return url;
+  }
+};
+const SEOHelmet = ({
+  title,
+  description = "Download ready-to-use n8n workflow automation templates and AI agents.",
+  keywords,
+  ogImage,
+  url,
+  canonical,
+  metaTags = [],
+  structuredData,
+  ogType = "website",
+  publishedTime,
+  modifiedTime,
+  robots = "index, follow"
+}) => {
+  const pageUrl = reactExports.useMemo(() => sanitizeUrl(url || (typeof window !== "undefined" ? window.location.href : "")), [url]);
+  const canonicalUrl = reactExports.useMemo(() => sanitizeUrl(canonical || pageUrl), [canonical, pageUrl]);
+  const finalOgImage = reactExports.useMemo(() => sanitizeUrl(ogImage || DEFAULT_OG_IMAGE), [ogImage]);
+  const finalRobots = reactExports.useMemo(() => {
+    if (typeof window !== "undefined" && (window.location.hostname.includes("hstgr.cloud") || window.location.hostname.includes("srv1381478"))) {
+      return "noindex, follow";
+    }
+    return robots;
+  }, [robots]);
+  const structuredDataString = reactExports.useMemo(() => {
+    if (!structuredData) return null;
+    try {
+      return JSON.stringify(structuredData);
+    } catch (e) {
+      console.error("Error stringifying structured data:", e);
+      return null;
+    }
+  }, [structuredData]);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(Helmet, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("title", { children: title ? title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}` : SITE_NAME }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { name: "description", content: description }),
+    keywords && /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { name: "keywords", content: keywords }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { name: "robots", content: finalRobots }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { name: "googlebot", content: finalRobots }),
+    canonicalUrl && /* @__PURE__ */ jsxRuntimeExports.jsx("link", { rel: "canonical", href: canonicalUrl }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { property: "og:site_name", content: SITE_NAME }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { property: "og:locale", content: "en_US" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { property: "og:type", content: ogType }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { property: "og:title", content: title || SITE_NAME }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { property: "og:description", content: description }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { property: "og:url", content: pageUrl }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { property: "og:image", content: finalOgImage }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { property: "og:image:width", content: "1200" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { property: "og:image:height", content: "630" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { property: "og:image:alt", content: `${title || SITE_NAME} – ${SITE_NAME}` }),
+    ogType === "article" && publishedTime && /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { property: "article:published_time", content: publishedTime }),
+    ogType === "article" && modifiedTime && /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { property: "article:modified_time", content: modifiedTime }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { name: "twitter:card", content: "summary_large_image" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { name: "twitter:site", content: TWITTER_HANDLE }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { name: "twitter:creator", content: TWITTER_HANDLE }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { name: "twitter:title", content: title || SITE_NAME }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { name: "twitter:description", content: description }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { name: "twitter:image", content: finalOgImage }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { name: "twitter:image:alt", content: `${title || SITE_NAME} – ${SITE_NAME}` }),
+    Array.isArray(metaTags) ? metaTags.map((tag, idx) => /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { name: tag.name || tag.property, content: tag.content }, idx)) : Object.entries(metaTags).map(([key, value]) => {
+      if (!value || typeof value !== "string") return null;
+      const isProperty = key.startsWith("og:") || key.startsWith("fb:") || key.startsWith("article:");
+      return isProperty ? /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { property: key, content: value }, key) : /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { name: key, content: value }, key);
+    }),
+    structuredDataString && /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "script",
+      {
+        type: "application/ld+json",
+        dangerouslySetInnerHTML: { __html: structuredDataString }
+      }
+    )
+  ] });
+};
+function HomePage() {
+  const ssrData = useSSRContext();
+  const [stats, setStats] = reactExports.useState(() => {
+    if (!ssrData.stats) return [];
+    return [
+      { label: "Workflow Views", value: ssrData.stats.total_visits || 0, suffix: "", decimals: 0 },
+      { label: "Active Users", value: ssrData.stats.active_users_today || 0, suffix: "", decimals: 0 },
+      { label: "Total Workflows", value: ssrData.stats.total_workflows || 0, suffix: "+", decimals: 0 }
+    ];
+  });
+  const [categories, setCategories] = reactExports.useState(ssrData.categories || []);
+  const [initialWorkflows, setInitialWorkflows] = reactExports.useState(ssrData.workflows || []);
+  const [blogs, setBlogs] = reactExports.useState(ssrData.blogs || []);
+  const [isLoading, setIsLoading] = reactExports.useState(typeof window !== "undefined" && !ssrData.stats);
+  reactExports.useEffect(() => {
+    async function loadData() {
+      try {
+        const [statsData, categoriesData, workflowsData, blogsData] = await Promise.all([
+          fetchWorkflowStats(),
+          fetchWorkflowCategories(),
+          fetchWorkflowLibrary(1, 12),
+          fetchBlogs(1, 20)
+        ]);
+        if (statsData) {
+          setStats([
+            { label: "Workflow Views", value: statsData.total_visits || 0, suffix: "", decimals: 0 },
+            { label: "Active Users", value: statsData.active_users_today || 0, suffix: "", decimals: 0 },
+            { label: "Total Workflows", value: statsData.total_workflows || 0, suffix: "+", decimals: 0 }
+          ]);
+        }
+        setCategories(categoriesData || []);
+        setInitialWorkflows(workflowsData?.data || []);
+        setBlogs(blogsData?.data || []);
+      } catch (error) {
+        console.error("Failed to fetch homepage data:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    loadData();
+  }, []);
+  if (isLoading) {
+    return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "min-h-screen bg-[#020204] flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingScreen$1, {}) });
+  }
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen bg-[#020204] text-slate-200 font-sans selection:bg-indigo-500/30 overflow-x-hidden", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      SEOHelmet,
+      {
+        title: ssrData.seo?.title || "EdgeLancer – n8n Workflow Automation Templates & AI Agents",
+        description: ssrData.seo?.description || "Download ready-to-use n8n workflow automation templates. Connect apps, automate tasks, and build powerful AI agents with EdgeLancer.",
+        keywords: ssrData.seo?.keywords,
+        ogImage: ssrData.seo?.og_image,
+        metaTags: ssrData.seo?.meta_tags,
+        structuredData: ssrData.seo?.structured_data,
+        canonical: ssrData.seo?.canonical
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(LazyStarfield, {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "fixed inset-0 bg-[url('/noise.svg')] opacity-[0.03] pointer-events-none z-[1]" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative z-10", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(PublicNavbar, {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { id: "main-content", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Hero, { initialStats: stats }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(ProductionTemplates, { initialWorkflows, initialCategories: categories }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(CategoriesSection, { initialCategories: categories }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(BlogsSection, { initialBlogs: blogs }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(BentoGrid, {}),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(CodeDemoSection, {}),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(FAQSection, {}),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(CTASection, {})
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(PublicFooter, {})
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("style", { dangerouslySetInnerHTML: {
+      __html: `
+                @keyframes dash {
+                  to { stroke-dashoffset: -40; }
+                }
+                .custom-scrollbar::-webkit-scrollbar {
+                    height: 4px;
+                    width: 4px;
+                }
+                .custom-scrollbar::-webkit-scrollbar-track {
+                    background: transparent;
+                }
+                .custom-scrollbar::-webkit-scrollbar-thumb {
+                    background: #333;
+                    border-radius: 4px;
+                }
+            `
+    } })
+  ] });
+}
+function LoadingScreen$1() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-col items-center justify-center animate-in fade-in zoom-in duration-700", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-24 h-24 border-4 border-indigo-500/30 border-t-indigo-500 rounded-full animate-spin" }) });
+}
+function PublicNavbarLayout({ children: children2, className }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: cn("min-h-screen bg-[#0a0a0f]", className), children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(PublicNavbar, {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("main", { id: "main-content", className: "pt-16 md:pt-20", children: children2 }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(PublicFooter, {})
+  ] });
+}
+const badgeVariants = cva(
+  "inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+  {
+    variants: {
+      variant: {
+        default: "border-transparent bg-primary text-primary-foreground shadow hover:bg-primary/80",
+        secondary: "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        destructive: "border-transparent bg-destructive text-destructive-foreground shadow hover:bg-destructive/80",
+        outline: "text-foreground"
+      }
+    },
+    defaultVariants: {
+      variant: "default"
+    }
+  }
+);
+function Badge({ className, variant, ...props }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: cn(badgeVariants({ variant }), className), ...props });
+}
+const Card = reactExports.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+  "div",
+  {
+    ref,
+    className: cn(
+      "rounded-xl border bg-card text-card-foreground shadow",
+      className
+    ),
+    ...props
+  }
+));
+Card.displayName = "Card";
+const CardHeader = reactExports.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+  "div",
+  {
+    ref,
+    className: cn("flex flex-col space-y-1.5 p-6", className),
+    ...props
+  }
+));
+CardHeader.displayName = "CardHeader";
+const CardTitle = reactExports.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+  "h3",
+  {
+    ref,
+    className: cn("font-semibold leading-none tracking-tight", className),
+    ...props
+  }
+));
+CardTitle.displayName = "CardTitle";
+const CardDescription = reactExports.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+  "p",
+  {
+    ref,
+    className: cn("text-sm text-muted-foreground", className),
+    ...props
+  }
+));
+CardDescription.displayName = "CardDescription";
+const CardContent = reactExports.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx("div", { ref, className: cn("p-6 pt-0", className), ...props }));
+CardContent.displayName = "CardContent";
+const CardFooter = reactExports.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+  "div",
+  {
+    ref,
+    className: cn("flex items-center p-6 pt-0", className),
+    ...props
+  }
+));
+CardFooter.displayName = "CardFooter";
+const Input = reactExports.forwardRef(
+  ({ className, type, ...props }, ref) => {
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "input",
+      {
+        type,
+        className: cn(
+          "flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
+          className
+        ),
+        ref,
+        ...props
+      }
+    );
+  }
+);
+Input.displayName = "Input";
+function Skeleton({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "div",
+    {
+      className: cn("animate-pulse rounded-md bg-primary/10", className),
+      ...props
+    }
+  );
+}
+const BlogCard = reactExports.memo(({ blog }) => {
+  const getImageUrl2 = (url) => {
+    if (!url) return null;
+    if (url.includes("localhost")) return null;
+    return url;
+  };
+  const getAuthorInitial = (name) => (name || "N").charAt(0).toUpperCase();
+  const calculateReadTime2 = (content) => {
+    if (!content) return "5 min read";
+    const words = content.split(/\s+/).length;
+    return `${Math.ceil(words / 200)} min read`;
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Link, { to: `/blogs/${blog.slug}`, "aria-label": `Read article: ${blog.title}`, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "bg-[#12121a] border-white/5 overflow-hidden hover:border-white/20 transition-all group h-full", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative aspect-[16/9] overflow-hidden bg-slate-900", children: [
+      getImageUrl2(blog.image_url) ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "img",
+        {
+          src: getImageUrl2(blog.image_url),
+          alt: blog.title,
+          loading: "lazy",
+          className: "w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 will-change-transform"
+        }
+      ) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-full h-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Eye, { className: "w-8 h-8 text-slate-600" }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-gradient-to-t from-[#12121a] via-transparent to-transparent" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(Badge, { className: "absolute top-4 left-4 bg-cyan-500/20 text-cyan-400 border-cyan-500/30", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Zap, { className: "w-3 h-3 mr-1" }),
+        blog.category?.title || "General"
+      ] })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-6", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors", children: blog.title }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-slate-300 mb-4 line-clamp-2", children: blog.description }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-8 h-8 rounded-full bg-gradient-to-br from-cyan-400 to-fuchsia-500 flex items-center justify-center text-white text-sm font-bold", children: getAuthorInitial(blog.author?.name) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm text-slate-400", children: blog.author?.name || "Admin" })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-4 text-xs text-slate-400", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "flex items-center gap-1", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Calendar, { className: "w-3 h-3" }),
+            formatDistanceToNow(new Date(blog.published_at || blog.created_at), { addSuffix: true })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "flex items-center gap-1", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Clock, { className: "w-3 h-3" }),
+            calculateReadTime2(blog.content)
+          ] })
+        ] })
+      ] })
+    ] })
+  ] }) });
+});
+function BlogPage({ categorySlug }) {
+  const { search } = distExports.useLocation();
+  const searchParams = reactExports.useMemo(() => new URLSearchParams(search), [search]);
+  const ssrData = useSSRContext();
+  const [blogs, setBlogs] = reactExports.useState(ssrData.blogs?.data || ssrData.blogs || []);
+  const [categories, setCategories] = reactExports.useState(ssrData.categories || []);
+  const [loading, setLoading] = reactExports.useState(!ssrData.blogs);
+  const [categoriesLoading, setCategoriesLoading] = reactExports.useState(!ssrData.categories);
+  const [searchQuery, setSearchQuery] = reactExports.useState("");
+  const [activeCategory, setActiveCategory] = reactExports.useState(categorySlug || searchParams.get("category") || "all");
+  const [page, setPage] = reactExports.useState(1);
+  const [totalPages, setTotalPages] = reactExports.useState(ssrData.blogs?.last_page || 1);
+  const [totalBlogs, setTotalBlogs] = reactExports.useState(ssrData.blogs?.total || 0);
+  const [globalTotal, setGlobalTotal] = reactExports.useState(ssrData.blogs?.total || 0);
+  const [isLoadingMore, setIsLoadingMore] = reactExports.useState(false);
+  const [hasMore, setHasMore] = reactExports.useState(ssrData.blogs ? ssrData.blogs.current_page < ssrData.blogs.last_page : true);
+  const observerTarget = reactExports.useRef(null);
+  reactExports.useEffect(() => {
+    setActiveCategory(categorySlug || searchParams.get("category") || "all");
+  }, [searchParams, categorySlug]);
+  reactExports.useEffect(() => {
+    const loadCategories = async () => {
+      setCategoriesLoading(true);
+      try {
+        const result = await blogService.getCategories();
+        if (result.success && result.data) setCategories(result.data);
+      } catch (e) {
+        console.error(e);
+      } finally {
+        setCategoriesLoading(false);
+      }
+    };
+    loadCategories();
+  }, []);
+  const loadBlogs = reactExports.useCallback(async (currentPage = 1, append = false) => {
+    if (append) {
+      setIsLoadingMore(true);
+    } else {
+      setLoading(true);
+    }
+    try {
+      const cSlug = activeCategory === "all" ? void 0 : activeCategory;
+      const result = await blogService.getAll(currentPage, 12, searchQuery, cSlug);
+      if (result.success && result.data) {
+        const data2 = result.data;
+        setBlogs((prev) => append ? [...prev, ...data2.data || []] : data2.data || []);
+        setTotalPages(data2.last_page || 1);
+        setTotalBlogs(data2.total || 0);
+        setHasMore((data2.current_page || currentPage) < (data2.last_page || 1));
+        if (!cSlug && !searchQuery) {
+          setGlobalTotal(result.data.total || 0);
+        }
+      } else {
+        if (!append) setBlogs([]);
+        setHasMore(false);
+      }
+    } catch (e) {
+      console.error(e);
+      if (!append) setBlogs([]);
+      setHasMore(false);
+    } finally {
+      setLoading(false);
+      setIsLoadingMore(false);
+    }
+  }, [activeCategory, searchQuery]);
+  reactExports.useEffect(() => {
+    setPage(1);
+    const timer2 = setTimeout(() => {
+      loadBlogs(1, false);
+    }, 400);
+    return () => clearTimeout(timer2);
+  }, [activeCategory, searchQuery, loadBlogs]);
+  const fetchMoreBlogs = reactExports.useCallback(() => {
+    if (isLoadingMore || !hasMore || loading) return;
+    const nextPage = page + 1;
+    setPage(nextPage);
+    loadBlogs(nextPage, true);
+  }, [page, hasMore, isLoadingMore, loading, loadBlogs]);
+  reactExports.useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasMore && !loading && !isLoadingMore) {
+          fetchMoreBlogs();
+        }
+      },
+      { threshold: 0.1, rootMargin: "400px" }
+    );
+    if (observerTarget.current) {
+      observer.observe(observerTarget.current);
+    }
+    return () => observer.disconnect();
+  }, [fetchMoreBlogs, hasMore, loading, isLoadingMore]);
+  const featuredBlogs = blogs.filter((blog) => blog.is_featured);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(PublicNavbarLayout, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      SEOHelmet,
+      {
+        title: ssrData.seo?.title || "Automation & AI Blog - EdgeLancer",
+        description: ssrData.seo?.description || "Latest insights on automation, n8n, and AI workflows.",
+        keywords: ssrData.seo?.keywords,
+        ogImage: ssrData.seo?.og_image,
+        metaTags: ssrData.seo?.meta_tags,
+        structuredData: ssrData.seo?.structured_data
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "relative pt-32 pb-16 px-4 overflow-hidden", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute inset-0 pointer-events-none transform-gpu", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute top-0 left-1/4 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[100px] will-change-transform" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-fuchsia-500/10 rounded-full blur-[100px] will-change-transform" })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto text-center relative", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(Badge, { className: "mb-6 bg-white/5 text-cyan-400 border-cyan-500/30 font-medium px-4 py-1.5 rounded-full backdrop-blur-sm", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(BookOpen, { className: "w-3 h-3 mr-2" }),
+          "Blog & Resources"
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-5xl md:text-6xl font-bold mb-6 text-white tracking-tight", children: "Insights & Updates" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xl text-slate-300 max-w-2xl mx-auto mb-10", children: "Tips, strategies, and news to help you grow your freelance business with AI automation." }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative group", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Search, { className: "absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-cyan-400 transition-colors" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            Input,
+            {
+              type: "text",
+              "aria-label": "Search articles",
+              placeholder: "Search articles...",
+              value: searchQuery,
+              onChange: (e) => setSearchQuery(e.target.value),
+              className: "pl-12 h-14 bg-white/5 border-white/10 text-white placeholder:text-slate-400 focus:border-cyan-500/50 rounded-xl transition-all"
+            }
+          )
+        ] }) })
+      ] })
+    ] }),
+    (loading || featuredBlogs.length > 0) && /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "py-12 px-4 min-h-[400px]", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-7xl mx-auto", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 mb-8", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Star, { className: "w-6 h-6 text-amber-500 fill-amber-500" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-2xl font-bold text-white", children: "Featured Articles" })
+      ] }),
+      loading ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid md:grid-cols-2 gap-8", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Skeleton, { className: "w-full aspect-[16/9] rounded-xl bg-white/5" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Skeleton, { className: "w-full aspect-[16/9] rounded-xl bg-white/5" })
+      ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid md:grid-cols-2 gap-8", children: featuredBlogs.slice(0, 2).map((blog) => /* @__PURE__ */ jsxRuntimeExports.jsx(BlogCard, { blog }, blog.id)) })
+    ] }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "py-12 px-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-7xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid lg:grid-cols-4 gap-12", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("aside", { className: "lg:col-span-1", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "sticky top-24", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("h3", { className: "text-lg font-semibold text-white mb-6 flex items-center gap-2", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Zap, { className: "w-5 h-5 text-cyan-400" }),
+          "Categories"
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-2", role: "group", "aria-label": "Blog categories", children: categoriesLoading ? Array.from({ length: 5 }).map((_, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(Skeleton, { className: "w-full h-12 bg-white/5 rounded-lg" }, i)) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "button",
+            {
+              onClick: () => {
+                setActiveCategory("all");
+                setPage(1);
+              },
+              className: `w-full flex items-center justify-between px-4 py-3 rounded-lg text-left transition-all ${activeCategory === "all" ? "bg-cyan-500/20 text-cyan-400 border border-cyan-500/30" : "bg-white/5 text-slate-400 hover:bg-white/10 hover:text-white border border-transparent"}`,
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-medium", children: "All Posts" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs px-2 py-0.5 rounded-full bg-white/10", children: globalTotal || totalBlogs })
+              ]
+            }
+          ),
+          categories.map((cat) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "button",
+            {
+              onClick: () => {
+                setActiveCategory(cat.slug);
+                setPage(1);
+              },
+              className: `w-full flex items-center justify-between px-4 py-3 rounded-lg text-left transition-all ${activeCategory === cat.slug ? "bg-cyan-500/20 text-cyan-400 border border-cyan-500/30" : "bg-white/5 text-slate-400 hover:bg-white/10 hover:text-white border border-transparent"}`,
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-medium", children: cat.title })
+            },
+            cat.id
+          ))
+        ] }) })
+      ] }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "lg:col-span-3", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between mb-8 border-b border-white/5 pb-4", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-2xl font-bold text-white", children: "All Articles" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-sm text-slate-400 font-medium", children: [
+            "Page ",
+            page,
+            " of ",
+            totalPages
+          ] })
+        ] }),
+        loading && blogs.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid sm:grid-cols-2 gap-6", children: Array.from({ length: 4 }).map((_, idx) => /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "bg-[#12121a] border-white/5 overflow-hidden", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Skeleton, { className: "w-full aspect-[16/10] bg-white/5" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-5 space-y-3", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Skeleton, { className: "w-3/4 h-5 bg-white/5" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Skeleton, { className: "w-full h-4 bg-white/5" })
+          ] })
+        ] }, idx)) }) : blogs.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center text-slate-400 py-16 border border-dashed border-white/10 rounded-xl bg-[#12121a]/50", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(BookOpen, { className: "w-12 h-12 mx-auto mb-4 opacity-20" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-lg", children: "No articles found matching your criteria." })
+        ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid sm:grid-cols-2 gap-6", children: blogs.map((blog) => /* @__PURE__ */ jsxRuntimeExports.jsx(BlogCard, { blog }, blog.id)) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { ref: observerTarget, className: "py-20 flex flex-col items-center justify-center gap-6", children: isLoadingMore ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col items-center gap-6", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-16 h-16 border-4 border-white/5 border-t-cyan-500 rounded-full animate-spin" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 text-white animate-pulse" })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-cyan-400 text-xs font-bold uppercase tracking-[0.3em] animate-pulse", children: "Scanning Decades of Data" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-gray-600 text-[10px] mt-2", children: "Connecting to verified oracle nodes..." })
+            ] })
+          ] }) : !hasMore && blogs.length > 0 ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative p-12 rounded-[2rem] bg-white/[0.02] border border-white/5 text-center backdrop-blur-md max-w-sm w-full mx-auto overflow-hidden group", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-gradient-to-b from-cyan-500/10 to-transparent rounded-[2rem] opacity-50 transition-opacity group-hover:opacity-80" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Star, { className: "w-10 h-10 text-amber-500 fill-amber-500 mx-auto mb-6 drop-shadow-lg animate-bounce" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-xl font-bold text-white mb-2", children: "Deep Index Reached" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-gray-400 text-sm leading-relaxed", children: [
+              "You have retrieved all ",
+              blogs.length,
+              " articles currently available."
+            ] })
+          ] }) : null })
+        ] })
+      ] })
+    ] }) }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "py-20 px-4 bg-gradient-to-b from-transparent to-white/[0.02] border-t border-white/5", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto text-center relative", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-cyan-500/10 rounded-full blur-[100px] pointer-events-none" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-3xl md:text-4xl font-bold text-white mb-4", children: "Subscribe to Newsletter" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-slate-400 mb-8", children: "Get the latest articles and insights delivered to your inbox." }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col sm:flex-row gap-3 max-w-md mx-auto relative z-10", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Input,
+          {
+            type: "email",
+            "aria-label": "Email address",
+            placeholder: "your@email.com",
+            className: "h-14 bg-white/5 border-white/10 text-white placeholder:text-slate-500 flex-1 rounded-xl focus:border-cyan-500/50 transition-all border-2"
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { className: "h-14 bg-gradient-to-r from-cyan-500 to-fuchsia-500 text-white border-0 hover:opacity-90 px-8 rounded-xl font-bold text-lg shadow-lg shadow-cyan-500/20 transition-all hover:scale-105 active:scale-95", children: "Subscribe" })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-6 text-slate-500 text-xs font-medium", children: "No spam, ever. Unsubscribe with one click." })
+    ] }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(FAQSection, { type: "page", slug: "blogs" })
+  ] });
+}
+const BlogSlugPage = () => {
+  const { slug } = distExports.useParams();
+  const ssrData = reactExports.useContext(SSRContext);
+  const [blog, setBlog] = reactExports.useState(ssrData.blog || null);
+  const [seo, setSeo] = reactExports.useState(ssrData.seo);
+  const [relatedBlogs, setRelatedBlogs] = reactExports.useState(ssrData.relatedBlogs || []);
+  const [relatedWorkflows, setRelatedWorkflows] = reactExports.useState(ssrData.relatedWorkflows || []);
+  const [loading, setLoading] = reactExports.useState(!blog);
+  reactExports.useEffect(() => {
+    if (!slug) return;
+    const load = async () => {
+      try {
+        const response = await blogService.getBySlugWithSeo(slug);
+        if (response.success && response.data) {
+          setBlog(response.data.blog);
+          setSeo(response.data.seo);
+          setRelatedBlogs(response.data.relatedBlogs || []);
+          setRelatedWorkflows(response.data.relatedWorkflows || []);
+        }
+      } catch (error) {
+        console.error("Error loading blog post:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    load();
+  }, [slug]);
+  const siteOrigin = "http://localhost:8000";
+  const handleShare = async () => {
+    if (!blog) return;
+    const shareData = {
+      title: blog?.title || "EdgeLancer Blog",
+      text: blog?.description || "Check out this amazing article!",
+      url: window.location.href
+    };
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+      } catch (err) {
+        console.error("Error sharing:", err);
+      }
+    } else {
+      const el = document.createElement("textarea");
+      el.value = window.location.href;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand("copy");
+      document.body.removeChild(el);
+      alert("Link copied to clipboard!");
+    }
+  };
+  if (loading) {
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen bg-[#020202] text-slate-300 font-sans flex flex-col", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(PublicNavbar, {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-grow flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative w-16 h-16", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute top-0 left-0 w-full h-full border-4 border-indigo-500/20 rounded-full" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute top-0 left-0 w-full h-full border-4 border-t-indigo-500 rounded-full animate-spin" })
+      ] }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(PublicFooter, {})
+    ] });
+  }
+  if (!blog) {
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen bg-[#020202] text-slate-300 font-sans flex flex-col", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(PublicNavbar, {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-grow flex flex-col items-center justify-center text-center px-4", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-20 h-20 bg-indigo-500/10 rounded-2xl flex items-center justify-center mb-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowLeft, { className: "w-10 h-10 text-indigo-500" }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-3xl font-bold text-white mb-4", children: "Article Not Found" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-slate-400 mb-8 max-w-md", children: "Sorry, we couldn't find the article you're looking for. It might have been moved or deleted." }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(distExports.Link, { to: "/blogs", className: "inline-flex items-center gap-2 px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-medium transition-all", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowLeft, { className: "w-5 h-5" }),
+          "Back to Blog"
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(PublicFooter, {})
+    ] });
+  }
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen bg-[#020202] text-slate-300 font-sans flex flex-col transition-all duration-300", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      SEOHelmet,
+      {
+        title: seo?.title,
+        description: seo?.description,
+        keywords: seo?.keywords,
+        ogImage: seo?.og_image,
+        canonical: seo?.canonical,
+        ogType: seo?.og_type,
+        structuredData: seo?.structured_data,
+        metaTags: seo?.meta_tags,
+        robots: seo?.robots
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(PublicNavbar, {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "fixed top-0 left-0 w-full h-1 z-[100] pointer-events-none", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { id: "scroll-progress", className: "h-full bg-indigo-600 shadow-[0_0_10px_#4f46e5] w-0 transition-all duration-150" }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("header", { className: "relative w-full pt-32 pb-20 overflow-hidden border-b border-white/5", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute top-0 left-1/4 w-96 h-96 bg-indigo-600/10 rounded-full blur-[100px] -translate-y-1/2" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bottom-0 right-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-[100px] translate-y-1/2" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto px-6 relative z-10", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center gap-3 mb-8", children: [
+          blog.category && /* @__PURE__ */ jsxRuntimeExports.jsx(
+            distExports.Link,
+            {
+              to: `/blogs?category=${blog.category.slug}`,
+              className: "px-4 py-1.5 bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-400 text-sm font-semibold rounded-full border border-indigo-500/20 transition-all backdrop-blur-sm",
+              children: blog.category.title
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 text-slate-400 text-sm bg-white/5 px-4 py-1.5 rounded-full border border-white/5 backdrop-blur-sm", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Clock, { className: "w-4 h-4" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: seo?.reading_time || "5 min read" })
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-4xl md:text-6xl font-bold text-white mb-8 leading-[1.1] tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400", children: blog.title }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center justify-between gap-6 py-6 border-y border-white/5", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-4", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-12 h-12 rounded-full overflow-hidden border-2 border-indigo-500/20 p-0.5 bg-gradient-to-tr from-indigo-500/20 to-blue-500/20", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "img",
+              {
+                src: blog.author?.avatar_url || `https://ui-avatars.com/api/?name=${blog.author?.name || "Author"}&background=4f46e5&color=fff`,
+                alt: blog.author?.name || "Author",
+                className: "w-full h-full rounded-full object-cover"
+              }
+            ) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-white font-semibold", children: blog.author?.name || "EdgeLancer Team" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-slate-500 text-sm flex items-center gap-2", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(Calendar, { className: "w-3.5 h-3.5" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: blog.published_at ? new Date(blog.published_at).toLocaleDateString(void 0, { year: "numeric", month: "long", day: "numeric" }) : "Recently Published" })
+              ] })
+            ] })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center gap-3", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "button",
+            {
+              onClick: handleShare,
+              className: "p-3 bg-white/5 hover:bg-white/10 text-slate-300 rounded-xl border border-white/5 transition-all group",
+              title: "Share article",
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx(Share2, { className: "w-5 h-5 group-hover:scale-110 transition-transform" })
+            }
+          ) })
+        ] })
+      ] })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { className: "max-w-7xl mx-auto px-6 py-20 flex flex-col lg:flex-row gap-12 relative", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("article", { className: "max-w-4xl lg:flex-grow order-2 lg:order-1", children: [
+        blog.image_url && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mb-12 rounded-2xl md:rounded-3xl overflow-hidden border border-white/5 shadow-2xl shadow-black/50", children: /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: blog.image_url, alt: blog.title, className: "w-full aspect-[16/9] object-cover" }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "prose prose-invert prose-indigo max-w-none prose-lg md:prose-xl prose-headings:text-white prose-headings:font-bold prose-p:text-slate-300 prose-p:leading-relaxed prose-a:text-indigo-400 prose-a:no-underline hover:prose-a:underline prose-img:rounded-2xl prose-blockquote:border-l-indigo-500 prose-blockquote:bg-white/5 prose-blockquote:rounded-r-xl prose-blockquote:py-1 prose-blockquote:px-6", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("style", { dangerouslySetInnerHTML: {
+            __html: `
+                            .blog-content h2 { 
+                                font-size: 2.25rem; 
+                                margin-top: 3.5rem; 
+                                margin-bottom: 1.5rem; 
+                                background: linear-gradient(to right, #fff, #94a3b8);
+                                -webkit-background-clip: text;
+                                -webkit-text-fill-color: transparent;
+                            }
+                            .blog-content h3 { font-size: 1.75rem; margin-top: 2.5rem; color: #fff; }
+                            .blog-content p { margin-bottom: 1.75rem; color: #cbd5e1; }
+                            .blog-content ul, .blog-content ol { margin: 1.5rem 0; padding-left: 1.5rem; }
+                            .blog-content li { margin-bottom: 0.75rem; color: #cbd5e1; }
+                            
+                            .blog-content .download-workflow-btn {
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                gap: 0.65rem;
+                                background: linear-gradient(135deg, #4f46e5 0%, #6366f1 50%, #3b82f6 100%);
+                                color: #ffffff !important;
+                                font-size: 1rem;
+                                font-weight: 600;
+                                padding: 1rem 2rem;
+                                border-radius: 0.875rem;
+                                text-decoration: none !important;
+                                margin: 2rem 0;
+                                box-shadow: 0 4px 24px -4px rgba(79, 70, 229, 0.45);
+                                transition: transform 0.2s ease, box-shadow 0.2s ease;
+                            }
+                            .blog-content .download-workflow-btn:hover {
+                                transform: translateY(-2px);
+                                box-shadow: 0 8px 30px -4px rgba(79, 70, 229, 0.55);
+                            }
+
+                            .blog-content blockquote {
+                                border-left: 3px solid #6366f1;
+                                background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(99, 102, 241, 0.02));
+                                padding: 1.25rem 1.75rem;
+                                margin: 2rem 0;
+                                border-radius: 0 0.875rem 0.875rem 0;
+                                font-style: italic;
+                                color: #cbd5e1;
+                            }
+
+                            .blog-content img {
+                                border-radius: 1rem;
+                                border: 1px solid rgba(255, 255, 255, 0.06);
+                                margin: 2rem auto;
+                                display: block;
+                            }
+                        `
+          } }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "div",
+            {
+              className: "blog-content w-full",
+              dangerouslySetInnerHTML: {
+                __html: (blog.content || "").replace(/http:\/\/localhost:3000\/templates\//g, `${siteOrigin}/workflow/`).replace(/http:\/\/localhost:3000\/workflow\//g, `${siteOrigin}/workflow/`).replace(/http:\/\/localhost:3000\//g, `${siteOrigin}/workflow/`).replace(/http:\/\/localhost:3000/g, `${siteOrigin}/workflow`).replace(/https?:\/\/edgelancer\.com\/blog\//g, "/blogs/").replace(/\/blog\//g, "/blogs/").replace(/href="blog\//g, 'href="/blogs/').replace(
+                  /<a([^>]*?)href="([^"]*)"([^>]*?)>(.*?)<\/a>/gi,
+                  (match2, p1, p2, p3, p4) => {
+                    if (p4.includes("http") || p2.includes("/webhook/")) {
+                      return match2;
+                    }
+                    if (p4.toLowerCase().includes("download") || p4.toLowerCase().includes("get this") || p4.toLowerCase().includes("workflow")) {
+                      return `<a${p1}href="${p2}"${p3} class="download-workflow-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>${p4}</a>`;
+                    }
+                    return match2;
+                  }
+                )
+              }
+            }
+          )
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("aside", { className: "w-full lg:w-96 order-1 lg:order-2", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "sticky top-32 space-y-10", children: [
+        relatedWorkflows.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "p-6 bg-white/[0.03] border border-white/5 rounded-3xl backdrop-blur-md", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-6", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-2 bg-indigo-500/10 rounded-lg", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Zap, { className: "w-4 h-4 text-indigo-400" }) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg font-bold text-white uppercase tracking-wider", children: "Related Tools" })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 gap-3", children: relatedWorkflows.map((workflow) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            distExports.Link,
+            {
+              to: `/workflow/${workflow.slug}`,
+              className: "group flex items-center gap-4 p-3 hover:bg-white/5 rounded-2xl transition-all border border-transparent hover:border-white/5",
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-14 h-14 bg-gradient-to-br from-indigo-500/20 to-blue-500/20 rounded-xl flex items-center justify-center p-2 group-hover:scale-105 transition-transform", children: workflow.category?.image_url ? /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: workflow.category.image_url, alt: workflow.title, className: "w-full h-full object-contain" }) : /* @__PURE__ */ jsxRuntimeExports.jsx(PanelsTopLeft, { className: "w-6 h-6 text-indigo-400" }) }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-grow min-w-0", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "text-white font-medium text-sm leading-tight truncate group-hover:text-indigo-400 transition-colors", children: workflow.title }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-slate-500 text-xs mt-1 truncate", children: workflow.category?.title })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronRight, { className: "w-4 h-4 text-slate-600 group-hover:text-indigo-400 group-hover:translate-x-1 transition-all" })
+              ]
+            },
+            workflow.id
+          )) })
+        ] }),
+        relatedBlogs.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "p-6 bg-white/[0.03] border border-white/5 rounded-3xl backdrop-blur-md", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-6", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-2 bg-indigo-500/10 rounded-lg", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Tag, { className: "w-4 h-4 text-indigo-400" }) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg font-bold text-white uppercase tracking-wider", children: "Read More" })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 gap-6", children: relatedBlogs.map((post) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            distExports.Link,
+            {
+              to: `/blogs/${post.slug}`,
+              className: "group block space-y-3",
+              children: [
+                post.image_url && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "aspect-[16/9] rounded-xl overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-500 border border-white/5", children: /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: post.image_url, alt: post.title, className: "w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" }) }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "text-white font-semibold group-hover:text-indigo-400 transition-colors line-clamp-2", children: post.title }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 mt-2 text-xs text-slate-500", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-1", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(Clock, { className: "w-3 h-3" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "5 min read" })
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-1 h-1 bg-white/10 rounded-full" }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: post.published_at ? new Date(post.published_at).toLocaleDateString() : "Recent" })
+                  ] })
+                ] })
+              ]
+            },
+            post.id
+          )) })
+        ] })
+      ] }) })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(PublicFooter, {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("script", { dangerouslySetInnerHTML: {
+      __html: `
+                window.onscroll = function() {
+                    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                    var scrolled = (winScroll / height) * 100;
+                    document.getElementById("scroll-progress").style.width = scrolled + "%";
+                };
+            `
+    } })
+  ] });
+};
+function WorkflowsPage({ categorySlug }) {
+  const navigate = distExports.useNavigate();
+  const { search } = distExports.useLocation();
+  const searchParams = reactExports.useMemo(() => new URLSearchParams(search), [search]);
+  const [searchQuery, setSearchQuery] = reactExports.useState("");
+  const ssrData = useSSRContext();
+  const [categories, setCategories] = reactExports.useState(ssrData.categories || []);
+  const [workflows, setWorkflows] = reactExports.useState(ssrData.workflows?.data || ssrData.workflows || []);
+  const [loading, setLoading] = reactExports.useState(!ssrData.workflows);
+  const [page, setPage] = reactExports.useState(1);
+  const [totalPages, setTotalPages] = reactExports.useState(ssrData.workflows?.last_page || 1);
+  const [showAllCategories, setShowAllCategories] = reactExports.useState(false);
+  const [activeCategory, setActiveCategory] = reactExports.useState("all");
+  const [isLoadingMore, setIsLoadingMore] = reactExports.useState(false);
+  const [hasMore, setHasMore] = reactExports.useState(ssrData.workflows ? ssrData.workflows.current_page < ssrData.workflows.last_page : true);
+  const [totalWorkflows, setTotalWorkflows] = reactExports.useState(ssrData.workflows?.total || 0);
+  const observerTarget = reactExports.useRef(null);
+  const iconPool2 = [
+    Zap,
+    Bot,
+    GitBranch,
+    Layers,
+    LayoutGrid,
+    Workflow,
+    Mail,
+    MessageSquare,
+    Globe,
+    Database,
+    FileText,
+    Share2,
+    Smartphone,
+    Cpu,
+    BarChart,
+    Settings,
+    Bell,
+    Cloud,
+    Code
+  ];
+  const gradientPool2 = [
+    "from-purple-500 to-indigo-500",
+    "from-cyan-500 to-blue-500",
+    "from-fuchsia-500 to-pink-500",
+    "from-emerald-500 to-teal-500",
+    "from-orange-500 to-red-500",
+    "from-blue-400 to-indigo-600"
+  ];
+  const getWorkflowVisuals2 = (id2) => {
+    const hash = id2 || 0;
+    const Icon2 = iconPool2[hash % iconPool2.length];
+    const gradient = gradientPool2[hash % gradientPool2.length];
+    return { Icon: Icon2, gradient };
+  };
+  reactExports.useEffect(() => {
+    const fetchCats = async () => {
+      try {
+        const res = await workflowService.getWorkflowLibraryCategories();
+        if (res.success && res.data) {
+          setCategories(res.data);
+          const slug = categorySlug || searchParams.get("category");
+          if (slug) {
+            const found = res.data.find((c) => c.slug === slug);
+            if (found) setActiveCategory(found.id);
+          }
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    };
+    fetchCats();
+  }, [searchParams, categorySlug]);
+  const loadWorkflows = reactExports.useCallback(async (currentPage = 1, append = false) => {
+    if (append) {
+      setIsLoadingMore(true);
+    } else {
+      setLoading(true);
+    }
+    try {
+      const categoryId = activeCategory === "all" ? null : activeCategory;
+      const res = await workflowService.getWorkflowLibrary(currentPage, 12, searchQuery, categoryId);
+      if (res.data) {
+        setWorkflows((prev) => append ? [...prev, ...res.data] : res.data);
+        setTotalPages(res.last_page || 1);
+        setTotalWorkflows(res.total || 0);
+        setHasMore((res.current_page || currentPage) < (res.last_page || 1));
+      } else {
+        if (!append) {
+          setWorkflows([]);
+          setTotalPages(1);
+          setTotalWorkflows(0);
+        }
+        setHasMore(false);
+      }
+    } catch (e) {
+      console.error(e);
+      setHasMore(false);
+    } finally {
+      setLoading(false);
+      setIsLoadingMore(false);
+    }
+  }, [activeCategory, searchQuery]);
+  reactExports.useEffect(() => {
+    setPage(1);
+    setHasMore(true);
+    const timer2 = setTimeout(() => {
+      loadWorkflows(1);
+    }, 400);
+    return () => clearTimeout(timer2);
+  }, [searchQuery, activeCategory, loadWorkflows]);
+  const handlePageChange = reactExports.useCallback(() => {
+    if (isLoadingMore || !hasMore || loading) return;
+    const nextPage = page + 1;
+    setPage(nextPage);
+    loadWorkflows(nextPage, true);
+  }, [page, hasMore, isLoadingMore, loading, loadWorkflows]);
+  reactExports.useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasMore && !loading && !isLoadingMore) {
+          handlePageChange();
+        }
+      },
+      { threshold: 0.1, rootMargin: "400px" }
+    );
+    if (observerTarget.current) {
+      observer.observe(observerTarget.current);
+    }
+    return () => observer.disconnect();
+  }, [handlePageChange, hasMore, loading, isLoadingMore]);
+  const featuredWorkflows = workflows.slice(0, 4);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(PublicNavbarLayout, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      SEOHelmet,
+      {
+        title: ssrData.seo?.title || `${activeCategory === "all" ? "All n8n Workflow Templates" : categories.find((c) => c.id === activeCategory)?.title + " Templates"} - EdgeLancer`,
+        description: ssrData.seo?.description || "Browse and download ready-to-use n8n workflow templates for marketing, sales, web scrapers and more.",
+        keywords: ssrData.seo?.keywords,
+        ogImage: ssrData.seo?.og_image,
+        metaTags: ssrData.seo?.meta_tags,
+        structuredData: ssrData.seo?.structured_data
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "relative pt-24 md:pt-32 pb-12 md:pb-16 px-4 overflow-hidden", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute inset-0 overflow-hidden", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute top-0 left-1/4 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-purple-500/10 rounded-full blur-[80px] md:blur-[120px]" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bottom-0 right-1/4 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-fuchsia-500/10 rounded-full blur-[80px] md:blur-[120px]" })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto text-center relative", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(Badge, { className: "mb-4 md:mb-6 bg-white/5 text-purple-400 border-purple-500/30 hover:bg-white/10 backdrop-blur-sm text-xs md:text-sm", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Layers, { className: "w-3 h-3 mr-1" }),
+          totalWorkflows > 0 ? `${totalWorkflows}+ Templates` : "Loading Templates..."
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("h1", { className: "text-4xl sm:text-5xl md:text-6xl font-bold mb-4 md:mb-6 leading-tight", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-white", children: "Ready-to-Use" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-fuchsia-400 to-pink-400", children: "Workflow Templates" })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-8 md:mb-10 px-2", children: "Start automating in seconds with our library of proven workflow templates." }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-xl mx-auto px-2 sm:px-0", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Search, { className: "absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            Input,
+            {
+              type: "text",
+              placeholder: "Search workflows...",
+              value: searchQuery,
+              onChange: (e) => setSearchQuery(e.target.value),
+              className: "pl-12 h-12 md:h-14 bg-[#12121a] border-white/10 text-white placeholder:text-gray-400 focus-visible:ring-purple-500/50 text-base md:text-lg rounded-xl shadow-xl"
+            }
+          )
+        ] }) })
+      ] })
+    ] }),
+    featuredWorkflows.length > 0 && !searchQuery && activeCategory === "all" && /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "py-8 md:py-12 px-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-7xl mx-auto", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-4 md:mb-6", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Star, { className: "w-5 h-5 text-amber-500 fill-amber-500" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-base md:text-lg font-semibold text-white", children: "Featured Workflows" })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4", children: featuredWorkflows.map((workflow) => {
+        const { Icon: Icon2, gradient } = getWorkflowVisuals2(workflow.id);
+        return /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Card,
+          {
+            onClick: () => navigate(`/workflow/${workflow.slug}`),
+            className: "bg-[#12121a] border-white/5 p-4 hover:border-white/20 transition-all cursor-pointer group",
+            children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `w-10 h-10 rounded-lg bg-gradient-to-br ${gradient} flex items-center justify-center flex-shrink-0`, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon2, { className: "w-5 h-5 text-white" }) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-w-0", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-medium text-white truncate group-hover:text-purple-400 transition-colors text-sm md:text-base", children: workflow.title }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-gray-400", children: [
+                  workflow.views ? workflow.views.toLocaleString() : workflow.user_count?.toLocaleString() || 0,
+                  " uses"
+                ] })
+              ] })
+            ] })
+          },
+          `featured-${workflow.id}`
+        );
+      }) })
+    ] }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "py-6 md:py-8 px-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-7xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col lg:flex-row gap-6 md:gap-8", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "lg:w-64 flex-shrink-0", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "static lg:sticky lg:top-24 bg-[#12121a] border border-white/5 rounded-xl p-4", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("h3", { className: "font-semibold text-white mb-3 md:mb-4 flex items-center gap-2 text-sm md:text-base", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Filter, { className: "w-4 h-4" }),
+          "Categories"
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex lg:flex-col gap-2 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 scrollbar-hide -mx-4 px-4 lg:mx-0 lg:px-0", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "button",
+            {
+              onClick: () => setActiveCategory("all"),
+              className: cn(
+                "whitespace-nowrap lg:w-full flex items-center justify-center lg:justify-between px-4 lg:px-3 py-2 rounded-lg text-sm transition-all shrink-0",
+                activeCategory === "all" ? "bg-white/10 text-white shadow-[0_0_15px_rgba(255,255,255,0.05)]" : "text-gray-400 hover:text-white hover:bg-white/5 bg-white/5 lg:bg-transparent"
+              ),
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "All Templates" })
+            }
+          ),
+          (showAllCategories ? categories : categories.slice(0, 8)).map((category) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "button",
+            {
+              onClick: () => setActiveCategory(category.id),
+              className: cn(
+                "whitespace-nowrap lg:w-full flex items-center justify-center lg:justify-between px-4 lg:px-3 py-2 rounded-lg text-sm transition-all shrink-0",
+                activeCategory === category.id ? "bg-white/10 text-white shadow-[0_0_15px_rgba(255,255,255,0.05)]" : "text-gray-400 hover:text-white hover:bg-white/5 bg-white/5 lg:bg-transparent"
+              ),
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: category.title })
+            },
+            category.id
+          )),
+          categories.length > 8 && /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "button",
+            {
+              onClick: () => setShowAllCategories(!showAllCategories),
+              className: "whitespace-nowrap lg:w-full flex items-center justify-center px-4 lg:px-3 py-2 lg:mt-2 rounded-lg text-sm text-indigo-400 hover:text-indigo-300 hover:bg-white/5 transition-all outline-none border border-white/5 lg:bg-[#12121a] shrink-0",
+              children: showAllCategories ? "Show Less" : "Show All"
+            }
+          )
+        ] })
+      ] }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1", style: { scrollMarginTop: "100px" }, children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center justify-between mb-4 md:mb-6", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-lg md:text-xl font-semibold text-white", children: [
+          activeCategory === "all" ? "All Templates" : categories.find((c) => c.id === activeCategory)?.title,
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "ml-2 text-xs md:text-sm text-gray-400", children: [
+            "(",
+            loading ? "..." : totalWorkflows,
+            ")"
+          ] })
+        ] }) }),
+        loading ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col items-center justify-center py-20 min-h-[400px] md:min-h-[600px]", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-16 h-16 border-4 border-white/5 border-t-cyan-500 rounded-full animate-spin" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 text-white animate-pulse" })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center mt-6", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-cyan-400 text-xs font-bold uppercase tracking-[0.3em] animate-pulse", children: "Scanning Decades of Data" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-gray-600 text-[10px] mt-2", children: "Connecting to verified oracle nodes..." })
+          ] })
+        ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid md:grid-cols-2 gap-4 md:gap-6", children: workflows.map((workflow) => {
+            const { Icon: Icon2, gradient } = getWorkflowVisuals2(workflow.id);
+            return /* @__PURE__ */ jsxRuntimeExports.jsx(
+              Card,
+              {
+                onClick: () => navigate(`/workflow/${workflow.slug}`),
+                className: "bg-[#12121a] border-white/5 hover:border-white/20 transition-all duration-300 flex flex-col group h-full overflow-hidden cursor-pointer",
+                children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-4 md:p-6 flex flex-col h-full", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start justify-between mb-4", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-to-br ${gradient} flex items-center justify-center shadow-lg shadow-black/20 shrink-0`, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon2, { className: "w-5 h-5 md:w-6 md:h-6 text-white" }) }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-1 md:gap-2 flex-wrap justify-end pl-2", children: [
+                      Number(workflow.price) === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { className: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20 text-[10px] md:text-xs", children: "Free" }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(Badge, { variant: "outline", className: "border-white/10 text-gray-300 text-[10px] md:text-xs", children: [
+                        "$",
+                        workflow.price
+                      ] }),
+                      workflow.rating && /* @__PURE__ */ jsxRuntimeExports.jsxs(Badge, { variant: "secondary", className: "bg-amber-500/10 text-amber-500 border-amber-500/20 gap-1 text-[10px] md:text-xs", children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(Star, { className: "w-2.5 h-2.5 md:w-3 md:h-3 fill-current" }),
+                        workflow.rating
+                      ] })
+                    ] })
+                  ] }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-4 flex-grow", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-base md:text-lg font-semibold text-white mb-1.5 md:mb-2 group-hover:text-cyan-400 transition-colors", children: workflow.title }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs md:text-sm text-gray-400 line-clamp-2", children: workflow.description })
+                  ] }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap gap-1.5 md:gap-2 mb-4 md:mb-6", children: [
+                    workflow.category && /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", className: "border-white/10 text-gray-400 text-[10px] md:text-xs font-normal", children: workflow.category.title }),
+                    workflow.nodes_count > 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs(Badge, { variant: "outline", className: "border-white/10 text-gray-400 text-[10px] md:text-xs font-normal gap-1", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(LayoutGrid, { className: "w-3 h-3" }),
+                      workflow.nodes_count,
+                      " Nodes"
+                    ] }),
+                    workflow.difficulty && /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", className: "border-white/10 text-gray-400 text-[10px] md:text-xs font-normal capitalize", children: workflow.difficulty }),
+                    workflow.time_saved_value && /* @__PURE__ */ jsxRuntimeExports.jsxs(Badge, { variant: "outline", className: "border-cyan-500/20 text-cyan-400 text-[10px] md:text-xs font-normal gap-1", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(Clock, { className: "w-3 h-3" }),
+                      workflow.time_saved_value,
+                      " ",
+                      workflow.time_saved_unit
+                    ] })
+                  ] }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between pt-3 md:pt-4 border-t border-white/5 mt-auto", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-1.5 md:gap-2 text-[11px] md:text-xs text-gray-400", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(Eye, { className: "w-3 h-3 md:w-4 md:h-4" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+                        workflow.views?.toLocaleString() || 0,
+                        " views"
+                      ] })
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      Button,
+                      {
+                        size: "sm",
+                        className: "bg-gradient-to-r from-cyan-500 to-fuchsia-500 text-white border-0 text-xs md:text-sm h-8 md:h-9",
+                        children: "View"
+                      }
+                    )
+                  ] })
+                ] })
+              },
+              workflow.id
+            );
+          }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "div",
+            {
+              ref: observerTarget,
+              className: "py-20 flex flex-col items-center justify-center gap-6",
+              children: isLoadingMore ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col items-center gap-6", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-16 h-16 border-4 border-white/5 border-t-cyan-500 rounded-full animate-spin" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 text-white animate-pulse" })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-cyan-400 text-xs font-bold uppercase tracking-[0.3em] animate-pulse", children: "Scanning Decades of Data" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-gray-600 text-[10px] mt-2", children: "Connecting to verified oracle nodes..." })
+                ] })
+              ] }) : !hasMore && workflows.length > 0 ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative p-12 rounded-[2rem] bg-white/[0.02] border border-white/5 text-center backdrop-blur-md max-w-sm w-full mx-auto", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-gradient-to-b from-amber-500/10 to-transparent rounded-[2rem] opacity-50" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(Star, { className: "w-10 h-10 text-amber-500 fill-amber-500 mx-auto mb-6 drop-shadow-lg animate-bounce" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-xl font-bold text-white mb-2", children: "Deep Index Reached" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-gray-400 text-sm leading-relaxed", children: [
+                  "You have retrieved all ",
+                  workflows.length,
+                  " workflows currently available."
+                ] })
+              ] }) : null
+            }
+          )
+        ] })
+      ] })
+    ] }) }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(FAQSection, { type: "page", slug: "workflows" })
+  ] });
+}
 function composeEventHandlers(originalEventHandler, ourEventHandler, { checkForDefaultPrevented = true } = {}) {
   return function handleEvent(event) {
     originalEventHandler?.(event);
@@ -63740,8 +71187,8 @@ function __spreadArray(to, from, pack) {
   }
   return to.concat(ar || Array.prototype.slice.call(from));
 }
-typeof SuppressedError === "function" ? SuppressedError : function(error, suppressed, message2) {
-  var e = new Error(message2);
+typeof SuppressedError === "function" ? SuppressedError : function(error, suppressed, message) {
+  var e = new Error(message);
   return e.name = "SuppressedError", e.error = error, e.suppressed = suppressed, e;
 };
 var zeroRightClassName = "right-scroll-bar-position";
@@ -65093,9418 +72540,6 @@ const DialogDescription = reactExports.forwardRef(({ className, ...props }, ref)
   }
 ));
 DialogDescription.displayName = Description.displayName;
-const toKebabCase = (string) => string.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
-const mergeClasses = (...classes) => classes.filter((className, index, array2) => {
-  return Boolean(className) && array2.indexOf(className) === index;
-}).join(" ");
-var defaultAttributes = {
-  xmlns: "http://www.w3.org/2000/svg",
-  width: 24,
-  height: 24,
-  viewBox: "0 0 24 24",
-  fill: "none",
-  stroke: "currentColor",
-  strokeWidth: 2,
-  strokeLinecap: "round",
-  strokeLinejoin: "round"
-};
-const Icon = reactExports.forwardRef(
-  ({
-    color: color2 = "currentColor",
-    size = 24,
-    strokeWidth = 2,
-    absoluteStrokeWidth,
-    className = "",
-    children: children2,
-    iconNode,
-    ...rest
-  }, ref) => {
-    return reactExports.createElement(
-      "svg",
-      {
-        ref,
-        ...defaultAttributes,
-        width: size,
-        height: size,
-        stroke: color2,
-        strokeWidth: absoluteStrokeWidth ? Number(strokeWidth) * 24 / Number(size) : strokeWidth,
-        className: mergeClasses("lucide", className),
-        ...rest
-      },
-      [
-        ...iconNode.map(([tag, attrs]) => reactExports.createElement(tag, attrs)),
-        ...Array.isArray(children2) ? children2 : [children2]
-      ]
-    );
-  }
-);
-const createLucideIcon = (iconName, iconNode) => {
-  const Component = reactExports.forwardRef(
-    ({ className, ...props }, ref) => reactExports.createElement(Icon, {
-      ref,
-      iconNode,
-      className: mergeClasses(`lucide-${toKebabCase(iconName)}`, className),
-      ...props
-    })
-  );
-  Component.displayName = `${iconName}`;
-  return Component;
-};
-const Activity = createLucideIcon("Activity", [
-  [
-    "path",
-    {
-      d: "M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2",
-      key: "169zse"
-    }
-  ]
-]);
-const ArrowLeft = createLucideIcon("ArrowLeft", [
-  ["path", { d: "m12 19-7-7 7-7", key: "1l729n" }],
-  ["path", { d: "M19 12H5", key: "x3x0zl" }]
-]);
-const ArrowRight = createLucideIcon("ArrowRight", [
-  ["path", { d: "M5 12h14", key: "1ays0h" }],
-  ["path", { d: "m12 5 7 7-7 7", key: "xquz4c" }]
-]);
-const BarChart3 = createLucideIcon("BarChart3", [
-  ["path", { d: "M3 3v18h18", key: "1s2lah" }],
-  ["path", { d: "M18 17V9", key: "2bz60n" }],
-  ["path", { d: "M13 17V5", key: "1frdt8" }],
-  ["path", { d: "M8 17v-3", key: "17ska0" }]
-]);
-const BarChart = createLucideIcon("BarChart", [
-  ["line", { x1: "12", x2: "12", y1: "20", y2: "10", key: "1vz5eb" }],
-  ["line", { x1: "18", x2: "18", y1: "20", y2: "4", key: "cun8e5" }],
-  ["line", { x1: "6", x2: "6", y1: "20", y2: "16", key: "hq0ia6" }]
-]);
-const Bell = createLucideIcon("Bell", [
-  ["path", { d: "M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9", key: "1qo2s2" }],
-  ["path", { d: "M10.3 21a1.94 1.94 0 0 0 3.4 0", key: "qgo35s" }]
-]);
-const BookOpen = createLucideIcon("BookOpen", [
-  ["path", { d: "M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z", key: "vv98re" }],
-  ["path", { d: "M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z", key: "1cyq3y" }]
-]);
-const Bot = createLucideIcon("Bot", [
-  ["path", { d: "M12 8V4H8", key: "hb8ula" }],
-  ["rect", { width: "16", height: "12", x: "4", y: "8", rx: "2", key: "enze0r" }],
-  ["path", { d: "M2 14h2", key: "vft8re" }],
-  ["path", { d: "M20 14h2", key: "4cs60a" }],
-  ["path", { d: "M15 13v2", key: "1xurst" }],
-  ["path", { d: "M9 13v2", key: "rq6x2g" }]
-]);
-const Box = createLucideIcon("Box", [
-  [
-    "path",
-    {
-      d: "M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z",
-      key: "hh9hay"
-    }
-  ],
-  ["path", { d: "m3.3 7 8.7 5 8.7-5", key: "g66t2b" }],
-  ["path", { d: "M12 22V12", key: "d0xqtd" }]
-]);
-const Brain = createLucideIcon("Brain", [
-  [
-    "path",
-    {
-      d: "M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z",
-      key: "l5xja"
-    }
-  ],
-  [
-    "path",
-    {
-      d: "M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z",
-      key: "ep3f8r"
-    }
-  ],
-  ["path", { d: "M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4", key: "1p4c4q" }],
-  ["path", { d: "M17.599 6.5a3 3 0 0 0 .399-1.375", key: "tmeiqw" }],
-  ["path", { d: "M6.003 5.125A3 3 0 0 0 6.401 6.5", key: "105sqy" }],
-  ["path", { d: "M3.477 10.896a4 4 0 0 1 .585-.396", key: "ql3yin" }],
-  ["path", { d: "M19.938 10.5a4 4 0 0 1 .585.396", key: "1qfode" }],
-  ["path", { d: "M6 18a4 4 0 0 1-1.967-.516", key: "2e4loj" }],
-  ["path", { d: "M19.967 17.484A4 4 0 0 1 18 18", key: "159ez6" }]
-]);
-const Briefcase = createLucideIcon("Briefcase", [
-  ["path", { d: "M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16", key: "jecpp" }],
-  ["rect", { width: "20", height: "14", x: "2", y: "6", rx: "2", key: "i6l2r4" }]
-]);
-const Calendar = createLucideIcon("Calendar", [
-  ["path", { d: "M8 2v4", key: "1cmpym" }],
-  ["path", { d: "M16 2v4", key: "4m81vk" }],
-  ["rect", { width: "18", height: "18", x: "3", y: "4", rx: "2", key: "1hopcy" }],
-  ["path", { d: "M3 10h18", key: "8toen8" }]
-]);
-const Check = createLucideIcon("Check", [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]]);
-const ChevronDown = createLucideIcon("ChevronDown", [
-  ["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]
-]);
-const ChevronLeft = createLucideIcon("ChevronLeft", [
-  ["path", { d: "m15 18-6-6 6-6", key: "1wnfg3" }]
-]);
-const ChevronRight = createLucideIcon("ChevronRight", [
-  ["path", { d: "m9 18 6-6-6-6", key: "mthhwq" }]
-]);
-const CircleAlert = createLucideIcon("CircleAlert", [
-  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
-  ["line", { x1: "12", x2: "12", y1: "8", y2: "12", key: "1pkeuh" }],
-  ["line", { x1: "12", x2: "12.01", y1: "16", y2: "16", key: "4dfq90" }]
-]);
-const CircleCheckBig = createLucideIcon("CircleCheckBig", [
-  ["path", { d: "M22 11.08V12a10 10 0 1 1-5.93-9.14", key: "g774vq" }],
-  ["path", { d: "m9 11 3 3L22 4", key: "1pflzl" }]
-]);
-const CircleCheck = createLucideIcon("CircleCheck", [
-  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
-  ["path", { d: "m9 12 2 2 4-4", key: "dzmm74" }]
-]);
-const CircleHelp = createLucideIcon("CircleHelp", [
-  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
-  ["path", { d: "M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3", key: "1u773s" }],
-  ["path", { d: "M12 17h.01", key: "p32p05" }]
-]);
-const Circle = createLucideIcon("Circle", [
-  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }]
-]);
-const Clock = createLucideIcon("Clock", [
-  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
-  ["polyline", { points: "12 6 12 12 16 14", key: "68esgv" }]
-]);
-const Cloud = createLucideIcon("Cloud", [
-  ["path", { d: "M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z", key: "p7xjir" }]
-]);
-const CodeXml = createLucideIcon("CodeXml", [
-  ["path", { d: "m18 16 4-4-4-4", key: "1inbqp" }],
-  ["path", { d: "m6 8-4 4 4 4", key: "15zrgr" }],
-  ["path", { d: "m14.5 4-5 16", key: "e7oirm" }]
-]);
-const Code = createLucideIcon("Code", [
-  ["polyline", { points: "16 18 22 12 16 6", key: "z7tu5w" }],
-  ["polyline", { points: "8 6 2 12 8 18", key: "1eg1df" }]
-]);
-const Copy = createLucideIcon("Copy", [
-  ["rect", { width: "14", height: "14", x: "8", y: "8", rx: "2", ry: "2", key: "17jyea" }],
-  ["path", { d: "M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2", key: "zix9uf" }]
-]);
-const Cpu = createLucideIcon("Cpu", [
-  ["rect", { width: "16", height: "16", x: "4", y: "4", rx: "2", key: "14l7u7" }],
-  ["rect", { width: "6", height: "6", x: "9", y: "9", rx: "1", key: "5aljv4" }],
-  ["path", { d: "M15 2v2", key: "13l42r" }],
-  ["path", { d: "M15 20v2", key: "15mkzm" }],
-  ["path", { d: "M2 15h2", key: "1gxd5l" }],
-  ["path", { d: "M2 9h2", key: "1bbxkp" }],
-  ["path", { d: "M20 15h2", key: "19e6y8" }],
-  ["path", { d: "M20 9h2", key: "19tzq7" }],
-  ["path", { d: "M9 2v2", key: "165o2o" }],
-  ["path", { d: "M9 20v2", key: "i2bqo8" }]
-]);
-const CreditCard = createLucideIcon("CreditCard", [
-  ["rect", { width: "20", height: "14", x: "2", y: "5", rx: "2", key: "ynyp8z" }],
-  ["line", { x1: "2", x2: "22", y1: "10", y2: "10", key: "1b3vmo" }]
-]);
-const Database = createLucideIcon("Database", [
-  ["ellipse", { cx: "12", cy: "5", rx: "9", ry: "3", key: "msslwz" }],
-  ["path", { d: "M3 5V19A9 3 0 0 0 21 19V5", key: "1wlel7" }],
-  ["path", { d: "M3 12A9 3 0 0 0 21 12", key: "mv7ke4" }]
-]);
-const DollarSign = createLucideIcon("DollarSign", [
-  ["line", { x1: "12", x2: "12", y1: "2", y2: "22", key: "7eqyqh" }],
-  ["path", { d: "M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6", key: "1b0p4s" }]
-]);
-const Download = createLucideIcon("Download", [
-  ["path", { d: "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4", key: "ih7n3h" }],
-  ["polyline", { points: "7 10 12 15 17 10", key: "2ggqvy" }],
-  ["line", { x1: "12", x2: "12", y1: "15", y2: "3", key: "1vk2je" }]
-]);
-const ExternalLink = createLucideIcon("ExternalLink", [
-  ["path", { d: "M15 3h6v6", key: "1q9fwt" }],
-  ["path", { d: "M10 14 21 3", key: "gplh6r" }],
-  ["path", { d: "M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6", key: "a6xqqp" }]
-]);
-const Eye = createLucideIcon("Eye", [
-  ["path", { d: "M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z", key: "rwhkz3" }],
-  ["circle", { cx: "12", cy: "12", r: "3", key: "1v7zrd" }]
-]);
-const Facebook = createLucideIcon("Facebook", [
-  [
-    "path",
-    { d: "M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z", key: "1jg4f8" }
-  ]
-]);
-const FileCode = createLucideIcon("FileCode", [
-  ["path", { d: "M10 12.5 8 15l2 2.5", key: "1tg20x" }],
-  ["path", { d: "m14 12.5 2 2.5-2 2.5", key: "yinavb" }],
-  ["path", { d: "M14 2v4a2 2 0 0 0 2 2h4", key: "tnqrlb" }],
-  ["path", { d: "M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z", key: "1mlx9k" }]
-]);
-const FileJson = createLucideIcon("FileJson", [
-  ["path", { d: "M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z", key: "1rqfz7" }],
-  ["path", { d: "M14 2v4a2 2 0 0 0 2 2h4", key: "tnqrlb" }],
-  [
-    "path",
-    { d: "M10 12a1 1 0 0 0-1 1v1a1 1 0 0 1-1 1 1 1 0 0 1 1 1v1a1 1 0 0 0 1 1", key: "1oajmo" }
-  ],
-  [
-    "path",
-    { d: "M14 18a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1 1 1 0 0 1-1-1v-1a1 1 0 0 0-1-1", key: "mpwhp6" }
-  ]
-]);
-const FileText = createLucideIcon("FileText", [
-  ["path", { d: "M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z", key: "1rqfz7" }],
-  ["path", { d: "M14 2v4a2 2 0 0 0 2 2h4", key: "tnqrlb" }],
-  ["path", { d: "M10 9H8", key: "b1mrlr" }],
-  ["path", { d: "M16 13H8", key: "t4e002" }],
-  ["path", { d: "M16 17H8", key: "z1uh3a" }]
-]);
-const Filter = createLucideIcon("Filter", [
-  ["polygon", { points: "22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3", key: "1yg77f" }]
-]);
-const FolderKanban = createLucideIcon("FolderKanban", [
-  [
-    "path",
-    {
-      d: "M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z",
-      key: "1fr9dc"
-    }
-  ],
-  ["path", { d: "M8 10v4", key: "tgpxqk" }],
-  ["path", { d: "M12 10v2", key: "hh53o1" }],
-  ["path", { d: "M16 10v6", key: "1d6xys" }]
-]);
-const GitBranch = createLucideIcon("GitBranch", [
-  ["line", { x1: "6", x2: "6", y1: "3", y2: "15", key: "17qcm7" }],
-  ["circle", { cx: "18", cy: "6", r: "3", key: "1h7g24" }],
-  ["circle", { cx: "6", cy: "18", r: "3", key: "fqmcym" }],
-  ["path", { d: "M18 9a9 9 0 0 1-9 9", key: "n2h4wq" }]
-]);
-const Github = createLucideIcon("Github", [
-  [
-    "path",
-    {
-      d: "M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4",
-      key: "tonef"
-    }
-  ],
-  ["path", { d: "M9 18c-4.51 2-5-2-7-2", key: "9comsn" }]
-]);
-const Globe = createLucideIcon("Globe", [
-  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
-  ["path", { d: "M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20", key: "13o1zl" }],
-  ["path", { d: "M2 12h20", key: "9i4pu4" }]
-]);
-const Headphones = createLucideIcon("Headphones", [
-  [
-    "path",
-    {
-      d: "M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3",
-      key: "1xhozi"
-    }
-  ]
-]);
-const Home = createLucideIcon("Home", [
-  ["path", { d: "m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z", key: "y5dka4" }],
-  ["polyline", { points: "9 22 9 12 15 12 15 22", key: "e2us08" }]
-]);
-const Image$1 = createLucideIcon("Image", [
-  ["rect", { width: "18", height: "18", x: "3", y: "3", rx: "2", ry: "2", key: "1m3agn" }],
-  ["circle", { cx: "9", cy: "9", r: "2", key: "af1f0g" }],
-  ["path", { d: "m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21", key: "1xmnt7" }]
-]);
-const Info = createLucideIcon("Info", [
-  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
-  ["path", { d: "M12 16v-4", key: "1dtifu" }],
-  ["path", { d: "M12 8h.01", key: "e9boi3" }]
-]);
-const Layers = createLucideIcon("Layers", [
-  [
-    "path",
-    {
-      d: "m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z",
-      key: "8b97xw"
-    }
-  ],
-  ["path", { d: "m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65", key: "dd6zsq" }],
-  ["path", { d: "m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65", key: "ep9fru" }]
-]);
-const LayoutDashboard = createLucideIcon("LayoutDashboard", [
-  ["rect", { width: "7", height: "9", x: "3", y: "3", rx: "1", key: "10lvy0" }],
-  ["rect", { width: "7", height: "5", x: "14", y: "3", rx: "1", key: "16une8" }],
-  ["rect", { width: "7", height: "9", x: "14", y: "12", rx: "1", key: "1hutg5" }],
-  ["rect", { width: "7", height: "5", x: "3", y: "16", rx: "1", key: "ldoo1y" }]
-]);
-const LayoutGrid = createLucideIcon("LayoutGrid", [
-  ["rect", { width: "7", height: "7", x: "3", y: "3", rx: "1", key: "1g98yp" }],
-  ["rect", { width: "7", height: "7", x: "14", y: "3", rx: "1", key: "6d4xhi" }],
-  ["rect", { width: "7", height: "7", x: "14", y: "14", rx: "1", key: "nxv5o0" }],
-  ["rect", { width: "7", height: "7", x: "3", y: "14", rx: "1", key: "1bb6yr" }]
-]);
-const Linkedin = createLucideIcon("Linkedin", [
-  [
-    "path",
-    {
-      d: "M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z",
-      key: "c2jq9f"
-    }
-  ],
-  ["rect", { width: "4", height: "12", x: "2", y: "9", key: "mk3on5" }],
-  ["circle", { cx: "4", cy: "4", r: "2", key: "bt5ra8" }]
-]);
-const LoaderCircle = createLucideIcon("LoaderCircle", [
-  ["path", { d: "M21 12a9 9 0 1 1-6.219-8.56", key: "13zald" }]
-]);
-const Loader = createLucideIcon("Loader", [
-  ["path", { d: "M12 2v4", key: "3427ic" }],
-  ["path", { d: "m16.2 7.8 2.9-2.9", key: "r700ao" }],
-  ["path", { d: "M18 12h4", key: "wj9ykh" }],
-  ["path", { d: "m16.2 16.2 2.9 2.9", key: "1bxg5t" }],
-  ["path", { d: "M12 18v4", key: "jadmvz" }],
-  ["path", { d: "m4.9 19.1 2.9-2.9", key: "bwix9q" }],
-  ["path", { d: "M2 12h4", key: "j09sii" }],
-  ["path", { d: "m4.9 4.9 2.9 2.9", key: "giyufr" }]
-]);
-const LogOut = createLucideIcon("LogOut", [
-  ["path", { d: "M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4", key: "1uf3rs" }],
-  ["polyline", { points: "16 17 21 12 16 7", key: "1gabdz" }],
-  ["line", { x1: "21", x2: "9", y1: "12", y2: "12", key: "1uyos4" }]
-]);
-const Mail = createLucideIcon("Mail", [
-  ["rect", { width: "20", height: "16", x: "2", y: "4", rx: "2", key: "18n3k1" }],
-  ["path", { d: "m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7", key: "1ocrg3" }]
-]);
-const Maximize2 = createLucideIcon("Maximize2", [
-  ["polyline", { points: "15 3 21 3 21 9", key: "mznyad" }],
-  ["polyline", { points: "9 21 3 21 3 15", key: "1avn1i" }],
-  ["line", { x1: "21", x2: "14", y1: "3", y2: "10", key: "ota7mn" }],
-  ["line", { x1: "3", x2: "10", y1: "21", y2: "14", key: "1atl0r" }]
-]);
-const Megaphone = createLucideIcon("Megaphone", [
-  ["path", { d: "m3 11 18-5v12L3 14v-3z", key: "n962bs" }],
-  ["path", { d: "M11.6 16.8a3 3 0 1 1-5.8-1.6", key: "1yl0tm" }]
-]);
-const Menu = createLucideIcon("Menu", [
-  ["line", { x1: "4", x2: "20", y1: "12", y2: "12", key: "1e0a9i" }],
-  ["line", { x1: "4", x2: "20", y1: "6", y2: "6", key: "1owob3" }],
-  ["line", { x1: "4", x2: "20", y1: "18", y2: "18", key: "yk5zj1" }]
-]);
-const MessageCircle = createLucideIcon("MessageCircle", [
-  ["path", { d: "M7.9 20A9 9 0 1 0 4 16.1L2 22Z", key: "vv11sd" }]
-]);
-const MessageSquare = createLucideIcon("MessageSquare", [
-  ["path", { d: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z", key: "1lielz" }]
-]);
-const Minimize2 = createLucideIcon("Minimize2", [
-  ["polyline", { points: "4 14 10 14 10 20", key: "11kfnr" }],
-  ["polyline", { points: "20 10 14 10 14 4", key: "rlmsce" }],
-  ["line", { x1: "14", x2: "21", y1: "10", y2: "3", key: "o5lafz" }],
-  ["line", { x1: "3", x2: "10", y1: "21", y2: "14", key: "1atl0r" }]
-]);
-const Minus = createLucideIcon("Minus", [["path", { d: "M5 12h14", key: "1ays0h" }]]);
-const Moon = createLucideIcon("Moon", [
-  ["path", { d: "M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z", key: "a7tn18" }]
-]);
-const Newspaper = createLucideIcon("Newspaper", [
-  [
-    "path",
-    {
-      d: "M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2",
-      key: "7pis2x"
-    }
-  ],
-  ["path", { d: "M18 14h-8", key: "sponae" }],
-  ["path", { d: "M15 18h-5", key: "95g1m2" }],
-  ["path", { d: "M10 6h8v4h-8V6Z", key: "smlsk5" }]
-]);
-const PenTool = createLucideIcon("PenTool", [
-  [
-    "path",
-    {
-      d: "M15.707 21.293a1 1 0 0 1-1.414 0l-1.586-1.586a1 1 0 0 1 0-1.414l5.586-5.586a1 1 0 0 1 1.414 0l1.586 1.586a1 1 0 0 1 0 1.414z",
-      key: "nt11vn"
-    }
-  ],
-  [
-    "path",
-    {
-      d: "m18 13-1.375-6.874a1 1 0 0 0-.746-.776L3.235 2.028a1 1 0 0 0-1.207 1.207L5.35 15.879a1 1 0 0 0 .776.746L13 18",
-      key: "15qc1e"
-    }
-  ],
-  ["path", { d: "m2.3 2.3 7.286 7.286", key: "1wuzzi" }],
-  ["circle", { cx: "11", cy: "11", r: "2", key: "xmgehs" }]
-]);
-const PieChart = createLucideIcon("PieChart", [
-  ["path", { d: "M21.21 15.89A10 10 0 1 1 8 2.83", key: "k2fpak" }],
-  ["path", { d: "M22 12A10 10 0 0 0 12 2v10z", key: "1rfc4y" }]
-]);
-const Plus = createLucideIcon("Plus", [
-  ["path", { d: "M5 12h14", key: "1ays0h" }],
-  ["path", { d: "M12 5v14", key: "s699le" }]
-]);
-const Radio = createLucideIcon("Radio", [
-  ["path", { d: "M4.9 19.1C1 15.2 1 8.8 4.9 4.9", key: "1vaf9d" }],
-  ["path", { d: "M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5", key: "u1ii0m" }],
-  ["circle", { cx: "12", cy: "12", r: "2", key: "1c9p78" }],
-  ["path", { d: "M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5", key: "1j5fej" }],
-  ["path", { d: "M19.1 4.9C23 8.8 23 15.1 19.1 19", key: "10b0cb" }]
-]);
-const RefreshCcw = createLucideIcon("RefreshCcw", [
-  ["path", { d: "M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8", key: "14sxne" }],
-  ["path", { d: "M3 3v5h5", key: "1xhq8a" }],
-  ["path", { d: "M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16", key: "1hlbsb" }],
-  ["path", { d: "M16 16h5v5", key: "ccwih5" }]
-]);
-const Search = createLucideIcon("Search", [
-  ["circle", { cx: "11", cy: "11", r: "8", key: "4ej97u" }],
-  ["path", { d: "m21 21-4.3-4.3", key: "1qie3q" }]
-]);
-const Send = createLucideIcon("Send", [
-  ["path", { d: "m22 2-7 20-4-9-9-4Z", key: "1q3vgg" }],
-  ["path", { d: "M22 2 11 13", key: "nzbqef" }]
-]);
-const Server = createLucideIcon("Server", [
-  ["rect", { width: "20", height: "8", x: "2", y: "2", rx: "2", ry: "2", key: "ngkwjq" }],
-  ["rect", { width: "20", height: "8", x: "2", y: "14", rx: "2", ry: "2", key: "iecqi9" }],
-  ["line", { x1: "6", x2: "6.01", y1: "6", y2: "6", key: "16zg32" }],
-  ["line", { x1: "6", x2: "6.01", y1: "18", y2: "18", key: "nzw8ys" }]
-]);
-const Settings = createLucideIcon("Settings", [
-  [
-    "path",
-    {
-      d: "M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z",
-      key: "1qme2f"
-    }
-  ],
-  ["circle", { cx: "12", cy: "12", r: "3", key: "1v7zrd" }]
-]);
-const Share2 = createLucideIcon("Share2", [
-  ["circle", { cx: "18", cy: "5", r: "3", key: "gq8acd" }],
-  ["circle", { cx: "6", cy: "12", r: "3", key: "w7nqdw" }],
-  ["circle", { cx: "18", cy: "19", r: "3", key: "1xt0gg" }],
-  ["line", { x1: "8.59", x2: "15.42", y1: "13.51", y2: "17.49", key: "47mynk" }],
-  ["line", { x1: "15.41", x2: "8.59", y1: "6.51", y2: "10.49", key: "1n3mei" }]
-]);
-const ShieldCheck = createLucideIcon("ShieldCheck", [
-  [
-    "path",
-    {
-      d: "M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z",
-      key: "oel41y"
-    }
-  ],
-  ["path", { d: "m9 12 2 2 4-4", key: "dzmm74" }]
-]);
-const Shield = createLucideIcon("Shield", [
-  [
-    "path",
-    {
-      d: "M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z",
-      key: "oel41y"
-    }
-  ]
-]);
-const ShoppingBag = createLucideIcon("ShoppingBag", [
-  ["path", { d: "M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z", key: "hou9p0" }],
-  ["path", { d: "M3 6h18", key: "d0wm0j" }],
-  ["path", { d: "M16 10a4 4 0 0 1-8 0", key: "1ltviw" }]
-]);
-const Slack = createLucideIcon("Slack", [
-  ["rect", { width: "3", height: "8", x: "13", y: "2", rx: "1.5", key: "diqz80" }],
-  ["path", { d: "M19 8.5V10h1.5A1.5 1.5 0 1 0 19 8.5", key: "183iwg" }],
-  ["rect", { width: "3", height: "8", x: "8", y: "14", rx: "1.5", key: "hqg7r1" }],
-  ["path", { d: "M5 15.5V14H3.5A1.5 1.5 0 1 0 5 15.5", key: "76g71w" }],
-  ["rect", { width: "8", height: "3", x: "14", y: "13", rx: "1.5", key: "1kmz0a" }],
-  ["path", { d: "M15.5 19H14v1.5a1.5 1.5 0 1 0 1.5-1.5", key: "jc4sz0" }],
-  ["rect", { width: "8", height: "3", x: "2", y: "8", rx: "1.5", key: "1omvl4" }],
-  ["path", { d: "M8.5 5H10V3.5A1.5 1.5 0 1 0 8.5 5", key: "16f3cl" }]
-]);
-const Smartphone = createLucideIcon("Smartphone", [
-  ["rect", { width: "14", height: "20", x: "5", y: "2", rx: "2", ry: "2", key: "1yt0o3" }],
-  ["path", { d: "M12 18h.01", key: "mhygvu" }]
-]);
-const Sparkles = createLucideIcon("Sparkles", [
-  [
-    "path",
-    {
-      d: "M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z",
-      key: "4pj2yx"
-    }
-  ],
-  ["path", { d: "M20 3v4", key: "1olli1" }],
-  ["path", { d: "M22 5h-4", key: "1gvqau" }],
-  ["path", { d: "M4 17v2", key: "vumght" }],
-  ["path", { d: "M5 18H3", key: "zchphs" }]
-]);
-const Star = createLucideIcon("Star", [
-  [
-    "polygon",
-    {
-      points: "12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2",
-      key: "8f66p6"
-    }
-  ]
-]);
-const Sun = createLucideIcon("Sun", [
-  ["circle", { cx: "12", cy: "12", r: "4", key: "4exip2" }],
-  ["path", { d: "M12 2v2", key: "tus03m" }],
-  ["path", { d: "M12 20v2", key: "1lh1kg" }],
-  ["path", { d: "m4.93 4.93 1.41 1.41", key: "149t6j" }],
-  ["path", { d: "m17.66 17.66 1.41 1.41", key: "ptbguv" }],
-  ["path", { d: "M2 12h2", key: "1t8f8n" }],
-  ["path", { d: "M20 12h2", key: "1q8mjw" }],
-  ["path", { d: "m6.34 17.66-1.41 1.41", key: "1m8zz5" }],
-  ["path", { d: "m19.07 4.93-1.41 1.41", key: "1shlcs" }]
-]);
-const Target = createLucideIcon("Target", [
-  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
-  ["circle", { cx: "12", cy: "12", r: "6", key: "1vlfrh" }],
-  ["circle", { cx: "12", cy: "12", r: "2", key: "1c9p78" }]
-]);
-const Terminal = createLucideIcon("Terminal", [
-  ["polyline", { points: "4 17 10 11 4 5", key: "akl6gq" }],
-  ["line", { x1: "12", x2: "20", y1: "19", y2: "19", key: "q2wloq" }]
-]);
-const TrendingUp = createLucideIcon("TrendingUp", [
-  ["polyline", { points: "22 7 13.5 15.5 8.5 10.5 2 17", key: "126l90" }],
-  ["polyline", { points: "16 7 22 7 22 13", key: "kwv8wd" }]
-]);
-const TriangleAlert = createLucideIcon("TriangleAlert", [
-  [
-    "path",
-    {
-      d: "m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3",
-      key: "wmoenq"
-    }
-  ],
-  ["path", { d: "M12 9v4", key: "juzpu7" }],
-  ["path", { d: "M12 17h.01", key: "p32p05" }]
-]);
-const Truck = createLucideIcon("Truck", [
-  ["path", { d: "M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2", key: "wrbu53" }],
-  ["path", { d: "M15 18H9", key: "1lyqi6" }],
-  [
-    "path",
-    {
-      d: "M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14",
-      key: "lysw3i"
-    }
-  ],
-  ["circle", { cx: "17", cy: "18", r: "2", key: "332jqn" }],
-  ["circle", { cx: "7", cy: "18", r: "2", key: "19iecd" }]
-]);
-const Twitter = createLucideIcon("Twitter", [
-  [
-    "path",
-    {
-      d: "M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z",
-      key: "pff0z6"
-    }
-  ]
-]);
-const User = createLucideIcon("User", [
-  ["path", { d: "M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2", key: "975kel" }],
-  ["circle", { cx: "12", cy: "7", r: "4", key: "17ys0d" }]
-]);
-const Users = createLucideIcon("Users", [
-  ["path", { d: "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2", key: "1yyitq" }],
-  ["circle", { cx: "9", cy: "7", r: "4", key: "nufk8" }],
-  ["path", { d: "M22 21v-2a4 4 0 0 0-3-3.87", key: "kshegd" }],
-  ["path", { d: "M16 3.13a4 4 0 0 1 0 7.75", key: "1da9ce" }]
-]);
-const Video = createLucideIcon("Video", [
-  [
-    "path",
-    {
-      d: "m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5",
-      key: "ftymec"
-    }
-  ],
-  ["rect", { x: "2", y: "6", width: "14", height: "12", rx: "2", key: "158x01" }]
-]);
-const Workflow = createLucideIcon("Workflow", [
-  ["rect", { width: "8", height: "8", x: "3", y: "3", rx: "2", key: "by2w9f" }],
-  ["path", { d: "M7 11v4a2 2 0 0 0 2 2h4", key: "xkn7yn" }],
-  ["rect", { width: "8", height: "8", x: "13", y: "13", rx: "2", key: "1cgmvn" }]
-]);
-const Wrench = createLucideIcon("Wrench", [
-  [
-    "path",
-    {
-      d: "M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z",
-      key: "cbrjhi"
-    }
-  ]
-]);
-const X = createLucideIcon("X", [
-  ["path", { d: "M18 6 6 18", key: "1bl5f8" }],
-  ["path", { d: "m6 6 12 12", key: "d8bk6v" }]
-]);
-const Zap = createLucideIcon("Zap", [
-  [
-    "path",
-    {
-      d: "M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z",
-      key: "1xq2db"
-    }
-  ]
-]);
-const ConfirmationContext = reactExports.createContext(void 0);
-function ConfirmationProvider({ children: children2 }) {
-  const [isOpen, setIsOpen] = reactExports.useState(false);
-  const [isLoading, setIsLoading] = reactExports.useState(false);
-  const [options, setOptions] = reactExports.useState({
-    title: "Confirm Action",
-    description: "Are you sure?"
-  });
-  const [resolveCallback, setResolveCallback] = reactExports.useState(null);
-  const confirm = (confirmOptions) => {
-    return new Promise((resolve) => {
-      setOptions(confirmOptions);
-      setResolveCallback(() => resolve);
-      setIsOpen(true);
-    });
-  };
-  const handleConfirm = async () => {
-    setIsLoading(true);
-    if (resolveCallback) {
-      resolveCallback(true);
-    }
-    setTimeout(() => {
-      setIsOpen(false);
-      setIsLoading(false);
-    }, 300);
-  };
-  const handleCancel = () => {
-    if (resolveCallback) {
-      resolveCallback(false);
-    }
-    setIsOpen(false);
-  };
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(ConfirmationContext.Provider, { value: { confirm }, children: [
-    children2,
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Dialog, { open: isOpen, onOpenChange: setIsOpen, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(DialogContent, { className: "sm:max-w-md", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs(DialogHeader, { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
-          options.isDangerous && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-shrink-0", children: /* @__PURE__ */ jsxRuntimeExports.jsx(TriangleAlert, { className: "h-5 w-5 text-red-500" }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(DialogTitle, { className: options.isDangerous ? "text-red-600" : "", children: options.title })
-        ] }),
-        options.description && /* @__PURE__ */ jsxRuntimeExports.jsx(DialogDescription, { className: "mt-2", children: options.description })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs(DialogFooter, { className: "gap-2 sm:gap-0", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          Button,
-          {
-            variant: "outline",
-            onClick: handleCancel,
-            disabled: isLoading,
-            children: options.cancelText || "Cancel"
-          }
-        ),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          Button,
-          {
-            onClick: handleConfirm,
-            disabled: isLoading,
-            className: options.isDangerous ? "bg-red-600 hover:bg-red-700 text-white" : "",
-            children: isLoading ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "w-4 h-4 mr-2 animate-spin" }),
-              options.confirmText || "Confirm"
-            ] }) : options.confirmText || "Confirm"
-          }
-        )
-      ] })
-    ] }) })
-  ] });
-}
-function useConfirmation() {
-  const context2 = reactExports.useContext(ConfirmationContext);
-  if (!context2) {
-    throw new Error("useConfirmation must be used within ConfirmationProvider");
-  }
-  return context2;
-}
-const mockUsers = [
-  {
-    id: "superadmin-1",
-    email: "superadmin@nexus.ai",
-    name: "System Administrator",
-    role: "superadmin",
-    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=80",
-    createdAt: "2024-01-01T00:00:00Z"
-  },
-  {
-    id: "admin-1",
-    email: "admin@teamone.com",
-    name: "Alex Morgan",
-    role: "admin",
-    teamId: "team-1",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80",
-    createdAt: "2024-01-15T00:00:00Z"
-  },
-  {
-    id: "admin-2",
-    email: "admin@teamtwo.com",
-    name: "Sarah Chen",
-    role: "admin",
-    teamId: "team-2",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80",
-    createdAt: "2024-02-01T00:00:00Z"
-  },
-  {
-    id: "user-1",
-    email: "user@teamone.com",
-    name: "Jordan Smith",
-    role: "user",
-    teamId: "team-1",
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&q=80",
-    createdAt: "2024-02-10T00:00:00Z"
-  },
-  {
-    id: "user-2",
-    email: "mike@teamone.com",
-    name: "Mike Johnson",
-    role: "user",
-    teamId: "team-1",
-    avatar: "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=100&q=80",
-    createdAt: "2024-02-15T00:00:00Z"
-  },
-  {
-    id: "user-3",
-    email: "emma@teamone.com",
-    name: "Emma Davis",
-    role: "user",
-    teamId: "team-1",
-    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80",
-    createdAt: "2024-02-20T00:00:00Z"
-  },
-  {
-    id: "user-4",
-    email: "lisa@teamtwo.com",
-    name: "Lisa Wang",
-    role: "user",
-    teamId: "team-2",
-    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&q=80",
-    createdAt: "2024-03-01T00:00:00Z"
-  }
-];
-const mockTeams = [
-  {
-    id: "team-1",
-    name: "ProDev Solutions",
-    adminId: "admin-1",
-    plan: "pro",
-    createdAt: "2024-01-15T00:00:00Z"
-  },
-  {
-    id: "team-2",
-    name: "Digital Nomads Agency",
-    adminId: "admin-2",
-    plan: "enterprise",
-    createdAt: "2024-02-01T00:00:00Z"
-  }
-];
-function getUsersByTeam(teamId) {
-  return mockUsers.filter((u) => u.teamId === teamId);
-}
-function getTeamById(teamId) {
-  return mockTeams.find((t) => t.id === teamId);
-}
-const __vite_import_meta_env__$1 = {};
-const createStoreImpl = (createState) => {
-  let state;
-  const listeners = /* @__PURE__ */ new Set();
-  const setState = (partial, replace2) => {
-    const nextState = typeof partial === "function" ? partial(state) : partial;
-    if (!Object.is(nextState, state)) {
-      const previousState = state;
-      state = (replace2 != null ? replace2 : typeof nextState !== "object" || nextState === null) ? nextState : Object.assign({}, state, nextState);
-      listeners.forEach((listener) => listener(state, previousState));
-    }
-  };
-  const getState2 = () => state;
-  const getInitialState = () => initialState2;
-  const subscribe2 = (listener) => {
-    listeners.add(listener);
-    return () => listeners.delete(listener);
-  };
-  const destroy = () => {
-    if ((__vite_import_meta_env__$1 ? "production" : void 0) !== "production") {
-      console.warn(
-        "[DEPRECATED] The `destroy` method will be unsupported in a future version. Instead use unsubscribe function returned by subscribe. Everything will be garbage-collected if store is garbage-collected."
-      );
-    }
-    listeners.clear();
-  };
-  const api = { setState, getState: getState2, getInitialState, subscribe: subscribe2, destroy };
-  const initialState2 = state = createState(setState, getState2, api);
-  return api;
-};
-const createStore = (createState) => createState ? createStoreImpl(createState) : createStoreImpl;
-var withSelector = { exports: {} };
-var withSelector_production = {};
-var shim = { exports: {} };
-var useSyncExternalStoreShim_production = {};
-var hasRequiredUseSyncExternalStoreShim_production;
-function requireUseSyncExternalStoreShim_production() {
-  if (hasRequiredUseSyncExternalStoreShim_production) return useSyncExternalStoreShim_production;
-  hasRequiredUseSyncExternalStoreShim_production = 1;
-  var React3 = requireReact();
-  function is(x, y) {
-    return x === y && (0 !== x || 1 / x === 1 / y) || x !== x && y !== y;
-  }
-  var objectIs = "function" === typeof Object.is ? Object.is : is, useState = React3.useState, useEffect = React3.useEffect, useLayoutEffect = React3.useLayoutEffect, useDebugValue2 = React3.useDebugValue;
-  function useSyncExternalStore$2(subscribe2, getSnapshot) {
-    var value = getSnapshot(), _useState = useState({ inst: { value, getSnapshot } }), inst = _useState[0].inst, forceUpdate = _useState[1];
-    useLayoutEffect(
-      function() {
-        inst.value = value;
-        inst.getSnapshot = getSnapshot;
-        checkIfSnapshotChanged(inst) && forceUpdate({ inst });
-      },
-      [subscribe2, value, getSnapshot]
-    );
-    useEffect(
-      function() {
-        checkIfSnapshotChanged(inst) && forceUpdate({ inst });
-        return subscribe2(function() {
-          checkIfSnapshotChanged(inst) && forceUpdate({ inst });
-        });
-      },
-      [subscribe2]
-    );
-    useDebugValue2(value);
-    return value;
-  }
-  function checkIfSnapshotChanged(inst) {
-    var latestGetSnapshot = inst.getSnapshot;
-    inst = inst.value;
-    try {
-      var nextValue = latestGetSnapshot();
-      return !objectIs(inst, nextValue);
-    } catch (error) {
-      return true;
-    }
-  }
-  function useSyncExternalStore$1(subscribe2, getSnapshot) {
-    return getSnapshot();
-  }
-  var shim2 = "undefined" === typeof window || "undefined" === typeof window.document || "undefined" === typeof window.document.createElement ? useSyncExternalStore$1 : useSyncExternalStore$2;
-  useSyncExternalStoreShim_production.useSyncExternalStore = void 0 !== React3.useSyncExternalStore ? React3.useSyncExternalStore : shim2;
-  return useSyncExternalStoreShim_production;
-}
-var useSyncExternalStoreShim_development = {};
-var hasRequiredUseSyncExternalStoreShim_development;
-function requireUseSyncExternalStoreShim_development() {
-  if (hasRequiredUseSyncExternalStoreShim_development) return useSyncExternalStoreShim_development;
-  hasRequiredUseSyncExternalStoreShim_development = 1;
-  "production" !== process.env.NODE_ENV && (function() {
-    function is(x, y) {
-      return x === y && (0 !== x || 1 / x === 1 / y) || x !== x && y !== y;
-    }
-    function useSyncExternalStore$2(subscribe2, getSnapshot) {
-      didWarnOld18Alpha || void 0 === React3.startTransition || (didWarnOld18Alpha = true, console.error(
-        "You are using an outdated, pre-release alpha of React 18 that does not support useSyncExternalStore. The use-sync-external-store shim will not work correctly. Upgrade to a newer pre-release."
-      ));
-      var value = getSnapshot();
-      if (!didWarnUncachedGetSnapshot) {
-        var cachedValue = getSnapshot();
-        objectIs(value, cachedValue) || (console.error(
-          "The result of getSnapshot should be cached to avoid an infinite loop"
-        ), didWarnUncachedGetSnapshot = true);
-      }
-      cachedValue = useState({
-        inst: { value, getSnapshot }
-      });
-      var inst = cachedValue[0].inst, forceUpdate = cachedValue[1];
-      useLayoutEffect(
-        function() {
-          inst.value = value;
-          inst.getSnapshot = getSnapshot;
-          checkIfSnapshotChanged(inst) && forceUpdate({ inst });
-        },
-        [subscribe2, value, getSnapshot]
-      );
-      useEffect(
-        function() {
-          checkIfSnapshotChanged(inst) && forceUpdate({ inst });
-          return subscribe2(function() {
-            checkIfSnapshotChanged(inst) && forceUpdate({ inst });
-          });
-        },
-        [subscribe2]
-      );
-      useDebugValue2(value);
-      return value;
-    }
-    function checkIfSnapshotChanged(inst) {
-      var latestGetSnapshot = inst.getSnapshot;
-      inst = inst.value;
-      try {
-        var nextValue = latestGetSnapshot();
-        return !objectIs(inst, nextValue);
-      } catch (error) {
-        return true;
-      }
-    }
-    function useSyncExternalStore$1(subscribe2, getSnapshot) {
-      return getSnapshot();
-    }
-    "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-    var React3 = requireReact(), objectIs = "function" === typeof Object.is ? Object.is : is, useState = React3.useState, useEffect = React3.useEffect, useLayoutEffect = React3.useLayoutEffect, useDebugValue2 = React3.useDebugValue, didWarnOld18Alpha = false, didWarnUncachedGetSnapshot = false, shim2 = "undefined" === typeof window || "undefined" === typeof window.document || "undefined" === typeof window.document.createElement ? useSyncExternalStore$1 : useSyncExternalStore$2;
-    useSyncExternalStoreShim_development.useSyncExternalStore = void 0 !== React3.useSyncExternalStore ? React3.useSyncExternalStore : shim2;
-    "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(Error());
-  })();
-  return useSyncExternalStoreShim_development;
-}
-var hasRequiredShim;
-function requireShim() {
-  if (hasRequiredShim) return shim.exports;
-  hasRequiredShim = 1;
-  if (process.env.NODE_ENV === "production") {
-    shim.exports = requireUseSyncExternalStoreShim_production();
-  } else {
-    shim.exports = requireUseSyncExternalStoreShim_development();
-  }
-  return shim.exports;
-}
-var hasRequiredWithSelector_production;
-function requireWithSelector_production() {
-  if (hasRequiredWithSelector_production) return withSelector_production;
-  hasRequiredWithSelector_production = 1;
-  var React3 = requireReact(), shim2 = requireShim();
-  function is(x, y) {
-    return x === y && (0 !== x || 1 / x === 1 / y) || x !== x && y !== y;
-  }
-  var objectIs = "function" === typeof Object.is ? Object.is : is, useSyncExternalStore = shim2.useSyncExternalStore, useRef = React3.useRef, useEffect = React3.useEffect, useMemo = React3.useMemo, useDebugValue2 = React3.useDebugValue;
-  withSelector_production.useSyncExternalStoreWithSelector = function(subscribe2, getSnapshot, getServerSnapshot, selector2, isEqual) {
-    var instRef = useRef(null);
-    if (null === instRef.current) {
-      var inst = { hasValue: false, value: null };
-      instRef.current = inst;
-    } else inst = instRef.current;
-    instRef = useMemo(
-      function() {
-        function memoizedSelector(nextSnapshot) {
-          if (!hasMemo) {
-            hasMemo = true;
-            memoizedSnapshot = nextSnapshot;
-            nextSnapshot = selector2(nextSnapshot);
-            if (void 0 !== isEqual && inst.hasValue) {
-              var currentSelection = inst.value;
-              if (isEqual(currentSelection, nextSnapshot))
-                return memoizedSelection = currentSelection;
-            }
-            return memoizedSelection = nextSnapshot;
-          }
-          currentSelection = memoizedSelection;
-          if (objectIs(memoizedSnapshot, nextSnapshot)) return currentSelection;
-          var nextSelection = selector2(nextSnapshot);
-          if (void 0 !== isEqual && isEqual(currentSelection, nextSelection))
-            return memoizedSnapshot = nextSnapshot, currentSelection;
-          memoizedSnapshot = nextSnapshot;
-          return memoizedSelection = nextSelection;
-        }
-        var hasMemo = false, memoizedSnapshot, memoizedSelection, maybeGetServerSnapshot = void 0 === getServerSnapshot ? null : getServerSnapshot;
-        return [
-          function() {
-            return memoizedSelector(getSnapshot());
-          },
-          null === maybeGetServerSnapshot ? void 0 : function() {
-            return memoizedSelector(maybeGetServerSnapshot());
-          }
-        ];
-      },
-      [getSnapshot, getServerSnapshot, selector2, isEqual]
-    );
-    var value = useSyncExternalStore(subscribe2, instRef[0], instRef[1]);
-    useEffect(
-      function() {
-        inst.hasValue = true;
-        inst.value = value;
-      },
-      [value]
-    );
-    useDebugValue2(value);
-    return value;
-  };
-  return withSelector_production;
-}
-var withSelector_development = {};
-var hasRequiredWithSelector_development;
-function requireWithSelector_development() {
-  if (hasRequiredWithSelector_development) return withSelector_development;
-  hasRequiredWithSelector_development = 1;
-  "production" !== process.env.NODE_ENV && (function() {
-    function is(x, y) {
-      return x === y && (0 !== x || 1 / x === 1 / y) || x !== x && y !== y;
-    }
-    "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-    var React3 = requireReact(), shim2 = requireShim(), objectIs = "function" === typeof Object.is ? Object.is : is, useSyncExternalStore = shim2.useSyncExternalStore, useRef = React3.useRef, useEffect = React3.useEffect, useMemo = React3.useMemo, useDebugValue2 = React3.useDebugValue;
-    withSelector_development.useSyncExternalStoreWithSelector = function(subscribe2, getSnapshot, getServerSnapshot, selector2, isEqual) {
-      var instRef = useRef(null);
-      if (null === instRef.current) {
-        var inst = { hasValue: false, value: null };
-        instRef.current = inst;
-      } else inst = instRef.current;
-      instRef = useMemo(
-        function() {
-          function memoizedSelector(nextSnapshot) {
-            if (!hasMemo) {
-              hasMemo = true;
-              memoizedSnapshot = nextSnapshot;
-              nextSnapshot = selector2(nextSnapshot);
-              if (void 0 !== isEqual && inst.hasValue) {
-                var currentSelection = inst.value;
-                if (isEqual(currentSelection, nextSnapshot))
-                  return memoizedSelection = currentSelection;
-              }
-              return memoizedSelection = nextSnapshot;
-            }
-            currentSelection = memoizedSelection;
-            if (objectIs(memoizedSnapshot, nextSnapshot))
-              return currentSelection;
-            var nextSelection = selector2(nextSnapshot);
-            if (void 0 !== isEqual && isEqual(currentSelection, nextSelection))
-              return memoizedSnapshot = nextSnapshot, currentSelection;
-            memoizedSnapshot = nextSnapshot;
-            return memoizedSelection = nextSelection;
-          }
-          var hasMemo = false, memoizedSnapshot, memoizedSelection, maybeGetServerSnapshot = void 0 === getServerSnapshot ? null : getServerSnapshot;
-          return [
-            function() {
-              return memoizedSelector(getSnapshot());
-            },
-            null === maybeGetServerSnapshot ? void 0 : function() {
-              return memoizedSelector(maybeGetServerSnapshot());
-            }
-          ];
-        },
-        [getSnapshot, getServerSnapshot, selector2, isEqual]
-      );
-      var value = useSyncExternalStore(subscribe2, instRef[0], instRef[1]);
-      useEffect(
-        function() {
-          inst.hasValue = true;
-          inst.value = value;
-        },
-        [value]
-      );
-      useDebugValue2(value);
-      return value;
-    };
-    "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(Error());
-  })();
-  return withSelector_development;
-}
-var hasRequiredWithSelector;
-function requireWithSelector() {
-  if (hasRequiredWithSelector) return withSelector.exports;
-  hasRequiredWithSelector = 1;
-  if (process.env.NODE_ENV === "production") {
-    withSelector.exports = requireWithSelector_production();
-  } else {
-    withSelector.exports = requireWithSelector_development();
-  }
-  return withSelector.exports;
-}
-var withSelectorExports = requireWithSelector();
-const useSyncExternalStoreExports = /* @__PURE__ */ getDefaultExportFromCjs(withSelectorExports);
-const __vite_import_meta_env__ = {};
-const { useDebugValue: useDebugValue$1 } = React2;
-const { useSyncExternalStoreWithSelector: useSyncExternalStoreWithSelector$1 } = useSyncExternalStoreExports;
-let didWarnAboutEqualityFn = false;
-const identity$3 = (arg) => arg;
-function useStore$1(api, selector2 = identity$3, equalityFn) {
-  if ((__vite_import_meta_env__ ? "production" : void 0) !== "production" && equalityFn && !didWarnAboutEqualityFn) {
-    console.warn(
-      "[DEPRECATED] Use `createWithEqualityFn` instead of `create` or use `useStoreWithEqualityFn` instead of `useStore`. They can be imported from 'zustand/traditional'. https://github.com/pmndrs/zustand/discussions/1937"
-    );
-    didWarnAboutEqualityFn = true;
-  }
-  const slice = useSyncExternalStoreWithSelector$1(
-    api.subscribe,
-    api.getState,
-    api.getServerState || api.getInitialState,
-    selector2,
-    equalityFn
-  );
-  useDebugValue$1(slice);
-  return slice;
-}
-const createImpl = (createState) => {
-  if ((__vite_import_meta_env__ ? "production" : void 0) !== "production" && typeof createState !== "function") {
-    console.warn(
-      "[DEPRECATED] Passing a vanilla store will be unsupported in a future version. Instead use `import { useStore } from 'zustand'`."
-    );
-  }
-  const api = typeof createState === "function" ? createStore(createState) : createState;
-  const useBoundStore = (selector2, equalityFn) => useStore$1(api, selector2, equalityFn);
-  Object.assign(useBoundStore, api);
-  return useBoundStore;
-};
-const create$1 = (createState) => createState ? createImpl(createState) : createImpl;
-const mockFreelanceAccounts = [
-  {
-    id: "acc-1",
-    teamId: "team-1",
-    platform: "upwork",
-    accountName: "ProDev Solutions",
-    username: "prodev_alex",
-    isActive: true,
-    autoBidEnabled: true,
-    dailyBudget: 500,
-    bidCount: 156,
-    successRate: 34,
-    aiPrompt: "Focus on web development projects with React and Node.js. Budget range: $1000-$5000. Prioritize long-term contracts.",
-    proxyId: "proxy-1",
-    lastActivity: new Date(Date.now() - 1e3 * 60 * 15).toISOString(),
-    assignedTo: ["user-1", "user-2"]
-  },
-  {
-    id: "acc-2",
-    teamId: "team-1",
-    platform: "upwork",
-    accountName: "AI Automation Expert",
-    username: "ai_expert_pro",
-    isActive: true,
-    autoBidEnabled: false,
-    dailyBudget: 300,
-    bidCount: 89,
-    successRate: 41,
-    aiPrompt: "Target AI/ML automation projects. Minimum budget: $2000. Focus on Python and TensorFlow.",
-    proxyId: "proxy-2",
-    lastActivity: new Date(Date.now() - 1e3 * 60 * 45).toISOString(),
-    assignedTo: ["user-1"]
-  },
-  {
-    id: "acc-3",
-    teamId: "team-1",
-    platform: "fiverr",
-    accountName: "WebFlow Master",
-    username: "webflow_master",
-    isActive: true,
-    autoBidEnabled: true,
-    dailyBudget: 200,
-    bidCount: 234,
-    successRate: 52,
-    aiPrompt: "Focus on Webflow and no-code solutions. Quick turnaround projects preferred.",
-    lastActivity: new Date(Date.now() - 1e3 * 60 * 5).toISOString(),
-    assignedTo: ["user-2", "user-3"]
-  },
-  {
-    id: "acc-4",
-    teamId: "team-1",
-    platform: "freelancer",
-    accountName: "Full Stack Dev",
-    username: "fullstack_dev",
-    isActive: false,
-    autoBidEnabled: false,
-    dailyBudget: 400,
-    bidCount: 67,
-    successRate: 28,
-    lastActivity: new Date(Date.now() - 1e3 * 60 * 60 * 24).toISOString(),
-    assignedTo: ["user-3"]
-  },
-  {
-    id: "acc-5",
-    teamId: "team-1",
-    platform: "toptal",
-    accountName: "Enterprise Solutions",
-    username: "enterprise_dev",
-    isActive: true,
-    autoBidEnabled: true,
-    dailyBudget: 1e3,
-    bidCount: 45,
-    successRate: 67,
-    aiPrompt: "Target enterprise-level projects. Minimum $10,000 budget. Focus on scalable architectures.",
-    proxyId: "proxy-3",
-    lastActivity: new Date(Date.now() - 1e3 * 60 * 30).toISOString(),
-    assignedTo: ["user-1"]
-  },
-  {
-    id: "acc-6",
-    teamId: "team-2",
-    platform: "upwork",
-    accountName: "Digital Nomads Main",
-    username: "digitalnomads",
-    isActive: true,
-    autoBidEnabled: true,
-    dailyBudget: 750,
-    bidCount: 312,
-    successRate: 45,
-    aiPrompt: "Focus on digital marketing and content creation projects.",
-    lastActivity: new Date(Date.now() - 1e3 * 60 * 10).toISOString(),
-    assignedTo: ["user-4"]
-  }
-];
-const mockProxies = [
-  {
-    id: "proxy-1",
-    teamId: "team-1",
-    ip: "192.168.1.100",
-    port: 8080,
-    username: "proxy_user_1",
-    status: "active",
-    assignedAccounts: ["acc-1"],
-    location: "United States",
-    lastChecked: new Date(Date.now() - 1e3 * 60 * 5).toISOString()
-  },
-  {
-    id: "proxy-2",
-    teamId: "team-1",
-    ip: "192.168.1.101",
-    port: 8080,
-    username: "proxy_user_2",
-    status: "active",
-    assignedAccounts: ["acc-2"],
-    location: "United Kingdom",
-    lastChecked: new Date(Date.now() - 1e3 * 60 * 3).toISOString()
-  },
-  {
-    id: "proxy-3",
-    teamId: "team-1",
-    ip: "192.168.1.102",
-    port: 8080,
-    username: "proxy_user_3",
-    status: "error",
-    assignedAccounts: ["acc-5"],
-    location: "Germany",
-    lastChecked: new Date(Date.now() - 1e3 * 60 * 60).toISOString()
-  },
-  {
-    id: "proxy-4",
-    teamId: "team-2",
-    ip: "10.0.0.50",
-    port: 3128,
-    username: "dn_proxy",
-    status: "active",
-    assignedAccounts: [],
-    location: "Canada",
-    lastChecked: new Date(Date.now() - 1e3 * 60 * 2).toISOString()
-  }
-];
-function getAccountsByTeam(teamId) {
-  return mockFreelanceAccounts.filter((a) => a.teamId === teamId);
-}
-function getAccountsForUser(userId) {
-  return mockFreelanceAccounts.filter((a) => a.assignedTo?.includes(userId));
-}
-function getProxiesByTeam(teamId) {
-  return mockProxies.filter((p) => p.teamId === teamId);
-}
-const mockProjects = [
-  {
-    id: "proj-1",
-    teamId: "team-1",
-    title: "E-commerce Platform Development",
-    description: "Build a full-featured e-commerce platform with React and Node.js. Includes payment integration, inventory management, and admin dashboard.",
-    clientName: "Sarah Johnson",
-    clientEmail: "sarah@techcorp.com",
-    platform: "upwork",
-    status: "active",
-    priority: "high",
-    budget: 15e3,
-    deadline: new Date(Date.now() + 1e3 * 60 * 60 * 24 * 30).toISOString(),
-    assignedTo: ["user-1", "user-2"],
-    createdAt: new Date(Date.now() - 1e3 * 60 * 60 * 24 * 15).toISOString(),
-    updatedAt: new Date(Date.now() - 1e3 * 60 * 60 * 2).toISOString(),
-    progress: 45,
-    conversationId: "conv-1",
-    tasks: [
-      { id: "task-1", title: "Setup project structure", completed: true },
-      { id: "task-2", title: "Design database schema", completed: true },
-      { id: "task-3", title: "Implement authentication", completed: true },
-      { id: "task-4", title: "Build product catalog", completed: false },
-      { id: "task-5", title: "Payment integration", completed: false },
-      { id: "task-6", title: "Admin dashboard", completed: false }
-    ]
-  },
-  {
-    id: "proj-2",
-    teamId: "team-1",
-    title: "AI Chatbot Integration",
-    description: "Integrate an AI-powered chatbot into existing customer support system.",
-    clientName: "Michael Chen",
-    clientEmail: "michael@innovate.io",
-    platform: "fiverr",
-    status: "bidding",
-    priority: "medium",
-    budget: 5e3,
-    deadline: new Date(Date.now() + 1e3 * 60 * 60 * 24 * 14).toISOString(),
-    assignedTo: ["user-1"],
-    createdAt: new Date(Date.now() - 1e3 * 60 * 60 * 24 * 3).toISOString(),
-    updatedAt: new Date(Date.now() - 1e3 * 60 * 30).toISOString(),
-    progress: 0,
-    conversationId: "conv-2",
-    tasks: [
-      { id: "task-7", title: "Requirements gathering", completed: false },
-      { id: "task-8", title: "API integration design", completed: false }
-    ]
-  },
-  {
-    id: "proj-3",
-    teamId: "team-1",
-    title: "Mobile App Development",
-    description: "React Native app for iOS and Android with real-time features.",
-    clientName: "Emma Williams",
-    clientEmail: "emma@startupx.com",
-    platform: "upwork",
-    status: "in_review",
-    priority: "high",
-    budget: 25e3,
-    deadline: new Date(Date.now() + 1e3 * 60 * 60 * 24 * 7).toISOString(),
-    assignedTo: ["user-2", "user-3"],
-    createdAt: new Date(Date.now() - 1e3 * 60 * 60 * 24 * 45).toISOString(),
-    updatedAt: new Date(Date.now() - 1e3 * 60 * 60 * 5).toISOString(),
-    progress: 90,
-    conversationId: "conv-3",
-    tasks: [
-      { id: "task-9", title: "UI/UX Design", completed: true },
-      { id: "task-10", title: "Core functionality", completed: true },
-      { id: "task-11", title: "Push notifications", completed: true },
-      { id: "task-12", title: "Final testing", completed: false }
-    ]
-  },
-  {
-    id: "proj-4",
-    teamId: "team-1",
-    title: "Dashboard Analytics Tool",
-    description: "Build a comprehensive analytics dashboard with data visualization.",
-    clientName: "David Martinez",
-    clientEmail: "david@analytics.co",
-    platform: "direct",
-    status: "completed",
-    priority: "low",
-    budget: 8e3,
-    assignedTo: ["user-3"],
-    createdAt: new Date(Date.now() - 1e3 * 60 * 60 * 24 * 60).toISOString(),
-    updatedAt: new Date(Date.now() - 1e3 * 60 * 60 * 24 * 5).toISOString(),
-    progress: 100,
-    tasks: [
-      { id: "task-13", title: "Data pipeline setup", completed: true },
-      { id: "task-14", title: "Chart components", completed: true },
-      { id: "task-15", title: "Export functionality", completed: true }
-    ]
-  },
-  {
-    id: "proj-5",
-    teamId: "team-1",
-    title: "API Development for SaaS",
-    description: "RESTful API development with comprehensive documentation.",
-    clientName: "Lisa Park",
-    clientEmail: "lisa@saascompany.com",
-    platform: "freelancer",
-    status: "bidding",
-    priority: "urgent",
-    budget: 12e3,
-    deadline: new Date(Date.now() + 1e3 * 60 * 60 * 24 * 21).toISOString(),
-    assignedTo: ["user-1"],
-    createdAt: new Date(Date.now() - 1e3 * 60 * 60 * 24 * 1).toISOString(),
-    updatedAt: new Date(Date.now() - 1e3 * 60 * 60).toISOString(),
-    progress: 0,
-    tasks: []
-  },
-  {
-    id: "proj-6",
-    teamId: "team-1",
-    title: "WordPress Plugin Development",
-    description: "Custom WordPress plugin for membership management.",
-    clientName: "Robert Brown",
-    clientEmail: "robert@wpsite.com",
-    platform: "fiverr",
-    status: "active",
-    priority: "medium",
-    budget: 3500,
-    deadline: new Date(Date.now() + 1e3 * 60 * 60 * 24 * 10).toISOString(),
-    assignedTo: ["user-2"],
-    createdAt: new Date(Date.now() - 1e3 * 60 * 60 * 24 * 7).toISOString(),
-    updatedAt: new Date(Date.now() - 1e3 * 60 * 60 * 12).toISOString(),
-    progress: 30,
-    tasks: [
-      { id: "task-16", title: "Plugin architecture", completed: true },
-      { id: "task-17", title: "User management", completed: false },
-      { id: "task-18", title: "Payment integration", completed: false }
-    ]
-  },
-  {
-    id: "proj-7",
-    teamId: "team-2",
-    title: "Social Media Marketing Campaign",
-    description: "Full social media marketing campaign for product launch.",
-    clientName: "Jennifer Lee",
-    clientEmail: "jennifer@brand.com",
-    platform: "upwork",
-    status: "active",
-    priority: "high",
-    budget: 7500,
-    deadline: new Date(Date.now() + 1e3 * 60 * 60 * 24 * 14).toISOString(),
-    assignedTo: ["user-4"],
-    createdAt: new Date(Date.now() - 1e3 * 60 * 60 * 24 * 10).toISOString(),
-    updatedAt: new Date(Date.now() - 1e3 * 60 * 60 * 3).toISOString(),
-    progress: 60,
-    tasks: [
-      { id: "task-19", title: "Content strategy", completed: true },
-      { id: "task-20", title: "Create content calendar", completed: true },
-      { id: "task-21", title: "Design assets", completed: false }
-    ]
-  }
-];
-function getProjectsByTeam(teamId) {
-  return mockProjects.filter((p) => p.teamId === teamId);
-}
-function getProjectsForUser(userId) {
-  return mockProjects.filter((p) => p.assignedTo.includes(userId));
-}
-const mockConversations = [
-  {
-    id: "conv-1",
-    teamId: "team-1",
-    clientName: "Sarah Johnson",
-    clientAvatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80",
-    clientEmail: "sarah@techcorp.com",
-    platform: "upwork",
-    lastMessage: "Thanks! When can you start on the payment integration?",
-    lastMessageTime: new Date(Date.now() - 1e3 * 60 * 5).toISOString(),
-    unreadCount: 2,
-    projectId: "proj-1",
-    projectTitle: "E-commerce Platform Development",
-    assignedTo: ["user-1", "user-2"],
-    status: "active",
-    messages: [
-      {
-        id: "msg-1",
-        conversationId: "conv-1",
-        sender: "client",
-        content: "Hi, I saw your proposal for the e-commerce project. Your portfolio looks impressive!",
-        timestamp: new Date(Date.now() - 1e3 * 60 * 60 * 24).toISOString(),
-        read: true
-      },
-      {
-        id: "msg-2",
-        conversationId: "conv-1",
-        sender: "user",
-        content: "Hello Sarah! Thank you for reaching out. I'd be happy to discuss the project details with you. I have extensive experience with e-commerce platforms.",
-        timestamp: new Date(Date.now() - 1e3 * 60 * 60 * 23).toISOString(),
-        read: true
-      },
-      {
-        id: "msg-3",
-        conversationId: "conv-1",
-        sender: "client",
-        content: "Great! Can you handle both frontend and backend? We need React for the frontend and Node.js for the backend.",
-        timestamp: new Date(Date.now() - 1e3 * 60 * 60 * 20).toISOString(),
-        read: true
-      },
-      {
-        id: "msg-4",
-        conversationId: "conv-1",
-        sender: "user",
-        content: "Absolutely! I specialize in full-stack development with React and Node.js. I can also set up the payment integration with Stripe.",
-        timestamp: new Date(Date.now() - 1e3 * 60 * 60 * 18).toISOString(),
-        read: true
-      },
-      {
-        id: "msg-5",
-        conversationId: "conv-1",
-        sender: "client",
-        content: "Perfect! I've reviewed your proposal and I'm ready to move forward. Let's start with the project.",
-        timestamp: new Date(Date.now() - 1e3 * 60 * 30).toISOString(),
-        read: true
-      },
-      {
-        id: "msg-6",
-        conversationId: "conv-1",
-        sender: "user",
-        content: "Excellent! I'll start setting up the project structure today. I'll send you the initial wireframes by tomorrow.",
-        timestamp: new Date(Date.now() - 1e3 * 60 * 20).toISOString(),
-        read: true
-      },
-      {
-        id: "msg-7",
-        conversationId: "conv-1",
-        sender: "client",
-        content: "Thanks! When can you start on the payment integration?",
-        timestamp: new Date(Date.now() - 1e3 * 60 * 5).toISOString(),
-        read: false
-      }
-    ]
-  },
-  {
-    id: "conv-2",
-    teamId: "team-1",
-    clientName: "Michael Chen",
-    clientAvatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80",
-    clientEmail: "michael@innovate.io",
-    platform: "fiverr",
-    lastMessage: "Could you send me some portfolio examples of chatbot integrations?",
-    lastMessageTime: new Date(Date.now() - 1e3 * 60 * 15).toISOString(),
-    unreadCount: 1,
-    projectId: "proj-2",
-    projectTitle: "AI Chatbot Integration",
-    assignedTo: ["user-1"],
-    status: "active",
-    messages: [
-      {
-        id: "msg-8",
-        conversationId: "conv-2",
-        sender: "client",
-        content: "Hi! I need help integrating an AI chatbot into my website. Do you have experience with this?",
-        timestamp: new Date(Date.now() - 1e3 * 60 * 60 * 2).toISOString(),
-        read: true
-      },
-      {
-        id: "msg-9",
-        conversationId: "conv-2",
-        sender: "user",
-        content: "Hello Michael! Yes, I have extensive experience with AI chatbot integrations. I've worked with OpenAI, Dialogflow, and custom solutions.",
-        timestamp: new Date(Date.now() - 1e3 * 60 * 60).toISOString(),
-        read: true
-      },
-      {
-        id: "msg-10",
-        conversationId: "conv-2",
-        sender: "client",
-        content: "Could you send me some portfolio examples of chatbot integrations?",
-        timestamp: new Date(Date.now() - 1e3 * 60 * 15).toISOString(),
-        read: false
-      }
-    ]
-  },
-  {
-    id: "conv-3",
-    teamId: "team-1",
-    clientName: "Emma Williams",
-    clientAvatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80",
-    clientEmail: "emma@startupx.com",
-    platform: "upwork",
-    lastMessage: "The app looks great! Just a few minor tweaks needed on the profile screen.",
-    lastMessageTime: new Date(Date.now() - 1e3 * 60 * 60).toISOString(),
-    unreadCount: 0,
-    projectId: "proj-3",
-    projectTitle: "Mobile App Development",
-    assignedTo: ["user-2", "user-3"],
-    status: "active",
-    messages: [
-      {
-        id: "msg-11",
-        conversationId: "conv-3",
-        sender: "client",
-        content: "I've reviewed the latest build. The app looks great! Just a few minor tweaks needed on the profile screen.",
-        timestamp: new Date(Date.now() - 1e3 * 60 * 60).toISOString(),
-        read: true
-      }
-    ]
-  },
-  {
-    id: "conv-4",
-    teamId: "team-1",
-    clientName: "David Martinez",
-    clientAvatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&q=80",
-    platform: "whatsapp",
-    lastMessage: "Can we schedule a call tomorrow to discuss the new requirements?",
-    lastMessageTime: new Date(Date.now() - 1e3 * 60 * 120).toISOString(),
-    unreadCount: 0,
-    assignedTo: ["user-3"],
-    status: "active",
-    messages: [
-      {
-        id: "msg-12",
-        conversationId: "conv-4",
-        sender: "client",
-        content: "Hey, got your number from the Fiverr project. Hope that's okay!",
-        timestamp: new Date(Date.now() - 1e3 * 60 * 150).toISOString(),
-        read: true
-      },
-      {
-        id: "msg-13",
-        conversationId: "conv-4",
-        sender: "user",
-        content: "Hi David! No problem at all. How can I help you?",
-        timestamp: new Date(Date.now() - 1e3 * 60 * 140).toISOString(),
-        read: true
-      },
-      {
-        id: "msg-14",
-        conversationId: "conv-4",
-        sender: "client",
-        content: "Can we schedule a call tomorrow to discuss the new requirements?",
-        timestamp: new Date(Date.now() - 1e3 * 60 * 120).toISOString(),
-        read: true
-      }
-    ]
-  },
-  {
-    id: "conv-5",
-    teamId: "team-1",
-    clientName: "Lisa Park",
-    clientAvatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&q=80",
-    clientEmail: "lisa@saascompany.com",
-    platform: "email",
-    lastMessage: "Looking forward to your proposal for the API development project.",
-    lastMessageTime: new Date(Date.now() - 1e3 * 60 * 60 * 3).toISOString(),
-    unreadCount: 1,
-    projectId: "proj-5",
-    projectTitle: "API Development for SaaS",
-    assignedTo: ["user-1"],
-    status: "active",
-    messages: [
-      {
-        id: "msg-15",
-        conversationId: "conv-5",
-        sender: "client",
-        content: "Hi, I found your profile on Freelancer. We need a comprehensive REST API for our SaaS platform.",
-        timestamp: new Date(Date.now() - 1e3 * 60 * 60 * 5).toISOString(),
-        read: true
-      },
-      {
-        id: "msg-16",
-        conversationId: "conv-5",
-        sender: "client",
-        content: "Looking forward to your proposal for the API development project.",
-        timestamp: new Date(Date.now() - 1e3 * 60 * 60 * 3).toISOString(),
-        read: false
-      }
-    ]
-  },
-  {
-    id: "conv-6",
-    teamId: "team-2",
-    clientName: "Jennifer Lee",
-    clientAvatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&q=80",
-    clientEmail: "jennifer@brand.com",
-    platform: "upwork",
-    lastMessage: "The content calendar looks perfect! Let's proceed with the design phase.",
-    lastMessageTime: new Date(Date.now() - 1e3 * 60 * 60 * 2).toISOString(),
-    unreadCount: 0,
-    projectId: "proj-7",
-    projectTitle: "Social Media Marketing Campaign",
-    assignedTo: ["user-4"],
-    status: "active",
-    messages: [
-      {
-        id: "msg-17",
-        conversationId: "conv-6",
-        sender: "client",
-        content: "The content calendar looks perfect! Let's proceed with the design phase.",
-        timestamp: new Date(Date.now() - 1e3 * 60 * 60 * 2).toISOString(),
-        read: true
-      }
-    ]
-  }
-];
-function getConversationsByTeam(teamId) {
-  return mockConversations.filter((c) => c.teamId === teamId);
-}
-function getConversationsForUser(userId) {
-  return mockConversations.filter((c) => c.assignedTo?.includes(userId));
-}
-const mockSocialPosts = [
-  {
-    id: "post-1",
-    teamId: "team-1",
-    content: "🚀 Excited to announce our latest project launch! We've been working hard on this e-commerce platform and it's finally live. Check it out! #webdev #ecommerce #react",
-    platforms: ["twitter", "linkedin"],
-    scheduledFor: new Date(Date.now() + 1e3 * 60 * 60 * 24 * 2).toISOString(),
-    status: "scheduled",
-    imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
-    createdBy: "user-1",
-    createdAt: new Date(Date.now() - 1e3 * 60 * 60 * 24).toISOString()
-  },
-  {
-    id: "post-2",
-    teamId: "team-1",
-    content: "💡 Pro tip: Always validate user input on both client and server side. Security should never be an afterthought! #coding #security #bestpractices",
-    platforms: ["twitter", "facebook", "linkedin"],
-    scheduledFor: new Date(Date.now() + 1e3 * 60 * 60 * 24 * 5).toISOString(),
-    status: "scheduled",
-    createdBy: "user-2",
-    createdAt: new Date(Date.now() - 1e3 * 60 * 60 * 12).toISOString()
-  },
-  {
-    id: "post-3",
-    teamId: "team-1",
-    content: "Looking for a skilled React developer? Our team specializes in building scalable web applications. DM us for a free consultation! 📱💻",
-    platforms: ["twitter", "linkedin"],
-    scheduledFor: new Date(Date.now() - 1e3 * 60 * 60 * 24 * 3).toISOString(),
-    status: "published",
-    createdBy: "admin-1",
-    createdAt: new Date(Date.now() - 1e3 * 60 * 60 * 24 * 5).toISOString(),
-    publishedAt: new Date(Date.now() - 1e3 * 60 * 60 * 24 * 3).toISOString(),
-    engagement: {
-      likes: 45,
-      comments: 12,
-      shares: 8
-    }
-  },
-  {
-    id: "post-4",
-    teamId: "team-1",
-    content: "🎉 Just completed another successful project! Thank you to our amazing client for the trust. Here's to many more collaborations!",
-    platforms: ["facebook", "instagram"],
-    scheduledFor: new Date(Date.now() + 1e3 * 60 * 60 * 24 * 7).toISOString(),
-    status: "draft",
-    imageUrl: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80",
-    createdBy: "user-3",
-    createdAt: new Date(Date.now() - 1e3 * 60 * 60 * 2).toISOString()
-  },
-  {
-    id: "post-5",
-    teamId: "team-1",
-    content: 'New blog post: "10 Tips for Better Code Reviews" - Learn how to give and receive feedback effectively. Link in bio! 📝',
-    platforms: ["twitter"],
-    scheduledFor: new Date(Date.now() + 1e3 * 60 * 60 * 48).toISOString(),
-    status: "scheduled",
-    createdBy: "user-1",
-    createdAt: new Date(Date.now() - 1e3 * 60 * 30).toISOString()
-  },
-  {
-    id: "post-6",
-    teamId: "team-2",
-    content: "📈 Digital marketing trends for 2024: AI-powered content, short-form video, and personalized experiences. Are you ready?",
-    platforms: ["twitter", "linkedin", "facebook"],
-    scheduledFor: new Date(Date.now() + 1e3 * 60 * 60 * 24).toISOString(),
-    status: "scheduled",
-    createdBy: "user-4",
-    createdAt: new Date(Date.now() - 1e3 * 60 * 60 * 6).toISOString()
-  }
-];
-const mockSocialAccounts = [
-  {
-    id: "social-1",
-    teamId: "team-1",
-    platform: "twitter",
-    accountName: "ProDev Solutions",
-    username: "@prodev_solutions",
-    isConnected: true,
-    followers: 12500,
-    avatar: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=100&q=80"
-  },
-  {
-    id: "social-2",
-    teamId: "team-1",
-    platform: "linkedin",
-    accountName: "ProDev Solutions",
-    username: "prodev-solutions",
-    isConnected: true,
-    followers: 8200
-  },
-  {
-    id: "social-3",
-    teamId: "team-1",
-    platform: "facebook",
-    accountName: "ProDev Solutions",
-    username: "prodevsolutions",
-    isConnected: true,
-    followers: 5600
-  },
-  {
-    id: "social-4",
-    teamId: "team-1",
-    platform: "instagram",
-    accountName: "ProDev Solutions",
-    username: "@prodev.solutions",
-    isConnected: false,
-    followers: 0
-  },
-  {
-    id: "social-5",
-    teamId: "team-2",
-    platform: "twitter",
-    accountName: "Digital Nomads",
-    username: "@digitalnomads_agency",
-    isConnected: true,
-    followers: 25e3
-  }
-];
-function getSocialPostsByTeam(teamId) {
-  return mockSocialPosts.filter((p) => p.teamId === teamId);
-}
-function getSocialAccountsByTeam(teamId) {
-  return mockSocialAccounts.filter((a) => a.teamId === teamId);
-}
-const mockSystemStatus = {
-  apiStatus: "operational",
-  upworkConnected: true,
-  fiverrConnected: true,
-  freelancerConnected: true,
-  lastSync: new Date(Date.now() - 1e3 * 60 * 2).toISOString()
-};
-const mockActivities = [
-  {
-    id: "act-1",
-    teamId: "team-1",
-    type: "bid_placed",
-    title: "Bid placed",
-    description: 'Auto-bid placed on "React Dashboard Development" - $2,500',
-    timestamp: new Date(Date.now() - 1e3 * 60 * 5).toISOString(),
-    platform: "upwork",
-    userId: "user-1"
-  },
-  {
-    id: "act-2",
-    teamId: "team-1",
-    type: "message_received",
-    title: "New message",
-    description: "Sarah Johnson: Thanks! When can you start?",
-    timestamp: new Date(Date.now() - 1e3 * 60 * 10).toISOString(),
-    platform: "upwork"
-  },
-  {
-    id: "act-3",
-    teamId: "team-1",
-    type: "bid_won",
-    title: "Bid won!",
-    description: 'Your bid on "AI Integration Project" was accepted - $5,000',
-    timestamp: new Date(Date.now() - 1e3 * 60 * 30).toISOString(),
-    platform: "fiverr",
-    userId: "user-2"
-  },
-  {
-    id: "act-4",
-    teamId: "team-1",
-    type: "project_completed",
-    title: "Project completed",
-    description: "Dashboard Analytics Tool marked as complete",
-    timestamp: new Date(Date.now() - 1e3 * 60 * 60).toISOString(),
-    userId: "user-3"
-  },
-  {
-    id: "act-5",
-    teamId: "team-1",
-    type: "payment_received",
-    title: "Payment received",
-    description: "Received $3,500 for Mobile App Development milestone",
-    timestamp: new Date(Date.now() - 1e3 * 60 * 60 * 2).toISOString(),
-    platform: "upwork"
-  },
-  {
-    id: "act-6",
-    teamId: "team-1",
-    type: "account_connected",
-    title: "Account connected",
-    description: 'Toptal account "Enterprise Solutions" connected successfully',
-    timestamp: new Date(Date.now() - 1e3 * 60 * 60 * 5).toISOString(),
-    platform: "toptal"
-  },
-  {
-    id: "act-7",
-    teamId: "team-1",
-    type: "bid_placed",
-    title: "Bid placed",
-    description: 'Auto-bid placed on "Node.js API Development" - $4,000',
-    timestamp: new Date(Date.now() - 1e3 * 60 * 60 * 8).toISOString(),
-    platform: "freelancer",
-    userId: "user-1"
-  },
-  {
-    id: "act-8",
-    teamId: "team-2",
-    type: "user_joined",
-    title: "New team member",
-    description: "Lisa Wang joined the team",
-    timestamp: new Date(Date.now() - 1e3 * 60 * 60 * 24).toISOString()
-  },
-  {
-    id: "act-9",
-    type: "user_joined",
-    title: "New admin registered",
-    description: "Digital Nomads Agency signed up for Enterprise plan",
-    timestamp: new Date(Date.now() - 1e3 * 60 * 60 * 24 * 2).toISOString()
-  }
-];
-const mockApiTokens = [
-  {
-    id: "token-1",
-    teamId: "team-1",
-    name: "Gemini Pro",
-    provider: "gemini",
-    status: "active",
-    lastUsed: new Date(Date.now() - 1e3 * 60 * 5).toISOString(),
-    createdAt: new Date(Date.now() - 1e3 * 60 * 60 * 24 * 30).toISOString()
-  },
-  {
-    id: "token-2",
-    teamId: "team-1",
-    name: "OpenAI GPT-4",
-    provider: "openai",
-    status: "active",
-    lastUsed: new Date(Date.now() - 1e3 * 60 * 60).toISOString(),
-    createdAt: new Date(Date.now() - 1e3 * 60 * 60 * 24 * 45).toISOString()
-  },
-  {
-    id: "token-3",
-    teamId: "team-1",
-    name: "Claude API",
-    provider: "anthropic",
-    status: "expired",
-    createdAt: new Date(Date.now() - 1e3 * 60 * 60 * 24 * 60).toISOString()
-  },
-  {
-    id: "token-4",
-    teamId: "team-2",
-    name: "Gemini Flash",
-    provider: "gemini",
-    status: "active",
-    lastUsed: new Date(Date.now() - 1e3 * 60 * 30).toISOString(),
-    createdAt: new Date(Date.now() - 1e3 * 60 * 60 * 24 * 15).toISOString()
-  }
-];
-const mockPlatformStats = {
-  "team-1": {
-    totalBids: 567,
-    successfulBids: 89,
-    totalEarnings: 125e3,
-    activeProjects: 4,
-    completedProjects: 23,
-    averageRating: 4.9
-  },
-  "team-2": {
-    totalBids: 312,
-    successfulBids: 45,
-    totalEarnings: 78e3,
-    activeProjects: 2,
-    completedProjects: 15,
-    averageRating: 4.8
-  }
-};
-function getActivitiesByTeam(teamId) {
-  return mockActivities.filter((a) => a.teamId === teamId || !a.teamId);
-}
-function getApiTokensByTeam(teamId) {
-  return mockApiTokens.filter((t) => t.teamId === teamId);
-}
-const useAppStore = create$1((set2, get2) => ({
-  // Initial State
-  projects: [],
-  freelanceAccounts: [],
-  proxies: [],
-  conversations: [],
-  socialPosts: [],
-  socialAccounts: [],
-  activities: [],
-  apiTokens: [],
-  teamUsers: [],
-  systemStatus: mockSystemStatus,
-  selectedConversationId: null,
-  sidebarCollapsed: false,
-  activeRequests: 0,
-  // Initialize data based on user role
-  initializeForUser: (user) => {
-    if (user.role === "superadmin") {
-      set2({
-        projects: mockProjects,
-        freelanceAccounts: mockFreelanceAccounts,
-        proxies: mockProxies,
-        conversations: mockConversations,
-        socialPosts: mockSocialPosts,
-        socialAccounts: mockSocialAccounts,
-        activities: mockActivities,
-        apiTokens: mockApiTokens,
-        teamUsers: mockUsers.filter((u) => u.role !== "superadmin")
-      });
-    } else if (user.role === "admin" && user.teamId) {
-      set2({
-        projects: getProjectsByTeam(user.teamId),
-        freelanceAccounts: getAccountsByTeam(user.teamId),
-        proxies: getProxiesByTeam(user.teamId),
-        conversations: getConversationsByTeam(user.teamId),
-        socialPosts: getSocialPostsByTeam(user.teamId),
-        socialAccounts: getSocialAccountsByTeam(user.teamId),
-        activities: getActivitiesByTeam(user.teamId),
-        apiTokens: getApiTokensByTeam(user.teamId),
-        teamUsers: getUsersByTeam(user.teamId)
-      });
-    } else if (user.role === "user") {
-      set2({
-        projects: getProjectsForUser(user.id),
-        freelanceAccounts: getAccountsForUser(user.id),
-        proxies: [],
-        conversations: getConversationsForUser(user.id),
-        socialPosts: user.teamId ? getSocialPostsByTeam(user.teamId) : [],
-        socialAccounts: user.teamId ? getSocialAccountsByTeam(user.teamId) : [],
-        activities: user.teamId ? getActivitiesByTeam(user.teamId).filter((a) => a.userId === user.id || !a.userId) : [],
-        apiTokens: [],
-        teamUsers: []
-      });
-    }
-  },
-  // Project Actions
-  addProject: (project) => {
-    const newProject = {
-      ...project,
-      id: `proj-${Date.now()}`,
-      createdAt: (/* @__PURE__ */ new Date()).toISOString(),
-      updatedAt: (/* @__PURE__ */ new Date()).toISOString()
-    };
-    set2((state) => ({ projects: [...state.projects, newProject] }));
-  },
-  updateProject: (id2, updates) => {
-    set2((state) => ({
-      projects: state.projects.map(
-        (p) => p.id === id2 ? { ...p, ...updates, updatedAt: (/* @__PURE__ */ new Date()).toISOString() } : p
-      )
-    }));
-  },
-  deleteProject: (id2) => {
-    set2((state) => ({ projects: state.projects.filter((p) => p.id !== id2) }));
-  },
-  updateProjectStatus: (id2, status) => {
-    set2((state) => ({
-      projects: state.projects.map(
-        (p) => p.id === id2 ? { ...p, status, updatedAt: (/* @__PURE__ */ new Date()).toISOString() } : p
-      )
-    }));
-  },
-  toggleTaskComplete: (projectId, taskId) => {
-    set2((state) => ({
-      projects: state.projects.map(
-        (p) => p.id === projectId ? {
-          ...p,
-          tasks: p.tasks.map(
-            (t) => t.id === taskId ? { ...t, completed: !t.completed } : t
-          ),
-          updatedAt: (/* @__PURE__ */ new Date()).toISOString()
-        } : p
-      )
-    }));
-  },
-  // Freelance Account Actions
-  addFreelanceAccount: (account) => {
-    const newAccount = {
-      ...account,
-      id: `acc-${Date.now()}`
-    };
-    set2((state) => ({ freelanceAccounts: [...state.freelanceAccounts, newAccount] }));
-  },
-  updateFreelanceAccount: (id2, updates) => {
-    set2((state) => ({
-      freelanceAccounts: state.freelanceAccounts.map(
-        (a) => a.id === id2 ? { ...a, ...updates } : a
-      )
-    }));
-  },
-  deleteFreelanceAccount: (id2) => {
-    set2((state) => ({
-      freelanceAccounts: state.freelanceAccounts.filter((a) => a.id !== id2)
-    }));
-  },
-  toggleAutoBid: (id2) => {
-    set2((state) => ({
-      freelanceAccounts: state.freelanceAccounts.map(
-        (a) => a.id === id2 ? { ...a, autoBidEnabled: !a.autoBidEnabled } : a
-      )
-    }));
-  },
-  // Proxy Actions
-  addProxy: (proxy) => {
-    const newProxy = {
-      ...proxy,
-      id: `proxy-${Date.now()}`
-    };
-    set2((state) => ({ proxies: [...state.proxies, newProxy] }));
-  },
-  updateProxy: (id2, updates) => {
-    set2((state) => ({
-      proxies: state.proxies.map((p) => p.id === id2 ? { ...p, ...updates } : p)
-    }));
-  },
-  deleteProxy: (id2) => {
-    set2((state) => ({ proxies: state.proxies.filter((p) => p.id !== id2) }));
-  },
-  // Conversation Actions
-  selectConversation: (id2) => {
-    set2({ selectedConversationId: id2 });
-    if (id2) {
-      get2().markConversationRead(id2);
-    }
-  },
-  markConversationRead: (id2) => {
-    set2((state) => ({
-      conversations: state.conversations.map(
-        (c) => c.id === id2 ? {
-          ...c,
-          unreadCount: 0,
-          messages: c.messages.map((m) => ({ ...m, read: true }))
-        } : c
-      )
-    }));
-  },
-  addMessage: (conversationId, content, sender) => {
-    const newMessage = {
-      id: `msg-${Date.now()}`,
-      conversationId,
-      sender,
-      content,
-      timestamp: (/* @__PURE__ */ new Date()).toISOString(),
-      read: sender === "user"
-    };
-    set2((state) => ({
-      conversations: state.conversations.map(
-        (c) => c.id === conversationId ? {
-          ...c,
-          messages: [...c.messages, newMessage],
-          lastMessage: content,
-          lastMessageTime: newMessage.timestamp,
-          unreadCount: sender === "client" ? c.unreadCount + 1 : c.unreadCount
-        } : c
-      )
-    }));
-  },
-  // Social Post Actions
-  addSocialPost: (post) => {
-    const newPost = {
-      ...post,
-      id: `post-${Date.now()}`,
-      createdAt: (/* @__PURE__ */ new Date()).toISOString()
-    };
-    set2((state) => ({ socialPosts: [...state.socialPosts, newPost] }));
-  },
-  updateSocialPost: (id2, updates) => {
-    set2((state) => ({
-      socialPosts: state.socialPosts.map((p) => p.id === id2 ? { ...p, ...updates } : p)
-    }));
-  },
-  deleteSocialPost: (id2) => {
-    set2((state) => ({ socialPosts: state.socialPosts.filter((p) => p.id !== id2) }));
-  },
-  // Team User Actions
-  addTeamUser: (user) => {
-    const newUser = {
-      ...user,
-      id: `user-${Date.now()}`,
-      createdAt: (/* @__PURE__ */ new Date()).toISOString()
-    };
-    set2((state) => ({ teamUsers: [...state.teamUsers, newUser] }));
-  },
-  updateTeamUser: (id2, updates) => {
-    set2((state) => ({
-      teamUsers: state.teamUsers.map((u) => u.id === id2 ? { ...u, ...updates } : u)
-    }));
-  },
-  deleteTeamUser: (id2) => {
-    set2((state) => ({ teamUsers: state.teamUsers.filter((u) => u.id !== id2) }));
-  },
-  // API Token Actions
-  addApiToken: (token) => {
-    const newToken = {
-      ...token,
-      id: `token-${Date.now()}`,
-      createdAt: (/* @__PURE__ */ new Date()).toISOString()
-    };
-    set2((state) => ({ apiTokens: [...state.apiTokens, newToken] }));
-  },
-  updateApiToken: (id2, updates) => {
-    set2((state) => ({
-      apiTokens: state.apiTokens.map((t) => t.id === id2 ? { ...t, ...updates } : t)
-    }));
-  },
-  deleteApiToken: (id2) => {
-    set2((state) => ({ apiTokens: state.apiTokens.filter((t) => t.id !== id2) }));
-  },
-  // Activity Actions
-  addActivity: (activity) => {
-    const newActivity = {
-      ...activity,
-      id: `act-${Date.now()}`,
-      timestamp: (/* @__PURE__ */ new Date()).toISOString()
-    };
-    set2((state) => ({ activities: [newActivity, ...state.activities] }));
-  },
-  // UI Actions
-  toggleSidebar: () => {
-    set2((state) => ({ sidebarCollapsed: !state.sidebarCollapsed }));
-  },
-  incrementActiveRequests: () => {
-    set2((state) => ({ activeRequests: state.activeRequests + 1 }));
-  },
-  decrementActiveRequests: () => {
-    set2((state) => ({ activeRequests: Math.max(0, state.activeRequests - 1) }));
-  },
-  // Stats
-  getPlatformStats: (teamId) => {
-    return mockPlatformStats[teamId] || {
-      totalBids: 0,
-      successfulBids: 0,
-      totalEarnings: 0,
-      activeProjects: 0,
-      completedProjects: 0,
-      averageRating: 0
-    };
-  },
-  getUnreadMessageCount: () => {
-    return get2().conversations.reduce((sum, c) => sum + c.unreadCount, 0);
-  }
-}));
-const SESSION_STORAGE_KEY = "nexus_session";
-const API_BASE_URL$1 = "http://localhost:8000/api";
-const AuthContext = reactExports.createContext(void 0);
-function AuthProvider({ children: children2 }) {
-  const [user, setUser] = reactExports.useState(null);
-  const [team, setTeam] = reactExports.useState(null);
-  const [token, setToken] = reactExports.useState(null);
-  const [isLoading, setIsLoading] = reactExports.useState(true);
-  const initializeForUser = useAppStore((state) => state.initializeForUser);
-  reactExports.useEffect(() => {
-    if (typeof window === "undefined") {
-      setIsLoading(false);
-      return;
-    }
-    const storedSession = localStorage.getItem(SESSION_STORAGE_KEY);
-    const legacyUser = localStorage.getItem("nexus_user");
-    try {
-      if (storedSession) {
-        const parsedSession = JSON.parse(storedSession);
-        setUser(parsedSession.user);
-        setToken(parsedSession.token ?? null);
-        if (parsedSession.user.teamId) {
-          setTeam(getTeamById(parsedSession.user.teamId) || null);
-        }
-        initializeForUser(parsedSession.user);
-      } else if (legacyUser) {
-        const parsedUser = JSON.parse(legacyUser);
-        setUser(parsedUser);
-        setToken(null);
-        if (parsedUser.teamId) {
-          setTeam(getTeamById(parsedUser.teamId) || null);
-        }
-        initializeForUser(parsedUser);
-      }
-    } catch (e) {
-      if (typeof window !== "undefined") {
-        localStorage.removeItem(SESSION_STORAGE_KEY);
-        localStorage.removeItem("nexus_user");
-      }
-    }
-    setIsLoading(false);
-  }, [initializeForUser]);
-  const login = async (email, password) => {
-    setIsLoading(true);
-    try {
-      if (!API_BASE_URL$1) ;
-      console.debug("Login attempt:", { url: `${API_BASE_URL$1}/admin/login`, email });
-      let response = await fetch(`${API_BASE_URL$1}/admin/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-app-key": "739f77912fa0ca22538ad067e284545d5cd541a7c13cacebb5e3e4a8fdec9c8"
-        },
-        body: JSON.stringify({ email, password })
-      });
-      if (response.status === 404) {
-        console.debug("Admin login endpoint not found, trying /login");
-        response = await fetch(`${API_BASE_URL$1}/login`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "x-app-key": "739f77912fa0ca22538ad067e284545d5cd541a7c13cacebb5e3e4a8fdec9c8"
-          },
-          body: JSON.stringify({ email, password })
-        });
-      }
-      const payload = await response.json().catch(() => ({ success: false }));
-      console.debug("Login response payload:", payload);
-      if (!response.ok) {
-        return { success: false, message: payload?.message || "Unable to login. Please try again." };
-      }
-      const data2 = payload.data || payload;
-      const authToken = data2.token || payload.token;
-      const adminData = data2.admin || data2.user || (data2.email ? data2 : null);
-      if (payload?.success && adminData && authToken) {
-        const roles = adminData.roles || (adminData.role ? [adminData.role] : []);
-        const mappedRole = roles.includes("superadmin") ? "superadmin" : roles.includes("admin") ? "admin" : "user";
-        const authenticatedUser = {
-          id: String(adminData.id || adminData.uuid),
-          email: adminData.email,
-          name: adminData.name || adminData.email,
-          role: mappedRole,
-          teamId: adminData.team_id || adminData.teamId,
-          createdAt: adminData.created_at || adminData.createdAt || (/* @__PURE__ */ new Date()).toISOString()
-        };
-        setUser(authenticatedUser);
-        setToken(authToken);
-        if (typeof window !== "undefined") {
-          localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify({ user: authenticatedUser, token: authToken }));
-          localStorage.removeItem("nexus_user");
-        }
-        if (authenticatedUser.teamId) {
-          setTeam(getTeamById(authenticatedUser.teamId) || null);
-        }
-        initializeForUser(authenticatedUser);
-        return { success: true };
-      }
-      return { success: false, message: payload?.message || "Invalid email or password" };
-    } catch (error) {
-      console.error("Login error", error);
-      return { success: false, message: "Network error. Please try again." };
-    } finally {
-      setIsLoading(false);
-    }
-  };
-  const register = async (name, email, password, passwordConfirmation) => {
-    setIsLoading(true);
-    try {
-      if (!API_BASE_URL$1) ;
-      const response = await fetch(`${API_BASE_URL$1}/register`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-app-key": "739f77912fa0ca22538ad067e284545d5cd541a7c13cacebb5e3e4a8fdec9c8"
-        },
-        body: JSON.stringify({ name, email, password, password_confirmation: passwordConfirmation })
-      });
-      const payload = await response.json().catch(() => ({ success: false }));
-      if (!response.ok) {
-        return { success: false, message: payload?.message || "Unable to register. Please try again." };
-      }
-      if (payload?.success && payload.data && payload.data.token) {
-        const { uuid, name: userName, email: userEmail, role, token: authToken } = payload.data;
-        const mappedRole = role === "freelancer" ? "user" : role;
-        const registeredUser = {
-          id: uuid,
-          email: userEmail,
-          name: userName,
-          role: mappedRole,
-          createdAt: (/* @__PURE__ */ new Date()).toISOString()
-        };
-        setUser(registeredUser);
-        setToken(authToken);
-        if (typeof window !== "undefined") {
-          localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify({ user: registeredUser, token: authToken }));
-          localStorage.removeItem("nexus_user");
-        }
-        if (registeredUser.teamId) {
-          setTeam(getTeamById(registeredUser.teamId) || null);
-        }
-        initializeForUser(registeredUser);
-        return { success: true };
-      }
-      return { success: false, message: payload?.message || "Registration failed" };
-    } catch (error) {
-      console.error("Registration error", error);
-      return { success: false, message: "Network error. Please try again." };
-    } finally {
-      setIsLoading(false);
-    }
-  };
-  const logout = async () => {
-    try {
-      if (token && API_BASE_URL$1) {
-        const endpoint = user?.role === "admin" || user?.role === "superadmin" ? `${API_BASE_URL$1}/admin/logout` : `${API_BASE_URL$1}/logout`;
-        await fetch(endpoint, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`,
-            "x-app-key": "739f77912fa0ca22538ad067e284545d5cd541a7c13cacebb5e3e4a8fdec9c8"
-          }
-        }).catch(() => {
-        });
-      }
-    } finally {
-      setUser(null);
-      setTeam(null);
-      setToken(null);
-      if (typeof window !== "undefined") {
-        localStorage.removeItem(SESSION_STORAGE_KEY);
-        localStorage.removeItem("nexus_user");
-      }
-    }
-  };
-  const hasRole = (roles) => {
-    if (!user) return false;
-    return roles.includes(user.role);
-  };
-  const canAccessTeamSettings = user?.role === "admin" || user?.role === "superadmin";
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    AuthContext.Provider,
-    {
-      value: {
-        user,
-        team,
-        token,
-        isLoading,
-        login,
-        register,
-        logout,
-        isAuthenticated: !!user,
-        hasRole,
-        canAccessTeamSettings
-      },
-      children: children2
-    }
-  );
-}
-function useAuth() {
-  const context2 = reactExports.useContext(AuthContext);
-  if (context2 === void 0) {
-    throw new Error("useAuth must be used within an AuthProvider");
-  }
-  return context2;
-}
-function ProtectedRoute({ allowedRoles }) {
-  const { isAuthenticated, isLoading, user, hasRole } = useAuth();
-  const location2 = distExports.useLocation();
-  if (isLoading) {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex h-screen items-center justify-center bg-[#020204]", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-8 h-8 rounded-full border-2 border-indigo-500 border-t-purple-500 animate-spin" }) });
-  }
-  if (!isAuthenticated || !user) {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Navigate, { to: "/login", state: { from: location2 }, replace: true });
-  }
-  if (allowedRoles && allowedRoles.length > 0) {
-    if (!hasRole(allowedRoles)) {
-      return /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Navigate, { to: "/", replace: true });
-    }
-  }
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Outlet, {});
-}
-const ThemeContext = reactExports.createContext(void 0);
-function ThemeProvider({ children: children2 }) {
-  const [theme, setThemeState] = reactExports.useState("dark");
-  reactExports.useEffect(() => {
-    const stored = localStorage.getItem("theme");
-    if (stored === "light" || stored === "dark") {
-      setThemeState(stored);
-    }
-  }, []);
-  reactExports.useEffect(() => {
-    const root2 = document.documentElement;
-    if (theme === "dark") {
-      root2.classList.add("dark");
-      root2.classList.remove("light");
-    } else {
-      root2.classList.add("light");
-      root2.classList.remove("dark");
-    }
-    localStorage.setItem("theme", theme);
-  }, [theme]);
-  const toggleTheme = () => {
-    setThemeState((prev) => prev === "dark" ? "light" : "dark");
-  };
-  const setTheme = (newTheme) => {
-    setThemeState(newTheme);
-  };
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(ThemeContext.Provider, { value: { theme, toggleTheme, setTheme }, children: children2 });
-}
-function useTheme() {
-  const context2 = reactExports.useContext(ThemeContext);
-  if (!context2) {
-    throw new Error("useTheme must be used within ThemeProvider");
-  }
-  return context2;
-}
-const ToastContext = reactExports.createContext(void 0);
-function ToastProvider({ children: children2 }) {
-  const [toasts, setToasts] = reactExports.useState([]);
-  const showToast = reactExports.useCallback((message2, type = "info", duration = 4e3) => {
-    const id2 = `toast-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-    const newToast = { id: id2, message: message2, type, duration };
-    setToasts((prev) => [...prev, newToast]);
-    if (duration > 0) {
-      setTimeout(() => {
-        setToasts((prev) => prev.filter((t) => t.id !== id2));
-      }, duration);
-    }
-  }, []);
-  const hideToast = reactExports.useCallback((id2) => {
-    setToasts((prev) => prev.filter((t) => t.id !== id2));
-  }, []);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(ToastContext.Provider, { value: { showToast, hideToast }, children: [
-    children2,
-    /* @__PURE__ */ jsxRuntimeExports.jsx(ToastContainer, { toasts, onClose: hideToast })
-  ] });
-}
-function useToast() {
-  const context2 = reactExports.useContext(ToastContext);
-  if (context2 === void 0) {
-    throw new Error("useToast must be used within a ToastProvider");
-  }
-  return context2;
-}
-function ToastContainer({ toasts, onClose }) {
-  if (toasts.length === 0) return null;
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "fixed bottom-4 right-4 z-[100] flex flex-col gap-2 max-w-sm", children: toasts.map((toast) => /* @__PURE__ */ jsxRuntimeExports.jsx(ToastItem, { toast, onClose }, toast.id)) });
-}
-function ToastItem({ toast, onClose }) {
-  const icons = {
-    success: /* @__PURE__ */ jsxRuntimeExports.jsx(CircleCheckBig, { className: "w-5 h-5 text-green-500" }),
-    error: /* @__PURE__ */ jsxRuntimeExports.jsx(CircleAlert, { className: "w-5 h-5 text-red-500" }),
-    warning: /* @__PURE__ */ jsxRuntimeExports.jsx(TriangleAlert, { className: "w-5 h-5 text-orange-500" }),
-    info: /* @__PURE__ */ jsxRuntimeExports.jsx(Info, { className: "w-5 h-5 text-blue-500" })
-  };
-  const bgColors = {
-    success: "border-green-500/30 bg-green-500/10",
-    error: "border-red-500/30 bg-red-500/10",
-    warning: "border-orange-500/30 bg-orange-500/10",
-    info: "border-blue-500/30 bg-blue-500/10"
-  };
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
-    "div",
-    {
-      className: `flex items-start gap-3 p-4 rounded-lg border ${bgColors[toast.type]} bg-nexus-card backdrop-blur-sm slide-in-bottom`,
-      children: [
-        icons[toast.type],
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "flex-1 text-sm text-nexus-text", children: toast.message }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "button",
-          {
-            onClick: () => onClose(toast.id),
-            className: "text-nexus-muted hover:text-nexus-text transition-colors",
-            children: /* @__PURE__ */ jsxRuntimeExports.jsx(X, { className: "w-4 h-4" })
-          }
-        )
-      ]
-    }
-  );
-}
-const SSRContext = reactExports.createContext({});
-const useSSRContext = () => reactExports.useContext(SSRContext);
-const LoadingScreen$1 = () => {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "fixed inset-0 z-50 flex items-center justify-center bg-[#020204]", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 rounded-full bg-indigo-500/20 blur-xl animate-pulse" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative flex flex-col items-center", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-16 h-16 border-4 border-indigo-500/10 border-t-indigo-500 rounded-full animate-spin" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-6 text-indigo-400 font-medium tracking-widest text-xs uppercase animate-pulse", children: "Loading EdgeLancer" })
-    ] })
-  ] }) });
-};
-function createContextScope(scopeName, createContextScopeDeps = []) {
-  let defaultContexts = [];
-  function createContext3(rootComponentName, defaultContext) {
-    const BaseContext = reactExports.createContext(defaultContext);
-    BaseContext.displayName = rootComponentName + "Context";
-    const index = defaultContexts.length;
-    defaultContexts = [...defaultContexts, defaultContext];
-    const Provider2 = (props) => {
-      const { scope, children: children2, ...context2 } = props;
-      const Context2 = scope?.[scopeName]?.[index] || BaseContext;
-      const value = reactExports.useMemo(() => context2, Object.values(context2));
-      return /* @__PURE__ */ jsxRuntimeExports.jsx(Context2.Provider, { value, children: children2 });
-    };
-    Provider2.displayName = rootComponentName + "Provider";
-    function useContext2(consumerName, scope) {
-      const Context2 = scope?.[scopeName]?.[index] || BaseContext;
-      const context2 = reactExports.useContext(Context2);
-      if (context2) return context2;
-      if (defaultContext !== void 0) return defaultContext;
-      throw new Error(`\`${consumerName}\` must be used within \`${rootComponentName}\``);
-    }
-    return [Provider2, useContext2];
-  }
-  const createScope = () => {
-    const scopeContexts = defaultContexts.map((defaultContext) => {
-      return reactExports.createContext(defaultContext);
-    });
-    return function useScope(scope) {
-      const contexts = scope?.[scopeName] || scopeContexts;
-      return reactExports.useMemo(
-        () => ({ [`__scope${scopeName}`]: { ...scope, [scopeName]: contexts } }),
-        [scope, contexts]
-      );
-    };
-  };
-  createScope.scopeName = scopeName;
-  return [createContext3, composeContextScopes(createScope, ...createContextScopeDeps)];
-}
-function composeContextScopes(...scopes) {
-  const baseScope = scopes[0];
-  if (scopes.length === 1) return baseScope;
-  const createScope = () => {
-    const scopeHooks = scopes.map((createScope2) => ({
-      useScope: createScope2(),
-      scopeName: createScope2.scopeName
-    }));
-    return function useComposedScopes(overrideScopes) {
-      const nextScopes = scopeHooks.reduce((nextScopes2, { useScope, scopeName }) => {
-        const scopeProps = useScope(overrideScopes);
-        const currentScope = scopeProps[`__scope${scopeName}`];
-        return { ...nextScopes2, ...currentScope };
-      }, {});
-      return reactExports.useMemo(() => ({ [`__scope${baseScope.scopeName}`]: nextScopes }), [nextScopes]);
-    };
-  };
-  createScope.scopeName = baseScope.scopeName;
-  return createScope;
-}
-var NODES = [
-  "a",
-  "button",
-  "div",
-  "form",
-  "h2",
-  "h3",
-  "img",
-  "input",
-  "label",
-  "li",
-  "nav",
-  "ol",
-  "p",
-  "select",
-  "span",
-  "svg",
-  "ul"
-];
-var Primitive = NODES.reduce((primitive, node) => {
-  const Slot2 = /* @__PURE__ */ createSlot$2(`Primitive.${node}`);
-  const Node2 = reactExports.forwardRef((props, forwardedRef) => {
-    const { asChild, ...primitiveProps } = props;
-    const Comp = asChild ? Slot2 : node;
-    if (typeof window !== "undefined") {
-      window[/* @__PURE__ */ Symbol.for("radix-ui")] = true;
-    }
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(Comp, { ...primitiveProps, ref: forwardedRef });
-  });
-  Node2.displayName = `Primitive.${node}`;
-  return { ...primitive, [node]: Node2 };
-}, {});
-var shimExports = requireShim();
-function useIsHydrated() {
-  return shimExports.useSyncExternalStore(
-    subscribe,
-    () => true,
-    () => false
-  );
-}
-function subscribe() {
-  return () => {
-  };
-}
-var AVATAR_NAME = "Avatar";
-var [createAvatarContext] = createContextScope(AVATAR_NAME);
-var [AvatarProvider, useAvatarContext] = createAvatarContext(AVATAR_NAME);
-var Avatar$1 = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const { __scopeAvatar, ...avatarProps } = props;
-    const [imageLoadingStatus, setImageLoadingStatus] = reactExports.useState("idle");
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(
-      AvatarProvider,
-      {
-        scope: __scopeAvatar,
-        imageLoadingStatus,
-        onImageLoadingStatusChange: setImageLoadingStatus,
-        children: /* @__PURE__ */ jsxRuntimeExports.jsx(Primitive.span, { ...avatarProps, ref: forwardedRef })
-      }
-    );
-  }
-);
-Avatar$1.displayName = AVATAR_NAME;
-var IMAGE_NAME = "AvatarImage";
-var AvatarImage$1 = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const { __scopeAvatar, src, onLoadingStatusChange = () => {
-    }, ...imageProps } = props;
-    const context2 = useAvatarContext(IMAGE_NAME, __scopeAvatar);
-    const imageLoadingStatus = useImageLoadingStatus(src, imageProps);
-    const handleLoadingStatusChange = useCallbackRef$1((status) => {
-      onLoadingStatusChange(status);
-      context2.onImageLoadingStatusChange(status);
-    });
-    useLayoutEffect2(() => {
-      if (imageLoadingStatus !== "idle") {
-        handleLoadingStatusChange(imageLoadingStatus);
-      }
-    }, [imageLoadingStatus, handleLoadingStatusChange]);
-    return imageLoadingStatus === "loaded" ? /* @__PURE__ */ jsxRuntimeExports.jsx(Primitive.img, { ...imageProps, ref: forwardedRef, src }) : null;
-  }
-);
-AvatarImage$1.displayName = IMAGE_NAME;
-var FALLBACK_NAME = "AvatarFallback";
-var AvatarFallback$1 = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const { __scopeAvatar, delayMs, ...fallbackProps } = props;
-    const context2 = useAvatarContext(FALLBACK_NAME, __scopeAvatar);
-    const [canRender, setCanRender] = reactExports.useState(delayMs === void 0);
-    reactExports.useEffect(() => {
-      if (delayMs !== void 0) {
-        const timerId = window.setTimeout(() => setCanRender(true), delayMs);
-        return () => window.clearTimeout(timerId);
-      }
-    }, [delayMs]);
-    return canRender && context2.imageLoadingStatus !== "loaded" ? /* @__PURE__ */ jsxRuntimeExports.jsx(Primitive.span, { ...fallbackProps, ref: forwardedRef }) : null;
-  }
-);
-AvatarFallback$1.displayName = FALLBACK_NAME;
-function resolveLoadingStatus(image, src) {
-  if (!image) {
-    return "idle";
-  }
-  if (!src) {
-    return "error";
-  }
-  if (image.src !== src) {
-    image.src = src;
-  }
-  return image.complete && image.naturalWidth > 0 ? "loaded" : "loading";
-}
-function useImageLoadingStatus(src, { referrerPolicy, crossOrigin }) {
-  const isHydrated2 = useIsHydrated();
-  const imageRef = reactExports.useRef(null);
-  const image = (() => {
-    if (!isHydrated2) return null;
-    if (!imageRef.current) {
-      imageRef.current = new window.Image();
-    }
-    return imageRef.current;
-  })();
-  const [loadingStatus, setLoadingStatus] = reactExports.useState(
-    () => resolveLoadingStatus(image, src)
-  );
-  useLayoutEffect2(() => {
-    setLoadingStatus(resolveLoadingStatus(image, src));
-  }, [image, src]);
-  useLayoutEffect2(() => {
-    const updateStatus = (status) => () => {
-      setLoadingStatus(status);
-    };
-    if (!image) return;
-    const handleLoad = updateStatus("loaded");
-    const handleError = updateStatus("error");
-    image.addEventListener("load", handleLoad);
-    image.addEventListener("error", handleError);
-    if (referrerPolicy) {
-      image.referrerPolicy = referrerPolicy;
-    }
-    if (typeof crossOrigin === "string") {
-      image.crossOrigin = crossOrigin;
-    }
-    return () => {
-      image.removeEventListener("load", handleLoad);
-      image.removeEventListener("error", handleError);
-    };
-  }, [image, crossOrigin, referrerPolicy]);
-  return loadingStatus;
-}
-var Root$2 = Avatar$1;
-var Image = AvatarImage$1;
-var Fallback = AvatarFallback$1;
-const Avatar = reactExports.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-  Root$2,
-  {
-    ref,
-    className: cn(
-      "relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full",
-      className
-    ),
-    ...props
-  }
-));
-Avatar.displayName = Root$2.displayName;
-const AvatarImage = reactExports.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-  Image,
-  {
-    ref,
-    className: cn("aspect-square h-full w-full", className),
-    ...props
-  }
-));
-AvatarImage.displayName = Image.displayName;
-const AvatarFallback = reactExports.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-  Fallback,
-  {
-    ref,
-    className: cn(
-      "flex h-full w-full items-center justify-center rounded-full bg-muted",
-      className
-    ),
-    ...props
-  }
-));
-AvatarFallback.displayName = Fallback.displayName;
-const badgeVariants = cva(
-  "inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
-  {
-    variants: {
-      variant: {
-        default: "border-transparent bg-primary text-primary-foreground shadow hover:bg-primary/80",
-        secondary: "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        destructive: "border-transparent bg-destructive text-destructive-foreground shadow hover:bg-destructive/80",
-        outline: "text-foreground"
-      }
-    },
-    defaultVariants: {
-      variant: "default"
-    }
-  }
-);
-function Badge({ className, variant, ...props }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: cn(badgeVariants({ variant }), className), ...props });
-}
-const Input = reactExports.forwardRef(
-  ({ className, type, ...props }, ref) => {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "input",
-      {
-        type,
-        className: cn(
-          "flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
-          className
-        ),
-        ref,
-        ...props
-      }
-    );
-  }
-);
-Input.displayName = "Input";
-var DirectionContext = reactExports.createContext(void 0);
-function useDirection(localDir) {
-  const globalDir = reactExports.useContext(DirectionContext);
-  return localDir || globalDir || "ltr";
-}
-function clamp$1(value, [min, max]) {
-  return Math.min(max, Math.max(min, value));
-}
-function useStateMachine(initialState2, machine) {
-  return reactExports.useReducer((state, event) => {
-    const nextState = machine[state][event];
-    return nextState ?? state;
-  }, initialState2);
-}
-var SCROLL_AREA_NAME = "ScrollArea";
-var [createScrollAreaContext] = createContextScope$1(SCROLL_AREA_NAME);
-var [ScrollAreaProvider, useScrollAreaContext] = createScrollAreaContext(SCROLL_AREA_NAME);
-var ScrollArea$1 = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const {
-      __scopeScrollArea,
-      type = "hover",
-      dir,
-      scrollHideDelay = 600,
-      ...scrollAreaProps
-    } = props;
-    const [scrollArea, setScrollArea] = reactExports.useState(null);
-    const [viewport, setViewport] = reactExports.useState(null);
-    const [content, setContent] = reactExports.useState(null);
-    const [scrollbarX, setScrollbarX] = reactExports.useState(null);
-    const [scrollbarY, setScrollbarY] = reactExports.useState(null);
-    const [cornerWidth, setCornerWidth] = reactExports.useState(0);
-    const [cornerHeight, setCornerHeight] = reactExports.useState(0);
-    const [scrollbarXEnabled, setScrollbarXEnabled] = reactExports.useState(false);
-    const [scrollbarYEnabled, setScrollbarYEnabled] = reactExports.useState(false);
-    const composedRefs = useComposedRefs(forwardedRef, (node) => setScrollArea(node));
-    const direction = useDirection(dir);
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(
-      ScrollAreaProvider,
-      {
-        scope: __scopeScrollArea,
-        type,
-        dir: direction,
-        scrollHideDelay,
-        scrollArea,
-        viewport,
-        onViewportChange: setViewport,
-        content,
-        onContentChange: setContent,
-        scrollbarX,
-        onScrollbarXChange: setScrollbarX,
-        scrollbarXEnabled,
-        onScrollbarXEnabledChange: setScrollbarXEnabled,
-        scrollbarY,
-        onScrollbarYChange: setScrollbarY,
-        scrollbarYEnabled,
-        onScrollbarYEnabledChange: setScrollbarYEnabled,
-        onCornerWidthChange: setCornerWidth,
-        onCornerHeightChange: setCornerHeight,
-        children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-          Primitive$1.div,
-          {
-            dir: direction,
-            ...scrollAreaProps,
-            ref: composedRefs,
-            style: {
-              position: "relative",
-              // Pass corner sizes as CSS vars to reduce re-renders of context consumers
-              ["--radix-scroll-area-corner-width"]: cornerWidth + "px",
-              ["--radix-scroll-area-corner-height"]: cornerHeight + "px",
-              ...props.style
-            }
-          }
-        )
-      }
-    );
-  }
-);
-ScrollArea$1.displayName = SCROLL_AREA_NAME;
-var VIEWPORT_NAME = "ScrollAreaViewport";
-var ScrollAreaViewport = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const { __scopeScrollArea, children: children2, nonce, ...viewportProps } = props;
-    const context2 = useScrollAreaContext(VIEWPORT_NAME, __scopeScrollArea);
-    const ref = reactExports.useRef(null);
-    const composedRefs = useComposedRefs(forwardedRef, ref, context2.onViewportChange);
-    return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "style",
-        {
-          dangerouslySetInnerHTML: {
-            __html: `[data-radix-scroll-area-viewport]{scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch;}[data-radix-scroll-area-viewport]::-webkit-scrollbar{display:none}`
-          },
-          nonce
-        }
-      ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        Primitive$1.div,
-        {
-          "data-radix-scroll-area-viewport": "",
-          ...viewportProps,
-          ref: composedRefs,
-          style: {
-            /**
-             * We don't support `visible` because the intention is to have at least one scrollbar
-             * if this component is used and `visible` will behave like `auto` in that case
-             * https://developer.mozilla.org/en-US/docs/Web/CSS/overflow#description
-             *
-             * We don't handle `auto` because the intention is for the native implementation
-             * to be hidden if using this component. We just want to ensure the node is scrollable
-             * so could have used either `scroll` or `auto` here. We picked `scroll` to prevent
-             * the browser from having to work out whether to render native scrollbars or not,
-             * we tell it to with the intention of hiding them in CSS.
-             */
-            overflowX: context2.scrollbarXEnabled ? "scroll" : "hidden",
-            overflowY: context2.scrollbarYEnabled ? "scroll" : "hidden",
-            ...props.style
-          },
-          children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { ref: context2.onContentChange, style: { minWidth: "100%", display: "table" }, children: children2 })
-        }
-      )
-    ] });
-  }
-);
-ScrollAreaViewport.displayName = VIEWPORT_NAME;
-var SCROLLBAR_NAME = "ScrollAreaScrollbar";
-var ScrollAreaScrollbar = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const { forceMount, ...scrollbarProps } = props;
-    const context2 = useScrollAreaContext(SCROLLBAR_NAME, props.__scopeScrollArea);
-    const { onScrollbarXEnabledChange, onScrollbarYEnabledChange } = context2;
-    const isHorizontal = props.orientation === "horizontal";
-    reactExports.useEffect(() => {
-      isHorizontal ? onScrollbarXEnabledChange(true) : onScrollbarYEnabledChange(true);
-      return () => {
-        isHorizontal ? onScrollbarXEnabledChange(false) : onScrollbarYEnabledChange(false);
-      };
-    }, [isHorizontal, onScrollbarXEnabledChange, onScrollbarYEnabledChange]);
-    return context2.type === "hover" ? /* @__PURE__ */ jsxRuntimeExports.jsx(ScrollAreaScrollbarHover, { ...scrollbarProps, ref: forwardedRef, forceMount }) : context2.type === "scroll" ? /* @__PURE__ */ jsxRuntimeExports.jsx(ScrollAreaScrollbarScroll, { ...scrollbarProps, ref: forwardedRef, forceMount }) : context2.type === "auto" ? /* @__PURE__ */ jsxRuntimeExports.jsx(ScrollAreaScrollbarAuto, { ...scrollbarProps, ref: forwardedRef, forceMount }) : context2.type === "always" ? /* @__PURE__ */ jsxRuntimeExports.jsx(ScrollAreaScrollbarVisible, { ...scrollbarProps, ref: forwardedRef }) : null;
-  }
-);
-ScrollAreaScrollbar.displayName = SCROLLBAR_NAME;
-var ScrollAreaScrollbarHover = reactExports.forwardRef((props, forwardedRef) => {
-  const { forceMount, ...scrollbarProps } = props;
-  const context2 = useScrollAreaContext(SCROLLBAR_NAME, props.__scopeScrollArea);
-  const [visible, setVisible] = reactExports.useState(false);
-  reactExports.useEffect(() => {
-    const scrollArea = context2.scrollArea;
-    let hideTimer = 0;
-    if (scrollArea) {
-      const handlePointerEnter = () => {
-        window.clearTimeout(hideTimer);
-        setVisible(true);
-      };
-      const handlePointerLeave = () => {
-        hideTimer = window.setTimeout(() => setVisible(false), context2.scrollHideDelay);
-      };
-      scrollArea.addEventListener("pointerenter", handlePointerEnter);
-      scrollArea.addEventListener("pointerleave", handlePointerLeave);
-      return () => {
-        window.clearTimeout(hideTimer);
-        scrollArea.removeEventListener("pointerenter", handlePointerEnter);
-        scrollArea.removeEventListener("pointerleave", handlePointerLeave);
-      };
-    }
-  }, [context2.scrollArea, context2.scrollHideDelay]);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || visible, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-    ScrollAreaScrollbarAuto,
-    {
-      "data-state": visible ? "visible" : "hidden",
-      ...scrollbarProps,
-      ref: forwardedRef
-    }
-  ) });
-});
-var ScrollAreaScrollbarScroll = reactExports.forwardRef((props, forwardedRef) => {
-  const { forceMount, ...scrollbarProps } = props;
-  const context2 = useScrollAreaContext(SCROLLBAR_NAME, props.__scopeScrollArea);
-  const isHorizontal = props.orientation === "horizontal";
-  const debounceScrollEnd = useDebounceCallback(() => send("SCROLL_END"), 100);
-  const [state, send] = useStateMachine("hidden", {
-    hidden: {
-      SCROLL: "scrolling"
-    },
-    scrolling: {
-      SCROLL_END: "idle",
-      POINTER_ENTER: "interacting"
-    },
-    interacting: {
-      SCROLL: "interacting",
-      POINTER_LEAVE: "idle"
-    },
-    idle: {
-      HIDE: "hidden",
-      SCROLL: "scrolling",
-      POINTER_ENTER: "interacting"
-    }
-  });
-  reactExports.useEffect(() => {
-    if (state === "idle") {
-      const hideTimer = window.setTimeout(() => send("HIDE"), context2.scrollHideDelay);
-      return () => window.clearTimeout(hideTimer);
-    }
-  }, [state, context2.scrollHideDelay, send]);
-  reactExports.useEffect(() => {
-    const viewport = context2.viewport;
-    const scrollDirection = isHorizontal ? "scrollLeft" : "scrollTop";
-    if (viewport) {
-      let prevScrollPos = viewport[scrollDirection];
-      const handleScroll2 = () => {
-        const scrollPos = viewport[scrollDirection];
-        const hasScrollInDirectionChanged = prevScrollPos !== scrollPos;
-        if (hasScrollInDirectionChanged) {
-          send("SCROLL");
-          debounceScrollEnd();
-        }
-        prevScrollPos = scrollPos;
-      };
-      viewport.addEventListener("scroll", handleScroll2);
-      return () => viewport.removeEventListener("scroll", handleScroll2);
-    }
-  }, [context2.viewport, isHorizontal, send, debounceScrollEnd]);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || state !== "hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-    ScrollAreaScrollbarVisible,
-    {
-      "data-state": state === "hidden" ? "hidden" : "visible",
-      ...scrollbarProps,
-      ref: forwardedRef,
-      onPointerEnter: composeEventHandlers(props.onPointerEnter, () => send("POINTER_ENTER")),
-      onPointerLeave: composeEventHandlers(props.onPointerLeave, () => send("POINTER_LEAVE"))
-    }
-  ) });
-});
-var ScrollAreaScrollbarAuto = reactExports.forwardRef((props, forwardedRef) => {
-  const context2 = useScrollAreaContext(SCROLLBAR_NAME, props.__scopeScrollArea);
-  const { forceMount, ...scrollbarProps } = props;
-  const [visible, setVisible] = reactExports.useState(false);
-  const isHorizontal = props.orientation === "horizontal";
-  const handleResize = useDebounceCallback(() => {
-    if (context2.viewport) {
-      const isOverflowX = context2.viewport.offsetWidth < context2.viewport.scrollWidth;
-      const isOverflowY = context2.viewport.offsetHeight < context2.viewport.scrollHeight;
-      setVisible(isHorizontal ? isOverflowX : isOverflowY);
-    }
-  }, 10);
-  useResizeObserver(context2.viewport, handleResize);
-  useResizeObserver(context2.content, handleResize);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || visible, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-    ScrollAreaScrollbarVisible,
-    {
-      "data-state": visible ? "visible" : "hidden",
-      ...scrollbarProps,
-      ref: forwardedRef
-    }
-  ) });
-});
-var ScrollAreaScrollbarVisible = reactExports.forwardRef((props, forwardedRef) => {
-  const { orientation = "vertical", ...scrollbarProps } = props;
-  const context2 = useScrollAreaContext(SCROLLBAR_NAME, props.__scopeScrollArea);
-  const thumbRef = reactExports.useRef(null);
-  const pointerOffsetRef = reactExports.useRef(0);
-  const [sizes, setSizes] = reactExports.useState({
-    content: 0,
-    viewport: 0,
-    scrollbar: { size: 0, paddingStart: 0, paddingEnd: 0 }
-  });
-  const thumbRatio = getThumbRatio(sizes.viewport, sizes.content);
-  const commonProps = {
-    ...scrollbarProps,
-    sizes,
-    onSizesChange: setSizes,
-    hasThumb: Boolean(thumbRatio > 0 && thumbRatio < 1),
-    onThumbChange: (thumb) => thumbRef.current = thumb,
-    onThumbPointerUp: () => pointerOffsetRef.current = 0,
-    onThumbPointerDown: (pointerPos) => pointerOffsetRef.current = pointerPos
-  };
-  function getScrollPosition(pointerPos, dir) {
-    return getScrollPositionFromPointer(pointerPos, pointerOffsetRef.current, sizes, dir);
-  }
-  if (orientation === "horizontal") {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(
-      ScrollAreaScrollbarX,
-      {
-        ...commonProps,
-        ref: forwardedRef,
-        onThumbPositionChange: () => {
-          if (context2.viewport && thumbRef.current) {
-            const scrollPos = context2.viewport.scrollLeft;
-            const offset = getThumbOffsetFromScroll(scrollPos, sizes, context2.dir);
-            thumbRef.current.style.transform = `translate3d(${offset}px, 0, 0)`;
-          }
-        },
-        onWheelScroll: (scrollPos) => {
-          if (context2.viewport) context2.viewport.scrollLeft = scrollPos;
-        },
-        onDragScroll: (pointerPos) => {
-          if (context2.viewport) {
-            context2.viewport.scrollLeft = getScrollPosition(pointerPos, context2.dir);
-          }
-        }
-      }
-    );
-  }
-  if (orientation === "vertical") {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(
-      ScrollAreaScrollbarY,
-      {
-        ...commonProps,
-        ref: forwardedRef,
-        onThumbPositionChange: () => {
-          if (context2.viewport && thumbRef.current) {
-            const scrollPos = context2.viewport.scrollTop;
-            const offset = getThumbOffsetFromScroll(scrollPos, sizes);
-            thumbRef.current.style.transform = `translate3d(0, ${offset}px, 0)`;
-          }
-        },
-        onWheelScroll: (scrollPos) => {
-          if (context2.viewport) context2.viewport.scrollTop = scrollPos;
-        },
-        onDragScroll: (pointerPos) => {
-          if (context2.viewport) context2.viewport.scrollTop = getScrollPosition(pointerPos);
-        }
-      }
-    );
-  }
-  return null;
-});
-var ScrollAreaScrollbarX = reactExports.forwardRef((props, forwardedRef) => {
-  const { sizes, onSizesChange, ...scrollbarProps } = props;
-  const context2 = useScrollAreaContext(SCROLLBAR_NAME, props.__scopeScrollArea);
-  const [computedStyle, setComputedStyle] = reactExports.useState();
-  const ref = reactExports.useRef(null);
-  const composeRefs2 = useComposedRefs(forwardedRef, ref, context2.onScrollbarXChange);
-  reactExports.useEffect(() => {
-    if (ref.current) setComputedStyle(getComputedStyle(ref.current));
-  }, [ref]);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    ScrollAreaScrollbarImpl,
-    {
-      "data-orientation": "horizontal",
-      ...scrollbarProps,
-      ref: composeRefs2,
-      sizes,
-      style: {
-        bottom: 0,
-        left: context2.dir === "rtl" ? "var(--radix-scroll-area-corner-width)" : 0,
-        right: context2.dir === "ltr" ? "var(--radix-scroll-area-corner-width)" : 0,
-        ["--radix-scroll-area-thumb-width"]: getThumbSize(sizes) + "px",
-        ...props.style
-      },
-      onThumbPointerDown: (pointerPos) => props.onThumbPointerDown(pointerPos.x),
-      onDragScroll: (pointerPos) => props.onDragScroll(pointerPos.x),
-      onWheelScroll: (event, maxScrollPos) => {
-        if (context2.viewport) {
-          const scrollPos = context2.viewport.scrollLeft + event.deltaX;
-          props.onWheelScroll(scrollPos);
-          if (isScrollingWithinScrollbarBounds(scrollPos, maxScrollPos)) {
-            event.preventDefault();
-          }
-        }
-      },
-      onResize: () => {
-        if (ref.current && context2.viewport && computedStyle) {
-          onSizesChange({
-            content: context2.viewport.scrollWidth,
-            viewport: context2.viewport.offsetWidth,
-            scrollbar: {
-              size: ref.current.clientWidth,
-              paddingStart: toInt(computedStyle.paddingLeft),
-              paddingEnd: toInt(computedStyle.paddingRight)
-            }
-          });
-        }
-      }
-    }
-  );
-});
-var ScrollAreaScrollbarY = reactExports.forwardRef((props, forwardedRef) => {
-  const { sizes, onSizesChange, ...scrollbarProps } = props;
-  const context2 = useScrollAreaContext(SCROLLBAR_NAME, props.__scopeScrollArea);
-  const [computedStyle, setComputedStyle] = reactExports.useState();
-  const ref = reactExports.useRef(null);
-  const composeRefs2 = useComposedRefs(forwardedRef, ref, context2.onScrollbarYChange);
-  reactExports.useEffect(() => {
-    if (ref.current) setComputedStyle(getComputedStyle(ref.current));
-  }, [ref]);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    ScrollAreaScrollbarImpl,
-    {
-      "data-orientation": "vertical",
-      ...scrollbarProps,
-      ref: composeRefs2,
-      sizes,
-      style: {
-        top: 0,
-        right: context2.dir === "ltr" ? 0 : void 0,
-        left: context2.dir === "rtl" ? 0 : void 0,
-        bottom: "var(--radix-scroll-area-corner-height)",
-        ["--radix-scroll-area-thumb-height"]: getThumbSize(sizes) + "px",
-        ...props.style
-      },
-      onThumbPointerDown: (pointerPos) => props.onThumbPointerDown(pointerPos.y),
-      onDragScroll: (pointerPos) => props.onDragScroll(pointerPos.y),
-      onWheelScroll: (event, maxScrollPos) => {
-        if (context2.viewport) {
-          const scrollPos = context2.viewport.scrollTop + event.deltaY;
-          props.onWheelScroll(scrollPos);
-          if (isScrollingWithinScrollbarBounds(scrollPos, maxScrollPos)) {
-            event.preventDefault();
-          }
-        }
-      },
-      onResize: () => {
-        if (ref.current && context2.viewport && computedStyle) {
-          onSizesChange({
-            content: context2.viewport.scrollHeight,
-            viewport: context2.viewport.offsetHeight,
-            scrollbar: {
-              size: ref.current.clientHeight,
-              paddingStart: toInt(computedStyle.paddingTop),
-              paddingEnd: toInt(computedStyle.paddingBottom)
-            }
-          });
-        }
-      }
-    }
-  );
-});
-var [ScrollbarProvider, useScrollbarContext] = createScrollAreaContext(SCROLLBAR_NAME);
-var ScrollAreaScrollbarImpl = reactExports.forwardRef((props, forwardedRef) => {
-  const {
-    __scopeScrollArea,
-    sizes,
-    hasThumb,
-    onThumbChange,
-    onThumbPointerUp,
-    onThumbPointerDown,
-    onThumbPositionChange,
-    onDragScroll,
-    onWheelScroll,
-    onResize,
-    ...scrollbarProps
-  } = props;
-  const context2 = useScrollAreaContext(SCROLLBAR_NAME, __scopeScrollArea);
-  const [scrollbar, setScrollbar] = reactExports.useState(null);
-  const composeRefs2 = useComposedRefs(forwardedRef, (node) => setScrollbar(node));
-  const rectRef = reactExports.useRef(null);
-  const prevWebkitUserSelectRef = reactExports.useRef("");
-  const viewport = context2.viewport;
-  const maxScrollPos = sizes.content - sizes.viewport;
-  const handleWheelScroll = useCallbackRef$1(onWheelScroll);
-  const handleThumbPositionChange = useCallbackRef$1(onThumbPositionChange);
-  const handleResize = useDebounceCallback(onResize, 10);
-  function handleDragScroll(event) {
-    if (rectRef.current) {
-      const x = event.clientX - rectRef.current.left;
-      const y = event.clientY - rectRef.current.top;
-      onDragScroll({ x, y });
-    }
-  }
-  reactExports.useEffect(() => {
-    const handleWheel = (event) => {
-      const element = event.target;
-      const isScrollbarWheel = scrollbar?.contains(element);
-      if (isScrollbarWheel) handleWheelScroll(event, maxScrollPos);
-    };
-    document.addEventListener("wheel", handleWheel, { passive: false });
-    return () => document.removeEventListener("wheel", handleWheel, { passive: false });
-  }, [viewport, scrollbar, maxScrollPos, handleWheelScroll]);
-  reactExports.useEffect(handleThumbPositionChange, [sizes, handleThumbPositionChange]);
-  useResizeObserver(scrollbar, handleResize);
-  useResizeObserver(context2.content, handleResize);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    ScrollbarProvider,
-    {
-      scope: __scopeScrollArea,
-      scrollbar,
-      hasThumb,
-      onThumbChange: useCallbackRef$1(onThumbChange),
-      onThumbPointerUp: useCallbackRef$1(onThumbPointerUp),
-      onThumbPositionChange: handleThumbPositionChange,
-      onThumbPointerDown: useCallbackRef$1(onThumbPointerDown),
-      children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-        Primitive$1.div,
-        {
-          ...scrollbarProps,
-          ref: composeRefs2,
-          style: { position: "absolute", ...scrollbarProps.style },
-          onPointerDown: composeEventHandlers(props.onPointerDown, (event) => {
-            const mainPointer = 0;
-            if (event.button === mainPointer) {
-              const element = event.target;
-              element.setPointerCapture(event.pointerId);
-              rectRef.current = scrollbar.getBoundingClientRect();
-              prevWebkitUserSelectRef.current = document.body.style.webkitUserSelect;
-              document.body.style.webkitUserSelect = "none";
-              if (context2.viewport) context2.viewport.style.scrollBehavior = "auto";
-              handleDragScroll(event);
-            }
-          }),
-          onPointerMove: composeEventHandlers(props.onPointerMove, handleDragScroll),
-          onPointerUp: composeEventHandlers(props.onPointerUp, (event) => {
-            const element = event.target;
-            if (element.hasPointerCapture(event.pointerId)) {
-              element.releasePointerCapture(event.pointerId);
-            }
-            document.body.style.webkitUserSelect = prevWebkitUserSelectRef.current;
-            if (context2.viewport) context2.viewport.style.scrollBehavior = "";
-            rectRef.current = null;
-          })
-        }
-      )
-    }
-  );
-});
-var THUMB_NAME$1 = "ScrollAreaThumb";
-var ScrollAreaThumb = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const { forceMount, ...thumbProps } = props;
-    const scrollbarContext = useScrollbarContext(THUMB_NAME$1, props.__scopeScrollArea);
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || scrollbarContext.hasThumb, children: /* @__PURE__ */ jsxRuntimeExports.jsx(ScrollAreaThumbImpl, { ref: forwardedRef, ...thumbProps }) });
-  }
-);
-var ScrollAreaThumbImpl = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const { __scopeScrollArea, style: style2, ...thumbProps } = props;
-    const scrollAreaContext = useScrollAreaContext(THUMB_NAME$1, __scopeScrollArea);
-    const scrollbarContext = useScrollbarContext(THUMB_NAME$1, __scopeScrollArea);
-    const { onThumbPositionChange } = scrollbarContext;
-    const composedRef = useComposedRefs(
-      forwardedRef,
-      (node) => scrollbarContext.onThumbChange(node)
-    );
-    const removeUnlinkedScrollListenerRef = reactExports.useRef(void 0);
-    const debounceScrollEnd = useDebounceCallback(() => {
-      if (removeUnlinkedScrollListenerRef.current) {
-        removeUnlinkedScrollListenerRef.current();
-        removeUnlinkedScrollListenerRef.current = void 0;
-      }
-    }, 100);
-    reactExports.useEffect(() => {
-      const viewport = scrollAreaContext.viewport;
-      if (viewport) {
-        const handleScroll2 = () => {
-          debounceScrollEnd();
-          if (!removeUnlinkedScrollListenerRef.current) {
-            const listener = addUnlinkedScrollListener(viewport, onThumbPositionChange);
-            removeUnlinkedScrollListenerRef.current = listener;
-            onThumbPositionChange();
-          }
-        };
-        onThumbPositionChange();
-        viewport.addEventListener("scroll", handleScroll2);
-        return () => viewport.removeEventListener("scroll", handleScroll2);
-      }
-    }, [scrollAreaContext.viewport, debounceScrollEnd, onThumbPositionChange]);
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(
-      Primitive$1.div,
-      {
-        "data-state": scrollbarContext.hasThumb ? "visible" : "hidden",
-        ...thumbProps,
-        ref: composedRef,
-        style: {
-          width: "var(--radix-scroll-area-thumb-width)",
-          height: "var(--radix-scroll-area-thumb-height)",
-          ...style2
-        },
-        onPointerDownCapture: composeEventHandlers(props.onPointerDownCapture, (event) => {
-          const thumb = event.target;
-          const thumbRect = thumb.getBoundingClientRect();
-          const x = event.clientX - thumbRect.left;
-          const y = event.clientY - thumbRect.top;
-          scrollbarContext.onThumbPointerDown({ x, y });
-        }),
-        onPointerUp: composeEventHandlers(props.onPointerUp, scrollbarContext.onThumbPointerUp)
-      }
-    );
-  }
-);
-ScrollAreaThumb.displayName = THUMB_NAME$1;
-var CORNER_NAME = "ScrollAreaCorner";
-var ScrollAreaCorner = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const context2 = useScrollAreaContext(CORNER_NAME, props.__scopeScrollArea);
-    const hasBothScrollbarsVisible = Boolean(context2.scrollbarX && context2.scrollbarY);
-    const hasCorner = context2.type !== "scroll" && hasBothScrollbarsVisible;
-    return hasCorner ? /* @__PURE__ */ jsxRuntimeExports.jsx(ScrollAreaCornerImpl, { ...props, ref: forwardedRef }) : null;
-  }
-);
-ScrollAreaCorner.displayName = CORNER_NAME;
-var ScrollAreaCornerImpl = reactExports.forwardRef((props, forwardedRef) => {
-  const { __scopeScrollArea, ...cornerProps } = props;
-  const context2 = useScrollAreaContext(CORNER_NAME, __scopeScrollArea);
-  const [width, setWidth] = reactExports.useState(0);
-  const [height, setHeight] = reactExports.useState(0);
-  const hasSize = Boolean(width && height);
-  useResizeObserver(context2.scrollbarX, () => {
-    const height2 = context2.scrollbarX?.offsetHeight || 0;
-    context2.onCornerHeightChange(height2);
-    setHeight(height2);
-  });
-  useResizeObserver(context2.scrollbarY, () => {
-    const width2 = context2.scrollbarY?.offsetWidth || 0;
-    context2.onCornerWidthChange(width2);
-    setWidth(width2);
-  });
-  return hasSize ? /* @__PURE__ */ jsxRuntimeExports.jsx(
-    Primitive$1.div,
-    {
-      ...cornerProps,
-      ref: forwardedRef,
-      style: {
-        width,
-        height,
-        position: "absolute",
-        right: context2.dir === "ltr" ? 0 : void 0,
-        left: context2.dir === "rtl" ? 0 : void 0,
-        bottom: 0,
-        ...props.style
-      }
-    }
-  ) : null;
-});
-function toInt(value) {
-  return value ? parseInt(value, 10) : 0;
-}
-function getThumbRatio(viewportSize, contentSize) {
-  const ratio = viewportSize / contentSize;
-  return isNaN(ratio) ? 0 : ratio;
-}
-function getThumbSize(sizes) {
-  const ratio = getThumbRatio(sizes.viewport, sizes.content);
-  const scrollbarPadding = sizes.scrollbar.paddingStart + sizes.scrollbar.paddingEnd;
-  const thumbSize = (sizes.scrollbar.size - scrollbarPadding) * ratio;
-  return Math.max(thumbSize, 18);
-}
-function getScrollPositionFromPointer(pointerPos, pointerOffset, sizes, dir = "ltr") {
-  const thumbSizePx = getThumbSize(sizes);
-  const thumbCenter = thumbSizePx / 2;
-  const offset = pointerOffset || thumbCenter;
-  const thumbOffsetFromEnd = thumbSizePx - offset;
-  const minPointerPos = sizes.scrollbar.paddingStart + offset;
-  const maxPointerPos = sizes.scrollbar.size - sizes.scrollbar.paddingEnd - thumbOffsetFromEnd;
-  const maxScrollPos = sizes.content - sizes.viewport;
-  const scrollRange = dir === "ltr" ? [0, maxScrollPos] : [maxScrollPos * -1, 0];
-  const interpolate2 = linearScale([minPointerPos, maxPointerPos], scrollRange);
-  return interpolate2(pointerPos);
-}
-function getThumbOffsetFromScroll(scrollPos, sizes, dir = "ltr") {
-  const thumbSizePx = getThumbSize(sizes);
-  const scrollbarPadding = sizes.scrollbar.paddingStart + sizes.scrollbar.paddingEnd;
-  const scrollbar = sizes.scrollbar.size - scrollbarPadding;
-  const maxScrollPos = sizes.content - sizes.viewport;
-  const maxThumbPos = scrollbar - thumbSizePx;
-  const scrollClampRange = dir === "ltr" ? [0, maxScrollPos] : [maxScrollPos * -1, 0];
-  const scrollWithoutMomentum = clamp$1(scrollPos, scrollClampRange);
-  const interpolate2 = linearScale([0, maxScrollPos], [0, maxThumbPos]);
-  return interpolate2(scrollWithoutMomentum);
-}
-function linearScale(input, output) {
-  return (value) => {
-    if (input[0] === input[1] || output[0] === output[1]) return output[0];
-    const ratio = (output[1] - output[0]) / (input[1] - input[0]);
-    return output[0] + ratio * (value - input[0]);
-  };
-}
-function isScrollingWithinScrollbarBounds(scrollPos, maxScrollPos) {
-  return scrollPos > 0 && scrollPos < maxScrollPos;
-}
-var addUnlinkedScrollListener = (node, handler = () => {
-}) => {
-  let prevPosition = { left: node.scrollLeft, top: node.scrollTop };
-  let rAF = 0;
-  (function loop() {
-    const position = { left: node.scrollLeft, top: node.scrollTop };
-    const isHorizontalScroll = prevPosition.left !== position.left;
-    const isVerticalScroll = prevPosition.top !== position.top;
-    if (isHorizontalScroll || isVerticalScroll) handler();
-    prevPosition = position;
-    rAF = window.requestAnimationFrame(loop);
-  })();
-  return () => window.cancelAnimationFrame(rAF);
-};
-function useDebounceCallback(callback, delay) {
-  const handleCallback = useCallbackRef$1(callback);
-  const debounceTimerRef = reactExports.useRef(0);
-  reactExports.useEffect(() => () => window.clearTimeout(debounceTimerRef.current), []);
-  return reactExports.useCallback(() => {
-    window.clearTimeout(debounceTimerRef.current);
-    debounceTimerRef.current = window.setTimeout(handleCallback, delay);
-  }, [handleCallback, delay]);
-}
-function useResizeObserver(element, onResize) {
-  const handleResize = useCallbackRef$1(onResize);
-  useLayoutEffect2(() => {
-    let rAF = 0;
-    if (element) {
-      const resizeObserver = new ResizeObserver(() => {
-        cancelAnimationFrame(rAF);
-        rAF = window.requestAnimationFrame(handleResize);
-      });
-      resizeObserver.observe(element);
-      return () => {
-        window.cancelAnimationFrame(rAF);
-        resizeObserver.unobserve(element);
-      };
-    }
-  }, [element, handleResize]);
-}
-var Root$1 = ScrollArea$1;
-var Viewport$1 = ScrollAreaViewport;
-var Corner = ScrollAreaCorner;
-const ScrollArea = reactExports.forwardRef(({ className, children: children2, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-  Root$1,
-  {
-    ref,
-    className: cn("relative overflow-hidden", className),
-    ...props,
-    children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Viewport$1, { className: "h-full w-full rounded-[inherit]", children: children2 }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(ScrollBar, {}),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Corner, {})
-    ]
-  }
-));
-ScrollArea.displayName = Root$1.displayName;
-const ScrollBar = reactExports.forwardRef(({ className, orientation = "vertical", ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-  ScrollAreaScrollbar,
-  {
-    ref,
-    orientation,
-    className: cn(
-      "flex touch-none select-none transition-colors",
-      orientation === "vertical" && "h-full w-2.5 border-l border-l-transparent p-[1px]",
-      orientation === "horizontal" && "h-2.5 flex-col border-t border-t-transparent p-[1px]",
-      className
-    ),
-    ...props,
-    children: /* @__PURE__ */ jsxRuntimeExports.jsx(ScrollAreaThumb, { className: "relative flex-1 rounded-full bg-border" })
-  }
-));
-ScrollBar.displayName = ScrollAreaScrollbar.displayName;
-const API_CONFIG = {
-  BASE_URL: "http://localhost:8000/api",
-  SESSION_KEY: "nexus_session",
-  DEFAULT_PER_PAGE: 15,
-  MAX_PER_PAGE: 100,
-  TIMEOUT: 3e4
-  // 30 seconds
-};
-const PAGINATION_CONFIG = {
-  defaultPage: 1,
-  defaultPerPage: API_CONFIG.DEFAULT_PER_PAGE,
-  pageSizeOptions: [10, 15, 25, 50, 100]
-};
-const getAuthToken = () => {
-  try {
-    if (typeof window === "undefined") return null;
-    const session = localStorage.getItem(API_CONFIG.SESSION_KEY);
-    if (session) {
-      const parsed = JSON.parse(session);
-      return parsed.token || null;
-    }
-  } catch (e) {
-    console.error("Error getting auth token:", e);
-  }
-  return null;
-};
-const getAuthHeaders = (includeContentType = true) => {
-  const token = getAuthToken();
-  const headers = {};
-  if (includeContentType) {
-    headers["Content-Type"] = "application/json";
-  }
-  if (token) {
-    headers["Authorization"] = `Bearer ${token}`;
-  }
-  const appKey = "739f77912fa0ca22538ad067e284545d5cd541a7c13cacebb5e3e4a8fdec9c8";
-  {
-    headers["X-App-Key"] = appKey;
-  }
-  return headers;
-};
-async function apiRequest(endpoint, method = "GET", body, customHeaders) {
-  const isFormData = body instanceof FormData;
-  const isGetRequest = method === "GET";
-  const includeDefaultContentType = !isFormData && !isGetRequest;
-  const headers = {
-    ...getAuthHeaders(includeDefaultContentType),
-    ...customHeaders
-  };
-  const options = {
-    method,
-    headers
-  };
-  if (body) {
-    if (isFormData) {
-      options.body = body;
-    } else {
-      options.body = typeof body === "string" ? body : JSON.stringify(body);
-    }
-  }
-  try {
-    const fullUrl = endpoint.startsWith("http") ? endpoint : `${API_CONFIG.BASE_URL}${endpoint}`;
-    const response = await fetch(fullUrl, options);
-    let data2 = {};
-    const contentType = response.headers.get("content-type");
-    if (contentType && contentType.includes("application/json")) {
-      data2 = await response.json();
-    } else {
-      const text = await response.text();
-      const isHtml = /<[a-z][\s\S]*>/i.test(text);
-      data2 = { message: isHtml ? `Request failed (${response.status})` : text || `Error ${response.status}` };
-    }
-    if (!response.ok) {
-      const firstValidationError = (() => {
-        if (!data2?.errors || typeof data2.errors !== "object") return void 0;
-        const entries = Object.entries(data2.errors);
-        for (const [, value] of entries) {
-          if (Array.isArray(value) && value.length > 0 && typeof value[0] === "string") {
-            return value[0];
-          }
-          if (typeof value === "string" && value.trim()) {
-            return value;
-          }
-        }
-        return void 0;
-      })();
-      return {
-        success: false,
-        message: data2.message || firstValidationError || `Request failed with status ${response.status}`,
-        errors: data2.errors
-      };
-    }
-    const resultData = data2;
-    return {
-      success: true,
-      data: resultData,
-      message: data2.message
-    };
-  } catch (error) {
-    console.error("API Request Error:", error);
-    return {
-      success: false,
-      message: error instanceof Error ? error.message : "Network error occurred"
-    };
-  } finally {
-  }
-}
-const buildQueryString = (params) => {
-  const searchParams = new URLSearchParams();
-  Object.entries(params).forEach(([key, value]) => {
-    if (value !== null && value !== void 0 && value !== "") {
-      searchParams.append(key, String(value));
-    }
-  });
-  const queryString = searchParams.toString();
-  return queryString ? `?${queryString}` : "";
-};
-class BaseService {
-  baseUrl;
-  constructor(baseUrl = API_CONFIG.BASE_URL) {
-    this.baseUrl = baseUrl;
-  }
-  getAuthHeaders(includeContentType = true) {
-    return getAuthHeaders(includeContentType);
-  }
-  async request(endpoint, method = "GET", body, customHeaders) {
-    return apiRequest(endpoint, method, body, customHeaders);
-  }
-  buildUrl(endpoint, params) {
-    const queryString = params ? buildQueryString(params) : "";
-    return `${endpoint}${queryString}`;
-  }
-}
-const supportChatService = {
-  // POST /support/ticket
-  createTicket: async (data2) => {
-    const response = await apiRequest("/support/ticket", "POST", data2);
-    return {
-      success: response.success,
-      message: response.message,
-      data: response.data,
-      errors: response.errors
-    };
-  },
-  // POST /support/ticket/{token}/message
-  sendMessage: async (token, data2) => {
-    const response = await apiRequest(`/support/ticket/${token}/message`, "POST", data2);
-    return {
-      success: response.success,
-      message: response.message,
-      data: response.data,
-      errors: response.errors
-    };
-  },
-  // GET /support/ticket/{token}/messages
-  getMessages: async (token) => {
-    const response = await apiRequest(`/support/ticket/${token}/messages`, "GET");
-    return {
-      success: response.success,
-      message: response.message,
-      data: response.data,
-      errors: response.errors
-    };
-  }
-};
-const ADMIN_SUPPORT_BASE = "/support";
-const adminSupportChatService = {
-  // GET /admin/support/stats
-  getStats: async () => {
-    const response = await apiRequest(`${ADMIN_SUPPORT_BASE}/stats`, "GET");
-    return {
-      success: response.success,
-      message: response.message,
-      data: response.data,
-      errors: response.errors
-    };
-  },
-  // GET /admin/support/tickets
-  getTickets: async (page = 1) => {
-    const response = await apiRequest(`${ADMIN_SUPPORT_BASE}/tickets?page=${page}`, "GET");
-    return {
-      success: response.success,
-      message: response.message,
-      data: response.data,
-      errors: response.errors
-    };
-  },
-  // GET /admin/support/tickets/{id}
-  getTicketById: async (id2) => {
-    const response = await apiRequest(`${ADMIN_SUPPORT_BASE}/tickets/${id2}`, "GET");
-    return {
-      success: response.success,
-      message: response.message,
-      data: response.data,
-      errors: response.errors
-    };
-  },
-  // POST /admin/support/tickets/{id}/reply
-  replyToTicket: async (id2, data2) => {
-    const response = await apiRequest(`${ADMIN_SUPPORT_BASE}/tickets/${id2}/reply`, "POST", data2);
-    return {
-      success: response.success,
-      message: response.message,
-      data: response.data,
-      errors: response.errors
-    };
-  },
-  // PUT /admin/support/tickets/{id}/close
-  closeTicket: async (id2) => {
-    const response = await apiRequest(`${ADMIN_SUPPORT_BASE}/tickets/${id2}/close`, "PUT");
-    return {
-      success: response.success,
-      message: response.message,
-      data: response.data,
-      errors: response.errors
-    };
-  },
-  // PUT /admin/support/tickets/{id}/reopen
-  reopenTicket: async (id2) => {
-    const response = await apiRequest(`${ADMIN_SUPPORT_BASE}/tickets/${id2}/reopen`, "PUT");
-    return {
-      success: response.success,
-      message: response.message,
-      data: response.data,
-      errors: response.errors
-    };
-  },
-  // DELETE /admin/support/tickets/{id}
-  deleteTicket: async (id2) => {
-    const response = await apiRequest(`${ADMIN_SUPPORT_BASE}/tickets/${id2}`, "DELETE");
-    return {
-      success: response.success,
-      message: response.message,
-      data: response.data,
-      errors: response.errors
-    };
-  }
-};
-function SupportChatFloat({
-  autoShowDelay = 6e3,
-  idleHideDelay = 3e4,
-  position = "bottom-right"
-}) {
-  const [isVisible, setIsVisible] = reactExports.useState(false);
-  const [isOpen, setIsOpen] = reactExports.useState(false);
-  const [isMinimized, setIsMinimized] = reactExports.useState(false);
-  const [messageText, setMessageText] = reactExports.useState("");
-  const [messages, setMessages] = reactExports.useState([]);
-  reactExports.useEffect(() => {
-    setMessages([{
-      id: "bot-welcome",
-      content: "Hi there! 👋 Welcome to EdgeLancer Support. Please enter your details to start.",
-      sender: "bot",
-      timestamp: /* @__PURE__ */ new Date(),
-      status: "read"
-    }]);
-  }, []);
-  const [showPreChat, setShowPreChat] = reactExports.useState(true);
-  const [userInfo, setUserInfo] = reactExports.useState({ name: "", email: "", subject: "", message: "" });
-  const [autoShowDisabled, setAutoShowDisabled] = reactExports.useState(false);
-  const [isSubmittingPreChat, setIsSubmittingPreChat] = reactExports.useState(false);
-  const [sessionToken, setSessionToken] = reactExports.useState(null);
-  const [ticketStatus, setTicketStatus] = reactExports.useState("open");
-  const messagesEndRef = reactExports.useRef(null);
-  const idleTimerRef = reactExports.useRef(null);
-  const autoShowTimerRef = reactExports.useRef(null);
-  const pollingTimerRef = reactExports.useRef(null);
-  reactExports.useEffect(() => {
-    const savedToken = localStorage.getItem("edgelancer_support_token");
-    if (savedToken) {
-      setSessionToken(savedToken);
-      setShowPreChat(false);
-      pollMessages(savedToken);
-    }
-  }, []);
-  const toChatMessage = (item, index) => {
-    const senderRaw = String(item.sender_type || item.sender || "").toLowerCase();
-    let mappedSender = "bot";
-    if (senderRaw.includes("user") || senderRaw.includes("customer")) {
-      mappedSender = "user";
-    } else if (senderRaw.includes("agent") || senderRaw.includes("admin")) {
-      mappedSender = "agent";
-    }
-    const content = String(item.message || item.content || "").trim();
-    const tsRaw = item.created_at || item.timestamp;
-    const timestamp = tsRaw ? new Date(tsRaw) : /* @__PURE__ */ new Date();
-    return {
-      id: String(item.id ?? `api-msg-${timestamp.getTime()}-${index}`),
-      content,
-      sender: mappedSender,
-      timestamp,
-      status: mappedSender === "user" ? "read" : "read"
-    };
-  };
-  const pollMessages = async (token) => {
-    if (!token) return;
-    try {
-      const response = await supportChatService.getMessages(token);
-      const resData = response.data || response;
-      if (resData.success) {
-        if (resData.ticket?.status) {
-          setTicketStatus(resData.ticket.status);
-        }
-        const rawMessages = resData.messages || [];
-        const apiMessages = rawMessages.map(toChatMessage).filter((m) => m.content.length > 0);
-        if (apiMessages.length > 0) {
-          setMessages((prev) => {
-            const newMessages = [...prev];
-            apiMessages.forEach((apiMsg) => {
-              const exactMatchIndex = newMessages.findIndex((m) => String(m.id) === String(apiMsg.id));
-              if (exactMatchIndex >= 0) {
-                newMessages[exactMatchIndex] = apiMsg;
-              } else {
-                const optimisticIndex = newMessages.findIndex(
-                  (m) => String(m.id).startsWith("temp-") && m.content === apiMsg.content
-                );
-                if (optimisticIndex >= 0) {
-                  newMessages[optimisticIndex] = apiMsg;
-                } else {
-                  newMessages.push(apiMsg);
-                }
-              }
-            });
-            return newMessages.sort((a, b) => a.timestamp.getTime() - b.timestamp.getTime());
-          });
-        }
-      } else {
-        handleEndSession();
-      }
-    } catch (error) {
-      console.error("Failed to poll messages:", error);
-    }
-  };
-  reactExports.useEffect(() => {
-    if (autoShowDisabled) return;
-    autoShowTimerRef.current = setTimeout(() => setIsVisible(true), autoShowDelay);
-    return () => clearTimeout(autoShowTimerRef.current);
-  }, [autoShowDelay, autoShowDisabled]);
-  reactExports.useEffect(() => {
-    if (!isOpen || isMinimized) return;
-    const resetIdleTimer = () => {
-      if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
-      idleTimerRef.current = setTimeout(() => setIsMinimized(true), idleHideDelay);
-    };
-    resetIdleTimer();
-    const handleActivity = () => resetIdleTimer();
-    window.addEventListener("mousemove", handleActivity);
-    window.addEventListener("keydown", handleActivity);
-    return () => {
-      clearTimeout(idleTimerRef.current);
-      window.removeEventListener("mousemove", handleActivity);
-      window.removeEventListener("keydown", handleActivity);
-    };
-  }, [isOpen, isMinimized, idleHideDelay]);
-  reactExports.useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
-  reactExports.useEffect(() => {
-    if (!sessionToken || showPreChat || ticketStatus === "closed") return;
-    pollingTimerRef.current = setInterval(() => pollMessages(sessionToken), 4e3);
-    return () => clearInterval(pollingTimerRef.current);
-  }, [sessionToken, showPreChat, ticketStatus]);
-  const handlePreChatSubmit = async (e) => {
-    e.preventDefault();
-    if (userInfo.name && userInfo.email && userInfo.message) {
-      setIsSubmittingPreChat(true);
-      try {
-        const response = await supportChatService.createTicket({
-          name: userInfo.name,
-          email: userInfo.email,
-          subject: userInfo.subject || "Support Request",
-          message: userInfo.message
-        });
-        const resData = response.data || response;
-        if (resData.success && resData.session_token) {
-          const token = resData.session_token;
-          setSessionToken(token);
-          localStorage.setItem("edgelancer_support_token", token);
-          setShowPreChat(false);
-          setMessages([{
-            id: `welcome-${Date.now()}`,
-            content: `Ticket created! We've received your message, ${userInfo.name}. An agent will reply shortly.`,
-            sender: "bot",
-            timestamp: /* @__PURE__ */ new Date(),
-            status: "read"
-          }]);
-          await pollMessages(token);
-        } else {
-          throw new Error(resData.message || "Failed to create ticket");
-        }
-      } catch (err) {
-        setMessages((prev) => [...prev, {
-          id: `err-${Date.now()}`,
-          content: err.message || "Sorry, there was an issue connecting. Please try again.",
-          sender: "bot",
-          timestamp: /* @__PURE__ */ new Date(),
-          status: "read"
-        }]);
-      } finally {
-        setIsSubmittingPreChat(false);
-      }
-    }
-  };
-  const handleSendMessage = async () => {
-    if (!messageText.trim() || !sessionToken || ticketStatus === "closed") return;
-    const messageContent = messageText.trim();
-    const tempId = `temp-${Date.now()}`;
-    const newMessage = {
-      id: tempId,
-      content: messageContent,
-      sender: "user",
-      timestamp: /* @__PURE__ */ new Date(),
-      status: "sending"
-    };
-    setMessages((prev) => [...prev, newMessage]);
-    setMessageText("");
-    try {
-      const response = await supportChatService.sendMessage(sessionToken, { message: messageContent });
-      const resData = response.data || response;
-      if (!resData.success) {
-        setMessages((prev) => prev.map((m) => m.id === tempId ? { ...m, status: "sent" } : m));
-        setMessages((prev) => [...prev, {
-          id: `sys-err-${Date.now()}`,
-          content: resData.message || "Message failed. This ticket may be closed.",
-          sender: "bot",
-          timestamp: /* @__PURE__ */ new Date(),
-          status: "read"
-        }]);
-        if (resData.message?.includes("closed")) setTicketStatus("closed");
-      } else {
-        setMessages((prev) => prev.map((m) => m.id === tempId ? { ...m, status: "sent" } : m));
-        await pollMessages(sessionToken);
-      }
-    } catch (error) {
-      setMessages((prev) => [...prev, {
-        id: `sys-err-${Date.now()}`,
-        content: "Network error sending message. Please try again.",
-        sender: "bot",
-        timestamp: /* @__PURE__ */ new Date(),
-        status: "read"
-      }]);
-    }
-  };
-  const handleEndSession = () => {
-    localStorage.removeItem("edgelancer_support_token");
-    setSessionToken(null);
-    setShowPreChat(true);
-    setTicketStatus("open");
-    setUserInfo({ name: "", email: "", subject: "", message: "" });
-    setMessages([{
-      id: "bot-welcome-new",
-      content: "Session ended. Please enter your details to start a new chat.",
-      sender: "bot",
-      timestamp: /* @__PURE__ */ new Date(),
-      status: "read"
-    }]);
-  };
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      handleSendMessage();
-    }
-  };
-  const formatTime = (date) => date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-  const positionClasses = position === "bottom-right" ? "right-4 sm:right-6" : "left-4 sm:left-6";
-  if (!isVisible && !isOpen) return null;
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: cn("fixed bottom-4 sm:bottom-6 z-50", positionClasses), children: [
-    isOpen && !isMinimized && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-4 w-[calc(100vw-2rem)] sm:w-[380px] max-h-[calc(100vh-120px)] bg-nexus-card border border-nexus-border rounded-2xl shadow-2xl overflow-hidden animate-in slide-in-from-bottom-4 duration-300 flex flex-col", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-4 bg-gradient-to-r from-cyan-500 to-purple-500 shrink-0", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-10 h-10 rounded-full bg-white/20 flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Bot, { className: "w-5 h-5 text-white" }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-semibold text-white", children: "EdgeLancer Support" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-1.5", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(Circle, { className: cn("w-2 h-2", ticketStatus === "open" ? "fill-green-400 text-green-400" : "fill-red-400 text-red-400") }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs text-white/80", children: ticketStatus === "open" ? "Online • Ready to help" : "Ticket Closed" })
-            ] })
-          ] })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-1", children: [
-          !showPreChat && /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { size: "icon", variant: "ghost", className: "h-8 w-8 text-white/80 hover:text-white hover:bg-white/20", onClick: handleEndSession, title: "Start New Chat", children: /* @__PURE__ */ jsxRuntimeExports.jsx(RefreshCcw, { className: "w-4 h-4" }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { size: "icon", variant: "ghost", className: "h-8 w-8 text-white/80 hover:text-white hover:bg-white/20", onClick: () => setIsMinimized(true), children: /* @__PURE__ */ jsxRuntimeExports.jsx(Minimize2, { className: "w-4 h-4" }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { size: "icon", variant: "ghost", className: "h-8 w-8 text-white/80 hover:text-white hover:bg-white/20", onClick: () => setIsOpen(false), children: /* @__PURE__ */ jsxRuntimeExports.jsx(X, { className: "w-4 h-4" }) })
-        ] })
-      ] }) }),
-      showPreChat ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-4 flex-1 overflow-y-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { onSubmit: handlePreChatSubmit, className: "space-y-4", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-nexus-muted mb-4", children: "Please provide your details to start the conversation." }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-3", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Input, { placeholder: "Your name", "aria-label": "Your name", value: userInfo.name, onChange: (e) => setUserInfo((prev) => ({ ...prev, name: e.target.value })), className: "bg-nexus-black border-nexus-border", required: true }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Input, { type: "email", placeholder: "Your email", "aria-label": "Your email", value: userInfo.email, onChange: (e) => setUserInfo((prev) => ({ ...prev, email: e.target.value })), className: "bg-nexus-black border-nexus-border", required: true }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Input, { placeholder: "Subject (Optional)", "aria-label": "Subject", value: userInfo.subject, onChange: (e) => setUserInfo((prev) => ({ ...prev, subject: e.target.value })), className: "bg-nexus-black border-nexus-border" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(
-              "textarea",
-              {
-                placeholder: "How can we help you?",
-                "aria-label": "Your message",
-                value: userInfo.message,
-                onChange: (e) => setUserInfo((prev) => ({ ...prev, message: e.target.value })),
-                className: "w-full min-h-[80px] p-3 text-sm rounded-md bg-nexus-black border border-nexus-border focus:outline-none focus:ring-1 focus:ring-cyan-500",
-                required: true
-              }
-            )
-          ] })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { type: "submit", disabled: isSubmittingPreChat, className: "w-full gradient-primary text-white border-0", children: isSubmittingPreChat ? "Connecting..." : "Start Chat" })
-      ] }) }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(ScrollArea, { className: "flex-1 h-[350px] p-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
-          messages.map((message2) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: cn("flex gap-2", message2.sender === "user" ? "flex-row-reverse" : "flex-row"), children: [
-            message2.sender !== "user" && /* @__PURE__ */ jsxRuntimeExports.jsx(Avatar, { className: "w-8 h-8 flex-shrink-0 mt-1", children: /* @__PURE__ */ jsxRuntimeExports.jsx(AvatarFallback, { className: cn(
-              "text-white text-[10px] font-bold",
-              message2.sender === "agent" ? "bg-gradient-to-br from-blue-500 to-indigo-600" : "bg-gradient-to-br from-slate-600 to-slate-800"
-            ), children: message2.sender === "agent" ? "CS" : "SYS" }) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: cn(
-              "max-w-[80%] px-4 py-2",
-              message2.sender === "user" ? "bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-2xl rounded-br-sm" : message2.sender === "agent" ? "bg-nexus-border text-white rounded-2xl rounded-bl-sm" : "bg-transparent border border-nexus-border/50 text-nexus-muted rounded-xl"
-            ), children: [
-              message2.sender === "agent" && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[10px] text-cyan-400 font-medium mb-0.5", children: "Support Agent" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: cn("text-sm whitespace-pre-wrap", message2.sender === "bot" && "text-xs italic"), children: message2.content }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: cn("text-[10px] mt-1 flex items-center gap-1", message2.sender === "user" ? "justify-end text-white/70" : "justify-start text-nexus-muted"), children: [
-                formatTime(message2.timestamp),
-                message2.sender === "user" && message2.status && /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "ml-1 text-[12px]", children: [
-                  message2.status === "sending" && "○",
-                  message2.status === "sent" && "✓",
-                  message2.status === "read" && "✓✓"
-                ] })
-              ] })
-            ] })
-          ] }, message2.id)),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { ref: messagesEndRef, className: "h-1" })
-        ] }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-3 border-t border-nexus-border bg-nexus-card shrink-0", children: ticketStatus === "closed" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center text-xs text-nexus-muted py-2 bg-nexus-black rounded-lg border border-nexus-border", children: [
-          "This conversation has been closed. ",
-          /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: handleEndSession, className: "text-cyan-400 hover:underline", children: "Start a new one" })
-        ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Input, { value: messageText, onChange: (e) => setMessageText(e.target.value), onKeyDown: handleKeyDown, placeholder: "Reply here...", "aria-label": "Chat message", className: "flex-1 h-9 bg-nexus-black border-nexus-border text-sm" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { size: "icon", "aria-label": "Send message", className: "h-9 w-9 gradient-primary text-white border-0", onClick: handleSendMessage, disabled: !messageText.trim(), children: /* @__PURE__ */ jsxRuntimeExports.jsx(Send, { className: "w-4 h-4" }) })
-        ] }) })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "px-4 py-2 bg-nexus-black/80 shrink-0", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-[10px] text-nexus-muted", children: "Powered by EdgeLancer" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "text-[10px] text-nexus-muted hover:text-white transition-colors", onClick: () => setAutoShowDisabled(true), children: "Disable auto-show" })
-      ] }) })
-    ] }),
-    isOpen && isMinimized && /* @__PURE__ */ jsxRuntimeExports.jsxs("button", { onClick: () => setIsMinimized(false), className: "mb-4 flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full shadow-lg hover:shadow-xl transition-all animate-in slide-in-from-bottom-2", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(MessageCircle, { className: "w-4 h-4 text-white" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-medium text-white", children: "Support Chat" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { className: "bg-white/20 text-white border-0 text-xs", children: messages.filter((m) => m.sender === "agent").length })
-    ] }),
-    !isOpen && /* @__PURE__ */ jsxRuntimeExports.jsxs("button", { onClick: () => setIsOpen(true), className: "group relative w-14 h-14 rounded-full bg-gradient-to-r from-cyan-500 to-purple-500 shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 flex items-center justify-center animate-in zoom-in-50", "aria-label": "Open support chat", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(MessageCircle, { className: "w-6 h-6 text-white" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500 to-purple-500 animate-ping opacity-30" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute right-full mr-3 px-3 py-1.5 bg-nexus-card border border-nexus-border rounded-lg text-sm text-white whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none", children: "Need help? Chat with us!" })
-    ] })
-  ] });
-}
-const API_BASE_URL = "http://localhost:8000/api";
-const memoryCache = /* @__PURE__ */ new Map();
-async function serverFetch(endpoint, options = {}) {
-  const url = endpoint.startsWith("http") ? endpoint : `${API_BASE_URL}${endpoint}`;
-  if (memoryCache.has(url)) return memoryCache.get(url);
-  const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json"
-  };
-  const appKey = "739f77912fa0ca22538ad067e284545d5cd541a7c13cacebb5e3e4a8fdec9c8";
-  {
-    headers["X-App-Key"] = appKey;
-  }
-  try {
-    const response = await fetch(url, { headers });
-    if (!response.ok) {
-      throw new Error(`API Status ${response.status}`);
-    }
-    const data2 = await response.json();
-    memoryCache.set(url, data2);
-    return data2;
-  } catch (err) {
-    console.error(`Fetch error for ${url}:`, err);
-    throw err;
-  }
-}
-async function fetchBlogs(page = 1, perPage = 12, search, categorySlug) {
-  const params = new URLSearchParams();
-  params.append("page", page.toString());
-  params.append("per_page", perPage.toString());
-  const data2 = await serverFetch(`/blogs?${params.toString()}`, {});
-  return data2?.data;
-}
-async function fetchWorkflowCategories() {
-  const data2 = await serverFetch("/workflow-library/categories", {});
-  const result = data2?.data;
-  return Array.isArray(result) ? result : result?.data || [];
-}
-async function fetchWorkflowLibrary(page = 1, perPage = 12, search, categoryId) {
-  const params = new URLSearchParams();
-  params.append("page", page.toString());
-  params.append("per_page", perPage.toString());
-  params.append("sort", "newest");
-  const data2 = await serverFetch(`/workflow-library?${params.toString()}`, {});
-  return data2;
-}
-async function fetchWorkflowStats() {
-  const data2 = await serverFetch("/workflows/stats", {});
-  return data2?.data || data2;
-}
-class FAQService extends BaseService {
-  constructor() {
-    super();
-  }
-  async listFAQs(page = PAGINATION_CONFIG.defaultPage, perPage = PAGINATION_CONFIG.defaultPerPage) {
-    const endpoint = this.buildUrl("/admin/faqs", { page, per_page: perPage });
-    const response = await fetch(`${this.baseUrl}${endpoint}`, {
-      headers: this.getAuthHeaders()
-    });
-    if (!response.ok) {
-      throw new Error(`Failed to fetch FAQs: ${response.statusText}`);
-    }
-    return response.json();
-  }
-  async getFAQ(id2) {
-    const response = await fetch(`${this.baseUrl}/admin/faqs/${id2}`, {
-      headers: this.getAuthHeaders()
-    });
-    if (!response.ok) {
-      throw new Error(`Failed to fetch FAQ: ${response.statusText}`);
-    }
-    return response.json();
-  }
-  async createFAQ(data2) {
-    const response = await fetch(`${this.baseUrl}/admin/faqs`, {
-      method: "POST",
-      headers: this.getAuthHeaders(),
-      body: JSON.stringify(data2)
-    });
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || "Failed to create FAQ");
-    }
-    return response.json();
-  }
-  async updateFAQ(id2, data2) {
-    const response = await fetch(`${this.baseUrl}/admin/faqs/${id2}`, {
-      method: "PUT",
-      headers: this.getAuthHeaders(),
-      body: JSON.stringify(data2)
-    });
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || "Failed to update FAQ");
-    }
-    return response.json();
-  }
-  async deleteFAQ(id2) {
-    const response = await fetch(`${this.baseUrl}/admin/faqs/${id2}`, {
-      method: "DELETE",
-      headers: this.getAuthHeaders()
-    });
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || "Failed to delete FAQ");
-    }
-    return response.json();
-  }
-  // Public/Web API endpoints (no authentication required)
-  async getPublicFAQs(type, slug) {
-    const endpoint = this.buildUrl("/web/faqs", { type, slug });
-    const response = await fetch(`${this.baseUrl}${endpoint}`);
-    if (!response.ok) {
-      throw new Error(`Failed to fetch FAQs: ${response.statusText}`);
-    }
-    return response.json();
-  }
-}
-const faqService = new FAQService();
-const FAQSection = ({
-  type = "page",
-  slug = "home",
-  title = "Frequently Asked Questions",
-  className,
-  data: data2
-}) => {
-  const [openIndex, setOpenIndex] = reactExports.useState(0);
-  const [faqs, setFaqs] = reactExports.useState([]);
-  const [isLoading, setIsLoading] = reactExports.useState(!data2);
-  const [error, setError] = reactExports.useState(null);
-  reactExports.useEffect(() => {
-    if (data2) {
-      setFaqs(data2);
-      setIsLoading(false);
-    } else {
-      loadFAQs();
-    }
-  }, [type, slug, data2]);
-  const loadFAQs = async () => {
-    setIsLoading(true);
-    setError(null);
-    try {
-      const response = await faqService.getPublicFAQs(type, slug);
-      if (response.success) {
-        setFaqs(response.data);
-      } else {
-        setFaqs([]);
-      }
-    } catch (err) {
-      console.error("Error loading FAQs:", err);
-      setFaqs([]);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-  if (isLoading) {
-    return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: cn("py-24 px-6 max-w-3xl mx-auto", className), children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-3xl font-bold text-white mb-10 text-center", children: title }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center justify-center py-12", children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "w-8 h-8 animate-spin text-indigo-400" }) })
-    ] });
-  }
-  if (error || faqs.length === 0) {
-    return null;
-  }
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: cn("py-24 px-6 max-w-3xl mx-auto", className), children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-2xl font-bold text-white mb-8 text-center", children: title }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-3", children: faqs.map((faq, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: cn(
-      "border rounded-xl overflow-hidden transition-all duration-300",
-      openIndex === i ? "border-indigo-500/20 bg-indigo-500/[0.04]" : "border-white/[0.06] bg-white/[0.02] hover:border-white/[0.1]"
-    ), children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("button", { onClick: () => setOpenIndex(openIndex === i ? null : i), className: "w-full flex items-center justify-between p-5 text-left gap-4", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-medium text-slate-200 text-[15px] leading-snug", children: faq.question }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: cn(
-          "w-7 h-7 rounded-lg flex items-center justify-center shrink-0 transition-colors",
-          openIndex === i ? "bg-indigo-500/15" : "bg-white/[0.05]"
-        ), children: openIndex === i ? /* @__PURE__ */ jsxRuntimeExports.jsx(Minus, { className: "w-3.5 h-3.5 text-indigo-400" }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { className: "w-3.5 h-3.5 text-slate-500" }) })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: cn(
-        "px-5 text-slate-400 text-sm leading-relaxed overflow-hidden transition-all duration-300 ease-in-out",
-        openIndex === i ? "max-h-60 pb-5 opacity-100" : "max-h-0 opacity-0"
-      ), children: faq.answer })
-    ] }, faq.id)) })
-  ] });
-};
-const adminBlogCategoryService = {
-  // Get all blog categories
-  getAll: async () => {
-    const response = await apiRequest("/admin/blog-categories", "GET");
-    return { success: response.success, message: response.message, data: response.data?.data };
-  },
-  // Create a new blog category
-  create: async (data2) => {
-    const response = await apiRequest("/admin/blog-categories", "POST", data2);
-    return { success: response.success, message: response.message, data: response.data?.data };
-  },
-  // Update a blog category
-  update: async (id2, data2) => {
-    const response = await apiRequest(`/admin/blog-categories/${id2}`, "PUT", data2);
-    return { success: response.success, message: response.message, data: response.data?.data };
-  },
-  // Delete a blog category
-  delete: async (id2) => {
-    const response = await apiRequest(`/admin/blog-categories/${id2}`, "DELETE");
-    return { success: response.success, message: response.message };
-  }
-};
-const adminBlogService = {
-  // Get all blogs with pagination
-  getAll: async (page = 1, perPage = 20) => {
-    const response = await apiRequest(`/admin/blogs?page=${page}&per_page=${perPage}`, "GET");
-    return { success: response.success, message: response.message, data: response.data?.data };
-  },
-  // Get a single blog by ID
-  getById: async (id2) => {
-    const response = await apiRequest(`/admin/blogs/${id2}`, "GET");
-    return { success: response.success, message: response.message, data: response.data?.data };
-  },
-  // Create a new blog
-  create: async (data2) => {
-    const response = await apiRequest("/admin/blogs", "POST", data2);
-    return { success: response.success, message: response.message, data: response.data?.data };
-  },
-  // Create a new blog with image file
-  createWithImage: async (data2, imageFile) => {
-    const formData = new FormData();
-    formData.append("category_id", data2.category_id.toString());
-    formData.append("title", data2.title);
-    formData.append("description", data2.description);
-    formData.append("content", data2.content);
-    formData.append("status", data2.status);
-    formData.append("is_featured", data2.is_featured ? "1" : "0");
-    if (data2.meta_title) formData.append("meta_title", data2.meta_title);
-    if (data2.meta_description) formData.append("meta_description", data2.meta_description);
-    if (data2.meta_keywords) formData.append("meta_keywords", data2.meta_keywords);
-    formData.append("image_url", imageFile);
-    const response = await apiRequest("/admin/blogs", "POST", formData);
-    return { success: response.success, message: response.message, data: response.data?.data };
-  },
-  // Update a blog
-  update: async (id2, data2) => {
-    const response = await apiRequest(`/admin/blogs/${id2}`, "PUT", data2);
-    return { success: response.success, message: response.message, data: response.data?.data };
-  },
-  // Update a blog with image file
-  updateWithImage: async (id2, data2, imageFile) => {
-    const formData = new FormData();
-    if (data2.category_id) formData.append("category_id", data2.category_id.toString());
-    if (data2.title) formData.append("title", data2.title);
-    if (data2.description) formData.append("description", data2.description);
-    if (data2.content) formData.append("content", data2.content);
-    if (data2.status) formData.append("status", data2.status);
-    if (data2.is_featured !== void 0) formData.append("is_featured", data2.is_featured ? "1" : "0");
-    if (data2.meta_title) formData.append("meta_title", data2.meta_title);
-    if (data2.meta_description) formData.append("meta_description", data2.meta_description);
-    if (data2.meta_keywords) formData.append("meta_keywords", data2.meta_keywords);
-    formData.append("image_url", imageFile);
-    formData.append("_method", "PUT");
-    const response = await apiRequest(`/admin/blogs/${id2}`, "POST", formData);
-    return { success: response.success, message: response.message, data: response.data?.data };
-  },
-  // Delete a blog
-  delete: async (id2) => {
-    const response = await apiRequest(`/admin/blogs/${id2}`, "DELETE");
-    return { success: response.success, message: response.message };
-  },
-  // Search blogs
-  search: async (query, filters) => {
-    const params = new URLSearchParams();
-    if (query) params.append("search", query);
-    if (filters?.category_id) params.append("category_id", filters.category_id.toString());
-    if (filters?.status && filters.status !== "all") params.append("status", filters.status);
-    if (filters?.page) params.append("page", filters.page.toString());
-    const response = await apiRequest(`/admin/blogs?${params.toString()}`, "GET");
-    return { success: response.success, message: response.message, data: response.data?.data };
-  }
-};
-const blogService = {
-  // Get all blogs with pagination, search, and category filter
-  getAll: async (page = 1, perPage = 20, search, categorySlug) => {
-    const params = new URLSearchParams();
-    params.append("page", page.toString());
-    params.append("per_page", perPage.toString());
-    if (search) params.append("search", search);
-    if (categorySlug) params.append("category", categorySlug);
-    const response = await apiRequest(`/blogs?${params.toString()}`, "GET");
-    return { success: response.success, message: response.message, data: response.data?.data };
-  },
-  // Get all blog categories
-  getCategories: async () => {
-    const response = await apiRequest("/blogs/categories", "GET");
-    const result = response.data?.data;
-    const arrayData = Array.isArray(result) ? result : result?.data || [];
-    return { success: response.success, message: response.message, data: arrayData };
-  },
-  // Get a single blog by slug
-  getBySlug: async (slug) => {
-    const response = await apiRequest(`/blogs/${slug}`, "GET");
-    return { success: response.success, message: response.message, data: response.data?.data };
-  },
-  // Get blog by slug with SEO payload preserved
-  getBySlugWithSeo: async (slug) => {
-    const response = await apiRequest(`/blogs/${slug}`);
-    return { success: response.success, message: response.message, data: response.data ? { blog: response.data.data, seo: response.data.seo } : void 0 };
-  },
-  // Get a single blog by ID
-  getById: async (id2) => {
-    const response = await apiRequest(`/blogs/${id2}`, "GET");
-    return { success: response.success, message: response.message, data: response.data?.data };
-  },
-  // Search blogs
-  search: async (query, filters) => {
-    const params = new URLSearchParams();
-    if (query) params.append("search", query);
-    if (filters?.category_id) params.append("category_id", filters.category_id.toString());
-    if (filters?.status && filters.status !== "all") params.append("status", filters.status);
-    if (filters?.page) params.append("page", filters.page.toString());
-    const response = await apiRequest(`/blogs?${params.toString()}`, "GET");
-    return { success: response.success, message: response.message, data: response.data?.data };
-  },
-  // Get related blogs
-  getRelatedBlogs: async (slug) => {
-    const response = await apiRequest(`/blogs/${slug}/related`);
-    return { success: response.success, message: response.message, data: response.data?.data };
-  },
-  // Get related workflows for a blog
-  getRelatedWorkflows: async (slug) => {
-    const response = await apiRequest(`/blogs/${slug}/related-workflows`);
-    return { success: response.success, message: response.message, data: response.data?.data };
-  }
-};
-class WorkflowService {
-  // Headers are now handled centrally in apiRequest
-  /**
-   * GET /admin/workflows - List all workflows with pagination
-   */
-  async listWorkflows(page = 1, perPage = 20) {
-    const response = await apiRequest(`/admin/workflows?page=${page}&per_page=${perPage}`);
-    if (!response.success) throw new Error(response.message);
-    return { success: true, data: response.data };
-  }
-  /**
-   * POST /admin/workflows - Create a new workflow
-   * Accepts JSON object OR FormData
-   */
-  async createWorkflow(payload) {
-    const response = await apiRequest("/admin/workflows", "POST", payload);
-    if (!response.success) throw new Error(response.message);
-    const dataPayload = response.data.data || response.data;
-    return { success: true, data: dataPayload };
-  }
-  /**
-   * GET /admin/workflows/:id - Get a specific workflow by ID
-   */
-  async getWorkflow(id2) {
-    const response = await apiRequest(`/admin/workflows/${id2}`);
-    if (!response.success) throw new Error(response.message);
-    const dataPayload = response.data.data || response.data;
-    return { success: true, data: dataPayload };
-  }
-  /**
-   * PUT /admin/workflows/:id - Update a specific workflow
-   * Accepts JSON object OR FormData
-   */
-  async updateWorkflow(id2, payload) {
-    const response = await apiRequest(`/admin/workflows/${id2}`, "PUT", payload);
-    if (!response.success) throw new Error(response.message);
-    const dataPayload = response.data.data || response.data;
-    return { success: true, data: dataPayload };
-  }
-  /**
-   * DELETE /admin/workflows/:id - Delete a specific workflow
-   */
-  async deleteWorkflow(id2) {
-    const response = await apiRequest(`/admin/workflows/${id2}`, "DELETE");
-    if (!response.success) throw new Error(response.message);
-    return response.data.data || response.data;
-  }
-  /**
-   * GET /admin/workflow-categories - List all workflow categories
-   */
-  async listCategories() {
-    const response = await apiRequest("/admin/workflow-categories");
-    if (!response.success) throw new Error(response.message);
-    return { success: true, data: response.data?.data };
-  }
-  /**
-   * GET /admin/workflow-categories/:id - Get a specific category by ID
-   */
-  async getCategory(id2) {
-    const response = await apiRequest(`/admin/workflow-categories/${id2}`);
-    if (!response.success) throw new Error(response.message);
-    return { success: true, data: response.data?.data };
-  }
-  /**
-   * POST /admin/workflow-categories - Create a new category
-   */
-  async createCategory(payload) {
-    const response = await apiRequest("/admin/workflow-categories", "POST", payload);
-    if (!response.success) throw new Error(response.message);
-    return { success: true, data: response.data?.data };
-  }
-  /**
-   * PUT /admin/workflow-categories/:id - Update a specific category
-   */
-  async updateCategory(id2, payload) {
-    const response = await apiRequest(`/admin/workflow-categories/${id2}`, "PUT", payload);
-    if (!response.success) throw new Error(response.message);
-    return { success: true, data: response.data?.data };
-  }
-  /**
-   * DELETE /admin/workflow-categories/:id - Delete a specific category
-   */
-  async deleteCategory(id2) {
-    const response = await apiRequest(`/admin/workflow-categories/${id2}`, "DELETE");
-    if (!response.success) throw new Error(response.message);
-    return response.data;
-  }
-  /**
-   * GET /workflow-library - Get public workflow library with pagination
-   */
-  async getWorkflowLibrary(page = 1, perPage = 12, search = "", categoryId = null, sort = "newest") {
-    const params = { page, per_page: perPage, sort };
-    if (search) params.search = search;
-    if (categoryId) params.category_id = categoryId;
-    const response = await apiRequest(`/workflow-library${buildQueryString(params)}`);
-    if (!response.success) throw new Error(response.message);
-    return response.data;
-  }
-  /**
-   * GET /workflows/stats - Get workflow statistics
-   */
-  async getWorkflowStats() {
-    const response = await apiRequest("/workflows/stats");
-    if (!response.success) throw new Error(response.message);
-    return { success: true, data: response.data?.data || response.data };
-  }
-  /**
-   * GET /workflow-library/categories - Get public workflow categories
-   */
-  async getWorkflowLibraryCategories() {
-    const response = await apiRequest("/workflow-library/categories");
-    if (!response.success) throw new Error(response.message);
-    const result = response.data?.data;
-    const arrayData = Array.isArray(result) ? result : result?.data || [];
-    return { success: true, data: arrayData };
-  }
-  /**
-   * GET /workflow-library/:slug - Get a specific workflow by slug
-   */
-  async getWorkflowBySlug(slug) {
-    const response = await apiRequest(`/workflow-library/${slug}`);
-    if (!response.success) throw new Error(response.message);
-    const raw = response.data;
-    const payload = raw?.data ?? raw;
-    return {
-      success: true,
-      data: payload,
-      seo: payload?.seo || raw?.seo || null
-    };
-  }
-  /**
-   * GET /workflows/file/:name - Get workflow JSON file by filename
-   */
-  async getWorkflowJsonFile(fileName, jsonFilePath) {
-    if (jsonFilePath && (jsonFilePath.startsWith("http") || jsonFilePath.startsWith("https"))) {
-      try {
-        console.log(`Fetching from json_file_path: ${jsonFilePath}`);
-        const response = await fetch(jsonFilePath, {
-          headers: {
-            "x-app-key": "739f77912fa0ca22538ad067e284545d5cd541a7c13cacebb5e3e4a8fdec9c8"
-          }
-        });
-        if (response.ok) {
-          return await response.json();
-        }
-        throw new Error(`HTTP error! status: ${response.status}`);
-      } catch (error) {
-        console.warn(`Error fetching from json_file_path (${jsonFilePath}):`, error);
-        if (fileName) {
-          try {
-            console.log(`Falling back to API with fileName: ${fileName}`);
-            const url = fileName.startsWith("http") || fileName.startsWith("/") ? fileName : `/workflows/file/${fileName}`;
-            const apiResponse = await apiRequest(url);
-            if (!apiResponse.success) {
-              throw new Error(apiResponse.message);
-            }
-            return apiResponse.data;
-          } catch (fallbackError) {
-            console.error(`Fallback to API also failed for ${fileName}:`, fallbackError);
-            throw fallbackError;
-          }
-        }
-        throw error;
-      }
-    }
-    if (fileName) {
-      try {
-        const url = fileName.startsWith("http") || fileName.startsWith("/") ? fileName : `/workflows/file/${fileName}`;
-        const response = await apiRequest(url);
-        if (!response.success) {
-          throw new Error(response.message);
-        }
-        return response.data;
-      } catch (error) {
-        console.error(`Error fetching from API (${fileName}):`, error);
-        throw error;
-      }
-    }
-    throw new Error("No file name or path provided");
-  }
-  /**
-   * GET /workflow-library/:slug/related - Get related workflows by slug
-   */
-  async getRelatedWorkflows(slug) {
-    const response = await apiRequest(`/workflow/${slug}/related`);
-    if (!response.success) throw new Error(response.message);
-    const raw = response.data;
-    const related = raw?.related_workflows || raw?.data?.related_workflows || raw?.data || [];
-    return {
-      success: true,
-      data: Array.isArray(related) ? related : []
-    };
-  }
-  /**
-   * POST /workflow/:slug/reviews - Submit a review
-   */
-  async submitReview(slug, data2) {
-    const response = await apiRequest(`/workflow/${slug}/reviews`, "POST", data2);
-    return { success: response.success, message: response.message || "", data: response.data };
-  }
-  /**
-   * GET /workflow/:slug/related-blogs - Get relevant blogs by workflow slug
-   */
-  async getRelatedBlogs(slug) {
-    const response = await apiRequest(`/workflow/${slug}/related-blogs`);
-    if (!response.success) throw new Error(response.message);
-    const raw = response.data;
-    const blogs = raw?.data || raw?.related_blogs || [];
-    return {
-      success: true,
-      data: Array.isArray(blogs) ? blogs : []
-    };
-  }
-}
-const workflowService = new WorkflowService();
-const PublicFooter = () => {
-  const [workflowCategories, setWorkflowCategories] = reactExports.useState([]);
-  const [blogCategories, setBlogCategories] = reactExports.useState(() => {
-    return [
-      { id: 1, title: "n8n Guides", slug: "n8n-guides" },
-      { id: 2, title: "AI Automation", slug: "ai-automation" },
-      { id: 3, title: "CRM Integration", slug: "crm-integration" },
-      { id: 4, title: "Web Scraping", slug: "web-scraping" }
-    ];
-  });
-  const [loading, setLoading] = reactExports.useState(true);
-  reactExports.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [wfRes, blogRes] = await Promise.all([
-          workflowService.getWorkflowLibraryCategories(),
-          blogService.getCategories()
-        ]);
-        if (wfRes.success && wfRes.data) {
-          setWorkflowCategories(wfRes.data.slice(0, 4));
-        }
-        if (blogRes.success && blogRes.data) {
-          setBlogCategories(blogRes.data.slice(0, 4));
-        }
-      } catch (error) {
-        console.error("Failed to fetch footer categories:", error);
-      }
-    };
-    fetchData().finally(() => setLoading(false));
-  }, []);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("footer", { className: "relative bg-[#050508] border-t border-white/5 overflow-hidden", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute -top-24 left-1/4 w-64 h-64 bg-purple-600/10 blur-[100px] rounded-full" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-1 md:grid-cols-12 gap-12 mb-12", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "md:col-span-3 space-y-6", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs(distExports.Link, { to: "/", className: "flex items-center gap-2 group cursor-pointer", title: "EdgeLancer - Back to Top", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: "/favicon.png", alt: "EdgeLancer Logo", width: 40, height: 40, className: "object-contain group-hover:scale-105 transition-transform duration-300" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(
-              "span",
-              {
-                className: "text-1xl md:text-1xl font-black tracking-widest uppercase bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-indigo-500 to-purple-600 drop-shadow-[0_0_15px_rgba(168,85,247,0.5)]",
-                style: { fontFamily: "'Orbitron', sans-serif" },
-                children: "EdgeLancer"
-              }
-            ),
-            "            "
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-gray-400 text-sm leading-relaxed", children: "Empowering the next generation of creators with autonomous AI workflows. Join the neural revolution." }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex gap-4", children: [
-            { Icon: Twitter, label: "Twitter", href: "https://x.com/edgelancern8n" },
-            { Icon: Github, label: "GitHub", href: "https://github.com/edgelancer" },
-            { Icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/edgelancer" },
-            { Icon: Mail, label: "Email", href: "mailto:contact@edgelancer.com" }
-          ].map((item, i) => /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: item.href, className: "p-2 rounded-lg bg-white/5 border border-white/10 text-gray-400 hover:text-cyan-400 hover:border-cyan-400/50 hover:bg-cyan-400/5 transition-all", "aria-label": item.label, title: `Follow us on ${item.label}`, children: /* @__PURE__ */ jsxRuntimeExports.jsx(item.Icon, { className: "w-5 h-5" }) }, i)) })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "md:col-span-2", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-white font-medium mb-6", children: "Platform" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-4", children: [
-            { label: "Home", href: "/" },
-            { label: "Workflows", href: "/workflows" },
-            { label: "Templates", href: "/templates" },
-            { label: "Blog", href: "/blogs" }
-          ].map((item) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(distExports.Link, { to: item.href, className: "text-gray-400 hover:text-white flex items-center group transition-colors", title: `Go to ${item.label}`, children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "w-0 group-hover:w-2 h-px bg-indigo-500 mr-0 group-hover:mr-2 transition-all duration-300" }),
-            item.label
-          ] }) }, item.label)) })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "md:col-span-2", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-white font-medium mb-6", children: "Resources" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-4", children: blogCategories.length > 0 ? blogCategories.map((item) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(distExports.Link, { to: `/blogs?category=${item.slug}`, className: "text-gray-400 hover:text-white flex items-center group transition-colors", title: `Browse ${item.title} blogs`, children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "w-0 group-hover:w-2 h-px bg-purple-500 mr-0 group-hover:mr-2 transition-all duration-300" }),
-            item.title
-          ] }) }, item.id)) : loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("li", { className: "text-gray-400 text-sm italic", children: "Loading..." }) : /* @__PURE__ */ jsxRuntimeExports.jsx("li", { className: "text-gray-500 text-sm italic", children: "Coming soon..." }) })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "md:col-span-3 space-y-6", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-white font-medium", children: "Get Product Updates" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative group", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(
-              "input",
-              {
-                type: "email",
-                placeholder: "Enter your email",
-                "aria-label": "Email address for newsletter",
-                className: "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50 transition-all placeholder:text-gray-600"
-              }
-            ),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "absolute right-2 top-2 bottom-2 px-3 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors flex items-center justify-center", "aria-label": "Subscribe to updates", children: /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowRight, { className: "w-4 h-4" }) })
-          ] })
-        ] })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-gray-400", children: [
-          "© ",
-          (/* @__PURE__ */ new Date()).getFullYear(),
-          " EdgeLancer  Built for the future."
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex gap-6 text-xs text-gray-400 items-center", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: "mailto:contact@edgelancer.com", className: "hover:text-cyan-400 transition-colors flex items-center gap-1", title: "Email us at contact@edgelancer.com", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Mail, { className: "w-3.5 h-3.5" }),
-            "contact@edgelancer.com"
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Link, { to: "/sitemap", className: "hover:text-white transition-colors", title: "View Site Structure", children: "Sitemap" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Link, { to: "/contact", className: "hover:text-white transition-colors", title: "Get in touch with us", children: "Contact" })
-        ] })
-      ] })
-    ] })
-  ] });
-};
-const navItems = [
-  { label: "Home", to: "/", title: "Go to Home" },
-  { label: "Workflows", to: "/workflows", title: "Browse Workflow Templates" },
-  { label: "Categories", to: "/workflows", title: "Browse by Niche" },
-  { label: "Templates", to: "/templates", title: "View Template Library" },
-  { label: "Courses", to: "/courses", title: "Browse our Expert Courses" },
-  { label: "Blogs", to: "/blogs", title: "Read our latest Blog Posts" },
-  { label: "Contact", to: "/contact", title: "Contact Us" }
-];
-function PublicNavbar() {
-  const { pathname } = distExports.useLocation();
-  const [isScrolled, setIsScrolled] = reactExports.useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = reactExports.useState(false);
-  const [mobileCategoryOpen, setMobileCategoryOpen] = reactExports.useState(false);
-  const [dynamicNavItems, setDynamicNavItems] = reactExports.useState(navItems);
-  const categoryIcons = [
-    BarChart3,
-    Bot,
-    Box,
-    Cpu,
-    FileCode,
-    FileJson,
-    GitBranch,
-    Globe,
-    Mail,
-    MessageSquare,
-    Share2,
-    ShieldCheck,
-    Terminal,
-    Users,
-    Workflow,
-    Zap
-  ];
-  const getRandomIcon = () => categoryIcons[Math.floor(Math.random() * categoryIcons.length)] || Box;
-  reactExports.useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await workflowService.getWorkflowLibraryCategories();
-        if (response.success && response.data) {
-          const categories = response.data;
-          const topCategories = categories.slice(0, 6).map((cat) => ({
-            label: cat.title,
-            to: `/workflows?category=${cat.slug}`,
-            title: `Explore ${cat.title} workflows`,
-            description: cat.badge_text || `Browse our ${cat.title} templates`,
-            icon: getRandomIcon()
-          }));
-          if (categories.length > 6) {
-            topCategories.push({
-              label: "View All Categories",
-              to: "/workflows",
-              title: "View all workflow categories",
-              description: "Explore all of our available categories",
-              icon: ArrowRight
-            });
-          }
-          setDynamicNavItems((prev) => prev.map((item) => {
-            if (item.label === "Categories") {
-              return { ...item, children: topCategories };
-            }
-            return item;
-          }));
-        }
-      } catch (error) {
-        console.error("Failed to fetch nav categories:", error);
-      }
-    };
-    fetchCategories();
-  }, []);
-  const [hoveredIndex, setHoveredIndex] = reactExports.useState(null);
-  const [activeIndex, setActiveIndex] = reactExports.useState(null);
-  const [hoverStyle, setHoverStyle] = reactExports.useState({});
-  const navRef = reactExports.useRef(null);
-  reactExports.useEffect(() => {
-    const handleScroll2 = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll2);
-    return () => window.removeEventListener("scroll", handleScroll2);
-  }, []);
-  reactExports.useEffect(() => {
-    const idx = dynamicNavItems.findIndex(
-      (item) => item.to === pathname || item.children && item.children.some((child) => child.to === pathname)
-    );
-    setActiveIndex(idx !== -1 ? idx : null);
-  }, [pathname, dynamicNavItems]);
-  reactExports.useEffect(() => {
-    if (mobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-    return () => {
-      document.body.style.overflow = "unset";
-    };
-  }, [mobileMenuOpen]);
-  const handleMouseEnter = (index, e) => {
-    setHoveredIndex(index);
-    const rect = e.currentTarget.getBoundingClientRect();
-    const navRect = navRef.current?.getBoundingClientRect();
-    if (navRect) {
-      setHoverStyle({
-        width: `${rect.width}px`,
-        transform: `translateX(${rect.left - navRect.left}px)`,
-        opacity: 1
-      });
-    }
-  };
-  const handleMouseLeave = () => {
-    setHoveredIndex(null);
-    setHoverStyle((prev) => ({ ...prev, opacity: 0 }));
-  };
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "nav",
-      {
-        className: cn(
-          "fixed z-50 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]",
-          "md:top-5 md:inset-x-0 md:max-w-6xl md:mx-auto md:rounded-2xl",
-          "top-0 inset-x-0 w-full border-b md:border",
-          isScrolled || mobileMenuOpen ? "bg-[#050507]/80 backdrop-blur-xl border-white/10 shadow-[0_8px_40px_-12px_rgba(0,0,0,0.8)]" : "bg-transparent border-transparent md:bg-[#050507]/40 md:backdrop-blur-md md:border-white/5"
-        ),
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "h-16 md:h-14 px-4 flex items-center justify-between", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            distExports.Link,
-            {
-              to: "/",
-              className: "flex items-center gap-3 group relative z-20",
-              title: "EdgeLancer Home",
-              onClick: () => setMobileMenuOpen(false),
-              children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-                "img",
-                {
-                  src: "/favicon.png",
-                  alt: "Logo",
-                  width: 80,
-                  height: 80,
-                  className: "w-20 h-20 object-contain group-hover:scale-105 transition-transform duration-300"
-                }
-              )
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs(
-            "div",
-            {
-              ref: navRef,
-              className: "hidden md:flex relative items-center bg-white/5 rounded-full p-1 border border-white/5 shadow-inner",
-              onMouseLeave: handleMouseLeave,
-              children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  "div",
-                  {
-                    className: "absolute top-1 bottom-1 left-0 bg-white/10 rounded-full transition-all duration-300 ease-out pointer-events-none",
-                    style: hoverStyle
-                  }
-                ),
-                dynamicNavItems.map((item, index) => {
-                  const isDropdown = !!item.children;
-                  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative group/dropdown h-full flex items-center", children: [
-                    isDropdown ? /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                      distExports.Link,
-                      {
-                        to: item.to,
-                        className: cn(
-                          "relative z-10 px-4 py-1.5 text-sm font-medium transition-colors duration-200 flex items-center gap-1 outline-none h-full",
-                          hoveredIndex === index ? "text-white" : "text-slate-400"
-                        ),
-                        onMouseEnter: (e) => handleMouseEnter(index, e),
-                        children: [
-                          item.label,
-                          /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronDown, { className: "w-3 h-3 mt-0.5 group-hover/dropdown:rotate-180 transition-transform duration-300" })
-                        ]
-                      }
-                    ) : /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                      distExports.Link,
-                      {
-                        to: item.to,
-                        className: cn(
-                          "relative z-10 px-4 py-1.5 text-sm font-medium transition-colors duration-200 block h-full flex items-center",
-                          activeIndex === index ? "text-white" : "text-slate-400 hover:text-white"
-                        ),
-                        onMouseEnter: (e) => handleMouseEnter(index, e),
-                        children: [
-                          item.label,
-                          activeIndex === index && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-indigo-400 rounded-full shadow-[0_0_8px_currentColor]" })
-                        ]
-                      }
-                    ),
-                    isDropdown && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute top-full left-1/2 -translate-x-1/2 pt-2 invisible opacity-0 translate-y-1 group-hover/dropdown:visible group-hover/dropdown:opacity-100 group-hover/dropdown:translate-y-0 transition-all duration-500 ease-out delay-200 group-hover/dropdown:delay-0", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-[600px] p-4 rounded-2xl border border-white/10 bg-[#0a0a0c]/95 backdrop-blur-2xl shadow-2xl grid grid-cols-2 gap-2", children: item.children?.map((child, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                      distExports.Link,
-                      {
-                        to: child.to,
-                        className: "flex items-start gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors group/item",
-                        children: [
-                          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-10 h-10 rounded-lg bg-white/5 border border-white/5 flex items-center justify-center text-slate-400 group-hover/item:text-indigo-400 group-hover/item:border-indigo-500/30 transition-all", children: /* @__PURE__ */ jsxRuntimeExports.jsx(child.icon, { className: "w-5 h-5" }) }),
-                          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-sm font-medium text-slate-200 group-hover/item:text-white", children: child.label }),
-                            child.description && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-xs text-slate-400 group-hover/item:text-slate-300", children: child.description })
-                          ] })
-                        ]
-                      },
-                      i
-                    )) }) })
-                  ] }, item.label);
-                })
-              ]
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs(distExports.Link, { to: "/contact", className: "hidden md:block group relative", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute -inset-1 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 opacity-20 blur-lg transition-all duration-500 group-hover:opacity-50 group-hover:blur-xl" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative overflow-hidden rounded-full p-[1px] transition-transform duration-300 active:scale-95", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute inset-[-1000%] animate-[spin_4s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)] group-hover:animate-[spin_2s_linear_infinite]" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs(Button, { className: "relative h-9 rounded-full bg-slate-950/90 backdrop-blur-sm px-6 text-sm font-semibold text-white transition-all duration-300 group-hover:bg-slate-900/90", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-50" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "relative flex items-center gap-2 bg-gradient-to-b from-white to-white/70 bg-clip-text text-transparent", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "tracking-wide", children: "Hire Us" }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowRight, { className: "w-3.5 h-3.5 text-indigo-400 transition-transform duration-300 group-hover:translate-x-1" })
-                  ] })
-                ] })
-              ] })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(
-              "button",
-              {
-                onClick: () => setMobileMenuOpen(!mobileMenuOpen),
-                className: "md:hidden relative z-50 p-2 text-slate-300 hover:text-white transition-colors",
-                children: mobileMenuOpen ? /* @__PURE__ */ jsxRuntimeExports.jsx(X, { className: "w-6 h-6" }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Menu, { className: "w-6 h-6" })
-              }
-            )
-          ] })
-        ] })
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs(
-      "div",
-      {
-        className: cn(
-          "fixed inset-0 z-40 bg-[#050507] md:hidden flex flex-col pt-24 px-6 transition-all duration-300 ease-in-out overflow-y-auto",
-          mobileMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"
-        ),
-        children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-col gap-2", children: dynamicNavItems.map((item, idx) => /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border-b border-white/5 last:border-0 pb-2", children: item.children ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs(
-              "button",
-              {
-                onClick: () => setMobileCategoryOpen(!mobileCategoryOpen),
-                className: "w-full group flex items-center justify-between p-4 rounded-xl hover:bg-white/5 transition-all text-left",
-                children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-lg font-medium text-slate-300 group-hover:text-white", children: item.label }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronDown, { className: cn("w-5 h-5 text-slate-600 transition-transform duration-300", mobileCategoryOpen ? "rotate-180 text-indigo-400" : "") })
-                ]
-              }
-            ),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: cn("overflow-hidden transition-all duration-300 px-4 space-y-1", mobileCategoryOpen ? "max-h-[500px] opacity-100 pb-4" : "max-h-0 opacity-0"), children: item.children.map((child, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-              distExports.Link,
-              {
-                to: child.to,
-                onClick: () => setMobileMenuOpen(false),
-                className: "flex items-center gap-3 p-3 rounded-lg text-slate-400 hover:text-white hover:bg-white/5",
-                children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(child.icon, { className: "w-4 h-4 text-indigo-400" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm", children: child.label })
-                ]
-              },
-              i
-            )) })
-          ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(
-            distExports.Link,
-            {
-              to: item.to,
-              onClick: () => setMobileMenuOpen(false),
-              className: "group flex items-center justify-between p-4 rounded-xl hover:bg-white/5 transition-all",
-              children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-lg font-medium text-slate-300 group-hover:text-white", children: item.label }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronRight, { className: "w-5 h-5 text-slate-600 group-hover:text-indigo-400 transition-colors" })
-              ]
-            }
-          ) }, item.label)) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-8 pb-10 space-y-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Link, { to: "/contact", onClick: () => setMobileMenuOpen(false), children: /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { className: "w-full h-12 text-base bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-900/20 rounded-xl", children: "Hire Us" }) }) })
-        ]
-      }
-    )
-  ] });
-}
-const SpotlightCard$1 = ({ children: children2, className = "", onClick }) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-  "div",
-  {
-    onClick,
-    className: `relative rounded-2xl border border-white/10 bg-[#12121a] backdrop-blur-xl hover:border-white/20 transition-all duration-300 cursor-pointer flex flex-col group overflow-hidden ${className}`,
-    children: children2
-  }
-);
-const iconPool = [
-  Zap,
-  Bot,
-  GitBranch,
-  Layers,
-  LayoutGrid,
-  Workflow,
-  Mail,
-  MessageSquare,
-  Globe,
-  Database,
-  FileText,
-  Share2,
-  Smartphone,
-  Cpu,
-  BarChart,
-  Settings,
-  Bell,
-  Cloud,
-  Code
-];
-const gradientPool = [
-  "from-purple-500 to-indigo-500",
-  "from-cyan-500 to-blue-500",
-  "from-fuchsia-500 to-pink-500",
-  "from-emerald-500 to-teal-500",
-  "from-orange-500 to-red-500",
-  "from-blue-400 to-indigo-600"
-];
-const getWorkflowVisuals = (id2, index = 0) => {
-  const safeId = id2 || index;
-  const Icon2 = iconPool[safeId % iconPool.length];
-  const gradient = gradientPool[safeId % gradientPool.length];
-  return { Icon: Icon2, gradient };
-};
-const ProductionTemplates = ({
-  initialWorkflows = [],
-  initialCategories = []
-}) => {
-  const navigate = distExports.useNavigate();
-  const [workflows, setWorkflows] = reactExports.useState(initialWorkflows);
-  const [categories, setCategories] = reactExports.useState(initialCategories);
-  const [activeCategory, setActiveCategory] = reactExports.useState(null);
-  const [searchQuery, setSearchQuery] = reactExports.useState("");
-  const [loading, setLoading] = reactExports.useState(initialWorkflows.length === 0);
-  const [hasLoadedInitial, setHasLoadedInitial] = reactExports.useState(initialWorkflows.length > 0);
-  reactExports.useEffect(() => {
-    if (initialCategories.length > 0) return;
-    workflowService.getWorkflowLibraryCategories().then((res) => {
-      if (res?.data) {
-        setCategories(res.data);
-      }
-    }).catch((error) => console.error("Error loading workflow categories:", error));
-  }, [initialCategories.length]);
-  reactExports.useEffect(() => {
-    if (hasLoadedInitial) {
-      setHasLoadedInitial(false);
-      return;
-    }
-    const fetchWorkflows = async () => {
-      try {
-        setLoading(true);
-        const templatesRes = await workflowService.getWorkflowLibrary(1, 12, searchQuery, activeCategory);
-        if (templatesRes?.data) {
-          setWorkflows(templatesRes.data);
-        } else {
-          setWorkflows([]);
-        }
-      } catch (error) {
-        console.error("Error loading workflow templates:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    const delayDebounceFn = setTimeout(() => {
-      fetchWorkflows();
-    }, 400);
-    return () => clearTimeout(delayDebounceFn);
-  }, [searchQuery, activeCategory]);
-  const handleViewDetails = (slug) => {
-    navigate(`/workflow/${slug}`);
-  };
-  const filteredWorkflows = workflows.filter((wf) => {
-    const matchesCategory = activeCategory === null || Number(wf.category_id) === Number(activeCategory);
-    const query = searchQuery.toLowerCase();
-    const matchesSearch = !searchQuery || wf.title && wf.title.toLowerCase().includes(query) || wf.description && wf.description.toLowerCase().includes(query);
-    return matchesCategory && matchesSearch;
-  });
-  const visibleCategories = categories.slice(0, 8);
-  if (loading) {
-    return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "relative py-24 px-6 bg-[#050505] min-h-screen font-sans text-slate-300 overflow-hidden", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-purple-900/20 blur-[120px] rounded-full pointer-events-none z-0 mix-blend-screen" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-7xl mx-auto flex items-center justify-center h-screen relative z-10", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col items-center gap-4", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Loader, { className: "w-8 h-8 animate-spin text-purple-500" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-slate-400", children: "Loading templates..." })
-      ] }) })
-    ] });
-  }
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "relative py-24 px-6 bg-[#050505] min-h-screen font-sans text-slate-300 overflow-hidden", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-purple-900/20 blur-[120px] rounded-full pointer-events-none z-0 mix-blend-screen" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-7xl mx-auto relative z-10", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col md:flex-row md:items-end justify-between mb-12 gap-8 border-b border-white/5 pb-8", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-purple-400 font-mono text-xs font-semibold uppercase tracking-wider mb-2", children: "Marketplace" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-4xl font-bold text-white tracking-tight mb-4", children: [
-            "Production ",
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-400", children: "Templates" })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-slate-400 max-w-xl text-lg leading-relaxed", children: "Deploy battle-tested automation architectures. Clone, configure, and run in seconds." })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative w-full md:w-80 group", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-gradient-to-r from-purple-500/10 to-indigo-500/10 rounded-xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Search, { className: "absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(
-              "input",
-              {
-                type: "text",
-                placeholder: "Search templates...",
-                value: searchQuery,
-                onChange: (e) => setSearchQuery(e.target.value),
-                className: "w-full pl-12 pr-4 py-3 rounded-xl border border-slate-800 bg-[#0a0a0a] text-white placeholder-slate-600 focus:outline-none focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 transition-all shadow-xl"
-              }
-            )
-          ] })
-        ] })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-10", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center justify-between mb-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("h3", { className: "text-sm font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-2", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Filter, { className: "w-4 h-4" }),
-          "Categories"
-        ] }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex gap-2 flex-wrap transition-all duration-300", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "button",
-            {
-              onClick: () => {
-                setActiveCategory(null);
-                setSearchQuery("");
-              },
-              className: `flex-shrink-0 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 border ${activeCategory === null ? "bg-purple-500/10 border-purple-500/50 text-purple-300 shadow-[0_0_15px_rgba(168,85,247,0.2)]" : "bg-transparent border-slate-800 text-slate-400 hover:text-slate-300 hover:border-slate-700"}`,
-              children: "All Templates"
-            }
-          ),
-          visibleCategories.map((cat) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "button",
-            {
-              onClick: () => {
-                setActiveCategory(cat.id);
-                setSearchQuery("");
-              },
-              className: `flex-shrink-0 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 border ${activeCategory === cat.id ? "bg-purple-500/10 border-purple-500/50 text-purple-300 shadow-[0_0_15px_rgba(168,85,247,0.2)]" : "bg-transparent border-slate-800 text-slate-400 hover:text-slate-300 hover:border-slate-700"}`,
-              children: cat.title
-            },
-            cat.id
-          ))
-        ] })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6", children: filteredWorkflows.map((workflow, index) => {
-        const { Icon: Icon2, gradient } = getWorkflowVisuals(workflow.id, index);
-        return /* @__PURE__ */ jsxRuntimeExports.jsx(
-          SpotlightCard$1,
-          {
-            className: "h-full",
-            onClick: () => handleViewDetails(workflow.slug),
-            children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-6 flex flex-col h-full", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start justify-between mb-4", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `w-12 h-12 rounded-xl bg-gradient-to-br ${gradient} flex items-center justify-center shadow-lg shadow-black/20 flex-shrink-0`, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon2, { className: "w-6 h-6 text-white" }) }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 flex-wrap justify-end", children: [
-                  Number(workflow.price) === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500/20 transition-colors", children: "Free" }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold border border-white/10 text-gray-300", children: [
-                    "$",
-                    workflow.price
-                  ] }),
-                  workflow.rating && /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-500 border border-amber-500/20", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(Star, { className: "w-3 h-3 fill-current" }),
-                    workflow.rating
-                  ] })
-                ] })
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-4 flex-grow", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg font-semibold text-white mb-2 group-hover:text-cyan-400 transition-colors line-clamp-1", children: workflow.title }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-gray-400 line-clamp-2", children: workflow.description })
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap gap-2 mb-6", children: [
-                workflow.category && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "inline-flex items-center px-2.5 py-0.5 rounded-full border border-white/10 text-gray-400 text-xs font-normal", children: workflow.category.title }),
-                workflow.nodes_count > 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full border border-white/10 text-gray-400 text-xs font-normal", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(LayoutGrid, { className: "w-3 h-3" }),
-                  workflow.nodes_count,
-                  " Nodes"
-                ] }),
-                workflow.difficulty && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "inline-flex items-center px-2.5 py-0.5 rounded-full border border-white/10 text-gray-400 text-xs font-normal capitalize", children: workflow.difficulty }),
-                workflow.time_saved_value && /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full border border-cyan-500/20 text-cyan-400 text-xs font-normal", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(Clock, { className: "w-3 h-3" }),
-                  workflow.time_saved_value,
-                  " ",
-                  workflow.time_saved_unit
-                ] })
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between pt-4 border-t border-white/5 mt-auto", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 text-xs text-gray-400", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(Eye, { className: "w-4 h-4" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
-                    workflow.views?.toLocaleString() || workflow.user_count?.toLocaleString() || 0,
-                    " views"
-                  ] })
-                ] }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  "button",
-                  {
-                    onClick: (e) => {
-                      e.stopPropagation();
-                      handleViewDetails(workflow.slug);
-                    },
-                    className: "px-4 py-1.5 text-sm rounded-md bg-gradient-to-r from-cyan-500 to-fuchsia-500 text-white font-medium hover:opacity-90 transition-opacity border-0 shadow-lg",
-                    children: "Download"
-                  }
-                )
-              ] })
-            ] })
-          },
-          workflow.id
-        );
-      }) }),
-      filteredWorkflows.length === 0 && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-center py-12 border border-white/5 rounded-2xl bg-[#12121a] mt-8", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-slate-400 text-lg", children: "No templates found matching your criteria." }) })
-    ] })
-  ] });
-};
-const SpotlightCard = ({ children: children2, className, spotlightColor = "rgba(99, 102, 241, 0.15)", onClick }) => {
-  const divRef = reactExports.useRef(null);
-  const [position, setPosition] = reactExports.useState({ x: 0, y: 0 });
-  const [opacity, setOpacity] = reactExports.useState(0);
-  const handleMouseMove = (e) => {
-    if (!divRef.current) return;
-    const rect = divRef.current.getBoundingClientRect();
-    setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-  };
-  const handleMouseEnter = () => setOpacity(1);
-  const handleMouseLeave = () => setOpacity(0);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
-    "div",
-    {
-      ref: divRef,
-      onMouseMove: handleMouseMove,
-      onMouseEnter: handleMouseEnter,
-      onMouseLeave: handleMouseLeave,
-      onClick,
-      className: cn(
-        "relative overflow-hidden rounded-xl border border-slate-800 bg-[#0e0f14] text-slate-200 transition-all duration-300",
-        className
-      ),
-      children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "div",
-          {
-            className: "pointer-events-none absolute -inset-px opacity-0 transition-opacity duration-300 z-10",
-            style: {
-              opacity,
-              background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, ${spotlightColor}, transparent 40%)`
-            }
-          }
-        ),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "relative z-20 h-full", children: children2 })
-      ]
-    }
-  );
-};
-const BentoGrid = () => /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "py-16 md:py-32 px-4 md:px-6", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-7xl mx-auto", children: [
-  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-12 md:mb-20 max-w-3xl", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-3xl md:text-4xl font-bold text-white mb-4 md:mb-6", children: [
-      "How to Setup ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-indigo-500", children: "n8n on Local System." })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-base md:text-lg text-slate-400", children: "If you are looking for the best workflow automation tool, learning how to setup n8n on local system is a game-changer. Experience complete privacy, zero limits, and total control." })
-  ] }),
-  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 auto-rows-auto md:auto-rows-[300px]", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs(SpotlightCard, { className: "md:col-span-2 md:row-span-2 p-6 md:p-10 flex flex-col justify-between group h-full", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative z-10", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-12 h-12 md:w-14 md:h-14 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center mb-6 text-indigo-400", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Terminal, { className: "w-6 h-6 md:w-7 md:h-7" }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-2xl md:text-3xl font-bold text-white mb-4", children: "Complete Local Installation" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-slate-400 max-w-md text-base md:text-lg mb-4", children: "Unlike cloud-only solutions, a local n8n installation gives you complete privacy, zero limits, and total control over your data." }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-slate-400 max-w-md text-base md:text-lg", children: [
-          "In this comprehensive guide, we'll walk you through the complete ",
-          /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "n8n local setup" }),
-          " process step-by-step to get your automation environment running perfectly."
-        ] })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-8 w-full h-48 bg-black/50 rounded-lg border border-white/10 p-4 font-mono text-xs md:text-sm overflow-hidden relative", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-gradient-to-b from-transparent to-black/80 z-10" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-2 text-slate-400", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400", children: "$" }),
-            " npx n8n"
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: "➜  Downloading packages..." }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-white", title: "n8n local host url", children: "✔  n8n ready on http://localhost:5689" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400", children: "Press 'O'" }),
-            " to open in browser"
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-            "[20:14:02] INFO: ",
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: "Editor initialized perfectly" })
-          ] })
-        ] })
-      ] })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs(SpotlightCard, { className: "p-6 md:p-8 flex flex-col justify-end group min-h-[250px]", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Settings, { className: "w-8 h-8 md:w-10 md:h-10 text-pink-500 mb-6" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg md:text-xl font-bold text-white mb-2", children: "Prerequisites" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { className: "text-sm md:text-base text-slate-400 list-disc pl-4 space-y-1", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Node.js (v18 or later)" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "npm (Package Manager)" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
-          "Docker (optional for ",
-          /* @__PURE__ */ jsxRuntimeExports.jsx("em", { children: "n8n docker setup" }),
-          ")"
-        ] })
-      ] })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs(SpotlightCard, { className: "p-6 md:p-8 flex flex-col justify-end group min-h-[250px]", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Zap, { className: "w-8 h-8 md:w-10 md:h-10 text-emerald-500 mb-6" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg md:text-xl font-bold text-white mb-2", children: "Method 1: npm (Fastest)" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm md:text-base text-slate-400 mb-4", children: "The quickest way to start automating locally today:" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("code", { className: "text-xs bg-black/50 p-2 rounded text-emerald-400 border border-emerald-500/20", children: "npx n8n" })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(SpotlightCard, { className: "md:col-span-2 p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-8 group", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 overflow-hidden", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Server, { className: "w-8 h-8 md:w-10 md:h-10 text-blue-500 mb-6" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg md:text-xl font-bold text-white mb-2", children: "Method 2: Docker Deployment" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm md:text-base text-slate-400 mb-4", children: [
-        "For robust ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "n8n automation local deployment" }),
-        ", Docker is the industry standard. It encapsulates dependencies perfectly and ensures a stable environment."
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("code", { className: "text-xs md:text-sm bg-black/50 p-3 rounded text-blue-400 border border-blue-500/20 block overflow-x-auto whitespace-nowrap", children: "docker run -it --rm --name n8n -p 5689:5689 -v ~/.n8n:/home/node/.n8n n8nio/n8n" })
-    ] }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs(SpotlightCard, { className: "p-6 md:p-8 flex flex-col justify-center bg-indigo-600/10 border-indigo-500/30 min-h-[250px]", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(ShieldCheck, { className: "w-8 h-8 md:w-10 md:h-10 text-indigo-400 mb-6" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg md:text-xl font-bold text-white mb-2", children: "Why Local Setup?" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm md:text-base text-indigo-200", children: "Mastering local installation provides unparalleled benefits: workflow privacy, custom nodes, no rate limits, and zero recurring cloud costs for your system." })
-    ] })
-  ] })
-] }) });
-function toDate(argument) {
-  const argStr = Object.prototype.toString.call(argument);
-  if (argument instanceof Date || typeof argument === "object" && argStr === "[object Date]") {
-    return new argument.constructor(+argument);
-  } else if (typeof argument === "number" || argStr === "[object Number]" || typeof argument === "string" || argStr === "[object String]") {
-    return new Date(argument);
-  } else {
-    return /* @__PURE__ */ new Date(NaN);
-  }
-}
-function constructFrom(date, value) {
-  if (date instanceof Date) {
-    return new date.constructor(value);
-  } else {
-    return new Date(value);
-  }
-}
-const millisecondsInWeek = 6048e5;
-const millisecondsInDay = 864e5;
-const minutesInMonth = 43200;
-const minutesInDay = 1440;
-let defaultOptions$1 = {};
-function getDefaultOptions() {
-  return defaultOptions$1;
-}
-function startOfWeek(date, options) {
-  const defaultOptions2 = getDefaultOptions();
-  const weekStartsOn = options?.weekStartsOn ?? options?.locale?.options?.weekStartsOn ?? defaultOptions2.weekStartsOn ?? defaultOptions2.locale?.options?.weekStartsOn ?? 0;
-  const _date = toDate(date);
-  const day = _date.getDay();
-  const diff = (day < weekStartsOn ? 7 : 0) + day - weekStartsOn;
-  _date.setDate(_date.getDate() - diff);
-  _date.setHours(0, 0, 0, 0);
-  return _date;
-}
-function startOfISOWeek(date) {
-  return startOfWeek(date, { weekStartsOn: 1 });
-}
-function getISOWeekYear(date) {
-  const _date = toDate(date);
-  const year = _date.getFullYear();
-  const fourthOfJanuaryOfNextYear = constructFrom(date, 0);
-  fourthOfJanuaryOfNextYear.setFullYear(year + 1, 0, 4);
-  fourthOfJanuaryOfNextYear.setHours(0, 0, 0, 0);
-  const startOfNextYear = startOfISOWeek(fourthOfJanuaryOfNextYear);
-  const fourthOfJanuaryOfThisYear = constructFrom(date, 0);
-  fourthOfJanuaryOfThisYear.setFullYear(year, 0, 4);
-  fourthOfJanuaryOfThisYear.setHours(0, 0, 0, 0);
-  const startOfThisYear = startOfISOWeek(fourthOfJanuaryOfThisYear);
-  if (_date.getTime() >= startOfNextYear.getTime()) {
-    return year + 1;
-  } else if (_date.getTime() >= startOfThisYear.getTime()) {
-    return year;
-  } else {
-    return year - 1;
-  }
-}
-function startOfDay(date) {
-  const _date = toDate(date);
-  _date.setHours(0, 0, 0, 0);
-  return _date;
-}
-function getTimezoneOffsetInMilliseconds(date) {
-  const _date = toDate(date);
-  const utcDate = new Date(
-    Date.UTC(
-      _date.getFullYear(),
-      _date.getMonth(),
-      _date.getDate(),
-      _date.getHours(),
-      _date.getMinutes(),
-      _date.getSeconds(),
-      _date.getMilliseconds()
-    )
-  );
-  utcDate.setUTCFullYear(_date.getFullYear());
-  return +date - +utcDate;
-}
-function differenceInCalendarDays(dateLeft, dateRight) {
-  const startOfDayLeft = startOfDay(dateLeft);
-  const startOfDayRight = startOfDay(dateRight);
-  const timestampLeft = +startOfDayLeft - getTimezoneOffsetInMilliseconds(startOfDayLeft);
-  const timestampRight = +startOfDayRight - getTimezoneOffsetInMilliseconds(startOfDayRight);
-  return Math.round((timestampLeft - timestampRight) / millisecondsInDay);
-}
-function startOfISOWeekYear(date) {
-  const year = getISOWeekYear(date);
-  const fourthOfJanuary = constructFrom(date, 0);
-  fourthOfJanuary.setFullYear(year, 0, 4);
-  fourthOfJanuary.setHours(0, 0, 0, 0);
-  return startOfISOWeek(fourthOfJanuary);
-}
-function compareAsc(dateLeft, dateRight) {
-  const _dateLeft = toDate(dateLeft);
-  const _dateRight = toDate(dateRight);
-  const diff = _dateLeft.getTime() - _dateRight.getTime();
-  if (diff < 0) {
-    return -1;
-  } else if (diff > 0) {
-    return 1;
-  } else {
-    return diff;
-  }
-}
-function constructNow(date) {
-  return constructFrom(date, Date.now());
-}
-function isDate(value) {
-  return value instanceof Date || typeof value === "object" && Object.prototype.toString.call(value) === "[object Date]";
-}
-function isValid(date) {
-  if (!isDate(date) && typeof date !== "number") {
-    return false;
-  }
-  const _date = toDate(date);
-  return !isNaN(Number(_date));
-}
-function differenceInCalendarMonths(dateLeft, dateRight) {
-  const _dateLeft = toDate(dateLeft);
-  const _dateRight = toDate(dateRight);
-  const yearDiff = _dateLeft.getFullYear() - _dateRight.getFullYear();
-  const monthDiff = _dateLeft.getMonth() - _dateRight.getMonth();
-  return yearDiff * 12 + monthDiff;
-}
-function getRoundingMethod(method) {
-  return (number) => {
-    const round = method ? Math[method] : Math.trunc;
-    const result = round(number);
-    return result === 0 ? 0 : result;
-  };
-}
-function differenceInMilliseconds(dateLeft, dateRight) {
-  return +toDate(dateLeft) - +toDate(dateRight);
-}
-function endOfDay(date) {
-  const _date = toDate(date);
-  _date.setHours(23, 59, 59, 999);
-  return _date;
-}
-function endOfMonth(date) {
-  const _date = toDate(date);
-  const month = _date.getMonth();
-  _date.setFullYear(_date.getFullYear(), month + 1, 0);
-  _date.setHours(23, 59, 59, 999);
-  return _date;
-}
-function isLastDayOfMonth(date) {
-  const _date = toDate(date);
-  return +endOfDay(_date) === +endOfMonth(_date);
-}
-function differenceInMonths(dateLeft, dateRight) {
-  const _dateLeft = toDate(dateLeft);
-  const _dateRight = toDate(dateRight);
-  const sign2 = compareAsc(_dateLeft, _dateRight);
-  const difference = Math.abs(
-    differenceInCalendarMonths(_dateLeft, _dateRight)
-  );
-  let result;
-  if (difference < 1) {
-    result = 0;
-  } else {
-    if (_dateLeft.getMonth() === 1 && _dateLeft.getDate() > 27) {
-      _dateLeft.setDate(30);
-    }
-    _dateLeft.setMonth(_dateLeft.getMonth() - sign2 * difference);
-    let isLastMonthNotFull = compareAsc(_dateLeft, _dateRight) === -sign2;
-    if (isLastDayOfMonth(toDate(dateLeft)) && difference === 1 && compareAsc(dateLeft, _dateRight) === 1) {
-      isLastMonthNotFull = false;
-    }
-    result = sign2 * (difference - Number(isLastMonthNotFull));
-  }
-  return result === 0 ? 0 : result;
-}
-function differenceInSeconds(dateLeft, dateRight, options) {
-  const diff = differenceInMilliseconds(dateLeft, dateRight) / 1e3;
-  return getRoundingMethod(options?.roundingMethod)(diff);
-}
-function startOfYear(date) {
-  const cleanDate = toDate(date);
-  const _date = constructFrom(date, 0);
-  _date.setFullYear(cleanDate.getFullYear(), 0, 1);
-  _date.setHours(0, 0, 0, 0);
-  return _date;
-}
-const formatDistanceLocale = {
-  lessThanXSeconds: {
-    one: "less than a second",
-    other: "less than {{count}} seconds"
-  },
-  xSeconds: {
-    one: "1 second",
-    other: "{{count}} seconds"
-  },
-  halfAMinute: "half a minute",
-  lessThanXMinutes: {
-    one: "less than a minute",
-    other: "less than {{count}} minutes"
-  },
-  xMinutes: {
-    one: "1 minute",
-    other: "{{count}} minutes"
-  },
-  aboutXHours: {
-    one: "about 1 hour",
-    other: "about {{count}} hours"
-  },
-  xHours: {
-    one: "1 hour",
-    other: "{{count}} hours"
-  },
-  xDays: {
-    one: "1 day",
-    other: "{{count}} days"
-  },
-  aboutXWeeks: {
-    one: "about 1 week",
-    other: "about {{count}} weeks"
-  },
-  xWeeks: {
-    one: "1 week",
-    other: "{{count}} weeks"
-  },
-  aboutXMonths: {
-    one: "about 1 month",
-    other: "about {{count}} months"
-  },
-  xMonths: {
-    one: "1 month",
-    other: "{{count}} months"
-  },
-  aboutXYears: {
-    one: "about 1 year",
-    other: "about {{count}} years"
-  },
-  xYears: {
-    one: "1 year",
-    other: "{{count}} years"
-  },
-  overXYears: {
-    one: "over 1 year",
-    other: "over {{count}} years"
-  },
-  almostXYears: {
-    one: "almost 1 year",
-    other: "almost {{count}} years"
-  }
-};
-const formatDistance$1 = (token, count2, options) => {
-  let result;
-  const tokenValue = formatDistanceLocale[token];
-  if (typeof tokenValue === "string") {
-    result = tokenValue;
-  } else if (count2 === 1) {
-    result = tokenValue.one;
-  } else {
-    result = tokenValue.other.replace("{{count}}", count2.toString());
-  }
-  if (options?.addSuffix) {
-    if (options.comparison && options.comparison > 0) {
-      return "in " + result;
-    } else {
-      return result + " ago";
-    }
-  }
-  return result;
-};
-function buildFormatLongFn(args) {
-  return (options = {}) => {
-    const width = options.width ? String(options.width) : args.defaultWidth;
-    const format2 = args.formats[width] || args.formats[args.defaultWidth];
-    return format2;
-  };
-}
-const dateFormats = {
-  full: "EEEE, MMMM do, y",
-  long: "MMMM do, y",
-  medium: "MMM d, y",
-  short: "MM/dd/yyyy"
-};
-const timeFormats = {
-  full: "h:mm:ss a zzzz",
-  long: "h:mm:ss a z",
-  medium: "h:mm:ss a",
-  short: "h:mm a"
-};
-const dateTimeFormats = {
-  full: "{{date}} 'at' {{time}}",
-  long: "{{date}} 'at' {{time}}",
-  medium: "{{date}}, {{time}}",
-  short: "{{date}}, {{time}}"
-};
-const formatLong = {
-  date: buildFormatLongFn({
-    formats: dateFormats,
-    defaultWidth: "full"
-  }),
-  time: buildFormatLongFn({
-    formats: timeFormats,
-    defaultWidth: "full"
-  }),
-  dateTime: buildFormatLongFn({
-    formats: dateTimeFormats,
-    defaultWidth: "full"
-  })
-};
-const formatRelativeLocale = {
-  lastWeek: "'last' eeee 'at' p",
-  yesterday: "'yesterday at' p",
-  today: "'today at' p",
-  tomorrow: "'tomorrow at' p",
-  nextWeek: "eeee 'at' p",
-  other: "P"
-};
-const formatRelative = (token, _date, _baseDate, _options) => formatRelativeLocale[token];
-function buildLocalizeFn(args) {
-  return (value, options) => {
-    const context2 = options?.context ? String(options.context) : "standalone";
-    let valuesArray;
-    if (context2 === "formatting" && args.formattingValues) {
-      const defaultWidth2 = args.defaultFormattingWidth || args.defaultWidth;
-      const width = options?.width ? String(options.width) : defaultWidth2;
-      valuesArray = args.formattingValues[width] || args.formattingValues[defaultWidth2];
-    } else {
-      const defaultWidth2 = args.defaultWidth;
-      const width = options?.width ? String(options.width) : args.defaultWidth;
-      valuesArray = args.values[width] || args.values[defaultWidth2];
-    }
-    const index = args.argumentCallback ? args.argumentCallback(value) : value;
-    return valuesArray[index];
-  };
-}
-const eraValues = {
-  narrow: ["B", "A"],
-  abbreviated: ["BC", "AD"],
-  wide: ["Before Christ", "Anno Domini"]
-};
-const quarterValues = {
-  narrow: ["1", "2", "3", "4"],
-  abbreviated: ["Q1", "Q2", "Q3", "Q4"],
-  wide: ["1st quarter", "2nd quarter", "3rd quarter", "4th quarter"]
-};
-const monthValues = {
-  narrow: ["J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"],
-  abbreviated: [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec"
-  ],
-  wide: [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December"
-  ]
-};
-const dayValues = {
-  narrow: ["S", "M", "T", "W", "T", "F", "S"],
-  short: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
-  abbreviated: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-  wide: [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday"
-  ]
-};
-const dayPeriodValues = {
-  narrow: {
-    am: "a",
-    pm: "p",
-    midnight: "mi",
-    noon: "n",
-    morning: "morning",
-    afternoon: "afternoon",
-    evening: "evening",
-    night: "night"
-  },
-  abbreviated: {
-    am: "AM",
-    pm: "PM",
-    midnight: "midnight",
-    noon: "noon",
-    morning: "morning",
-    afternoon: "afternoon",
-    evening: "evening",
-    night: "night"
-  },
-  wide: {
-    am: "a.m.",
-    pm: "p.m.",
-    midnight: "midnight",
-    noon: "noon",
-    morning: "morning",
-    afternoon: "afternoon",
-    evening: "evening",
-    night: "night"
-  }
-};
-const formattingDayPeriodValues = {
-  narrow: {
-    am: "a",
-    pm: "p",
-    midnight: "mi",
-    noon: "n",
-    morning: "in the morning",
-    afternoon: "in the afternoon",
-    evening: "in the evening",
-    night: "at night"
-  },
-  abbreviated: {
-    am: "AM",
-    pm: "PM",
-    midnight: "midnight",
-    noon: "noon",
-    morning: "in the morning",
-    afternoon: "in the afternoon",
-    evening: "in the evening",
-    night: "at night"
-  },
-  wide: {
-    am: "a.m.",
-    pm: "p.m.",
-    midnight: "midnight",
-    noon: "noon",
-    morning: "in the morning",
-    afternoon: "in the afternoon",
-    evening: "in the evening",
-    night: "at night"
-  }
-};
-const ordinalNumber = (dirtyNumber, _options) => {
-  const number = Number(dirtyNumber);
-  const rem100 = number % 100;
-  if (rem100 > 20 || rem100 < 10) {
-    switch (rem100 % 10) {
-      case 1:
-        return number + "st";
-      case 2:
-        return number + "nd";
-      case 3:
-        return number + "rd";
-    }
-  }
-  return number + "th";
-};
-const localize = {
-  ordinalNumber,
-  era: buildLocalizeFn({
-    values: eraValues,
-    defaultWidth: "wide"
-  }),
-  quarter: buildLocalizeFn({
-    values: quarterValues,
-    defaultWidth: "wide",
-    argumentCallback: (quarter) => quarter - 1
-  }),
-  month: buildLocalizeFn({
-    values: monthValues,
-    defaultWidth: "wide"
-  }),
-  day: buildLocalizeFn({
-    values: dayValues,
-    defaultWidth: "wide"
-  }),
-  dayPeriod: buildLocalizeFn({
-    values: dayPeriodValues,
-    defaultWidth: "wide",
-    formattingValues: formattingDayPeriodValues,
-    defaultFormattingWidth: "wide"
-  })
-};
-function buildMatchFn(args) {
-  return (string, options = {}) => {
-    const width = options.width;
-    const matchPattern = width && args.matchPatterns[width] || args.matchPatterns[args.defaultMatchWidth];
-    const matchResult = string.match(matchPattern);
-    if (!matchResult) {
-      return null;
-    }
-    const matchedString = matchResult[0];
-    const parsePatterns = width && args.parsePatterns[width] || args.parsePatterns[args.defaultParseWidth];
-    const key = Array.isArray(parsePatterns) ? findIndex(parsePatterns, (pattern) => pattern.test(matchedString)) : (
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- I challange you to fix the type
-      findKey(parsePatterns, (pattern) => pattern.test(matchedString))
-    );
-    let value;
-    value = args.valueCallback ? args.valueCallback(key) : key;
-    value = options.valueCallback ? (
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- I challange you to fix the type
-      options.valueCallback(value)
-    ) : value;
-    const rest = string.slice(matchedString.length);
-    return { value, rest };
-  };
-}
-function findKey(object, predicate) {
-  for (const key in object) {
-    if (Object.prototype.hasOwnProperty.call(object, key) && predicate(object[key])) {
-      return key;
-    }
-  }
-  return void 0;
-}
-function findIndex(array2, predicate) {
-  for (let key = 0; key < array2.length; key++) {
-    if (predicate(array2[key])) {
-      return key;
-    }
-  }
-  return void 0;
-}
-function buildMatchPatternFn(args) {
-  return (string, options = {}) => {
-    const matchResult = string.match(args.matchPattern);
-    if (!matchResult) return null;
-    const matchedString = matchResult[0];
-    const parseResult = string.match(args.parsePattern);
-    if (!parseResult) return null;
-    let value = args.valueCallback ? args.valueCallback(parseResult[0]) : parseResult[0];
-    value = options.valueCallback ? options.valueCallback(value) : value;
-    const rest = string.slice(matchedString.length);
-    return { value, rest };
-  };
-}
-const matchOrdinalNumberPattern = /^(\d+)(th|st|nd|rd)?/i;
-const parseOrdinalNumberPattern = /\d+/i;
-const matchEraPatterns = {
-  narrow: /^(b|a)/i,
-  abbreviated: /^(b\.?\s?c\.?|b\.?\s?c\.?\s?e\.?|a\.?\s?d\.?|c\.?\s?e\.?)/i,
-  wide: /^(before christ|before common era|anno domini|common era)/i
-};
-const parseEraPatterns = {
-  any: [/^b/i, /^(a|c)/i]
-};
-const matchQuarterPatterns = {
-  narrow: /^[1234]/i,
-  abbreviated: /^q[1234]/i,
-  wide: /^[1234](th|st|nd|rd)? quarter/i
-};
-const parseQuarterPatterns = {
-  any: [/1/i, /2/i, /3/i, /4/i]
-};
-const matchMonthPatterns = {
-  narrow: /^[jfmasond]/i,
-  abbreviated: /^(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)/i,
-  wide: /^(january|february|march|april|may|june|july|august|september|october|november|december)/i
-};
-const parseMonthPatterns = {
-  narrow: [
-    /^j/i,
-    /^f/i,
-    /^m/i,
-    /^a/i,
-    /^m/i,
-    /^j/i,
-    /^j/i,
-    /^a/i,
-    /^s/i,
-    /^o/i,
-    /^n/i,
-    /^d/i
-  ],
-  any: [
-    /^ja/i,
-    /^f/i,
-    /^mar/i,
-    /^ap/i,
-    /^may/i,
-    /^jun/i,
-    /^jul/i,
-    /^au/i,
-    /^s/i,
-    /^o/i,
-    /^n/i,
-    /^d/i
-  ]
-};
-const matchDayPatterns = {
-  narrow: /^[smtwf]/i,
-  short: /^(su|mo|tu|we|th|fr|sa)/i,
-  abbreviated: /^(sun|mon|tue|wed|thu|fri|sat)/i,
-  wide: /^(sunday|monday|tuesday|wednesday|thursday|friday|saturday)/i
-};
-const parseDayPatterns = {
-  narrow: [/^s/i, /^m/i, /^t/i, /^w/i, /^t/i, /^f/i, /^s/i],
-  any: [/^su/i, /^m/i, /^tu/i, /^w/i, /^th/i, /^f/i, /^sa/i]
-};
-const matchDayPeriodPatterns = {
-  narrow: /^(a|p|mi|n|(in the|at) (morning|afternoon|evening|night))/i,
-  any: /^([ap]\.?\s?m\.?|midnight|noon|(in the|at) (morning|afternoon|evening|night))/i
-};
-const parseDayPeriodPatterns = {
-  any: {
-    am: /^a/i,
-    pm: /^p/i,
-    midnight: /^mi/i,
-    noon: /^no/i,
-    morning: /morning/i,
-    afternoon: /afternoon/i,
-    evening: /evening/i,
-    night: /night/i
-  }
-};
-const match = {
-  ordinalNumber: buildMatchPatternFn({
-    matchPattern: matchOrdinalNumberPattern,
-    parsePattern: parseOrdinalNumberPattern,
-    valueCallback: (value) => parseInt(value, 10)
-  }),
-  era: buildMatchFn({
-    matchPatterns: matchEraPatterns,
-    defaultMatchWidth: "wide",
-    parsePatterns: parseEraPatterns,
-    defaultParseWidth: "any"
-  }),
-  quarter: buildMatchFn({
-    matchPatterns: matchQuarterPatterns,
-    defaultMatchWidth: "wide",
-    parsePatterns: parseQuarterPatterns,
-    defaultParseWidth: "any",
-    valueCallback: (index) => index + 1
-  }),
-  month: buildMatchFn({
-    matchPatterns: matchMonthPatterns,
-    defaultMatchWidth: "wide",
-    parsePatterns: parseMonthPatterns,
-    defaultParseWidth: "any"
-  }),
-  day: buildMatchFn({
-    matchPatterns: matchDayPatterns,
-    defaultMatchWidth: "wide",
-    parsePatterns: parseDayPatterns,
-    defaultParseWidth: "any"
-  }),
-  dayPeriod: buildMatchFn({
-    matchPatterns: matchDayPeriodPatterns,
-    defaultMatchWidth: "any",
-    parsePatterns: parseDayPeriodPatterns,
-    defaultParseWidth: "any"
-  })
-};
-const enUS = {
-  code: "en-US",
-  formatDistance: formatDistance$1,
-  formatLong,
-  formatRelative,
-  localize,
-  match,
-  options: {
-    weekStartsOn: 0,
-    firstWeekContainsDate: 1
-  }
-};
-function getDayOfYear(date) {
-  const _date = toDate(date);
-  const diff = differenceInCalendarDays(_date, startOfYear(_date));
-  const dayOfYear = diff + 1;
-  return dayOfYear;
-}
-function getISOWeek(date) {
-  const _date = toDate(date);
-  const diff = +startOfISOWeek(_date) - +startOfISOWeekYear(_date);
-  return Math.round(diff / millisecondsInWeek) + 1;
-}
-function getWeekYear(date, options) {
-  const _date = toDate(date);
-  const year = _date.getFullYear();
-  const defaultOptions2 = getDefaultOptions();
-  const firstWeekContainsDate = options?.firstWeekContainsDate ?? options?.locale?.options?.firstWeekContainsDate ?? defaultOptions2.firstWeekContainsDate ?? defaultOptions2.locale?.options?.firstWeekContainsDate ?? 1;
-  const firstWeekOfNextYear = constructFrom(date, 0);
-  firstWeekOfNextYear.setFullYear(year + 1, 0, firstWeekContainsDate);
-  firstWeekOfNextYear.setHours(0, 0, 0, 0);
-  const startOfNextYear = startOfWeek(firstWeekOfNextYear, options);
-  const firstWeekOfThisYear = constructFrom(date, 0);
-  firstWeekOfThisYear.setFullYear(year, 0, firstWeekContainsDate);
-  firstWeekOfThisYear.setHours(0, 0, 0, 0);
-  const startOfThisYear = startOfWeek(firstWeekOfThisYear, options);
-  if (_date.getTime() >= startOfNextYear.getTime()) {
-    return year + 1;
-  } else if (_date.getTime() >= startOfThisYear.getTime()) {
-    return year;
-  } else {
-    return year - 1;
-  }
-}
-function startOfWeekYear(date, options) {
-  const defaultOptions2 = getDefaultOptions();
-  const firstWeekContainsDate = options?.firstWeekContainsDate ?? options?.locale?.options?.firstWeekContainsDate ?? defaultOptions2.firstWeekContainsDate ?? defaultOptions2.locale?.options?.firstWeekContainsDate ?? 1;
-  const year = getWeekYear(date, options);
-  const firstWeek = constructFrom(date, 0);
-  firstWeek.setFullYear(year, 0, firstWeekContainsDate);
-  firstWeek.setHours(0, 0, 0, 0);
-  const _date = startOfWeek(firstWeek, options);
-  return _date;
-}
-function getWeek(date, options) {
-  const _date = toDate(date);
-  const diff = +startOfWeek(_date, options) - +startOfWeekYear(_date, options);
-  return Math.round(diff / millisecondsInWeek) + 1;
-}
-function addLeadingZeros(number, targetLength) {
-  const sign2 = number < 0 ? "-" : "";
-  const output = Math.abs(number).toString().padStart(targetLength, "0");
-  return sign2 + output;
-}
-const lightFormatters = {
-  // Year
-  y(date, token) {
-    const signedYear = date.getFullYear();
-    const year = signedYear > 0 ? signedYear : 1 - signedYear;
-    return addLeadingZeros(token === "yy" ? year % 100 : year, token.length);
-  },
-  // Month
-  M(date, token) {
-    const month = date.getMonth();
-    return token === "M" ? String(month + 1) : addLeadingZeros(month + 1, 2);
-  },
-  // Day of the month
-  d(date, token) {
-    return addLeadingZeros(date.getDate(), token.length);
-  },
-  // AM or PM
-  a(date, token) {
-    const dayPeriodEnumValue = date.getHours() / 12 >= 1 ? "pm" : "am";
-    switch (token) {
-      case "a":
-      case "aa":
-        return dayPeriodEnumValue.toUpperCase();
-      case "aaa":
-        return dayPeriodEnumValue;
-      case "aaaaa":
-        return dayPeriodEnumValue[0];
-      case "aaaa":
-      default:
-        return dayPeriodEnumValue === "am" ? "a.m." : "p.m.";
-    }
-  },
-  // Hour [1-12]
-  h(date, token) {
-    return addLeadingZeros(date.getHours() % 12 || 12, token.length);
-  },
-  // Hour [0-23]
-  H(date, token) {
-    return addLeadingZeros(date.getHours(), token.length);
-  },
-  // Minute
-  m(date, token) {
-    return addLeadingZeros(date.getMinutes(), token.length);
-  },
-  // Second
-  s(date, token) {
-    return addLeadingZeros(date.getSeconds(), token.length);
-  },
-  // Fraction of second
-  S(date, token) {
-    const numberOfDigits = token.length;
-    const milliseconds = date.getMilliseconds();
-    const fractionalSeconds = Math.trunc(
-      milliseconds * Math.pow(10, numberOfDigits - 3)
-    );
-    return addLeadingZeros(fractionalSeconds, token.length);
-  }
-};
-const dayPeriodEnum = {
-  midnight: "midnight",
-  noon: "noon",
-  morning: "morning",
-  afternoon: "afternoon",
-  evening: "evening",
-  night: "night"
-};
-const formatters = {
-  // Era
-  G: function(date, token, localize2) {
-    const era = date.getFullYear() > 0 ? 1 : 0;
-    switch (token) {
-      // AD, BC
-      case "G":
-      case "GG":
-      case "GGG":
-        return localize2.era(era, { width: "abbreviated" });
-      // A, B
-      case "GGGGG":
-        return localize2.era(era, { width: "narrow" });
-      // Anno Domini, Before Christ
-      case "GGGG":
-      default:
-        return localize2.era(era, { width: "wide" });
-    }
-  },
-  // Year
-  y: function(date, token, localize2) {
-    if (token === "yo") {
-      const signedYear = date.getFullYear();
-      const year = signedYear > 0 ? signedYear : 1 - signedYear;
-      return localize2.ordinalNumber(year, { unit: "year" });
-    }
-    return lightFormatters.y(date, token);
-  },
-  // Local week-numbering year
-  Y: function(date, token, localize2, options) {
-    const signedWeekYear = getWeekYear(date, options);
-    const weekYear = signedWeekYear > 0 ? signedWeekYear : 1 - signedWeekYear;
-    if (token === "YY") {
-      const twoDigitYear = weekYear % 100;
-      return addLeadingZeros(twoDigitYear, 2);
-    }
-    if (token === "Yo") {
-      return localize2.ordinalNumber(weekYear, { unit: "year" });
-    }
-    return addLeadingZeros(weekYear, token.length);
-  },
-  // ISO week-numbering year
-  R: function(date, token) {
-    const isoWeekYear = getISOWeekYear(date);
-    return addLeadingZeros(isoWeekYear, token.length);
-  },
-  // Extended year. This is a single number designating the year of this calendar system.
-  // The main difference between `y` and `u` localizers are B.C. years:
-  // | Year | `y` | `u` |
-  // |------|-----|-----|
-  // | AC 1 |   1 |   1 |
-  // | BC 1 |   1 |   0 |
-  // | BC 2 |   2 |  -1 |
-  // Also `yy` always returns the last two digits of a year,
-  // while `uu` pads single digit years to 2 characters and returns other years unchanged.
-  u: function(date, token) {
-    const year = date.getFullYear();
-    return addLeadingZeros(year, token.length);
-  },
-  // Quarter
-  Q: function(date, token, localize2) {
-    const quarter = Math.ceil((date.getMonth() + 1) / 3);
-    switch (token) {
-      // 1, 2, 3, 4
-      case "Q":
-        return String(quarter);
-      // 01, 02, 03, 04
-      case "QQ":
-        return addLeadingZeros(quarter, 2);
-      // 1st, 2nd, 3rd, 4th
-      case "Qo":
-        return localize2.ordinalNumber(quarter, { unit: "quarter" });
-      // Q1, Q2, Q3, Q4
-      case "QQQ":
-        return localize2.quarter(quarter, {
-          width: "abbreviated",
-          context: "formatting"
-        });
-      // 1, 2, 3, 4 (narrow quarter; could be not numerical)
-      case "QQQQQ":
-        return localize2.quarter(quarter, {
-          width: "narrow",
-          context: "formatting"
-        });
-      // 1st quarter, 2nd quarter, ...
-      case "QQQQ":
-      default:
-        return localize2.quarter(quarter, {
-          width: "wide",
-          context: "formatting"
-        });
-    }
-  },
-  // Stand-alone quarter
-  q: function(date, token, localize2) {
-    const quarter = Math.ceil((date.getMonth() + 1) / 3);
-    switch (token) {
-      // 1, 2, 3, 4
-      case "q":
-        return String(quarter);
-      // 01, 02, 03, 04
-      case "qq":
-        return addLeadingZeros(quarter, 2);
-      // 1st, 2nd, 3rd, 4th
-      case "qo":
-        return localize2.ordinalNumber(quarter, { unit: "quarter" });
-      // Q1, Q2, Q3, Q4
-      case "qqq":
-        return localize2.quarter(quarter, {
-          width: "abbreviated",
-          context: "standalone"
-        });
-      // 1, 2, 3, 4 (narrow quarter; could be not numerical)
-      case "qqqqq":
-        return localize2.quarter(quarter, {
-          width: "narrow",
-          context: "standalone"
-        });
-      // 1st quarter, 2nd quarter, ...
-      case "qqqq":
-      default:
-        return localize2.quarter(quarter, {
-          width: "wide",
-          context: "standalone"
-        });
-    }
-  },
-  // Month
-  M: function(date, token, localize2) {
-    const month = date.getMonth();
-    switch (token) {
-      case "M":
-      case "MM":
-        return lightFormatters.M(date, token);
-      // 1st, 2nd, ..., 12th
-      case "Mo":
-        return localize2.ordinalNumber(month + 1, { unit: "month" });
-      // Jan, Feb, ..., Dec
-      case "MMM":
-        return localize2.month(month, {
-          width: "abbreviated",
-          context: "formatting"
-        });
-      // J, F, ..., D
-      case "MMMMM":
-        return localize2.month(month, {
-          width: "narrow",
-          context: "formatting"
-        });
-      // January, February, ..., December
-      case "MMMM":
-      default:
-        return localize2.month(month, { width: "wide", context: "formatting" });
-    }
-  },
-  // Stand-alone month
-  L: function(date, token, localize2) {
-    const month = date.getMonth();
-    switch (token) {
-      // 1, 2, ..., 12
-      case "L":
-        return String(month + 1);
-      // 01, 02, ..., 12
-      case "LL":
-        return addLeadingZeros(month + 1, 2);
-      // 1st, 2nd, ..., 12th
-      case "Lo":
-        return localize2.ordinalNumber(month + 1, { unit: "month" });
-      // Jan, Feb, ..., Dec
-      case "LLL":
-        return localize2.month(month, {
-          width: "abbreviated",
-          context: "standalone"
-        });
-      // J, F, ..., D
-      case "LLLLL":
-        return localize2.month(month, {
-          width: "narrow",
-          context: "standalone"
-        });
-      // January, February, ..., December
-      case "LLLL":
-      default:
-        return localize2.month(month, { width: "wide", context: "standalone" });
-    }
-  },
-  // Local week of year
-  w: function(date, token, localize2, options) {
-    const week = getWeek(date, options);
-    if (token === "wo") {
-      return localize2.ordinalNumber(week, { unit: "week" });
-    }
-    return addLeadingZeros(week, token.length);
-  },
-  // ISO week of year
-  I: function(date, token, localize2) {
-    const isoWeek = getISOWeek(date);
-    if (token === "Io") {
-      return localize2.ordinalNumber(isoWeek, { unit: "week" });
-    }
-    return addLeadingZeros(isoWeek, token.length);
-  },
-  // Day of the month
-  d: function(date, token, localize2) {
-    if (token === "do") {
-      return localize2.ordinalNumber(date.getDate(), { unit: "date" });
-    }
-    return lightFormatters.d(date, token);
-  },
-  // Day of year
-  D: function(date, token, localize2) {
-    const dayOfYear = getDayOfYear(date);
-    if (token === "Do") {
-      return localize2.ordinalNumber(dayOfYear, { unit: "dayOfYear" });
-    }
-    return addLeadingZeros(dayOfYear, token.length);
-  },
-  // Day of week
-  E: function(date, token, localize2) {
-    const dayOfWeek = date.getDay();
-    switch (token) {
-      // Tue
-      case "E":
-      case "EE":
-      case "EEE":
-        return localize2.day(dayOfWeek, {
-          width: "abbreviated",
-          context: "formatting"
-        });
-      // T
-      case "EEEEE":
-        return localize2.day(dayOfWeek, {
-          width: "narrow",
-          context: "formatting"
-        });
-      // Tu
-      case "EEEEEE":
-        return localize2.day(dayOfWeek, {
-          width: "short",
-          context: "formatting"
-        });
-      // Tuesday
-      case "EEEE":
-      default:
-        return localize2.day(dayOfWeek, {
-          width: "wide",
-          context: "formatting"
-        });
-    }
-  },
-  // Local day of week
-  e: function(date, token, localize2, options) {
-    const dayOfWeek = date.getDay();
-    const localDayOfWeek = (dayOfWeek - options.weekStartsOn + 8) % 7 || 7;
-    switch (token) {
-      // Numerical value (Nth day of week with current locale or weekStartsOn)
-      case "e":
-        return String(localDayOfWeek);
-      // Padded numerical value
-      case "ee":
-        return addLeadingZeros(localDayOfWeek, 2);
-      // 1st, 2nd, ..., 7th
-      case "eo":
-        return localize2.ordinalNumber(localDayOfWeek, { unit: "day" });
-      case "eee":
-        return localize2.day(dayOfWeek, {
-          width: "abbreviated",
-          context: "formatting"
-        });
-      // T
-      case "eeeee":
-        return localize2.day(dayOfWeek, {
-          width: "narrow",
-          context: "formatting"
-        });
-      // Tu
-      case "eeeeee":
-        return localize2.day(dayOfWeek, {
-          width: "short",
-          context: "formatting"
-        });
-      // Tuesday
-      case "eeee":
-      default:
-        return localize2.day(dayOfWeek, {
-          width: "wide",
-          context: "formatting"
-        });
-    }
-  },
-  // Stand-alone local day of week
-  c: function(date, token, localize2, options) {
-    const dayOfWeek = date.getDay();
-    const localDayOfWeek = (dayOfWeek - options.weekStartsOn + 8) % 7 || 7;
-    switch (token) {
-      // Numerical value (same as in `e`)
-      case "c":
-        return String(localDayOfWeek);
-      // Padded numerical value
-      case "cc":
-        return addLeadingZeros(localDayOfWeek, token.length);
-      // 1st, 2nd, ..., 7th
-      case "co":
-        return localize2.ordinalNumber(localDayOfWeek, { unit: "day" });
-      case "ccc":
-        return localize2.day(dayOfWeek, {
-          width: "abbreviated",
-          context: "standalone"
-        });
-      // T
-      case "ccccc":
-        return localize2.day(dayOfWeek, {
-          width: "narrow",
-          context: "standalone"
-        });
-      // Tu
-      case "cccccc":
-        return localize2.day(dayOfWeek, {
-          width: "short",
-          context: "standalone"
-        });
-      // Tuesday
-      case "cccc":
-      default:
-        return localize2.day(dayOfWeek, {
-          width: "wide",
-          context: "standalone"
-        });
-    }
-  },
-  // ISO day of week
-  i: function(date, token, localize2) {
-    const dayOfWeek = date.getDay();
-    const isoDayOfWeek = dayOfWeek === 0 ? 7 : dayOfWeek;
-    switch (token) {
-      // 2
-      case "i":
-        return String(isoDayOfWeek);
-      // 02
-      case "ii":
-        return addLeadingZeros(isoDayOfWeek, token.length);
-      // 2nd
-      case "io":
-        return localize2.ordinalNumber(isoDayOfWeek, { unit: "day" });
-      // Tue
-      case "iii":
-        return localize2.day(dayOfWeek, {
-          width: "abbreviated",
-          context: "formatting"
-        });
-      // T
-      case "iiiii":
-        return localize2.day(dayOfWeek, {
-          width: "narrow",
-          context: "formatting"
-        });
-      // Tu
-      case "iiiiii":
-        return localize2.day(dayOfWeek, {
-          width: "short",
-          context: "formatting"
-        });
-      // Tuesday
-      case "iiii":
-      default:
-        return localize2.day(dayOfWeek, {
-          width: "wide",
-          context: "formatting"
-        });
-    }
-  },
-  // AM or PM
-  a: function(date, token, localize2) {
-    const hours = date.getHours();
-    const dayPeriodEnumValue = hours / 12 >= 1 ? "pm" : "am";
-    switch (token) {
-      case "a":
-      case "aa":
-        return localize2.dayPeriod(dayPeriodEnumValue, {
-          width: "abbreviated",
-          context: "formatting"
-        });
-      case "aaa":
-        return localize2.dayPeriod(dayPeriodEnumValue, {
-          width: "abbreviated",
-          context: "formatting"
-        }).toLowerCase();
-      case "aaaaa":
-        return localize2.dayPeriod(dayPeriodEnumValue, {
-          width: "narrow",
-          context: "formatting"
-        });
-      case "aaaa":
-      default:
-        return localize2.dayPeriod(dayPeriodEnumValue, {
-          width: "wide",
-          context: "formatting"
-        });
-    }
-  },
-  // AM, PM, midnight, noon
-  b: function(date, token, localize2) {
-    const hours = date.getHours();
-    let dayPeriodEnumValue;
-    if (hours === 12) {
-      dayPeriodEnumValue = dayPeriodEnum.noon;
-    } else if (hours === 0) {
-      dayPeriodEnumValue = dayPeriodEnum.midnight;
-    } else {
-      dayPeriodEnumValue = hours / 12 >= 1 ? "pm" : "am";
-    }
-    switch (token) {
-      case "b":
-      case "bb":
-        return localize2.dayPeriod(dayPeriodEnumValue, {
-          width: "abbreviated",
-          context: "formatting"
-        });
-      case "bbb":
-        return localize2.dayPeriod(dayPeriodEnumValue, {
-          width: "abbreviated",
-          context: "formatting"
-        }).toLowerCase();
-      case "bbbbb":
-        return localize2.dayPeriod(dayPeriodEnumValue, {
-          width: "narrow",
-          context: "formatting"
-        });
-      case "bbbb":
-      default:
-        return localize2.dayPeriod(dayPeriodEnumValue, {
-          width: "wide",
-          context: "formatting"
-        });
-    }
-  },
-  // in the morning, in the afternoon, in the evening, at night
-  B: function(date, token, localize2) {
-    const hours = date.getHours();
-    let dayPeriodEnumValue;
-    if (hours >= 17) {
-      dayPeriodEnumValue = dayPeriodEnum.evening;
-    } else if (hours >= 12) {
-      dayPeriodEnumValue = dayPeriodEnum.afternoon;
-    } else if (hours >= 4) {
-      dayPeriodEnumValue = dayPeriodEnum.morning;
-    } else {
-      dayPeriodEnumValue = dayPeriodEnum.night;
-    }
-    switch (token) {
-      case "B":
-      case "BB":
-      case "BBB":
-        return localize2.dayPeriod(dayPeriodEnumValue, {
-          width: "abbreviated",
-          context: "formatting"
-        });
-      case "BBBBB":
-        return localize2.dayPeriod(dayPeriodEnumValue, {
-          width: "narrow",
-          context: "formatting"
-        });
-      case "BBBB":
-      default:
-        return localize2.dayPeriod(dayPeriodEnumValue, {
-          width: "wide",
-          context: "formatting"
-        });
-    }
-  },
-  // Hour [1-12]
-  h: function(date, token, localize2) {
-    if (token === "ho") {
-      let hours = date.getHours() % 12;
-      if (hours === 0) hours = 12;
-      return localize2.ordinalNumber(hours, { unit: "hour" });
-    }
-    return lightFormatters.h(date, token);
-  },
-  // Hour [0-23]
-  H: function(date, token, localize2) {
-    if (token === "Ho") {
-      return localize2.ordinalNumber(date.getHours(), { unit: "hour" });
-    }
-    return lightFormatters.H(date, token);
-  },
-  // Hour [0-11]
-  K: function(date, token, localize2) {
-    const hours = date.getHours() % 12;
-    if (token === "Ko") {
-      return localize2.ordinalNumber(hours, { unit: "hour" });
-    }
-    return addLeadingZeros(hours, token.length);
-  },
-  // Hour [1-24]
-  k: function(date, token, localize2) {
-    let hours = date.getHours();
-    if (hours === 0) hours = 24;
-    if (token === "ko") {
-      return localize2.ordinalNumber(hours, { unit: "hour" });
-    }
-    return addLeadingZeros(hours, token.length);
-  },
-  // Minute
-  m: function(date, token, localize2) {
-    if (token === "mo") {
-      return localize2.ordinalNumber(date.getMinutes(), { unit: "minute" });
-    }
-    return lightFormatters.m(date, token);
-  },
-  // Second
-  s: function(date, token, localize2) {
-    if (token === "so") {
-      return localize2.ordinalNumber(date.getSeconds(), { unit: "second" });
-    }
-    return lightFormatters.s(date, token);
-  },
-  // Fraction of second
-  S: function(date, token) {
-    return lightFormatters.S(date, token);
-  },
-  // Timezone (ISO-8601. If offset is 0, output is always `'Z'`)
-  X: function(date, token, _localize) {
-    const timezoneOffset = date.getTimezoneOffset();
-    if (timezoneOffset === 0) {
-      return "Z";
-    }
-    switch (token) {
-      // Hours and optional minutes
-      case "X":
-        return formatTimezoneWithOptionalMinutes(timezoneOffset);
-      // Hours, minutes and optional seconds without `:` delimiter
-      // Note: neither ISO-8601 nor JavaScript supports seconds in timezone offsets
-      // so this token always has the same output as `XX`
-      case "XXXX":
-      case "XX":
-        return formatTimezone(timezoneOffset);
-      // Hours, minutes and optional seconds with `:` delimiter
-      // Note: neither ISO-8601 nor JavaScript supports seconds in timezone offsets
-      // so this token always has the same output as `XXX`
-      case "XXXXX":
-      case "XXX":
-      // Hours and minutes with `:` delimiter
-      default:
-        return formatTimezone(timezoneOffset, ":");
-    }
-  },
-  // Timezone (ISO-8601. If offset is 0, output is `'+00:00'` or equivalent)
-  x: function(date, token, _localize) {
-    const timezoneOffset = date.getTimezoneOffset();
-    switch (token) {
-      // Hours and optional minutes
-      case "x":
-        return formatTimezoneWithOptionalMinutes(timezoneOffset);
-      // Hours, minutes and optional seconds without `:` delimiter
-      // Note: neither ISO-8601 nor JavaScript supports seconds in timezone offsets
-      // so this token always has the same output as `xx`
-      case "xxxx":
-      case "xx":
-        return formatTimezone(timezoneOffset);
-      // Hours, minutes and optional seconds with `:` delimiter
-      // Note: neither ISO-8601 nor JavaScript supports seconds in timezone offsets
-      // so this token always has the same output as `xxx`
-      case "xxxxx":
-      case "xxx":
-      // Hours and minutes with `:` delimiter
-      default:
-        return formatTimezone(timezoneOffset, ":");
-    }
-  },
-  // Timezone (GMT)
-  O: function(date, token, _localize) {
-    const timezoneOffset = date.getTimezoneOffset();
-    switch (token) {
-      // Short
-      case "O":
-      case "OO":
-      case "OOO":
-        return "GMT" + formatTimezoneShort(timezoneOffset, ":");
-      // Long
-      case "OOOO":
-      default:
-        return "GMT" + formatTimezone(timezoneOffset, ":");
-    }
-  },
-  // Timezone (specific non-location)
-  z: function(date, token, _localize) {
-    const timezoneOffset = date.getTimezoneOffset();
-    switch (token) {
-      // Short
-      case "z":
-      case "zz":
-      case "zzz":
-        return "GMT" + formatTimezoneShort(timezoneOffset, ":");
-      // Long
-      case "zzzz":
-      default:
-        return "GMT" + formatTimezone(timezoneOffset, ":");
-    }
-  },
-  // Seconds timestamp
-  t: function(date, token, _localize) {
-    const timestamp = Math.trunc(date.getTime() / 1e3);
-    return addLeadingZeros(timestamp, token.length);
-  },
-  // Milliseconds timestamp
-  T: function(date, token, _localize) {
-    const timestamp = date.getTime();
-    return addLeadingZeros(timestamp, token.length);
-  }
-};
-function formatTimezoneShort(offset, delimiter = "") {
-  const sign2 = offset > 0 ? "-" : "+";
-  const absOffset = Math.abs(offset);
-  const hours = Math.trunc(absOffset / 60);
-  const minutes = absOffset % 60;
-  if (minutes === 0) {
-    return sign2 + String(hours);
-  }
-  return sign2 + String(hours) + delimiter + addLeadingZeros(minutes, 2);
-}
-function formatTimezoneWithOptionalMinutes(offset, delimiter) {
-  if (offset % 60 === 0) {
-    const sign2 = offset > 0 ? "-" : "+";
-    return sign2 + addLeadingZeros(Math.abs(offset) / 60, 2);
-  }
-  return formatTimezone(offset, delimiter);
-}
-function formatTimezone(offset, delimiter = "") {
-  const sign2 = offset > 0 ? "-" : "+";
-  const absOffset = Math.abs(offset);
-  const hours = addLeadingZeros(Math.trunc(absOffset / 60), 2);
-  const minutes = addLeadingZeros(absOffset % 60, 2);
-  return sign2 + hours + delimiter + minutes;
-}
-const dateLongFormatter = (pattern, formatLong2) => {
-  switch (pattern) {
-    case "P":
-      return formatLong2.date({ width: "short" });
-    case "PP":
-      return formatLong2.date({ width: "medium" });
-    case "PPP":
-      return formatLong2.date({ width: "long" });
-    case "PPPP":
-    default:
-      return formatLong2.date({ width: "full" });
-  }
-};
-const timeLongFormatter = (pattern, formatLong2) => {
-  switch (pattern) {
-    case "p":
-      return formatLong2.time({ width: "short" });
-    case "pp":
-      return formatLong2.time({ width: "medium" });
-    case "ppp":
-      return formatLong2.time({ width: "long" });
-    case "pppp":
-    default:
-      return formatLong2.time({ width: "full" });
-  }
-};
-const dateTimeLongFormatter = (pattern, formatLong2) => {
-  const matchResult = pattern.match(/(P+)(p+)?/) || [];
-  const datePattern = matchResult[1];
-  const timePattern = matchResult[2];
-  if (!timePattern) {
-    return dateLongFormatter(pattern, formatLong2);
-  }
-  let dateTimeFormat;
-  switch (datePattern) {
-    case "P":
-      dateTimeFormat = formatLong2.dateTime({ width: "short" });
-      break;
-    case "PP":
-      dateTimeFormat = formatLong2.dateTime({ width: "medium" });
-      break;
-    case "PPP":
-      dateTimeFormat = formatLong2.dateTime({ width: "long" });
-      break;
-    case "PPPP":
-    default:
-      dateTimeFormat = formatLong2.dateTime({ width: "full" });
-      break;
-  }
-  return dateTimeFormat.replace("{{date}}", dateLongFormatter(datePattern, formatLong2)).replace("{{time}}", timeLongFormatter(timePattern, formatLong2));
-};
-const longFormatters = {
-  p: timeLongFormatter,
-  P: dateTimeLongFormatter
-};
-const dayOfYearTokenRE = /^D+$/;
-const weekYearTokenRE = /^Y+$/;
-const throwTokens = ["D", "DD", "YY", "YYYY"];
-function isProtectedDayOfYearToken(token) {
-  return dayOfYearTokenRE.test(token);
-}
-function isProtectedWeekYearToken(token) {
-  return weekYearTokenRE.test(token);
-}
-function warnOrThrowProtectedError(token, format2, input) {
-  const _message = message(token, format2, input);
-  console.warn(_message);
-  if (throwTokens.includes(token)) throw new RangeError(_message);
-}
-function message(token, format2, input) {
-  const subject = token[0] === "Y" ? "years" : "days of the month";
-  return `Use \`${token.toLowerCase()}\` instead of \`${token}\` (in \`${format2}\`) for formatting ${subject} to the input \`${input}\`; see: https://github.com/date-fns/date-fns/blob/master/docs/unicodeTokens.md`;
-}
-const formattingTokensRegExp = /[yYQqMLwIdDecihHKkms]o|(\w)\1*|''|'(''|[^'])+('|$)|./g;
-const longFormattingTokensRegExp = /P+p+|P+|p+|''|'(''|[^'])+('|$)|./g;
-const escapedStringRegExp = /^'([^]*?)'?$/;
-const doubleQuoteRegExp = /''/g;
-const unescapedLatinCharacterRegExp = /[a-zA-Z]/;
-function format(date, formatStr, options) {
-  const defaultOptions2 = getDefaultOptions();
-  const locale = defaultOptions2.locale ?? enUS;
-  const firstWeekContainsDate = defaultOptions2.firstWeekContainsDate ?? defaultOptions2.locale?.options?.firstWeekContainsDate ?? 1;
-  const weekStartsOn = defaultOptions2.weekStartsOn ?? defaultOptions2.locale?.options?.weekStartsOn ?? 0;
-  const originalDate = toDate(date);
-  if (!isValid(originalDate)) {
-    throw new RangeError("Invalid time value");
-  }
-  let parts = formatStr.match(longFormattingTokensRegExp).map((substring) => {
-    const firstCharacter = substring[0];
-    if (firstCharacter === "p" || firstCharacter === "P") {
-      const longFormatter = longFormatters[firstCharacter];
-      return longFormatter(substring, locale.formatLong);
-    }
-    return substring;
-  }).join("").match(formattingTokensRegExp).map((substring) => {
-    if (substring === "''") {
-      return { isToken: false, value: "'" };
-    }
-    const firstCharacter = substring[0];
-    if (firstCharacter === "'") {
-      return { isToken: false, value: cleanEscapedString(substring) };
-    }
-    if (formatters[firstCharacter]) {
-      return { isToken: true, value: substring };
-    }
-    if (firstCharacter.match(unescapedLatinCharacterRegExp)) {
-      throw new RangeError(
-        "Format string contains an unescaped latin alphabet character `" + firstCharacter + "`"
-      );
-    }
-    return { isToken: false, value: substring };
-  });
-  if (locale.localize.preprocessor) {
-    parts = locale.localize.preprocessor(originalDate, parts);
-  }
-  const formatterOptions = {
-    firstWeekContainsDate,
-    weekStartsOn,
-    locale
-  };
-  return parts.map((part) => {
-    if (!part.isToken) return part.value;
-    const token = part.value;
-    if (isProtectedWeekYearToken(token) || isProtectedDayOfYearToken(token)) {
-      warnOrThrowProtectedError(token, formatStr, String(date));
-    }
-    const formatter = formatters[token[0]];
-    return formatter(originalDate, token, locale.localize, formatterOptions);
-  }).join("");
-}
-function cleanEscapedString(input) {
-  const matched = input.match(escapedStringRegExp);
-  if (!matched) {
-    return input;
-  }
-  return matched[1].replace(doubleQuoteRegExp, "'");
-}
-function formatDistance(date, baseDate, options) {
-  const defaultOptions2 = getDefaultOptions();
-  const locale = options?.locale ?? defaultOptions2.locale ?? enUS;
-  const minutesInAlmostTwoDays = 2520;
-  const comparison = compareAsc(date, baseDate);
-  if (isNaN(comparison)) {
-    throw new RangeError("Invalid time value");
-  }
-  const localizeOptions = Object.assign({}, options, {
-    addSuffix: options?.addSuffix,
-    comparison
-  });
-  let dateLeft;
-  let dateRight;
-  if (comparison > 0) {
-    dateLeft = toDate(baseDate);
-    dateRight = toDate(date);
-  } else {
-    dateLeft = toDate(date);
-    dateRight = toDate(baseDate);
-  }
-  const seconds = differenceInSeconds(dateRight, dateLeft);
-  const offsetInSeconds = (getTimezoneOffsetInMilliseconds(dateRight) - getTimezoneOffsetInMilliseconds(dateLeft)) / 1e3;
-  const minutes = Math.round((seconds - offsetInSeconds) / 60);
-  let months;
-  if (minutes < 2) {
-    if (options?.includeSeconds) {
-      if (seconds < 5) {
-        return locale.formatDistance("lessThanXSeconds", 5, localizeOptions);
-      } else if (seconds < 10) {
-        return locale.formatDistance("lessThanXSeconds", 10, localizeOptions);
-      } else if (seconds < 20) {
-        return locale.formatDistance("lessThanXSeconds", 20, localizeOptions);
-      } else if (seconds < 40) {
-        return locale.formatDistance("halfAMinute", 0, localizeOptions);
-      } else if (seconds < 60) {
-        return locale.formatDistance("lessThanXMinutes", 1, localizeOptions);
-      } else {
-        return locale.formatDistance("xMinutes", 1, localizeOptions);
-      }
-    } else {
-      if (minutes === 0) {
-        return locale.formatDistance("lessThanXMinutes", 1, localizeOptions);
-      } else {
-        return locale.formatDistance("xMinutes", minutes, localizeOptions);
-      }
-    }
-  } else if (minutes < 45) {
-    return locale.formatDistance("xMinutes", minutes, localizeOptions);
-  } else if (minutes < 90) {
-    return locale.formatDistance("aboutXHours", 1, localizeOptions);
-  } else if (minutes < minutesInDay) {
-    const hours = Math.round(minutes / 60);
-    return locale.formatDistance("aboutXHours", hours, localizeOptions);
-  } else if (minutes < minutesInAlmostTwoDays) {
-    return locale.formatDistance("xDays", 1, localizeOptions);
-  } else if (minutes < minutesInMonth) {
-    const days = Math.round(minutes / minutesInDay);
-    return locale.formatDistance("xDays", days, localizeOptions);
-  } else if (minutes < minutesInMonth * 2) {
-    months = Math.round(minutes / minutesInMonth);
-    return locale.formatDistance("aboutXMonths", months, localizeOptions);
-  }
-  months = differenceInMonths(dateRight, dateLeft);
-  if (months < 12) {
-    const nearestMonth = Math.round(minutes / minutesInMonth);
-    return locale.formatDistance("xMonths", nearestMonth, localizeOptions);
-  } else {
-    const monthsSinceStartOfYear = months % 12;
-    const years = Math.trunc(months / 12);
-    if (monthsSinceStartOfYear < 3) {
-      return locale.formatDistance("aboutXYears", years, localizeOptions);
-    } else if (monthsSinceStartOfYear < 9) {
-      return locale.formatDistance("overXYears", years, localizeOptions);
-    } else {
-      return locale.formatDistance("almostXYears", years + 1, localizeOptions);
-    }
-  }
-}
-function formatDistanceToNow(date, options) {
-  return formatDistance(date, constructNow(date), options);
-}
-const getImageUrl = (url) => {
-  if (!url) return null;
-  if (url.includes("localhost")) return null;
-  return url;
-};
-const calculateReadTime = (content) => {
-  if (!content) return "5 min read";
-  const words = content.split(/\s+/).length;
-  return `${Math.ceil(words / 200)} min read`;
-};
-const BlogsSection = ({ initialBlogs = [] }) => {
-  const blogs = reactExports.useMemo(() => {
-    if (initialBlogs.length <= 6) return initialBlogs;
-    const shuffled = [...initialBlogs].sort(() => Math.random() - 0.5);
-    return shuffled.slice(0, 6);
-  }, [initialBlogs]);
-  if (blogs.length === 0) return null;
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "py-16 md:py-24 px-4 md:px-6 border-t border-white/5 bg-[#020204]", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-7xl mx-auto", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col md:flex-row justify-between items-start md:items-end mb-8 md:mb-12 gap-4", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-2xl md:text-3xl font-bold text-white mb-2", children: "Latest from the Blog" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-slate-400 text-sm md:text-base", children: "Tips, tutorials, and insights on workflow automation." })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs(
-        distExports.Link,
-        {
-          to: "/blogs",
-          title: "View all blog posts",
-          className: "text-indigo-400 hover:text-indigo-300 h-auto text-sm md:text-base group flex items-center",
-          children: [
-            "View all posts ",
-            /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowRight, { className: "w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" })
-          ]
-        }
-      )
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6", children: blogs.map((blog) => /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Link, { to: `/blogs/${blog.slug}`, "aria-label": `Read: ${blog.title}`, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(SpotlightCard, { className: "group cursor-pointer h-full flex flex-col", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative aspect-[16/9] overflow-hidden rounded-t-xl bg-slate-900", children: [
-        getImageUrl(blog.image_url) ? /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "img",
-          {
-            src: getImageUrl(blog.image_url),
-            alt: blog.title,
-            className: "w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-          }
-        ) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-full h-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Eye, { className: "w-8 h-8 text-slate-600" }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-gradient-to-t from-[#0e0f14] via-transparent to-transparent" }),
-        blog.category?.title && /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "absolute top-3 left-3 px-2 py-1 text-xs font-medium rounded-md bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 flex items-center gap-1", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Zap, { className: "w-3 h-3" }),
-          blog.category.title
-        ] })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-5 flex flex-col flex-1", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg font-semibold text-white mb-2 group-hover:text-cyan-400 transition-colors line-clamp-2", children: blog.title }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-slate-400 leading-relaxed line-clamp-2 mb-4", children: blog.description }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-auto flex items-center gap-4 text-xs text-slate-500", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "flex items-center gap-1", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Calendar, { className: "w-3 h-3" }),
-            formatDistanceToNow(new Date(blog.published_at || blog.created_at || Date.now()), { addSuffix: true })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "flex items-center gap-1", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Clock, { className: "w-3 h-3" }),
-            calculateReadTime(blog.content)
-          ] })
-        ] })
-      ] })
-    ] }) }, blog.id)) })
-  ] }) });
-};
-const CategoriesSection = ({ initialCategories = [] }) => {
-  const navigate = distExports.useNavigate();
-  const [categories, setCategories] = reactExports.useState(initialCategories);
-  const [loading, setLoading] = reactExports.useState(initialCategories.length === 0);
-  const categoryIcons = [
-    BarChart3,
-    Bot,
-    FileCode,
-    FileJson,
-    GitBranch,
-    Globe,
-    Mail,
-    MessageSquare,
-    Share2,
-    ShieldCheck,
-    Terminal,
-    Users,
-    Workflow,
-    Zap
-  ];
-  const getIconForCategory = (cat, index) => {
-    if (!cat.title) return categoryIcons[index % categoryIcons.length];
-    const hash = cat.title.split("").reduce((acc, ch) => acc + ch.charCodeAt(0), 0);
-    return categoryIcons[hash % categoryIcons.length];
-  };
-  reactExports.useEffect(() => {
-    if (initialCategories.length > 0) {
-      const withIcons = initialCategories.slice(0, 9).map((cat, index) => ({
-        ...cat,
-        icon: getIconForCategory(cat, index)
-      }));
-      setCategories(withIcons);
-      setLoading(false);
-      return;
-    }
-    const fetchCategories = async () => {
-      try {
-        setLoading(true);
-        const response = await workflowService.getWorkflowLibraryCategories();
-        if (response.success && response.data) {
-          const sortedCategories = [...response.data].sort((a, b) => {
-            const countA = typeof a.workflows_count === "number" ? a.workflows_count : 0;
-            const countB = typeof b.workflows_count === "number" ? b.workflows_count : 0;
-            return countB - countA;
-          });
-          const categoriesWithIcons = sortedCategories.slice(0, 9).map((cat, index) => ({
-            ...cat,
-            icon: getIconForCategory(cat, index)
-          }));
-          setCategories(categoriesWithIcons);
-        }
-      } catch (error) {
-        console.error("Error fetching categories:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchCategories();
-  }, [initialCategories.length]);
-  const handleCategoryClick = (slug) => {
-    navigate(`/workflows?category=${slug}`);
-  };
-  if (loading) {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "py-16 md:py-24 px-4 md:px-6 border-t border-white/5 bg-[#020204]", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-7xl mx-auto", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-col md:flex-row justify-between items-start md:items-end mb-8 md:mb-12 gap-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-2xl md:text-3xl font-bold text-white mb-2", children: "Browse by Category" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-slate-400 text-sm md:text-base", children: "Find a starting point for your next automation." })
-      ] }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6", children: [1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-5 md:p-6 bg-[#0e0f14] rounded-xl border border-slate-800 animate-pulse", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-10 h-10 bg-slate-800 rounded-lg mb-4" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-6 bg-slate-800 rounded mb-2 w-3/4" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-4 bg-slate-800 rounded w-full" })
-      ] }, i)) })
-    ] }) });
-  }
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "py-16 md:py-24 px-4 md:px-6 border-t border-white/5 bg-[#020204]", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-7xl mx-auto", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col md:flex-row justify-between items-start md:items-end mb-8 md:mb-12 gap-4", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-2xl md:text-3xl font-bold text-white mb-2", children: "Browse by Category" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-slate-400 text-sm md:text-base", children: "Find a starting point for your next automation." })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs(
-        distExports.Link,
-        {
-          to: "/workflows",
-          title: "View all workflow categories and templates",
-          className: "text-indigo-400 hover:text-indigo-300 p-0 hover:bg-transparent md:hover:bg-accent md:p-4 h-auto text-sm md:text-base group flex items-center",
-          children: [
-            "View all categories ",
-            /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowRight, { className: "w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" })
-          ]
-        }
-      )
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6", children: categories.map((cat) => {
-      const Icon2 = cat.icon || Workflow;
-      return /* @__PURE__ */ jsxRuntimeExports.jsxs(
-        SpotlightCard,
-        {
-          className: "group p-5 md:p-6 cursor-pointer",
-          onClick: () => handleCategoryClick(cat.slug),
-          children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start justify-between mb-4", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-10 h-10 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center group-hover:bg-indigo-500/10 group-hover:border-indigo-500/50 transition-colors", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon2, { className: "w-5 h-5 text-slate-400 group-hover:text-indigo-400 transition-colors" }) }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowRight, { className: "w-4 h-4 text-slate-600 -translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all" })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg font-semibold text-white mb-2", children: cat.title }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-slate-400 leading-relaxed", children: cat.badge_text || `Discover ${cat.title.toLowerCase()} automation workflows` })
-          ]
-        },
-        cat.id
-      );
-    }) })
-  ] }) });
-};
-const CodeDemoSection = () => /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "py-16 md:py-24 bg-[#0a0a0a] border-y border-white/5 overflow-hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-7xl mx-auto px-4 md:px-6 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center", children: [
-  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-8 order-2 lg:order-1", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-3xl md:text-4xl font-bold text-white", children: [
-      "Download & Import ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      "Ready-to-Use ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-indigo-500", children: "n8n Workflows." })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-base md:text-lg text-slate-400 leading-relaxed", children: "Instantly grab powerful workflow JSON templates that get the best views. Our analysis gives you complete workflow details, custom nodes, and a seamless import experience right into your secure n8n editor." }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-4", children: [
-      { title: "One-Click Import", desc: "Simply copy our JSON templates directly into your n8n workspace." },
-      { title: "Complete Node Analysis", desc: "Every template includes complete descriptions and analysis of nodes." },
-      { title: "Free Download", desc: "Download JSON files to keep backups before launching in n8n." }
-    ].map((item, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "flex gap-4", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-1 w-6 h-6 rounded-full bg-indigo-500/20 flex items-center justify-center shrink-0", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Check, { className: "w-3 h-3 text-indigo-400" }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-bold text-white text-sm md:text-base", children: item.title }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs md:text-sm text-slate-400", children: item.desc })
-      ] })
-    ] }, i)) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center gap-4 pt-4", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("button", { className: "flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl font-medium transition-colors", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Download, { className: "w-4 h-4" }),
-        "Download JSON Template"
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("button", { className: "flex items-center gap-2 bg-white/5 hover:bg-white/10 text-white px-6 py-3 rounded-xl font-medium transition-colors border border-white/10", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Copy, { className: "w-4 h-4" }),
-        "Copy to Clipboard"
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: "http://localhost:5689", title: "n8n local host url", target: "_blank", rel: "noreferrer", className: "flex items-center gap-2 bg-white/5 hover:bg-white/10 text-slate-300 px-6 py-3 rounded-xl font-medium transition-colors border border-white/10 text-sm", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(ExternalLink, { className: "w-4 h-4" }),
-        "Open Local n8n Editor"
-      ] })
-    ] })
-  ] }),
-  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-xl border border-white/10 bg-[#050505] shadow-2xl overflow-hidden flex flex-col h-[450px] md:h-[550px] w-full order-1 lg:order-2", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "h-10 border-b border-white/5 flex items-center px-4 bg-[#0e0e0e] justify-between shrink-0", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex gap-1.5", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-3 h-3 rounded-full bg-slate-700" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-3 h-3 rounded-full bg-slate-700" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-3 h-3 rounded-full bg-slate-700" })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-xs text-slate-400 font-mono", children: "workflow-analysis.json" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-10" })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-1 overflow-hidden", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "w-48 border-r border-white/5 bg-[#0a0a0a] p-4 hidden md:block shrink-0", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-[10px] font-bold text-slate-400 uppercase mb-3", children: "Templates" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 text-sm text-indigo-400 bg-indigo-500/10 p-2 rounded cursor-pointer", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(FileJson, { className: "w-4 h-4" }),
-            " workflow-analysis.json"
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 text-sm text-slate-400 p-2 cursor-pointer hover:text-white", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(FileCode, { className: "w-4 h-4" }),
-            " README.md"
-          ] })
-        ] })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 p-4 md:p-6 font-mono text-xs md:text-sm overflow-auto custom-scrollbar", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-slate-300 whitespace-pre", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-slate-400", children: '// How to use: Download this JSON and click "Import from File" or paste it directly in your n8n editor.' }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        "{",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        "  ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"name"' }),
-        ": ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400", children: '"Complete SEO & Data Analysis Workflow"' }),
-        ",",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        "  ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"nodes"' }),
-        ": [",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        "    ",
-        "{",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        "      ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"parameters"' }),
-        ": ",
-        "{",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        "        ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"method"' }),
-        ": ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400", children: '"GET"' }),
-        ",",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        "        ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"url"' }),
-        ": ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400", children: '"https://api.edgelancer.com/api/workflow/top-view"' }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        "      ",
-        "}",
-        ",",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        "      ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"id"' }),
-        ": ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400", children: '"4a2c9183-b715"' }),
-        ",",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        "      ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"name"' }),
-        ": ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400", children: '"Fetch Top Views API"' }),
-        ",",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        "      ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"type"' }),
-        ": ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400", children: '"n8n-nodes-base.httpRequest"' }),
-        ",",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        "      ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"typeVersion"' }),
-        ": ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-orange-400", children: "4.1" }),
-        ",",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        "      ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"position"' }),
-        ": [",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-orange-400", children: "460" }),
-        ", ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-orange-400", children: "260" }),
-        "]",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        "    ",
-        "}",
-        ",",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        "    ",
-        "{",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        "      ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"parameters"' }),
-        ": ",
-        "{",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        "        ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"content"' }),
-        ": ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400", children: '"## Complete Workflow Details\\n\\nThis template analyzes the data fetched and returns custom tags to be previewed."' }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        "      ",
-        "}",
-        ",",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        "      ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"id"' }),
-        ": ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400", children: '"9922ffaa-bb11"' }),
-        ",",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        "      ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"name"' }),
-        ": ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400", children: '"Sticky Note"' }),
-        ",",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        "      ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"type"' }),
-        ": ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400", children: '"n8n-nodes-base.stickyNote"' }),
-        ",",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        "      ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"typeVersion"' }),
-        ": ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-orange-400", children: "1" }),
-        ",",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        "      ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"position"' }),
-        ": [",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-orange-400", children: "240" }),
-        ", ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-orange-400", children: "120" }),
-        "]",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        "    ",
-        "}",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        "  ],",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        "  ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"pinData"' }),
-        ": ",
-        "{}",
-        ",",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        "  ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"connections"' }),
-        ": ",
-        "{}",
-        ",",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        "  ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"active"' }),
-        ": ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-orange-400", children: "false" }),
-        ",",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        "  ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"settings"' }),
-        ": ",
-        "{",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        "    ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"executionOrder"' }),
-        ": ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400", children: '"v1"' }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        "  ",
-        "}",
-        ",",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        "  ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"versionId"' }),
-        ": ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400", children: '"342111-a8ab-10222"' }),
-        ",",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        "  ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"tags"' }),
-        ": [",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        "    ",
-        "{",
-        " ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"name"' }),
-        ": ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400", children: '"analysis"' }),
-        " ",
-        "}",
-        ",",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        "    ",
-        "{",
-        " ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-400", children: '"name"' }),
-        ": ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400", children: '"high-views"' }),
-        " ",
-        "}",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        "  ]",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        "}"
-      ] }) })
-    ] })
-  ] })
-] }) });
-const CTASection = () => {
-  distExports.useNavigate();
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "py-24 md:py-40 text-center relative overflow-hidden", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-gradient-to-t from-indigo-900/10 via-transparent to-transparent pointer-events-none" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto px-6 relative z-10", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-6 md:mb-8 tracking-tighter", children: "Ready for Boost your business?" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-lg md:text-xl text-slate-400 mb-10 md:mb-12 max-w-2xl mx-auto", children: "Perfect if anyone wants to build a custom automation tool." }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col sm:flex-row justify-center gap-4 w-full sm:w-auto px-4 sm:px-0", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Link, { to: "/contact", title: "Get Started with EdgeLancer for Free", className: "w-full sm:w-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Button, { size: "lg", className: "h-12 md:h-14 px-8 md:px-10 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full text-base md:text-lg shadow-2xl shadow-indigo-500/20 font-bold w-full", children: [
-          "Get Started Free ",
-          /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronRight, { className: "w-5 h-5 ml-2" })
-        ] }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Link, { to: "/contact", title: "Contact our Sales Team", className: "w-full sm:w-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { size: "lg", variant: "outline", className: "h-12 md:h-14 px-8 md:px-10 border-slate-700 text-white hover:bg-white/5 rounded-full text-base md:text-lg font-bold w-full bg-transparent", children: "Contact Sales" }) })
-      ] })
-    ] })
-  ] });
-};
-const Counter = ({ end, duration = 2e3, decimals = 0 }) => {
-  const [count2, setCount] = reactExports.useState(0);
-  reactExports.useEffect(() => {
-    let startTime = null;
-    let animationFrameId;
-    const animate = (timestamp) => {
-      if (!startTime) startTime = timestamp;
-      const progress = timestamp - startTime;
-      const percentage = Math.min(progress / duration, 1);
-      const ease = 1 - Math.pow(1 - percentage, 4);
-      const currentVal = ease * end;
-      setCount(currentVal);
-      if (progress < duration) {
-        animationFrameId = requestAnimationFrame(animate);
-      }
-    };
-    animationFrameId = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(animationFrameId);
-  }, [end, duration]);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: count2.toFixed(decimals) });
-};
-const Hero = ({ initialStats = [] }) => {
-  const [stats, setStats] = reactExports.useState(initialStats.length > 0 ? initialStats : [
-    { label: "Workflow Views", value: 10, suffix: "M+", decimals: 0 },
-    { label: "Active Users", value: 50, suffix: "K+", decimals: 0 },
-    { label: "Total Workflows", value: 500, suffix: "+", decimals: 0 }
-  ]);
-  const [searchQuery, setSearchQuery] = reactExports.useState("");
-  const [searchResults, setSearchResults] = reactExports.useState([]);
-  const [searchLoading, setSearchLoading] = reactExports.useState(false);
-  const [showResults, setShowResults] = reactExports.useState(false);
-  const navigate = distExports.useNavigate();
-  reactExports.useEffect(() => {
-    if (!searchQuery) {
-      setSearchResults([]);
-      setShowResults(false);
-      return;
-    }
-    setSearchLoading(true);
-    const handler = setTimeout(async () => {
-      try {
-        const res = await workflowService.getWorkflowLibrary(1, 8, searchQuery);
-        if (res?.data) {
-          setSearchResults(res.data);
-          setShowResults(true);
-        } else {
-          setSearchResults([]);
-          setShowResults(false);
-        }
-      } catch (e) {
-        setSearchResults([]);
-        setShowResults(false);
-      } finally {
-        setSearchLoading(false);
-      }
-    }, 400);
-    return () => clearTimeout(handler);
-  }, [searchQuery]);
-  reactExports.useEffect(() => {
-    if (initialStats.length > 0) return;
-    const fetchStats = async () => {
-      try {
-        const response = await workflowService.getWorkflowStats();
-        if (response.success && response.data) {
-          const { total_workflows, total_visits, active_users_today } = response.data;
-          setStats([
-            { label: "Workflow Views", value: total_visits, suffix: "", decimals: 0 },
-            { label: "Active Users", value: active_users_today, suffix: "", decimals: 0 },
-            { label: "Total Workflows", value: total_workflows, suffix: "+", decimals: 0 }
-          ]);
-        }
-      } catch (error) {
-        console.error("Failed to fetch stats:", error);
-      }
-    };
-    fetchStats();
-  }, [initialStats.length]);
-  return (
-    // UPDATED: Reduced padding-top from 'pt-24 md:pt-24' to 'pt-12 md:pt-16'
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "relative w-full min-h-[90vh] md:h-screen flex flex-col justify-center pt-12 md:pt-16 bg-[#050505] overflow-hidden", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-purple-900/20 blur-[120px] rounded-full pointer-events-none z-0 mix-blend-screen" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-7xl mx-auto relative z-10 w-full px-4 md:px-6", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center max-w-4xl mx-auto", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("h1", { className: "text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-white leading-[1.1] mb-5", children: [
-          "Ready-to-Use ",
-          /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-400", children: "Workflow Templates" })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-base sm:text-lg md:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed mb-8 px-4", children: "Start automating in seconds with our library of proven workflow templates. Customize them to fit your exact needs." }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-xl mx-auto relative mb-8 group px-2", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-gradient-to-r from-purple-500/20 to-indigo-500/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative flex items-center", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Search, { className: "absolute left-4 w-5 h-5 text-slate-400" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(
-              "input",
-              {
-                type: "text",
-                placeholder: "Search workflows...",
-                className: "w-full h-12 md:h-14 pl-12 pr-4 rounded-xl bg-[#0a0a0a] border border-slate-800 text-slate-200 placeholder:text-slate-400 focus:outline-none focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 transition-all shadow-2xl text-base",
-                "aria-label": "Search workflows",
-                value: searchQuery,
-                onChange: (e) => setSearchQuery(e.target.value),
-                onFocus: () => {
-                  if (searchResults.length > 0) setShowResults(true);
-                },
-                onBlur: () => setTimeout(() => setShowResults(false), 200),
-                autoComplete: "off"
-              }
-            ),
-            showResults && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute left-0 right-0 top-14 z-20 bg-[#0a0a0a] border border-slate-800 rounded-xl shadow-2xl mt-2 max-h-80 overflow-y-auto animate-in fade-in slide-in-from-top-2", children: searchLoading ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-4 text-slate-400 text-center text-sm", children: "Searching..." }) : searchResults.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-4 text-slate-400 text-center text-sm", children: "No workflows found" }) : searchResults.map((wf) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-              "button",
-              {
-                className: "w-full text-left px-4 py-3 hover:bg-purple-900/10 transition-colors flex flex-col border-b border-slate-800 last:border-b-0",
-                title: `View details for ${wf.title}`,
-                onClick: () => navigate(`/workflow/${wf.slug}`),
-                children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-semibold text-slate-200 text-base", children: wf.title }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs text-slate-400 line-clamp-1", children: wf.description })
-                ]
-              },
-              wf.id
-            )) })
-          ] })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-slate-400 text-xs md:text-sm mb-10 font-medium px-4", children: "Connect your favorite apps, build powerful workflows, and let AI handle repetitive tasks." }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap justify-center gap-8 md:gap-20 border-t border-white/5 pt-8", children: stats.map((stat, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col items-center p-2 min-w-[120px]", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-1 tabular-nums", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Counter, { end: stat.value, decimals: stat.decimals }),
-            stat.suffix
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-[10px] md:text-sm text-slate-400 font-medium uppercase tracking-wider text-center", children: stat.label })
-        ] }, i)) })
-      ] }) })
-    ] })
-  );
-};
-const Starfield = reactExports.lazy(() => import("./assets/Starfield-CBXUfjFu.js").then((m) => ({ default: m.Starfield })));
-function LazyStarfield() {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(reactExports.Suspense, { fallback: null, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Starfield, {}) });
-}
-var reactFastCompare;
-var hasRequiredReactFastCompare;
-function requireReactFastCompare() {
-  if (hasRequiredReactFastCompare) return reactFastCompare;
-  hasRequiredReactFastCompare = 1;
-  var hasElementType = typeof Element !== "undefined";
-  var hasMap = typeof Map === "function";
-  var hasSet = typeof Set === "function";
-  var hasArrayBuffer = typeof ArrayBuffer === "function" && !!ArrayBuffer.isView;
-  function equal(a, b) {
-    if (a === b) return true;
-    if (a && b && typeof a == "object" && typeof b == "object") {
-      if (a.constructor !== b.constructor) return false;
-      var length, i, keys;
-      if (Array.isArray(a)) {
-        length = a.length;
-        if (length != b.length) return false;
-        for (i = length; i-- !== 0; )
-          if (!equal(a[i], b[i])) return false;
-        return true;
-      }
-      var it;
-      if (hasMap && a instanceof Map && b instanceof Map) {
-        if (a.size !== b.size) return false;
-        it = a.entries();
-        while (!(i = it.next()).done)
-          if (!b.has(i.value[0])) return false;
-        it = a.entries();
-        while (!(i = it.next()).done)
-          if (!equal(i.value[1], b.get(i.value[0]))) return false;
-        return true;
-      }
-      if (hasSet && a instanceof Set && b instanceof Set) {
-        if (a.size !== b.size) return false;
-        it = a.entries();
-        while (!(i = it.next()).done)
-          if (!b.has(i.value[0])) return false;
-        return true;
-      }
-      if (hasArrayBuffer && ArrayBuffer.isView(a) && ArrayBuffer.isView(b)) {
-        length = a.length;
-        if (length != b.length) return false;
-        for (i = length; i-- !== 0; )
-          if (a[i] !== b[i]) return false;
-        return true;
-      }
-      if (a.constructor === RegExp) return a.source === b.source && a.flags === b.flags;
-      if (a.valueOf !== Object.prototype.valueOf && typeof a.valueOf === "function" && typeof b.valueOf === "function") return a.valueOf() === b.valueOf();
-      if (a.toString !== Object.prototype.toString && typeof a.toString === "function" && typeof b.toString === "function") return a.toString() === b.toString();
-      keys = Object.keys(a);
-      length = keys.length;
-      if (length !== Object.keys(b).length) return false;
-      for (i = length; i-- !== 0; )
-        if (!Object.prototype.hasOwnProperty.call(b, keys[i])) return false;
-      if (hasElementType && a instanceof Element) return false;
-      for (i = length; i-- !== 0; ) {
-        if ((keys[i] === "_owner" || keys[i] === "__v" || keys[i] === "__o") && a.$$typeof) {
-          continue;
-        }
-        if (!equal(a[keys[i]], b[keys[i]])) return false;
-      }
-      return true;
-    }
-    return a !== a && b !== b;
-  }
-  reactFastCompare = function isEqual(a, b) {
-    try {
-      return equal(a, b);
-    } catch (error) {
-      if ((error.message || "").match(/stack|recursion/i)) {
-        console.warn("react-fast-compare cannot handle circular refs");
-        return false;
-      }
-      throw error;
-    }
-  };
-  return reactFastCompare;
-}
-var reactFastCompareExports = requireReactFastCompare();
-const fastCompare = /* @__PURE__ */ getDefaultExportFromCjs(reactFastCompareExports);
-var invariant_1;
-var hasRequiredInvariant;
-function requireInvariant() {
-  if (hasRequiredInvariant) return invariant_1;
-  hasRequiredInvariant = 1;
-  var NODE_ENV = process.env.NODE_ENV;
-  var invariant3 = function(condition, format2, a, b, c, d, e, f) {
-    if (NODE_ENV !== "production") {
-      if (format2 === void 0) {
-        throw new Error("invariant requires an error message argument");
-      }
-    }
-    if (!condition) {
-      var error;
-      if (format2 === void 0) {
-        error = new Error(
-          "Minified exception occurred; use the non-minified dev environment for the full error message and additional helpful warnings."
-        );
-      } else {
-        var args = [a, b, c, d, e, f];
-        var argIndex = 0;
-        error = new Error(
-          format2.replace(/%s/g, function() {
-            return args[argIndex++];
-          })
-        );
-        error.name = "Invariant Violation";
-      }
-      error.framesToPop = 1;
-      throw error;
-    }
-  };
-  invariant_1 = invariant3;
-  return invariant_1;
-}
-var invariantExports = requireInvariant();
-const invariant = /* @__PURE__ */ getDefaultExportFromCjs(invariantExports);
-var shallowequal;
-var hasRequiredShallowequal;
-function requireShallowequal() {
-  if (hasRequiredShallowequal) return shallowequal;
-  hasRequiredShallowequal = 1;
-  shallowequal = function shallowEqual2(objA, objB, compare, compareContext) {
-    var ret = compare ? compare.call(compareContext, objA, objB) : void 0;
-    if (ret !== void 0) {
-      return !!ret;
-    }
-    if (objA === objB) {
-      return true;
-    }
-    if (typeof objA !== "object" || !objA || typeof objB !== "object" || !objB) {
-      return false;
-    }
-    var keysA = Object.keys(objA);
-    var keysB = Object.keys(objB);
-    if (keysA.length !== keysB.length) {
-      return false;
-    }
-    var bHasOwnProperty = Object.prototype.hasOwnProperty.bind(objB);
-    for (var idx = 0; idx < keysA.length; idx++) {
-      var key = keysA[idx];
-      if (!bHasOwnProperty(key)) {
-        return false;
-      }
-      var valueA = objA[key];
-      var valueB = objB[key];
-      ret = compare ? compare.call(compareContext, valueA, valueB, key) : void 0;
-      if (ret === false || ret === void 0 && valueA !== valueB) {
-        return false;
-      }
-    }
-    return true;
-  };
-  return shallowequal;
-}
-var shallowequalExports = requireShallowequal();
-const shallowEqual = /* @__PURE__ */ getDefaultExportFromCjs(shallowequalExports);
-var TAG_NAMES = /* @__PURE__ */ ((TAG_NAMES2) => {
-  TAG_NAMES2["BASE"] = "base";
-  TAG_NAMES2["BODY"] = "body";
-  TAG_NAMES2["HEAD"] = "head";
-  TAG_NAMES2["HTML"] = "html";
-  TAG_NAMES2["LINK"] = "link";
-  TAG_NAMES2["META"] = "meta";
-  TAG_NAMES2["NOSCRIPT"] = "noscript";
-  TAG_NAMES2["SCRIPT"] = "script";
-  TAG_NAMES2["STYLE"] = "style";
-  TAG_NAMES2["TITLE"] = "title";
-  TAG_NAMES2["FRAGMENT"] = "Symbol(react.fragment)";
-  return TAG_NAMES2;
-})(TAG_NAMES || {});
-var SEO_PRIORITY_TAGS = {
-  link: { rel: ["amphtml", "canonical", "alternate"] },
-  script: { type: ["application/ld+json"] },
-  meta: {
-    charset: "",
-    name: ["generator", "robots", "description"],
-    property: [
-      "og:type",
-      "og:title",
-      "og:url",
-      "og:image",
-      "og:image:alt",
-      "og:description",
-      "twitter:url",
-      "twitter:title",
-      "twitter:description",
-      "twitter:image",
-      "twitter:image:alt",
-      "twitter:card",
-      "twitter:site"
-    ]
-  }
-};
-var VALID_TAG_NAMES = Object.values(TAG_NAMES);
-var REACT_TAG_MAP = {
-  accesskey: "accessKey",
-  charset: "charSet",
-  class: "className",
-  contenteditable: "contentEditable",
-  contextmenu: "contextMenu",
-  "http-equiv": "httpEquiv",
-  itemprop: "itemProp",
-  tabindex: "tabIndex"
-};
-var HTML_TAG_MAP = Object.entries(REACT_TAG_MAP).reduce(
-  (carry, [key, value]) => {
-    carry[value] = key;
-    return carry;
-  },
-  {}
-);
-var HELMET_ATTRIBUTE = "data-rh";
-var HELMET_PROPS = {
-  DEFAULT_TITLE: "defaultTitle",
-  DEFER: "defer",
-  ENCODE_SPECIAL_CHARACTERS: "encodeSpecialCharacters",
-  ON_CHANGE_CLIENT_STATE: "onChangeClientState",
-  TITLE_TEMPLATE: "titleTemplate",
-  PRIORITIZE_SEO_TAGS: "prioritizeSeoTags"
-};
-var getInnermostProperty = (propsList, property) => {
-  for (let i = propsList.length - 1; i >= 0; i -= 1) {
-    const props = propsList[i];
-    if (Object.prototype.hasOwnProperty.call(props, property)) {
-      return props[property];
-    }
-  }
-  return null;
-};
-var getTitleFromPropsList = (propsList) => {
-  let innermostTitle = getInnermostProperty(
-    propsList,
-    "title"
-    /* TITLE */
-  );
-  const innermostTemplate = getInnermostProperty(propsList, HELMET_PROPS.TITLE_TEMPLATE);
-  if (Array.isArray(innermostTitle)) {
-    innermostTitle = innermostTitle.join("");
-  }
-  if (innermostTemplate && innermostTitle) {
-    return innermostTemplate.replace(/%s/g, () => innermostTitle);
-  }
-  const innermostDefaultTitle = getInnermostProperty(propsList, HELMET_PROPS.DEFAULT_TITLE);
-  return innermostTitle || innermostDefaultTitle || void 0;
-};
-var getOnChangeClientState = (propsList) => getInnermostProperty(propsList, HELMET_PROPS.ON_CHANGE_CLIENT_STATE) || (() => {
-});
-var getAttributesFromPropsList = (tagType, propsList) => propsList.filter((props) => typeof props[tagType] !== "undefined").map((props) => props[tagType]).reduce((tagAttrs, current) => ({ ...tagAttrs, ...current }), {});
-var getBaseTagFromPropsList = (primaryAttributes, propsList) => propsList.filter((props) => typeof props[
-  "base"
-  /* BASE */
-] !== "undefined").map((props) => props[
-  "base"
-  /* BASE */
-]).reverse().reduce((innermostBaseTag, tag) => {
-  if (!innermostBaseTag.length) {
-    const keys = Object.keys(tag);
-    for (let i = 0; i < keys.length; i += 1) {
-      const attributeKey = keys[i];
-      const lowerCaseAttributeKey = attributeKey.toLowerCase();
-      if (primaryAttributes.indexOf(lowerCaseAttributeKey) !== -1 && tag[lowerCaseAttributeKey]) {
-        return innermostBaseTag.concat(tag);
-      }
-    }
-  }
-  return innermostBaseTag;
-}, []);
-var warn$1 = (msg) => console && typeof console.warn === "function" && console.warn(msg);
-var getTagsFromPropsList = (tagName, primaryAttributes, propsList) => {
-  const approvedSeenTags = {};
-  return propsList.filter((props) => {
-    if (Array.isArray(props[tagName])) {
-      return true;
-    }
-    if (typeof props[tagName] !== "undefined") {
-      warn$1(
-        `Helmet: ${tagName} should be of type "Array". Instead found type "${typeof props[tagName]}"`
-      );
-    }
-    return false;
-  }).map((props) => props[tagName]).reverse().reduce((approvedTags, instanceTags) => {
-    const instanceSeenTags = {};
-    instanceTags.filter((tag) => {
-      let primaryAttributeKey;
-      const keys2 = Object.keys(tag);
-      for (let i = 0; i < keys2.length; i += 1) {
-        const attributeKey = keys2[i];
-        const lowerCaseAttributeKey = attributeKey.toLowerCase();
-        if (primaryAttributes.indexOf(lowerCaseAttributeKey) !== -1 && !(primaryAttributeKey === "rel" && tag[primaryAttributeKey].toLowerCase() === "canonical") && !(lowerCaseAttributeKey === "rel" && tag[lowerCaseAttributeKey].toLowerCase() === "stylesheet")) {
-          primaryAttributeKey = lowerCaseAttributeKey;
-        }
-        if (primaryAttributes.indexOf(attributeKey) !== -1 && (attributeKey === "innerHTML" || attributeKey === "cssText" || attributeKey === "itemprop")) {
-          primaryAttributeKey = attributeKey;
-        }
-      }
-      if (!primaryAttributeKey || !tag[primaryAttributeKey]) {
-        return false;
-      }
-      const value = tag[primaryAttributeKey].toLowerCase();
-      if (!approvedSeenTags[primaryAttributeKey]) {
-        approvedSeenTags[primaryAttributeKey] = {};
-      }
-      if (!instanceSeenTags[primaryAttributeKey]) {
-        instanceSeenTags[primaryAttributeKey] = {};
-      }
-      if (!approvedSeenTags[primaryAttributeKey][value]) {
-        instanceSeenTags[primaryAttributeKey][value] = true;
-        return true;
-      }
-      return false;
-    }).reverse().forEach((tag) => approvedTags.push(tag));
-    const keys = Object.keys(instanceSeenTags);
-    for (let i = 0; i < keys.length; i += 1) {
-      const attributeKey = keys[i];
-      const tagUnion = {
-        ...approvedSeenTags[attributeKey],
-        ...instanceSeenTags[attributeKey]
-      };
-      approvedSeenTags[attributeKey] = tagUnion;
-    }
-    return approvedTags;
-  }, []).reverse();
-};
-var getAnyTrueFromPropsList = (propsList, checkedTag) => {
-  if (Array.isArray(propsList) && propsList.length) {
-    for (let index = 0; index < propsList.length; index += 1) {
-      const prop = propsList[index];
-      if (prop[checkedTag]) {
-        return true;
-      }
-    }
-  }
-  return false;
-};
-var reducePropsToState = (propsList) => ({
-  baseTag: getBaseTagFromPropsList([
-    "href"
-    /* HREF */
-  ], propsList),
-  bodyAttributes: getAttributesFromPropsList("bodyAttributes", propsList),
-  defer: getInnermostProperty(propsList, HELMET_PROPS.DEFER),
-  encode: getInnermostProperty(propsList, HELMET_PROPS.ENCODE_SPECIAL_CHARACTERS),
-  htmlAttributes: getAttributesFromPropsList("htmlAttributes", propsList),
-  linkTags: getTagsFromPropsList(
-    "link",
-    [
-      "rel",
-      "href"
-      /* HREF */
-    ],
-    propsList
-  ),
-  metaTags: getTagsFromPropsList(
-    "meta",
-    [
-      "name",
-      "charset",
-      "http-equiv",
-      "property",
-      "itemprop"
-      /* ITEM_PROP */
-    ],
-    propsList
-  ),
-  noscriptTags: getTagsFromPropsList("noscript", [
-    "innerHTML"
-    /* INNER_HTML */
-  ], propsList),
-  onChangeClientState: getOnChangeClientState(propsList),
-  scriptTags: getTagsFromPropsList(
-    "script",
-    [
-      "src",
-      "innerHTML"
-      /* INNER_HTML */
-    ],
-    propsList
-  ),
-  styleTags: getTagsFromPropsList("style", [
-    "cssText"
-    /* CSS_TEXT */
-  ], propsList),
-  title: getTitleFromPropsList(propsList),
-  titleAttributes: getAttributesFromPropsList("titleAttributes", propsList),
-  prioritizeSeoTags: getAnyTrueFromPropsList(propsList, HELMET_PROPS.PRIORITIZE_SEO_TAGS)
-});
-var flattenArray = (possibleArray) => Array.isArray(possibleArray) ? possibleArray.join("") : possibleArray;
-var checkIfPropsMatch = (props, toMatch) => {
-  const keys = Object.keys(props);
-  for (let i = 0; i < keys.length; i += 1) {
-    if (toMatch[keys[i]] && toMatch[keys[i]].includes(props[keys[i]])) {
-      return true;
-    }
-  }
-  return false;
-};
-var prioritizer = (elementsList, propsToMatch) => {
-  if (Array.isArray(elementsList)) {
-    return elementsList.reduce(
-      (acc, elementAttrs) => {
-        if (checkIfPropsMatch(elementAttrs, propsToMatch)) {
-          acc.priority.push(elementAttrs);
-        } else {
-          acc.default.push(elementAttrs);
-        }
-        return acc;
-      },
-      { priority: [], default: [] }
-    );
-  }
-  return { default: elementsList, priority: [] };
-};
-var without = (obj, key) => {
-  return {
-    ...obj,
-    [key]: void 0
-  };
-};
-var SELF_CLOSING_TAGS = [
-  "noscript",
-  "script",
-  "style"
-  /* STYLE */
-];
-var encodeSpecialCharacters = (str, encode2 = true) => {
-  if (encode2 === false) {
-    return String(str);
-  }
-  return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#x27;");
-};
-var generateElementAttributesAsString = (attributes) => Object.keys(attributes).reduce((str, key) => {
-  const attr = typeof attributes[key] !== "undefined" ? `${key}="${attributes[key]}"` : `${key}`;
-  return str ? `${str} ${attr}` : attr;
-}, "");
-var generateTitleAsString = (type, title, attributes, encode2) => {
-  const attributeString = generateElementAttributesAsString(attributes);
-  const flattenedTitle = flattenArray(title);
-  return attributeString ? `<${type} ${HELMET_ATTRIBUTE}="true" ${attributeString}>${encodeSpecialCharacters(
-    flattenedTitle,
-    encode2
-  )}</${type}>` : `<${type} ${HELMET_ATTRIBUTE}="true">${encodeSpecialCharacters(
-    flattenedTitle,
-    encode2
-  )}</${type}>`;
-};
-var generateTagsAsString = (type, tags, encode2 = true) => tags.reduce((str, t) => {
-  const tag = t;
-  const attributeHtml = Object.keys(tag).filter(
-    (attribute) => !(attribute === "innerHTML" || attribute === "cssText")
-  ).reduce((string, attribute) => {
-    const attr = typeof tag[attribute] === "undefined" ? attribute : `${attribute}="${encodeSpecialCharacters(tag[attribute], encode2)}"`;
-    return string ? `${string} ${attr}` : attr;
-  }, "");
-  const tagContent = tag.innerHTML || tag.cssText || "";
-  const isSelfClosing = SELF_CLOSING_TAGS.indexOf(type) === -1;
-  return `${str}<${type} ${HELMET_ATTRIBUTE}="true" ${attributeHtml}${isSelfClosing ? `/>` : `>${tagContent}</${type}>`}`;
-}, "");
-var convertElementAttributesToReactProps = (attributes, initProps = {}) => Object.keys(attributes).reduce((obj, key) => {
-  const mapped = REACT_TAG_MAP[key];
-  obj[mapped || key] = attributes[key];
-  return obj;
-}, initProps);
-var generateTitleAsReactComponent = (_type, title, attributes) => {
-  const initProps = {
-    key: title,
-    [HELMET_ATTRIBUTE]: true
-  };
-  const props = convertElementAttributesToReactProps(attributes, initProps);
-  return [React2.createElement("title", props, title)];
-};
-var generateTagsAsReactComponent = (type, tags) => tags.map((tag, i) => {
-  const mappedTag = {
-    key: i,
-    [HELMET_ATTRIBUTE]: true
-  };
-  Object.keys(tag).forEach((attribute) => {
-    const mapped = REACT_TAG_MAP[attribute];
-    const mappedAttribute = mapped || attribute;
-    if (mappedAttribute === "innerHTML" || mappedAttribute === "cssText") {
-      const content = tag.innerHTML || tag.cssText;
-      mappedTag.dangerouslySetInnerHTML = { __html: content };
-    } else {
-      mappedTag[mappedAttribute] = tag[attribute];
-    }
-  });
-  return React2.createElement(type, mappedTag);
-});
-var getMethodsForTag = (type, tags, encode2 = true) => {
-  switch (type) {
-    case "title":
-      return {
-        toComponent: () => generateTitleAsReactComponent(type, tags.title, tags.titleAttributes),
-        toString: () => generateTitleAsString(type, tags.title, tags.titleAttributes, encode2)
-      };
-    case "bodyAttributes":
-    case "htmlAttributes":
-      return {
-        toComponent: () => convertElementAttributesToReactProps(tags),
-        toString: () => generateElementAttributesAsString(tags)
-      };
-    default:
-      return {
-        toComponent: () => generateTagsAsReactComponent(type, tags),
-        toString: () => generateTagsAsString(type, tags, encode2)
-      };
-  }
-};
-var getPriorityMethods = ({ metaTags, linkTags, scriptTags, encode: encode2 }) => {
-  const meta = prioritizer(metaTags, SEO_PRIORITY_TAGS.meta);
-  const link = prioritizer(linkTags, SEO_PRIORITY_TAGS.link);
-  const script = prioritizer(scriptTags, SEO_PRIORITY_TAGS.script);
-  const priorityMethods = {
-    toComponent: () => [
-      ...generateTagsAsReactComponent("meta", meta.priority),
-      ...generateTagsAsReactComponent("link", link.priority),
-      ...generateTagsAsReactComponent("script", script.priority)
-    ],
-    toString: () => (
-      // generate all the tags as strings and concatenate them
-      `${getMethodsForTag("meta", meta.priority, encode2)} ${getMethodsForTag(
-        "link",
-        link.priority,
-        encode2
-      )} ${getMethodsForTag("script", script.priority, encode2)}`
-    )
-  };
-  return {
-    priorityMethods,
-    metaTags: meta.default,
-    linkTags: link.default,
-    scriptTags: script.default
-  };
-};
-var mapStateOnServer = (props) => {
-  const {
-    baseTag,
-    bodyAttributes,
-    encode: encode2 = true,
-    htmlAttributes,
-    noscriptTags,
-    styleTags,
-    title = "",
-    titleAttributes,
-    prioritizeSeoTags
-  } = props;
-  let { linkTags, metaTags, scriptTags } = props;
-  let priorityMethods = {
-    toComponent: () => [],
-    toString: () => ""
-  };
-  if (prioritizeSeoTags) {
-    ({ priorityMethods, linkTags, metaTags, scriptTags } = getPriorityMethods(props));
-  }
-  return {
-    priority: priorityMethods,
-    base: getMethodsForTag("base", baseTag, encode2),
-    bodyAttributes: getMethodsForTag("bodyAttributes", bodyAttributes, encode2),
-    htmlAttributes: getMethodsForTag("htmlAttributes", htmlAttributes, encode2),
-    link: getMethodsForTag("link", linkTags, encode2),
-    meta: getMethodsForTag("meta", metaTags, encode2),
-    noscript: getMethodsForTag("noscript", noscriptTags, encode2),
-    script: getMethodsForTag("script", scriptTags, encode2),
-    style: getMethodsForTag("style", styleTags, encode2),
-    title: getMethodsForTag("title", { title, titleAttributes }, encode2)
-  };
-};
-var server_default = mapStateOnServer;
-var instances = [];
-var isDocument = !!(typeof window !== "undefined" && window.document && window.document.createElement);
-var HelmetData = class {
-  instances = [];
-  canUseDOM = isDocument;
-  context;
-  value = {
-    setHelmet: (serverState) => {
-      this.context.helmet = serverState;
-    },
-    helmetInstances: {
-      get: () => this.canUseDOM ? instances : this.instances,
-      add: (instance) => {
-        (this.canUseDOM ? instances : this.instances).push(instance);
-      },
-      remove: (instance) => {
-        const index = (this.canUseDOM ? instances : this.instances).indexOf(instance);
-        (this.canUseDOM ? instances : this.instances).splice(index, 1);
-      }
-    }
-  };
-  constructor(context2, canUseDOM) {
-    this.context = context2;
-    this.canUseDOM = canUseDOM || false;
-    if (!canUseDOM) {
-      context2.helmet = server_default({
-        baseTag: [],
-        bodyAttributes: {},
-        htmlAttributes: {},
-        linkTags: [],
-        metaTags: [],
-        noscriptTags: [],
-        scriptTags: [],
-        styleTags: [],
-        title: "",
-        titleAttributes: {}
-      });
-    }
-  }
-};
-var major = parseInt(React2.version.split(".")[0], 10);
-var isReact19 = major >= 19;
-var defaultValue = {};
-var Context = React2.createContext(defaultValue);
-var HelmetProvider = class _HelmetProvider extends reactExports.Component {
-  static canUseDOM = isDocument;
-  helmetData;
-  constructor(props) {
-    super(props);
-    if (isReact19) {
-      this.helmetData = null;
-    } else {
-      this.helmetData = new HelmetData(this.props.context || {}, _HelmetProvider.canUseDOM);
-    }
-  }
-  render() {
-    if (isReact19) {
-      return /* @__PURE__ */ React2.createElement(React2.Fragment, null, this.props.children);
-    }
-    return /* @__PURE__ */ React2.createElement(Context.Provider, { value: this.helmetData.value }, this.props.children);
-  }
-};
-var updateTags = (type, tags) => {
-  const headElement = document.head || document.querySelector(
-    "head"
-    /* HEAD */
-  );
-  const tagNodes = headElement.querySelectorAll(`${type}[${HELMET_ATTRIBUTE}]`);
-  const oldTags = [].slice.call(tagNodes);
-  const newTags = [];
-  let indexToDelete;
-  if (tags && tags.length) {
-    tags.forEach((tag) => {
-      const newElement = document.createElement(type);
-      for (const attribute in tag) {
-        if (Object.prototype.hasOwnProperty.call(tag, attribute)) {
-          if (attribute === "innerHTML") {
-            newElement.innerHTML = tag.innerHTML;
-          } else if (attribute === "cssText") {
-            const cssText = tag.cssText;
-            newElement.appendChild(document.createTextNode(cssText));
-          } else {
-            const attr = attribute;
-            const value = typeof tag[attr] === "undefined" ? "" : tag[attr];
-            newElement.setAttribute(attribute, value);
-          }
-        }
-      }
-      newElement.setAttribute(HELMET_ATTRIBUTE, "true");
-      if (oldTags.some((existingTag, index) => {
-        indexToDelete = index;
-        return newElement.isEqualNode(existingTag);
-      })) {
-        oldTags.splice(indexToDelete, 1);
-      } else {
-        newTags.push(newElement);
-      }
-    });
-  }
-  oldTags.forEach((tag) => tag.parentNode?.removeChild(tag));
-  newTags.forEach((tag) => headElement.appendChild(tag));
-  return {
-    oldTags,
-    newTags
-  };
-};
-var updateAttributes = (tagName, attributes) => {
-  const elementTag = document.getElementsByTagName(tagName)[0];
-  if (!elementTag) {
-    return;
-  }
-  const helmetAttributeString = elementTag.getAttribute(HELMET_ATTRIBUTE);
-  const helmetAttributes = helmetAttributeString ? helmetAttributeString.split(",") : [];
-  const attributesToRemove = [...helmetAttributes];
-  const attributeKeys = Object.keys(attributes);
-  for (const attribute of attributeKeys) {
-    const value = attributes[attribute] || "";
-    if (elementTag.getAttribute(attribute) !== value) {
-      elementTag.setAttribute(attribute, value);
-    }
-    if (helmetAttributes.indexOf(attribute) === -1) {
-      helmetAttributes.push(attribute);
-    }
-    const indexToSave = attributesToRemove.indexOf(attribute);
-    if (indexToSave !== -1) {
-      attributesToRemove.splice(indexToSave, 1);
-    }
-  }
-  for (let i = attributesToRemove.length - 1; i >= 0; i -= 1) {
-    elementTag.removeAttribute(attributesToRemove[i]);
-  }
-  if (helmetAttributes.length === attributesToRemove.length) {
-    elementTag.removeAttribute(HELMET_ATTRIBUTE);
-  } else if (elementTag.getAttribute(HELMET_ATTRIBUTE) !== attributeKeys.join(",")) {
-    elementTag.setAttribute(HELMET_ATTRIBUTE, attributeKeys.join(","));
-  }
-};
-var updateTitle = (title, attributes) => {
-  if (typeof title !== "undefined" && document.title !== title) {
-    document.title = flattenArray(title);
-  }
-  updateAttributes("title", attributes);
-};
-var commitTagChanges = (newState, cb) => {
-  const {
-    baseTag,
-    bodyAttributes,
-    htmlAttributes,
-    linkTags,
-    metaTags,
-    noscriptTags,
-    onChangeClientState,
-    scriptTags,
-    styleTags,
-    title,
-    titleAttributes
-  } = newState;
-  updateAttributes("body", bodyAttributes);
-  updateAttributes("html", htmlAttributes);
-  updateTitle(title, titleAttributes);
-  const tagUpdates = {
-    baseTag: updateTags("base", baseTag),
-    linkTags: updateTags("link", linkTags),
-    metaTags: updateTags("meta", metaTags),
-    noscriptTags: updateTags("noscript", noscriptTags),
-    scriptTags: updateTags("script", scriptTags),
-    styleTags: updateTags("style", styleTags)
-  };
-  const addedTags = {};
-  const removedTags = {};
-  Object.keys(tagUpdates).forEach((tagType) => {
-    const { newTags, oldTags } = tagUpdates[tagType];
-    if (newTags.length) {
-      addedTags[tagType] = newTags;
-    }
-    if (oldTags.length) {
-      removedTags[tagType] = tagUpdates[tagType].oldTags;
-    }
-  });
-  if (cb) {
-    cb();
-  }
-  onChangeClientState(newState, addedTags, removedTags);
-};
-var _helmetCallback = null;
-var handleStateChangeOnClient = (newState) => {
-  if (_helmetCallback) {
-    cancelAnimationFrame(_helmetCallback);
-  }
-  if (newState.defer) {
-    _helmetCallback = requestAnimationFrame(() => {
-      commitTagChanges(newState, () => {
-        _helmetCallback = null;
-      });
-    });
-  } else {
-    commitTagChanges(newState);
-    _helmetCallback = null;
-  }
-};
-var client_default = handleStateChangeOnClient;
-var HelmetDispatcher = class extends reactExports.Component {
-  rendered = false;
-  shouldComponentUpdate(nextProps) {
-    return !shallowEqual(nextProps, this.props);
-  }
-  componentDidUpdate() {
-    this.emitChange();
-  }
-  componentWillUnmount() {
-    const { helmetInstances } = this.props.context;
-    helmetInstances.remove(this);
-    this.emitChange();
-  }
-  emitChange() {
-    const { helmetInstances, setHelmet } = this.props.context;
-    let serverState = null;
-    const state = reducePropsToState(
-      helmetInstances.get().map((instance) => {
-        const { context: _context, ...props } = instance.props;
-        return props;
-      })
-    );
-    if (HelmetProvider.canUseDOM) {
-      client_default(state);
-    } else if (server_default) {
-      serverState = server_default(state);
-    }
-    setHelmet(serverState);
-  }
-  // componentWillMount will be deprecated
-  // for SSR, initialize on first render
-  // constructor is also unsafe in StrictMode
-  init() {
-    if (this.rendered) {
-      return;
-    }
-    this.rendered = true;
-    const { helmetInstances } = this.props.context;
-    helmetInstances.add(this);
-    this.emitChange();
-  }
-  render() {
-    this.init();
-    return null;
-  }
-};
-var react19Instances = [];
-var toHtmlAttributes = (props) => {
-  const result = {};
-  for (const key of Object.keys(props)) {
-    result[HTML_TAG_MAP[key] || key] = props[key];
-  }
-  return result;
-};
-var toReactProps = (attrs) => {
-  const result = {};
-  for (const key of Object.keys(attrs)) {
-    const mapped = REACT_TAG_MAP[key];
-    result[mapped || key] = attrs[key];
-  }
-  return result;
-};
-var applyAttributes = (tagName, attributes) => {
-  if (!isDocument)
-    return;
-  const el = document.getElementsByTagName(tagName)[0];
-  if (!el)
-    return;
-  const managedAttr = "data-rh-managed";
-  const prev = el.getAttribute(managedAttr);
-  const prevKeys = prev ? prev.split(",") : [];
-  const nextKeys = Object.keys(attributes);
-  for (const key of prevKeys) {
-    if (!nextKeys.includes(key)) {
-      el.removeAttribute(key);
-    }
-  }
-  for (const key of nextKeys) {
-    const value = attributes[key];
-    if (value === void 0 || value === null || value === false) {
-      el.removeAttribute(key);
-    } else if (value === true) {
-      el.setAttribute(key, "");
-    } else {
-      el.setAttribute(key, String(value));
-    }
-  }
-  if (nextKeys.length > 0) {
-    el.setAttribute(managedAttr, nextKeys.join(","));
-  } else {
-    el.removeAttribute(managedAttr);
-  }
-};
-var syncAllAttributes = () => {
-  const htmlAttrs = {};
-  const bodyAttrs = {};
-  for (const instance of react19Instances) {
-    const { htmlAttributes, bodyAttributes } = instance.props;
-    if (htmlAttributes) {
-      Object.assign(htmlAttrs, toHtmlAttributes(htmlAttributes));
-    }
-    if (bodyAttributes) {
-      Object.assign(bodyAttrs, toHtmlAttributes(bodyAttributes));
-    }
-  }
-  applyAttributes("html", htmlAttrs);
-  applyAttributes("body", bodyAttrs);
-};
-var React19Dispatcher = class extends reactExports.Component {
-  componentDidMount() {
-    react19Instances.push(this);
-    syncAllAttributes();
-  }
-  componentDidUpdate() {
-    syncAllAttributes();
-  }
-  componentWillUnmount() {
-    const index = react19Instances.indexOf(this);
-    if (index !== -1) {
-      react19Instances.splice(index, 1);
-    }
-    syncAllAttributes();
-  }
-  resolveTitle() {
-    const { title, titleTemplate, defaultTitle } = this.props;
-    if (title && titleTemplate) {
-      return titleTemplate.replace(/%s/g, () => Array.isArray(title) ? title.join("") : title);
-    }
-    return title || defaultTitle || void 0;
-  }
-  renderTitle() {
-    const title = this.resolveTitle();
-    if (title === void 0)
-      return null;
-    const titleAttributes = this.props.titleAttributes || {};
-    return React2.createElement("title", toReactProps(titleAttributes), title);
-  }
-  renderBase() {
-    const { base } = this.props;
-    if (!base)
-      return null;
-    return React2.createElement("base", toReactProps(base));
-  }
-  renderMeta() {
-    const { meta } = this.props;
-    if (!meta || !Array.isArray(meta))
-      return null;
-    return meta.map(
-      (attrs, i) => React2.createElement("meta", {
-        key: i,
-        ...toReactProps(attrs)
-      })
-    );
-  }
-  renderLink() {
-    const { link } = this.props;
-    if (!link || !Array.isArray(link))
-      return null;
-    return link.map(
-      (attrs, i) => React2.createElement("link", {
-        key: i,
-        ...toReactProps(attrs)
-      })
-    );
-  }
-  renderScript() {
-    const { script } = this.props;
-    if (!script || !Array.isArray(script))
-      return null;
-    return script.map((attrs, i) => {
-      const { innerHTML, ...rest } = attrs;
-      const props = toReactProps(rest);
-      if (innerHTML) {
-        props.dangerouslySetInnerHTML = { __html: innerHTML };
-      }
-      return React2.createElement("script", { key: i, ...props });
-    });
-  }
-  renderStyle() {
-    const { style: style2 } = this.props;
-    if (!style2 || !Array.isArray(style2))
-      return null;
-    return style2.map((attrs, i) => {
-      const { cssText, ...rest } = attrs;
-      const props = toReactProps(rest);
-      if (cssText) {
-        props.dangerouslySetInnerHTML = { __html: cssText };
-      }
-      return React2.createElement("style", { key: i, ...props });
-    });
-  }
-  renderNoscript() {
-    const { noscript } = this.props;
-    if (!noscript || !Array.isArray(noscript))
-      return null;
-    return noscript.map((attrs, i) => {
-      const { innerHTML, ...rest } = attrs;
-      const props = toReactProps(rest);
-      if (innerHTML) {
-        props.dangerouslySetInnerHTML = { __html: innerHTML };
-      }
-      return React2.createElement("noscript", { key: i, ...props });
-    });
-  }
-  render() {
-    return React2.createElement(
-      React2.Fragment,
-      null,
-      this.renderTitle(),
-      this.renderBase(),
-      this.renderMeta(),
-      this.renderLink(),
-      this.renderScript(),
-      this.renderStyle(),
-      this.renderNoscript()
-    );
-  }
-};
-var Helmet = class extends reactExports.Component {
-  static defaultProps = {
-    defer: true,
-    encodeSpecialCharacters: true,
-    prioritizeSeoTags: false
-  };
-  shouldComponentUpdate(nextProps) {
-    return !fastCompare(without(this.props, "helmetData"), without(nextProps, "helmetData"));
-  }
-  mapNestedChildrenToProps(child, nestedChildren) {
-    if (!nestedChildren) {
-      return null;
-    }
-    switch (child.type) {
-      case "script":
-      case "noscript":
-        return {
-          innerHTML: nestedChildren
-        };
-      case "style":
-        return {
-          cssText: nestedChildren
-        };
-      default:
-        throw new Error(
-          `<${child.type} /> elements are self-closing and can not contain children. Refer to our API for more information.`
-        );
-    }
-  }
-  flattenArrayTypeChildren(child, arrayTypeChildren, newChildProps, nestedChildren) {
-    return {
-      ...arrayTypeChildren,
-      [child.type]: [
-        ...arrayTypeChildren[child.type] || [],
-        {
-          ...newChildProps,
-          ...this.mapNestedChildrenToProps(child, nestedChildren)
-        }
-      ]
-    };
-  }
-  mapObjectTypeChildren(child, newProps, newChildProps, nestedChildren) {
-    switch (child.type) {
-      case "title":
-        return {
-          ...newProps,
-          [child.type]: nestedChildren,
-          titleAttributes: { ...newChildProps }
-        };
-      case "body":
-        return {
-          ...newProps,
-          bodyAttributes: { ...newChildProps }
-        };
-      case "html":
-        return {
-          ...newProps,
-          htmlAttributes: { ...newChildProps }
-        };
-      default:
-        return {
-          ...newProps,
-          [child.type]: { ...newChildProps }
-        };
-    }
-  }
-  mapArrayTypeChildrenToProps(arrayTypeChildren, newProps) {
-    let newFlattenedProps = { ...newProps };
-    Object.keys(arrayTypeChildren).forEach((arrayChildName) => {
-      newFlattenedProps = {
-        ...newFlattenedProps,
-        [arrayChildName]: arrayTypeChildren[arrayChildName]
-      };
-    });
-    return newFlattenedProps;
-  }
-  warnOnInvalidChildren(child, nestedChildren) {
-    invariant(
-      VALID_TAG_NAMES.some((name) => child.type === name),
-      typeof child.type === "function" ? `You may be attempting to nest <Helmet> components within each other, which is not allowed. Refer to our API for more information.` : `Only elements types ${VALID_TAG_NAMES.join(
-        ", "
-      )} are allowed. Helmet does not support rendering <${child.type}> elements. Refer to our API for more information.`
-    );
-    invariant(
-      !nestedChildren || typeof nestedChildren === "string" || Array.isArray(nestedChildren) && !nestedChildren.some((nestedChild) => typeof nestedChild !== "string"),
-      `Helmet expects a string as a child of <${child.type}>. Did you forget to wrap your children in braces? ( <${child.type}>{\`\`}</${child.type}> ) Refer to our API for more information.`
-    );
-    return true;
-  }
-  mapChildrenToProps(children2, newProps) {
-    let arrayTypeChildren = {};
-    React2.Children.forEach(children2, (child) => {
-      if (!child || !child.props) {
-        return;
-      }
-      const { children: nestedChildren, ...childProps } = child.props;
-      const newChildProps = Object.keys(childProps).reduce((obj, key) => {
-        obj[HTML_TAG_MAP[key] || key] = childProps[key];
-        return obj;
-      }, {});
-      let { type } = child;
-      if (typeof type === "symbol") {
-        type = type.toString();
-      } else {
-        this.warnOnInvalidChildren(child, nestedChildren);
-      }
-      switch (type) {
-        case "Symbol(react.fragment)":
-          newProps = this.mapChildrenToProps(nestedChildren, newProps);
-          break;
-        case "link":
-        case "meta":
-        case "noscript":
-        case "script":
-        case "style":
-          arrayTypeChildren = this.flattenArrayTypeChildren(
-            child,
-            arrayTypeChildren,
-            newChildProps,
-            nestedChildren
-          );
-          break;
-        default:
-          newProps = this.mapObjectTypeChildren(child, newProps, newChildProps, nestedChildren);
-          break;
-      }
-    });
-    return this.mapArrayTypeChildrenToProps(arrayTypeChildren, newProps);
-  }
-  render() {
-    const { children: children2, ...props } = this.props;
-    let newProps = { ...props };
-    let { helmetData } = props;
-    if (children2) {
-      newProps = this.mapChildrenToProps(children2, newProps);
-    }
-    if (helmetData && !(helmetData instanceof HelmetData)) {
-      const data2 = helmetData;
-      helmetData = new HelmetData(data2.context, true);
-      delete newProps.helmetData;
-    }
-    if (isReact19) {
-      return /* @__PURE__ */ React2.createElement(React19Dispatcher, { ...newProps });
-    }
-    return helmetData ? /* @__PURE__ */ React2.createElement(HelmetDispatcher, { ...newProps, context: helmetData.value }) : /* @__PURE__ */ React2.createElement(Context.Consumer, null, (context2) => /* @__PURE__ */ React2.createElement(HelmetDispatcher, { ...newProps, context: context2 }));
-  }
-};
-const SITE_NAME = "EdgeLancer";
-const DEFAULT_OG_IMAGE = "/og-image.png";
-const TWITTER_HANDLE = "@edgelancern8n";
-const FRONTEND_ORIGIN = "http://localhost:8000";
-const API_DOMAINS = [
-  "api.edgelancer.com",
-  ..."http://localhost:8000/api".startsWith("http") ? [new URL("http://localhost:8000/api").hostname] : []
-];
-function sanitizeUrl(rawUrl) {
-  if (!rawUrl) return "";
-  try {
-    const parsed = new URL(rawUrl);
-    const isApiDomain = API_DOMAINS.some((d) => parsed.hostname.includes(d));
-    if (isApiDomain) {
-      return `${FRONTEND_ORIGIN}${parsed.pathname}${parsed.search}`;
-    }
-    return rawUrl;
-  } catch {
-    return rawUrl;
-  }
-}
-const SEOHelmet = ({
-  title,
-  description = "",
-  keywords = "",
-  ogImage = "",
-  url = "",
-  canonical,
-  metaTags = {},
-  structuredData,
-  robots,
-  ogType = "website",
-  publishedTime,
-  modifiedTime
-}) => {
-  const isStaging = typeof window !== "undefined" && (window.location.hostname.includes("hstgr.cloud") || window.location.hostname.includes("srv1381478"));
-  const finalRobots = isStaging ? "noindex, nofollow" : robots;
-  let finalOgImage = ogImage;
-  if (finalOgImage && !finalOgImage.startsWith("http")) {
-    finalOgImage = `${FRONTEND_ORIGIN}${finalOgImage.startsWith("/") ? "" : "/"}${finalOgImage}`;
-  } else if (!finalOgImage) {
-    finalOgImage = `${FRONTEND_ORIGIN}${DEFAULT_OG_IMAGE.startsWith("/") ? "" : "/"}${DEFAULT_OG_IMAGE}`;
-  }
-  const safeCanonical = sanitizeUrl(canonical);
-  const safeUrl = sanitizeUrl(url) || url;
-  let canonicalUrl = safeCanonical || safeUrl;
-  if (canonicalUrl && canonicalUrl.includes("?") && !safeCanonical) {
-    canonicalUrl = canonicalUrl.split("?")[0];
-  }
-  const pageUrl = safeUrl || "";
-  const structuredDataString = reactExports.useMemo(() => {
-    if (!structuredData) return null;
-    try {
-      return JSON.stringify(structuredData);
-    } catch (e) {
-      console.error("Failed to stringify structured data:", e);
-      return null;
-    }
-  }, [structuredData]);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(Helmet, { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("title", { children: title }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { name: "description", content: description }),
-    keywords && /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { name: "keywords", content: keywords }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { name: "robots", content: finalRobots }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { name: "googlebot", content: finalRobots }),
-    canonicalUrl && /* @__PURE__ */ jsxRuntimeExports.jsx("link", { rel: "canonical", href: canonicalUrl }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { property: "og:site_name", content: SITE_NAME }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { property: "og:locale", content: "en_US" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { property: "og:type", content: ogType }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { property: "og:title", content: title }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { property: "og:description", content: description }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { property: "og:url", content: pageUrl }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { property: "og:image", content: finalOgImage }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { property: "og:image:width", content: "1200" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { property: "og:image:height", content: "630" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { property: "og:image:alt", content: `${title} – ${SITE_NAME}` }),
-    ogType === "article" && publishedTime && /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { property: "article:published_time", content: publishedTime }),
-    ogType === "article" && modifiedTime && /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { property: "article:modified_time", content: modifiedTime }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { name: "twitter:card", content: "summary_large_image" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { name: "twitter:site", content: TWITTER_HANDLE }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { name: "twitter:creator", content: TWITTER_HANDLE }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { name: "twitter:title", content: title }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { name: "twitter:description", content: description }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { name: "twitter:image", content: finalOgImage }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { name: "twitter:image:alt", content: `${title} – ${SITE_NAME}` }),
-    Object.entries(metaTags).map(([key, value]) => {
-      if (!value || typeof value !== "string") return null;
-      const isProperty = key.startsWith("og:") || key.startsWith("fb:") || key.startsWith("article:");
-      return isProperty ? /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { property: key, content: value }, key) : /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { name: key, content: value }, key);
-    }),
-    structuredDataString && /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "script",
-      {
-        type: "application/ld+json",
-        dangerouslySetInnerHTML: { __html: structuredDataString }
-      }
-    )
-  ] });
-};
-function HomePage() {
-  const ssrData = useSSRContext();
-  const [stats, setStats] = reactExports.useState(() => {
-    if (ssrData.stats && !Array.isArray(ssrData.stats)) {
-      return [
-        { label: "Workflow Views", value: ssrData.stats.total_visits || 0, suffix: "", decimals: 0 },
-        { label: "Active Users", value: ssrData.stats.active_users_today || 0, suffix: "", decimals: 0 },
-        { label: "Total Workflows", value: ssrData.stats.total_workflows || 0, suffix: "+", decimals: 0 }
-      ];
-    }
-    return ssrData.stats || [];
-  });
-  const [categories, setCategories] = reactExports.useState(ssrData.categories || []);
-  const [initialWorkflows, setInitialWorkflows] = reactExports.useState(ssrData.workflows || []);
-  const [blogs, setBlogs] = reactExports.useState(ssrData.blogs || []);
-  const [isLoading, setIsLoading] = reactExports.useState(!ssrData.stats);
-  reactExports.useEffect(() => {
-    async function loadData() {
-      try {
-        const [statsData, categoriesData, workflowsData, blogsData] = await Promise.all([
-          fetchWorkflowStats(),
-          fetchWorkflowCategories(),
-          fetchWorkflowLibrary(1, 12),
-          fetchBlogs(1, 20)
-        ]);
-        if (statsData) {
-          setStats([
-            { label: "Workflow Views", value: statsData.total_visits || 0, suffix: "", decimals: 0 },
-            { label: "Active Users", value: statsData.active_users_today || 0, suffix: "", decimals: 0 },
-            { label: "Total Workflows", value: statsData.total_workflows || 0, suffix: "+", decimals: 0 }
-          ]);
-        }
-        setCategories(categoriesData || []);
-        setInitialWorkflows(workflowsData?.data || []);
-        setBlogs(blogsData?.data || []);
-      } catch (error) {
-        console.error("Failed to fetch homepage data:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    loadData();
-  }, []);
-  if (isLoading) {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "min-h-screen bg-[#020204] flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingScreen, {}) });
-  }
-  const origin = typeof window !== "undefined" ? window.location.origin : "https://edge.srv1381478.hstgr.cloud";
-  const organizationJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "EdgeLancer",
-    url: origin,
-    logo: `${origin}/favicon.png`,
-    description: "Download ready-to-use n8n workflow automation templates. Connect apps, automate tasks, and build powerful AI agents with EdgeLancer.",
-    sameAs: [
-      "https://twitter.com/edgelancer",
-      "https://github.com/edgelancer",
-      "https://linkedin.com/company/edgelancer"
-    ]
-  };
-  const websiteJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: "EdgeLancer",
-    url: origin,
-    potentialAction: {
-      "@type": "SearchAction",
-      target: `${origin}/workflows?search={search_term_string}`,
-      "query-input": "required name=search_term_string"
-    }
-  };
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen bg-[#020204] text-slate-200 font-sans selection:bg-indigo-500/30 overflow-x-hidden", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      SEOHelmet,
-      {
-        title: ssrData.seo?.title || "Download Premium n8n Workflow Templates - EdgeLancer",
-        description: ssrData.seo?.description || "Ready-to-use n8n workflow automation templates. Connect apps, automate tasks, and build powerful AI agents with EdgeLancer.",
-        keywords: ssrData.seo?.keywords,
-        ogImage: ssrData.seo?.og_image,
-        metaTags: ssrData.seo?.meta_tags,
-        structuredData: ssrData.seo?.structured_data
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "script",
-      {
-        type: "application/ld+json",
-        dangerouslySetInnerHTML: { __html: JSON.stringify(organizationJsonLd) }
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "script",
-      {
-        type: "application/ld+json",
-        dangerouslySetInnerHTML: { __html: JSON.stringify(websiteJsonLd) }
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(LazyStarfield, {}),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "fixed inset-0 bg-[url('/noise.svg')] opacity-[0.03] pointer-events-none z-[1]" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative z-10", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(PublicNavbar, {}),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { id: "main-content", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Hero, { initialStats: stats }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(ProductionTemplates, { initialWorkflows, initialCategories: categories }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(CategoriesSection, { initialCategories: categories }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(BlogsSection, { initialBlogs: blogs }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(BentoGrid, {}),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(CodeDemoSection, {}),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(FAQSection, {}),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(CTASection, {})
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(PublicFooter, {})
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("style", { dangerouslySetInnerHTML: {
-      __html: `
-                @keyframes dash {
-                  to { stroke-dashoffset: -40; }
-                }
-                .custom-scrollbar::-webkit-scrollbar {
-                    height: 4px;
-                    width: 4px;
-                }
-                .custom-scrollbar::-webkit-scrollbar-track {
-                    background: transparent;
-                }
-                .custom-scrollbar::-webkit-scrollbar-thumb {
-                    background: #333;
-                    border-radius: 4px;
-                }
-            `
-    } })
-  ] });
-}
-function LoadingScreen() {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-col items-center justify-center animate-in fade-in zoom-in duration-700", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-24 h-24 border-4 border-indigo-500/30 border-t-indigo-500 rounded-full animate-spin" }) });
-}
-function PublicNavbarLayout({ children: children2, className }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: cn("min-h-screen bg-[#0a0a0f]", className), children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(PublicNavbar, {}),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("main", { id: "main-content", className: "pt-16 md:pt-20", children: children2 }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(PublicFooter, {})
-  ] });
-}
-const Card = reactExports.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-  "div",
-  {
-    ref,
-    className: cn(
-      "rounded-xl border bg-card text-card-foreground shadow",
-      className
-    ),
-    ...props
-  }
-));
-Card.displayName = "Card";
-const CardHeader = reactExports.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-  "div",
-  {
-    ref,
-    className: cn("flex flex-col space-y-1.5 p-6", className),
-    ...props
-  }
-));
-CardHeader.displayName = "CardHeader";
-const CardTitle = reactExports.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-  "h3",
-  {
-    ref,
-    className: cn("font-semibold leading-none tracking-tight", className),
-    ...props
-  }
-));
-CardTitle.displayName = "CardTitle";
-const CardDescription = reactExports.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-  "p",
-  {
-    ref,
-    className: cn("text-sm text-muted-foreground", className),
-    ...props
-  }
-));
-CardDescription.displayName = "CardDescription";
-const CardContent = reactExports.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx("div", { ref, className: cn("p-6 pt-0", className), ...props }));
-CardContent.displayName = "CardContent";
-const CardFooter = reactExports.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-  "div",
-  {
-    ref,
-    className: cn("flex items-center p-6 pt-0", className),
-    ...props
-  }
-));
-CardFooter.displayName = "CardFooter";
-function Skeleton({
-  className,
-  ...props
-}) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    "div",
-    {
-      className: cn("animate-pulse rounded-md bg-primary/10", className),
-      ...props
-    }
-  );
-}
-const BlogCard = reactExports.memo(({ blog }) => {
-  const getImageUrl2 = (url) => {
-    if (!url) return null;
-    if (url.includes("localhost")) return null;
-    return url;
-  };
-  const getAuthorInitial = (name) => (name || "N").charAt(0).toUpperCase();
-  const calculateReadTime2 = (content) => {
-    if (!content) return "5 min read";
-    const words = content.split(/\s+/).length;
-    return `${Math.ceil(words / 200)} min read`;
-  };
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Link, { to: `/blogs/${blog.slug}`, "aria-label": `Read article: ${blog.title}`, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "bg-[#12121a] border-white/5 overflow-hidden hover:border-white/20 transition-all group h-full", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative aspect-[16/9] overflow-hidden bg-slate-900", children: [
-      getImageUrl2(blog.image_url) ? /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "img",
-        {
-          src: getImageUrl2(blog.image_url),
-          alt: blog.title,
-          loading: "lazy",
-          className: "w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 will-change-transform"
-        }
-      ) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-full h-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Eye, { className: "w-8 h-8 text-slate-600" }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-gradient-to-t from-[#12121a] via-transparent to-transparent" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs(Badge, { className: "absolute top-4 left-4 bg-cyan-500/20 text-cyan-400 border-cyan-500/30", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Zap, { className: "w-3 h-3 mr-1" }),
-        blog.category?.title || "General"
-      ] })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-6", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors", children: blog.title }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-slate-300 mb-4 line-clamp-2", children: blog.description }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-8 h-8 rounded-full bg-gradient-to-br from-cyan-400 to-fuchsia-500 flex items-center justify-center text-white text-sm font-bold", children: getAuthorInitial(blog.author?.name) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm text-slate-400", children: blog.author?.name || "Admin" })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-4 text-xs text-slate-400", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "flex items-center gap-1", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Calendar, { className: "w-3 h-3" }),
-            formatDistanceToNow(new Date(blog.published_at || blog.created_at), { addSuffix: true })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "flex items-center gap-1", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Clock, { className: "w-3 h-3" }),
-            calculateReadTime2(blog.content)
-          ] })
-        ] })
-      ] })
-    ] })
-  ] }) });
-});
-function BlogPage({ categorySlug }) {
-  const { search } = distExports.useLocation();
-  const searchParams = reactExports.useMemo(() => new URLSearchParams(search), [search]);
-  const ssrData = useSSRContext();
-  const [blogs, setBlogs] = reactExports.useState(ssrData.blogs?.data || ssrData.blogs || []);
-  const [categories, setCategories] = reactExports.useState(ssrData.categories || []);
-  const [loading, setLoading] = reactExports.useState(!ssrData.blogs);
-  const [categoriesLoading, setCategoriesLoading] = reactExports.useState(!ssrData.categories);
-  const [searchQuery, setSearchQuery] = reactExports.useState("");
-  const [activeCategory, setActiveCategory] = reactExports.useState(categorySlug || searchParams.get("category") || "all");
-  const [page, setPage] = reactExports.useState(1);
-  const [totalPages, setTotalPages] = reactExports.useState(ssrData.blogs?.last_page || 1);
-  const [totalBlogs, setTotalBlogs] = reactExports.useState(ssrData.blogs?.total || 0);
-  const [globalTotal, setGlobalTotal] = reactExports.useState(ssrData.blogs?.total || 0);
-  const [isLoadingMore, setIsLoadingMore] = reactExports.useState(false);
-  const [hasMore, setHasMore] = reactExports.useState(ssrData.blogs ? ssrData.blogs.current_page < ssrData.blogs.last_page : true);
-  const observerTarget = reactExports.useRef(null);
-  reactExports.useEffect(() => {
-    setActiveCategory(categorySlug || searchParams.get("category") || "all");
-  }, [searchParams, categorySlug]);
-  reactExports.useEffect(() => {
-    const loadCategories = async () => {
-      setCategoriesLoading(true);
-      try {
-        const result = await blogService.getCategories();
-        if (result.success && result.data) setCategories(result.data);
-      } catch (e) {
-        console.error(e);
-      } finally {
-        setCategoriesLoading(false);
-      }
-    };
-    loadCategories();
-  }, []);
-  const loadBlogs = reactExports.useCallback(async (currentPage = 1, append = false) => {
-    if (append) {
-      setIsLoadingMore(true);
-    } else {
-      setLoading(true);
-    }
-    try {
-      const cSlug = activeCategory === "all" ? void 0 : activeCategory;
-      const result = await blogService.getAll(currentPage, 12, searchQuery, cSlug);
-      if (result.success && result.data) {
-        const data2 = result.data;
-        setBlogs((prev) => append ? [...prev, ...data2.data || []] : data2.data || []);
-        setTotalPages(data2.last_page || 1);
-        setTotalBlogs(data2.total || 0);
-        setHasMore((data2.current_page || currentPage) < (data2.last_page || 1));
-        if (!cSlug && !searchQuery) {
-          setGlobalTotal(result.data.total || 0);
-        }
-      } else {
-        if (!append) setBlogs([]);
-        setHasMore(false);
-      }
-    } catch (e) {
-      console.error(e);
-      if (!append) setBlogs([]);
-      setHasMore(false);
-    } finally {
-      setLoading(false);
-      setIsLoadingMore(false);
-    }
-  }, [activeCategory, searchQuery]);
-  reactExports.useEffect(() => {
-    setPage(1);
-    const timer2 = setTimeout(() => {
-      loadBlogs(1, false);
-    }, 400);
-    return () => clearTimeout(timer2);
-  }, [activeCategory, searchQuery, loadBlogs]);
-  const fetchMoreBlogs = reactExports.useCallback(() => {
-    if (isLoadingMore || !hasMore || loading) return;
-    const nextPage = page + 1;
-    setPage(nextPage);
-    loadBlogs(nextPage, true);
-  }, [page, hasMore, isLoadingMore, loading, loadBlogs]);
-  reactExports.useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && hasMore && !loading && !isLoadingMore) {
-          fetchMoreBlogs();
-        }
-      },
-      { threshold: 0.1, rootMargin: "400px" }
-    );
-    if (observerTarget.current) {
-      observer.observe(observerTarget.current);
-    }
-    return () => observer.disconnect();
-  }, [fetchMoreBlogs, hasMore, loading, isLoadingMore]);
-  const featuredBlogs = blogs.filter((blog) => blog.is_featured);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(PublicNavbarLayout, { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      SEOHelmet,
-      {
-        title: ssrData.seo?.title || "Automation & AI Blog - EdgeLancer",
-        description: ssrData.seo?.description || "Latest insights on automation, n8n, and AI workflows.",
-        keywords: ssrData.seo?.keywords,
-        ogImage: ssrData.seo?.og_image,
-        metaTags: ssrData.seo?.meta_tags,
-        structuredData: ssrData.seo?.structured_data
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "relative pt-32 pb-16 px-4 overflow-hidden", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute inset-0 pointer-events-none transform-gpu", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute top-0 left-1/4 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[100px] will-change-transform" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-fuchsia-500/10 rounded-full blur-[100px] will-change-transform" })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto text-center relative", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs(Badge, { className: "mb-6 bg-white/5 text-cyan-400 border-cyan-500/30 font-medium px-4 py-1.5 rounded-full backdrop-blur-sm", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(BookOpen, { className: "w-3 h-3 mr-2" }),
-          "Blog & Resources"
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-5xl md:text-6xl font-bold mb-6 text-white tracking-tight", children: "Insights & Updates" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xl text-slate-300 max-w-2xl mx-auto mb-10", children: "Tips, strategies, and news to help you grow your freelance business with AI automation." }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative group", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Search, { className: "absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-cyan-400 transition-colors" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Input,
-            {
-              type: "text",
-              "aria-label": "Search articles",
-              placeholder: "Search articles...",
-              value: searchQuery,
-              onChange: (e) => setSearchQuery(e.target.value),
-              className: "pl-12 h-14 bg-white/5 border-white/10 text-white placeholder:text-slate-400 focus:border-cyan-500/50 rounded-xl transition-all"
-            }
-          )
-        ] }) })
-      ] })
-    ] }),
-    (loading || featuredBlogs.length > 0) && /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "py-12 px-4 min-h-[400px]", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-7xl mx-auto", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 mb-8", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Star, { className: "w-6 h-6 text-amber-500 fill-amber-500" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-2xl font-bold text-white", children: "Featured Articles" })
-      ] }),
-      loading ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid md:grid-cols-2 gap-8", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Skeleton, { className: "w-full aspect-[16/9] rounded-xl bg-white/5" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Skeleton, { className: "w-full aspect-[16/9] rounded-xl bg-white/5" })
-      ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid md:grid-cols-2 gap-8", children: featuredBlogs.slice(0, 2).map((blog) => /* @__PURE__ */ jsxRuntimeExports.jsx(BlogCard, { blog }, blog.id)) })
-    ] }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "py-12 px-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-7xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid lg:grid-cols-4 gap-12", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("aside", { className: "lg:col-span-1", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "sticky top-24", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("h3", { className: "text-lg font-semibold text-white mb-6 flex items-center gap-2", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Zap, { className: "w-5 h-5 text-cyan-400" }),
-          "Categories"
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-2", role: "group", "aria-label": "Blog categories", children: categoriesLoading ? Array.from({ length: 5 }).map((_, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(Skeleton, { className: "w-full h-12 bg-white/5 rounded-lg" }, i)) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs(
-            "button",
-            {
-              onClick: () => {
-                setActiveCategory("all");
-                setPage(1);
-              },
-              className: `w-full flex items-center justify-between px-4 py-3 rounded-lg text-left transition-all ${activeCategory === "all" ? "bg-cyan-500/20 text-cyan-400 border border-cyan-500/30" : "bg-white/5 text-slate-400 hover:bg-white/10 hover:text-white border border-transparent"}`,
-              children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-medium", children: "All Posts" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs px-2 py-0.5 rounded-full bg-white/10", children: globalTotal || totalBlogs })
-              ]
-            }
-          ),
-          categories.map((cat) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "button",
-            {
-              onClick: () => {
-                setActiveCategory(cat.slug);
-                setPage(1);
-              },
-              className: `w-full flex items-center justify-between px-4 py-3 rounded-lg text-left transition-all ${activeCategory === cat.slug ? "bg-cyan-500/20 text-cyan-400 border border-cyan-500/30" : "bg-white/5 text-slate-400 hover:bg-white/10 hover:text-white border border-transparent"}`,
-              children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-medium", children: cat.title })
-            },
-            cat.id
-          ))
-        ] }) })
-      ] }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "lg:col-span-3", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between mb-8 border-b border-white/5 pb-4", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-2xl font-bold text-white", children: "All Articles" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-sm text-slate-400 font-medium", children: [
-            "Page ",
-            page,
-            " of ",
-            totalPages
-          ] })
-        ] }),
-        loading && blogs.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid sm:grid-cols-2 gap-6", children: Array.from({ length: 4 }).map((_, idx) => /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "bg-[#12121a] border-white/5 overflow-hidden", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Skeleton, { className: "w-full aspect-[16/10] bg-white/5" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-5 space-y-3", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Skeleton, { className: "w-3/4 h-5 bg-white/5" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Skeleton, { className: "w-full h-4 bg-white/5" })
-          ] })
-        ] }, idx)) }) : blogs.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center text-slate-400 py-16 border border-dashed border-white/10 rounded-xl bg-[#12121a]/50", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(BookOpen, { className: "w-12 h-12 mx-auto mb-4 opacity-20" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-lg", children: "No articles found matching your criteria." })
-        ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid sm:grid-cols-2 gap-6", children: blogs.map((blog) => /* @__PURE__ */ jsxRuntimeExports.jsx(BlogCard, { blog }, blog.id)) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { ref: observerTarget, className: "py-20 flex flex-col items-center justify-center gap-6", children: isLoadingMore ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col items-center gap-6", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-16 h-16 border-4 border-white/5 border-t-cyan-500 rounded-full animate-spin" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 text-white animate-pulse" })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-cyan-400 text-xs font-bold uppercase tracking-[0.3em] animate-pulse", children: "Scanning Decades of Data" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-gray-600 text-[10px] mt-2", children: "Connecting to verified oracle nodes..." })
-            ] })
-          ] }) : !hasMore && blogs.length > 0 ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative p-12 rounded-[2rem] bg-white/[0.02] border border-white/5 text-center backdrop-blur-md max-w-sm w-full mx-auto overflow-hidden group", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-gradient-to-b from-cyan-500/10 to-transparent rounded-[2rem] opacity-50 transition-opacity group-hover:opacity-80" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Star, { className: "w-10 h-10 text-amber-500 fill-amber-500 mx-auto mb-6 drop-shadow-lg animate-bounce" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-xl font-bold text-white mb-2", children: "Deep Index Reached" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-gray-400 text-sm leading-relaxed", children: [
-              "You have retrieved all ",
-              blogs.length,
-              " articles currently available."
-            ] })
-          ] }) : null })
-        ] })
-      ] })
-    ] }) }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "py-20 px-4 bg-gradient-to-b from-transparent to-white/[0.02] border-t border-white/5", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto text-center relative", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-cyan-500/10 rounded-full blur-[100px] pointer-events-none" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-3xl md:text-4xl font-bold text-white mb-4", children: "Subscribe to Newsletter" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-slate-400 mb-8", children: "Get the latest articles and insights delivered to your inbox." }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col sm:flex-row gap-3 max-w-md mx-auto relative z-10", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          Input,
-          {
-            type: "email",
-            "aria-label": "Email address",
-            placeholder: "your@email.com",
-            className: "h-14 bg-white/5 border-white/10 text-white placeholder:text-slate-500 flex-1 rounded-xl focus:border-cyan-500/50 transition-all border-2"
-          }
-        ),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { className: "h-14 bg-gradient-to-r from-cyan-500 to-fuchsia-500 text-white border-0 hover:opacity-90 px-8 rounded-xl font-bold text-lg shadow-lg shadow-cyan-500/20 transition-all hover:scale-105 active:scale-95", children: "Subscribe" })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-6 text-slate-500 text-xs font-medium", children: "No spam, ever. Unsubscribe with one click." })
-    ] }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(FAQSection, { type: "page", slug: "blogs" })
-  ] });
-}
 function cc(names) {
   if (typeof names === "string" || typeof names === "number") return "" + names;
   let out = "";
@@ -75761,10 +73796,10 @@ function color_formatHsl() {
 function color_formatRgb() {
   return this.rgb().formatRgb();
 }
-function color(format2) {
+function color(format) {
   var m, l;
-  format2 = (format2 + "").trim().toLowerCase();
-  return (m = reHex.exec(format2)) ? (l = m[1].length, m = parseInt(m[1], 16), l === 6 ? rgbn(m) : l === 3 ? new Rgb(m >> 8 & 15 | m >> 4 & 240, m >> 4 & 15 | m & 240, (m & 15) << 4 | m & 15, 1) : l === 8 ? rgba(m >> 24 & 255, m >> 16 & 255, m >> 8 & 255, (m & 255) / 255) : l === 4 ? rgba(m >> 12 & 15 | m >> 8 & 240, m >> 8 & 15 | m >> 4 & 240, m >> 4 & 15 | m & 240, ((m & 15) << 4 | m & 15) / 255) : null) : (m = reRgbInteger.exec(format2)) ? new Rgb(m[1], m[2], m[3], 1) : (m = reRgbPercent.exec(format2)) ? new Rgb(m[1] * 255 / 100, m[2] * 255 / 100, m[3] * 255 / 100, 1) : (m = reRgbaInteger.exec(format2)) ? rgba(m[1], m[2], m[3], m[4]) : (m = reRgbaPercent.exec(format2)) ? rgba(m[1] * 255 / 100, m[2] * 255 / 100, m[3] * 255 / 100, m[4]) : (m = reHslPercent.exec(format2)) ? hsla(m[1], m[2] / 100, m[3] / 100, 1) : (m = reHslaPercent.exec(format2)) ? hsla(m[1], m[2] / 100, m[3] / 100, m[4]) : named.hasOwnProperty(format2) ? rgbn(named[format2]) : format2 === "transparent" ? new Rgb(NaN, NaN, NaN, 0) : null;
+  format = (format + "").trim().toLowerCase();
+  return (m = reHex.exec(format)) ? (l = m[1].length, m = parseInt(m[1], 16), l === 6 ? rgbn(m) : l === 3 ? new Rgb(m >> 8 & 15 | m >> 4 & 240, m >> 4 & 15 | m & 240, (m & 15) << 4 | m & 15, 1) : l === 8 ? rgba(m >> 24 & 255, m >> 16 & 255, m >> 8 & 255, (m & 255) / 255) : l === 4 ? rgba(m >> 12 & 15 | m >> 8 & 240, m >> 8 & 15 | m >> 4 & 240, m >> 4 & 15 | m & 240, ((m & 15) << 4 | m & 15) / 255) : null) : (m = reRgbInteger.exec(format)) ? new Rgb(m[1], m[2], m[3], 1) : (m = reRgbPercent.exec(format)) ? new Rgb(m[1] * 255 / 100, m[2] * 255 / 100, m[3] * 255 / 100, 1) : (m = reRgbaInteger.exec(format)) ? rgba(m[1], m[2], m[3], m[4]) : (m = reRgbaPercent.exec(format)) ? rgba(m[1] * 255 / 100, m[2] * 255 / 100, m[3] * 255 / 100, m[4]) : (m = reHslPercent.exec(format)) ? hsla(m[1], m[2] / 100, m[3] / 100, 1) : (m = reHslaPercent.exec(format)) ? hsla(m[1], m[2] / 100, m[3] / 100, m[4]) : named.hasOwnProperty(format) ? rgbn(named[format]) : format === "transparent" ? new Rgb(NaN, NaN, NaN, 0) : null;
 }
 function rgbn(n) {
   return new Rgb(n >> 16 & 255, n >> 8 & 255, n & 255, 1);
@@ -77308,16 +75343,16 @@ const getDimensions = (node) => ({
   width: node.offsetWidth,
   height: node.offsetHeight
 });
-const clamp = (val, min = 0, max = 1) => Math.min(Math.max(val, min), max);
+const clamp$1 = (val, min = 0, max = 1) => Math.min(Math.max(val, min), max);
 const clampPosition = (position = { x: 0, y: 0 }, extent) => ({
-  x: clamp(position.x, extent[0][0], extent[1][0]),
-  y: clamp(position.y, extent[0][1], extent[1][1])
+  x: clamp$1(position.x, extent[0][0], extent[1][0]),
+  y: clamp$1(position.y, extent[0][1], extent[1][1])
 });
 const calcAutoPanVelocity = (value, min, max) => {
   if (value < min) {
-    return clamp(Math.abs(value - min), 1, 50) / 50;
+    return clamp$1(Math.abs(value - min), 1, 50) / 50;
   } else if (value > max) {
-    return -clamp(Math.abs(value - max), 1, 50) / 50;
+    return -clamp$1(Math.abs(value - max), 1, 50) / 50;
   }
   return 0;
 };
@@ -77360,9 +75395,9 @@ const isRectObject = (obj) => isNumeric(obj.width) && isNumeric(obj.height) && i
 const isNumeric = (n) => !isNaN(n) && isFinite(n);
 const internalsSymbol = /* @__PURE__ */ Symbol.for("internals");
 const elementSelectionKeys = ["Enter", " ", "Escape"];
-const devWarn = (id2, message2) => {
+const devWarn = (id2, message) => {
   if (process.env.NODE_ENV === "development") {
-    console.warn(`[React Flow]: ${message2} Help: https://reactflow.dev/error#${id2}`);
+    console.warn(`[React Flow]: ${message} Help: https://reactflow.dev/error#${id2}`);
   }
 };
 const isReactKeyboardEvent = (event) => "nativeEvent" in event;
@@ -77874,7 +75909,7 @@ const getViewportForBounds = (bounds, width, height, minZoom, maxZoom, padding =
   const xZoom = width / (bounds.width * (1 + padding));
   const yZoom = height / (bounds.height * (1 + padding));
   const zoom2 = Math.min(xZoom, yZoom);
-  const clampedZoom = clamp(zoom2, minZoom, maxZoom);
+  const clampedZoom = clamp$1(zoom2, minZoom, maxZoom);
   const boundsCenterX = bounds.x + bounds.width / 2;
   const boundsCenterY = bounds.y + bounds.height / 2;
   const x = width / 2 - boundsCenterX * clampedZoom;
@@ -77980,8 +76015,8 @@ function isValidHandle(handle, connectionMode, fromNodeId, fromHandleId, fromTyp
     };
     result.connection = connection;
     const isConnectable = connectable && connectableEnd;
-    const isValid2 = isConnectable && (connectionMode === ConnectionMode.Strict ? isTarget && handleType === "source" || !isTarget && handleType === "target" : handleNodeId !== fromNodeId || handleId !== fromHandleId);
-    if (isValid2) {
+    const isValid = isConnectable && (connectionMode === ConnectionMode.Strict ? isTarget && handleType === "source" || !isTarget && handleType === "target" : handleNodeId !== fromNodeId || handleId !== fromHandleId);
+    if (isValid) {
       result.endHandle = {
         nodeId: handleNodeId,
         handleId,
@@ -78045,7 +76080,7 @@ function handlePointerDown({ event, handleId, nodeId, onConnect, isTarget, getSt
   let connectionPosition = getEventPosition(event, containerBounds);
   let autoPanStarted = false;
   let connection = null;
-  let isValid2 = false;
+  let isValid = false;
   let handleDomNode = null;
   const handleLookup = getHandleLookup({
     nodes: getNodes(),
@@ -78087,28 +76122,28 @@ function handlePointerDown({ event, handleId, nodeId, onConnect, isTarget, getSt
     }
     handleDomNode = validHandleResult.handleDomNode;
     connection = validHandleResult.connection;
-    isValid2 = validHandleResult.isValid;
+    isValid = validHandleResult.isValid;
     setState({
-      connectionPosition: closestHandle && isValid2 ? rendererPointToPoint({
+      connectionPosition: closestHandle && isValid ? rendererPointToPoint({
         x: closestHandle.x,
         y: closestHandle.y
       }, transform) : connectionPosition,
-      connectionStatus: getConnectionStatus(!!closestHandle, isValid2),
+      connectionStatus: getConnectionStatus(!!closestHandle, isValid),
       connectionEndHandle: validHandleResult.endHandle
     });
-    if (!closestHandle && !isValid2 && !handleDomNode) {
+    if (!closestHandle && !isValid && !handleDomNode) {
       return resetRecentHandle(prevActiveHandle);
     }
     if (connection.source !== connection.target && handleDomNode) {
       resetRecentHandle(prevActiveHandle);
       prevActiveHandle = handleDomNode;
       handleDomNode.classList.add("connecting", "react-flow__handle-connecting");
-      handleDomNode.classList.toggle("valid", isValid2);
-      handleDomNode.classList.toggle("react-flow__handle-valid", isValid2);
+      handleDomNode.classList.toggle("valid", isValid);
+      handleDomNode.classList.toggle("react-flow__handle-valid", isValid);
     }
   }
   function onPointerUp(event2) {
-    if ((closestHandle || handleDomNode) && connection && isValid2) {
+    if ((closestHandle || handleDomNode) && connection && isValid) {
       onConnect?.(connection);
     }
     getState2().onConnectEnd?.(event2);
@@ -78119,7 +76154,7 @@ function handlePointerDown({ event, handleId, nodeId, onConnect, isTarget, getSt
     cancelConnection();
     cancelAnimationFrame(autoPanId);
     autoPanStarted = false;
-    isValid2 = false;
+    isValid = false;
     connection = null;
     handleDomNode = null;
     doc.removeEventListener("mousemove", onPointerMove);
@@ -78203,12 +76238,12 @@ const Handle = reactExports.forwardRef(({ type = "source", position = Position.T
     }
     const doc = getHostForElement(event.target);
     const isValidConnectionHandler = isValidConnection || isValidConnectionStore || alwaysValid;
-    const { connection, isValid: isValid2 } = isValidHandle({
+    const { connection, isValid } = isValidHandle({
       nodeId,
       id: handleId,
       type
     }, connectionMode, connectionClickStartHandle.nodeId, connectionClickStartHandle.handleId || null, connectionClickStartHandle.type, isValidConnectionHandler, doc);
-    if (isValid2) {
+    if (isValid) {
       onConnectExtended(connection);
     }
     onClickConnectEnd?.(event);
@@ -78982,7 +77017,7 @@ const ZoomPane = ({ onMove, onMoveStart, onMoveEnd, onPaneContextMenu, zoomOnScr
       const bbox = zoomPane.current.getBoundingClientRect();
       const d3ZoomInstance = zoom().scaleExtent([minZoom, maxZoom]).translateExtent(translateExtent);
       const selection2 = select(zoomPane.current).call(d3ZoomInstance);
-      const updatedTransform = identity.translate(defaultViewport.x, defaultViewport.y).scale(clamp(defaultViewport.zoom, minZoom, maxZoom));
+      const updatedTransform = identity.translate(defaultViewport.x, defaultViewport.y).scale(clamp$1(defaultViewport.zoom, minZoom, maxZoom));
       const extent = [
         [0, 0],
         [bbox.width, bbox.height]
@@ -80356,7 +78391,7 @@ function isEdgeVisible({ sourcePos, targetPos, sourceWidth, sourceHeight, target
 }
 function getNodeData(node) {
   const handleBounds = node?.[internalsSymbol]?.handleBounds || null;
-  const isValid2 = handleBounds && node?.width && node?.height && typeof node?.positionAbsolute?.x !== "undefined" && typeof node?.positionAbsolute?.y !== "undefined";
+  const isValid = handleBounds && node?.width && node?.height && typeof node?.positionAbsolute?.x !== "undefined" && typeof node?.positionAbsolute?.y !== "undefined";
   return [
     {
       x: node?.positionAbsolute?.x || 0,
@@ -80365,7 +78400,7 @@ function getNodeData(node) {
       height: node?.height || 0
     },
     handleBounds,
-    !!isValid2
+    !!isValid
   ];
 }
 const defaultEdgeTree = [{ level: 0, isMaxLevel: true, edges: [] }];
@@ -80548,7 +78583,7 @@ const EdgeRenderer = ({ defaultMarkerColor, onlyRenderVisibleElements, elevateEd
 EdgeRenderer.displayName = "EdgeRenderer";
 var EdgeRenderer$1 = reactExports.memo(EdgeRenderer);
 const selector$3 = (s) => `translate(${s.transform[0]}px,${s.transform[1]}px) scale(${s.transform[2]})`;
-function Viewport({ children: children2 }) {
+function Viewport$1({ children: children2 }) {
   const transform = useStore(selector$3);
   return React2.createElement("div", { className: "react-flow__viewport react-flow__container", style: { transform } }, children2);
 }
@@ -80633,8 +78668,8 @@ const selector$2$1 = (s) => ({
 });
 function ConnectionLineWrapper({ containerStyle: containerStyle2, style: style2, type, component }) {
   const { nodeId, handleType, nodesConnectable, width, height, connectionStatus } = useStore(selector$2$1, shallow$1);
-  const isValid2 = !!(nodeId && handleType && width && nodesConnectable);
-  if (!isValid2) {
+  const isValid = !!(nodeId && handleType && width && nodesConnectable);
+  if (!isValid) {
     return null;
   }
   return React2.createElement(
@@ -80670,7 +78705,7 @@ const GraphView = ({ nodeTypes, edgeTypes, onMove, onMoveStart, onMoveEnd, onIni
     FlowRenderer$1,
     { onPaneClick, onPaneMouseEnter, onPaneMouseMove, onPaneMouseLeave, onPaneContextMenu, onPaneScroll, deleteKeyCode, selectionKeyCode, selectionOnDrag, selectionMode, onSelectionStart, onSelectionEnd, multiSelectionKeyCode, panActivationKeyCode, zoomActivationKeyCode, elementsSelectable, onMove, onMoveStart, onMoveEnd, zoomOnScroll, zoomOnPinch, zoomOnDoubleClick, panOnScroll, panOnScrollSpeed, panOnScrollMode, panOnDrag, defaultViewport, translateExtent, minZoom, maxZoom, onSelectionContextMenu, preventScrolling, noDragClassName, noWheelClassName, noPanClassName, disableKeyboardA11y },
     React2.createElement(
-      Viewport,
+      Viewport$1,
       null,
       React2.createElement(
         EdgeRenderer$1,
@@ -81404,898 +79439,6 @@ const N8nNode = ({ data: data2 }) => {
     )
   ] });
 };
-function BlogSlugPage() {
-  const { slug } = distExports.useParams();
-  const ssrData = useSSRContext();
-  const [blog, setBlog] = reactExports.useState(ssrData.blog || null);
-  const [seo, setSeo] = reactExports.useState(ssrData.seo);
-  const [loading, setLoading] = reactExports.useState(!ssrData.blog);
-  const [error, setError] = reactExports.useState("");
-  const [relatedBlogs, setRelatedBlogs] = reactExports.useState(ssrData.relatedBlogs || []);
-  const [relatedWorkflows, setRelatedWorkflows] = reactExports.useState(ssrData.relatedWorkflows || []);
-  const [failedRelatedBlogImages, setFailedRelatedBlogImages] = reactExports.useState({});
-  const [isCopied, setIsCopied] = reactExports.useState(false);
-  reactExports.useEffect(() => {
-    const load = async () => {
-      if (!slug) return;
-      setLoading(true);
-      try {
-        const result = await blogService.getBySlugWithSeo(slug);
-        if (result.success && result.data) {
-          setBlog(result.data.blog);
-          setSeo(result.data.seo);
-          setError("");
-        } else {
-          setError(result.message || "Article not found");
-          setBlog(null);
-        }
-      } catch (err) {
-        setError("Failed to load article");
-        console.error(err);
-      }
-      setLoading(false);
-    };
-    const loadRelated = async () => {
-      if (!slug) return;
-      try {
-        const result = await blogService.getRelatedBlogs(slug);
-        if (result.success && result.data) {
-          setRelatedBlogs(result.data);
-        }
-      } catch (err) {
-        console.error("Error loading related blogs:", err);
-      }
-    };
-    const loadRelatedWorkflows = async () => {
-      if (!slug) return;
-      try {
-        const result = await blogService.getRelatedWorkflows(slug);
-        if (result.success && result.data) {
-          setRelatedWorkflows(result.data);
-        }
-      } catch (err) {
-        console.error("Error loading related workflows:", err);
-      }
-    };
-    load();
-    loadRelated();
-    loadRelatedWorkflows();
-  }, [slug]);
-  const currentYear = (/* @__PURE__ */ new Date()).getFullYear();
-  const metaTitleText = seo?.title || blog?.meta_title || blog?.title || "Blog Post - EdgeLancer";
-  const metaTitle = metaTitleText.toLowerCase().includes("n8n") ? metaTitleText : `${metaTitleText} - n8n Automation Guide (${currentYear})`;
-  const metaDesc = seo?.description || blog?.meta_description || blog?.description || "Read this article on EdgeLancer blog.";
-  const origin = "http://localhost:8000";
-  const schemaData = blog ? (() => {
-    const articleSchema = {
-      "@context": "https://schema.org",
-      "@type": "BlogPosting",
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": `${origin}/blogs/${blog?.slug || ""}`
-      },
-      "headline": metaTitle,
-      "description": metaDesc,
-      "image": seo?.og_image || blog?.image_url || `${origin}/og-image.png`,
-      "author": {
-        "@type": "Person",
-        "name": blog?.author?.name || "EdgeLancer Team",
-        "url": `${origin}/about`
-      },
-      "publisher": {
-        "@type": "Organization",
-        "name": "EdgeLancer",
-        "logo": {
-          "@type": "ImageObject",
-          "url": `${origin}/logo.png`
-        }
-      },
-      "datePublished": blog?.published_at || blog?.created_at,
-      "dateModified": blog?.updated_at || blog?.published_at || blog?.created_at
-    };
-    if (blog.faqs && blog.faqs.length > 0) {
-      const faqSchema = {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": blog.faqs.map((faq) => ({
-          "@type": "Question",
-          "name": faq.question,
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": faq.answer
-          }
-        }))
-      };
-      return [articleSchema, faqSchema];
-    }
-    return articleSchema;
-  })() : void 0;
-  const handleShare = async () => {
-    if (!blog) return;
-    const shareData = {
-      title: blog?.title || "EdgeLancer Blog",
-      text: blog?.description || "Check out this amazing article!",
-      url: typeof window !== "undefined" ? window.location.href : ""
-    };
-    if (navigator.share && navigator.canShare(shareData)) {
-      try {
-        await navigator.share(shareData);
-      } catch (err) {
-        console.debug("Share cancelled");
-      }
-    } else {
-      try {
-        await navigator.clipboard.writeText(shareData.url);
-        setIsCopied(true);
-        setTimeout(() => setIsCopied(false), 2e3);
-      } catch (err) {
-        console.error("Failed to copy link", err);
-      }
-    }
-  };
-  const publishedDate = blog?.published_at || blog?.created_at;
-  const readingTime = blog?.content ? Math.ceil(blog.content.replace(/<[^>]+>/g, "").split(" ").length / 200) : 1;
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(PublicNavbarLayout, { className: "bg-[#030303] selection:bg-indigo-500/30 selection:text-indigo-200", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      SEOHelmet,
-      {
-        title: metaTitle,
-        description: metaDesc,
-        url: blog?.slug ? `${origin}/blogs/${blog.slug}` : origin,
-        keywords: seo?.keywords || blog?.meta_keywords,
-        ogImage: seo?.og_image || blog?.image_url || void 0,
-        ogType: "article",
-        publishedTime: blog?.published_at || blog?.created_at,
-        modifiedTime: blog?.updated_at,
-        structuredData: schemaData || seo?.structured_data
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "fixed inset-0 z-0 pointer-events-none overflow-hidden", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute top-[-15%] left-[-10%] w-[600px] h-[600px] bg-indigo-900/10 rounded-full blur-[120px] opacity-70" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bottom-[-10%] right-[-5%] w-[500px] h-[500px] bg-cyan-900/10 rounded-full blur-[100px] opacity-60" })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { className: "relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-24 animate-in fade-in duration-700", children: [
-      loading && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-8 animate-pulse max-w-3xl mx-auto mt-10", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Skeleton, { className: "h-6 w-24 bg-white/5 rounded-full" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Skeleton, { className: "h-14 w-full bg-white/5 rounded-xl" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Skeleton, { className: "h-14 w-3/4 bg-white/5 rounded-xl" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Skeleton, { className: "h-6 w-1/2 bg-white/5 rounded-lg mt-4" })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Skeleton, { className: "aspect-video w-full rounded-3xl bg-white/5" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4 pt-8", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Skeleton, { className: "h-4 w-full bg-white/5" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Skeleton, { className: "h-4 w-full bg-white/5" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Skeleton, { className: "h-4 w-5/6 bg-white/5" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Skeleton, { className: "h-4 w-4/6 bg-white/5" })
-        ] })
-      ] }),
-      !loading && error && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col items-center justify-center py-32 text-center space-y-6", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-16 h-16 rounded-full bg-red-500/10 flex items-center justify-center mb-2", children: /* @__PURE__ */ jsxRuntimeExports.jsx(FileText, { className: "w-8 h-8 text-red-400" }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-3xl font-bold text-white", children: "Article Not Found" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-slate-400 max-w-md", children: error }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { asChild: true, className: "bg-indigo-600 hover:bg-indigo-500 text-white rounded-full px-8 mt-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Link, { to: "/blogs", children: "Explore Other Articles" }) })
-      ] }),
-      !loading && blog && /* @__PURE__ */ jsxRuntimeExports.jsxs("article", { className: "flex flex-col", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-3xl mx-auto w-full", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("header", { className: "space-y-8 mb-12", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs(
-            distExports.Link,
-            {
-              to: "/blogs",
-              className: "inline-flex items-center gap-2 text-sm font-medium text-slate-400 hover:text-white transition-colors group mb-6",
-              children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-1.5 rounded-full bg-white/5 border border-white/10 group-hover:bg-white/10 transition-colors", children: /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowLeft, { className: "w-4 h-4 transition-transform group-hover:-translate-x-1" }) }),
-                "Back to Articles"
-              ]
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6", children: [
-            blog.category && /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { className: "bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 px-3 py-1 uppercase tracking-widest text-[10px] font-bold rounded-full", children: blog.category.title }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white leading-[1.15]", children: blog.title }),
-            blog.description && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-lg md:text-xl text-slate-400 leading-relaxed font-light", children: blog.description })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center gap-4 text-sm text-slate-400 pt-6", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 bg-white/5 border border-white/10 rounded-full py-1.5 pl-1.5 pr-4", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-inner", children: /* @__PURE__ */ jsxRuntimeExports.jsx(User, { className: "w-4 h-4 text-white" }) }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-medium text-slate-200", children: blog.author?.name || "EdgeLancer Team" })
-            ] }),
-            publishedDate && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 bg-white/5 border border-white/10 rounded-full py-2 px-4", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(Calendar, { className: "w-4 h-4 text-slate-400" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("time", { dateTime: publishedDate, className: "font-medium", children: publishedDate ? format(new Date(publishedDate), "MMM d, yyyy") : "Recently" })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 bg-white/5 border border-white/10 rounded-full py-2 px-4", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(Clock, { className: "w-4 h-4 text-slate-400" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "font-medium", children: [
-                readingTime,
-                " min read"
-              ] })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 bg-white/5 border border-white/10 rounded-full py-2 px-4 ml-auto", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(Eye, { className: "w-4 h-4 text-slate-400" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "font-medium", children: [
-                blog.views?.toLocaleString() ?? 0,
-                " views"
-              ] })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { variant: "ghost", size: "icon", onClick: handleShare, className: "rounded-full bg-white/5 border border-white/10 text-slate-400 hover:text-white", children: isCopied ? /* @__PURE__ */ jsxRuntimeExports.jsx(Check, { className: "w-4 h-4 text-emerald-400" }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Share2, { className: "w-4 h-4" }) })
-          ] })
-        ] }) }),
-        blog.image_url && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-5xl mx-auto w-full mb-16", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative aspect-video md:aspect-[21/9] overflow-hidden rounded-3xl border border-white/10 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7)] bg-[#0a0a0f] group", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "img",
-            {
-              src: blog.image_url,
-              alt: blog.title,
-              className: "w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-gradient-to-t from-[#030303] via-transparent to-transparent opacity-80" })
-        ] }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-3xl mx-auto w-full", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("style", { children: `
-                                .blog-content {
-                                    font-size: 1.125rem;
-                                    line-height: 1.85;
-                                    word-break: break-word;
-                                }
-                                
-                                .blog-content p,
-                                .blog-content li,
-                                .blog-content div:not(.table-container) {
-                                    color: #d1d5db !important;
-                                }
-
-                                .blog-content h1, .blog-content h2, .blog-content h3, 
-                                .blog-content h4, .blog-content h5, .blog-content h6 {
-                                    color: #ffffff !important;
-                                    font-weight: 700;
-                                    letter-spacing: -0.025em;
-                                    scroll-margin-top: 5rem;
-                                }
-
-                                .blog-content h2 {
-                                    font-size: 1.75rem;
-                                    margin-top: 3.5rem;
-                                    margin-bottom: 1.25rem;
-                                    padding-bottom: 0.875rem;
-                                    border-bottom: 1px solid rgba(99, 102, 241, 0.15);
-                                    position: relative;
-                                }
-                                .blog-content h2::before {
-                                    content: '';
-                                    position: absolute;
-                                    bottom: -1px;
-                                    left: 0;
-                                    width: 3rem;
-                                    height: 2px;
-                                    background: linear-gradient(to right, #6366f1, transparent);
-                                    border-radius: 2px;
-                                }
-                                .blog-content h3 {
-                                    font-size: 1.375rem;
-                                    margin-top: 2.5rem;
-                                    margin-bottom: 1rem;
-                                    color: #e0e7ff !important;
-                                }
-
-                                .blog-content strong, 
-                                .blog-content b {
-                                    color: #ffffff !important;
-                                    font-weight: 600;
-                                }
-                                
-                                .blog-content ul {
-                                    padding-left: 0;
-                                    list-style: none;
-                                }
-                                .blog-content ul > li {
-                                    position: relative;
-                                    padding-left: 1.75rem;
-                                    margin-bottom: 0.875rem;
-                                }
-                                .blog-content ul > li::before {
-                                    content: '';
-                                    position: absolute;
-                                    left: 0;
-                                    top: 0.65em;
-                                    width: 6px;
-                                    height: 6px;
-                                    border-radius: 50%;
-                                    background: #6366f1;
-                                    box-shadow: 0 0 8px rgba(99, 102, 241, 0.4);
-                                }
-
-                                .blog-content ol {
-                                    padding-left: 0;
-                                    list-style: none;
-                                    counter-reset: step-counter;
-                                }
-                                .blog-content ol > li {
-                                    position: relative;
-                                    padding-left: 3rem;
-                                    margin-bottom: 1.25rem;
-                                    counter-increment: step-counter;
-                                }
-                                .blog-content ol > li::before {
-                                    content: counter(step-counter);
-                                    position: absolute;
-                                    left: 0;
-                                    top: 0.1em;
-                                    width: 2rem;
-                                    height: 2rem;
-                                    display: flex;
-                                    align-items: center;
-                                    justify-content: center;
-                                    border-radius: 0.5rem;
-                                    background: rgba(99, 102, 241, 0.12);
-                                    border: 1px solid rgba(99, 102, 241, 0.25);
-                                    color: #818cf8;
-                                    font-size: 0.85rem;
-                                    font-weight: 700;
-                                }
-
-                                .blog-content a:not(.download-workflow-btn) {
-                                    color: #818cf8 !important;
-                                    text-decoration: none;
-                                    border-bottom: 1px solid rgba(129, 140, 248, 0.3);
-                                    transition: all 0.2s ease;
-                                }
-                                .blog-content a:not(.download-workflow-btn):hover {
-                                    color: #a5b4fc !important;
-                                    border-bottom-color: #a5b4fc;
-                                }
-
-                                .blog-content .download-workflow-btn {
-                                    display: inline-flex;
-                                    align-items: center;
-                                    justify-content: center;
-                                    gap: 0.65rem;
-                                    background: linear-gradient(135deg, #4f46e5 0%, #6366f1 50%, #3b82f6 100%);
-                                    color: #ffffff !important;
-                                    font-size: 1rem;
-                                    font-weight: 600;
-                                    padding: 1rem 2rem;
-                                    border-radius: 0.875rem;
-                                    text-decoration: none !important;
-                                    margin: 2rem 0;
-                                    box-shadow: 0 4px 24px -4px rgba(79, 70, 229, 0.45);
-                                    transition: transform 0.2s ease, box-shadow 0.2s ease;
-                                }
-                                .blog-content .download-workflow-btn:hover {
-                                    transform: translateY(-2px);
-                                    box-shadow: 0 8px 30px -4px rgba(79, 70, 229, 0.55);
-                                }
-
-                                .blog-content blockquote {
-                                    border-left: 3px solid #6366f1;
-                                    background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(99, 102, 241, 0.02));
-                                    padding: 1.25rem 1.75rem;
-                                    margin: 2rem 0;
-                                    border-radius: 0 0.875rem 0.875rem 0;
-                                    font-style: italic;
-                                    color: #cbd5e1;
-                                }
-
-                                .blog-content img {
-                                    border-radius: 1rem;
-                                    border: 1px solid rgba(255, 255, 255, 0.06);
-                                    margin: 2rem auto;
-                                    display: block;
-                                }
-                            ` }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "div",
-            {
-              className: "blog-content w-full",
-              dangerouslySetInnerHTML: {
-                __html: (blog.content || "").replace(/http:\/\/localhost:3000\/templates\//g, `${origin}/workflow/`).replace(/http:\/\/localhost:3000\/workflow\//g, `${origin}/workflow/`).replace(/http:\/\/localhost:3000\//g, `${origin}/workflow/`).replace(/http:\/\/localhost:3000/g, `${origin}/workflow`).replace(/https?:\/\/edgelancer\.com\/blog\//g, "/blogs/").replace(/\/blog\//g, "/blogs/").replace(/href="blog\//g, 'href="/blogs/').replace(
-                  /<a([^>]*?)href="([^"]*)"([^>]*?)>(.*?)<\/a>/gi,
-                  (match2, p1, p2, p3, p4) => {
-                    if (p4.includes("http") || p2.includes("/webhook/")) {
-                      return `<a${p1}href="${p2}"${p3} class="download-workflow-btn">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                                                        <span>Download Workflow</span>
-                                                    </a>`;
-                    }
-                    return match2;
-                  }
-                )
-              }
-            }
-          ),
-          blog.author && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-16 pt-10 border-t border-white/10 flex flex-col sm:flex-row gap-6 items-start sm:items-center bg-white/[0.02] p-8 rounded-3xl", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-20 h-20 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shrink-0 shadow-lg shadow-indigo-500/20", children: /* @__PURE__ */ jsxRuntimeExports.jsx(User, { className: "w-10 h-10 text-white" }) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-xl font-bold text-white mb-2", children: blog.author.name }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-indigo-400 text-sm font-semibold mb-3 uppercase tracking-wider", children: "Automation Expert & Content Creator" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-slate-400 leading-relaxed font-light", children: [
-                blog.author.name,
-                " specializes in building complex n8n workflows and AI agents. With extensive hands-on experience in workflow automation, they write practical guides to help businesses scale operations efficiently without code."
-              ] })
-            ] })
-          ] }),
-          blog.faqs && blog.faqs.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-16 pt-12 border-t border-white/10", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "prose prose-invert max-w-none", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-2xl font-bold text-white mb-8 border-b border-indigo-500/15 pb-4 inline-block", children: "Key Questions Answered" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-8 pl-4 border-l-[3px] border-indigo-500/30", children: blog.faqs.map((faq, idx) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-2", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("h3", { className: "text-lg font-semibold text-indigo-300 m-0 p-0", children: [
-                  "Q: ",
-                  faq.question
-                ] }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-slate-300 leading-relaxed m-0 p-0", children: [
-                  "A: ",
-                  faq.answer
-                ] })
-              ] }, `faq-prose-${idx}`)) })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-12", children: /* @__PURE__ */ jsxRuntimeExports.jsx(FAQSection, { data: blog.faqs, title: "Frequently Asked Questions (Accordion)", className: "py-0" }) })
-          ] }),
-          !blog.faqs?.length && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-16 pt-12 border-t border-white/10 prose prose-invert max-w-none", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-2xl font-bold text-white mb-6 border-b border-indigo-500/15 pb-4 inline-block", children: "Quick AI Summary Overview" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-slate-300 leading-relaxed pl-4 border-l-[3px] border-indigo-500/30", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Q: How does this workflow automation help?" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-              "A: This `",
-              blog.title,
-              "` guide provides step-by-step instructions for automating tasks via n8n. It reduces manual data entry and improves operational efficiency.",
-              /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Q: Which tools are integrated?" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-              "A: By leveraging n8n, this strategy connects multiple external apps through standardized API nodes, making it a robust alternative to Zapier or Make.",
-              /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Q: Do I need coding experience?" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-              "A: While n8n supports custom JavaScript nodes, the core concepts detailed here rely on visual workflow mapping suitable for non-developers and automation experts alike."
-            ] })
-          ] })
-        ] }),
-        (relatedWorkflows.length > 0 || relatedBlogs.length > 0) && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-24 pt-16 border-t border-white/5 space-y-20", children: [
-          relatedWorkflows.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col md:flex-row items-end justify-between gap-6 mb-12", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-3", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(Workflow, { className: "w-3.5 h-3.5 text-cyan-400" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-[10px] font-bold text-cyan-400 uppercase tracking-widest", children: "Automation" })
-                ] }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-3xl md:text-4xl font-bold text-white tracking-tight", children: "Automate this with n8n Workflows" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-slate-400 text-lg font-light max-w-2xl", children: "Ready-to-use templates designed to implement these strategies instantly. Connect apps like Typeform, Google Sheets, and Slack without code." })
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-col gap-3 sm:flex-row items-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { asChild: true, className: "bg-gradient-to-r from-indigo-500 to-cyan-500 hover:from-indigo-400 hover:to-cyan-400 border-0 rounded-2xl px-6 py-6 h-auto font-bold text-white shadow-lg shadow-indigo-500/20", children: /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Link, { to: "/workflows", children: "Browse Core Templates" }) }) })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6", children: relatedWorkflows.slice(0, 6).map((workflow) => {
-              const price = parseFloat(workflow.price || "0");
-              const CardCategoryIcon = LucideIconMap[workflow.category?.icon] || Users;
-              return /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                "div",
-                {
-                  className: "group flex flex-col bg-[#0a0a0f] border border-white/5 rounded-[1.5rem] p-6 hover:border-cyan-500/30 transition-all duration-500 shadow-2xl hover:shadow-cyan-500/10 relative",
-                  children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start justify-between mb-5", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20 border border-white/5 flex items-center justify-center text-indigo-400 shadow-inner", children: /* @__PURE__ */ jsxRuntimeExports.jsx(CardCategoryIcon, { className: "w-6 h-6" }) }),
-                      price === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { className: "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] uppercase font-bold px-2.5 py-1", children: "Free" }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(Badge, { className: "bg-white/10 text-white border border-white/20 text-[10px] font-bold px-2.5 py-1", children: [
-                        "$",
-                        workflow.price
-                      ] })
-                    ] }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-2 mb-6", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-bold text-white group-hover:text-cyan-400 transition-colors leading-tight text-lg line-clamp-2", children: workflow.title }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-slate-400 font-light leading-relaxed text-sm line-clamp-2", children: workflow.description })
-                    ] }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center gap-2 mb-8", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "bg-white/5 text-slate-400 border-0 text-[10px] py-1 px-3 rounded-lg capitalize", children: workflow.category?.title || "Workflow" }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs(Badge, { variant: "secondary", className: "bg-white/5 text-slate-400 border-0 text-[10px] py-1 px-3 rounded-lg", children: [
-                        workflow.nodes_count || 12,
-                        " Nodes"
-                      ] }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "bg-white/5 text-slate-400 border-0 text-[10px] py-1 px-3 rounded-lg capitalize", children: workflow.difficulty || "Beginner" })
-                    ] }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between mt-auto pt-5 border-t border-white/5", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-1.5 text-slate-500 text-xs font-medium", children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsx(Eye, { className: "w-4 h-4 text-slate-600" }),
-                        /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
-                          (workflow.views || workflow.total_views || 100).toLocaleString(),
-                          " views"
-                        ] })
-                      ] }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Link, { to: `/workflow/${workflow.slug}`, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { className: "bg-gradient-to-r from-cyan-500 to-purple-600 hover:opacity-90 text-white border-0 rounded-xl px-6 h-10 font-bold text-xs shadow-lg shadow-cyan-500/10", children: "Download" }) })
-                    ] })
-                  ]
-                },
-                workflow.id
-              );
-            }) })
-          ] }),
-          relatedBlogs.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col md:flex-row items-baseline justify-between gap-4 mb-10", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-3xl font-bold text-white mb-2 flex items-center gap-3", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(Newspaper, { className: "w-8 h-8 text-indigo-400" }),
-                  "Build Your Automation Stack"
-                ] }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-slate-400", children: "Deepen your knowledge with related guides and tutorials in this cluster." })
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs(distExports.Link, { to: "/blogs", className: "text-indigo-400 hover:text-indigo-300 text-sm font-semibold transition-colors flex items-center gap-1 group", children: [
-                "View Complete Knowledge Base",
-                /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronRight, { className: "w-4 h-4 group-hover:translate-x-1 transition-transform" })
-              ] })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-6", children: relatedBlogs.slice(0, 4).map((rBlog) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-              distExports.Link,
-              {
-                to: `/blogs/${rBlog.slug}`,
-                className: "group flex flex-col sm:flex-row gap-5 p-4 bg-white/[0.02] border border-white/5 rounded-3xl hover:bg-white/[0.04] hover:border-indigo-500/30 transition-all duration-300",
-                children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "relative w-full sm:w-40 aspect-video sm:aspect-square overflow-hidden rounded-2xl shrink-0 border border-white/10 bg-[#050507]", children: rBlog.image_url ? /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: rBlog.image_url, alt: rBlog.title, className: "w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" }) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-800 to-slate-900", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Newspaper, { className: "w-8 h-8 text-indigo-500/50" }) }) }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col justify-center flex-1 min-w-0", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-[10px] uppercase tracking-widest text-indigo-400 font-bold mb-2", children: rBlog.category?.title || "Article" }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg font-bold text-white group-hover:text-indigo-300 transition-colors line-clamp-2 leading-tight", children: rBlog.title }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-slate-400 text-sm line-clamp-2 mt-2", children: rBlog.description })
-                  ] })
-                ]
-              },
-              rBlog.id
-            )) })
-          ] })
-        ] })
-      ] })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(FAQSection, { type: "page", slug: "blogs" })
-  ] });
-}
-function WorkflowsPage({ categorySlug }) {
-  const navigate = distExports.useNavigate();
-  const { search } = distExports.useLocation();
-  const searchParams = reactExports.useMemo(() => new URLSearchParams(search), [search]);
-  const [searchQuery, setSearchQuery] = reactExports.useState("");
-  const ssrData = useSSRContext();
-  const [categories, setCategories] = reactExports.useState(ssrData.categories || []);
-  const [workflows, setWorkflows] = reactExports.useState(ssrData.workflows?.data || ssrData.workflows || []);
-  const [loading, setLoading] = reactExports.useState(!ssrData.workflows);
-  const [page, setPage] = reactExports.useState(1);
-  const [totalPages, setTotalPages] = reactExports.useState(ssrData.workflows?.last_page || 1);
-  const [showAllCategories, setShowAllCategories] = reactExports.useState(false);
-  const [activeCategory, setActiveCategory] = reactExports.useState("all");
-  const [isLoadingMore, setIsLoadingMore] = reactExports.useState(false);
-  const [hasMore, setHasMore] = reactExports.useState(ssrData.workflows ? ssrData.workflows.current_page < ssrData.workflows.last_page : true);
-  const [totalWorkflows, setTotalWorkflows] = reactExports.useState(ssrData.workflows?.total || 0);
-  const observerTarget = reactExports.useRef(null);
-  const iconPool2 = [
-    Zap,
-    Bot,
-    GitBranch,
-    Layers,
-    LayoutGrid,
-    Workflow,
-    Mail,
-    MessageSquare,
-    Globe,
-    Database,
-    FileText,
-    Share2,
-    Smartphone,
-    Cpu,
-    BarChart,
-    Settings,
-    Bell,
-    Cloud,
-    Code
-  ];
-  const gradientPool2 = [
-    "from-purple-500 to-indigo-500",
-    "from-cyan-500 to-blue-500",
-    "from-fuchsia-500 to-pink-500",
-    "from-emerald-500 to-teal-500",
-    "from-orange-500 to-red-500",
-    "from-blue-400 to-indigo-600"
-  ];
-  const getWorkflowVisuals2 = (id2) => {
-    const hash = id2 || 0;
-    const Icon2 = iconPool2[hash % iconPool2.length];
-    const gradient = gradientPool2[hash % gradientPool2.length];
-    return { Icon: Icon2, gradient };
-  };
-  reactExports.useEffect(() => {
-    const fetchCats = async () => {
-      try {
-        const res = await workflowService.getWorkflowLibraryCategories();
-        if (res.success && res.data) {
-          setCategories(res.data);
-          const slug = categorySlug || searchParams.get("category");
-          if (slug) {
-            const found = res.data.find((c) => c.slug === slug);
-            if (found) setActiveCategory(found.id);
-          }
-        }
-      } catch (e) {
-        console.error(e);
-      }
-    };
-    fetchCats();
-  }, [searchParams, categorySlug]);
-  const loadWorkflows = reactExports.useCallback(async (currentPage = 1, append = false) => {
-    if (append) {
-      setIsLoadingMore(true);
-    } else {
-      setLoading(true);
-    }
-    try {
-      const categoryId = activeCategory === "all" ? null : activeCategory;
-      const res = await workflowService.getWorkflowLibrary(currentPage, 12, searchQuery, categoryId);
-      if (res.data) {
-        setWorkflows((prev) => append ? [...prev, ...res.data] : res.data);
-        setTotalPages(res.last_page || 1);
-        setTotalWorkflows(res.total || 0);
-        setHasMore((res.current_page || currentPage) < (res.last_page || 1));
-      } else {
-        if (!append) {
-          setWorkflows([]);
-          setTotalPages(1);
-          setTotalWorkflows(0);
-        }
-        setHasMore(false);
-      }
-    } catch (e) {
-      console.error(e);
-      setHasMore(false);
-    } finally {
-      setLoading(false);
-      setIsLoadingMore(false);
-    }
-  }, [activeCategory, searchQuery]);
-  reactExports.useEffect(() => {
-    setPage(1);
-    setHasMore(true);
-    const timer2 = setTimeout(() => {
-      loadWorkflows(1);
-    }, 400);
-    return () => clearTimeout(timer2);
-  }, [searchQuery, activeCategory, loadWorkflows]);
-  const handlePageChange = reactExports.useCallback(() => {
-    if (isLoadingMore || !hasMore || loading) return;
-    const nextPage = page + 1;
-    setPage(nextPage);
-    loadWorkflows(nextPage, true);
-  }, [page, hasMore, isLoadingMore, loading, loadWorkflows]);
-  reactExports.useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && hasMore && !loading && !isLoadingMore) {
-          handlePageChange();
-        }
-      },
-      { threshold: 0.1, rootMargin: "400px" }
-    );
-    if (observerTarget.current) {
-      observer.observe(observerTarget.current);
-    }
-    return () => observer.disconnect();
-  }, [handlePageChange, hasMore, loading, isLoadingMore]);
-  const featuredWorkflows = workflows.slice(0, 4);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(PublicNavbarLayout, { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      SEOHelmet,
-      {
-        title: ssrData.seo?.title || `${activeCategory === "all" ? "All n8n Workflow Templates" : categories.find((c) => c.id === activeCategory)?.title + " Templates"} - EdgeLancer`,
-        description: ssrData.seo?.description || "Browse and download ready-to-use n8n workflow templates for marketing, sales, web scrapers and more.",
-        keywords: ssrData.seo?.keywords,
-        ogImage: ssrData.seo?.og_image,
-        metaTags: ssrData.seo?.meta_tags,
-        structuredData: ssrData.seo?.structured_data
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "relative pt-24 md:pt-32 pb-12 md:pb-16 px-4 overflow-hidden", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute inset-0 overflow-hidden", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute top-0 left-1/4 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-purple-500/10 rounded-full blur-[80px] md:blur-[120px]" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bottom-0 right-1/4 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-fuchsia-500/10 rounded-full blur-[80px] md:blur-[120px]" })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto text-center relative", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs(Badge, { className: "mb-4 md:mb-6 bg-white/5 text-purple-400 border-purple-500/30 hover:bg-white/10 backdrop-blur-sm text-xs md:text-sm", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Layers, { className: "w-3 h-3 mr-1" }),
-          totalWorkflows > 0 ? `${totalWorkflows}+ Templates` : "Loading Templates..."
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("h1", { className: "text-4xl sm:text-5xl md:text-6xl font-bold mb-4 md:mb-6 leading-tight", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-white", children: "Ready-to-Use" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-fuchsia-400 to-pink-400", children: "Workflow Templates" })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-8 md:mb-10 px-2", children: "Start automating in seconds with our library of proven workflow templates." }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-xl mx-auto px-2 sm:px-0", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Search, { className: "absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Input,
-            {
-              type: "text",
-              placeholder: "Search workflows...",
-              value: searchQuery,
-              onChange: (e) => setSearchQuery(e.target.value),
-              className: "pl-12 h-12 md:h-14 bg-[#12121a] border-white/10 text-white placeholder:text-gray-400 focus-visible:ring-purple-500/50 text-base md:text-lg rounded-xl shadow-xl"
-            }
-          )
-        ] }) })
-      ] })
-    ] }),
-    featuredWorkflows.length > 0 && !searchQuery && activeCategory === "all" && /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "py-8 md:py-12 px-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-7xl mx-auto", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-4 md:mb-6", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Star, { className: "w-5 h-5 text-amber-500 fill-amber-500" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-base md:text-lg font-semibold text-white", children: "Featured Workflows" })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4", children: featuredWorkflows.map((workflow) => {
-        const { Icon: Icon2, gradient } = getWorkflowVisuals2(workflow.id);
-        return /* @__PURE__ */ jsxRuntimeExports.jsx(
-          Card,
-          {
-            onClick: () => navigate(`/workflow/${workflow.slug}`),
-            className: "bg-[#12121a] border-white/5 p-4 hover:border-white/20 transition-all cursor-pointer group",
-            children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `w-10 h-10 rounded-lg bg-gradient-to-br ${gradient} flex items-center justify-center flex-shrink-0`, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon2, { className: "w-5 h-5 text-white" }) }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-w-0", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-medium text-white truncate group-hover:text-purple-400 transition-colors text-sm md:text-base", children: workflow.title }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-gray-400", children: [
-                  workflow.views ? workflow.views.toLocaleString() : workflow.user_count?.toLocaleString() || 0,
-                  " uses"
-                ] })
-              ] })
-            ] })
-          },
-          `featured-${workflow.id}`
-        );
-      }) })
-    ] }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "py-6 md:py-8 px-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-7xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col lg:flex-row gap-6 md:gap-8", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "lg:w-64 flex-shrink-0", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "static lg:sticky lg:top-24 bg-[#12121a] border border-white/5 rounded-xl p-4", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("h3", { className: "font-semibold text-white mb-3 md:mb-4 flex items-center gap-2 text-sm md:text-base", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Filter, { className: "w-4 h-4" }),
-          "Categories"
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex lg:flex-col gap-2 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 scrollbar-hide -mx-4 px-4 lg:mx-0 lg:px-0", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "button",
-            {
-              onClick: () => setActiveCategory("all"),
-              className: cn(
-                "whitespace-nowrap lg:w-full flex items-center justify-center lg:justify-between px-4 lg:px-3 py-2 rounded-lg text-sm transition-all shrink-0",
-                activeCategory === "all" ? "bg-white/10 text-white shadow-[0_0_15px_rgba(255,255,255,0.05)]" : "text-gray-400 hover:text-white hover:bg-white/5 bg-white/5 lg:bg-transparent"
-              ),
-              children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "All Templates" })
-            }
-          ),
-          (showAllCategories ? categories : categories.slice(0, 8)).map((category) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "button",
-            {
-              onClick: () => setActiveCategory(category.id),
-              className: cn(
-                "whitespace-nowrap lg:w-full flex items-center justify-center lg:justify-between px-4 lg:px-3 py-2 rounded-lg text-sm transition-all shrink-0",
-                activeCategory === category.id ? "bg-white/10 text-white shadow-[0_0_15px_rgba(255,255,255,0.05)]" : "text-gray-400 hover:text-white hover:bg-white/5 bg-white/5 lg:bg-transparent"
-              ),
-              children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: category.title })
-            },
-            category.id
-          )),
-          categories.length > 8 && /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "button",
-            {
-              onClick: () => setShowAllCategories(!showAllCategories),
-              className: "whitespace-nowrap lg:w-full flex items-center justify-center px-4 lg:px-3 py-2 lg:mt-2 rounded-lg text-sm text-indigo-400 hover:text-indigo-300 hover:bg-white/5 transition-all outline-none border border-white/5 lg:bg-[#12121a] shrink-0",
-              children: showAllCategories ? "Show Less" : "Show All"
-            }
-          )
-        ] })
-      ] }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1", style: { scrollMarginTop: "100px" }, children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center justify-between mb-4 md:mb-6", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-lg md:text-xl font-semibold text-white", children: [
-          activeCategory === "all" ? "All Templates" : categories.find((c) => c.id === activeCategory)?.title,
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "ml-2 text-xs md:text-sm text-gray-400", children: [
-            "(",
-            loading ? "..." : totalWorkflows,
-            ")"
-          ] })
-        ] }) }),
-        loading ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col items-center justify-center py-20 min-h-[400px] md:min-h-[600px]", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-16 h-16 border-4 border-white/5 border-t-cyan-500 rounded-full animate-spin" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 text-white animate-pulse" })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center mt-6", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-cyan-400 text-xs font-bold uppercase tracking-[0.3em] animate-pulse", children: "Scanning Decades of Data" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-gray-600 text-[10px] mt-2", children: "Connecting to verified oracle nodes..." })
-          ] })
-        ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid md:grid-cols-2 gap-4 md:gap-6", children: workflows.map((workflow) => {
-            const { Icon: Icon2, gradient } = getWorkflowVisuals2(workflow.id);
-            return /* @__PURE__ */ jsxRuntimeExports.jsx(
-              Card,
-              {
-                onClick: () => navigate(`/workflow/${workflow.slug}`),
-                className: "bg-[#12121a] border-white/5 hover:border-white/20 transition-all duration-300 flex flex-col group h-full overflow-hidden cursor-pointer",
-                children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-4 md:p-6 flex flex-col h-full", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start justify-between mb-4", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-to-br ${gradient} flex items-center justify-center shadow-lg shadow-black/20 shrink-0`, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon2, { className: "w-5 h-5 md:w-6 md:h-6 text-white" }) }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-1 md:gap-2 flex-wrap justify-end pl-2", children: [
-                      Number(workflow.price) === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { className: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20 text-[10px] md:text-xs", children: "Free" }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(Badge, { variant: "outline", className: "border-white/10 text-gray-300 text-[10px] md:text-xs", children: [
-                        "$",
-                        workflow.price
-                      ] }),
-                      workflow.rating && /* @__PURE__ */ jsxRuntimeExports.jsxs(Badge, { variant: "secondary", className: "bg-amber-500/10 text-amber-500 border-amber-500/20 gap-1 text-[10px] md:text-xs", children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsx(Star, { className: "w-2.5 h-2.5 md:w-3 md:h-3 fill-current" }),
-                        workflow.rating
-                      ] })
-                    ] })
-                  ] }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-4 flex-grow", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-base md:text-lg font-semibold text-white mb-1.5 md:mb-2 group-hover:text-cyan-400 transition-colors", children: workflow.title }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs md:text-sm text-gray-400 line-clamp-2", children: workflow.description })
-                  ] }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap gap-1.5 md:gap-2 mb-4 md:mb-6", children: [
-                    workflow.category && /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", className: "border-white/10 text-gray-400 text-[10px] md:text-xs font-normal", children: workflow.category.title }),
-                    workflow.nodes_count > 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs(Badge, { variant: "outline", className: "border-white/10 text-gray-400 text-[10px] md:text-xs font-normal gap-1", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(LayoutGrid, { className: "w-3 h-3" }),
-                      workflow.nodes_count,
-                      " Nodes"
-                    ] }),
-                    workflow.difficulty && /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", className: "border-white/10 text-gray-400 text-[10px] md:text-xs font-normal capitalize", children: workflow.difficulty }),
-                    workflow.time_saved_value && /* @__PURE__ */ jsxRuntimeExports.jsxs(Badge, { variant: "outline", className: "border-cyan-500/20 text-cyan-400 text-[10px] md:text-xs font-normal gap-1", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(Clock, { className: "w-3 h-3" }),
-                      workflow.time_saved_value,
-                      " ",
-                      workflow.time_saved_unit
-                    ] })
-                  ] }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between pt-3 md:pt-4 border-t border-white/5 mt-auto", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-1.5 md:gap-2 text-[11px] md:text-xs text-gray-400", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(Eye, { className: "w-3 h-3 md:w-4 md:h-4" }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
-                        workflow.views?.toLocaleString() || 0,
-                        " views"
-                      ] })
-                    ] }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(
-                      Button,
-                      {
-                        size: "sm",
-                        className: "bg-gradient-to-r from-cyan-500 to-fuchsia-500 text-white border-0 text-xs md:text-sm h-8 md:h-9",
-                        children: "View"
-                      }
-                    )
-                  ] })
-                ] })
-              },
-              workflow.id
-            );
-          }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "div",
-            {
-              ref: observerTarget,
-              className: "py-20 flex flex-col items-center justify-center gap-6",
-              children: isLoadingMore ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col items-center gap-6", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-16 h-16 border-4 border-white/5 border-t-cyan-500 rounded-full animate-spin" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 text-white animate-pulse" })
-                ] }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-cyan-400 text-xs font-bold uppercase tracking-[0.3em] animate-pulse", children: "Scanning Decades of Data" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-gray-600 text-[10px] mt-2", children: "Connecting to verified oracle nodes..." })
-                ] })
-              ] }) : !hasMore && workflows.length > 0 ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative p-12 rounded-[2rem] bg-white/[0.02] border border-white/5 text-center backdrop-blur-md max-w-sm w-full mx-auto", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-gradient-to-b from-amber-500/10 to-transparent rounded-[2rem] opacity-50" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx(Star, { className: "w-10 h-10 text-amber-500 fill-amber-500 mx-auto mb-6 drop-shadow-lg animate-bounce" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-xl font-bold text-white mb-2", children: "Deep Index Reached" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-gray-400 text-sm leading-relaxed", children: [
-                  "You have retrieved all ",
-                  workflows.length,
-                  " workflows currently available."
-                ] })
-              ] }) : null
-            }
-          )
-        ] })
-      ] })
-    ] }) }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(FAQSection, { type: "page", slug: "workflows" })
-  ] });
-}
 const WorkflowPreview = ({ nodes, edges }) => {
   const nodeTypes = reactExports.useMemo(() => ({ custom: N8nNode }), []);
   const { fitView: fitView2 } = useReactFlow();
@@ -82724,13 +79867,24 @@ function WorkflowDetailsPage() {
   const loadAllData = async () => {
     setLoading(true);
     try {
-      await Promise.all([
-        loadWorkflowDetails(),
-        loadRelatedWorkflows(),
-        loadRelevantBlogs()
-      ]);
+      setError(null);
+      const response = await workflowService.getWorkflowBySlug(slug);
+      const wfData = response.data;
+      if (wfData?.id) {
+        setWorkflow(wfData);
+        setSeo(response.seo || null);
+        setRelatedWorkflows(response.relatedWorkflows || []);
+        setRelevantBlogs(response.suggestedBlogs || []);
+        let finalJson = null;
+        if (wfData.json_data) {
+          finalJson = typeof wfData.json_data === "string" ? JSON.parse(wfData.json_data) : wfData.json_data;
+        }
+        setN8nJson(finalJson);
+        if (finalJson) processN8nData(finalJson);
+      }
     } catch (e) {
       console.error(e);
+      setError("Failed to load workflow details");
     } finally {
       setLoading(false);
     }
@@ -82784,44 +79938,6 @@ function WorkflowDetailsPage() {
     setNodes(newNodes);
     setEdges(newEdges);
   };
-  const loadWorkflowDetails = async () => {
-    try {
-      setError(null);
-      const response = await workflowService.getWorkflowBySlug(slug);
-      const payload = response?.data || {};
-      const wfData = payload?.current_workflow || payload?.workflow || payload;
-      if (wfData?.id) {
-        setWorkflow(wfData);
-        setSeo(response?.seo || payload?.seo || null);
-        let finalJson = null;
-        if (wfData.json_data) {
-          finalJson = typeof wfData.json_data === "string" ? JSON.parse(wfData.json_data) : wfData.json_data;
-        }
-        if (finalJson) {
-          setN8nJson(finalJson);
-          processN8nData(finalJson);
-        }
-      } else {
-        setError("Workflow not found");
-      }
-    } catch (err) {
-      setError("Failed to load workflow");
-    }
-  };
-  const loadRelatedWorkflows = async () => {
-    try {
-      const res = await workflowService.getRelatedWorkflows(slug);
-      if (res?.data) setRelatedWorkflows(res.data);
-    } catch (e) {
-    }
-  };
-  const loadRelevantBlogs = async () => {
-    try {
-      const res = await workflowService.getRelatedBlogs(slug);
-      if (res?.success) setRelevantBlogs(res.data);
-    } catch (e) {
-    }
-  };
   const handleDownload = () => {
     if (!n8nJson) return;
     const currentYear = (/* @__PURE__ */ new Date()).getFullYear();
@@ -82856,59 +79972,19 @@ function WorkflowDetailsPage() {
   if (error || !workflow) return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-white text-center p-20", children: error || "Not found" });
   const CategoryIcon = LucideIconMap[workflow.category?.icon] || Users;
   const features = Array.isArray(workflow.workflow_features) ? workflow.workflow_features : typeof workflow.workflow_features === "string" ? JSON.parse(workflow.workflow_features) : [];
-  const origin = "http://localhost:8000";
-  const structuredData = workflow ? [
-    {
-      "@context": "https://schema.org/",
-      "@type": "Product",
-      "name": workflow?.title || "Workflow",
-      "description": workflow?.description || "",
-      "image": workflow?.og_image || workflow?.category?.image_url,
-      "brand": {
-        "@type": "Brand",
-        "name": "EdgeLancer"
-      },
-      "aggregateRating": workflow?.rating ? {
-        "@type": "AggregateRating",
-        "ratingValue": workflow.rating,
-        "reviewCount": workflow?.reviews_count || 15
-      } : void 0
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": origin
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Workflows",
-          "item": `${origin}/workflows`
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": workflow?.title || "Workflow",
-          "item": `${origin}/workflow/${workflow?.slug || ""}`
-        }
-      ]
-    }
-  ] : void 0;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `min-h-screen bg-[#020202] text-slate-300 font-sans flex flex-col transition-all duration-300 ${isFullscreen ? "h-screen overflow-hidden" : ""}`, children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       SEOHelmet,
       {
-        title: seo?.title || workflow?.meta_title || workflow?.title || "Workflow Details",
-        description: seo?.description || workflow?.meta_description || workflow?.description || "View workflow details on EdgeLancer.",
-        url: workflow?.slug ? `${origin}/workflow/${workflow.slug}` : void 0,
-        ogImage: (workflow?.og_image || workflow?.category?.image_url) ?? void 0,
-        ogType: "product",
-        structuredData
+        title: seo?.title,
+        description: seo?.description,
+        keywords: seo?.keywords,
+        ogImage: seo?.og_image,
+        canonical: seo?.canonical,
+        ogType: seo?.og_type,
+        structuredData: seo?.structured_data,
+        metaTags: seo?.meta_tags,
+        robots: seo?.robots
       }
     ),
     !isFullscreen && /* @__PURE__ */ jsxRuntimeExports.jsx(PublicNavbar, {}),
@@ -83850,6 +80926,249 @@ function TemplatesShowcasePage() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(FAQSection, { type: "page", slug: "templates" })
   ] });
 }
+function createContextScope(scopeName, createContextScopeDeps = []) {
+  let defaultContexts = [];
+  function createContext3(rootComponentName, defaultContext) {
+    const BaseContext = reactExports.createContext(defaultContext);
+    BaseContext.displayName = rootComponentName + "Context";
+    const index = defaultContexts.length;
+    defaultContexts = [...defaultContexts, defaultContext];
+    const Provider2 = (props) => {
+      const { scope, children: children2, ...context2 } = props;
+      const Context2 = scope?.[scopeName]?.[index] || BaseContext;
+      const value = reactExports.useMemo(() => context2, Object.values(context2));
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(Context2.Provider, { value, children: children2 });
+    };
+    Provider2.displayName = rootComponentName + "Provider";
+    function useContext2(consumerName, scope) {
+      const Context2 = scope?.[scopeName]?.[index] || BaseContext;
+      const context2 = reactExports.useContext(Context2);
+      if (context2) return context2;
+      if (defaultContext !== void 0) return defaultContext;
+      throw new Error(`\`${consumerName}\` must be used within \`${rootComponentName}\``);
+    }
+    return [Provider2, useContext2];
+  }
+  const createScope = () => {
+    const scopeContexts = defaultContexts.map((defaultContext) => {
+      return reactExports.createContext(defaultContext);
+    });
+    return function useScope(scope) {
+      const contexts = scope?.[scopeName] || scopeContexts;
+      return reactExports.useMemo(
+        () => ({ [`__scope${scopeName}`]: { ...scope, [scopeName]: contexts } }),
+        [scope, contexts]
+      );
+    };
+  };
+  createScope.scopeName = scopeName;
+  return [createContext3, composeContextScopes(createScope, ...createContextScopeDeps)];
+}
+function composeContextScopes(...scopes) {
+  const baseScope = scopes[0];
+  if (scopes.length === 1) return baseScope;
+  const createScope = () => {
+    const scopeHooks = scopes.map((createScope2) => ({
+      useScope: createScope2(),
+      scopeName: createScope2.scopeName
+    }));
+    return function useComposedScopes(overrideScopes) {
+      const nextScopes = scopeHooks.reduce((nextScopes2, { useScope, scopeName }) => {
+        const scopeProps = useScope(overrideScopes);
+        const currentScope = scopeProps[`__scope${scopeName}`];
+        return { ...nextScopes2, ...currentScope };
+      }, {});
+      return reactExports.useMemo(() => ({ [`__scope${baseScope.scopeName}`]: nextScopes }), [nextScopes]);
+    };
+  };
+  createScope.scopeName = baseScope.scopeName;
+  return createScope;
+}
+var NODES = [
+  "a",
+  "button",
+  "div",
+  "form",
+  "h2",
+  "h3",
+  "img",
+  "input",
+  "label",
+  "li",
+  "nav",
+  "ol",
+  "p",
+  "select",
+  "span",
+  "svg",
+  "ul"
+];
+var Primitive = NODES.reduce((primitive, node) => {
+  const Slot2 = /* @__PURE__ */ createSlot$2(`Primitive.${node}`);
+  const Node2 = reactExports.forwardRef((props, forwardedRef) => {
+    const { asChild, ...primitiveProps } = props;
+    const Comp = asChild ? Slot2 : node;
+    if (typeof window !== "undefined") {
+      window[/* @__PURE__ */ Symbol.for("radix-ui")] = true;
+    }
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(Comp, { ...primitiveProps, ref: forwardedRef });
+  });
+  Node2.displayName = `Primitive.${node}`;
+  return { ...primitive, [node]: Node2 };
+}, {});
+var shimExports = requireShim();
+function useIsHydrated() {
+  return shimExports.useSyncExternalStore(
+    subscribe,
+    () => true,
+    () => false
+  );
+}
+function subscribe() {
+  return () => {
+  };
+}
+var AVATAR_NAME = "Avatar";
+var [createAvatarContext] = createContextScope(AVATAR_NAME);
+var [AvatarProvider, useAvatarContext] = createAvatarContext(AVATAR_NAME);
+var Avatar$1 = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const { __scopeAvatar, ...avatarProps } = props;
+    const [imageLoadingStatus, setImageLoadingStatus] = reactExports.useState("idle");
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      AvatarProvider,
+      {
+        scope: __scopeAvatar,
+        imageLoadingStatus,
+        onImageLoadingStatusChange: setImageLoadingStatus,
+        children: /* @__PURE__ */ jsxRuntimeExports.jsx(Primitive.span, { ...avatarProps, ref: forwardedRef })
+      }
+    );
+  }
+);
+Avatar$1.displayName = AVATAR_NAME;
+var IMAGE_NAME = "AvatarImage";
+var AvatarImage$1 = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const { __scopeAvatar, src, onLoadingStatusChange = () => {
+    }, ...imageProps } = props;
+    const context2 = useAvatarContext(IMAGE_NAME, __scopeAvatar);
+    const imageLoadingStatus = useImageLoadingStatus(src, imageProps);
+    const handleLoadingStatusChange = useCallbackRef$1((status) => {
+      onLoadingStatusChange(status);
+      context2.onImageLoadingStatusChange(status);
+    });
+    useLayoutEffect2(() => {
+      if (imageLoadingStatus !== "idle") {
+        handleLoadingStatusChange(imageLoadingStatus);
+      }
+    }, [imageLoadingStatus, handleLoadingStatusChange]);
+    return imageLoadingStatus === "loaded" ? /* @__PURE__ */ jsxRuntimeExports.jsx(Primitive.img, { ...imageProps, ref: forwardedRef, src }) : null;
+  }
+);
+AvatarImage$1.displayName = IMAGE_NAME;
+var FALLBACK_NAME = "AvatarFallback";
+var AvatarFallback$1 = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const { __scopeAvatar, delayMs, ...fallbackProps } = props;
+    const context2 = useAvatarContext(FALLBACK_NAME, __scopeAvatar);
+    const [canRender, setCanRender] = reactExports.useState(delayMs === void 0);
+    reactExports.useEffect(() => {
+      if (delayMs !== void 0) {
+        const timerId = window.setTimeout(() => setCanRender(true), delayMs);
+        return () => window.clearTimeout(timerId);
+      }
+    }, [delayMs]);
+    return canRender && context2.imageLoadingStatus !== "loaded" ? /* @__PURE__ */ jsxRuntimeExports.jsx(Primitive.span, { ...fallbackProps, ref: forwardedRef }) : null;
+  }
+);
+AvatarFallback$1.displayName = FALLBACK_NAME;
+function resolveLoadingStatus(image, src) {
+  if (!image) {
+    return "idle";
+  }
+  if (!src) {
+    return "error";
+  }
+  if (image.src !== src) {
+    image.src = src;
+  }
+  return image.complete && image.naturalWidth > 0 ? "loaded" : "loading";
+}
+function useImageLoadingStatus(src, { referrerPolicy, crossOrigin }) {
+  const isHydrated2 = useIsHydrated();
+  const imageRef = reactExports.useRef(null);
+  const image = (() => {
+    if (!isHydrated2) return null;
+    if (!imageRef.current) {
+      imageRef.current = new window.Image();
+    }
+    return imageRef.current;
+  })();
+  const [loadingStatus, setLoadingStatus] = reactExports.useState(
+    () => resolveLoadingStatus(image, src)
+  );
+  useLayoutEffect2(() => {
+    setLoadingStatus(resolveLoadingStatus(image, src));
+  }, [image, src]);
+  useLayoutEffect2(() => {
+    const updateStatus = (status) => () => {
+      setLoadingStatus(status);
+    };
+    if (!image) return;
+    const handleLoad = updateStatus("loaded");
+    const handleError = updateStatus("error");
+    image.addEventListener("load", handleLoad);
+    image.addEventListener("error", handleError);
+    if (referrerPolicy) {
+      image.referrerPolicy = referrerPolicy;
+    }
+    if (typeof crossOrigin === "string") {
+      image.crossOrigin = crossOrigin;
+    }
+    return () => {
+      image.removeEventListener("load", handleLoad);
+      image.removeEventListener("error", handleError);
+    };
+  }, [image, crossOrigin, referrerPolicy]);
+  return loadingStatus;
+}
+var Root$2 = Avatar$1;
+var Image = AvatarImage$1;
+var Fallback = AvatarFallback$1;
+const Avatar = reactExports.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+  Root$2,
+  {
+    ref,
+    className: cn(
+      "relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full",
+      className
+    ),
+    ...props
+  }
+));
+Avatar.displayName = Root$2.displayName;
+const AvatarImage = reactExports.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+  Image,
+  {
+    ref,
+    className: cn("aspect-square h-full w-full", className),
+    ...props
+  }
+));
+AvatarImage.displayName = Image.displayName;
+const AvatarFallback = reactExports.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+  Fallback,
+  {
+    ref,
+    className: cn(
+      "flex h-full w-full items-center justify-center rounded-full bg-muted",
+      className
+    ),
+    ...props
+  }
+));
+AvatarFallback.displayName = Fallback.displayName;
 const Sheet = Root$3;
 const SheetPortal = Portal;
 const SheetOverlay = reactExports.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -84119,6 +81438,748 @@ const mockNotifications = [
     read: true
   }
 ];
+var DirectionContext = reactExports.createContext(void 0);
+function useDirection(localDir) {
+  const globalDir = reactExports.useContext(DirectionContext);
+  return localDir || globalDir || "ltr";
+}
+function clamp(value, [min, max]) {
+  return Math.min(max, Math.max(min, value));
+}
+function useStateMachine(initialState2, machine) {
+  return reactExports.useReducer((state, event) => {
+    const nextState = machine[state][event];
+    return nextState ?? state;
+  }, initialState2);
+}
+var SCROLL_AREA_NAME = "ScrollArea";
+var [createScrollAreaContext] = createContextScope$1(SCROLL_AREA_NAME);
+var [ScrollAreaProvider, useScrollAreaContext] = createScrollAreaContext(SCROLL_AREA_NAME);
+var ScrollArea$1 = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const {
+      __scopeScrollArea,
+      type = "hover",
+      dir,
+      scrollHideDelay = 600,
+      ...scrollAreaProps
+    } = props;
+    const [scrollArea, setScrollArea] = reactExports.useState(null);
+    const [viewport, setViewport] = reactExports.useState(null);
+    const [content, setContent] = reactExports.useState(null);
+    const [scrollbarX, setScrollbarX] = reactExports.useState(null);
+    const [scrollbarY, setScrollbarY] = reactExports.useState(null);
+    const [cornerWidth, setCornerWidth] = reactExports.useState(0);
+    const [cornerHeight, setCornerHeight] = reactExports.useState(0);
+    const [scrollbarXEnabled, setScrollbarXEnabled] = reactExports.useState(false);
+    const [scrollbarYEnabled, setScrollbarYEnabled] = reactExports.useState(false);
+    const composedRefs = useComposedRefs(forwardedRef, (node) => setScrollArea(node));
+    const direction = useDirection(dir);
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      ScrollAreaProvider,
+      {
+        scope: __scopeScrollArea,
+        type,
+        dir: direction,
+        scrollHideDelay,
+        scrollArea,
+        viewport,
+        onViewportChange: setViewport,
+        content,
+        onContentChange: setContent,
+        scrollbarX,
+        onScrollbarXChange: setScrollbarX,
+        scrollbarXEnabled,
+        onScrollbarXEnabledChange: setScrollbarXEnabled,
+        scrollbarY,
+        onScrollbarYChange: setScrollbarY,
+        scrollbarYEnabled,
+        onScrollbarYEnabledChange: setScrollbarYEnabled,
+        onCornerWidthChange: setCornerWidth,
+        onCornerHeightChange: setCornerHeight,
+        children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Primitive$1.div,
+          {
+            dir: direction,
+            ...scrollAreaProps,
+            ref: composedRefs,
+            style: {
+              position: "relative",
+              // Pass corner sizes as CSS vars to reduce re-renders of context consumers
+              ["--radix-scroll-area-corner-width"]: cornerWidth + "px",
+              ["--radix-scroll-area-corner-height"]: cornerHeight + "px",
+              ...props.style
+            }
+          }
+        )
+      }
+    );
+  }
+);
+ScrollArea$1.displayName = SCROLL_AREA_NAME;
+var VIEWPORT_NAME = "ScrollAreaViewport";
+var ScrollAreaViewport = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const { __scopeScrollArea, children: children2, nonce, ...viewportProps } = props;
+    const context2 = useScrollAreaContext(VIEWPORT_NAME, __scopeScrollArea);
+    const ref = reactExports.useRef(null);
+    const composedRefs = useComposedRefs(forwardedRef, ref, context2.onViewportChange);
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "style",
+        {
+          dangerouslySetInnerHTML: {
+            __html: `[data-radix-scroll-area-viewport]{scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch;}[data-radix-scroll-area-viewport]::-webkit-scrollbar{display:none}`
+          },
+          nonce
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        Primitive$1.div,
+        {
+          "data-radix-scroll-area-viewport": "",
+          ...viewportProps,
+          ref: composedRefs,
+          style: {
+            /**
+             * We don't support `visible` because the intention is to have at least one scrollbar
+             * if this component is used and `visible` will behave like `auto` in that case
+             * https://developer.mozilla.org/en-US/docs/Web/CSS/overflow#description
+             *
+             * We don't handle `auto` because the intention is for the native implementation
+             * to be hidden if using this component. We just want to ensure the node is scrollable
+             * so could have used either `scroll` or `auto` here. We picked `scroll` to prevent
+             * the browser from having to work out whether to render native scrollbars or not,
+             * we tell it to with the intention of hiding them in CSS.
+             */
+            overflowX: context2.scrollbarXEnabled ? "scroll" : "hidden",
+            overflowY: context2.scrollbarYEnabled ? "scroll" : "hidden",
+            ...props.style
+          },
+          children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { ref: context2.onContentChange, style: { minWidth: "100%", display: "table" }, children: children2 })
+        }
+      )
+    ] });
+  }
+);
+ScrollAreaViewport.displayName = VIEWPORT_NAME;
+var SCROLLBAR_NAME = "ScrollAreaScrollbar";
+var ScrollAreaScrollbar = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const { forceMount, ...scrollbarProps } = props;
+    const context2 = useScrollAreaContext(SCROLLBAR_NAME, props.__scopeScrollArea);
+    const { onScrollbarXEnabledChange, onScrollbarYEnabledChange } = context2;
+    const isHorizontal = props.orientation === "horizontal";
+    reactExports.useEffect(() => {
+      isHorizontal ? onScrollbarXEnabledChange(true) : onScrollbarYEnabledChange(true);
+      return () => {
+        isHorizontal ? onScrollbarXEnabledChange(false) : onScrollbarYEnabledChange(false);
+      };
+    }, [isHorizontal, onScrollbarXEnabledChange, onScrollbarYEnabledChange]);
+    return context2.type === "hover" ? /* @__PURE__ */ jsxRuntimeExports.jsx(ScrollAreaScrollbarHover, { ...scrollbarProps, ref: forwardedRef, forceMount }) : context2.type === "scroll" ? /* @__PURE__ */ jsxRuntimeExports.jsx(ScrollAreaScrollbarScroll, { ...scrollbarProps, ref: forwardedRef, forceMount }) : context2.type === "auto" ? /* @__PURE__ */ jsxRuntimeExports.jsx(ScrollAreaScrollbarAuto, { ...scrollbarProps, ref: forwardedRef, forceMount }) : context2.type === "always" ? /* @__PURE__ */ jsxRuntimeExports.jsx(ScrollAreaScrollbarVisible, { ...scrollbarProps, ref: forwardedRef }) : null;
+  }
+);
+ScrollAreaScrollbar.displayName = SCROLLBAR_NAME;
+var ScrollAreaScrollbarHover = reactExports.forwardRef((props, forwardedRef) => {
+  const { forceMount, ...scrollbarProps } = props;
+  const context2 = useScrollAreaContext(SCROLLBAR_NAME, props.__scopeScrollArea);
+  const [visible, setVisible] = reactExports.useState(false);
+  reactExports.useEffect(() => {
+    const scrollArea = context2.scrollArea;
+    let hideTimer = 0;
+    if (scrollArea) {
+      const handlePointerEnter = () => {
+        window.clearTimeout(hideTimer);
+        setVisible(true);
+      };
+      const handlePointerLeave = () => {
+        hideTimer = window.setTimeout(() => setVisible(false), context2.scrollHideDelay);
+      };
+      scrollArea.addEventListener("pointerenter", handlePointerEnter);
+      scrollArea.addEventListener("pointerleave", handlePointerLeave);
+      return () => {
+        window.clearTimeout(hideTimer);
+        scrollArea.removeEventListener("pointerenter", handlePointerEnter);
+        scrollArea.removeEventListener("pointerleave", handlePointerLeave);
+      };
+    }
+  }, [context2.scrollArea, context2.scrollHideDelay]);
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || visible, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+    ScrollAreaScrollbarAuto,
+    {
+      "data-state": visible ? "visible" : "hidden",
+      ...scrollbarProps,
+      ref: forwardedRef
+    }
+  ) });
+});
+var ScrollAreaScrollbarScroll = reactExports.forwardRef((props, forwardedRef) => {
+  const { forceMount, ...scrollbarProps } = props;
+  const context2 = useScrollAreaContext(SCROLLBAR_NAME, props.__scopeScrollArea);
+  const isHorizontal = props.orientation === "horizontal";
+  const debounceScrollEnd = useDebounceCallback(() => send("SCROLL_END"), 100);
+  const [state, send] = useStateMachine("hidden", {
+    hidden: {
+      SCROLL: "scrolling"
+    },
+    scrolling: {
+      SCROLL_END: "idle",
+      POINTER_ENTER: "interacting"
+    },
+    interacting: {
+      SCROLL: "interacting",
+      POINTER_LEAVE: "idle"
+    },
+    idle: {
+      HIDE: "hidden",
+      SCROLL: "scrolling",
+      POINTER_ENTER: "interacting"
+    }
+  });
+  reactExports.useEffect(() => {
+    if (state === "idle") {
+      const hideTimer = window.setTimeout(() => send("HIDE"), context2.scrollHideDelay);
+      return () => window.clearTimeout(hideTimer);
+    }
+  }, [state, context2.scrollHideDelay, send]);
+  reactExports.useEffect(() => {
+    const viewport = context2.viewport;
+    const scrollDirection = isHorizontal ? "scrollLeft" : "scrollTop";
+    if (viewport) {
+      let prevScrollPos = viewport[scrollDirection];
+      const handleScroll2 = () => {
+        const scrollPos = viewport[scrollDirection];
+        const hasScrollInDirectionChanged = prevScrollPos !== scrollPos;
+        if (hasScrollInDirectionChanged) {
+          send("SCROLL");
+          debounceScrollEnd();
+        }
+        prevScrollPos = scrollPos;
+      };
+      viewport.addEventListener("scroll", handleScroll2);
+      return () => viewport.removeEventListener("scroll", handleScroll2);
+    }
+  }, [context2.viewport, isHorizontal, send, debounceScrollEnd]);
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || state !== "hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+    ScrollAreaScrollbarVisible,
+    {
+      "data-state": state === "hidden" ? "hidden" : "visible",
+      ...scrollbarProps,
+      ref: forwardedRef,
+      onPointerEnter: composeEventHandlers(props.onPointerEnter, () => send("POINTER_ENTER")),
+      onPointerLeave: composeEventHandlers(props.onPointerLeave, () => send("POINTER_LEAVE"))
+    }
+  ) });
+});
+var ScrollAreaScrollbarAuto = reactExports.forwardRef((props, forwardedRef) => {
+  const context2 = useScrollAreaContext(SCROLLBAR_NAME, props.__scopeScrollArea);
+  const { forceMount, ...scrollbarProps } = props;
+  const [visible, setVisible] = reactExports.useState(false);
+  const isHorizontal = props.orientation === "horizontal";
+  const handleResize = useDebounceCallback(() => {
+    if (context2.viewport) {
+      const isOverflowX = context2.viewport.offsetWidth < context2.viewport.scrollWidth;
+      const isOverflowY = context2.viewport.offsetHeight < context2.viewport.scrollHeight;
+      setVisible(isHorizontal ? isOverflowX : isOverflowY);
+    }
+  }, 10);
+  useResizeObserver(context2.viewport, handleResize);
+  useResizeObserver(context2.content, handleResize);
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || visible, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+    ScrollAreaScrollbarVisible,
+    {
+      "data-state": visible ? "visible" : "hidden",
+      ...scrollbarProps,
+      ref: forwardedRef
+    }
+  ) });
+});
+var ScrollAreaScrollbarVisible = reactExports.forwardRef((props, forwardedRef) => {
+  const { orientation = "vertical", ...scrollbarProps } = props;
+  const context2 = useScrollAreaContext(SCROLLBAR_NAME, props.__scopeScrollArea);
+  const thumbRef = reactExports.useRef(null);
+  const pointerOffsetRef = reactExports.useRef(0);
+  const [sizes, setSizes] = reactExports.useState({
+    content: 0,
+    viewport: 0,
+    scrollbar: { size: 0, paddingStart: 0, paddingEnd: 0 }
+  });
+  const thumbRatio = getThumbRatio(sizes.viewport, sizes.content);
+  const commonProps = {
+    ...scrollbarProps,
+    sizes,
+    onSizesChange: setSizes,
+    hasThumb: Boolean(thumbRatio > 0 && thumbRatio < 1),
+    onThumbChange: (thumb) => thumbRef.current = thumb,
+    onThumbPointerUp: () => pointerOffsetRef.current = 0,
+    onThumbPointerDown: (pointerPos) => pointerOffsetRef.current = pointerPos
+  };
+  function getScrollPosition(pointerPos, dir) {
+    return getScrollPositionFromPointer(pointerPos, pointerOffsetRef.current, sizes, dir);
+  }
+  if (orientation === "horizontal") {
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      ScrollAreaScrollbarX,
+      {
+        ...commonProps,
+        ref: forwardedRef,
+        onThumbPositionChange: () => {
+          if (context2.viewport && thumbRef.current) {
+            const scrollPos = context2.viewport.scrollLeft;
+            const offset = getThumbOffsetFromScroll(scrollPos, sizes, context2.dir);
+            thumbRef.current.style.transform = `translate3d(${offset}px, 0, 0)`;
+          }
+        },
+        onWheelScroll: (scrollPos) => {
+          if (context2.viewport) context2.viewport.scrollLeft = scrollPos;
+        },
+        onDragScroll: (pointerPos) => {
+          if (context2.viewport) {
+            context2.viewport.scrollLeft = getScrollPosition(pointerPos, context2.dir);
+          }
+        }
+      }
+    );
+  }
+  if (orientation === "vertical") {
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      ScrollAreaScrollbarY,
+      {
+        ...commonProps,
+        ref: forwardedRef,
+        onThumbPositionChange: () => {
+          if (context2.viewport && thumbRef.current) {
+            const scrollPos = context2.viewport.scrollTop;
+            const offset = getThumbOffsetFromScroll(scrollPos, sizes);
+            thumbRef.current.style.transform = `translate3d(0, ${offset}px, 0)`;
+          }
+        },
+        onWheelScroll: (scrollPos) => {
+          if (context2.viewport) context2.viewport.scrollTop = scrollPos;
+        },
+        onDragScroll: (pointerPos) => {
+          if (context2.viewport) context2.viewport.scrollTop = getScrollPosition(pointerPos);
+        }
+      }
+    );
+  }
+  return null;
+});
+var ScrollAreaScrollbarX = reactExports.forwardRef((props, forwardedRef) => {
+  const { sizes, onSizesChange, ...scrollbarProps } = props;
+  const context2 = useScrollAreaContext(SCROLLBAR_NAME, props.__scopeScrollArea);
+  const [computedStyle, setComputedStyle] = reactExports.useState();
+  const ref = reactExports.useRef(null);
+  const composeRefs2 = useComposedRefs(forwardedRef, ref, context2.onScrollbarXChange);
+  reactExports.useEffect(() => {
+    if (ref.current) setComputedStyle(getComputedStyle(ref.current));
+  }, [ref]);
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    ScrollAreaScrollbarImpl,
+    {
+      "data-orientation": "horizontal",
+      ...scrollbarProps,
+      ref: composeRefs2,
+      sizes,
+      style: {
+        bottom: 0,
+        left: context2.dir === "rtl" ? "var(--radix-scroll-area-corner-width)" : 0,
+        right: context2.dir === "ltr" ? "var(--radix-scroll-area-corner-width)" : 0,
+        ["--radix-scroll-area-thumb-width"]: getThumbSize(sizes) + "px",
+        ...props.style
+      },
+      onThumbPointerDown: (pointerPos) => props.onThumbPointerDown(pointerPos.x),
+      onDragScroll: (pointerPos) => props.onDragScroll(pointerPos.x),
+      onWheelScroll: (event, maxScrollPos) => {
+        if (context2.viewport) {
+          const scrollPos = context2.viewport.scrollLeft + event.deltaX;
+          props.onWheelScroll(scrollPos);
+          if (isScrollingWithinScrollbarBounds(scrollPos, maxScrollPos)) {
+            event.preventDefault();
+          }
+        }
+      },
+      onResize: () => {
+        if (ref.current && context2.viewport && computedStyle) {
+          onSizesChange({
+            content: context2.viewport.scrollWidth,
+            viewport: context2.viewport.offsetWidth,
+            scrollbar: {
+              size: ref.current.clientWidth,
+              paddingStart: toInt(computedStyle.paddingLeft),
+              paddingEnd: toInt(computedStyle.paddingRight)
+            }
+          });
+        }
+      }
+    }
+  );
+});
+var ScrollAreaScrollbarY = reactExports.forwardRef((props, forwardedRef) => {
+  const { sizes, onSizesChange, ...scrollbarProps } = props;
+  const context2 = useScrollAreaContext(SCROLLBAR_NAME, props.__scopeScrollArea);
+  const [computedStyle, setComputedStyle] = reactExports.useState();
+  const ref = reactExports.useRef(null);
+  const composeRefs2 = useComposedRefs(forwardedRef, ref, context2.onScrollbarYChange);
+  reactExports.useEffect(() => {
+    if (ref.current) setComputedStyle(getComputedStyle(ref.current));
+  }, [ref]);
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    ScrollAreaScrollbarImpl,
+    {
+      "data-orientation": "vertical",
+      ...scrollbarProps,
+      ref: composeRefs2,
+      sizes,
+      style: {
+        top: 0,
+        right: context2.dir === "ltr" ? 0 : void 0,
+        left: context2.dir === "rtl" ? 0 : void 0,
+        bottom: "var(--radix-scroll-area-corner-height)",
+        ["--radix-scroll-area-thumb-height"]: getThumbSize(sizes) + "px",
+        ...props.style
+      },
+      onThumbPointerDown: (pointerPos) => props.onThumbPointerDown(pointerPos.y),
+      onDragScroll: (pointerPos) => props.onDragScroll(pointerPos.y),
+      onWheelScroll: (event, maxScrollPos) => {
+        if (context2.viewport) {
+          const scrollPos = context2.viewport.scrollTop + event.deltaY;
+          props.onWheelScroll(scrollPos);
+          if (isScrollingWithinScrollbarBounds(scrollPos, maxScrollPos)) {
+            event.preventDefault();
+          }
+        }
+      },
+      onResize: () => {
+        if (ref.current && context2.viewport && computedStyle) {
+          onSizesChange({
+            content: context2.viewport.scrollHeight,
+            viewport: context2.viewport.offsetHeight,
+            scrollbar: {
+              size: ref.current.clientHeight,
+              paddingStart: toInt(computedStyle.paddingTop),
+              paddingEnd: toInt(computedStyle.paddingBottom)
+            }
+          });
+        }
+      }
+    }
+  );
+});
+var [ScrollbarProvider, useScrollbarContext] = createScrollAreaContext(SCROLLBAR_NAME);
+var ScrollAreaScrollbarImpl = reactExports.forwardRef((props, forwardedRef) => {
+  const {
+    __scopeScrollArea,
+    sizes,
+    hasThumb,
+    onThumbChange,
+    onThumbPointerUp,
+    onThumbPointerDown,
+    onThumbPositionChange,
+    onDragScroll,
+    onWheelScroll,
+    onResize,
+    ...scrollbarProps
+  } = props;
+  const context2 = useScrollAreaContext(SCROLLBAR_NAME, __scopeScrollArea);
+  const [scrollbar, setScrollbar] = reactExports.useState(null);
+  const composeRefs2 = useComposedRefs(forwardedRef, (node) => setScrollbar(node));
+  const rectRef = reactExports.useRef(null);
+  const prevWebkitUserSelectRef = reactExports.useRef("");
+  const viewport = context2.viewport;
+  const maxScrollPos = sizes.content - sizes.viewport;
+  const handleWheelScroll = useCallbackRef$1(onWheelScroll);
+  const handleThumbPositionChange = useCallbackRef$1(onThumbPositionChange);
+  const handleResize = useDebounceCallback(onResize, 10);
+  function handleDragScroll(event) {
+    if (rectRef.current) {
+      const x = event.clientX - rectRef.current.left;
+      const y = event.clientY - rectRef.current.top;
+      onDragScroll({ x, y });
+    }
+  }
+  reactExports.useEffect(() => {
+    const handleWheel = (event) => {
+      const element = event.target;
+      const isScrollbarWheel = scrollbar?.contains(element);
+      if (isScrollbarWheel) handleWheelScroll(event, maxScrollPos);
+    };
+    document.addEventListener("wheel", handleWheel, { passive: false });
+    return () => document.removeEventListener("wheel", handleWheel, { passive: false });
+  }, [viewport, scrollbar, maxScrollPos, handleWheelScroll]);
+  reactExports.useEffect(handleThumbPositionChange, [sizes, handleThumbPositionChange]);
+  useResizeObserver(scrollbar, handleResize);
+  useResizeObserver(context2.content, handleResize);
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    ScrollbarProvider,
+    {
+      scope: __scopeScrollArea,
+      scrollbar,
+      hasThumb,
+      onThumbChange: useCallbackRef$1(onThumbChange),
+      onThumbPointerUp: useCallbackRef$1(onThumbPointerUp),
+      onThumbPositionChange: handleThumbPositionChange,
+      onThumbPointerDown: useCallbackRef$1(onThumbPointerDown),
+      children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+        Primitive$1.div,
+        {
+          ...scrollbarProps,
+          ref: composeRefs2,
+          style: { position: "absolute", ...scrollbarProps.style },
+          onPointerDown: composeEventHandlers(props.onPointerDown, (event) => {
+            const mainPointer = 0;
+            if (event.button === mainPointer) {
+              const element = event.target;
+              element.setPointerCapture(event.pointerId);
+              rectRef.current = scrollbar.getBoundingClientRect();
+              prevWebkitUserSelectRef.current = document.body.style.webkitUserSelect;
+              document.body.style.webkitUserSelect = "none";
+              if (context2.viewport) context2.viewport.style.scrollBehavior = "auto";
+              handleDragScroll(event);
+            }
+          }),
+          onPointerMove: composeEventHandlers(props.onPointerMove, handleDragScroll),
+          onPointerUp: composeEventHandlers(props.onPointerUp, (event) => {
+            const element = event.target;
+            if (element.hasPointerCapture(event.pointerId)) {
+              element.releasePointerCapture(event.pointerId);
+            }
+            document.body.style.webkitUserSelect = prevWebkitUserSelectRef.current;
+            if (context2.viewport) context2.viewport.style.scrollBehavior = "";
+            rectRef.current = null;
+          })
+        }
+      )
+    }
+  );
+});
+var THUMB_NAME$1 = "ScrollAreaThumb";
+var ScrollAreaThumb = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const { forceMount, ...thumbProps } = props;
+    const scrollbarContext = useScrollbarContext(THUMB_NAME$1, props.__scopeScrollArea);
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || scrollbarContext.hasThumb, children: /* @__PURE__ */ jsxRuntimeExports.jsx(ScrollAreaThumbImpl, { ref: forwardedRef, ...thumbProps }) });
+  }
+);
+var ScrollAreaThumbImpl = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const { __scopeScrollArea, style: style2, ...thumbProps } = props;
+    const scrollAreaContext = useScrollAreaContext(THUMB_NAME$1, __scopeScrollArea);
+    const scrollbarContext = useScrollbarContext(THUMB_NAME$1, __scopeScrollArea);
+    const { onThumbPositionChange } = scrollbarContext;
+    const composedRef = useComposedRefs(
+      forwardedRef,
+      (node) => scrollbarContext.onThumbChange(node)
+    );
+    const removeUnlinkedScrollListenerRef = reactExports.useRef(void 0);
+    const debounceScrollEnd = useDebounceCallback(() => {
+      if (removeUnlinkedScrollListenerRef.current) {
+        removeUnlinkedScrollListenerRef.current();
+        removeUnlinkedScrollListenerRef.current = void 0;
+      }
+    }, 100);
+    reactExports.useEffect(() => {
+      const viewport = scrollAreaContext.viewport;
+      if (viewport) {
+        const handleScroll2 = () => {
+          debounceScrollEnd();
+          if (!removeUnlinkedScrollListenerRef.current) {
+            const listener = addUnlinkedScrollListener(viewport, onThumbPositionChange);
+            removeUnlinkedScrollListenerRef.current = listener;
+            onThumbPositionChange();
+          }
+        };
+        onThumbPositionChange();
+        viewport.addEventListener("scroll", handleScroll2);
+        return () => viewport.removeEventListener("scroll", handleScroll2);
+      }
+    }, [scrollAreaContext.viewport, debounceScrollEnd, onThumbPositionChange]);
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      Primitive$1.div,
+      {
+        "data-state": scrollbarContext.hasThumb ? "visible" : "hidden",
+        ...thumbProps,
+        ref: composedRef,
+        style: {
+          width: "var(--radix-scroll-area-thumb-width)",
+          height: "var(--radix-scroll-area-thumb-height)",
+          ...style2
+        },
+        onPointerDownCapture: composeEventHandlers(props.onPointerDownCapture, (event) => {
+          const thumb = event.target;
+          const thumbRect = thumb.getBoundingClientRect();
+          const x = event.clientX - thumbRect.left;
+          const y = event.clientY - thumbRect.top;
+          scrollbarContext.onThumbPointerDown({ x, y });
+        }),
+        onPointerUp: composeEventHandlers(props.onPointerUp, scrollbarContext.onThumbPointerUp)
+      }
+    );
+  }
+);
+ScrollAreaThumb.displayName = THUMB_NAME$1;
+var CORNER_NAME = "ScrollAreaCorner";
+var ScrollAreaCorner = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const context2 = useScrollAreaContext(CORNER_NAME, props.__scopeScrollArea);
+    const hasBothScrollbarsVisible = Boolean(context2.scrollbarX && context2.scrollbarY);
+    const hasCorner = context2.type !== "scroll" && hasBothScrollbarsVisible;
+    return hasCorner ? /* @__PURE__ */ jsxRuntimeExports.jsx(ScrollAreaCornerImpl, { ...props, ref: forwardedRef }) : null;
+  }
+);
+ScrollAreaCorner.displayName = CORNER_NAME;
+var ScrollAreaCornerImpl = reactExports.forwardRef((props, forwardedRef) => {
+  const { __scopeScrollArea, ...cornerProps } = props;
+  const context2 = useScrollAreaContext(CORNER_NAME, __scopeScrollArea);
+  const [width, setWidth] = reactExports.useState(0);
+  const [height, setHeight] = reactExports.useState(0);
+  const hasSize = Boolean(width && height);
+  useResizeObserver(context2.scrollbarX, () => {
+    const height2 = context2.scrollbarX?.offsetHeight || 0;
+    context2.onCornerHeightChange(height2);
+    setHeight(height2);
+  });
+  useResizeObserver(context2.scrollbarY, () => {
+    const width2 = context2.scrollbarY?.offsetWidth || 0;
+    context2.onCornerWidthChange(width2);
+    setWidth(width2);
+  });
+  return hasSize ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+    Primitive$1.div,
+    {
+      ...cornerProps,
+      ref: forwardedRef,
+      style: {
+        width,
+        height,
+        position: "absolute",
+        right: context2.dir === "ltr" ? 0 : void 0,
+        left: context2.dir === "rtl" ? 0 : void 0,
+        bottom: 0,
+        ...props.style
+      }
+    }
+  ) : null;
+});
+function toInt(value) {
+  return value ? parseInt(value, 10) : 0;
+}
+function getThumbRatio(viewportSize, contentSize) {
+  const ratio = viewportSize / contentSize;
+  return isNaN(ratio) ? 0 : ratio;
+}
+function getThumbSize(sizes) {
+  const ratio = getThumbRatio(sizes.viewport, sizes.content);
+  const scrollbarPadding = sizes.scrollbar.paddingStart + sizes.scrollbar.paddingEnd;
+  const thumbSize = (sizes.scrollbar.size - scrollbarPadding) * ratio;
+  return Math.max(thumbSize, 18);
+}
+function getScrollPositionFromPointer(pointerPos, pointerOffset, sizes, dir = "ltr") {
+  const thumbSizePx = getThumbSize(sizes);
+  const thumbCenter = thumbSizePx / 2;
+  const offset = pointerOffset || thumbCenter;
+  const thumbOffsetFromEnd = thumbSizePx - offset;
+  const minPointerPos = sizes.scrollbar.paddingStart + offset;
+  const maxPointerPos = sizes.scrollbar.size - sizes.scrollbar.paddingEnd - thumbOffsetFromEnd;
+  const maxScrollPos = sizes.content - sizes.viewport;
+  const scrollRange = dir === "ltr" ? [0, maxScrollPos] : [maxScrollPos * -1, 0];
+  const interpolate2 = linearScale([minPointerPos, maxPointerPos], scrollRange);
+  return interpolate2(pointerPos);
+}
+function getThumbOffsetFromScroll(scrollPos, sizes, dir = "ltr") {
+  const thumbSizePx = getThumbSize(sizes);
+  const scrollbarPadding = sizes.scrollbar.paddingStart + sizes.scrollbar.paddingEnd;
+  const scrollbar = sizes.scrollbar.size - scrollbarPadding;
+  const maxScrollPos = sizes.content - sizes.viewport;
+  const maxThumbPos = scrollbar - thumbSizePx;
+  const scrollClampRange = dir === "ltr" ? [0, maxScrollPos] : [maxScrollPos * -1, 0];
+  const scrollWithoutMomentum = clamp(scrollPos, scrollClampRange);
+  const interpolate2 = linearScale([0, maxScrollPos], [0, maxThumbPos]);
+  return interpolate2(scrollWithoutMomentum);
+}
+function linearScale(input, output) {
+  return (value) => {
+    if (input[0] === input[1] || output[0] === output[1]) return output[0];
+    const ratio = (output[1] - output[0]) / (input[1] - input[0]);
+    return output[0] + ratio * (value - input[0]);
+  };
+}
+function isScrollingWithinScrollbarBounds(scrollPos, maxScrollPos) {
+  return scrollPos > 0 && scrollPos < maxScrollPos;
+}
+var addUnlinkedScrollListener = (node, handler = () => {
+}) => {
+  let prevPosition = { left: node.scrollLeft, top: node.scrollTop };
+  let rAF = 0;
+  (function loop() {
+    const position = { left: node.scrollLeft, top: node.scrollTop };
+    const isHorizontalScroll = prevPosition.left !== position.left;
+    const isVerticalScroll = prevPosition.top !== position.top;
+    if (isHorizontalScroll || isVerticalScroll) handler();
+    prevPosition = position;
+    rAF = window.requestAnimationFrame(loop);
+  })();
+  return () => window.cancelAnimationFrame(rAF);
+};
+function useDebounceCallback(callback, delay) {
+  const handleCallback = useCallbackRef$1(callback);
+  const debounceTimerRef = reactExports.useRef(0);
+  reactExports.useEffect(() => () => window.clearTimeout(debounceTimerRef.current), []);
+  return reactExports.useCallback(() => {
+    window.clearTimeout(debounceTimerRef.current);
+    debounceTimerRef.current = window.setTimeout(handleCallback, delay);
+  }, [handleCallback, delay]);
+}
+function useResizeObserver(element, onResize) {
+  const handleResize = useCallbackRef$1(onResize);
+  useLayoutEffect2(() => {
+    let rAF = 0;
+    if (element) {
+      const resizeObserver = new ResizeObserver(() => {
+        cancelAnimationFrame(rAF);
+        rAF = window.requestAnimationFrame(handleResize);
+      });
+      resizeObserver.observe(element);
+      return () => {
+        window.cancelAnimationFrame(rAF);
+        resizeObserver.unobserve(element);
+      };
+    }
+  }, [element, handleResize]);
+}
+var Root$1 = ScrollArea$1;
+var Viewport = ScrollAreaViewport;
+var Corner = ScrollAreaCorner;
+const ScrollArea = reactExports.forwardRef(({ className, children: children2, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+  Root$1,
+  {
+    ref,
+    className: cn("relative overflow-hidden", className),
+    ...props,
+    children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Viewport, { className: "h-full w-full rounded-[inherit]", children: children2 }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(ScrollBar, {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Corner, {})
+    ]
+  }
+));
+ScrollArea.displayName = Root$1.displayName;
+const ScrollBar = reactExports.forwardRef(({ className, orientation = "vertical", ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+  ScrollAreaScrollbar,
+  {
+    ref,
+    orientation,
+    className: cn(
+      "flex touch-none select-none transition-colors",
+      orientation === "vertical" && "h-full w-2.5 border-l border-l-transparent p-[1px]",
+      orientation === "horizontal" && "h-2.5 flex-col border-t border-t-transparent p-[1px]",
+      className
+    ),
+    ...props,
+    children: /* @__PURE__ */ jsxRuntimeExports.jsx(ScrollAreaThumb, { className: "relative flex-1 rounded-full bg-border" })
+  }
+));
+ScrollBar.displayName = ScrollAreaScrollbar.displayName;
 function usePrevious(value) {
   const ref = reactExports.useRef({ value, previous: value });
   return reactExports.useMemo(() => {
@@ -84323,6 +82384,41 @@ const Switch = reactExports.forwardRef(({ className, ...props }, ref) => /* @__P
   }
 ));
 Switch.displayName = Root.displayName;
+const ThemeContext = reactExports.createContext(void 0);
+function ThemeProvider({ children: children2 }) {
+  const [theme, setThemeState] = reactExports.useState("dark");
+  reactExports.useEffect(() => {
+    const stored = localStorage.getItem("theme");
+    if (stored === "light" || stored === "dark") {
+      setThemeState(stored);
+    }
+  }, []);
+  reactExports.useEffect(() => {
+    const root2 = document.documentElement;
+    if (theme === "dark") {
+      root2.classList.add("dark");
+      root2.classList.remove("light");
+    } else {
+      root2.classList.add("light");
+      root2.classList.remove("dark");
+    }
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+  const toggleTheme = () => {
+    setThemeState((prev) => prev === "dark" ? "light" : "dark");
+  };
+  const setTheme = (newTheme) => {
+    setThemeState(newTheme);
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(ThemeContext.Provider, { value: { theme, toggleTheme, setTheme }, children: children2 });
+}
+function useTheme() {
+  const context2 = reactExports.useContext(ThemeContext);
+  if (!context2) {
+    throw new Error("useTheme must be used within ThemeProvider");
+  }
+  return context2;
+}
 const warn = (i18n, code, msg, rest) => {
   const args = [msg, {
     code,
@@ -84664,7 +82760,7 @@ function Header() {
           read: false
         };
         setNotifications((prev) => [newNotification, ...prev]);
-        import("./assets/sounds-BC4bt-ac.js").then(({ playNotificationSound }) => {
+        import("./assets/sounds-C24HAfwg.js").then(({ playNotificationSound }) => {
           playNotificationSound("newMessage");
         });
       }
@@ -84815,70 +82911,580 @@ function DashboardLayout() {
     ] })
   ] });
 }
+const LoadingScreen = () => {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "fixed inset-0 z-50 flex items-center justify-center bg-[#020204]", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 rounded-full bg-indigo-500/20 blur-xl animate-pulse" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative flex flex-col items-center", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-16 h-16 border-4 border-indigo-500/10 border-t-indigo-500 rounded-full animate-spin" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-6 text-indigo-400 font-medium tracking-widest text-xs uppercase animate-pulse", children: "Loading EdgeLancer" })
+    ] })
+  ] }) });
+};
 const LoginPage = reactExports.lazy(() => import("./assets/LoginPage-D-v7jJSe.js"));
 const SignupPage = reactExports.lazy(() => import("./assets/SignupPage-BZxBe0WH.js"));
 const ContactPage = reactExports.lazy(() => import("./assets/ContactPage-5-MZp5En.js"));
-const SitemapPage = reactExports.lazy(() => import("./assets/SitemapPage-D_gfK2s_.js"));
-const CoursesListPage = reactExports.lazy(() => import("./assets/CoursesListPage-B9K4TSP9.js"));
-const CourseDetailsPage = reactExports.lazy(() => import("./assets/CourseDetailsPage-Dm_9iaaX.js"));
-const LessonViewerPage = reactExports.lazy(() => import("./assets/LessonViewerPage-DDuwguHo.js"));
+const SitemapPage = reactExports.lazy(() => import("./assets/SitemapPage-zuR9GGoK.js"));
+const CoursesListPage = reactExports.lazy(() => import("./assets/CoursesListPage-EwnXVptC.js"));
+const CourseDetailsPage = reactExports.lazy(() => import("./assets/CourseDetailsPage-D9P-GTzC.js"));
+const LessonViewerPage = reactExports.lazy(() => import("./assets/LessonViewerPage-BhR_6_IB.js"));
 const NotFoundPage = reactExports.lazy(() => import("./assets/NotFoundPage-CV7wKiHM.js"));
-const SecureInterviewClient = reactExports.lazy(() => import("./assets/SecureInterviewClient-Xc6vi2Ic.js"));
-const AdminDashboard = reactExports.lazy(() => import("./assets/Dashboard-IWsEjtbp.js"));
-const BlogsManagement = reactExports.lazy(() => import("./assets/BlogManagement-Dpd0vdG4.js"));
-const PagesManagement = reactExports.lazy(() => import("./assets/PageManagement-BVh6HAxt.js"));
-const FAQsManagement = reactExports.lazy(() => import("./assets/FAQManagement-3EGGHD0w.js"));
-const CourseManagement = reactExports.lazy(() => import("./assets/AdminCoursesPage-DY1-xmnX.js"));
+const SecureInterviewClient = reactExports.lazy(() => import("./assets/SecureInterviewClient-Tke7t9o7.js"));
+const AdminDashboard = reactExports.lazy(() => import("./assets/Dashboard-Bz8ng1zC.js"));
+const BlogsManagement = reactExports.lazy(() => import("./assets/BlogManagement-DZ74slcy.js"));
+const PagesManagement = reactExports.lazy(() => import("./assets/PageManagement-D7AQ8Spk.js"));
+const FAQsManagement = reactExports.lazy(() => import("./assets/FAQManagement-B8WQMwoJ.js"));
+const CourseManagement = reactExports.lazy(() => import("./assets/AdminCoursesPage-XTe7FMiK.js"));
 const CourseReviews = reactExports.lazy(() => import("./assets/AdminCourseReviewsPage-DFOIRdy1.js"));
-const ContactEnquiries = reactExports.lazy(() => import("./assets/ContactEnquiries-B65oHj-U.js"));
-const NewsletterSubscribers = reactExports.lazy(() => import("./assets/NewsletterSubscribers-B0qpf1f8.js"));
-const SupportChatAdmin = reactExports.lazy(() => import("./assets/SupportChatAdmin-Ddsgav1r.js"));
-const AutomationHub = reactExports.lazy(() => import("./assets/AutomationHub-CXB0t8LJ.js"));
-const WorkflowTemplates = reactExports.lazy(() => import("./assets/WorkflowTemplates-BYBbZXrU.js"));
-const SuperAdminDashboard = reactExports.lazy(() => import("./assets/SuperAdminDashboard-BXFV-jWE.js"));
+const ContactEnquiries = reactExports.lazy(() => import("./assets/ContactEnquiries-CIwl6EUJ.js"));
+const NewsletterSubscribers = reactExports.lazy(() => import("./assets/NewsletterSubscribers-DjrEVQ0i.js"));
+const SupportChatAdmin = reactExports.lazy(() => import("./assets/SupportChatAdmin-GMxYVc8e.js"));
+const AutomationHub = reactExports.lazy(() => import("./assets/AutomationHub-E0Ejb5iS.js"));
+const WorkflowTemplates = reactExports.lazy(() => import("./assets/WorkflowTemplates-D9dQ15HF.js"));
+const SuperAdminDashboard = reactExports.lazy(() => import("./assets/SuperAdminDashboard-NqY30DND.js"));
+const LazyLoad = ({ children: children2 }) => /* @__PURE__ */ jsxRuntimeExports.jsx(reactExports.Suspense, { fallback: /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingScreen, {}), children: children2 });
 function AppRoutes() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(distExports.Routes, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "/", element: /* @__PURE__ */ jsxRuntimeExports.jsx(HomePage, {}) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "/login", element: /* @__PURE__ */ jsxRuntimeExports.jsx(LoginPage, {}) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "/signup", element: /* @__PURE__ */ jsxRuntimeExports.jsx(SignupPage, {}) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "/login", element: /* @__PURE__ */ jsxRuntimeExports.jsx(LazyLoad, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoginPage, {}) }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "/signup", element: /* @__PURE__ */ jsxRuntimeExports.jsx(LazyLoad, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(SignupPage, {}) }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "/blogs", element: /* @__PURE__ */ jsxRuntimeExports.jsx(BlogPage, {}) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "/blogs/:slug", element: /* @__PURE__ */ jsxRuntimeExports.jsx(BlogSlugPage, {}) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "/contact", element: /* @__PURE__ */ jsxRuntimeExports.jsx(ContactPage, {}) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "/contact", element: /* @__PURE__ */ jsxRuntimeExports.jsx(LazyLoad, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(ContactPage, {}) }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "/templates", element: /* @__PURE__ */ jsxRuntimeExports.jsx(TemplatesShowcasePage, {}) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "/sitemap", element: /* @__PURE__ */ jsxRuntimeExports.jsx(SitemapPage, {}) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "/sitemap", element: /* @__PURE__ */ jsxRuntimeExports.jsx(LazyLoad, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(SitemapPage, {}) }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "/workflow/:slug", element: /* @__PURE__ */ jsxRuntimeExports.jsx(WorkflowDetailsPage, {}) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "/workflow", element: /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Navigate, { to: "/workflows", replace: true }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "/workflows", element: /* @__PURE__ */ jsxRuntimeExports.jsx(WorkflowsPage, {}) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "/courses", element: /* @__PURE__ */ jsxRuntimeExports.jsx(CoursesListPage, {}) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "/courses/:slug", element: /* @__PURE__ */ jsxRuntimeExports.jsx(CourseDetailsPage, {}) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "/courses/:courseSlug/:lessonSlug", element: /* @__PURE__ */ jsxRuntimeExports.jsx(LessonViewerPage, {}) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "/courses", element: /* @__PURE__ */ jsxRuntimeExports.jsx(LazyLoad, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(CoursesListPage, {}) }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "/courses/:slug", element: /* @__PURE__ */ jsxRuntimeExports.jsx(LazyLoad, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(CourseDetailsPage, {}) }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "/courses/:courseSlug/:lessonSlug", element: /* @__PURE__ */ jsxRuntimeExports.jsx(LazyLoad, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(LessonViewerPage, {}) }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "/workflow-categories/:slug", element: /* @__PURE__ */ jsxRuntimeExports.jsx(WorkflowsPage, {}) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "/blog-categories/:slug", element: /* @__PURE__ */ jsxRuntimeExports.jsx(BlogPage, {}) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "/interview/:token", element: /* @__PURE__ */ jsxRuntimeExports.jsx(SecureInterviewClient, {}) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "/interview/:token", element: /* @__PURE__ */ jsxRuntimeExports.jsx(LazyLoad, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(SecureInterviewClient, {}) }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "/app", element: /* @__PURE__ */ jsxRuntimeExports.jsx(ProtectedRoute, { allowedRoles: ["admin", "superadmin"] }), children: /* @__PURE__ */ jsxRuntimeExports.jsxs(distExports.Route, { element: /* @__PURE__ */ jsxRuntimeExports.jsx(DashboardLayout, {}), children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { index: true, element: /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Navigate, { to: "dashboard", replace: true }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "dashboard", element: /* @__PURE__ */ jsxRuntimeExports.jsx(AdminDashboard, {}) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "blogs", element: /* @__PURE__ */ jsxRuntimeExports.jsx(BlogsManagement, {}) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "pages", element: /* @__PURE__ */ jsxRuntimeExports.jsx(PagesManagement, {}) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "faqs", element: /* @__PURE__ */ jsxRuntimeExports.jsx(FAQsManagement, {}) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "courses", element: /* @__PURE__ */ jsxRuntimeExports.jsx(CourseManagement, {}) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "course-reviews", element: /* @__PURE__ */ jsxRuntimeExports.jsx(CourseReviews, {}) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "contact-enquiries", element: /* @__PURE__ */ jsxRuntimeExports.jsx(ContactEnquiries, {}) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "newsletter-subscribers", element: /* @__PURE__ */ jsxRuntimeExports.jsx(NewsletterSubscribers, {}) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "support-chat", element: /* @__PURE__ */ jsxRuntimeExports.jsx(SupportChatAdmin, {}) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "workflows", element: /* @__PURE__ */ jsxRuntimeExports.jsx(AutomationHub, {}) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "workflow-templates", element: /* @__PURE__ */ jsxRuntimeExports.jsx(WorkflowTemplates, {}) })
+      /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "dashboard", element: /* @__PURE__ */ jsxRuntimeExports.jsx(LazyLoad, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(AdminDashboard, {}) }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "blogs", element: /* @__PURE__ */ jsxRuntimeExports.jsx(LazyLoad, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(BlogsManagement, {}) }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "pages", element: /* @__PURE__ */ jsxRuntimeExports.jsx(LazyLoad, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(PagesManagement, {}) }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "faqs", element: /* @__PURE__ */ jsxRuntimeExports.jsx(LazyLoad, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(FAQsManagement, {}) }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "courses", element: /* @__PURE__ */ jsxRuntimeExports.jsx(LazyLoad, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(CourseManagement, {}) }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "course-reviews", element: /* @__PURE__ */ jsxRuntimeExports.jsx(LazyLoad, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(CourseReviews, {}) }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "contact-enquiries", element: /* @__PURE__ */ jsxRuntimeExports.jsx(LazyLoad, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(ContactEnquiries, {}) }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "newsletter-subscribers", element: /* @__PURE__ */ jsxRuntimeExports.jsx(LazyLoad, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(NewsletterSubscribers, {}) }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "support-chat", element: /* @__PURE__ */ jsxRuntimeExports.jsx(LazyLoad, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(SupportChatAdmin, {}) }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "workflows", element: /* @__PURE__ */ jsxRuntimeExports.jsx(LazyLoad, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(AutomationHub, {}) }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "workflow-templates", element: /* @__PURE__ */ jsxRuntimeExports.jsx(LazyLoad, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(WorkflowTemplates, {}) }) })
     ] }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "/superadmin", element: /* @__PURE__ */ jsxRuntimeExports.jsx(ProtectedRoute, { allowedRoles: ["superadmin"] }), children: /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { index: true, element: /* @__PURE__ */ jsxRuntimeExports.jsx(SuperAdminDashboard, {}) }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "*", element: /* @__PURE__ */ jsxRuntimeExports.jsx(NotFoundPage, {}) })
+    /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "/superadmin", element: /* @__PURE__ */ jsxRuntimeExports.jsx(ProtectedRoute, { allowedRoles: ["superadmin"] }), children: /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { index: true, element: /* @__PURE__ */ jsxRuntimeExports.jsx(LazyLoad, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(SuperAdminDashboard, {}) }) }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Route, { path: "*", element: /* @__PURE__ */ jsxRuntimeExports.jsx(LazyLoad, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(NotFoundPage, {}) }) })
   ] });
 }
-function App() {
-  const ssrData = typeof window !== "undefined" ? window.__SSR_DATA__ || {} : globalThis.context || {};
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(SSRContext.Provider, { value: ssrData, children: /* @__PURE__ */ jsxRuntimeExports.jsx(ThemeProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(AuthProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(ToastProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(ConfirmationProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(reactExports.Suspense, { fallback: /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingScreen$1, {}), children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(AppRoutes, {}),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(SupportChatFloat, {})
-  ] }) }) }) }) }) });
+const ConfirmationContext = reactExports.createContext(void 0);
+function ConfirmationProvider({ children: children2 }) {
+  const [isOpen, setIsOpen] = reactExports.useState(false);
+  const [isLoading, setIsLoading] = reactExports.useState(false);
+  const [options, setOptions] = reactExports.useState({
+    title: "Confirm Action",
+    description: "Are you sure?"
+  });
+  const [resolveCallback, setResolveCallback] = reactExports.useState(null);
+  const confirm = (confirmOptions) => {
+    return new Promise((resolve) => {
+      setOptions(confirmOptions);
+      setResolveCallback(() => resolve);
+      setIsOpen(true);
+    });
+  };
+  const handleConfirm = async () => {
+    setIsLoading(true);
+    if (resolveCallback) {
+      resolveCallback(true);
+    }
+    setTimeout(() => {
+      setIsOpen(false);
+      setIsLoading(false);
+    }, 300);
+  };
+  const handleCancel = () => {
+    if (resolveCallback) {
+      resolveCallback(false);
+    }
+    setIsOpen(false);
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(ConfirmationContext.Provider, { value: { confirm }, children: [
+    children2,
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      ConfirmationDialogInternal,
+      {
+        isOpen,
+        setIsOpen,
+        isLoading,
+        options,
+        handleConfirm,
+        handleCancel
+      }
+    )
+  ] });
+}
+function ConfirmationDialogInternal({
+  isOpen,
+  setIsOpen,
+  isLoading,
+  options,
+  handleConfirm,
+  handleCancel
+}) {
+  const [isClient, setIsClient] = reactExports.useState(false);
+  reactExports.useEffect(() => {
+    setIsClient(true);
+  }, []);
+  if (!isClient) return null;
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Dialog, { open: isOpen, onOpenChange: setIsOpen, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(DialogContent, { className: "sm:max-w-md", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(DialogHeader, { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
+        options.isDangerous && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-shrink-0", children: /* @__PURE__ */ jsxRuntimeExports.jsx(TriangleAlert, { className: "h-5 w-5 text-red-500" }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(DialogTitle, { className: options.isDangerous ? "text-red-600" : "", children: options.title })
+      ] }),
+      options.description && /* @__PURE__ */ jsxRuntimeExports.jsx(DialogDescription, { className: "mt-2", children: options.description })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(DialogFooter, { className: "gap-2 sm:gap-0", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        Button,
+        {
+          variant: "outline",
+          onClick: handleCancel,
+          disabled: isLoading,
+          children: options.cancelText || "Cancel"
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        Button,
+        {
+          onClick: handleConfirm,
+          disabled: isLoading,
+          className: options.isDangerous ? "bg-red-600 hover:bg-red-700 text-white" : "",
+          children: isLoading ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "w-4 h-4 mr-2 animate-spin" }),
+            options.confirmText || "Confirm"
+          ] }) : options.confirmText || "Confirm"
+        }
+      )
+    ] })
+  ] }) });
+}
+function useConfirmation() {
+  const context2 = reactExports.useContext(ConfirmationContext);
+  if (!context2) {
+    throw new Error("useConfirmation must be used within ConfirmationProvider");
+  }
+  return context2;
+}
+const ToastContext = reactExports.createContext(void 0);
+function ToastProvider({ children: children2 }) {
+  const [toasts, setToasts] = reactExports.useState([]);
+  const showToast = reactExports.useCallback((message, type = "info", duration = 4e3) => {
+    const id2 = `toast-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    const newToast = { id: id2, message, type, duration };
+    setToasts((prev) => [...prev, newToast]);
+    if (duration > 0) {
+      setTimeout(() => {
+        setToasts((prev) => prev.filter((t) => t.id !== id2));
+      }, duration);
+    }
+  }, []);
+  const hideToast = reactExports.useCallback((id2) => {
+    setToasts((prev) => prev.filter((t) => t.id !== id2));
+  }, []);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(ToastContext.Provider, { value: { showToast, hideToast }, children: [
+    children2,
+    /* @__PURE__ */ jsxRuntimeExports.jsx(ToastContainer, { toasts, onClose: hideToast })
+  ] });
+}
+function useToast() {
+  const context2 = reactExports.useContext(ToastContext);
+  if (context2 === void 0) {
+    throw new Error("useToast must be used within a ToastProvider");
+  }
+  return context2;
+}
+function ToastContainer({ toasts, onClose }) {
+  if (toasts.length === 0) return null;
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "fixed bottom-4 right-4 z-[100] flex flex-col gap-2 max-w-sm", children: toasts.map((toast) => /* @__PURE__ */ jsxRuntimeExports.jsx(ToastItem, { toast, onClose }, toast.id)) });
+}
+function ToastItem({ toast, onClose }) {
+  const icons = {
+    success: /* @__PURE__ */ jsxRuntimeExports.jsx(CircleCheckBig, { className: "w-5 h-5 text-green-500" }),
+    error: /* @__PURE__ */ jsxRuntimeExports.jsx(CircleAlert, { className: "w-5 h-5 text-red-500" }),
+    warning: /* @__PURE__ */ jsxRuntimeExports.jsx(TriangleAlert, { className: "w-5 h-5 text-orange-500" }),
+    info: /* @__PURE__ */ jsxRuntimeExports.jsx(Info, { className: "w-5 h-5 text-blue-500" })
+  };
+  const bgColors = {
+    success: "border-green-500/30 bg-green-500/10",
+    error: "border-red-500/30 bg-red-500/10",
+    warning: "border-orange-500/30 bg-orange-500/10",
+    info: "border-blue-500/30 bg-blue-500/10"
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    "div",
+    {
+      className: `flex items-start gap-3 p-4 rounded-lg border ${bgColors[toast.type]} bg-nexus-card backdrop-blur-sm slide-in-bottom`,
+      children: [
+        icons[toast.type],
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "flex-1 text-sm text-nexus-text", children: toast.message }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "button",
+          {
+            onClick: () => onClose(toast.id),
+            className: "text-nexus-muted hover:text-nexus-text transition-colors",
+            children: /* @__PURE__ */ jsxRuntimeExports.jsx(X, { className: "w-4 h-4" })
+          }
+        )
+      ]
+    }
+  );
+}
+const mockUser = {
+  id: "user-1",
+  name: "Alex Morgan",
+  email: "alex@nexusai.com",
+  role: "admin",
+  avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80"
+};
+const mockAccounts = [
+  {
+    id: "acc-1",
+    platform: "upwork",
+    accountName: "ProDev Solutions",
+    username: "prodev_alex",
+    isActive: true,
+    autoBidEnabled: true,
+    dailyBudget: 500,
+    bidCount: 23,
+    successRate: 34,
+    aiPrompt: "Focus on web development projects with React and Node.js. Budget range: $1000-$5000.",
+    lastActivity: new Date(Date.now() - 1e3 * 60 * 15).toISOString()
+  },
+  {
+    id: "acc-2",
+    platform: "upwork",
+    accountName: "AI Automation Expert",
+    username: "ai_expert_pro",
+    isActive: true,
+    autoBidEnabled: false,
+    dailyBudget: 300,
+    bidCount: 18,
+    successRate: 41,
+    aiPrompt: "Target AI/ML automation projects. Minimum budget: $2000.",
+    lastActivity: new Date(Date.now() - 1e3 * 60 * 45).toISOString()
+  },
+  {
+    id: "acc-3",
+    platform: "fiverr",
+    accountName: "WebFlow Master",
+    username: "webflow_master",
+    isActive: true,
+    autoBidEnabled: true,
+    dailyBudget: 200,
+    bidCount: 31,
+    successRate: 52,
+    aiPrompt: "Focus on Webflow and no-code solutions.",
+    lastActivity: new Date(Date.now() - 1e3 * 60 * 5).toISOString()
+  },
+  {
+    id: "acc-4",
+    platform: "fiverr",
+    accountName: "Full Stack Dev",
+    username: "fullstack_dev",
+    isActive: false,
+    autoBidEnabled: false,
+    dailyBudget: 400,
+    bidCount: 12,
+    successRate: 28,
+    lastActivity: new Date(Date.now() - 1e3 * 60 * 60 * 24).toISOString()
+  }
+];
+const mockConversations = [
+  {
+    id: "conv-1",
+    clientName: "Sarah Johnson",
+    clientAvatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80",
+    platform: "upwork",
+    lastMessage: "Thanks! When can you start?",
+    lastMessageTime: new Date(Date.now() - 1e3 * 60 * 5).toISOString(),
+    unreadCount: 2,
+    projectTitle: "E-commerce Platform Development",
+    messages: [
+      {
+        id: "msg-1",
+        conversationId: "conv-1",
+        sender: "client",
+        content: "Hi, I saw your proposal for the e-commerce project.",
+        timestamp: new Date(Date.now() - 1e3 * 60 * 30).toISOString(),
+        platform: "upwork",
+        read: true
+      },
+      {
+        id: "msg-2",
+        conversationId: "conv-1",
+        sender: "user",
+        content: "Hello Sarah! Yes, I'd be happy to discuss the project details with you.",
+        timestamp: new Date(Date.now() - 1e3 * 60 * 25).toISOString(),
+        platform: "upwork",
+        read: true
+      },
+      {
+        id: "msg-3",
+        conversationId: "conv-1",
+        sender: "client",
+        content: "Great! Can you handle both frontend and backend?",
+        timestamp: new Date(Date.now() - 1e3 * 60 * 20).toISOString(),
+        platform: "upwork",
+        read: true
+      },
+      {
+        id: "msg-4",
+        conversationId: "conv-1",
+        sender: "user",
+        content: "Absolutely! I specialize in full-stack development with React and Node.js.",
+        timestamp: new Date(Date.now() - 1e3 * 60 * 10).toISOString(),
+        platform: "upwork",
+        read: true
+      },
+      {
+        id: "msg-5",
+        conversationId: "conv-1",
+        sender: "client",
+        content: "Thanks! When can you start?",
+        timestamp: new Date(Date.now() - 1e3 * 60 * 5).toISOString(),
+        platform: "upwork",
+        read: false
+      }
+    ]
+  },
+  {
+    id: "conv-2",
+    clientName: "Michael Chen",
+    clientAvatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80",
+    platform: "fiverr",
+    lastMessage: "Could you send me some portfolio examples?",
+    lastMessageTime: new Date(Date.now() - 1e3 * 60 * 15).toISOString(),
+    unreadCount: 1,
+    projectTitle: "AI Chatbot Integration",
+    messages: [
+      {
+        id: "msg-6",
+        conversationId: "conv-2",
+        sender: "client",
+        content: "Hi! I need help integrating an AI chatbot into my website.",
+        timestamp: new Date(Date.now() - 1e3 * 60 * 20).toISOString(),
+        platform: "fiverr",
+        read: true
+      },
+      {
+        id: "msg-7",
+        conversationId: "conv-2",
+        sender: "client",
+        content: "Could you send me some portfolio examples?",
+        timestamp: new Date(Date.now() - 1e3 * 60 * 15).toISOString(),
+        platform: "fiverr",
+        read: false
+      }
+    ]
+  },
+  {
+    id: "conv-3",
+    clientName: "Emma Williams",
+    clientAvatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80",
+    platform: "upwork",
+    lastMessage: "Perfect! Let's move forward with the contract.",
+    lastMessageTime: new Date(Date.now() - 1e3 * 60 * 60).toISOString(),
+    unreadCount: 0,
+    projectTitle: "Mobile App Development",
+    messages: [
+      {
+        id: "msg-8",
+        conversationId: "conv-3",
+        sender: "client",
+        content: "I need a React Native app for iOS and Android.",
+        timestamp: new Date(Date.now() - 1e3 * 60 * 90).toISOString(),
+        platform: "upwork",
+        read: true
+      },
+      {
+        id: "msg-9",
+        conversationId: "conv-3",
+        sender: "user",
+        content: "I can definitely help with that. What's your timeline?",
+        timestamp: new Date(Date.now() - 1e3 * 60 * 80).toISOString(),
+        platform: "upwork",
+        read: true
+      },
+      {
+        id: "msg-10",
+        conversationId: "conv-3",
+        sender: "client",
+        content: "Perfect! Let's move forward with the contract.",
+        timestamp: new Date(Date.now() - 1e3 * 60 * 60).toISOString(),
+        platform: "upwork",
+        read: true
+      }
+    ]
+  },
+  {
+    id: "conv-4",
+    clientName: "David Martinez",
+    platform: "whatsapp",
+    lastMessage: "Can we schedule a call tomorrow?",
+    lastMessageTime: new Date(Date.now() - 1e3 * 60 * 120).toISOString(),
+    unreadCount: 0,
+    messages: [
+      {
+        id: "msg-11",
+        conversationId: "conv-4",
+        sender: "client",
+        content: "Hey, got your number from the Fiverr project.",
+        timestamp: new Date(Date.now() - 1e3 * 60 * 150).toISOString(),
+        platform: "whatsapp",
+        read: true
+      },
+      {
+        id: "msg-12",
+        conversationId: "conv-4",
+        sender: "client",
+        content: "Can we schedule a call tomorrow?",
+        timestamp: new Date(Date.now() - 1e3 * 60 * 120).toISOString(),
+        platform: "whatsapp",
+        read: true
+      }
+    ]
+  }
+];
+const mockSystemStatus = {
+  apiStatus: "operational",
+  upworkConnected: true,
+  fiverrConnected: true,
+  whatsappConnected: true,
+  activeBids: 47,
+  activeConversations: 12,
+  lastSync: new Date(Date.now() - 1e3 * 60 * 2).toISOString()
+};
+const mockActivities = [
+  {
+    id: "act-1",
+    type: "bid_placed",
+    title: "Bid placed",
+    description: 'Auto-bid placed on "React Dashboard Development" - $2,500',
+    timestamp: new Date(Date.now() - 1e3 * 60 * 5).toISOString(),
+    platform: "upwork"
+  },
+  {
+    id: "act-2",
+    type: "message_received",
+    title: "New message",
+    description: "Sarah Johnson: Thanks! When can you start?",
+    timestamp: new Date(Date.now() - 1e3 * 60 * 10).toISOString(),
+    platform: "upwork"
+  },
+  {
+    id: "act-3",
+    type: "bid_won",
+    title: "Bid won!",
+    description: 'Your bid on "AI Integration Project" was accepted',
+    timestamp: new Date(Date.now() - 1e3 * 60 * 30).toISOString(),
+    platform: "fiverr"
+  },
+  {
+    id: "act-4",
+    type: "account_connected",
+    title: "Account connected",
+    description: "WebFlow Master account successfully connected",
+    timestamp: new Date(Date.now() - 1e3 * 60 * 60).toISOString(),
+    platform: "fiverr"
+  }
+];
+const AppContext = reactExports.createContext(void 0);
+function AppProvider({ children: children2 }) {
+  const [user] = reactExports.useState(mockUser);
+  const [accounts, setAccounts] = reactExports.useState(mockAccounts);
+  const [conversations, setConversations] = reactExports.useState(mockConversations);
+  const [systemStatus, setSystemStatus] = reactExports.useState(mockSystemStatus);
+  const [activities, setActivities] = reactExports.useState(mockActivities);
+  reactExports.useEffect(() => {
+    const interval2 = setInterval(() => {
+      const randomConvo = conversations[Math.floor(Math.random() * conversations.length)];
+      if (randomConvo && Math.random() > 0.7) {
+        const newMessage = {
+          id: `msg-${Date.now()}`,
+          conversationId: randomConvo.id,
+          sender: "client",
+          content: getRandomClientMessage(),
+          timestamp: (/* @__PURE__ */ new Date()).toISOString(),
+          platform: randomConvo.platform,
+          read: false
+        };
+        setConversations((prev) => prev.map((conv) => {
+          if (conv.id === randomConvo.id) {
+            return {
+              ...conv,
+              messages: [...conv.messages, newMessage],
+              lastMessage: newMessage.content,
+              lastMessageTime: newMessage.timestamp,
+              unreadCount: conv.unreadCount + 1
+            };
+          }
+          return conv;
+        }));
+        const newActivity = {
+          id: `activity-${Date.now()}`,
+          type: "message_received",
+          title: "New message",
+          description: `${randomConvo.clientName}: ${newMessage.content.substring(0, 50)}...`,
+          timestamp: (/* @__PURE__ */ new Date()).toISOString(),
+          platform: randomConvo.platform
+        };
+        setActivities((prev) => [newActivity, ...prev.slice(0, 19)]);
+      }
+    }, 18e3);
+    return () => clearInterval(interval2);
+  }, [conversations]);
+  const updateAccount = (id2, updates) => {
+    setAccounts((prev) => prev.map((acc) => acc.id === id2 ? { ...acc, ...updates } : acc));
+  };
+  const addActivity = (activity) => {
+    setActivities((prev) => [activity, ...prev.slice(0, 19)]);
+  };
+  const markConversationRead = (conversationId) => {
+    setConversations((prev) => prev.map(
+      (conv) => conv.id === conversationId ? { ...conv, unreadCount: 0 } : conv
+    ));
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(AppContext.Provider, { value: {
+    user,
+    accounts,
+    conversations,
+    systemStatus,
+    activities,
+    updateAccount,
+    addActivity,
+    markConversationRead
+  }, children: children2 });
+}
+function getRandomClientMessage() {
+  const messages = [
+    "Hi, I'm interested in your services. Can we discuss the project?",
+    "What's your availability for this week?",
+    "Could you provide a quote for this work?",
+    "I have some questions about the proposal.",
+    "When can you start on this project?",
+    "Can you share some examples of similar work?",
+    "I'd like to schedule a call to discuss details.",
+    "What's your timeline for delivery?"
+  ];
+  return messages[Math.floor(Math.random() * messages.length)];
+}
+function App({ initialData }) {
+  const ssrData = initialData || (typeof window !== "undefined" ? window.__SSR_DATA__ : null) || (typeof globalThis !== "undefined" ? globalThis.context : null) || {};
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(SSRContext.Provider, { value: ssrData, children: /* @__PURE__ */ jsxRuntimeExports.jsx(AuthProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(AppProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(ThemeProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(ToastProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(ConfirmationProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "app-container", children: /* @__PURE__ */ jsxRuntimeExports.jsx(AppRoutes, {}) }) }) }) }) }) }) });
 }
 function render(url, context2 = {}) {
   const helmetContext = {};
@@ -84886,9 +83492,9 @@ function render(url, context2 = {}) {
     globalThis.context = context2;
   }
   const html = server_nodeExports.renderToString(
-    /* @__PURE__ */ jsxRuntimeExports.jsx(React2.StrictMode, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(HelmetProvider, { context: helmetContext, children: /* @__PURE__ */ jsxRuntimeExports.jsx(StaticRouter, { location: url, children: /* @__PURE__ */ jsxRuntimeExports.jsx(App, {}) }) }) })
+    /* @__PURE__ */ jsxRuntimeExports.jsx(HelmetProvider, { context: helmetContext, children: /* @__PURE__ */ jsxRuntimeExports.jsx(StaticRouter, { location: url, children: /* @__PURE__ */ jsxRuntimeExports.jsx(App, { initialData: context2 }) }) })
   );
-  const helmet = helmetContext.helmet;
+  const { helmet } = helmetContext;
   const bridgeResponse = {
     html,
     head: helmet ? `
@@ -84911,13 +83517,13 @@ export {
   ArrowRight as A,
   Box as B,
   ChevronRight as C,
-  ExternalLink as D,
+  FileText as D,
   Eye as E,
   FAQSection as F,
   Globe as G,
-  Download as H,
+  ExternalLink as H,
   Input as I,
-  Minimize2 as J,
+  Download as J,
   Maximize2 as K,
   LoaderCircle as L,
   Mail as M,
@@ -84936,7 +83542,7 @@ export {
   Zap as Z,
   usePrevious as _,
   useToast as a,
-  DynamicIcon as a$,
+  Sparkles as a$,
   createContextScope$1 as a0,
   CheckIcon as a1,
   Cpu as a2,
@@ -84964,36 +83570,36 @@ export {
   buildQueryString as aO,
   apiRequest as aP,
   Skeleton as aQ,
-  adminSupportChatService as aR,
-  PAGINATION_CONFIG as aS,
-  reactDomExports as aT,
-  useLayoutEffect2 as aU,
-  clamp$1 as aV,
-  CaretSortIcon as aW,
-  ChevronUpIcon as aX,
-  ChevronDownIcon as aY,
-  BarChart3 as aZ,
-  Filter as a_,
+  PAGINATION_CONFIG as aR,
+  reactDomExports as aS,
+  useLayoutEffect2 as aT,
+  clamp as aU,
+  CaretSortIcon as aV,
+  ChevronUpIcon as aW,
+  ChevronDownIcon as aX,
+  BarChart3 as aY,
+  Filter as aZ,
+  DynamicIcon as a_,
   Workflow as aa,
   Target as ab,
   Users as ac,
-  Circle as ad,
-  adminBlogService as ae,
-  faqService as af,
-  composeRefs as ag,
-  useCallbackRef$1 as ah,
-  useDirection as ai,
-  Portal$1 as aj,
-  hideOthers as ak,
-  dispatchDiscreteCustomEvent as al,
-  useFocusGuards as am,
-  ReactRemoveScroll as an,
-  FocusScope as ao,
-  DismissableLayer as ap,
-  useId as aq,
-  ChevronRightIcon as ar,
-  DotFilledIcon as as,
-  Plus as at,
+  adminBlogService as ad,
+  faqService as ae,
+  composeRefs as af,
+  useCallbackRef$1 as ag,
+  useDirection as ah,
+  Portal$1 as ai,
+  hideOthers as aj,
+  dispatchDiscreteCustomEvent as ak,
+  useFocusGuards as al,
+  ReactRemoveScroll as am,
+  FocusScope as an,
+  DismissableLayer as ao,
+  useId as ap,
+  ChevronRightIcon as aq,
+  DotFilledIcon as ar,
+  Plus as as,
+  Tag as at,
   Calendar as au,
   formatDistanceToNow as av,
   Dialog as aw,
@@ -85001,18 +83607,17 @@ export {
   DialogHeader as ay,
   DialogTitle as az,
   Button as b,
-  Sparkles as b0,
-  GitBranch as b1,
-  mockPlatformStats as b2,
-  mockUsers as b3,
-  Avatar as b4,
-  AvatarImage as b5,
-  AvatarFallback as b6,
-  DollarSign as b7,
-  mockTeams as b8,
-  TrendingUp as b9,
-  mockActivities as ba,
-  commonjsGlobal as bb,
+  GitBranch as b0,
+  mockPlatformStats as b1,
+  mockUsers as b2,
+  Avatar as b3,
+  AvatarImage as b4,
+  AvatarFallback as b5,
+  DollarSign as b6,
+  mockTeams as b7,
+  TrendingUp as b8,
+  mockActivities$1 as b9,
+  commonjsGlobal as ba,
   cn as c,
   distExports as d,
   render as default,
@@ -85027,15 +83632,15 @@ export {
   CircleHelp as m,
   BookOpen as n,
   Layers as o,
-  Star as p,
-  Search as q,
+  PanelsTopLeft as p,
+  Star as q,
   reactExports as r,
-  ArrowLeft as s,
-  ChevronDown as t,
+  Search as s,
+  ArrowLeft as t,
   useAuth as u,
-  CircleCheck as v,
+  ChevronDown as v,
   workflowService as w,
-  ChevronLeft as x,
-  LayoutGrid as y,
-  FileText as z
+  CircleCheck as x,
+  ChevronLeft as y,
+  LayoutGrid as z
 };

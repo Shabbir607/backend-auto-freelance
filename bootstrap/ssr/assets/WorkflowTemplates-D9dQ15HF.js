@@ -1,4 +1,4 @@
-import { a as useToast, r as reactExports, j as jsxRuntimeExports, o as Layers, q as Search, I as Input, b as Button, a_ as Filter, a$ as DynamicIcon, p as Star, h as Card, b0 as Sparkles, g as Badge, b1 as GitBranch, ac as Users, aw as Dialog, ax as DialogContent, ay as DialogHeader, az as DialogTitle, aA as DialogDescription, Z as Zap, a5 as CircleCheckBig, aB as DialogFooter, E as Eye, at as Plus, w as workflowService } from "../ssr.js";
+import { a as useToast, r as reactExports, j as jsxRuntimeExports, o as Layers, s as Search, I as Input, b as Button, aZ as Filter, a_ as DynamicIcon, q as Star, h as Card, a$ as Sparkles, g as Badge, b0 as GitBranch, ac as Users, aw as Dialog, ax as DialogContent, ay as DialogHeader, az as DialogTitle, aA as DialogDescription, Z as Zap, a5 as CircleCheckBig, aB as DialogFooter, E as Eye, as as Plus, w as workflowService } from "../ssr.js";
 import "stream";
 import "util";
 function WorkflowTemplates() {

@@ -1,4 +1,4 @@
-import { e as createLucideIcon, d as distExports, a as useToast, r as reactExports, j as jsxRuntimeExports, L as LoaderCircle, f as PublicNavbarLayout, l as SEOHelmet, s as ArrowLeft, o as Layers, v as CircleCheck, g as Badge, x as ChevronLeft, C as ChevronRight, y as LayoutGrid, k as Clock, c as cn, G as Globe, z as FileText, D as ExternalLink, H as Download, X, J as Minimize2, K as Maximize2 } from "../ssr.js";
+import { e as createLucideIcon, d as distExports, a as useToast, r as reactExports, j as jsxRuntimeExports, L as LoaderCircle, f as PublicNavbarLayout, l as SEOHelmet, t as ArrowLeft, o as Layers, x as CircleCheck, g as Badge, y as ChevronLeft, C as ChevronRight, z as LayoutGrid, k as Clock, c as cn, G as Globe, D as FileText, H as ExternalLink, J as Download, X, K as Maximize2 } from "../ssr.js";
 import { c as courseService } from "./courseService-BvPIQTiW.js";
 import { C as CirclePlay } from "./circle-play-CO_UqoRJ.js";
 import { L as Lock } from "./lock-_zUWinz0.js";
@@ -6,6 +6,12 @@ import { P as Play } from "./play-rHRNHkGu.js";
 import { P as Pause } from "./pause-Dd5jwD05.js";
 import "stream";
 import "util";
+const Minimize2 = createLucideIcon("Minimize2", [
+  ["polyline", { points: "4 14 10 14 10 20", key: "11kfnr" }],
+  ["polyline", { points: "20 10 14 10 14 4", key: "rlmsce" }],
+  ["line", { x1: "14", x2: "21", y1: "10", y2: "3", key: "o5lafz" }],
+  ["line", { x1: "3", x2: "10", y1: "21", y2: "14", key: "1atl0r" }]
+]);
 const RotateCcw = createLucideIcon("RotateCcw", [
   ["path", { d: "M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8", key: "1357e3" }],
   ["path", { d: "M3 3v5h5", key: "1xhq8a" }]

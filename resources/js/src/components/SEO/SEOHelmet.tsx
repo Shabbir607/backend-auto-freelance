@@ -79,7 +79,7 @@ export const SEOHelmet: React.FC<SEOHelmetProps> = ({
     return (
         <Helmet>
             {/* ── Basic ── */}
-            <title>{title ? `${title} | ${SITE_NAME}` : SITE_NAME}</title>
+            <title>{title ? (title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`) : SITE_NAME}</title>
             <meta name="description" content={description} />
             {keywords && <meta name="keywords" content={keywords} />}
             <meta name="robots" content={finalRobots} />

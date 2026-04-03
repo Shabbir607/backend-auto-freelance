@@ -1,4 +1,4 @@
-import { e as createLucideIcon, u as useAuth, d as distExports, j as jsxRuntimeExports, h as Card, a3 as Shield, b as Button, b2 as mockPlatformStats, b3 as mockUsers, s as ArrowLeft, b4 as Avatar, b5 as AvatarImage, b6 as AvatarFallback, b7 as DollarSign, b8 as mockTeams, ac as Users, b9 as TrendingUp, g as Badge, a9 as Activity, ba as mockActivities, av as formatDistanceToNow } from "../ssr.js";
+import { e as createLucideIcon, u as useAuth, d as distExports, j as jsxRuntimeExports, h as Card, a3 as Shield, b as Button, b1 as mockPlatformStats, b2 as mockUsers, t as ArrowLeft, b3 as Avatar, b4 as AvatarImage, b5 as AvatarFallback, b6 as DollarSign, b7 as mockTeams, ac as Users, b8 as TrendingUp, g as Badge, a9 as Activity, b9 as mockActivities, av as formatDistanceToNow } from "../ssr.js";
 import "stream";
 import "util";
 const Building2 = createLucideIcon("Building2", [

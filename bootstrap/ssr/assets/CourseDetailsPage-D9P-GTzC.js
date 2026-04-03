@@ -1,4 +1,4 @@
-import { e as createLucideIcon, r as reactExports, j as jsxRuntimeExports, d as distExports, a as useToast, u as useAuth, L as LoaderCircle, f as PublicNavbarLayout, l as SEOHelmet, s as ArrowLeft, g as Badge, p as Star, b as Button, t as ChevronDown, h as Card, U as User, V as Video } from "../ssr.js";
+import { e as createLucideIcon, r as reactExports, j as jsxRuntimeExports, d as distExports, a as useToast, u as useAuth, L as LoaderCircle, f as PublicNavbarLayout, l as SEOHelmet, t as ArrowLeft, g as Badge, q as Star, b as Button, v as ChevronDown, h as Card, U as User, V as Video } from "../ssr.js";
 import { T as Textarea } from "./textarea-DZtg9ezc.js";
 import { c as courseService } from "./courseService-BvPIQTiW.js";
 import { C as CirclePlay } from "./circle-play-CO_UqoRJ.js";

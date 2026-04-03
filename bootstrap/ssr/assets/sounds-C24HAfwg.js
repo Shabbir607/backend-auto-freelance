@@ -1,4 +1,4 @@
-import { bb as commonjsGlobal } from "../ssr.js";
+import { ba as commonjsGlobal } from "../ssr.js";
 import "stream";
 import "util";
 var howler = {};

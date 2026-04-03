@@ -84,7 +84,7 @@ class AppController extends Controller
             'categories' => WorkflowCategory::where('is_active', true)->orderBy('sort_order')->take(12)->get(),
             'stats' => $stats,
             'seo' => [
-                'title' => 'EdgeLancer – n8n Workflow Automation Templates & AI Agents | EdgeLancer',
+                'title' => 'EdgeLancer – n8n Workflow Automation Templates & AI Agents',
                 'description' => 'Download ready-to-use n8n workflow automation templates. Connect apps, automate tasks, and build powerful AI agents with EdgeLancer.',
                 'og_image' => "{$origin}/og-image.png",
                 'canonical' => $origin,

@@ -1,13 +1,86 @@
-import { a as useToast, aD as useConfirmation, r as reactExports, j as jsxRuntimeExports, b as Button, L as LoaderCircle, h as Card, aE as CardHeader, aF as CardDescription, aG as CardTitle, aH as CardContent, i as MessageSquare, g as Badge, c as cn, av as formatDistanceToNow, aw as Dialog, ax as DialogContent, ay as DialogHeader, az as DialogTitle, aA as DialogDescription, a7 as CircleAlert, S as Send, aR as adminSupportChatService } from "../ssr.js";
-import { C as CompactPagination } from "./pagination-controls-BDasQ1IR.js";
+import { aP as apiRequest, a as useToast, aD as useConfirmation, r as reactExports, j as jsxRuntimeExports, b as Button, L as LoaderCircle, h as Card, aE as CardHeader, aF as CardDescription, aG as CardTitle, aH as CardContent, i as MessageSquare, g as Badge, c as cn, av as formatDistanceToNow, aw as Dialog, ax as DialogContent, ay as DialogHeader, az as DialogTitle, aA as DialogDescription, a7 as CircleAlert, S as Send } from "../ssr.js";
+import { C as CompactPagination } from "./pagination-controls-BzU-U942.js";
 import { T as Table, a as TableHeader, b as TableRow, c as TableHead, d as TableBody, e as TableCell } from "./table-BVLYlhcV.js";
 import { T as Textarea } from "./textarea-DZtg9ezc.js";
 import { R as RefreshCw } from "./refresh-cw-Bi_GhDfH.js";
 import { T as Trash2 } from "./trash-2-Cu4B9ujU.js";
 import "stream";
 import "util";
-import "./select-D43oyr7W.js";
-import "./index-sGgg5_n-.js";
+import "./select-D2P8LlRo.js";
+import "./index-ChMh29jy.js";
+const ADMIN_SUPPORT_BASE = "/support";
+const adminSupportChatService = {
+  // GET /admin/support/stats
+  getStats: async () => {
+    const response = await apiRequest(`${ADMIN_SUPPORT_BASE}/stats`, "GET");
+    return {
+      success: response.success,
+      message: response.message,
+      data: response.data,
+      errors: response.errors
+    };
+  },
+  // GET /admin/support/tickets
+  getTickets: async (page = 1) => {
+    const response = await apiRequest(`${ADMIN_SUPPORT_BASE}/tickets?page=${page}`, "GET");
+    return {
+      success: response.success,
+      message: response.message,
+      data: response.data,
+      errors: response.errors
+    };
+  },
+  // GET /admin/support/tickets/{id}
+  getTicketById: async (id) => {
+    const response = await apiRequest(`${ADMIN_SUPPORT_BASE}/tickets/${id}`, "GET");
+    return {
+      success: response.success,
+      message: response.message,
+      data: response.data,
+      errors: response.errors
+    };
+  },
+  // POST /admin/support/tickets/{id}/reply
+  replyToTicket: async (id, data) => {
+    const response = await apiRequest(`${ADMIN_SUPPORT_BASE}/tickets/${id}/reply`, "POST", data);
+    return {
+      success: response.success,
+      message: response.message,
+      data: response.data,
+      errors: response.errors
+    };
+  },
+  // PUT /admin/support/tickets/{id}/close
+  closeTicket: async (id) => {
+    const response = await apiRequest(`${ADMIN_SUPPORT_BASE}/tickets/${id}/close`, "PUT");
+    return {
+      success: response.success,
+      message: response.message,
+      data: response.data,
+      errors: response.errors
+    };
+  },
+  // PUT /admin/support/tickets/{id}/reopen
+  reopenTicket: async (id) => {
+    const response = await apiRequest(`${ADMIN_SUPPORT_BASE}/tickets/${id}/reopen`, "PUT");
+    return {
+      success: response.success,
+      message: response.message,
+      data: response.data,
+      errors: response.errors
+    };
+  },
+  // DELETE /admin/support/tickets/{id}
+  deleteTicket: async (id) => {
+    const response = await apiRequest(`${ADMIN_SUPPORT_BASE}/tickets/${id}`, "DELETE");
+    return {
+      success: response.success,
+      message: response.message,
+      data: response.data,
+      errors: response.errors
+    };
+  }
+};
 const getStatusLabel = (ticket) => String(ticket.status || ticket.ticket_status || "open").toLowerCase();
 const getStatsValue = (stats, keys) => {
   for (const key of keys) {

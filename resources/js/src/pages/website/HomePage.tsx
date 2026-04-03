@@ -103,17 +103,10 @@ export default function HomePage() {
                 ogImage={ssrData.seo?.og_image}
                 metaTags={ssrData.seo?.meta_tags}
                 structuredData={ssrData.seo?.structured_data}
-            />
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
-            />
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+                canonical={ssrData.seo?.canonical}
             />
             <LazyStarfield />
-            <div className="fixed inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] pointer-events-none z-[1]" />
+            <div className="fixed inset-0 bg-[url('/noise.svg')] opacity-[0.03] pointer-events-none z-[1]" />
 
             <div className="relative z-10">
                 <PublicNavbar />

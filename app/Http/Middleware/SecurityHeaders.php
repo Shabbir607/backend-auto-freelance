@@ -30,11 +30,11 @@ class SecurityHeaders
             // Local Development CSP to allow Vite
             $appUrl = config('app.url', 'http://localhost:8000');
             $csp = "default-src 'self' https: data:; " .
-                   "script-src 'self' https: 'unsafe-inline' 'unsafe-eval' http://127.0.0.1:5173 http://localhost:5173 http://[::]:5173; " .
-                   "style-src 'self' https: 'unsafe-inline' http://127.0.0.1:5173 http://localhost:5173 http://[::]:5173; " .
-                   "connect-src 'self' https: ws://127.0.0.1:5173 ws://localhost:5173 ws://[::]:5173 http://127.0.0.1:5173 http://localhost:5173 http://[::]:5173 {$appUrl}; " .
-                   "img-src 'self' https: data: http://127.0.0.1:5173 http://localhost:5173 http://[::]:5173; " .
-                   "font-src 'self' https: data: http://127.0.0.1:5173 http://localhost:5173 http://[::]:5173;";
+                   "script-src 'self' https: 'unsafe-inline' 'unsafe-eval' http://127.0.0.1:5173 http://localhost:5173; " .
+                   "style-src 'self' https: 'unsafe-inline' http://127.0.0.1:5173 http://localhost:5173; " .
+                   "connect-src 'self' https: ws://127.0.0.1:5173 ws://localhost:5173 http://127.0.0.1:5173 http://localhost:5173 {$appUrl}; " .
+                   "img-src 'self' https: data: http://127.0.0.1:5173 http://localhost:5173; " .
+                   "font-src 'self' https: data: http://127.0.0.1:5173 http://localhost:5173;";
             $response->headers->set('Content-Security-Policy', $csp);
         }
         

@@ -1,10 +1,13 @@
-import { u as useAuth, a as useToast, r as reactExports, aa as Workflow, n as BookOpen, ab as Target, m as CircleHelp, z as FileText, i as MessageSquare, ac as Users, j as jsxRuntimeExports, g as Badge, ad as Circle, L as LoaderCircle, d as distExports, h as Card, c as cn, b as Button, C as ChevronRight, w as workflowService, ae as adminBlogService, af as faqService } from "../ssr.js";
+import { e as createLucideIcon, u as useAuth, a as useToast, r as reactExports, aa as Workflow, n as BookOpen, ab as Target, m as CircleHelp, D as FileText, i as MessageSquare, ac as Users, j as jsxRuntimeExports, g as Badge, L as LoaderCircle, d as distExports, h as Card, c as cn, b as Button, C as ChevronRight, w as workflowService, ad as adminBlogService, ae as faqService } from "../ssr.js";
 import { c as courseService } from "./courseService-BvPIQTiW.js";
 import { p as pageService } from "./pageService-mJqNpZ7Z.js";
 import { c as contactService } from "./contactService-D_MD-cyw.js";
 import { n as newsletterService } from "./newsletterService-A9YTC_wA.js";
 import "stream";
 import "util";
+const Circle = createLucideIcon("Circle", [
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }]
+]);
 function Dashboard() {
   const { user } = useAuth();
   const { showToast } = useToast();

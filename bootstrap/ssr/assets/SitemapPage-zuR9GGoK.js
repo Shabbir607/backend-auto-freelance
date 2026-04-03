@@ -1,11 +1,6 @@
-import { e as createLucideIcon, r as reactExports, w as workflowService, j as jsxRuntimeExports, f as PublicNavbarLayout, l as SEOHelmet, G as Globe, m as CircleHelp, d as distExports, A as ArrowRight, Z as Zap, n as BookOpen, o as Layers, b as Button, L as LoaderCircle, p as Star, F as FAQSection } from "../ssr.js";
+import { r as reactExports, w as workflowService, j as jsxRuntimeExports, f as PublicNavbarLayout, l as SEOHelmet, G as Globe, m as CircleHelp, d as distExports, A as ArrowRight, Z as Zap, n as BookOpen, o as Layers, b as Button, p as PanelsTopLeft, L as LoaderCircle, q as Star, F as FAQSection } from "../ssr.js";
 import "stream";
 import "util";
-const PanelsTopLeft = createLucideIcon("PanelsTopLeft", [
-  ["rect", { width: "18", height: "18", x: "3", y: "3", rx: "2", key: "afitv7" }],
-  ["path", { d: "M3 9h18", key: "1pudct" }],
-  ["path", { d: "M9 21V9", key: "1oto5p" }]
-]);
 const CORE_PAGES = [
   { title: "Home", path: "/", icon: Globe, color: "text-cyan-400", bg: "bg-cyan-500/10" },
   { title: "Contact Support", path: "/contact", icon: CircleHelp, color: "text-emerald-400", bg: "bg-emerald-500/10" }
