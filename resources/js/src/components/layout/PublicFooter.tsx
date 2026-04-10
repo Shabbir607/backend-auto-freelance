@@ -2,16 +2,13 @@
 
 import { BlogCategory, blogService } from '@/services/blogService';
 import { WorkflowCategory, workflowService } from '@/services/workflowService';
-import { useSSRContext } from '@/contexts/SSRContext';
-import { ArrowRight, Github, Linkedin, Mail, Sparkles, Twitter } from 'lucide-react';
+import { ArrowRight, Github, Linkedin, Mail, Twitter } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export const PublicFooter = () => {
-  const ssrData = useSSRContext();
-  const [workflowCategories, setWorkflowCategories] = useState<WorkflowCategory[]>(ssrData.categories || []);
-  const [blogCategories, setBlogCategories] = useState<BlogCategory[]>(ssrData.blogCategories || []);
-  const [loading, setLoading] = useState(!ssrData.categories);
+  const [workflowCategories, setWorkflowCategories] = useState<WorkflowCategory[]>([]);
+  const [blogCategories, setBlogCategories] = useState<BlogCategory[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,7 +27,7 @@ export const PublicFooter = () => {
         console.error("Failed to fetch footer categories:", error);
       }
     };
-    fetchData().finally(() => setLoading(false));
+    fetchData();
   }, []);
 
   return (
@@ -45,7 +42,7 @@ export const PublicFooter = () => {
           {/* Brand Section */}
           <div className="md:col-span-3 space-y-6">
             <Link to="/" className="flex items-center gap-2 group cursor-pointer" title="EdgeLancer - Back to Top">
-              <img src="/favicon.png" alt="EdgeLancer Logo" width={40} height={40} className="object-contain group-hover:scale-105 transition-transform duration-300" />
+              <img src="/favicon.png" alt="Logo" title="/" className="w-10 h-10 object-contain group-hover:scale-105 transition-transform duration-300" />
               <span
                 className="text-1xl md:text-1xl font-black tracking-widest uppercase bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-indigo-500 to-purple-600 drop-shadow-[0_0_15px_rgba(168,85,247,0.5)]"
                 style={{ fontFamily: "'Orbitron', sans-serif" }}
@@ -74,14 +71,14 @@ export const PublicFooter = () => {
             <h3 className="text-white font-medium mb-6">Platform</h3>
             <ul className="space-y-4">
               {[
-                { label: 'Home', href: '/' },
-                { label: 'Workflows', href: '/workflows' },
-                { label: 'Templates', href: '/templates' },
-                { label: 'Blog', href: '/blogs' },
+                { label: 'Home', to: '/' },
+                { label: 'Workflows', to: '/workflows' },
+                { label: 'Templates', to: '/templates' },
+                { label: 'Blog', to: '/blogs' },
 
               ].map((item) => (
                 <li key={item.label}>
-                  <Link to={item.href} className="text-gray-400 hover:text-white flex items-center group transition-colors" title={`Go to ${item.label}`}>
+                  <Link to={item.to} className="text-gray-400 hover:text-white flex items-center group transition-colors" title={`Go to ${item.label}`}>
                     <span className="w-0 group-hover:w-2 h-px bg-indigo-500 mr-0 group-hover:mr-2 transition-all duration-300" />
                     {item.label}
                   </Link>
@@ -90,7 +87,24 @@ export const PublicFooter = () => {
             </ul>
           </div>
 
-          {/* Workflows (Dynamic) - Removed per instructions */}
+          {/* Workflows (Dynamic) */}
+          <div className="md:col-span-2">
+            <h4 className="text-white font-medium mb-6">Solutions</h4>
+            <ul className="space-y-4">
+              {workflowCategories.length > 0 ? (
+                workflowCategories.map((item) => (
+                  <li key={item.id}>
+                    <Link to={`/workflows?category=${item.slug}`} className="text-gray-400 hover:text-white flex items-center group transition-colors" title={`View ${item.title} solutions`}>
+                      <span className="w-0 group-hover:w-2 h-px bg-cyan-400 mr-0 group-hover:mr-2 transition-all duration-300" />
+                      {item.title}
+                    </Link>
+                  </li>
+                ))
+              ) : (
+                <li className="text-gray-600 text-sm italic">Loading...</li>
+              )}
+            </ul>
+          </div>
 
           {/* Blogs (Dynamic) */}
           <div className="md:col-span-2">
@@ -105,10 +119,8 @@ export const PublicFooter = () => {
                     </Link>
                   </li>
                 ))
-              ) : loading ? (
-                <li className="text-gray-400 text-sm italic">Loading...</li>
               ) : (
-                <li className="text-gray-500 text-sm italic">Coming soon...</li>
+                <li className="text-gray-400 text-sm italic">Loading...</li>
               )}
             </ul>
           </div>
@@ -120,7 +132,6 @@ export const PublicFooter = () => {
               <input
                 type="email"
                 placeholder="Enter your email"
-                aria-label="Email address for newsletter"
                 className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50 transition-all placeholder:text-gray-600"
               />
               <button className="absolute right-2 top-2 bottom-2 px-3 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors flex items-center justify-center" aria-label="Subscribe to updates">

@@ -1,8 +1,6 @@
 "use client";
 
 import { workflowService } from '@/services/workflowService';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import {
   BarChart,
   Bell,
@@ -30,6 +28,8 @@ import {
   Workflow,
   Zap
 } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const SpotlightCard = ({ children, className = "", onClick }: { children: React.ReactNode, className?: string, onClick: () => void }) => (
   <div
@@ -78,6 +78,7 @@ export const ProductionTemplates = ({
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(initialWorkflows.length === 0);
   const [hasLoadedInitial, setHasLoadedInitial] = useState(initialWorkflows.length > 0);
+  const [showAllCategories, setShowAllCategories] = useState(false);
 
   useEffect(() => {
     if (initialCategories.length > 0) return;
@@ -136,7 +137,9 @@ export const ProductionTemplates = ({
     return matchesCategory && matchesSearch;
   });
 
-  const visibleCategories = categories.slice(0, 8);
+  const collapsedCategoryCount = 5;
+  const visibleCategories = showAllCategories ? categories : categories.slice(0, collapsedCategoryCount);
+  const hasMoreCategories = categories.length > collapsedCategoryCount;
 
   if (loading) {
     return (
@@ -198,7 +201,7 @@ export const ProductionTemplates = ({
           </div>
 
           {/* Categories Container */}
-          <div className="flex gap-2 flex-wrap transition-all duration-300">
+          <div className={`flex gap-2 transition-all duration-300 ${showAllCategories ? 'flex-wrap overflow-visible pb-0' : 'flex-nowrap overflow-x-auto pb-1'}`}>
             <button
               onClick={() => { setActiveCategory(null); setSearchQuery(''); }}
               className={`flex-shrink-0 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 border ${activeCategory === null
@@ -220,6 +223,15 @@ export const ProductionTemplates = ({
                 {cat.title}
               </button>
             ))}
+            
+            {hasMoreCategories && (
+              <button
+                onClick={() => setShowAllCategories(!showAllCategories)}
+                className="flex-shrink-0 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 border bg-transparent border-slate-700 text-slate-400 hover:text-slate-300 hover:border-slate-600 hover:bg-slate-800/20"
+              >
+                {showAllCategories ? 'Show Less' : `Show All (${categories.length})`}
+              </button>
+            )}
           </div>
         </div>
 

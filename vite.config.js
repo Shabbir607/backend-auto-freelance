@@ -1,7 +1,7 @@
-import { defineConfig } from 'vite';
-import laravel from 'laravel-vite-plugin';
 import react from '@vitejs/plugin-react';
+import laravel from 'laravel-vite-plugin';
 import path from 'path';
+import { defineConfig } from 'vite';
 
 export default defineConfig({
     plugins: [
@@ -12,6 +12,14 @@ export default defineConfig({
         }),
         react(),
     ],
+    server: {
+        host: '127.0.0.1',
+        port: 5173,
+        strictPort: true,
+        hmr: {
+            host: '127.0.0.1',
+        },
+    },
     resolve: {
         alias: {
             '@': path.resolve(__dirname, './resources/js/src'),

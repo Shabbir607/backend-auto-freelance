@@ -3,6 +3,7 @@ import { PublicNavbar } from '@/components/layout/PublicNavbar';
 import { SocialShareDialog } from '@/components/SocialShareDialog';
 import { WorkflowReviewsSection } from '@/components/workflow/WorkflowReviewsSection';
 import { WorkflowResponse as WorkflowType, workflowService } from '@/services/workflowService';
+import { formatDistanceToNow } from 'date-fns';
 import {
     ArrowLeft,
     Bot,
@@ -12,11 +13,8 @@ import {
     Clock,
     Copy,
     Download,
-    ExternalLink,
     Eye,
-    FileCode,
     FileJson,
-    FileText,
     LayoutGrid,
     Maximize2,
     MessageSquare,
@@ -26,17 +24,14 @@ import {
     Share2,
     ShieldCheck,
     Sparkles,
-    Star,
     Terminal,
     Users,
-    Wand2,
     Workflow,
     X,
     Zap
 } from 'lucide-react';
-import { formatDistanceToNow } from 'date-fns';
-import { useEffect, useMemo, useState } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import ReactFlow, {
     Background,
     Controls,
@@ -44,19 +39,18 @@ import ReactFlow, {
     MiniMap,
     Panel,
     ReactFlowProvider,
-    useReactFlow,
+    applyEdgeChanges,
     applyNodeChanges,
-    applyEdgeChanges
+    useReactFlow
 } from 'reactflow';
 import 'reactflow/dist/style.css';
-import { useCallback } from 'react';
 
-import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
 
-import { LucideIconMap, N8nNode } from '@/components/workflow/N8nNode';
 import { SEOHelmet } from '@/components/SEO/SEOHelmet';
+import { LucideIconMap, N8nNode } from '@/components/workflow/N8nNode';
 import { useSSRContext } from '@/contexts/SSRContext';
 
 // --- Interactive Workflow Canvas ---
@@ -277,6 +271,10 @@ export default function WorkflowDetailsPage() {
         document.body.removeChild(a);
     };
 
+    const openSetupGuide = () => {
+        setActiveTab('setup');
+    };
+
     if (loading) return (
         <div className="min-h-screen bg-[#020202] flex flex-col items-center justify-center gap-4">
             <div className="w-12 h-12 rounded-full border-4 border-slate-800 border-t-purple-500 animate-spin" />
@@ -360,6 +358,13 @@ export default function WorkflowDetailsPage() {
 
                             <div className="flex items-center gap-3 shrink-0">
                                 <button
+                                    onClick={openSetupGuide}
+                                    className="h-12 px-6 rounded-xl border border-indigo-500/20 bg-indigo-500/10 hover:bg-indigo-500/15 text-indigo-300 font-medium transition-all flex items-center gap-2"
+                                >
+                                    <Terminal className="w-4 h-4" />
+                                    Setup Guide
+                                </button>
+                                <button
                                     onClick={() => setIsShareOpen(true)}
                                     className="h-12 px-6 rounded-xl border border-white/10 bg-[#111] hover:bg-[#1a1a1a] text-slate-300 font-medium transition-all flex items-center gap-2 group"
                                 >
@@ -386,7 +391,7 @@ export default function WorkflowDetailsPage() {
                                     { id: 'visual', label: 'Flow Visualizer', icon: Workflow },
                                     { id: 'config', label: 'JSON Config', icon: FileJson },
                                     { id: 'docs', label: 'Documentation', icon: MessageSquare },
-                                    { id: 'setup', label: 'Setup Guide', icon: FileText },
+                                    { id: 'setup', label: 'Setup Guide', icon: Terminal },
                                 ].map((tab) => (
                                     <button
                                         key={tab.id}
@@ -399,6 +404,29 @@ export default function WorkflowDetailsPage() {
                                         {tab.label}
                                     </button>
                                 ))}
+                            </div>
+                        )}
+
+                        {!isFullscreen && (
+                            <div className="mb-4 rounded-2xl border border-indigo-500/15 bg-indigo-500/[0.04] p-5 md:p-6">
+                                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                                    <div className="space-y-2">
+                                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-[10px] font-bold uppercase tracking-widest">
+                                            <Terminal className="w-3.5 h-3.5" />
+                                            Setup Guide
+                                        </div>
+                                        <h3 className="text-white font-semibold text-lg">Need help importing this workflow into n8n?</h3>
+                                        <p className="text-slate-400 text-sm md:text-base max-w-3xl">
+                                            Open the Setup Guide tab for import options, local install commands, and the recommended environment requirements.
+                                        </p>
+                                    </div>
+                                    <button
+                                        onClick={openSetupGuide}
+                                        className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-500 text-white text-sm font-semibold hover:bg-indigo-400 transition-colors"
+                                    >
+                                        Open Setup Guide
+                                    </button>
+                                </div>
                             </div>
                         )}
 
