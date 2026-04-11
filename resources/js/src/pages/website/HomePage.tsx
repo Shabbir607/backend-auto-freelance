@@ -106,7 +106,7 @@ export default function HomePage() {
                 canonical={ssrData.seo?.canonical}
             />
             <LazyStarfield />
-            <div className="fixed inset-0 bg-[url('/noise.svg')] opacity-[0.03] pointer-events-none z-[1]" />
+            <div className="fixed inset-0 opacity-[0.03] pointer-events-none z-[1]" style={{ backgroundImage: "url('/noise.svg')" }} />
 
             <div className="relative z-10">
                 <PublicNavbar />

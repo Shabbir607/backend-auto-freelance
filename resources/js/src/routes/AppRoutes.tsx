@@ -8,7 +8,6 @@ import BlogPage from "../pages/website/BlogPage";
 import BlogSlugPage from "../pages/website/BlogSlugPage";
 import WorkflowsPage from "../pages/website/WorkflowsPage";
 import WorkflowDetailsPage from "../pages/website/WorkflowDetailsPage";
-import TemplatesShowcasePage from "../pages/website/TemplatesShowcasePage";
 
 // Lazy Pages (Admin & Less Critical)
 const LoginPage = lazy(() => import("../pages/auth/LoginPage"));
@@ -56,10 +55,11 @@ export default function AppRoutes() {
             <Route path="/blogs" element={<BlogPage />} />
             <Route path="/blogs/:slug" element={<BlogSlugPage />} />
             <Route path="/contact" element={<LazyLoad><ContactPage /></LazyLoad>} />
-            <Route path="/templates" element={<TemplatesShowcasePage />} />
             <Route path="/sitemap" element={<LazyLoad><SitemapPage /></LazyLoad>} />
             <Route path="/workflow/:slug" element={<WorkflowDetailsPage />} />
             <Route path="/workflow" element={<Navigate to="/workflows" replace />} />
+            <Route path="/workflow-library" element={<WorkflowsPage />} />
+            <Route path="/templates" element={<WorkflowsPage />} />
             <Route path="/workflows" element={<WorkflowsPage />} />
             <Route path="/courses" element={<LazyLoad><CoursesListPage /></LazyLoad>} />
             <Route path="/courses/:slug" element={<LazyLoad><CourseDetailsPage /></LazyLoad>} />

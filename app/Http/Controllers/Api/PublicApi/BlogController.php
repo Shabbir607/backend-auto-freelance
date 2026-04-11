@@ -136,6 +136,43 @@ class BlogController extends Controller
     }
 
     /**
+     * Get related blogs for a blog post.
+     */
+    public function relatedBlogs($slug)
+    {
+        $blog = Blog::where('slug', $slug)->where('status', 'published')->firstOrFail();
+
+        $relatedBlogs = Blog::where('category_id', $blog->category_id)
+            ->where('id', '!=', $blog->id)
+            ->where('status', 'published')
+            ->take(6)
+            ->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => $relatedBlogs
+        ]);
+    }
+
+    /**
+     * Get related workflows for a blog post.
+     */
+    public function relatedWorkflows($slug)
+    {
+        $blog = Blog::where('slug', $slug)->where('status', 'published')->firstOrFail();
+
+        $relatedWorkflows = Workflow::where('category_id', $blog->category_id)
+            ->where('status', 'published')
+            ->take(4)
+            ->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => $relatedWorkflows
+        ]);
+    }
+
+    /**
      * Get blog categories with blog counts.
      */
     public function categories()

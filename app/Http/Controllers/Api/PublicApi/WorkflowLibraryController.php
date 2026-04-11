@@ -81,13 +81,16 @@ public function index(Request $request)
 
             $workflows = $query->paginate($perPage);
 
-            // Hide json_data for list view
+            // Hide json_data for list view to save memory and protect details
             $workflows->getCollection()->transform(function ($workflow) {
                 $workflow->makeHidden(['json_data']);
                 return $workflow;
             });
 
-            return response()->json($workflows);
+            return response()->json([
+                'success' => true,
+                'data' => $workflows
+            ]);
         });
     }
 
@@ -169,6 +172,12 @@ public function workflowsByCategory(Request $request)
     }
 
     $workflows = $query->orderBy('created_at', 'desc')->paginate($perPage);
+
+    // Hide json_data for list view
+    $workflows->getCollection()->transform(function ($workflow) {
+        $workflow->makeHidden(['json_data']);
+        return $workflow;
+    });
 
     return response()->json([
         'success' => true,
@@ -362,10 +371,60 @@ public function categoryWithWorkflows(Request $request, $slug)
         $workflow->increment('total_views');
         $workflow->increment('recent_views');
 
+        // Fetch related workflows
+        $keywords = explode(' ', strtolower($workflow->title));
+        $relatedWorkflows = Workflow::where('status', 'published')
+            ->where('id', '!=', $workflow->id)
+            ->where(function ($q) use ($workflow, $keywords) {
+                $q->where('category_id', $workflow->category_id);
+                foreach ($keywords as $word) {
+                    if (strlen($word) > 3) {
+                        $q->orWhere('title', 'like', "%{$word}%");
+                    }
+                }
+            })
+            ->with(['category', 'integrations'])
+            ->orderBy('created_at', 'desc')
+            ->limit(6)
+            ->get();
+
+        // Fetch suggested blogs
+        $title = strtolower($workflow->title);
+        $blogKeywords = explode(' ', $title);
+        $filteredKeywords = array_filter($blogKeywords, function($word) {
+            return strlen($word) > 3;
+        });
+
+        $suggestedBlogs = Blog::where('status', 'published')
+            ->with(['category', 'author:id,name,email'])
+            ->where(function ($q) use ($filteredKeywords) {
+                foreach ($filteredKeywords as $word) {
+                    $q->orWhere('title', 'like', "%{$word}%");
+                    $q->orWhere('description', 'like', "%{$word}%");
+                }
+            })
+            ->orderByDesc('is_featured')
+            ->orderByDesc('published_at')
+            ->limit(6)
+            ->get();
+
+        if ($suggestedBlogs->count() < 3) {
+            $fallbackBlogs = Blog::where('status', 'published')
+                ->with(['category', 'author:id,name,email'])
+                ->whereNotIn('id', $suggestedBlogs->pluck('id'))
+                ->orderByDesc('is_featured')
+                ->orderByDesc('published_at')
+                ->limit(6 - $suggestedBlogs->count())
+                ->get();
+            $suggestedBlogs = $suggestedBlogs->concat($fallbackBlogs);
+        }
+
         return response()->json([
             'success' => true,
             'data' => $workflow,
-            'seo' => $workflow->getSeoMetadata()
+            'seo' => $workflow->getSeoMetadata(),
+            'related_workflows' => $relatedWorkflows,
+            'suggested_blogs' => $suggestedBlogs
         ]);
     }
 

@@ -34,8 +34,9 @@ import {
     Workflow,
     Zap
 } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
+import { useSSRContext } from '@/contexts/SSRContext';
 
 export function WorkflowsPage() {
     usePageMeta({
@@ -44,17 +45,35 @@ export function WorkflowsPage() {
         defaultDescription: 'Browse and download ready-to-use workflow templates for automation, AI, marketing, and more.'
     });
 
+    const ssrData = useSSRContext();
     const [searchParams] = useSearchParams();
     const [searchQuery, setSearchQuery] = useState('');
     const [activeCategory, setActiveCategory] = useState<number | 'all'>('all');
 
-    const [categories, setCategories] = useState<WorkflowCategory[]>([]);
-    const [workflows, setWorkflows] = useState<any[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [page, setPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(1);
+    // Initialize state from SSR context if available
+    const initialCategories = useMemo(() => {
+        return ssrData?.categories || [];
+    }, [ssrData]);
+
+    const initialWorkflows = useMemo(() => {
+        return ssrData?.workflows?.data || ssrData?.workflows || [];
+    }, [ssrData]);
+
+    const initialTotalPages = useMemo(() => {
+        return ssrData?.workflows?.last_page || 1;
+    }, [ssrData]);
+
+    const initialTotalWorkflows = useMemo(() => {
+        return ssrData?.workflows?.total || 0;
+    }, [ssrData]);
+
+    const [categories, setCategories] = useState<WorkflowCategory[]>(initialCategories);
+    const [workflows, setWorkflows] = useState<any[]>(initialWorkflows);
+    const [loading, setLoading] = useState(!ssrData?.workflows);
+    const [page, setPage] = useState(ssrData?.workflows?.current_page || 1);
+    const [totalPages, setTotalPages] = useState(initialTotalPages);
     const [showAllCategories, setShowAllCategories] = useState(false);
-    const [totalWorkflows, setTotalWorkflows] = useState(0);
+    const [totalWorkflows, setTotalWorkflows] = useState(initialTotalWorkflows);
 
     const iconPool = [
         Zap, Bot, GitBranch, Layers, LayoutGrid, Workflow,

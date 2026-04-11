@@ -1,0 +1,617 @@
+
+   PASS  Tests\Unit\ExampleTest
+  ✓ that true is true                                                    0.02s  
+
+   PASS  Tests\Unit\WorkflowAiGeneratorServiceTest
+  ✓ it rotates on 429 and eventually succeeds                            0.44s  
+  ✓ it retries on 500 before rotating                                    4.11s  
+  ✓ it throws exception when all keys exhausted                          0.12s  
+  ✓ it wraps around keys                                                 0.09s  
+
+   FAIL  Tests\Feature\BlogSystemTest
+  ✓ admin can manage categories                                         17.03s  
+  ✓ admin can manage blogs                                               0.41s  
+  ⨯ public can view published blogs                                      0.31s  
+  ⨯ public can filter blogs by category                                  0.20s  
+
+   FAIL  Tests\Feature\CentralizedProjectTest
+  ⨯ list all projects aggregates accounts
+  ⨯ create account filter
+  ⨯ bid with specific account
+
+   FAIL  Tests\Feature\CourseApiTest
+  ✓ admin can create a course                                            0.15s  
+  ⨯ admin can manage full seo payload                                    0.26s  
+  ✓ public user cannot create course                                     0.18s  
+  ⨯ admin can update course                                              0.64s  
+  ✓ admin can delete course                                              0.76s  
+  ✓ admin can publish course                                             0.27s  
+  ✓ public user can view published courses                               0.18s  
+  ✓ public user can view course by slug                                  0.19s  
+
+   PASS  Tests\Feature\ExampleTest
+  ✓ the application returns a successful response                        1.62s  
+
+   PASS  Tests\Feature\FreelancerApiTest
+  ✓ create contest                                                       0.17s  
+  ✓ get upgrade fees                                                     0.26s  
+  ✓ get timezones                                                        1.05s  
+
+   FAIL  Tests\Feature\FreelancerFullApiTest
+  ✓ list jobs                                                            1.46s  
+  ✓ search jobs                                                          1.21s  
+  ✓ job bundles                                                          0.30s  
+  ✓ job bundle categories                                                0.86s  
+  ✓ list threads                                                         0.26s  
+  ✓ create thread                                                        0.25s  
+  ✓ get thread                                                           0.37s  
+  ✓ send message                                                         0.35s  
+  ✓ list messages                                                        0.25s  
+  ⨯ list accounts                                                        0.44s  
+  ⨯ fetch profile                                                        0.51s  
+  ✓ search directory                                                     0.28s  
+  ✓ get login devices                                                    0.36s  
+  ✓ add user skills                                                      0.35s  
+  ✓ get user reputation                                                  0.24s  
+  ✓ list projects                                                        0.54s  
+  ✓ create project                                                       0.44s  
+  ✓ get project                                                          0.84s  
+  ✓ invite freelancer                                                    0.32s  
+  ✓ get project upgrade fees                                             0.34s  
+  ✓ get milestones                                                       0.43s  
+  ✓ list all projects                                                    0.15s  
+  ✓ place bid                                                            0.25s  
+  ✓ list bids                                                            0.24s  
+  ✓ get bid fees                                                         1.23s  
+  ✓ create contest                                                       0.31s  
+  ✓ list contests                                                        0.30s  
+  ✓ search active contests                                               0.39s  
+  ✓ get categories                                                       0.58s  
+  ✓ get timezones                                                        1.25s  
+  ✓ milestone crud                                                       1.80s  
+  ✓ filter crud                                                          0.98s  
+  ✓ add demo filters                                                     0.10s  
+
+   FAIL  Tests\Feature\FreelancerSyncTest
+  ✓ sync threads job fetches and stores threads                          0.15s  
+  ⨯ sync messages job fetches and stores messages                        0.06s  
+  ⨯ thread service returns local threads                                 0.06s  
+
+   PASS  Tests\Feature\LessonApiTest
+  ✓ admin can create lesson                                              0.07s  
+  ✓ admin can manage lesson seo                                          0.08s  
+  ✓ admin can update lesson                                              0.07s  
+  ✓ admin can upload video file                                          0.08s  
+  ✓ admin can submit video url                                           0.07s  
+  ✓ public user can view lesson                                          0.10s  
+
+   PASS  Tests\Feature\ModuleApiTest
+  ✓ admin can create module                                              0.17s  
+  ✓ admin can update module                                              0.19s  
+  ✓ admin can delete module                                              0.20s  
+
+   PASS  Tests\Feature\ProgressApiTest
+  ✓ guest can update lesson progress by ip                               0.20s  
+  ✓ progress marks as completed at 90 percent                            1.76s  
+
+   FAIL  Tests\Feature\ProjectManagementTest
+  ⨯ project management flow                                              0.53s  
+
+   PASS  Tests\Feature\ReviewApiTest
+  ✓ guest can submit review                                              0.21s  
+  ✓ admin can approve review                                             0.37s  
+  ✓ admin can reject review                                              0.19s  
+
+   FAIL  Tests\Feature\RoleRegistrationTest
+  ⨯ can register as freelancer                                           1.23s  
+  ⨯ can register as recruiter                                            2.46s  
+  ⨯ recruiter can create job posting                                     0.85s  
+
+   FAIL  Tests\Feature\TeamHub\ChatFeatureTest
+  ⨯ typing event is broadcast                                            0.23s  
+  ⨯ mark as read updates status                                          0.45s  
+
+   FAIL  Tests\Feature\TeamHub\MessagePaginationTest
+  ⨯ can fetch paginated messages                                         0.48s  
+
+   FAIL  Tests\Feature\TeamHubTest
+  ⨯ user can create team                                                 0.54s  
+  ⨯ regular user cannot create team                                      0.22s  
+  ⨯ admin can invite member                                              0.29s  
+  ⨯ user can accept invitation                                           0.34s  
+  ⨯ user can create channel                                              0.29s  
+  ⨯ user can send message                                                0.36s  
+
+   FAIL  Tests\Feature\WorkflowFileUploadTest
+  ⨯ can upload workflow with json file                                   0.19s  
+  ⨯ validates json file type                                             0.18s  
+  ⨯ can download file                                                    0.76s  
+
+   FAIL  Tests\Feature\WorkflowImportTest
+  ⨯ can import workflow with external id and metrics                     0.33s  
+  ✓ search workflows                                                     0.71s  
+  ✓ filter by category                                                   3.05s  
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\BlogSystemTest > public can view publish…  TypeError   
+  PHPUnit\Framework\Assert::assertCount(): Argument #2 ($haystack) must be of type Countable|Traversable|array, null given, called in /opt/lampp/htdocs/backend-auto-freelance/vendor/laravel/framework/src/Illuminate/Testing/AssertableJsonString.php on line 73
+
+  at tests/Feature/BlogSystemTest.php:125
+    121▕ 
+    122▕         // LIST
+    123▕         $response = $this->getJson('/api/blogs');
+    124▕         $response->assertStatus(200)
+  ➜ 125▕             ->assertJsonCount(1, 'data.data')
+    126▕             ->assertJsonFragment(['slug' => 'future-of-ai'])
+    127▕             ->assertJsonMissing(['slug' => 'secret-ai']);
+    128▕ 
+    129▕         // SHOW
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\BlogSystemTest > public can filter blogs…  TypeError   
+  PHPUnit\Framework\Assert::assertCount(): Argument #2 ($haystack) must be of type Countable|Traversable|array, null given, called in /opt/lampp/htdocs/backend-auto-freelance/vendor/laravel/framework/src/Illuminate/Testing/AssertableJsonString.php on line 73
+
+  at tests/Feature/BlogSystemTest.php:147
+    143▕         Blog::create(['category_id' => $cat2->id, 'title' => 'B2', 'slug' => 'b2', 'status' => 'published', 'published_at' => now()]);
+    144▕ 
+    145▕         $response = $this->getJson('/api/blogs?category=cat1');
+    146▕         $response->assertStatus(200)
+  ➜ 147▕             ->assertJsonCount(1, 'data.data')
+    148▕             ->assertJsonFragment(['slug' => 'b1'])
+    149▕             ->assertJsonMissing(['slug' => 'b2']);
+    150▕     }
+    151▕ }
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\CentralizedProjectTest > list all…  RoleDoesNotExist   
+  There is no role named `freelancer` for guard `web`.
+
+  at vendor/spatie/laravel-permission/src/Exceptions/RoleDoesNotExist.php:11
+      7▕ class RoleDoesNotExist extends InvalidArgumentException
+      8▕ {
+      9▕     public static function named(string $roleName, ?string $guardName)
+     10▕     {
+  ➜  11▕         return new static(__('There is no role named `:role` for guard `:guard`.', [
+     12▕             'role' => $roleName,
+     13▕             'guard' => $guardName,
+     14▕         ]));
+     15▕     }
+
+      [2m+8 vendor frames [22m
+  9   tests/Feature/CentralizedProjectTest.php:24
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\CentralizedProjectTest > create a…  RoleDoesNotExist   
+  There is no role named `freelancer` for guard `web`.
+
+  at vendor/spatie/laravel-permission/src/Exceptions/RoleDoesNotExist.php:11
+      7▕ class RoleDoesNotExist extends InvalidArgumentException
+      8▕ {
+      9▕     public static function named(string $roleName, ?string $guardName)
+     10▕     {
+  ➜  11▕         return new static(__('There is no role named `:role` for guard `:guard`.', [
+     12▕             'role' => $roleName,
+     13▕             'guard' => $guardName,
+     14▕         ]));
+     15▕     }
+
+      [2m+8 vendor frames [22m
+  9   tests/Feature/CentralizedProjectTest.php:24
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\CentralizedProjectTest > bid with…  RoleDoesNotExist   
+  There is no role named `freelancer` for guard `web`.
+
+  at vendor/spatie/laravel-permission/src/Exceptions/RoleDoesNotExist.php:11
+      7▕ class RoleDoesNotExist extends InvalidArgumentException
+      8▕ {
+      9▕     public static function named(string $roleName, ?string $guardName)
+     10▕     {
+  ➜  11▕         return new static(__('There is no role named `:role` for guard `:guard`.', [
+     12▕             'role' => $roleName,
+     13▕             'guard' => $guardName,
+     14▕         ]));
+     15▕     }
+
+      [2m+8 vendor frames [22m
+  9   tests/Feature/CentralizedProjectTest.php:24
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\CourseApiTest > admin can manage full seo payload      
+  Expected response status code [201] but received 422.
+Failed asserting that 422 is identical to 201.
+
+The following errors occurred during the last request:
+
+{
+    "message": "The og_image field must be an image. (and 1 more error)",
+    "errors": {
+        "og_image": [
+            "The og_image field must be an image.",
+            "The og_image field must be a file of type: jpeg, png, jpg, gif, svg, webp."
+        ]
+    }
+}
+
+  at tests/Feature/CourseApiTest.php:62
+     58▕         ];
+     59▕ 
+     60▕         $response = $this->actingAs($this->admin, 'api')->postJson('/api/admin/courses', $payload);
+     61▕ 
+  ➜  62▕         $response->assertStatus(201)
+     63▕                  ->assertJsonPath('data.seo.og_image', 'http://example.com/og.jpg')
+     64▕                  ->assertJsonPath('data.seo.canonical_url', 'http://example.com/canonical')
+     65▕                  ->assertJsonPath('data.seo.meta_tags', '<meta name="test">');
+     66▕     }
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\CourseApiTest > admin can update course                
+  Expected response status code [200] but received 405.
+Failed asserting that 405 is identical to 200.
+
+  at tests/Feature/CourseApiTest.php:91
+     87▕         ];
+     88▕ 
+     89▕         $response = $this->actingAs($this->admin, 'api')->putJson("/api/admin/courses/{$course->id}", $payload);
+     90▕ 
+  ➜  91▕         $response->assertStatus(200)
+     92▕                  ->assertJsonPath('data.title', 'New Title');
+     93▕ 
+     94▕         $this->assertDatabaseHas('courses', ['title' => 'New Title']);
+     95▕     }
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\FreelancerFullApiTest > list accounts                  
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/FreelancerFullApiTest.php:183
+    179▕     public function test_list_accounts()
+    180▕     {
+    181▕         $this->accountServiceMock->shouldReceive('listAccounts')->once()->andReturn([]);
+    182▕         $response = $this->actingAs($this->user, 'api')->getJson("/api/freelancer/freelancer/accounts");
+  ➜ 183▕         $response->assertStatus(200);
+    184▕     }
+    185▕ 
+    186▕     public function test_fetch_profile()
+    187▕     {
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\FreelancerFullApiTest > fetch profile                  
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/FreelancerFullApiTest.php:190
+    186▕     public function test_fetch_profile()
+    187▕     {
+    188▕         $this->accountServiceMock->shouldReceive('fetchProfile')->once()->andReturn([]);
+    189▕         $response = $this->actingAs($this->user, 'api')->getJson("/api/freelancer/freelancer/accounts/profile?uuid={$this->account->uuid}");
+  ➜ 190▕         $response->assertStatus(200);
+    191▕     }
+    192▕ 
+    193▕     public function test_search_directory()
+    194▕     {
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\FreelancerSyncTest > sync messages job fetches and…    
+  Failed asserting that a row in the table [freelancer_messages] matches the attributes {
+    "freelancer_thread_id": 2,
+    "freelancer_message_id": "5001",
+    "body": "Hello World"
+}.
+
+The table is empty.
+
+  at tests/Feature/FreelancerSyncTest.php:115
+    111▕ 
+    112▕         $job = new SyncFreelancerMessages($thread);
+    113▕         $job->handle($this->mockAuthService);
+    114▕ 
+  ➜ 115▕         $this->assertDatabaseHas('freelancer_messages', [
+    116▕             'freelancer_thread_id' => $thread->id,
+    117▕             'freelancer_message_id' => '5001',
+    118▕             'body' => 'Hello World'
+    119▕         ]);
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\FreelancerSyncTest > thr…  RelationNotFoundException   
+  Call to undefined relationship [account] on model [App\Models\FreelancerThread].
+
+  at vendor/laravel/framework/src/Illuminate/Database/Eloquent/RelationNotFoundException.php:35
+     31▕     public static function make($model, $relation, $type = null)
+     32▕     {
+     33▕         $class = get_class($model);
+     34▕ 
+  ➜  35▕         $instance = new static(
+     36▕             is_null($type)
+     37▕                 ? "Call to undefined relationship [{$relation}] on model [{$class}]."
+     38▕                 : "Call to undefined relationship [{$relation}] on model [{$class}] of type [{$type}].",
+     39▕         );
+
+      [2m+8 vendor frames [22m
+  9   app/Services/Freelancer/ThreadService.php:40
+  10  tests/Feature/FreelancerSyncTest.php:145
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ProjectManagementTest > project management flow        
+  Expected response status code [201] but received 405.
+Failed asserting that 405 is identical to 201.
+
+  at tests/Feature/ProjectManagementTest.php:35
+     31▕             'budget' => 5000,
+     32▕             'start_date' => now()->toDateString(),
+     33▕         ]);
+     34▕ 
+  ➜  35▕         $response->assertStatus(201)
+     36▕                  ->assertJsonPath('name', 'Test Project');
+     37▕ 
+     38▕         $projectId = $response->json('id');
+     39▕
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\RoleRegistrationTest > can register as freelancer      
+  Expected response status code [201] but received 405.
+Failed asserting that 405 is identical to 201.
+
+  at tests/Feature/RoleRegistrationTest.php:39
+     35▕             'password_confirmation' => 'password',
+     36▕             'role' => 'freelancer'
+     37▕         ]);
+     38▕ 
+  ➜  39▕         $response->assertStatus(201);
+     40▕         $this->assertDatabaseHas('users', ['email' => $email]);
+     41▕         
+     42▕         $user = User::where('email', $email)->first();
+     43▕         $this->assertTrue($user->hasRole('freelancer'));
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\RoleRegistrationTest > can register as recruiter       
+  Expected response status code [201] but received 405.
+Failed asserting that 405 is identical to 201.
+
+  at tests/Feature/RoleRegistrationTest.php:58
+     54▕             'password_confirmation' => 'password',
+     55▕             'role' => 'recruiter'
+     56▕         ]);
+     57▕ 
+  ➜  58▕         $response->assertStatus(201);
+     59▕         $user = User::where('email', $email)->first();
+     60▕         $this->assertTrue($user->hasRole('recruiter'));
+     61▕         $this->assertTrue($user->can('manage projects'));
+     62▕     }
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\RoleRegistrationTest > recruiter…   RoleDoesNotExist   
+  There is no role named `recruiter` for guard `web`.
+
+  at vendor/spatie/laravel-permission/src/Exceptions/RoleDoesNotExist.php:11
+      7▕ class RoleDoesNotExist extends InvalidArgumentException
+      8▕ {
+      9▕     public static function named(string $roleName, ?string $guardName)
+     10▕     {
+  ➜  11▕         return new static(__('There is no role named `:role` for guard `:guard`.', [
+     12▕             'role' => $roleName,
+     13▕             'guard' => $guardName,
+     14▕         ]));
+     15▕     }
+
+      [2m+7 vendor frames [22m
+  8   tests/Feature/RoleRegistrationTest.php:67
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\TeamHub\ChatFeatureTest > typing event is broadcast    
+  Expected response status code [200] but received 405.
+Failed asserting that 405 is identical to 200.
+
+  at tests/Feature/TeamHub/ChatFeatureTest.php:37
+     33▕         ]);
+     34▕ 
+     35▕         $this->actingAs($user)
+     36▕             ->postJson("/api/team-hub/channels/{$channel->uuid}/typing")
+  ➜  37▕             ->assertOk();
+     38▕ 
+     39▕         Event::assertDispatched(UserTyping::class);
+     40▕     }
+     41▕
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\TeamHub\ChatFeatureTest > mark as read updates stat…   
+  Expected response status code [200] but received 405.
+Failed asserting that 405 is identical to 200.
+
+  at tests/Feature/TeamHub/ChatFeatureTest.php:66
+     62▕         ]);
+     63▕ 
+     64▕         $this->actingAs($user)
+     65▕             ->postJson("/api/team-hub/channels/{$channel->uuid}/read", ['message_id' => $message->id])
+  ➜  66▕             ->assertOk();
+     67▕ 
+     68▕         $this->assertDatabaseHas('channel_read_status', [
+     69▕             'channel_id' => $channel->id,
+     70▕             'user_id' => $user->id,
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\TeamHub\MessagePaginationTest > can fetch paginated…   
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/TeamHub/MessagePaginationTest.php:72
+     68▕ 
+     69▕         // 1. Fetch first page (latest 50 messages)
+     70▕         $response = $this->getJson("/api/team-hub/channels/{$this->channel->uuid}/chat-messages");
+     71▕ 
+  ➜  72▕         $response->assertStatus(200);
+     73▕         
+     74▕         // Check structure
+     75▕         $response->assertJsonStructure([
+     76▕             'data',
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\TeamHubTest > user can create team                     
+  Expected response status code [201] but received 405.
+Failed asserting that 405 is identical to 201.
+
+  at tests/Feature/TeamHubTest.php:32
+     28▕         $response = $this->postJson('/api/team-hub/team', [
+     29▕             'name' => 'My Awesome Team',
+     30▕         ]);
+     31▕ 
+  ➜  32▕         $response->assertStatus(201)
+     33▕             ->assertJsonPath('name', 'My Awesome Team');
+     34▕ 
+     35▕         $this->assertDatabaseHas('teams', [
+     36▕             'name' => 'My Awesome Team',
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\TeamHubTest > regular user cannot create team          
+  Expected response status code [403] but received 405.
+Failed asserting that 405 is identical to 403.
+
+  at tests/Feature/TeamHubTest.php:55
+     51▕         $response = $this->postJson('/api/team-hub/team', [
+     52▕             'name' => 'My Awesome Team',
+     53▕         ]);
+     54▕ 
+  ➜  55▕         $response->assertStatus(403);
+     56▕     }
+     57▕ 
+     58▕     public function test_admin_can_invite_member()
+     59▕     {
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\TeamHubTest > admin can invite member                  
+  Expected response status code [200] but received 405.
+Failed asserting that 405 is identical to 200.
+
+  at tests/Feature/TeamHubTest.php:73
+     69▕             'email' => 'newmember@example.com',
+     70▕             'role' => 'member',
+     71▕         ]);
+     72▕ 
+  ➜  73▕         $response->assertStatus(200)
+     74▕             ->assertJsonStructure(['message', 'invitation', 'invitation_url']);
+     75▕ 
+     76▕         $this->assertDatabaseHas('team_invitations', [
+     77▕             'email' => 'newmember@example.com',
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\TeamHubTest > user can accept invitation               
+  Expected response status code [200] but received 405.
+Failed asserting that 405 is identical to 200.
+
+  at tests/Feature/TeamHubTest.php:105
+    101▕         $response = $this->postJson('/api/team-hub/team/join', [
+    102▕             'token' => 'valid-token',
+    103▕         ]);
+    104▕ 
+  ➜ 105▕         $response->assertStatus(200);
+    106▕ 
+    107▕         $this->assertEquals($team->id, $user->fresh()->team_id);
+    108▕         $this->assertEquals('accepted', $invitation->fresh()->status);
+    109▕     }
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\TeamHubTest > user can create channel                  
+  Expected response status code [201] but received 405.
+Failed asserting that 405 is identical to 201.
+
+  at tests/Feature/TeamHubTest.php:124
+    120▕             'name' => 'random',
+    121▕             'description' => 'Random stuff',
+    122▕         ]);
+    123▕ 
+  ➜ 124▕         $response->assertStatus(201)
+    125▕             ->assertJsonPath('name', 'random');
+    126▕             
+    127▕         $this->assertDatabaseHas('channels', [
+    128▕             'name' => 'random',
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\TeamHubTest > user can send message                    
+  Expected response status code [201] but received 405.
+Failed asserting that 405 is identical to 201.
+
+  at tests/Feature/TeamHubTest.php:153
+    149▕         $response = $this->postJson("/api/team-hub/channels/{$channelUuid}/chat-messages", [
+    150▕             'content' => 'Hello World',
+    151▕         ]);
+    152▕         
+  ➜ 153▕         $response->assertStatus(201);
+    154▕ 
+    155▕         $this->assertDatabaseHas('team_messages', [
+    156▕             'content' => 'Hello World',
+    157▕         ]);
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\WorkflowFileUploadTest > can uplo…  RoleDoesNotExist   
+  There is no role named `admin` for guard `web`.
+
+  at vendor/spatie/laravel-permission/src/Exceptions/RoleDoesNotExist.php:11
+      7▕ class RoleDoesNotExist extends InvalidArgumentException
+      8▕ {
+      9▕     public static function named(string $roleName, ?string $guardName)
+     10▕     {
+  ➜  11▕         return new static(__('There is no role named `:role` for guard `:guard`.', [
+     12▕             'role' => $roleName,
+     13▕             'guard' => $guardName,
+     14▕         ]));
+     15▕     }
+
+      [2m+7 vendor frames [22m
+  8   tests/Feature/WorkflowFileUploadTest.php:32
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\WorkflowFileUploadTest > validate…  RoleDoesNotExist   
+  There is no role named `admin` for guard `web`.
+
+  at vendor/spatie/laravel-permission/src/Exceptions/RoleDoesNotExist.php:11
+      7▕ class RoleDoesNotExist extends InvalidArgumentException
+      8▕ {
+      9▕     public static function named(string $roleName, ?string $guardName)
+     10▕     {
+  ➜  11▕         return new static(__('There is no role named `:role` for guard `:guard`.', [
+     12▕             'role' => $roleName,
+     13▕             'guard' => $guardName,
+     14▕         ]));
+     15▕     }
+
+      [2m+7 vendor frames [22m
+  8   tests/Feature/WorkflowFileUploadTest.php:72
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\WorkflowFileUploadTest > can down…  RoleDoesNotExist   
+  There is no role named `admin` for guard `web`.
+
+  at vendor/spatie/laravel-permission/src/Exceptions/RoleDoesNotExist.php:11
+      7▕ class RoleDoesNotExist extends InvalidArgumentException
+      8▕ {
+      9▕     public static function named(string $roleName, ?string $guardName)
+     10▕     {
+  ➜  11▕         return new static(__('There is no role named `:role` for guard `:guard`.', [
+     12▕             'role' => $roleName,
+     13▕             'guard' => $guardName,
+     14▕         ]));
+     15▕     }
+
+      [2m+7 vendor frames [22m
+  8   tests/Feature/WorkflowFileUploadTest.php:100
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\WorkflowImportTest > can import workflow with exter…   
+  Expected response status code [201] but received 405.
+Failed asserting that 405 is identical to 201.
+
+  at tests/Feature/WorkflowImportTest.php:75
+     71▕             'category_id' => $category->id,
+     72▕             'json_file' => $file
+     73▕         ]);
+     74▕ 
+  ➜  75▕         $response->assertStatus(201);
+     76▕         
+     77▕         $workflow = Workflow::where('external_id', '823lWldG0eG7Wp63')->first();
+     78▕         $this->assertNotNull($workflow);
+     79▕         $this->assertEquals(100, $workflow->views);
+
+
+  Tests:    28 failed, 65 passed (177 assertions)
+  Duration: 65.08s
+

@@ -80,12 +80,13 @@ Route::post('/ip/validate', [IpController::class, 'validateIp']);
 // Webhooks
 Route::post('webhook/freelancer', [WebhookController::class, 'handle']);
 Route::get('web/faqs', [PublicFaqController::class, 'index']);
-Route::middleware(['verify.app.key'])->group(function () {
-    Route::get('/workflow-library', [WorkflowLibraryController::class, 'index']);
-    Route::get('/blogs', [PublicBlogController::class, 'index']);
-    Route::get('/blogs/categories', [PublicBlogController::class, 'categories']);
-    Route::get('/workflow-category/{slug}', [WorkflowLibraryController::class, 'categoryWithWorkflows']);
+Route::get('/workflow-library', [WorkflowLibraryController::class, 'index']);
+Route::get('/blogs', [PublicBlogController::class, 'index']);
+Route::get('/blogs/categories', [PublicBlogController::class, 'categories']);
+Route::get('/workflow-category/{slug}', [WorkflowLibraryController::class, 'categoryWithWorkflows']);
 
+Route::middleware(['verify.app.key'])->group(function () {
+    // Other protected webhook/system routes if any
 });
 
     Route::get('/project/details', [FreelancerScraperController::class, 'scrape']);

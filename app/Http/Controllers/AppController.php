@@ -31,13 +31,17 @@ class AppController extends Controller
             $routeData = $this->getHomepageData();
         } elseif ($url === '/blogs') {
             $routeData = $this->getBlogsListData();
-        } elseif ($url === '/workflows') {
+        } elseif ($url === '/workflows' || $url === '/workflow-library' || $url === '/templates') {
             $routeData = $this->getWorkflowsListData();
         } elseif (preg_match('/^\/blogs\/([^\/]+)\/?$/', $url, $matches)) {
             $routeData = $this->getBlogData($matches[1]);
             if (empty($routeData)) $isNotFound = true;
         } elseif (preg_match('/^\/workflow\/([^\/]+)\/?$/', $url, $matches)) {
             $routeData = $this->getWorkflowData($matches[1]);
+            if (empty($routeData)) $isNotFound = true;
+        } elseif (preg_match('/^\/workflow-categories\/([^\/]+)\/?$/', $url, $matches)) {
+            $routeData = $this->getWorkflowsListData(); // Page fetches by query param usually, but SSR can provide list
+            // We could potentially filter here if we had getWorkflowCategoryListData($matches[1])
             if (empty($routeData)) $isNotFound = true;
         }
         

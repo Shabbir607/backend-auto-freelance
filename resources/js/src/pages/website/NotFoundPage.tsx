@@ -10,7 +10,7 @@ export default function NotFoundPage() {
         <div className="min-h-screen bg-[#020204] flex flex-col">
             <PublicNavbar />
             <main className="flex-grow flex items-center justify-center relative overflow-hidden">
-                <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-[0.03] pointer-events-none" />
+                <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: "url('/noise.svg')" }} />
                 <div className="relative z-10 text-center px-4">
                     <h1 className="text-9xl font-black text-transparent bg-clip-text bg-gradient-to-b from-indigo-500 to-indigo-900 opacity-20">404</h1>
                     <div className="absolute inset-0 flex flex-col items-center justify-center mt-8">

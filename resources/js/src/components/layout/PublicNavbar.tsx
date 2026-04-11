@@ -158,7 +158,7 @@ export function PublicNavbar() {
     <>
       <nav
         className={cn(
-          "fixed z-50 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]",
+          "fixed z-50 transition-all duration-500 ease-out",
           "md:top-5 md:inset-x-0 md:max-w-6xl md:mx-auto md:rounded-2xl",
           "top-0 inset-x-0 w-full border-b md:border",
           isScrolled || mobileMenuOpen

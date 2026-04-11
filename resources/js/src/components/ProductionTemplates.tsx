@@ -59,8 +59,9 @@ const gradientPool = [
 
 const getWorkflowVisuals = (id: string | number, index: number = 0) => {
   const safeId = id || index;
-  const Icon = iconPool[safeId % iconPool.length];
-  const gradient = gradientPool[safeId % gradientPool.length];
+  const safeIdNum = typeof safeId === 'string' ? parseInt(safeId, 10) : Number(safeId || 0);
+  const Icon = iconPool[safeIdNum % iconPool.length];
+  const gradient = gradientPool[safeIdNum % gradientPool.length];
   return { Icon, gradient };
 };
 
@@ -102,10 +103,14 @@ export const ProductionTemplates = ({
       try {
         setLoading(true);
         // Pass the page, perPage, searchQuery, and activeCategory to the API
-        const templatesRes = await workflowService.getWorkflowLibrary(1, 12, searchQuery, activeCategory);
+        const templatesRes = await workflowService.getWorkflowLibrary(1, 12, searchQuery, activeCategory as any);
 
         if (templatesRes?.data) {
-          setWorkflows(templatesRes.data);
+          // Robustly handle both standard and nested data structures
+          const workflowsArray = Array.isArray(templatesRes.data)
+            ? templatesRes.data
+            : (templatesRes.data as any).data || [];
+          setWorkflows(workflowsArray);
         } else {
           setWorkflows([]);
         }
@@ -223,7 +228,7 @@ export const ProductionTemplates = ({
                 {cat.title}
               </button>
             ))}
-            
+
             {hasMoreCategories && (
               <button
                 onClick={() => setShowAllCategories(!showAllCategories)}

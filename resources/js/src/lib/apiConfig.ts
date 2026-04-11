@@ -153,11 +153,14 @@ export async function apiRequest<T>(
     }
 
     // Standardize response format (Stop aggressive unwrapping)
-    const resultData = data;
+    // If the backend already returns the standard {success, data} format, use it directly
+    if (data && typeof data === 'object' && 'success' in data && 'data' in data) {
+      return data as ApiResponse<T>;
+    }
 
     return {
       success: true,
-      data: resultData as T,
+      data: data as T,
       message: data.message,
     };
   } catch (error) {

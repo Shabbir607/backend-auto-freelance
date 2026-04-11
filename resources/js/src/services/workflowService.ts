@@ -239,7 +239,7 @@ class WorkflowService {
     if (search) params.search = search;
     if (categoryId) params.category_id = categoryId;
 
-    const response = await apiRequest<any>(`/workflow-library${buildQueryString(params)}`);
+    const response = await apiRequest<any>(`/workflows${buildQueryString(params)}`);
     if (!response.success) throw new Error(response.message);
     return response.data;
   }
@@ -260,8 +260,8 @@ class WorkflowService {
     const response = await apiRequest<any>('/workflow-library/categories');
     if (!response.success) throw new Error(response.message);
     const result = response.data;
-    const arrayData = Array.isArray(result) ? result : (result?.data || []);
-    return { success: true, data: arrayData as WorkflowCategory[] };
+    const arrayData = (result as any).data || result;
+    return { success: true, data: (Array.isArray(arrayData) ? arrayData : []) as WorkflowCategory[] };
   }
 
   /**

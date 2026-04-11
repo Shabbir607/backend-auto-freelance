@@ -19,11 +19,24 @@ class SsrService
             // Proper file URI for Node.js import on Windows
             $bundleUrl = 'file:///' . str_replace(['\\', ' '], ['/', '%20'], $bundlePath);
             
-            // Create a temporary relay script that imports and runs the SSR bundle
-            $contextJson = json_encode($context);
+            $ssrDir = storage_path('app/ssr');
+            if (!is_dir($ssrDir)) {
+                @mkdir($ssrDir, 0755, true);
+            }
+
+            $requestId = md5($url . time() . uniqid());
+            $tempRelay = $ssrDir . '/relay_' . $requestId . '.mjs';
+            $tempContext = $ssrDir . '/context_' . $requestId . '.json';
+            
+            // Write context to a file instead of embedding it directly in the script,
+            // to prevent V8 parsing memory limits (AST Out Of Memory) on very large objects.
+            file_put_contents($tempContext, json_encode($context));
+
             $relayScript = <<<JS
 import render from '{$bundleUrl}';
-const context = {$contextJson};
+import fs from 'node:fs';
+
+const context = JSON.parse(fs.readFileSync('{$tempContext}', 'utf-8'));
 const url = '{$url}';
 try {
     const response = render(url, context);
@@ -33,7 +46,6 @@ try {
     process.exit(1);
 }
 JS;
-            $tempRelay = storage_path('app/ssr/relay_' . md5($url . time()) . '.mjs');
             file_put_contents($tempRelay, $relayScript);
 
             $command = [$nodePath, '--max-old-space-size=2048', $tempRelay];
@@ -43,6 +55,7 @@ JS;
             
             // Cleanup
             if (file_exists($tempRelay)) @unlink($tempRelay);
+            if (file_exists($tempContext)) @unlink($tempContext);
 
             if (!$process->isSuccessful()) {
                 throw new \Exception('Node SSR Failed: ' . $process->getErrorOutput());

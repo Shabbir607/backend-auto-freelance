@@ -102,10 +102,11 @@ export default function TemplatesShowcasePage() {
       const res = await workflowService.getWorkflowLibrary(currentPage, 12, searchQuery, categoryId as number, 'newest');
 
       if (res.data) {
-        setTemplates(prev => append ? [...prev, ...res.data] : res.data);
-        setTotalPages(res.last_page || 1);
-        setTotalWorkflows(res.total || 0);
-        setHasMore((res.current_page || currentPage) < (res.last_page || 1));
+        const workflowsArray = res.data.data || res.data;
+        setTemplates(prev => append ? [...prev, ...workflowsArray] : workflowsArray);
+        setTotalPages(res.data.last_page || 1);
+        setTotalWorkflows(res.data.total || 0);
+        setHasMore((res.data.current_page || currentPage) < (res.data.last_page || 1));
       } else if (!append) {
         setTemplates([]);
         setTotalWorkflows(0);
