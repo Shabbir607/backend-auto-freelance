@@ -2,18 +2,42 @@
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <sitemap>
     <loc>https://edgelancer.com/sitemap-pages.xml</loc>
-    <lastmod>2026-03-10</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>https://edgelancer.com/sitemap-workflow-categories.xml</loc>
-    <lastmod>2026-03-10</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>https://edgelancer.com/sitemap-blogs-1.xml</loc>
-    <lastmod>2026-03-10</lastmod>
+    <lastmod>2026-04-24</lastmod>
   </sitemap>
   <sitemap>
     <loc>https://edgelancer.com/sitemap-blog-categories.xml</loc>
-    <lastmod>2026-03-10</lastmod>
+    <lastmod>2026-04-24</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://edgelancer.com/sitemap-blogs-1.xml</loc>
+    <lastmod>2026-04-24</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://edgelancer.com/sitemap-blogs-2.xml</loc>
+    <lastmod>2026-04-24</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://edgelancer.com/sitemap-blogs-3.xml</loc>
+    <lastmod>2026-04-24</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://edgelancer.com/sitemap-workflow-categories.xml</loc>
+    <lastmod>2026-04-24</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://edgelancer.com/sitemap-workflows-1.xml</loc>
+    <lastmod>2026-04-24</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://edgelancer.com/sitemap-workflows-2.xml</loc>
+    <lastmod>2026-04-24</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://edgelancer.com/sitemap-workflows-3.xml</loc>
+    <lastmod>2026-04-24</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://edgelancer.com/sitemap-courses-1.xml</loc>
+    <lastmod>2026-04-24</lastmod>
   </sitemap>
 </sitemapindex>

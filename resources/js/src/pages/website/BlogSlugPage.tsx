@@ -33,16 +33,18 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { useSSRContext } from "@/contexts/SSRContext";
 
 export function BlogSlugPage() {
   const { slug } = useParams<{ slug: string }>();
 
-  const [blog, setBlog] = useState<Blog | null>(null);
-  const [seo, setSeo] = useState<BlogSeo | undefined>();
-  const [loading, setLoading] = useState(true);
+  const ssrData = useSSRContext();
+  const [blog, setBlog] = useState<Blog | null>(ssrData.blog || null);
+  const [seo, setSeo] = useState<BlogSeo | undefined>(ssrData.seo);
+  const [loading, setLoading] = useState(!ssrData.blog);
   const [error, setError] = useState<string>("");
-  const [relatedBlogs, setRelatedBlogs] = useState<Blog[]>([]);
-  const [relatedWorkflows, setRelatedWorkflows] = useState<any[]>([]);
+  const [relatedBlogs, setRelatedBlogs] = useState<Blog[]>(ssrData.relatedBlogs || []);
+  const [relatedWorkflows, setRelatedWorkflows] = useState<any[]>(ssrData.relatedWorkflows || []);
   const [failedRelatedBlogImages, setFailedRelatedBlogImages] = useState<Record<string, boolean>>({});
 
   // State for Share Feedback
@@ -56,6 +58,8 @@ export function BlogSlugPage() {
       if (result.success && result.data) {
         setBlog(result.data.blog);
         setSeo(result.data.seo);
+        if (result.data.relatedBlogs) setRelatedBlogs(result.data.relatedBlogs);
+        if (result.data.relatedWorkflows) setRelatedWorkflows(result.data.relatedWorkflows);
         setError("");
       } else {
         setError(result.message || "Article not found");

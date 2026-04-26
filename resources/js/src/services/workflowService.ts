@@ -278,8 +278,8 @@ class WorkflowService {
       success: true,
       data: payload,
       seo: payload?.seo || raw?.seo || null,
-      relatedWorkflows: raw?.related_workflows || payload?.related_workflows || [],
-      suggestedBlogs: raw?.suggested_blogs || raw?.related_blogs || payload?.suggested_blogs || []
+      relatedWorkflows: raw?.relatedWorkflows || payload?.relatedWorkflows || [],
+      suggestedBlogs: raw?.suggestedBlogs || payload?.suggestedBlogs || []
     };
   }
 

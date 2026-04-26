@@ -8,9 +8,12 @@ use App\Models\Workflow;
 use App\Models\WorkflowCategory;
 use App\Models\Blog;
 use Illuminate\Support\Facades\Cache;
+use App\Traits\HandlesRelatedContent;
 
 class AppController extends Controller
 {
+    use HandlesRelatedContent;
+
     public function __invoke(Request $request)
     {
         $url = $request->getPathInfo(); // Use path info instead of URI to exclude query strings
@@ -125,10 +128,9 @@ class AppController extends Controller
             ->take(3)
             ->get();
 
-        $relatedWorkflows = Workflow::where('category_id', $blog->category_id)
-            ->where('status', 'published')
-            ->take(4)
-            ->get();
+        $relatedWorkflows = $this->getWorkflowsRelatedToBlog($blog, 4);
+
+
 
         return [
             'blog' => $blog,
@@ -149,16 +151,12 @@ class AppController extends Controller
             return [];
         }
 
-        $relatedWorkflows = Workflow::where('category_id', $workflow->category_id)
-            ->where('id', '!=', $workflow->id)
-            ->where('status', 'published')
-            ->take(3)
-            ->get();
+        $relatedWorkflows = $this->getWorkflowsRelatedToWorkflow($workflow, 3);
 
-        $suggestedBlogs = Blog::where('category_id', $workflow->category_id)
-            ->where('status', 'published')
-            ->take(3)
-            ->get();
+
+        $suggestedBlogs = $this->getBlogsRelatedToWorkflow($workflow, 6);
+
+
 
         return [
             'workflow' => $workflow,

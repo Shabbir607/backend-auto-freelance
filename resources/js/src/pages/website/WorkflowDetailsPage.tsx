@@ -126,7 +126,7 @@ export default function WorkflowDetailsPage() {
     const [isShareOpen, setIsShareOpen] = useState(false);
     const [isFullscreen, setIsFullscreen] = useState(false);
     const [relatedWorkflows, setRelatedWorkflows] = useState<WorkflowType[]>(ssrData.relatedWorkflows || []);
-    const [relevantBlogs, setRelevantBlogs] = useState<any[]>(ssrData.relevantBlogs || []);
+    const [relevantBlogs, setRelevantBlogs] = useState<any[]>(ssrData.suggestedBlogs || ssrData.relevantBlogs || []);
 
     const [isClient, setIsClient] = useState(false);
     useEffect(() => {

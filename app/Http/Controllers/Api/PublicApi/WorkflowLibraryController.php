@@ -13,11 +13,12 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Blog;
-
-
+use App\Traits\HandlesRelatedContent;
 
 class WorkflowLibraryController extends Controller
 {
+    use HandlesRelatedContent;
+
   
 public function stats()
 {
@@ -220,22 +221,10 @@ public function categoryWithWorkflows(Request $request, $slug)
         // Extract keywords from title
         $keywords = explode(' ', strtolower($workflow->title));
 
-        // ✅ Relevant workflows (same category OR similar title)
-        $relatedWorkflows = Workflow::where('status', 'published')
-            ->where('id', '!=', $workflow->id)
-            ->where(function ($q) use ($workflow, $keywords) {
-                $q->where('category_id', $workflow->category_id);
+        // ✅ Relevant workflows (using smart matching)
+        $relatedWorkflows = $this->getWorkflowsRelatedToWorkflow($workflow, 6);
 
-                foreach ($keywords as $word) {
-                    if (strlen($word) > 3) {
-                        $q->orWhere('title', 'like', "%{$word}%");
-                    }
-                }
-            })
-            ->with(['category', 'integrations'])
-            ->orderBy('created_at', 'desc')
-            ->limit(6)
-            ->get();
+
 
         // ✅ Relevant categories (only categories having workflows)
         $relatedCategories = WorkflowCategory::where('is_active', true)
@@ -249,9 +238,9 @@ public function categoryWithWorkflows(Request $request, $slug)
 
         return response()->json([
             'success' => true,
-            'current_workflow' => $workflow,
-            'related_workflows' => $relatedWorkflows,
-            'related_categories' => $relatedCategories
+            'currentWorkflow' => $workflow,
+            'relatedWorkflows' => $relatedWorkflows,
+            'relatedCategories' => $relatedCategories
         ]);
     }
 
@@ -267,42 +256,9 @@ public function categoryWithWorkflows(Request $request, $slug)
                 ->where('status', 'published')
                 ->firstOrFail();
 
-            // Extract keywords from title
-            $title = strtolower($workflow->title);
-            $keywords = explode(' ', $title);
-            $filteredKeywords = array_filter($keywords, function($word) {
-                return strlen($word) > 3;
-            });
+            $blogs = $this->getBlogsRelatedToWorkflow($workflow, 6);
 
-            // If title contains "how to" or similar, use full title partially
-            $blogs = Blog::published()
-                ->with(['category', 'author:id,name,email'])
-                ->where(function ($q) use ($filteredKeywords, $workflow) {
-                    // Match category if possible
-                    // However, workflow categories might not match blog categories directly
-                    // So we prioritize title keywords
-                    foreach ($filteredKeywords as $word) {
-                        $q->orWhere('title', 'like', "%{$word}%");
-                        $q->orWhere('description', 'like', "%{$word}%");
-                    }
-                })
-                ->orderByDesc('is_featured')
-                ->orderByDesc('published_at')
-                ->limit(6)
-                ->get();
 
-            // Fallback if no relevant blogs found
-            if ($blogs->count() < 3) {
-                $fallbackBlogs = Blog::published()
-                    ->with(['category', 'author:id,name,email'])
-                    ->whereNotIn('id', $blogs->pluck('id'))
-                    ->orderByDesc('is_featured')
-                    ->orderByDesc('published_at')
-                    ->limit(6 - $blogs->count())
-                    ->get();
-                
-                $blogs = $blogs->concat($fallbackBlogs);
-            }
 
             return response()->json([
                 'success' => true,
@@ -371,60 +327,25 @@ public function categoryWithWorkflows(Request $request, $slug)
         $workflow->increment('total_views');
         $workflow->increment('recent_views');
 
-        // Fetch related workflows
-        $keywords = explode(' ', strtolower($workflow->title));
-        $relatedWorkflows = Workflow::where('status', 'published')
-            ->where('id', '!=', $workflow->id)
-            ->where(function ($q) use ($workflow, $keywords) {
-                $q->where('category_id', $workflow->category_id);
-                foreach ($keywords as $word) {
-                    if (strlen($word) > 3) {
-                        $q->orWhere('title', 'like', "%{$word}%");
-                    }
-                }
-            })
-            ->with(['category', 'integrations'])
-            ->orderBy('created_at', 'desc')
-            ->limit(6)
-            ->get();
+        // Fetch related workflows (using smart matching)
+        $relatedWorkflows = $this->getWorkflowsRelatedToWorkflow($workflow, 6);
 
-        // Fetch suggested blogs
-        $title = strtolower($workflow->title);
-        $blogKeywords = explode(' ', $title);
-        $filteredKeywords = array_filter($blogKeywords, function($word) {
-            return strlen($word) > 3;
-        });
+        
+        // Ensure category and integrations are loaded as expected by frontend
+        $relatedWorkflows->load(['category', 'integrations']);
 
-        $suggestedBlogs = Blog::where('status', 'published')
-            ->with(['category', 'author:id,name,email'])
-            ->where(function ($q) use ($filteredKeywords) {
-                foreach ($filteredKeywords as $word) {
-                    $q->orWhere('title', 'like', "%{$word}%");
-                    $q->orWhere('description', 'like', "%{$word}%");
-                }
-            })
-            ->orderByDesc('is_featured')
-            ->orderByDesc('published_at')
-            ->limit(6)
-            ->get();
 
-        if ($suggestedBlogs->count() < 3) {
-            $fallbackBlogs = Blog::where('status', 'published')
-                ->with(['category', 'author:id,name,email'])
-                ->whereNotIn('id', $suggestedBlogs->pluck('id'))
-                ->orderByDesc('is_featured')
-                ->orderByDesc('published_at')
-                ->limit(6 - $suggestedBlogs->count())
-                ->get();
-            $suggestedBlogs = $suggestedBlogs->concat($fallbackBlogs);
-        }
+        // Fetch suggested blogs (using smart matching)
+        $suggestedBlogs = $this->getBlogsRelatedToWorkflow($workflow, 6);
+
+
 
         return response()->json([
             'success' => true,
             'data' => $workflow,
             'seo' => $workflow->getSeoMetadata(),
-            'related_workflows' => $relatedWorkflows,
-            'suggested_blogs' => $suggestedBlogs
+            'relatedWorkflows' => $relatedWorkflows,
+            'suggestedBlogs' => $suggestedBlogs
         ]);
     }
 

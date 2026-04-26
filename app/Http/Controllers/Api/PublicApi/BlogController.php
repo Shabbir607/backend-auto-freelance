@@ -8,9 +8,12 @@ use App\Models\Workflow;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use App\Traits\HandlesRelatedContent;
 
 class BlogController extends Controller
 {
+    use HandlesRelatedContent;
+
     /**
      * Display a listing of the resource.
      */
@@ -86,11 +89,10 @@ class BlogController extends Controller
                 ->take(3)
                 ->get();
 
-            // Get related workflows (by category)
-            $relatedWorkflows = Workflow::where('category_id', $blog->category_id)
-                ->where('status', 'published')
-                ->take(4)
-                ->get();
+            // Get related workflows (by keywords)
+            $relatedWorkflows = $this->getWorkflowsRelatedToBlog($blog, 4);
+
+
 
             return response()->json([
                 'blog' => $blog,
@@ -147,6 +149,18 @@ class BlogController extends Controller
             ->where('status', 'published')
             ->take(6)
             ->get();
+        
+        // If not enough by category, we can improve this too, but for now let's keep consistency
+        if ($relatedBlogs->count() < 6) {
+             $filler = Blog::where('status', 'published')
+                ->where('id', '!=', $blog->id)
+                ->whereNotIn('id', $relatedBlogs->pluck('id'))
+                ->latest()
+                ->take(6 - $relatedBlogs->count())
+                ->get();
+            $relatedBlogs = $relatedBlogs->concat($filler);
+        }
+
 
         return response()->json([
             'success' => true,
@@ -161,10 +175,9 @@ class BlogController extends Controller
     {
         $blog = Blog::where('slug', $slug)->where('status', 'published')->firstOrFail();
 
-        $relatedWorkflows = Workflow::where('category_id', $blog->category_id)
-            ->where('status', 'published')
-            ->take(4)
-            ->get();
+        $relatedWorkflows = $this->getWorkflowsRelatedToBlog($blog, 4);
+
+
 
         return response()->json([
             'success' => true,

@@ -3,7 +3,7 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "build": "NODE_OPTIONS='--max-old-space-size=4096' vite build",
+        "build": "set \"NODE_OPTIONS=--max-old-space-size=4096\" && vite build",
         "dev": "vite"
     },
     "dependencies": {

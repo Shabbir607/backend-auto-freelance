@@ -9,10 +9,9 @@ use Illuminate\Support\Str;
 
 class PageController extends Controller
 {
-    public function show(Request $req)
+    public function show(Request $req, $slug = null)
     {
-        // ... (existing show implementation)
-        $originalSlug = $req->slug;
+        $originalSlug = $slug ?? $req->slug;
 
         if (!$originalSlug) {
             return response()->json([

@@ -408,13 +408,13 @@ export const blogService = {
   // Get related blogs
   getRelatedBlogs: async (slug: string): Promise<ApiResponse<Blog[]>> => {
     const response = await apiRequest<any>(`/blogs/${slug}/related`);
-    return { success: response.success, message: response.message, data: response.data?.data };
+    return { success: response.success, message: response.message, data: response.data };
   },
 
   // Get related workflows for a blog
   getRelatedWorkflows: async (slug: string): Promise<ApiResponse<any[]>> => {
     const response = await apiRequest<any>(`/blogs/${slug}/related-workflows`);
-    return { success: response.success, message: response.message, data: response.data?.data };
+    return { success: response.success, message: response.message, data: response.data };
   },
 };
 
