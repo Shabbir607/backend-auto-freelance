@@ -34,6 +34,7 @@ import {
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useSSRContext } from "@/contexts/SSRContext";
+import { SEOHelmet } from "@/components/SEO/SEOHelmet";
 
 export function BlogSlugPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -97,83 +98,8 @@ export function BlogSlugPage() {
     loadRelatedWorkflows();
   }, [slug]);
 
-  // SEO Effect: Apply blog-specific metadata to the head and inject structured data
-  useEffect(() => {
-    if (!blog) return;
+  // SEO and Structured Data is now handled by the <SEOHelmet /> component in the return.
 
-    const metaTitle = seo?.title || blog.meta_title || blog.title || "Blog Post - EdgeLancer";
-    const metaDesc = seo?.description || blog.meta_description || blog.description || "Read this article on EdgeLancer blog.";
-
-    const generateKeywords = (t: string, d: string) => {
-      const text = `${t} ${d}`.toLowerCase().replace(/[^a-z0-9 ]/g, '');
-      return [...new Set(text.split(/\s+/).filter(w => w.length > 3))].slice(0, 10).join(', ');
-    };
-
-    const metaKeywords = seo?.keywords || blog.meta_keywords || generateKeywords(metaTitle, metaDesc);
-    const ogImage = seo?.og_image || blog.image_url || "";
-
-    document.title = metaTitle;
-
-    const updateMeta = (name: string, content: string, attr: 'name' | 'property' = 'name') => {
-      if (!content) return;
-      let el = document.querySelector(`meta[${attr}="${name}"]`);
-      if (!el) {
-        el = document.createElement('meta');
-        el.setAttribute(attr, name);
-        document.head.appendChild(el);
-      }
-      el.setAttribute('content', content);
-    };
-
-    updateMeta('description', metaDesc);
-    updateMeta('keywords', metaKeywords);
-    updateMeta('og:title', metaTitle, 'property');
-    updateMeta('og:description', metaDesc, 'property');
-    updateMeta('og:image', ogImage, 'property');
-    updateMeta('twitter:title', metaTitle);
-    updateMeta('twitter:description', metaDesc);
-    updateMeta('twitter:image', ogImage);
-
-    const existingScript = document.getElementById('blog-json-ld');
-    if (existingScript) existingScript.remove();
-
-    const script = document.createElement('script');
-    script.type = 'application/ld+json';
-    script.id = 'blog-json-ld';
-
-    if (seo?.structured_data) {
-      script.text = JSON.stringify(seo.structured_data);
-    } else {
-      const fallbackData = {
-        "@context": "https://schema.org",
-        "@type": "BlogPosting",
-        "headline": blog.title,
-        "description": metaDesc,
-        "image": ogImage ? [ogImage] : [],
-        "datePublished": blog.published_at || blog.created_at || new Date().toISOString(),
-        "dateModified": blog.updated_at || blog.published_at || blog.created_at || new Date().toISOString(),
-        "author": {
-          "@type": "Person",
-          "name": blog.author?.name || "EdgeLancer Team"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "EdgeLancer",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://edgelancer.com/logo.png"
-          }
-        }
-      };
-      script.text = JSON.stringify(fallbackData);
-    }
-    document.head.appendChild(script);
-
-    return () => {
-      const existingScript = document.getElementById('blog-json-ld');
-      if (existingScript) existingScript.remove();
-    };
-  }, [blog, seo]);
 
   const handleShare = async () => {
     if (!blog) return;
@@ -218,6 +144,20 @@ export function BlogSlugPage() {
 
   return (
     <PublicNavbarLayout className="bg-[#030303] selection:bg-indigo-500/30 selection:text-indigo-200">
+      {blog && (
+        <SEOHelmet
+          title={seo?.title || blog.title}
+          description={seo?.description || blog.description}
+          keywords={seo?.keywords || blog.meta_keywords}
+          ogImage={seo?.og_image || blog.image_url || undefined}
+          ogType="article"
+          publishedTime={blog.published_at}
+          modifiedTime={blog.updated_at}
+          structuredData={seo?.structured_data}
+          metaTags={seo?.meta_tags}
+          robots={seo?.robots}
+        />
+      )}
       {/* Premium Ambient Background Glow */}
       <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
         <div className="absolute top-[-15%] left-[-10%] w-[600px] h-[600px] bg-indigo-900/10 rounded-full blur-[120px] opacity-70" />

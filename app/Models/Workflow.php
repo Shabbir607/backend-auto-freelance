@@ -39,6 +39,7 @@ class Workflow extends Model
         'meta_keywords',
         'canonical_url',
         'og_image',
+        'content',
     ];
 
     protected $casts = [

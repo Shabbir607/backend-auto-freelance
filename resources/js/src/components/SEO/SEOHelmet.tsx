@@ -56,7 +56,11 @@ export const SEOHelmet: React.FC<SEOHelmetProps> = ({
     robots = 'index, follow'
 }) => {
     const pageUrl = useMemo(() => sanitizeUrl(url || (typeof window !== 'undefined' ? window.location.href : '')), [url]);
-    const canonicalUrl = useMemo(() => sanitizeUrl(canonical || pageUrl), [canonical, pageUrl]);
+    const canonicalUrl = useMemo(() => {
+        if (canonical) return sanitizeUrl(canonical);
+        // Default canonical URL should strip query parameters and hashes to prevent duplicate indexing issues
+        return sanitizeUrl(pageUrl.split('?')[0].split('#')[0]);
+    }, [canonical, pageUrl]);
     const finalOgImage = useMemo(() => sanitizeUrl(ogImage || DEFAULT_OG_IMAGE), [ogImage]);
     const finalRobots = useMemo(() => {
         // If we are on a preview/test domain, force noindex

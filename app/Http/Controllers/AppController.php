@@ -8,6 +8,7 @@ use App\Models\Workflow;
 use App\Models\WorkflowCategory;
 use App\Models\Blog;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 use App\Traits\HandlesRelatedContent;
 
 class AppController extends Controller
@@ -19,7 +20,7 @@ class AppController extends Controller
         $url = $request->getPathInfo(); // Use path info instead of URI to exclude query strings
         $normalizedPath = ltrim($url, '/');
         if ($normalizedPath === '') $normalizedPath = 'home';
-        \Log::info("SSR Normalized Path: [" . $normalizedPath . "]");
+        Log::info("SSR Normalized Path: [" . $normalizedPath . "]");
         
         $context = [];
         $seoData = $this->getSeoData($normalizedPath);
@@ -46,6 +47,33 @@ class AppController extends Controller
             $routeData = $this->getWorkflowsListData(); // Page fetches by query param usually, but SSR can provide list
             // We could potentially filter here if we had getWorkflowCategoryListData($matches[1])
             if (empty($routeData)) $isNotFound = true;
+        } else {
+            // Check if the URL matches any other valid frontend routes
+            // If not, it's a true 404 (prevents Soft 404s for junk URLs like /wp-admin, /random-path)
+            $validFrontendRoutes = [
+                '/^\/login\/?$/',
+                '/^\/signup\/?$/',
+                '/^\/contact\/?$/',
+                '/^\/sitemap\/?$/',
+                '/^\/courses(\/.*)?$/',
+                '/^\/blog-categories\/[^\/]+\/?$/',
+                '/^\/workflow\/?$/',
+                '/^\/interview\/[^\/]+\/?$/',
+                '/^\/app(\/.*)?$/',
+                '/^\/superadmin(\/.*)?$/',
+            ];
+
+            $isValidRoute = false;
+            foreach ($validFrontendRoutes as $pattern) {
+                if (preg_match($pattern, $url)) {
+                    $isValidRoute = true;
+                    break;
+                }
+            }
+
+            if (!$isValidRoute) {
+                $isNotFound = true;
+            }
         }
         
         // Merge route data into context while preserving the seo key
@@ -67,10 +95,22 @@ class AppController extends Controller
             }
         }
 
+        // Build canonical & og:image for the Blade fallback (when SSR head is empty)
+        $origin = rtrim(config('app.frontend_url') ?? 'https://edgelancer.com', '/');
+        $seoCtx = $context['seo'] ?? [];
+        $fallbackCanonical = $origin . '/' . ltrim($request->getPathInfo(), '/');
+        $fallbackCanonical = rtrim($fallbackCanonical, '/'); // clean trailing slash
+        $canonical = $seoCtx['canonical'] ?? $fallbackCanonical;
+        $canonical = preg_replace('/https?:\/\/localhost(:\d+)?/', $origin, $canonical);
+        $ogImage   = $seoCtx['og_image']  ?? "{$origin}/og-image.png";
+        $ogImage   = preg_replace('/https?:\/\/localhost(:\d+)?/', $origin, $ogImage);
+
         return response(view('app', [
-            'ssrHtml' => $ssrHtml,
-            'ssrHead' => $ssrHead,
-            'ssrData' => $context
+            'ssrHtml'   => $ssrHtml,
+            'ssrHead'   => $ssrHead,
+            'ssrData'   => $context,
+            'canonical' => $canonical,
+            'ogImage'   => $ogImage,
         ]), $isNotFound ? 404 : 200);
     }
 

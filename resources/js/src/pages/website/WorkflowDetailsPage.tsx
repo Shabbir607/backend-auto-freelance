@@ -324,6 +324,14 @@ export default function WorkflowDetailsPage() {
                             Back to Library
                         </button>
 
+                        <nav className="flex items-center gap-2 text-xs font-medium text-slate-500 mb-6 uppercase tracking-wider">
+                            <Link to="/" className="hover:text-purple-400 transition-colors">Home</Link>
+                            <ChevronRight className="w-3 h-3" />
+                            <Link to="/workflows" className="hover:text-purple-400 transition-colors">Workflows</Link>
+                            <ChevronRight className="w-3 h-3" />
+                            <span className="text-slate-300 truncate max-w-[200px] md:max-w-none">{workflow.title}</span>
+                        </nav>
+
                         <div className="flex flex-col lg:flex-row items-start justify-between gap-8">
                             <div className="flex-1">
                                 <div className="flex items-center gap-5 mb-4">
@@ -351,9 +359,16 @@ export default function WorkflowDetailsPage() {
                                         </div>
                                     </div>
                                 </div>
-                                <p className="text-slate-400 text-lg leading-relaxed max-w-3xl border-l-2 border-purple-500/30 pl-4">
-                                    {workflow.description}
-                                </p>
+                                {workflow.content ? (
+                                    <div 
+                                        className="prose prose-invert prose-slate max-w-4xl mt-8 prose-headings:text-white prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6 prose-p:text-slate-400 prose-p:leading-relaxed prose-li:text-slate-400 prose-strong:text-purple-400 docs-rendered-content"
+                                        dangerouslySetInnerHTML={{ __html: workflow.content }}
+                                    />
+                                ) : (
+                                    <p className="text-slate-400 text-lg leading-relaxed max-w-3xl border-l-2 border-purple-500/30 pl-4">
+                                        {workflow.description}
+                                    </p>
+                                )}
                             </div>
 
                             <div className="flex items-center gap-3 shrink-0">

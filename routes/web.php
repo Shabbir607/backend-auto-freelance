@@ -43,6 +43,11 @@ Route::get('/llms.txt', function () {
     return response($content, 200, ['Content-Type' => 'text/plain']);
 });
 
+// SEO Redirects
+Route::get('/workflow/organize-email-attachments-into-google-drive-folders-by-company-with-gmail-sheets-file-management', function () {
+    return redirect('/workflow/organize-email-attachments-google-drive-gmail/', 301);
+});
+
 // Catch-all route for the React SPA with SSR
 Route::get('/', AppController::class);
 Route::get('/{any}', AppController::class)->where('any', '^(?!api|storage|telescope).*$');

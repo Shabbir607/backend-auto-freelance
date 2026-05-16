@@ -7,25 +7,39 @@
     @if(!empty($ssrHead))
         {!! $ssrHead !!}
     @else
-        <title>{{ $ssrData['blog']['title'] ?? 'EdgeLancer – n8n Workflow Automation Templates & AI Agents' }}</title>
+        @php
+            $seo = $ssrData['seo'] ?? $ssrData['blog'] ?? null;
+            $title = $seo['title'] ?? 'EdgeLancer – n8n Workflow Automation Templates & AI Agents';
+            $description = $seo['description'] ?? 'Download ready-to-use n8n workflow automation templates. Connect apps, automate tasks, and build powerful AI agents with EdgeLancer.';
+            $type = !empty($ssrData['blog']) ? 'article' : 'website';
+            // Use variables passed from controller with fallbacks
+            $safeCanonical = $canonical ?? url()->current();
+            $safeImage = $ogImage ?? url('/og-image.png');
+        @endphp
+        <title>{{ $title }}</title>
         <!-- Metadata -->
-        <meta name="title" content="{{ $ssrData['blog']['title'] ?? 'EdgeLancer – n8n Workflow Automation Templates & AI Agents' }}">
-        <meta name="description" content="{{ $ssrData['blog']['description'] ?? 'Download ready-to-use n8n workflow automation templates. Connect apps, automate tasks, and build powerful AI agents with EdgeLancer.' }}">
+        <meta name="title" content="{{ $title }}">
+        <meta name="description" content="{{ $description }}">
+        <link rel="canonical" href="{{ $safeCanonical }}">
         
         <!-- OpenGraph -->
-        <meta property="og:type" content="{{ !empty($ssrData['blog']) ? 'article' : 'website' }}">
-        <meta property="og:url" content="{{ url()->current() }}">
-        <meta property="og:title" content="{{ $ssrData['blog']['title'] ?? 'EdgeLancer – n8n Workflow Automation Templates & AI Agents' }}">
-        <meta property="og:description" content="{{ $ssrData['blog']['description'] ?? 'Discover powerful n8n automation templates and AI workflows to automate your business processes.' }}">
-        <meta property="og:image" content="{{ $ssrData['blog']['image_url'] ?? url('/og-image.png') }}">
+        <meta property="og:type" content="{{ $type }}">
+        <meta property="og:url" content="{{ $safeCanonical }}">
+        <meta property="og:title" content="{{ $title }}">
+        <meta property="og:description" content="{{ $description }}">
+        <meta property="og:image" content="{{ $safeImage }}">
 
         <!-- Twitter -->
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:site" content="@edgelancer">
-        <meta name="twitter:title" content="{{ $ssrData['blog']['title'] ?? 'EdgeLancer – Automation Templates & AI Agents' }}">
-        <meta name="twitter:description" content="{{ $ssrData['blog']['description'] ?? 'Download ready-to-use n8n workflow automation templates and AI agents.' }}">
-        <meta name="twitter:image" content="{{ $ssrData['blog']['image_url'] ?? url('/og-image.png') }}">
+        <meta name="twitter:title" content="{{ $title }}">
+        <meta name="twitter:description" content="{{ $description }}">
+        <meta name="twitter:image" content="{{ $safeImage }}">
     @endif
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png">
+
     @if(str_contains(request()->getHost(), 'hstgr.cloud') || str_contains(request()->getHost(), 'srv1381478'))
         <meta name="robots" content="noindex, follow">
     @endif

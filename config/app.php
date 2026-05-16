@@ -56,6 +56,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Frontend URL
+    |--------------------------------------------------------------------------
+    |
+    | The public-facing URL of the frontend application. Used to generate
+    | canonical links, OG image URLs, and structured data in SSR.
+    | Set FRONTEND_URL in your .env file (e.g. https://edgelancer.com).
+    |
+    */
+
+    'frontend_url' => env('FRONTEND_URL', 'https://edgelancer.com'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Timezone
     |--------------------------------------------------------------------------
     |

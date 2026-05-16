@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { memo, useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
+import { useSSRContext } from '@/contexts/SSRContext';
 
 interface BlogCategory {
     id: number;
@@ -103,17 +104,18 @@ export function BlogPage({ categorySlug }: { categorySlug?: string }) {
         defaultDescription: 'Read the latest articles, tutorials, and insights about workflow automation and AI.'
     });
 
+    const ssrData = useSSRContext();
     const [searchParams] = useSearchParams();
-    const [blogs, setBlogs] = useState<Blog[]>([]);
-    const [categories, setCategories] = useState<BlogCategory[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [categoriesLoading, setCategoriesLoading] = useState(true);
+    const [blogs, setBlogs] = useState<Blog[]>(ssrData?.blogs?.data || ssrData?.blogs || []);
+    const [categories, setCategories] = useState<BlogCategory[]>(ssrData?.categories || []);
+    const [loading, setLoading] = useState(!ssrData?.blogs);
+    const [categoriesLoading, setCategoriesLoading] = useState(!ssrData?.categories);
     const [searchQuery, setSearchQuery] = useState('');
     const [activeCategory, setActiveCategory] = useState<string>(categorySlug || searchParams.get('category') || 'all');
-    const [page, setPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(1);
-    const [totalBlogs, setTotalBlogs] = useState(0);
-    const [globalTotal, setGlobalTotal] = useState(0);
+    const [page, setPage] = useState(ssrData?.blogs?.current_page || 1);
+    const [totalPages, setTotalPages] = useState(ssrData?.blogs?.last_page || 1);
+    const [totalBlogs, setTotalBlogs] = useState(ssrData?.blogs?.total || 0);
+    const [globalTotal, setGlobalTotal] = useState(ssrData?.blogs?.total || 0);
 
     useEffect(() => {
         setActiveCategory(categorySlug || searchParams.get('category') || 'all');
@@ -310,7 +312,7 @@ export function BlogPage({ categorySlug }: { categorySlug?: string }) {
                                         variant="outline"
                                         className="border-white/20 text-white hover:bg-white/5"
                                         disabled={page === 1}
-                                        onClick={() => setPage(p => Math.max(1, p - 1))}
+                                        onClick={() => setPage((p: number) => Math.max(1, p - 1))}
                                     >
                                         Previous
                                     </Button>
@@ -321,7 +323,7 @@ export function BlogPage({ categorySlug }: { categorySlug?: string }) {
                                         variant="outline"
                                         className="border-white/20 text-white hover:bg-white/5"
                                         disabled={page >= totalPages}
-                                        onClick={() => setPage(p => p + 1)}
+                                        onClick={() => setPage((p: number) => p + 1)}
                                     >
                                         Next
                                     </Button>

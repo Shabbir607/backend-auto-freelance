@@ -1180,7 +1180,7 @@ const useAppStore = create((set, get) => ({
   }
 }));
 const SESSION_STORAGE_KEY = "nexus_session";
-const API_BASE_URL$1 = "http://localhost:8000/api";
+const API_BASE_URL$1 = "/api";
 const AuthContext = reactExports.createContext(void 0);
 function AuthProvider({ children }) {
   const [user, setUser] = reactExports.useState(null);
@@ -1230,7 +1230,7 @@ function AuthProvider({ children }) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-app-key": "739f77912fa0ca22538ad067e284545d5cd541a7c13cacebb5e3e4a8fdec9c8"
+          "x-app-key": ""
         },
         body: JSON.stringify({ email, password })
       });
@@ -1240,7 +1240,7 @@ function AuthProvider({ children }) {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "x-app-key": "739f77912fa0ca22538ad067e284545d5cd541a7c13cacebb5e3e4a8fdec9c8"
+            "x-app-key": ""
           },
           body: JSON.stringify({ email, password })
         });
@@ -1292,7 +1292,7 @@ function AuthProvider({ children }) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-app-key": "739f77912fa0ca22538ad067e284545d5cd541a7c13cacebb5e3e4a8fdec9c8"
+          "x-app-key": ""
         },
         body: JSON.stringify({ name, email, password, password_confirmation: passwordConfirmation })
       });
@@ -1339,7 +1339,7 @@ function AuthProvider({ children }) {
           headers: {
             "Content-Type": "application/json",
             "Authorization": `Bearer ${token}`,
-            "x-app-key": "739f77912fa0ca22538ad067e284545d5cd541a7c13cacebb5e3e4a8fdec9c8"
+            "x-app-key": ""
           }
         }).catch(() => {
         });
@@ -1401,7 +1401,7 @@ function ProtectedRoute({ allowedRoles }) {
   }
   return /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Outlet, {});
 }
-const API_BASE_URL = "http://localhost:8000/api";
+const API_BASE_URL = "/api";
 const memoryCache = /* @__PURE__ */ new Map();
 async function serverFetch(endpoint, options = {}) {
   const url = endpoint.startsWith("http") ? endpoint : `${API_BASE_URL}${endpoint}`;
@@ -1410,10 +1410,6 @@ async function serverFetch(endpoint, options = {}) {
     "Content-Type": "application/json",
     "Accept": "application/json"
   };
-  const appKey = "739f77912fa0ca22538ad067e284545d5cd541a7c13cacebb5e3e4a8fdec9c8";
-  {
-    headers["X-App-Key"] = appKey;
-  }
   try {
     const response = await fetch(url, { headers });
     if (!response.ok) {
@@ -1455,7 +1451,7 @@ function cn(...inputs) {
   return twMerge(clsx(inputs));
 }
 const API_CONFIG = {
-  BASE_URL: "http://localhost:8000/api",
+  BASE_URL: "/api",
   SESSION_KEY: "nexus_session",
   DEFAULT_PER_PAGE: 15,
   MAX_PER_PAGE: 100,
@@ -1488,10 +1484,6 @@ const getAuthHeaders = (includeContentType = true) => {
   }
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
-  }
-  const appKey = "739f77912fa0ca22538ad067e284545d5cd541a7c13cacebb5e3e4a8fdec9c8";
-  {
-    headers["X-App-Key"] = appKey;
   }
   return headers;
 };
@@ -1861,12 +1853,12 @@ const blogService = {
   // Get related blogs
   getRelatedBlogs: async (slug) => {
     const response = await apiRequest(`/blogs/${slug}/related`);
-    return { success: response.success, message: response.message, data: response.data?.data };
+    return { success: response.success, message: response.message, data: response.data };
   },
   // Get related workflows for a blog
   getRelatedWorkflows: async (slug) => {
     const response = await apiRequest(`/blogs/${slug}/related-workflows`);
-    return { success: response.success, message: response.message, data: response.data?.data };
+    return { success: response.success, message: response.message, data: response.data };
   }
 };
 class WorkflowService {
@@ -1997,8 +1989,8 @@ class WorkflowService {
       success: true,
       data: payload,
       seo: payload?.seo || raw?.seo || null,
-      relatedWorkflows: raw?.related_workflows || payload?.related_workflows || [],
-      suggestedBlogs: raw?.suggested_blogs || raw?.related_blogs || payload?.suggested_blogs || []
+      relatedWorkflows: raw?.relatedWorkflows || payload?.relatedWorkflows || [],
+      suggestedBlogs: raw?.suggestedBlogs || payload?.suggestedBlogs || []
     };
   }
   /**
@@ -2010,7 +2002,7 @@ class WorkflowService {
         console.log(`Fetching from json_file_path: ${jsonFilePath}`);
         const response = await fetch(jsonFilePath, {
           headers: {
-            "x-app-key": "739f77912fa0ca22538ad067e284545d5cd541a7c13cacebb5e3e4a8fdec9c8"
+            "x-app-key": ""
           }
         });
         if (response.ok) {
@@ -2686,7 +2678,7 @@ const ProductionTemplates = ({
         setLoading(true);
         const templatesRes = await workflowService.getWorkflowLibrary(1, 12, searchQuery, activeCategory);
         if (templatesRes?.data) {
-          const workflowsArray = templatesRes.data.data || templatesRes.data;
+          const workflowsArray = Array.isArray(templatesRes.data) ? templatesRes.data : templatesRes.data.data || [];
           setWorkflows(workflowsArray);
         } else {
           setWorkflows([]);
@@ -4093,17 +4085,18 @@ function BlogPage({ categorySlug }) {
     defaultTitle: "Blog - EdgeLancer",
     defaultDescription: "Read the latest articles, tutorials, and insights about workflow automation and AI."
   });
+  const ssrData = useSSRContext();
   const [searchParams] = distExports.useSearchParams();
-  const [blogs, setBlogs] = reactExports.useState([]);
-  const [categories, setCategories] = reactExports.useState([]);
-  const [loading, setLoading] = reactExports.useState(true);
-  const [categoriesLoading, setCategoriesLoading] = reactExports.useState(true);
+  const [blogs, setBlogs] = reactExports.useState(ssrData?.blogs?.data || ssrData?.blogs || []);
+  const [categories, setCategories] = reactExports.useState(ssrData?.categories || []);
+  const [loading, setLoading] = reactExports.useState(!ssrData?.blogs);
+  const [categoriesLoading, setCategoriesLoading] = reactExports.useState(!ssrData?.categories);
   const [searchQuery, setSearchQuery] = reactExports.useState("");
   const [activeCategory, setActiveCategory] = reactExports.useState(categorySlug || searchParams.get("category") || "all");
-  const [page, setPage] = reactExports.useState(1);
-  const [totalPages, setTotalPages] = reactExports.useState(1);
-  const [totalBlogs, setTotalBlogs] = reactExports.useState(0);
-  const [globalTotal, setGlobalTotal] = reactExports.useState(0);
+  const [page, setPage] = reactExports.useState(ssrData?.blogs?.current_page || 1);
+  const [totalPages, setTotalPages] = reactExports.useState(ssrData?.blogs?.last_page || 1);
+  const [totalBlogs, setTotalBlogs] = reactExports.useState(ssrData?.blogs?.total || 0);
+  const [globalTotal, setGlobalTotal] = reactExports.useState(ssrData?.blogs?.total || 0);
   reactExports.useEffect(() => {
     setActiveCategory(categorySlug || searchParams.get("category") || "all");
   }, [searchParams, categorySlug]);
@@ -4287,12 +4280,13 @@ function BlogPage({ categorySlug }) {
 }
 function BlogSlugPage() {
   const { slug } = distExports.useParams();
-  const [blog, setBlog] = reactExports.useState(null);
-  const [seo, setSeo] = reactExports.useState();
-  const [loading, setLoading] = reactExports.useState(true);
+  const ssrData = useSSRContext();
+  const [blog, setBlog] = reactExports.useState(ssrData.blog || null);
+  const [seo, setSeo] = reactExports.useState(ssrData.seo);
+  const [loading, setLoading] = reactExports.useState(!ssrData.blog);
   const [error, setError] = reactExports.useState("");
-  const [relatedBlogs, setRelatedBlogs] = reactExports.useState([]);
-  const [relatedWorkflows, setRelatedWorkflows] = reactExports.useState([]);
+  const [relatedBlogs, setRelatedBlogs] = reactExports.useState(ssrData.relatedBlogs || []);
+  const [relatedWorkflows, setRelatedWorkflows] = reactExports.useState(ssrData.relatedWorkflows || []);
   const [failedRelatedBlogImages, setFailedRelatedBlogImages] = reactExports.useState({});
   const [isCopied, setIsCopied] = reactExports.useState(false);
   reactExports.useEffect(() => {
@@ -4303,6 +4297,8 @@ function BlogSlugPage() {
       if (result.success && result.data) {
         setBlog(result.data.blog);
         setSeo(result.data.seo);
+        if (result.data.relatedBlogs) setRelatedBlogs(result.data.relatedBlogs);
+        if (result.data.relatedWorkflows) setRelatedWorkflows(result.data.relatedWorkflows);
         setError("");
       } else {
         setError(result.message || "Article not found");
@@ -4336,72 +4332,6 @@ function BlogSlugPage() {
     loadRelated();
     loadRelatedWorkflows();
   }, [slug]);
-  reactExports.useEffect(() => {
-    if (!blog) return;
-    const metaTitle = seo?.title || blog.meta_title || blog.title || "Blog Post - EdgeLancer";
-    const metaDesc = seo?.description || blog.meta_description || blog.description || "Read this article on EdgeLancer blog.";
-    const generateKeywords = (t, d) => {
-      const text = `${t} ${d}`.toLowerCase().replace(/[^a-z0-9 ]/g, "");
-      return [...new Set(text.split(/\s+/).filter((w) => w.length > 3))].slice(0, 10).join(", ");
-    };
-    const metaKeywords = seo?.keywords || blog.meta_keywords || generateKeywords(metaTitle, metaDesc);
-    const ogImage = seo?.og_image || blog.image_url || "";
-    document.title = metaTitle;
-    const updateMeta = (name, content, attr = "name") => {
-      if (!content) return;
-      let el = document.querySelector(`meta[${attr}="${name}"]`);
-      if (!el) {
-        el = document.createElement("meta");
-        el.setAttribute(attr, name);
-        document.head.appendChild(el);
-      }
-      el.setAttribute("content", content);
-    };
-    updateMeta("description", metaDesc);
-    updateMeta("keywords", metaKeywords);
-    updateMeta("og:title", metaTitle, "property");
-    updateMeta("og:description", metaDesc, "property");
-    updateMeta("og:image", ogImage, "property");
-    updateMeta("twitter:title", metaTitle);
-    updateMeta("twitter:description", metaDesc);
-    updateMeta("twitter:image", ogImage);
-    const existingScript = document.getElementById("blog-json-ld");
-    if (existingScript) existingScript.remove();
-    const script = document.createElement("script");
-    script.type = "application/ld+json";
-    script.id = "blog-json-ld";
-    if (seo?.structured_data) {
-      script.text = JSON.stringify(seo.structured_data);
-    } else {
-      const fallbackData = {
-        "@context": "https://schema.org",
-        "@type": "BlogPosting",
-        "headline": blog.title,
-        "description": metaDesc,
-        "image": ogImage ? [ogImage] : [],
-        "datePublished": blog.published_at || blog.created_at || (/* @__PURE__ */ new Date()).toISOString(),
-        "dateModified": blog.updated_at || blog.published_at || blog.created_at || (/* @__PURE__ */ new Date()).toISOString(),
-        "author": {
-          "@type": "Person",
-          "name": blog.author?.name || "EdgeLancer Team"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "EdgeLancer",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://edgelancer.com/logo.png"
-          }
-        }
-      };
-      script.text = JSON.stringify(fallbackData);
-    }
-    document.head.appendChild(script);
-    return () => {
-      const existingScript2 = document.getElementById("blog-json-ld");
-      if (existingScript2) existingScript2.remove();
-    };
-  }, [blog, seo]);
   const handleShare = async () => {
     if (!blog) return;
     const shareData = {
@@ -4435,6 +4365,21 @@ function BlogSlugPage() {
   };
   const readingTime = blog?.content ? Math.ceil(blog.content.replace(/<[^>]+>/g, "").split(" ").length / 200) : 1;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(PublicNavbarLayout, { className: "bg-[#030303] selection:bg-indigo-500/30 selection:text-indigo-200", children: [
+    blog && /* @__PURE__ */ jsxRuntimeExports.jsx(
+      SEOHelmet,
+      {
+        title: seo?.title || blog.title,
+        description: seo?.description || blog.description,
+        keywords: seo?.keywords || blog.meta_keywords,
+        ogImage: seo?.og_image || blog.image_url || void 0,
+        ogType: "article",
+        publishedTime: blog.published_at,
+        modifiedTime: blog.updated_at,
+        structuredData: seo?.structured_data,
+        metaTags: seo?.meta_tags,
+        robots: seo?.robots
+      }
+    ),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "fixed inset-0 z-0 pointer-events-none overflow-hidden", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute top-[-15%] left-[-10%] w-[600px] h-[600px] bg-indigo-900/10 rounded-full blur-[120px] opacity-70" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bottom-[-10%] right-[-5%] w-[500px] h-[500px] bg-cyan-900/10 rounded-full blur-[100px] opacity-60" })
@@ -5809,7 +5754,7 @@ function WorkflowDetailsPage() {
   const [isShareOpen, setIsShareOpen] = reactExports.useState(false);
   const [isFullscreen, setIsFullscreen] = reactExports.useState(false);
   const [relatedWorkflows, setRelatedWorkflows] = reactExports.useState(ssrData.relatedWorkflows || []);
-  const [relevantBlogs, setRelevantBlogs] = reactExports.useState(ssrData.relevantBlogs || []);
+  const [relevantBlogs, setRelevantBlogs] = reactExports.useState(ssrData.suggestedBlogs || ssrData.relevantBlogs || []);
   const [isClient, setIsClient] = reactExports.useState(false);
   reactExports.useEffect(() => {
     setIsClient(true);
@@ -5975,6 +5920,13 @@ function WorkflowDetailsPage() {
             ]
           }
         ),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("nav", { className: "flex items-center gap-2 text-xs font-medium text-slate-500 mb-6 uppercase tracking-wider", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Link, { to: "/", className: "hover:text-purple-400 transition-colors", children: "Home" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronRight, { className: "w-3 h-3" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.Link, { to: "/workflows", className: "hover:text-purple-400 transition-colors", children: "Workflows" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronRight, { className: "w-3 h-3" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-slate-300 truncate max-w-[200px] md:max-w-none", children: workflow.title })
+        ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col lg:flex-row items-start justify-between gap-8", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-5 mb-4", children: [
@@ -5997,7 +5949,13 @@ function WorkflowDetailsPage() {
                 ] })
               ] })
             ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-slate-400 text-lg leading-relaxed max-w-3xl border-l-2 border-purple-500/30 pl-4", children: workflow.description })
+            workflow.content ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "div",
+              {
+                className: "prose prose-invert prose-slate max-w-4xl mt-8 prose-headings:text-white prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6 prose-p:text-slate-400 prose-p:leading-relaxed prose-li:text-slate-400 prose-strong:text-purple-400 docs-rendered-content",
+                dangerouslySetInnerHTML: { __html: workflow.content }
+              }
+            ) : /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-slate-400 text-lg leading-relaxed max-w-3xl border-l-2 border-purple-500/30 pl-4", children: workflow.description })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 shrink-0", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -7016,7 +6974,7 @@ const LessonViewerPage = reactExports.lazy(() => import("./assets/LessonViewerPa
 const NotFoundPage = reactExports.lazy(() => import("./assets/NotFoundPage-VbeknB5R.js"));
 const SecureInterviewClient = reactExports.lazy(() => import("./assets/SecureInterviewClient-CByxj-oI.js"));
 const AdminDashboard = reactExports.lazy(() => import("./assets/Dashboard-Cb2mVMh7.js"));
-const BlogsManagement = reactExports.lazy(() => import("./assets/BlogManagement-tjYSX7uI.js"));
+const BlogsManagement = reactExports.lazy(() => import("./assets/BlogManagement-BhlA4_cP.js"));
 const PagesManagement = reactExports.lazy(() => import("./assets/PageManagement-BAgXiXaF.js"));
 const FAQsManagement = reactExports.lazy(() => import("./assets/FAQManagement-C2ayKQaV.js"));
 const CourseManagement = reactExports.lazy(() => import("./assets/AdminCoursesPage-DidbUXDR.js"));

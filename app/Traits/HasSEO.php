@@ -9,11 +9,20 @@ use App\Models\Workflow;
 trait HasSEO
 {
     /**
+     * Replace any localhost URL with the production origin.
+     */
+    protected function sanitizeUrl(string $url, string $origin): string
+    {
+        // Replace http://localhost:PORT or https://localhost:PORT with the production origin
+        return preg_replace('/https?:\/\/localhost(:\d+)?/', rtrim($origin, '/'), $url);
+    }
+
+    /**
      * Get the SEO metadata for the model.
      */
     public function getSeoMetadata()
     {
-        $origin = config('app.frontend_url') ?? 'https://edgelancer.com';
+        $origin = rtrim(config('app.frontend_url') ?? 'https://edgelancer.com', '/');
         
         $title = $this->meta_title ?: ($this->title ?? 'EdgeLancer');
         $description = $this->meta_description ?: (isset($this->description) ? Str::limit(strip_tags($this->description), 160) : 'EdgeLancer Automation');
@@ -37,6 +46,10 @@ trait HasSEO
             $canonical = $this->canonical_url;
         }
 
+        // Sanitize any localhost URLs that may have been stored during development
+        $canonical = $this->sanitizeUrl($canonical, $origin);
+        $ogImage = $this->sanitizeUrl($this->og_image ?: "{$origin}/og-image.png", $origin);
+
         return [
             'id' => $this->id,
             'title' => $title,
@@ -44,9 +57,9 @@ trait HasSEO
             'keywords' => $keywords,
             'canonical' => $canonical,
             'og_type' => $ogType,
-            'og_image' => $this->og_image ?: "{$origin}/og-image.png",
+            'og_image' => $ogImage,
             'twitter_card' => 'summary_large_image',
-            'robots' => 'index, follow',
+            'robots' => 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
             'structured_data' => $this->generateStructuredData($origin, $canonical),
             'meta_tags' => $this->generateAdditionalMetaTags(),
             'reading_time' => $this instanceof Blog ? $this->calculateReadingTime() : null,
@@ -58,6 +71,9 @@ trait HasSEO
      */
     protected function generateStructuredData($origin, $canonical)
     {
+        // Ensure origin and canonical are free of localhost references
+        $origin = $this->sanitizeUrl($origin, $origin);
+        $canonical = $this->sanitizeUrl($canonical, $origin);
         $graph = [];
 
         // 1. BreadcrumbList
@@ -91,6 +107,50 @@ trait HasSEO
                 ]
             ];
         } elseif ($this instanceof Workflow) {
+            // Block A: SoftwareApplication
+            $graph[] = [
+                '@type' => 'SoftwareApplication',
+                '@id' => "{$canonical}#software",
+                'name' => $this->title,
+                'applicationCategory' => 'BusinessApplication',
+                'operatingSystem' => 'Web',
+                'offers' => [
+                    '@type' => 'Offer',
+                    'price' => $this->price ?? '0',
+                    'priceCurrency' => 'USD'
+                ],
+                'description' => Str::limit(strip_tags($this->description), 160),
+                'url' => $canonical,
+                'publisher' => [
+                    '@type' => 'Organization',
+                    'name' => 'EdgeLancer',
+                    'url' => $origin
+                ]
+            ];
+
+            // Block B: TechArticle
+            $graph[] = [
+                '@type' => 'TechArticle',
+                '@id' => "{$canonical}#techarticle",
+                'headline' => "How to " . $this->title . " with n8n",
+                'description' => Str::limit(strip_tags($this->description), 160),
+                'author' => [
+                    '@type' => 'Organization',
+                    'name' => 'EdgeLancer',
+                    'url' => $origin
+                ],
+                'publisher' => [
+                    '@type' => 'Organization',
+                    'name' => 'EdgeLancer',
+                    'url' => $origin
+                ],
+                'datePublished' => $this->created_at->toIso8601String(),
+                'dateModified' => $this->updated_at->toIso8601String(),
+                'url' => $canonical,
+                'image' => $this->og_image ?: "{$origin}/og-image.png"
+            ];
+
+            // Product (Optional, but kept for compatibility)
             $graph[] = [
                 '@type' => 'Product',
                 '@id' => "{$canonical}#product",

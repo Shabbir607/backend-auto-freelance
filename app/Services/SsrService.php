@@ -30,13 +30,18 @@ class SsrService
             
             // Write context to a file instead of embedding it directly in the script,
             // to prevent V8 parsing memory limits (AST Out Of Memory) on very large objects.
-            file_put_contents($tempContext, json_encode($context));
+            $encodedContext = json_encode($context, JSON_INVALID_UTF8_SUBSTITUTE);
+            if ($encodedContext === false) {
+                throw new \Exception('JSON encoding of context failed: ' . json_last_error_msg());
+            }
+            file_put_contents($tempContext, $encodedContext);
 
+            $escapedContextPath = str_replace('\\', '\\\\', $tempContext);
             $relayScript = <<<JS
 import render from '{$bundleUrl}';
 import fs from 'node:fs';
 
-const context = JSON.parse(fs.readFileSync('{$tempContext}', 'utf-8'));
+const context = JSON.parse(fs.readFileSync('{$escapedContextPath}', 'utf-8'));
 const url = '{$url}';
 try {
     const response = render(url, context);
